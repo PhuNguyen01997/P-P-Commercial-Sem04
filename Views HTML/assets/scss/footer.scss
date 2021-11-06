@@ -14,6 +14,12 @@
     &-item{
         width: calc(25% - 7px);
 
+        &__contact{
+            a{
+                text-decoration: underline;
+            }
+        }
+
         &__connect{
             .icon{
                 display: block;
@@ -54,6 +60,10 @@
 
         &--mobile{
             @include flex($justify: flex-start, $align: flex-start);
+        }
+
+        &--line{
+            display: block;
         }
     }
 }

@@ -5,16 +5,21 @@
   direction: $direction;
 }
 
+$color-red: rgb(255, 57, 69);
+$color-bd-ipt: rgba(0,0,0,.14);
 $color-primary02: rgb(0, 224, 194);
 $color-primary01: rgb(0, 216, 224);
 $padding-pc: 30px;
 $max-width: 1260px;
+
 * {
   box-sizing: border-box;
 }
+
 a {
   color: inherit;
   text-decoration: inherit;
+
   &:hover,
   &:active {
     opacity: 0.75;
@@ -27,36 +32,66 @@ html {
   font-size: 10px;
   font-family: Arial, sans-serif;
 }
+
 body {
   line-height: normal;
   font-size: 1.3rem;
 }
+
 input {
   font-size: inherit;
+  border: 1px solid $color-bd-ipt;
+  border-radius: 2px;
+  box-shadow: 1px 1px 13px -10px rgba(173,173,173,1);
+
+  &:focus{
+    border-color: $color-primary02;
+  }
 }
+
 input,
 button {
-  border: none;
   outline: none;
 }
+
+button {
+  border: none;
+}
+
 .btn {
   color: white;
   border-radius: 8px;
+
   &:hover {
     opacity: 0.75;
   }
+
   cursor: pointer;
   font-size: 1.8rem;
 }
-.btn--primary {
+
+.btn__primary {
   background-color: $color-primary01;
+}
+.btn__red{
+  background-color: $color-red;
 }
 
 .inner {
-  // width: $max-width;
   max-width: 1260px;
   margin: 0 auto;
   padding: 0 $padding-pc;
+}
+.form{
+  &--error{
+    &-ipt{
+      border: 1px solid red;
+    }
+    &-mess{
+      color: red;
+      margin-bottom: 15px;
+    }
+  }
 }
 .icon {
   img {
@@ -64,6 +99,6 @@ button {
     width: 100%;
   }
 }
-
+@import "./auth";
 @import "./header";
 @import "./footer";

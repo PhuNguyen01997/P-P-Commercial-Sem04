@@ -26,12 +26,23 @@ body {
 
 input {
   font-size: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 13px -10px #adadad;
+          box-shadow: 1px 1px 13px -10px #adadad;
+}
+
+input:focus {
+  border-color: #00e0c2;
 }
 
 input,
 button {
-  border: none;
   outline: none;
+}
+
+button {
+  border: none;
 }
 
 .btn {
@@ -45,8 +56,12 @@ button {
   opacity: 0.75;
 }
 
-.btn--primary {
+.btn__primary {
   background-color: #00d8e0;
+}
+
+.btn__red {
+  background-color: #ff3945;
 }
 
 .inner {
@@ -55,9 +70,61 @@ button {
   padding: 0 30px;
 }
 
+.form--error-ipt {
+  border: 1px solid red;
+}
+
+.form--error-mess {
+  color: red;
+  margin-bottom: 15px;
+}
+
 .icon img {
   display: block;
   width: 100%;
+}
+
+.auth-title {
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 0 2.2rem 2.2rem;
+}
+
+.auth-container {
+  border: 1px solid red;
+  padding: 15px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.auth-navi {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  direction: row;
+}
+
+.auth--ipt {
+  width: 100%;
+}
+
+.auth--ipt__txt {
+  display: block;
+  height: 32px;
+  padding: 4px;
+  margin-bottom: 10px;
+}
+
+.auth--ipt__submit {
+  border-radius: 2px;
+  height: 40px;
+  margin-bottom: 10px;
 }
 
 .header {
@@ -192,6 +259,10 @@ button {
   width: calc(25% - 7px);
 }
 
+.footer-item__contact a {
+  text-decoration: underline;
+}
+
 .footer-item__connect .icon {
   display: block;
   width: 30px;
@@ -240,5 +311,9 @@ button {
       -ms-flex-pack: start;
           justify-content: flex-start;
   direction: row;
+}
+
+.footer-item--line {
+  display: block;
 }
 /*# sourceMappingURL=style.css.map */
