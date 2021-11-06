@@ -1,0 +1,81 @@
+.header {
+    color: white;
+    background: linear-gradient(to bottom, $color-primary01, $color-primary02);
+
+    &-container {
+        @include flex($justify: space-between);
+    }
+
+    &-logo {
+        padding: 10px 0;
+        width: 100%;
+        max-width: 100px;
+        margin-right: 40px;
+    }
+
+    &-search {
+        width: 100%;
+    }
+
+    &-form {
+        font-size: 1.8rem;
+        position: relative;
+        margin-bottom: 5px;
+        &--search {
+            font-size: 1.8rem;
+            width: 100%;
+            height: 38px;
+            font-weight: normal;
+            padding: 0px 68px 0 5px;
+            border-radius: 3px;
+        }
+
+        &--submit {
+            position: absolute;
+            width: 60px;
+            height: calc(100% - 6px);
+            top: 3px;
+            right: 3px;
+            border-radius: 3px;
+        }
+    }
+
+    &-category {
+        @include flex($justify: flex-start);
+        font-size: 1.2rem;
+
+        &--item {
+            &:not(:last-child) {
+                margin-right: 15px;
+            }
+        }
+    }
+
+    &-cart{
+        width: 138px;
+        min-width: 60px;
+        margin: 0 10px;
+        font-size: 30px;
+        text-align: center;
+    }
+}
+.nav {
+    @include flex($justify: space-between);
+    min-height: 34px;
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+
+    &-col {
+        &__left {
+            .nav-col--item:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+
+        &__right {
+            .nav-col--item:not(:first-child) {
+                margin-left: 10px;
+            }
+        }
+    }
+}

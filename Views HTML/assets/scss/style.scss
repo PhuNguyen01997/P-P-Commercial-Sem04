@@ -1,0 +1,69 @@
+@mixin flex($align: center, $justify: center, $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  direction: $direction;
+}
+
+$color-primary02: rgb(0, 224, 194);
+$color-primary01: rgb(0, 216, 224);
+$padding-pc: 30px;
+$max-width: 1260px;
+* {
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+  &:hover,
+  &:active {
+    opacity: 0.75;
+    color: inherit;
+    text-decoration: inherit;
+  }
+}
+
+html {
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+}
+body {
+  line-height: normal;
+  font-size: 1.3rem;
+}
+input {
+  font-size: inherit;
+}
+input,
+button {
+  border: none;
+  outline: none;
+}
+.btn {
+  color: white;
+  border-radius: 8px;
+  &:hover {
+    opacity: 0.75;
+  }
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+.btn--primary {
+  background-color: $color-primary01;
+}
+
+.inner {
+  // width: $max-width;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 $padding-pc;
+}
+.icon {
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+@import "./header";
+@import "./footer";

@@ -1,0 +1,59 @@
+.footer{
+    background-color: #fbfbfb;
+    padding: 10px 0;
+    .inner{
+        @include flex($justify: space-between, $align: flex-start);
+    }
+
+    &-head{
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    &-item{
+        width: calc(25% - 7px);
+
+        &__connect{
+            .icon{
+                display: block;
+                width: 30px;
+                
+                &:not(:last-child){
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        &__payment{
+            .icon{
+                &__visa{
+                    width: 50px;
+                }
+            }
+        }
+
+        &__mobile{
+            .icon{
+                &__qr{
+                    width: 80px;
+                    margin-right: 10px;
+                }
+
+                &__store{
+                    margin-bottom: 10px;
+                    display: block;
+                    width: 100px;
+                }
+            }
+        }
+
+        &--social{
+            @include flex($justify: flex-start);
+        }
+
+        &--mobile{
+            @include flex($justify: flex-start, $align: flex-start);
+        }
+    }
+}
