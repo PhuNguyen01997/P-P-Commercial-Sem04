@@ -18,7 +18,7 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
@@ -108,11 +108,14 @@
                 </div>
                 <div class="shopping-side--item">
                     <p class="shopping-side--title">Price range</p>
-                    <div class="shopping-side--content shopping-side--content__price-range">
-                        <input type="number">
-                        <span><i class="fas fa-exchange-alt"></i></span>
-                        <input type="number">
-                    </div>
+                    <form action="">
+                        <div class="shopping-side--content shopping-side--content__price-range">
+                            <input type="number">
+                            <span><i class="fas fa-exchange-alt"></i></span>
+                            <input type="number">
+                        </div>
+                        <button class="btn btn__red" type="submit">Apply</button>
+                    </form>
                 </div>
                 <div class="shopping-side--item">
                     <p class="shopping-side--title">Rate</p>
@@ -225,8 +228,7 @@
                             <img src="/assets/img/products/product_01.jpg" alt="">
                         </div>
                         <div class="product-item--content">
-                            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                                Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
+                            <p class="product-item--title">Bàn Phím Cơ Máy </p>
                             <p class="product-item--price">$ 99.99</p>
                             <p class="product-item--rate">
                                 <span class="icon icon__star">
@@ -340,6 +342,16 @@
                             <p class="product-item--location">TP.HCM</p>
                         </div>
                     </a>
+                </div>
+                <div class="shopping-pagi">
+                    <ul class="pagi">
+                        <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
+                        <li class="pagi-item btn active">1</li>
+                        <li class="pagi-item btn">2</li>
+                        <li class="pagi-item btn">3</li>
+                        <li class="pagi-item btn">4</li>
+                        <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
+                    </ul>
                 </div>
             </div>
         </div>

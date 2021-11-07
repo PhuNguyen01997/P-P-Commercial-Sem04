@@ -22,6 +22,7 @@ html {
 body {
   line-height: normal;
   font-size: 1.3rem;
+  background-color: #F5F5F5;
 }
 
 input {
@@ -69,6 +70,7 @@ button {
 }
 
 .select--list {
+  position: relative;
   margin-top: 2px;
   z-index: 99;
   width: 100%;
@@ -150,7 +152,7 @@ button {
 .inner {
   max-width: 1260px;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 .form--error-ipt {
@@ -253,6 +255,40 @@ button {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.65);
   text-align: right;
+}
+
+.pagi {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  direction: row;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: 2.2rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.pagi-item {
+  height: 30px;
+  width: 40px;
+  line-height: 30px;
+  cursor: pointer;
+  text-align: center;
+  color: inherit;
+  background: transparent;
+  margin: 0 1.5rem;
+}
+
+.pagi-item.active {
+  background-color: #9932CC;
+  color: white;
 }
 
 .header {
@@ -360,6 +396,7 @@ button {
 .footer {
   background-color: #fbfbfb;
   padding: 10px 0;
+  border-top: 4px solid #9932CC;
 }
 
 .footer .inner {
@@ -487,7 +524,7 @@ button {
 }
 
 .shopping {
-  padding: 20px 0;
+  margin: 40px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -498,6 +535,10 @@ button {
       -ms-flex-pack: center;
           justify-content: center;
   direction: row;
+}
+
+.shopping .product-item {
+  background-color: white;
 }
 
 .shopping-side {
@@ -540,14 +581,25 @@ button {
       -ms-flex-pack: start;
           justify-content: flex-start;
   direction: row;
+  margin-bottom: 10px;
 }
 
 .shopping-side--content__price-range input {
-  width: calc(50% - 33px);
+  width: calc(50% - 15px);
 }
 
 .shopping-side--content__price-range span {
+  display: inline-block;
+  text-align: center;
+  width: 20px;
   margin: 0 10px;
+}
+
+.shopping-side--content__price-range ~ button[type="submit"] {
+  display: block;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 .shopping-main {
@@ -634,5 +686,13 @@ button {
 
 .shopping-sort--pagi button:last-child {
   border-left: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.shopping-list {
+  margin-bottom: 20px;
+}
+
+.shopping-pagi {
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

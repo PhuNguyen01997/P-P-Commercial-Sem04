@@ -1,6 +1,7 @@
 .footer{
     background-color: #fbfbfb;
     padding: 10px 0;
+    border-top: 4px solid $color-primary01;
     .inner{
         @include flex($justify: space-between, $align: flex-start);
     }
