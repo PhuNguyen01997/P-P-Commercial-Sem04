@@ -1,5 +1,5 @@
 .shopping{
-    @include flex();
+    @include flex($align: flex-start);
     &-side{
         max-width: 160px;
         flex-shrink: 0;
@@ -12,7 +12,10 @@
         }
 
         &--item{
-            border-bottom: 1px solid $color-bd;
+            &:not(:last-child) {
+                border-bottom: 1px solid $color-bd;
+                padding-bottom: 10px;
+            }
         }
 
         &--title{
@@ -60,6 +63,14 @@
             height: 100%;
         }
 
+        & > *:not(:last-child){
+            margin-right: 8px;
+        }
+
+        & > *:first-child{
+            margin-right: 18px;
+        }
+
         &--btn{
             background-color: white;
             color: black;
@@ -76,9 +87,7 @@
         }
 
         &--select{
-            select{
-                height: 100%;
-            }
+            width: 140px;
         }
 
         &--pagi{

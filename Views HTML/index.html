@@ -9,15 +9,17 @@
 
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
 
@@ -41,11 +43,11 @@
                 </div>
             </nav>
             <div class="header-container">
-                <div class="icon header-logo"><img height="100" src="assets/img/common/logo-white.p" alt="logo"></div>
+                <div class="icon header-logo"><img height="100" src="assets/img/common/logo-white.png" alt="logo"></div>
                 <div class="header-search">
                     <form action="#" class="header-form">
                         <input class="header-form--search" type="text" name="search">
-                        <button class="btn btn--primary header-form--submit" type="submit"><i
+                        <button class="btn btn__primary header-form--submit" type="submit"><i
                                 class="fas fa-search"></i></button>
                     </form>
                     <ul class="header-category">
@@ -172,19 +174,24 @@
                     <p>Sort by</p>
                     <button class="btn shopping-sort--btn active">New</button>
                     <button class="btn shopping-sort--btn">Selling</button>
-                    <div class="shopping-sort--select">
-                        <select name="" id="" style="display: none">
+                    <div class="select shopping-sort--select">
+                        <select name="" id="">
                             <option value="">Price</option>
                             <option value="increase">Low to high</option>
                             <option value="decrease">High to low</option>
                         </select>
-                        <div class="select">
-                            <p></p>
-                            <ul class="select">
-                                <li class="select-item"></li>
-                                <li class="select-item"></li>
-                            </ul>
-                        </div>
+                        <button class="select--default">Price</button>
+                        <ul class="select--list">
+                            <li class="select--item" data-value="increase" data-text="Low to high">
+                                <span>Low to high</span>
+                                <span class="icon"><i class="fas fa-angle-down"></i></span>
+                            </li>
+                            <li class="select--item active" data-value="decrease" data-text="High to low">
+                                <span>High to low</span>
+                                <span class="icon"><i class="fas fa-angle-down"></i></span>
+                            </li>
+                        </ul>
+                        <p class="icon"><i class="fas fa-angle-down"></i></p>
                     </div>
                     <div class="shopping-sort--pagi">
                         <p>1/5</p>
@@ -231,6 +238,8 @@
                 </div>
             </div>
     </footer>
+
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
