@@ -39,6 +39,7 @@ input:focus {
 input,
 button {
   outline: none;
+  font-size: inherit;
 }
 
 button {
@@ -46,11 +47,91 @@ button {
   cursor: pointer;
 }
 
+.select {
+  position: relative;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.select select {
+  display: none;
+}
+
+.select--default {
+  border-radius: 2px;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  overflow: hidden;
+}
+
+.select--list {
+  margin-top: 2px;
+  z-index: 99;
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.select--list.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.select--item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  direction: row;
+  padding: 7px 10px;
+}
+
+.select--item:hover, .select--item.active {
+  color: #9932CC;
+}
+
+.select--item.active .icon {
+  display: block;
+}
+
+.select--item span:first-child {
+  margin-right: 10px;
+}
+
+.select--item .icon {
+  display: none;
+  margin-left: auto;
+}
+
+.select > .icon {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  color: #555;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.3em;
+  pointer-events: none;
+}
+
 .btn {
   color: white;
   border-radius: 2px;
   cursor: pointer;
-  font-size: 1.8rem;
 }
 
 .btn:hover {
@@ -121,7 +202,6 @@ button {
 }
 
 .header-form--search {
-  font-size: 1.8rem;
   width: 100%;
   height: 38px;
   font-weight: normal;
@@ -321,9 +401,9 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -343,8 +423,9 @@ button {
   font-size: 22px;
 }
 
-.shopping-side--item {
+.shopping-side--item:not(:last-child) {
   border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  padding-bottom: 10px;
 }
 
 .shopping-side--title {
@@ -410,6 +491,14 @@ button {
   height: 100%;
 }
 
+.shopping-sort > *:not(:last-child) {
+  margin-right: 8px;
+}
+
+.shopping-sort > *:first-child {
+  margin-right: 18px;
+}
+
 .shopping-sort--btn {
   background-color: white;
   color: black;
@@ -425,8 +514,8 @@ button {
   opacity: 1;
 }
 
-.shopping-sort--select select {
-  height: 100%;
+.shopping-sort--select {
+  width: 140px;
 }
 
 .shopping-sort--pagi {
