@@ -1,0 +1,105 @@
+.shopping{
+    @include flex();
+    &-side{
+        max-width: 160px;
+        flex-shrink: 0;
+        border: 1px solid red;
+        margin-right: 20px;
+
+        &--headline{
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        &--item{
+            border-bottom: 1px solid $color-bd;
+        }
+
+        &--title{
+            margin: 10px 0;
+        }
+
+        &--content{
+            &__list-check, &__list-rate{
+                li{
+                    margin-bottom: 6px;
+                }
+            }
+
+            &__list-rate{
+                .icon{
+                    color: rgb(255, 242, 0);
+                    margin-right: 5px;
+                }
+            }
+
+            &__price-range{
+                @include flex($justify: flex-start);
+                input{
+                    width: calc(50% - 33px);
+                }
+                span{
+                    margin: 0 10px;
+                }
+            }
+        }
+    }
+    &-main{
+        border: 1px solid blue;
+        flex-grow: 1;
+    }
+    &-sort{
+        @include flex($justify: flex-start);
+        @include background-primary();
+        padding: 10px 15px;
+        color: white;
+        font-size: 1.6rem;
+        height: 54px;
+
+        & > *:not(p){
+            height: 100%;
+        }
+
+        &--btn{
+            background-color: white;
+            color: black;
+
+            &.active{
+                border: 2px solid white;
+                background-color: $color-primary01;
+                color: white;
+            }
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+
+        &--select{
+            select{
+                height: 100%;
+            }
+        }
+
+        &--pagi{
+            @include flex($justify: space-between);
+            margin-left: auto;
+
+            p{
+                margin-right: 10px;
+            }
+
+            button{
+                font-size: 20px;
+                color: $color-txt-grey;
+                width: 34px;
+                height: 100%;
+                background-color: white;
+
+                &:last-child{
+                    border-left: 1px solid $color-bd-ipt;
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 .header {
+    @include background-primary();
     color: white;
-    background: linear-gradient(to bottom, $color-primary01, $color-primary02);
 
     &-container {
         @include flex($justify: space-between);

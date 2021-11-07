@@ -1,3 +1,12 @@
+$color-red: rgb(255, 57, 69);
+$color-bd-ipt: rgba(0,0,0,.14);
+$color-bd: rgba(0,0,0,.09);
+$color-txt-grey: #555;
+$color-primary02: rgb(0, 224, 194);
+$color-primary01: rgb(0, 216, 224);
+$padding-pc: 30px;
+$max-width: 1260px;
+
 @mixin flex($align: center, $justify: center, $direction: row) {
   display: flex;
   align-items: $align;
@@ -5,12 +14,9 @@
   direction: $direction;
 }
 
-$color-red: rgb(255, 57, 69);
-$color-bd-ipt: rgba(0,0,0,.14);
-$color-primary02: rgb(0, 224, 194);
-$color-primary01: rgb(0, 216, 224);
-$padding-pc: 30px;
-$max-width: 1260px;
+@mixin background-primary() {
+  background: linear-gradient(to bottom, $color-primary01, $color-primary02);
+}
 
 * {
   box-sizing: border-box;
@@ -56,11 +62,12 @@ button {
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 .btn {
   color: white;
-  border-radius: 8px;
+  border-radius: 2px;
 
   &:hover {
     opacity: 0.75;
@@ -99,6 +106,7 @@ button {
     width: 100%;
   }
 }
-@import "./auth";
 @import "./header";
 @import "./footer";
+@import "./auth";
+@import "./shop";
