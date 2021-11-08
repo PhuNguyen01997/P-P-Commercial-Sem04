@@ -3,6 +3,11 @@
           box-sizing: border-box;
 }
 
+*::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 a {
   color: inherit;
   text-decoration: inherit;
@@ -46,6 +51,51 @@ button {
 button {
   border: none;
   cursor: pointer;
+}
+
+.attachAdjust {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  direction: row;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.attachAdjust--button {
+  content: "";
+  position: relative;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+
+.attachAdjust--button[data-value="minus"] {
+  background: url("/assets/img/common/icon-minus.png") no-repeat 50% 50%;
+  background-size: 50% 50%;
+}
+
+.attachAdjust--button[data-value="plus"] {
+  background: url("/assets/img/common/icon-plus.png") no-repeat 50% 50%;
+  background-size: 50% 50%;
+}
+
+.attachAdjust input {
+  border-left: none;
+  border-right: none;
+  display: block;
+  height: 100%;
+  text-align: center;
 }
 
 .select {
@@ -145,6 +195,11 @@ button {
   background-color: #9932CC;
 }
 
+.btn__primary-outline {
+  background-color: rgba(153, 50, 204, 0.1);
+  color: #9932CC;
+}
+
 .btn__red {
   background-color: #ff3945;
 }
@@ -162,6 +217,11 @@ button {
 .form--error-mess {
   color: red;
   margin-bottom: 15px;
+}
+
+.pic img {
+  width: 100%;
+  display: block;
 }
 
 .icon img {
@@ -694,5 +754,123 @@ button {
 
 .shopping-pagi {
   text-align: center;
+}
+
+.detail {
+  padding-top: 20px;
+}
+
+.detail-primary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  direction: row;
+  background-color: white;
+  padding: 10px;
+}
+
+.detail-picture {
+  width: 100%;
+  max-width: 450px;
+  margin-right: 20px;
+}
+
+.detail-picture .pic {
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-picture .pic img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.detail-picture--current {
+  padding-bottom: 100%;
+}
+
+.detail-content--title {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.detail-content--price {
+  font-size: 3rem;
+  color: #ff3945;
+  margin-bottom: 20px;
+}
+
+.detail-content--rate {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.detail-content--line {
+  font-size: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  direction: row;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-bottom: 10px;
+}
+
+.detail-content--line-key {
+  display: block;
+  color: rgba(0, 0, 0, 0.65);
+  min-width: 80px;
+}
+
+.detail-content--line-value__quantity input[type="number"] {
+  display: inline-block;
+  width: 50px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.detail-content--button {
+  font-size: 1.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  direction: row;
+  margin-top: 20px;
+}
+
+.detail-content--button-cart, .detail-content--button-buy {
+  display: block;
+  height: 48px;
+  padding: 0 20px;
+}
+
+.detail-content--button-cart {
+  margin-right: 15px;
+}
+
+.detail-content--button-cart i {
+  margin-right: 10px;
 }
 /*# sourceMappingURL=style.css.map */

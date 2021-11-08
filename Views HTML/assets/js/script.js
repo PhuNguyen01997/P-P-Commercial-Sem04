@@ -30,4 +30,21 @@ $(function () {
 
         $(select).find('.select--list')[0].classList.remove('show');
     })
+
+
+    $('.attachAdjust').on('click', ".attachAdjust--button", function () {
+        const input = $(this).siblings("input")[0];
+        switch ($(this).attr("data-value")) {
+            case 'plus': {
+                input.value = (parseInt(input.value) + 1 > 99 ? 99 : parseInt(input.value) + 1);
+                break;
+            }
+            case 'minus': {
+                input.value = (parseInt(input.value) - 1 < 1 ? 1 : parseInt(input.value) - 1);
+                break;
+            }
+            default:
+                break;
+        }
+    });
 })
