@@ -348,6 +348,11 @@ button {
   }
 }
 
+.circle{
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 @import "./header";
 @import "./footer";
 @import "./auth";
