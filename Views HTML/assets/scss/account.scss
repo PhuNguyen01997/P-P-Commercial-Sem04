@@ -1,0 +1,15 @@
+.account{
+    &-head{
+        @include flex();
+
+        &--avatar{
+            width: 60px;
+        }
+    }
+
+    &-body{
+        &--item{
+            margin-bottom: 10px;
+        }
+    }
+}

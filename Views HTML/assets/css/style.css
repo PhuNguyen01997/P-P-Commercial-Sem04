@@ -185,6 +185,8 @@ button {
   color: white;
   border-radius: 2px;
   cursor: pointer;
+  padding: 1px 6px;
+  font-size: inherit;
 }
 
 .btn:hover {
@@ -215,6 +217,23 @@ button {
   padding: 0 20px;
 }
 
+.split {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  direction: row;
+}
+
+.split-side {
+  max-width: 340px;
+}
+
 .form--error-ipt {
   border: 1px solid red;
 }
@@ -222,6 +241,10 @@ button {
 .form--error-mess {
   color: red;
   margin-bottom: 15px;
+}
+
+.dropdown-list {
+  display: none;
 }
 
 .pic img {
@@ -354,6 +377,11 @@ button {
 .pagi-item.active {
   background-color: #9932cc;
   color: white;
+}
+
+.circle {
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .header {
@@ -1034,5 +1062,26 @@ button {
 .detail-rate--date {
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.65);
+}
+
+.account-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  direction: row;
+}
+
+.account-head--avatar {
+  width: 60px;
+}
+
+.account-body--item {
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=style.css.map */

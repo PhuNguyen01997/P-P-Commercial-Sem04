@@ -1,4 +1,5 @@
 $(function () {
+    // JS for custom select
     function setSelect(select, value, text) {
         $($(select).find('select')[0]).val(value).change();
         $(select).find('.select--default').html(text);
@@ -31,7 +32,7 @@ $(function () {
         $(select).find('.select--list')[0].classList.remove('show');
     })
 
-
+    // JS for custom input has increase, decrease button
     $('.attachAdjust').on('click', ".attachAdjust--button", function () {
         const input = $(this).siblings("input")[0];
         switch ($(this).attr("data-value")) {
@@ -47,4 +48,13 @@ $(function () {
                 break;
         }
     });
+
+    // JS for dropdown
+    if($('.dropdown').length){
+        $('.dropdown > *:first-child').on('click', function(){
+            const container = $(this).next()[0];
+            console.log(container)
+            $(container).slideToggle();
+        })
+    }
 })

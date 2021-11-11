@@ -191,6 +191,8 @@ button {
   color: white;
   border-radius: 2px;
   cursor: pointer;
+  padding: 1px 6px;
+  font-size: inherit;
 
   &:hover {
     opacity: 0.75;
@@ -223,6 +225,14 @@ button {
   padding: 0 $padding-pc;
 }
 
+.split{
+  @include flex($align: flex-start, $justify: flex-start);
+
+  &-side{
+    max-width: 340px;
+  }
+}
+
 .form {
   &--error {
     &-ipt {
@@ -233,6 +243,12 @@ button {
       color: red;
       margin-bottom: 15px;
     }
+  }
+}
+
+.dropdown{
+  &-list{
+    display: none;
   }
 }
 
@@ -358,3 +374,4 @@ button {
 @import "./auth";
 @import "./shop";
 @import "./detail";
+@import "./account";
