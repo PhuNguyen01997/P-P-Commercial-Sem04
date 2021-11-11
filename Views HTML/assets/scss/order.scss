@@ -1,0 +1,125 @@
+.order {
+    font-size: 1.4rem;
+    margin: 20px auto 30px;
+
+    .order {
+        &-item {
+            @include box-shadow();
+            border-radius: 2px;
+            background-color: white;
+            margin-bottom: 12px;
+        }
+
+        &-submit {
+            background-color: $color-bg-yellow-white;
+        }
+
+        &-header {
+            @include flex($justify: flex-start);
+            width: calc(100% - 30px);
+            padding: 20px 0 15px;
+            margin: 0 auto 15px;
+            border-bottom: 1px solid $color-bd-ipt;
+
+            &>*:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            &--name {
+                font-weight: bold;
+            }
+
+            &--btn {
+                font-size: 1.2rem;
+                padding: 5px 8px;
+            }
+
+            &--status {
+                color: $color-red;
+                margin-left: auto;
+            }
+        }
+
+        &-body {
+            &--item {
+                @include flex($justify: flex-start, $align: flex-start);
+                border-bottom: 1px solid $color-bd;
+                padding: 0 15px;
+
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+            }
+
+            &--pic {
+                width: 80px;
+                height: 80px;
+                flex-shrink: 0;
+            }
+
+            &--text {
+                padding: 0 20px 0 10px;
+
+                &>* {
+                    margin-bottom: 5px;
+                }
+            }
+
+            &--name {
+                display: -webkit-box;
+                text-overflow: ellipsis;
+                font-size: 16px;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+            }
+
+            &--category {
+                color: $color-txt-white-grey;
+            }
+
+            &--quantity {
+                color: $color-txt-grey;
+            }
+
+            &--price {
+                font-size: 18px;
+                align-self: center;
+                color: $color-red;
+            }
+        }
+
+        &-submit {
+            padding: 0 15px;
+
+            &--total {
+                @include flex($justify: flex-end);
+                padding: 24px 0px 12px;
+
+                span:last-child {
+                    margin-left: 10px;
+                    color: $color-red;
+                    font-size: 2.4rem;
+                }
+            }
+
+            &--info {
+                @include flex($justify: flex-end);
+                padding: 12px 0 24px;
+            }
+
+            &--text {
+                color: $color-txt-white-grey;
+            }
+
+            &--btn {
+                height: 40px;
+                margin-left: 10px;
+
+                &:first-of-type {
+                    margin-left: auto;
+                }
+            }
+        }
+    }
+}
