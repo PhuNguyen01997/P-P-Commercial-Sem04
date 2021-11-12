@@ -79,6 +79,23 @@ button {
   border: none;
   cursor: pointer;
 }
+.m{
+  &l10{
+    margin-left: 10px;
+  }
+
+  &r10{
+    margin-right: 10px;
+  }
+
+  &b10{
+    margin-bottom: 10px;
+  }
+
+  &t10{
+    margin-top: 10px;
+  }
+}
 
 .attachAdjust {
   position: relative;
@@ -240,6 +257,7 @@ button {
 
 .split {
   @include flex($align: flex-start, $justify: flex-start);
+  margin: 20px auto 30px;
 
   &-side {
     width: 180px;

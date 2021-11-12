@@ -62,62 +62,130 @@
         </div>
     </header>
     <main>
-        <div class="inner split order">
+        <div class="inner split order-detail">
             <div class="account-side split-side">
                 <div class="account-head">
                     <p class="pic circle account-head--avatar pic"><img src="/assets/img/products/product_01.jpg"
                             alt=""></p>
                     <div class="account-head--text">
                         <p class="account-head--name">Uwu Bu Bu</p>
-                        <p class="account-head--edit"><i class="fas fa-pencil-alt"></i>Edit profile</p>
+                        <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
+                        </p>
                     </div>
                 </div>
                 <ul class="account-body">
                     <li class="account-body--item account-body--item__dropdown dropdown">
-                        <a href="#"><i class="fas fa-user"></i> My Account</a>
+                        <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
                         <ul class="dropdown-list">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Change password</a></li>
+                            <li class="dropdown-item"><a href="#">Profile</a></li>
+                            <li class="dropdown-item"><a href="#">Change password</a></li>
                         </ul>
                     </li>
-                    <li class="account-body--item"><a href="#"><i class="fas fa-file-invoice-dollar"></i> Orders</a>
+                    <li class="account-body--item"><a href="javascript: void(0)"><i
+                                class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
                     </li>
-                    <li class="account-body--item"></li>
                 </ul>
             </div>
-            <div class="split-main">
-                <div class="order-item">
-                    <div class="order-content">
-                        <div class="order-header">
-                            <p class="order-shop-name">qw qpwoqw qwoqowpqpw</p>
-                            <button class="btn btn-primary"><i class="fas fa-store"></i> Visit shop</button>
-                            <p>Status</p>
+            <div class="split-main order-detail-main">
+                <div class="order-detail-header">
+                    <a class="order-detail-header--back" href="#"><i class="fas fa-angle-left mr10"></i>Back</a>
+                    <p class="order-detail-header--id">Order ID: 12837218736126</p>
+                    <p class="order-detail-header--status">chỗ này ghi trạng thái đơn hàng</p>
+                </div>
+                <div class="order-detail-status">
+                    <div class="order-step">
+                        <div class="order-step--item">
+                            <p class="order-step--icon">
+                                <i class="far fa-file-alt"></i>
+                            </p>
+                            <p>Đơn hàng đã đặt</p>
+                            <p>11:14 11:11:2021</p>
                         </div>
-                        <div class="order-body">
-                            <ul class="order-shop-list">
-                                <li class="order-shop-item">
-                                    <p class="pic order-pic"><img src="/assets/img/products/product_01.jpg" alt=""></p>
-                                    <div>
-                                        <p class="order-name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020 A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                                        <p>Category: category-name</p>
-                                        <p>x99</p>
-                                    </div>
-                                    <p>$99</p>
-                                </li>
-                            </ul>
+                        <div class="order-step--item">
+                            <p class="order-step--icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </p>
+                            <p>Đơn hàng dã thanh toán ($99.99)</p>
+                            <p>11:14 11:11:2021</p>
+                        </div>
+                        <div class="order-step--item">
+                            <p class="order-step--icon">
+                                <i class="fas fa-truck"></i>
+                            </p>
+                            <p>Đang giao hàng</p>
+                            <p>11:14 11:11:2021</p>
+                        </div>
+                        <div class="order-step--item">
+                            <p class="order-step--icon">
+                                <i class="fas fa-dolly-flatbed"></i>
+                            </p>
+                            <p>Chờ xác nhận</p>
+                            <p>11:14 11:11:2021</p>
+                        </div>
+                        <div class="order-step--item">
+                            <p class="order-step--icon">
+                                <i class="far fa-star"></i>
+                            </p>
+                            <p>Đánh giá</p>
+                            <p>11:14 11:11:2021</p>
+                        </div>
+                        <div class="order-step--item">
+                            <p class="order-step--icon">
+                                <i class="far fa-window-close"></i>
+                            </p>
+                            <p>Đánh giá</p>
+                            <p>11:14 11:11:2021</p>
                         </div>
                     </div>
-                    <div class="order-submit">
-                        <p><span>Total: </span><span>$99.99</span></p>
-                        <div>
-                            <p>Bạn đã hủy</p>
-                            <button class="btn">Mua lại</button>
-                            <button class="btn">Đánh giá</button>
-                            <button class="btn">Liên hệ người bán</button>
-                            <button class="btn">Chi tiết đon hàng</button>
-                        </div>
+                    <div class="order-detail-control">
+                        <button>Liên hệ người bán</button>
+                        <button>Hủy đơn hàng</button>
                     </div>
                 </div>
+                <div class="order-detail-info">
+                    <p class="order-detail-info--name">Nguyễn Hoàng Phú</p>
+                    <p class="order-detail-info--phone">0937441896</p>
+                    <p class="order-detail-info--address">99 wưsxng bw xrwc, Phường 9, Quận 9, TP. Hồ Chí Minh</p>
+                </div>
+                <div class="order-shop">
+                    <p class="order-shop--name">qw qpwoqw qwoqowpqpw</p>
+                    <button class="order-shop--btn order-shop--btn__visit btn btn__primary">
+                        <i class="fas fa-store"></i> Visit shop
+                    </button>
+                    <!-- <p class="order-shop--status">Status</p> -->
+                </div>
+                <ul class="order-detail-list">
+                    <li class="order-item">
+                        <p class="pic order-item--pic"><img src="/assets/img/products/product_01.jpg"
+                                alt=""></p>
+                        <div class="order-item--text">
+                            <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
+                                A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
+                                X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
+                            <p class="order-item--category">Category: category-name</p>
+                            <p class="order-item--quantity">x99</p>
+                        </div>
+                        <p class="order-item--price">$99</p>
+                    </li>
+                </ul>
+                <ul class="order-summary">
+                    <li class="order-summary--item">
+                        <p>Tổng tiền hàng</p>
+                        <p>$20.00</p>
+                    </li>
+                    <div class="order-summary--item">
+                        <p>Phí vận chuyển</p>
+                        <p>$5.00</p>
+                    </div>
+                    <div class="order-summary--item order-summary--item__total">
+                        <p>Tổng số tiền</p>
+                        <p>$25.00</p>
+                    </div>
+                    <div class="order-summary--item">
+                        <p>Phương thức thanh toán</p>
+                        <p>Thẻ tín dụng / ghi nợ</p>
+                    </div>
+                </ul>
             </div>
         </div>
     </main>
