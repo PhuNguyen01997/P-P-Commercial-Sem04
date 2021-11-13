@@ -56,4 +56,16 @@
             }
         }
     }
+
+    .split-main{
+        background-color: white;
+        padding: 0 15px;
+    }
+
+    .form{
+        button[type="submit"]{
+            padding: 0px 10px;
+            min-width: 100px;
+        }
+    }
 }
