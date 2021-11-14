@@ -164,9 +164,11 @@
                 border-color: $color-green;
             }
 
-            &.success{
+            &.success {
                 .order-step--icon {
-                    &::before, &::after{
+
+                    &::before,
+                    &::after {
                         background-color: $color-green;
                     }
                 }
@@ -177,7 +179,7 @@
                     background-color: $color-green;
                     color: white;
 
-                    &::before{
+                    &::before {
                         background-color: $color-green;
                     }
                 }
@@ -253,6 +255,20 @@
     font-size: 1.4rem;
     @include box-shadow();
 
+    .order {
+        &-shop {
+            background-color: $color-bg-yellow-white;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        &-item {
+            padding-top: 15px;
+        }
+    }
+
     &-main {
         background-color: white;
     }
@@ -283,6 +299,7 @@
 
     &-info {
         border: none;
+        position: relative;
 
         &>*:not(:last-child) {
             margin-right: 20px;
@@ -299,20 +316,6 @@
         }
     }
 
-    .order {
-        &-shop {
-            background-color: $color-bg-yellow-white;
-            padding-left: 15px;
-            padding-right: 15px;
-            margin-bottom: 0;
-            width: 100%;
-        }
-
-        &-item {
-            padding-top: 15px;
-        }
-    }
-
     &-list {
         background-color: $color-bg-yellow-white;
     }
@@ -320,17 +323,18 @@
     &-status {
         padding: 40px 30px;
 
-        .order-step{
+        .order-step {
             margin-bottom: 20px;
         }
     }
 
-    &-control{
+    &-control {
         text-align: right;
-        &--btn{
+
+        &--btn {
             height: 40px;
 
-            &:first-child{
+            &:first-child {
                 margin-right: 20px;
             }
         }
