@@ -1552,6 +1552,116 @@ button {
   font-size: 2.4rem;
 }
 
+.order-step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.order-step--item {
+  position: relative;
+  text-align: center;
+  border-color: #e0e0e0;
+  color: #e0e0e0;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.order-step--item.current, .order-step--item.success {
+  color: #2dc258;
+  border-color: #2dc258;
+}
+
+.order-step--item.success .order-step--icon::before, .order-step--item.success .order-step--icon::after {
+  background-color: #2dc258;
+}
+
+.order-step--item.current .order-step--icon {
+  background-color: #2dc258;
+  color: white;
+}
+
+.order-step--item.current .order-step--icon::before {
+  background-color: #2dc258;
+}
+
+.order-step--item:last-child .order-step--icon::after {
+  display: none;
+}
+
+.order-step--item:first-child .order-step--icon::before {
+  display: none;
+}
+
+.order-step--status, .order-step--time {
+  width: 140px;
+  margin: 0 auto;
+}
+
+.order-step--icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-width: 4px;
+  border-style: solid;
+  border-color: inherit;
+  font-size: 2.4rem;
+}
+
+.order-step--icon:before, .order-step--icon:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: calc(50% - 30px);
+  top: 30px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: #e0e0e0;
+}
+
+.order-step--icon:before {
+  left: 0;
+}
+
+.order-step--icon:after {
+  right: 0;
+}
+
+.order-step--status {
+  color: #000;
+  margin: 20px auto 4px;
+}
+
+.order-step--time {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+}
+
 .order-detail {
   font-size: 1.4rem;
   -webkit-box-shadow: 1px 1px 13px -10px #adadad;
@@ -1626,5 +1736,25 @@ button {
 
 .order-detail-list {
   background-color: #FFFEFB;
+}
+
+.order-detail-status {
+  padding: 40px 30px;
+}
+
+.order-detail-status .order-step {
+  margin-bottom: 20px;
+}
+
+.order-detail-control {
+  text-align: right;
+}
+
+.order-detail-control--btn {
+  height: 40px;
+}
+
+.order-detail-control--btn:first-child {
+  margin-right: 20px;
 }
 /*# sourceMappingURL=style.css.map */
