@@ -18,7 +18,14 @@
         }
 
         & .dropdown-item {
-            margin-bottom: 10px;
+            a{
+                padding: 5px 0;
+                display: block;
+            }
+
+            &:last-child{
+                margin-bottom: 5px;
+            }
         }
     }
 
@@ -70,6 +77,40 @@
                     color: $color-primary01;
                 }
             }
+        }
+    }
+
+    &-edit-form{
+        @include flex($justify: flex-start, $align: flex-start);
+        padding-bottom: 20px;
+
+        &--left{
+            width: 70%;
+            border-right: 1px solid $color-bd;
+            padding-right: 50px;
+        }
+
+        &--right{
+            padding: 0 15px;
+            @include flex(center, flex-start, column);
+            width: 30%;
+        }
+
+        &--update-btn{
+            height: 40px;
+            padding: 1px 10px;
+            margin-bottom: 10px;
+        }
+
+        &--pic{
+            width: 100px;
+            height: 100px;
+            margin: 20px auto 20px;
+        }
+
+        &--pic-note{
+            text-align: center;
+            color: $color-txt-grey;
         }
     }
 }

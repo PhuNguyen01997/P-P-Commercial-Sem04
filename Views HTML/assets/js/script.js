@@ -8,6 +8,22 @@ $(function () {
         $(select).find(`.select--item[data-value="${value}"]`).addClass('active');
     }
 
+    $(".select").each(function () {
+        const selected = $(this).find('option:selected')[0];
+        console.log(selected);
+        const showDefault = `<button class="select--default">${selected.text}</button>`;
+        let list = `<ul class="select--list">`;
+        $(this).find('option').each((index, option) => {
+            list += `<li class="select--item ${selected.value === option.value ? "active" : ""}" data-value="${option.value}" data-text="${option.text}">`
+            list += `<span>${option.text}</span>`
+            list += `<span class="icon"><i class="fas fa-angle-down"></i></span>`
+            list += `</li>`;
+        });
+        list += `</ul>`;
+        list += `<p class="icon"><i class="fas fa-angle-down"></i></p>`;
+        $(this).append(showDefault + list);
+    })
+
     $('.select').on('mouseenter', function () {
         $(this).find('.select--list')[0].classList.add('show');
     })
@@ -32,6 +48,7 @@ $(function () {
         $(select).find('.select--list')[0].classList.remove('show');
     })
 
+
     // JS for custom input has increase, decrease button
     $('.attachAdjust').on('click', ".attachAdjust--button", function () {
         const input = $(this).siblings("input")[0];
@@ -50,8 +67,8 @@ $(function () {
     });
 
     // JS for dropdown
-    if($('.dropdown').length){
-        $('.dropdown > *:first-child').on('click', function(){
+    if ($('.dropdown').length) {
+        $('.dropdown > *:first-child').on('click', function () {
             const container = $(this).next()[0];
             console.log(container)
             $(container).slideToggle();

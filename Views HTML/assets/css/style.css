@@ -1528,8 +1528,13 @@ button {
   margin-left: 30px;
 }
 
-.account-side .dropdown-item {
-  margin-bottom: 10px;
+.account-side .dropdown-item a {
+  padding: 5px 0;
+  display: block;
+}
+
+.account-side .dropdown-item:last-child {
+  margin-bottom: 5px;
 }
 
 .account-head {
@@ -1589,6 +1594,64 @@ button {
 
 .account-body--item .icon__shop {
   color: #9932cc;
+}
+
+.account-edit-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-bottom: 20px;
+}
+
+.account-edit-form--left {
+  width: 70%;
+  border-right: 1px solid rgba(0, 0, 0, 0.09);
+  padding-right: 50px;
+}
+
+.account-edit-form--right {
+  padding: 0 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 30%;
+}
+
+.account-edit-form--update-btn {
+  height: 40px;
+  padding: 1px 10px;
+  margin-bottom: 10px;
+}
+
+.account-edit-form--pic {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto 20px;
+}
+
+.account-edit-form--pic-note {
+  text-align: center;
+  color: #555;
 }
 
 .order {
