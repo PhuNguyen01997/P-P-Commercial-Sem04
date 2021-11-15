@@ -1,9 +1,20 @@
 .account {
+    .split-main {
+        background-color: white;
+    }
+
+    .form {
+        button[type="submit"] {
+            padding: 0px 10px;
+            min-width: 100px;
+        }
+    }
+
     &-side {
         font-size: 1.4rem;
 
         & .dropdown-list {
-            margin-left: 20px;
+            margin-left: 30px;
         }
 
         & .dropdown-item {
@@ -44,6 +55,7 @@
             }
 
             .icon {
+                text-align: center;
                 width: 20px;
 
                 &__account {
@@ -53,19 +65,11 @@
                 &__order {
                     color: rgb(252, 58, 10);
                 }
+
+                &__shop {
+                    color: $color-primary01;
+                }
             }
-        }
-    }
-
-    .split-main{
-        background-color: white;
-        padding: 0 15px;
-    }
-
-    .form{
-        button[type="submit"]{
-            padding: 0px 10px;
-            min-width: 100px;
         }
     }
 }

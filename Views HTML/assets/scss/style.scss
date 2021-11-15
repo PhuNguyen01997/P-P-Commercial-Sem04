@@ -84,19 +84,19 @@ button {
 
 .m {
   &l10 {
-    margin-left: 10px;
+    margin-left: 10px !important;
   }
 
   &r10 {
-    margin-right: 10px;
+    margin-right: 10px !important;
   }
 
   &b10 {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
   }
 
   &t10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
   }
 }
 
@@ -285,6 +285,15 @@ button {
 
   &-main {
     width: 100%;
+
+    &__form{
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    &__shopping-product{
+      padding: 15px 15px 20px;
+    }
   }
 
   &-header {

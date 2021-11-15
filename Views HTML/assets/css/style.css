@@ -55,19 +55,19 @@ button {
 }
 
 .ml10 {
-  margin-left: 10px;
+  margin-left: 10px !important;
 }
 
 .mr10 {
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 
 .mb10 {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 
 .mt10 {
-  margin-top: 10px;
+  margin-top: 10px !important;
 }
 
 .attachAdjust {
@@ -303,6 +303,15 @@ button {
 
 .split-main {
   width: 100%;
+}
+
+.split-main__form {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.split-main__shopping-product {
+  padding: 15px 15px 20px;
 }
 
 .split-header {
@@ -1502,12 +1511,21 @@ button {
   color: rgba(0, 0, 0, 0.65);
 }
 
+.account .split-main {
+  background-color: white;
+}
+
+.account .form button[type="submit"] {
+  padding: 0px 10px;
+  min-width: 100px;
+}
+
 .account-side {
   font-size: 1.4rem;
 }
 
 .account-side .dropdown-list {
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .account-side .dropdown-item {
@@ -1557,6 +1575,7 @@ button {
 }
 
 .account-body--item .icon {
+  text-align: center;
   width: 20px;
 }
 
@@ -1568,14 +1587,8 @@ button {
   color: #fc3a0a;
 }
 
-.account .split-main {
-  background-color: white;
-  padding: 0 15px;
-}
-
-.account .form button[type="submit"] {
-  padding: 0px 10px;
-  min-width: 100px;
+.account-body--item .icon__shop {
+  color: #9932cc;
 }
 
 .order {
