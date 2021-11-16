@@ -24,7 +24,7 @@
             padding: 10px 15px;
             width: 390px;
             flex-shrink: 0;
-            border-radius:5px;
+            border-radius: 5px;
             overflow: hidden;
 
             &--bg {
@@ -35,13 +35,13 @@
                 width: 100%;
                 height: 100%;
 
-                img{
+                img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
                 }
 
-                &::before{
+                &::before {
                     content: "";
                     display: block;
                     position: absolute;
@@ -54,7 +54,7 @@
                 }
             }
 
-            & > *:not(.shopping-header-banner--bg){
+            &>*:not(.shopping-header-banner--bg) {
                 position: relative;
                 z-index: 2;
             }
@@ -64,11 +64,11 @@
                 margin-bottom: 5px;
             }
 
-            &--block02{
+            &--block02 {
                 width: 100%;
                 @include flex($justify: space-between);
 
-                .btn{
+                .btn {
                     width: calc(50% - 5px);
                 }
             }
@@ -81,7 +81,7 @@
                 flex-shrink: 0;
             }
 
-            &--name-container{
+            &--name-container {
                 margin-top: 10px;
             }
 
@@ -102,7 +102,7 @@
             }
         }
 
-        &-list{
+        &-list {
             @include flex($justify: center, $align: flex-start, $direction: column);
             align-content: space-around;
             width: 100%;
@@ -112,13 +112,13 @@
             flex-grow: 0;
             padding-left: 20px;
 
-            span:last-child{
+            span:last-child {
                 margin-left: 10px;
                 color: $color-primary01;
             }
         }
 
-        &-item{
+        &-item {
             padding: 10px 0;
         }
     }
@@ -260,27 +260,6 @@
         &--select {
             width: 140px;
         }
-
-        &--pagi {
-            @include flex($justify: space-between);
-            margin-left: auto;
-
-            p {
-                margin-right: 10px;
-            }
-
-            button {
-                font-size: 20px;
-                color: $color-txt-grey;
-                width: 34px;
-                height: 100%;
-                background-color: white;
-
-                &:last-child {
-                    border-left: 1px solid $color-bd-ipt;
-                }
-            }
-        }
     }
 
     &-list {
@@ -291,40 +270,79 @@
         text-align: center;
     }
 
-    &-order{
-        &-search{
+    &-order {
+        &-search {
             @include flex($justify: flex-start, $align: center);
             height: 54px;
             background-color: $color-primary01;
             padding: 0 15px;
             margin-bottom: 20px;
+            color: #fff;
 
-            & > *{
+            &>* {
                 height: 34px;
                 margin-right: 10px;
 
-                &:last-child{
+                &:last-child {
                     margin-left: auto;
                 }
             }
 
-            &--status{
+            &--status {
                 width: 100px;
             }
 
-            &--sort-date{
+            &--sort-date {
                 width: 100px;
             }
         }
 
-        &-table{
-            thead{
+        &-table {
+            @include box-shadow();
+            border-top: 1px solid $color-bd;
+            border-bottom: 1px solid $color-bd;
+
+            thead,
+            tfoot {
                 font-weight: bold;
-                border-bottom: 2px solid #000;
+
+                tr {
+                    position: relative;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        height: 2px;
+                        width: 100%;
+                        background-color: $color-primary01;
+                    }
+                }
             }
-            tbody{
+
+            thead {
+                tr {
+                    &:after {
+                        bottom: 0;
+                    }
+                }
+            }
+
+            tfoot {
+                tr {
+                    &:after {
+                        top: 0;
+                    }
+                }
+            }
+
+            tbody {
                 color: $color-txt-grey;
             }
+        }
+
+        &-pagi {
+            text-align: center;
         }
     }
 }

@@ -489,6 +489,27 @@ button {
       color: white;
     }
   }
+
+  &-simplify{
+    @include flex($justify: space-between);
+    margin-left: auto;
+
+    p {
+        margin-right: 10px;
+    }
+
+    button {
+        font-size: 20px;
+        color: $color-txt-grey;
+        width: 34px;
+        height: 100%;
+        background-color: white;
+
+        &:last-child {
+            border-left: 1px solid $color-bd-ipt;
+        }
+    }
+  }
 }
 
 .circle {
