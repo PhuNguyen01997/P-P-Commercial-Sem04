@@ -1,6 +1,7 @@
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  border-radius: 2px;
 }
 
 *::before, *::after {
@@ -37,6 +38,7 @@ input {
   border-radius: 2px;
   -webkit-box-shadow: 1px 1px 13px -10px #adadad;
           box-shadow: 1px 1px 13px -10px #adadad;
+  padding: 0 5px;
 }
 
 input:focus {
@@ -1218,6 +1220,52 @@ button {
   text-align: center;
 }
 
+.shopping-order-search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 54px;
+  background-color: #9932cc;
+  padding: 0 15px;
+  margin-bottom: 20px;
+}
+
+.shopping-order-search > * {
+  height: 34px;
+  margin-right: 10px;
+}
+
+.shopping-order-search > *:last-child {
+  margin-left: auto;
+}
+
+.shopping-order-search--status {
+  width: 100px;
+}
+
+.shopping-order-search--sort-date {
+  width: 100px;
+}
+
+.shopping-order-table thead {
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+
+.shopping-order-table tbody {
+  color: #555;
+}
+
 .detail {
   padding-top: 20px;
   margin-bottom: 40px;
@@ -1513,6 +1561,10 @@ button {
 
 .account .split-main {
   background-color: white;
+}
+
+.account .shopping-order {
+  background: inherit;
 }
 
 .account .form button[type="submit"] {

@@ -12,10 +12,10 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
+    </script>
 
 
 
@@ -97,40 +97,58 @@
                     </li>
                 </ul>
             </div>
-            <div class="split-main .shopping-order split-main__shopping-order">
+            <div class="split-main shopping-order split-main__shopping-order">
                 <div class="shopping-order-search">
-                    <input type="text" placeholder="Customer name">
-                    <button class="btn btn__red">Calendar</button>
-                    <select name="" id="">status</select>
+                    <input class="shopping-order-search--name" type="text" placeholder="Customer name || product name">
+                    <button class="btn btn__red shopping-order-search--date">Calendar</button>
+                    <div class="select shopping-order-search--status">
+                        <select name="" id="">
+                            <option value="">Status</option>
+                            <option value="increase">Option 1</option>
+                            <option value="decrease">Option 2</option>
+                        </select>
+                    </div>
+                    <div class="select shopping-order-search--sort-date">
+                        <select name="" id="">
+                            <option value="">Sort by</option>
+                            <option value="increase">New</option>
+                            <option value="decrease">Old</option>
+                        </select>
+                    </div>
+                    <div class="shopping-sort--pagi">
+                        <p>1/5</p>
+                        <button><i class="fas fa-angle-left"></i></button>
+                        <button><i class="fas fa-angle-right"></i></button>
+                    </div>
                 </div>
-                <table class="table table-striped">
-                    <thead class="thead-light">
+                <table class="shopping-order-table table table-striped table-hover">
+                    <thead class="">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col"></th>
                             <th scope="col">First</th>
                             <th scope="col">Last</th>
                             <th scope="col">Handle</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
                     </tbody>
                 </table>
             </div>

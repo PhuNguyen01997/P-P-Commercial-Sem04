@@ -290,4 +290,41 @@
     &-pagi {
         text-align: center;
     }
+
+    &-order{
+        &-search{
+            @include flex($justify: flex-start, $align: center);
+            height: 54px;
+            background-color: $color-primary01;
+            padding: 0 15px;
+            margin-bottom: 20px;
+
+            & > *{
+                height: 34px;
+                margin-right: 10px;
+
+                &:last-child{
+                    margin-left: auto;
+                }
+            }
+
+            &--status{
+                width: 100px;
+            }
+
+            &--sort-date{
+                width: 100px;
+            }
+        }
+
+        &-table{
+            thead{
+                font-weight: bold;
+                border-bottom: 2px solid #000;
+            }
+            tbody{
+                color: $color-txt-grey;
+            }
+        }
+    }
 }

@@ -10,7 +10,6 @@ $(function () {
 
     $(".select").each(function () {
         const selected = $(this).find('option:selected')[0];
-        console.log(selected);
         const showDefault = `<button class="select--default">${selected.text}</button>`;
         let list = `<ul class="select--list">`;
         $(this).find('option').each((index, option) => {
@@ -70,7 +69,6 @@ $(function () {
     if ($('.dropdown').length) {
         $('.dropdown > *:first-child').on('click', function () {
             const container = $(this).next()[0];
-            console.log(container)
             $(container).slideToggle();
         })
     }
