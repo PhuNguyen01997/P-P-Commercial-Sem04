@@ -49,6 +49,10 @@ $(function () {
 
 
     // JS for custom input has increase, decrease button
+    $('.attachAdjust').each(function () {
+        $(this).prepend('<span class="attachAdjust--button" data-value="minus"></span>');
+        $(this).append('<span class="attachAdjust--button" data-value="plus"></span>');
+    })
     $('.attachAdjust').on('click', ".attachAdjust--button", function () {
         const input = $(this).siblings("input")[0];
         switch ($(this).attr("data-value")) {
@@ -74,10 +78,23 @@ $(function () {
     }
 
     // JS for checkbox
-    $('input[type="checkbox"]:checked').each(function(){
+    $('input[type="checkbox"]:checked').each(function () {
         $(this).parents('.checkbox').addClass("checkbox__active");
     })
-    $('.checkbox').on('change', "input[type='checkbox']", function(){
+    $('.checkbox').on('change', "input[type='checkbox']", function () {
         $(this).parents('.checkbox').toggleClass("checkbox__active");
     })
-})
+
+    // Js for cart footer is sticky
+    if ($('.cart__list .cart-footer').length) {
+        $(window).on('scroll', function () {
+            const winBotPos = $(window).scrollTop() + $(window).height();
+            const cartFooterBotPos = $('.cart-footer').offset().top + $('.cart-footer').height();
+            if (winBotPos < cartFooterBotPos) {
+                $('.cart-footer').addClass('cart-footer__float');
+            } else {
+                $('.cart-footer').removeClass('cart-footer__float');
+            }
+        });
+    }
+});

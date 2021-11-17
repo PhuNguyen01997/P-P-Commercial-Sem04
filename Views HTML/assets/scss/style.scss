@@ -102,6 +102,10 @@ button {
   }
 }
 
+.strikethrough{
+  text-decoration: line-through;
+}
+
 .attachAdjust {
   position: relative;
   @include flex($justify: flex-start, $align: stretch);
@@ -131,6 +135,7 @@ button {
     border-left: none;
     border-right: none;
     display: block;
+    width: 50px; //default
     height: 100%;
     text-align: center;
   }
@@ -234,8 +239,8 @@ button {
     border-radius: 3px;
   }
 
-  &__active{
-    .icon{
+  &__active {
+    .icon {
       background-color: $color-primary01;
       border: none;
     }
@@ -288,6 +293,10 @@ button {
 .icon {
   &__left {
     margin-right: 10px;
+  }
+
+  &__right {
+    margin-left: 10px;
   }
 }
 
