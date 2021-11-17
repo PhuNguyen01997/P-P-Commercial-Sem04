@@ -215,6 +215,34 @@ button {
   }
 }
 
+.checkbox {
+  cursor: pointer;
+  @include flex($justify: flex-start);
+  display: inline-flex;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .icon {
+    color: white;
+    @include flex();
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    border: 1px solid $color-bd-ipt;
+    border-radius: 3px;
+  }
+
+  &__active{
+    .icon{
+      background-color: $color-primary01;
+      border: none;
+    }
+  }
+
+}
+
 .btn {
   color: white;
   border-radius: 2px;
@@ -251,14 +279,14 @@ button {
     }
   }
 
-  &__transparent{
+  &__transparent {
     background: none;
     border: 1px solid white;
   }
 }
 
-.icon{
-  &__left{
+.icon {
+  &__left {
     margin-right: 10px;
   }
 }
@@ -288,12 +316,12 @@ button {
   &-main {
     width: 100%;
 
-    &__form{
+    &__form {
       padding-left: 15px;
       padding-right: 15px;
     }
 
-    &__shopping-product{
+    &__shopping-product {
       padding: 15px 15px 20px;
     }
   }
@@ -490,24 +518,24 @@ button {
     }
   }
 
-  &-simplify{
+  &-simplify {
     @include flex($justify: space-between);
     margin-left: auto;
 
     p {
-        margin-right: 10px;
+      margin-right: 10px;
     }
 
     button {
-        font-size: 20px;
-        color: $color-txt-grey;
-        width: 34px;
-        height: 100%;
-        background-color: white;
+      font-size: 20px;
+      color: $color-txt-grey;
+      width: 34px;
+      height: 100%;
+      background-color: white;
 
-        &:last-child {
-            border-left: 1px solid $color-bd-ipt;
-        }
+      &:last-child {
+        border-left: 1px solid $color-bd-ipt;
+      }
     }
   }
 }
@@ -533,3 +561,4 @@ button {
 @import "./detail";
 @import "./account";
 @import "./order";
+@import "./cart";

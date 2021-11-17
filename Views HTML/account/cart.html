@@ -62,15 +62,22 @@
     <main>
         <div class="inner cart">
             <div class="cart-header">
-                <p>Sản phẩm</p>
-                <p>Đơn giá</p>
-                <p>Số lượng</p>
-                <p>Số tiền</p>
-                <p>Thao tác</p>
+                <div class="cart-header-item cart-checkbox">
+                    <label for="check01" class="checkbox">
+                        <i class="icon fas fa-check"></i>
+                        <span></span>
+                        <input id="check01" type="checkbox">
+                    </label>
+                </div>
+                <p class="cart-header-item">Sản phẩm</p>
+                <p class="cart-header-item">Đơn giá</p>
+                <p class="cart-header-item">Số lượng</p>
+                <p class="cart-header-item">Số tiền</p>
+                <p class="cart-header-item">Thao tác</p>
             </div>
             <div class="cart-section">
                 <div class="cart-section-shop">
-                    <div class="cart-section-shop--checkbox">
+                    <div class="cart-section-shop--checkbox checkbox">
                         <input type="checkbox" name="" id="">
                     </div>
                     <div class="cart-section-shop--info">
@@ -79,7 +86,7 @@
                 </div>
                 <ul class="cart-section-product">
                     <li class="cart-section-product--item">
-                        <div class="cart-section-product--checkbox">
+                        <div class="cart-section-product--checkbox checkbox">
                             <input type="checkbox">
                         </div>
                         <div class="cart-section-product--img pic">
@@ -106,7 +113,18 @@
                     </li>
                 </ul>
             </div>
-            <div class="cart-footer"></div>
+            <div class="cart-footer">
+                <div class="cart-footer-block cart-footer-block__03">
+                    <div class="cart-footer-checkbox checkbox">
+                        <input type="checkbox">
+                        <p>Chọn tất cả</p>
+                    </div>
+                    <a class="cart-footer-txt cart-footer-txt__select" href="#">Xóa</a>
+                    <p class="cart-footer-txt cart-footer-txt__total">Tổng thanh toán (99 sản phẩm)</p>
+                    <p class="cart-footer-price">$12.323.123</p>
+                    <button class="btn btn__primary">Mua hàng</button>
+                </div>
+            </div>
         </div>
     </main>
     <footer class="footer">

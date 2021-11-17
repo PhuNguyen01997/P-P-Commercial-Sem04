@@ -72,4 +72,12 @@ $(function () {
             $(container).slideToggle();
         })
     }
+
+    // JS for checkbox
+    $('input[type="checkbox"]:checked').each(function(){
+        $(this).parents('.checkbox').addClass("checkbox__active");
+    })
+    $('.checkbox').on('change', "input[type='checkbox']", function(){
+        $(this).parents('.checkbox').toggleClass("checkbox__active");
+    })
 })
