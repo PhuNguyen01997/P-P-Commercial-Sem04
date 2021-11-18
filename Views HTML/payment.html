@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="inner">
+            <nav class="nav">
+                <div class="nav-col__left nav-col">
+                    <a class="nav-col--item" href="#">Become a seller</a>
+                    <a class="nav-col--item" href="#">Seller channel</a>
+                </div>
+                <div class="nav-col__right nav-col">
+                    <a class="nav-col--item" href="#">Notification</a>
+                    <a class="nav-col--item" href="#">Sign Up</a>
+                    <a class="nav-col--item" href="#">Sign In</a>
+                </div>
+            </nav>
+            <div class="header-container">
+                <div class="icon header-logo"><img height="100" src="/assets/img/common/logo-white.png" alt="logo">
+                </div>
+                <div class="header-search">
+                    <form action="#" class="header-form">
+                        <input class="header-form--search" type="text" name="search">
+                        <button class="btn btn__primary header-form--submit" type="submit"><i
+                                class="fas fa-search"></i></button>
+                    </form>
+                    <ul class="header-category">
+                        <li class="header-category--item"><a href="#">Vehicle</a></li>
+                        <li class="header-category--item"><a href="#">Media</a></li>
+                        <li class="header-category--item"><a href="#">Clothes</a></li>
+                        <li class="header-category--item"><a href="#">Service</a></li>
+                    </ul>
+                </div>
+                <a class="icon header-cart" href="#"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="inner pay">
+            <div class="top-envelope"></div>
+            <div class="pay-address">
+                <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
+                <p class="pay-address--text">
+                    <span class="name">Nguyễn Bành Trần Võ 0999999999</span>
+                    <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    <a class="change" href="#">Thay đổi</a>
+                </p>
+            </div>
+            <div class="pay-cart">
+                <div class="pay-cart-header">
+                    <p>Sản phẩm</p>
+                    <p>Số lượng</p>
+                    <p>Đơn giá</p>
+                    <p>Thành tiền</p>
+                </div>
+                <div class="pay-cart-shop">
+                    <p class="pay-cart-shop--name">FOCALLURE.vn</p>
+                    <a href="#"><i class="icon icon__left fas fa-comment-alt"></i>Chat ngay</a>
+                </div>
+                <ul class="pay-cart-list">
+                    <li class="pay-cart-item">
+                        <div class="pay-cart-item--pic pic"><img src="/assets/img/products/product_02.jpg" alt=""></div>
+                        <p class="pay-cart-item--name">Màn chụp tự bung đỉnh vuông Kiều Phi - Mẫu mùng chụp tự
+                            bung người lớn chống muỗi gấp gọn tiện dụng</p>
+                        <p class="pay-cart-item--price">$99.999.999</p>
+                        <p class="pay-cart-item--quantity">99</p>
+                        <p class="pay-cart-item--total">$99.999.999</p>
+                    </li>
+                </ul>
+                <div class="pay-cart-footer">
+                    <input type="text" placeholder="Lưu ý cho người bán">
+                    <p class="pay-cart-footer--text">Tổng số tiền (99 sản phẩm)</p>
+                    <p class="pay-cart-footer--total">$99.999.999</p>
+                </div>
+            </div>
+            <div class="pay-submit">
+                <div class="pay-submit-header">
+                    <p>Phương thức thanh toán</p>
+                    <button class="btn">Thẻ tín dụng/ghi nợ</button>
+                    <button class="btn">Thanh toán khi nhận hàng</button>
+                </div>
+                <div class="pay-submit-body pay-submit-body__debit">
+                    <div class="pay-submit-body--left"></div>
+                    <div class="pay-submit-body--right">
+                        <div class="pay-submit-body--card-list">
+                            <label for="radioDemo01" class="pay-submit-body--card-item">
+                                <input id="radioDemo01" type="radio">
+                                <img src="/assets/img/common/icon-visa.png" alt="">
+                                <p>9999 9999 9999</p>
+                            </label>
+                            <label for="radioDemo02" class="pay-submit-body--card-item">
+                                <input id="radioDemo02" type="radio">
+                                <img src="/assets/img/common/icon-visa.png" alt="">
+                                <p>9999 9999 9999</p>
+                            </label>
+                            <label for="radioDemo03" class="pay-submit-body--card-item">
+                                <input id="radioDemo03" type="radio">
+                                <img src="/assets/img/common/icon-visa.png" alt="">
+                                <p>9999 9999 9999</p>
+                            </label>
+                        </div>
+                        <div class="cart-footer-item--card-order">Thẻ khác</div>
+                    </div>
+                </div>
+                <div class="pay-submit-footer">
+                    <p><span>Tổng tiền hàng</span><span>$99.999.999</span></p>
+                    <p><span>Tổng tiền hàng</span><span>$99.999.999</span></p>
+                    <p><span>Tổng tiền hàng</span><span>$99.999.999</span></p>
+                    <div class="pay-submit-footer--final">
+                        <p>Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <a href="#">Điều khoản Shopee</a>
+                        </p>
+                        <button class="btn btn__primary">Đặt hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="inner">
+            <div class="footer-item footer-item__contact">
+                <p class="footer-head">Contact & support</p>
+                <p class="footer-item--line">Address: 590 CMNT, P3, Q10, TPHCM</p>
+                <p class="footer-item--line">Hotline: <a href="tel:1900-0000">1900-0000</a></p>
+                <p class="footer-item--line">Email: <a
+                        href="mailto:phunguyen01997@gmail.com">phunguyen01997@gmail.com</a></p>
+                <a class="footer-item--line" href="#">FAQ</a>
+                <a class="footer-item--line" href="#">Support request</a>
+                <a class="footer-item--line" href="#">Return policy</a>
+            </div>
+            <div class="footer-item footer-item__payment">
+                <p class="footer-head">Online pay method</p>
+                <p class="icon icon__visa"><img src="/assets/img/common/icon-visa.png" alt=""></p>
+            </div>
+            <div class="footer-item footer-item__connect">
+                <p class="footer-head">Connect with us</p>
+                <p class="footer-item--social">
+                    <a class="icon" href="#"><img src="/assets/img/common/icon-fb.png" alt="Facebook"></a>
+                    <a class="icon" href="#"><img src="/assets/img/common/icon-yt.png" alt="Youtube"></a>
+                    <a class="icon" href="#"><img src="/assets/img/common/icon-zl.png" alt="Zalo"></a>
+                </p>
+            </div>
+            <div class="footer-item footer-item__mobile">
+                <p class="footer-head">Download on mobile</p>
+                <div class="footer-item--mobile">
+                    <p class="icon icon__qr"><img src="/assets/img/common/icon-qr.png" alt=""></p>
+                    <div class="">
+                        <a class="icon icon__store" href="#"><img src="/assets/img/common/icon-gg-play.png" alt=""></a>
+                        <a class="icon icon__store" href="#"><img src="/assets/img/common/icon-apple.png" alt=""></a>
+                    </div>
+                    </d>
+                </div>
+            </div>
+    </footer>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>

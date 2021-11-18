@@ -1,0 +1,39 @@
+.pay{
+    & > *{
+        background-color: white;
+    }
+    &>*:not(:last-child):not(.top-envelope){
+        margin-bottom: 20px;
+    }
+    &-address{
+        padding: 28px 30px;
+        &--title{
+            color: $color-primary01;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        &--text{
+            @include flex($justify: flex-start);
+
+            & > *{
+                margin-bottom: 5px;
+            }
+
+            &> *:not(:last-child){
+                margin-right: 20px;
+            }
+
+            .name,.number{
+                font-size: 1.6rem;
+            }
+            .name{
+                font-weight: bold;
+            }
+
+            .change{
+                margin-left: auto;
+                color: $color-green;
+            }
+        }
+    }
+}

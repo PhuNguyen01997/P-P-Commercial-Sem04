@@ -2425,4 +2425,59 @@ button {
   -webkit-box-shadow: 0px -16px 30px -15px #c4c4c4;
           box-shadow: 0px -16px 30px -15px #c4c4c4;
 }
+
+.pay > * {
+  background-color: white;
+}
+
+.pay > *:not(:last-child):not(.top-envelope) {
+  margin-bottom: 20px;
+}
+
+.pay-address {
+  padding: 28px 30px;
+}
+
+.pay-address--title {
+  color: #9932cc;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.pay-address--text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.pay-address--text > * {
+  margin-bottom: 5px;
+}
+
+.pay-address--text > *:not(:last-child) {
+  margin-right: 20px;
+}
+
+.pay-address--text .name, .pay-address--text .number {
+  font-size: 1.6rem;
+}
+
+.pay-address--text .name {
+  font-weight: bold;
+}
+
+.pay-address--text .change {
+  margin-left: auto;
+  color: #2dc258;
+}
 /*# sourceMappingURL=style.css.map */
