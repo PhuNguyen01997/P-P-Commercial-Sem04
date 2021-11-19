@@ -1,38 +1,260 @@
-.pay{
-    & > *{
+.pay {
+    margin: 30px auto;
+    &>* {
         background-color: white;
     }
-    &>*:not(:last-child):not(.top-envelope){
+
+    &>*:not(:last-child):not(.top-envelope) {
         margin-bottom: 20px;
     }
-    &-address{
+
+    &-address {
         padding: 28px 30px;
-        &--title{
+
+        &--title {
             color: $color-primary01;
             font-size: 1.8rem;
             margin-bottom: 15px;
         }
-        &--text{
+
+        &--text {
             @include flex($justify: flex-start);
 
-            & > *{
+            &>* {
                 margin-bottom: 5px;
             }
 
-            &> *:not(:last-child){
+            &>*:not(:last-child) {
                 margin-right: 20px;
             }
 
-            .name,.number{
+            .name,
+            .number {
                 font-size: 1.6rem;
             }
-            .name{
+
+            .name {
                 font-weight: bold;
             }
 
-            .change{
+            .change {
                 margin-left: auto;
                 color: $color-green;
+            }
+        }
+    }
+
+    &-cart {
+        &-header {
+            @include flex($justify: flex-start);
+            padding: 24px 30px 0 30px;
+
+            &>* {
+                &:first-child {
+                    flex-grow: 1;
+                    font-size: 1.8rem;
+                }
+            }
+
+            &>* {
+                &:nth-child(n + 2) {
+                    color: $color-txt-white-grey;
+                    width: 100px;
+                    flex-shrink: 0;
+                    text-align: center;
+                    margin-right: 10px;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &-shop {
+            @include flex($justify: flex-start);
+            min-height: 50px;
+            padding: 0 30px;
+
+            &--chat {
+                margin-left: 20px;
+                color: $color-green;
+            }
+        }
+
+        &-item {
+            @include flex($justify: flex-start);
+            padding: 10px 30px 20px 30px;
+            border-bottom: 1px solid $color-bd;
+
+            &>*:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            &--price,
+            &--quantity,
+            &--total {
+                width: 100px;
+                flex-shrink: 0;
+                text-align: center;
+            }
+
+            &--pic {
+                flex-shrink: 0;
+                width: 40px;
+                height: 40px;
+
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &--name {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        &-footer {
+            @include flex($justify: flex-start);
+            padding: 18px 30px;
+
+            &--note {
+                padding: 5px 10px;
+                height: 40px;
+                width: 40%;
+            }
+
+            &--text {
+                color: $color-txt-white-grey;
+                margin-left: auto;
+            }
+
+            &--total {
+                font-size: 2rem;
+                color: $color-red;
+                margin-left: 15px;
+            }
+        }
+    }
+
+    &-submit {
+        & > *{
+            border-bottom: 1px solid $color-bd;
+        }
+
+        &-header {
+            @include flex($justify: flex-start);
+            padding: 15px 30px;
+
+            &--txt {
+                font-size: 1.8rem;
+                width: 200px;
+            }
+
+            &--btn {
+                margin-left: 10px;
+                height: 40px;
+
+                &:hover {
+                    border-color: $color-primary01;
+                    color: $color-primary01;
+                }
+            }
+        }
+
+        &-body {
+            padding: 30px;
+
+            &__debit {
+                @include flex($justify: flex-start, $align: flex-start);
+
+                .pay-submit-body {
+                    &--left {
+                        width: 200px;
+                        flex-shrink: 0;
+                    }
+
+                    &--card-item {
+                        @include flex($justify: flex-start);
+                        margin-bottom: 15px;
+
+                        input {
+                            margin-right: 10px;
+                        }
+
+                        .pic {
+                            width: 65px;
+                            margin-right: 20px;
+                        }
+
+                        .number {
+                            font-family: "OCR A Std";
+                        }
+                    }
+
+                    &--card-order {
+                        min-width: 120px;
+                        height: 40px;
+
+                        .icon {
+                            color: $color-txt-white-grey;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-footer {
+            &--list {
+                display: grid;
+                grid-template-columns: 1fr max-content max-content;
+                grid-template-rows: auto;
+                padding: 10px 30px;
+                border-bottom: 1px solid $color-bd;
+            }
+
+            &--txt, &--number{
+                @include flex($justify: flex-start);
+                color: $color-txt-white-grey;
+                min-height: 40px;
+            }
+
+            &--txt {
+                grid-column-start: 2;
+                grid-column-end: 3;
+                margin-right: 10px;
+            }
+
+            &--number {
+                grid-column-start: 3;
+                grid-column-end: 4;
+                text-align: right;
+
+                &__total {
+                    font-size: 2.8rem;
+                    color: $color-red;
+                }
+            }
+
+            &--final{
+                @include flex($justify: space-between);
+                min-height: 90px;
+                padding: 10px 30px;
+
+                .btn{
+                    width: 210px;
+                    height: 40px;
+                }
+
+                .txt{
+                    color: $color-txt-white-grey;
+                    a{
+                        color: $color-primary01;
+                    }
+                }
             }
         }
     }

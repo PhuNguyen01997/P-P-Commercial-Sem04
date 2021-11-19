@@ -2426,6 +2426,10 @@ button {
           box-shadow: 0px -16px 30px -15px #c4c4c4;
 }
 
+.pay {
+  margin: 30px auto;
+}
+
 .pay > * {
   background-color: white;
 }
@@ -2468,7 +2472,8 @@ button {
   margin-right: 20px;
 }
 
-.pay-address--text .name, .pay-address--text .number {
+.pay-address--text .name,
+.pay-address--text .number {
   font-size: 1.6rem;
 }
 
@@ -2479,5 +2484,328 @@ button {
 .pay-address--text .change {
   margin-left: auto;
   color: #2dc258;
+}
+
+.pay-cart-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 24px 30px 0 30px;
+}
+
+.pay-cart-header > *:first-child {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-size: 1.8rem;
+}
+
+.pay-cart-header > *:nth-child(n + 2) {
+  color: rgba(0, 0, 0, 0.65);
+  width: 100px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  text-align: center;
+  margin-right: 10px;
+}
+
+.pay-cart-header > *:last-child {
+  margin-right: 0;
+}
+
+.pay-cart-shop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-height: 50px;
+  padding: 0 30px;
+}
+
+.pay-cart-shop--chat {
+  margin-left: 20px;
+  color: #2dc258;
+}
+
+.pay-cart-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 10px 30px 20px 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.pay-cart-item > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.pay-cart-item--price, .pay-cart-item--quantity, .pay-cart-item--total {
+  width: 100px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  text-align: center;
+}
+
+.pay-cart-item--pic {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.pay-cart-item--pic img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.pay-cart-item--name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pay-cart-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 18px 30px;
+}
+
+.pay-cart-footer--note {
+  padding: 5px 10px;
+  height: 40px;
+  width: 40%;
+}
+
+.pay-cart-footer--text {
+  color: rgba(0, 0, 0, 0.65);
+  margin-left: auto;
+}
+
+.pay-cart-footer--total {
+  font-size: 2rem;
+  color: #ff3945;
+  margin-left: 15px;
+}
+
+.pay-submit > * {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.pay-submit-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 15px 30px;
+}
+
+.pay-submit-header--txt {
+  font-size: 1.8rem;
+  width: 200px;
+}
+
+.pay-submit-header--btn {
+  margin-left: 10px;
+  height: 40px;
+}
+
+.pay-submit-header--btn:hover {
+  border-color: #9932cc;
+  color: #9932cc;
+}
+
+.pay-submit-body {
+  padding: 30px;
+}
+
+.pay-submit-body__debit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.pay-submit-body__debit .pay-submit-body--left {
+  width: 200px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.pay-submit-body__debit .pay-submit-body--card-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.pay-submit-body__debit .pay-submit-body--card-item input {
+  margin-right: 10px;
+}
+
+.pay-submit-body__debit .pay-submit-body--card-item .pic {
+  width: 65px;
+  margin-right: 20px;
+}
+
+.pay-submit-body__debit .pay-submit-body--card-item .number {
+  font-family: "OCR A Std";
+}
+
+.pay-submit-body__debit .pay-submit-body--card-order {
+  min-width: 120px;
+  height: 40px;
+}
+
+.pay-submit-body__debit .pay-submit-body--card-order .icon {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.pay-submit-footer--list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr max-content max-content;
+      grid-template-columns: 1fr -webkit-max-content -webkit-max-content;
+      grid-template-columns: 1fr max-content max-content;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  padding: 10px 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.pay-submit-footer--txt, .pay-submit-footer--number {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: rgba(0, 0, 0, 0.65);
+  min-height: 40px;
+}
+
+.pay-submit-footer--txt {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 3;
+  margin-right: 10px;
+}
+
+.pay-submit-footer--number {
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 4;
+  text-align: right;
+}
+
+.pay-submit-footer--number__total {
+  font-size: 2.8rem;
+  color: #ff3945;
+}
+
+.pay-submit-footer--final {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-height: 90px;
+  padding: 10px 30px;
+}
+
+.pay-submit-footer--final .btn {
+  width: 210px;
+  height: 40px;
+}
+
+.pay-submit-footer--final .txt {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.pay-submit-footer--final .txt a {
+  color: #9932cc;
 }
 /*# sourceMappingURL=style.css.map */

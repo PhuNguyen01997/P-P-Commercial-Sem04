@@ -79,7 +79,8 @@
                 </div>
                 <div class="pay-cart-shop">
                     <p class="pay-cart-shop--name">FOCALLURE.vn</p>
-                    <a href="#"><i class="icon icon__left fas fa-comment-alt"></i>Chat ngay</a>
+                    <a class="pay-cart-shop--chat" href="#"><i class="icon icon__left fas fa-comment-alt"></i>Chat
+                        ngay</a>
                 </div>
                 <ul class="pay-cart-list">
                     <li class="pay-cart-item">
@@ -90,49 +91,64 @@
                         <p class="pay-cart-item--quantity">99</p>
                         <p class="pay-cart-item--total">$99.999.999</p>
                     </li>
+                    <li class="pay-cart-item">
+                        <div class="pay-cart-item--pic pic"><img src="/assets/img/products/product_02.jpg" alt=""></div>
+                        <p class="pay-cart-item--name">Màn chụp tự bung đỉnh vuông Kiều Phi - Mẫu mùng chụp tự
+                            bung người lớn chống muỗi gấp gọn tiện dụng</p>
+                        <p class="pay-cart-item--price">$99.999.999</p>
+                        <p class="pay-cart-item--quantity">99</p>
+                        <p class="pay-cart-item--total">$99.999.999</p>
+                    </li>
                 </ul>
                 <div class="pay-cart-footer">
-                    <input type="text" placeholder="Lưu ý cho người bán">
+                    <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
                     <p class="pay-cart-footer--text">Tổng số tiền (99 sản phẩm)</p>
                     <p class="pay-cart-footer--total">$99.999.999</p>
                 </div>
             </div>
             <div class="pay-submit">
                 <div class="pay-submit-header">
-                    <p>Phương thức thanh toán</p>
-                    <button class="btn">Thẻ tín dụng/ghi nợ</button>
-                    <button class="btn">Thanh toán khi nhận hàng</button>
+                    <p class="pay-submit-header--txt">Phương thức thanh toán</p>
+                    <button class="pay-submit-header--btn btn btn__white">Thẻ tín dụng/ghi nợ</button>
+                    <button class="pay-submit-header--btn btn btn__white">Thanh toán khi nhận hàng</button>
                 </div>
                 <div class="pay-submit-body pay-submit-body__debit">
-                    <div class="pay-submit-body--left"></div>
+                    <div class="pay-submit-body--left">
+                        <p>Chọn thẻ</p>
+                    </div>
                     <div class="pay-submit-body--right">
                         <div class="pay-submit-body--card-list">
                             <label for="radioDemo01" class="pay-submit-body--card-item">
-                                <input id="radioDemo01" type="radio">
-                                <img src="/assets/img/common/icon-visa.png" alt="">
-                                <p>9999 9999 9999</p>
+                                <input name="card-radio" id="radioDemo01" type="radio">
+                                <p class="pic"><img src="/assets/img/common/icon-visa.png" alt=""></p>
+                                <p class="number">9999 9999 9999</p>
                             </label>
                             <label for="radioDemo02" class="pay-submit-body--card-item">
-                                <input id="radioDemo02" type="radio">
-                                <img src="/assets/img/common/icon-visa.png" alt="">
-                                <p>9999 9999 9999</p>
+                                <input name="card-radio" id="radioDemo02" type="radio">
+                                <p class="pic"><img src="/assets/img/common/icon-visa.png" alt=""></p>
+                                <p class="number">9999 9999 9999</p>
                             </label>
                             <label for="radioDemo03" class="pay-submit-body--card-item">
-                                <input id="radioDemo03" type="radio">
-                                <img src="/assets/img/common/icon-visa.png" alt="">
-                                <p>9999 9999 9999</p>
+                                <input name="card-radio" id="radioDemo03" type="radio">
+                                <p class="pic"><img src="/assets/img/common/icon-visa.png" alt=""></p>
+                                <p class="number">9999 9999 9999</p>
                             </label>
                         </div>
-                        <div class="cart-footer-item--card-order">Thẻ khác</div>
+                        <button class="btn btn__white pay-submit-body--card-order"><i
+                                class="icon icon__left fas fa-plus"></i>Thẻ khác</button>
                     </div>
                 </div>
                 <div class="pay-submit-footer">
-                    <p><span>Tổng tiền hàng</span><span>$99.999.999</span></p>
-                    <p><span>Tổng tiền hàng</span><span>$99.999.999</span></p>
-                    <p><span>Tổng tiền hàng</span><span>$99.999.999</span></p>
+                    <div class="pay-submit-footer--list">
+                        <span class="pay-submit-footer--txt">Tổng tiền hàng</span>
+                        <span class="pay-submit-footer--number">$99.999.999</span>
+                        <span class="pay-submit-footer--txt">Phí vận chuyển</span>
+                        <span class="pay-submit-footer--number">$99.999.999</span>
+                        <span class="pay-submit-footer--txt">Tổng thanh toán:</span>
+                        <span class="pay-submit-footer--number pay-submit-footer--number__total">$99.999.999</span>
+                    </div>
                     <div class="pay-submit-footer--final">
-                        <p>Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <a href="#">Điều khoản Shopee</a>
-                        </p>
+                        <p class="txt">Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <a href="#">Điều khoản Shopee</a></p>
                         <button class="btn btn__primary">Đặt hàng</button>
                     </div>
                 </div>
