@@ -56,6 +56,10 @@ button {
   cursor: pointer;
 }
 
+label {
+  cursor: pointer;
+}
+
 .ml10 {
   margin-left: 10px !important;
 }
@@ -279,6 +283,48 @@ button {
 .checkbox__active .icon {
   background-color: #9932cc;
   border: none;
+}
+
+.radio {
+  width: 20px;
+  height: 20px;
+}
+
+.radio input[type="radio"] {
+  display: none;
+}
+
+.radio-show {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #C4C4C4;
+}
+
+.radio-show::before {
+  display: none;
+  content: "";
+  width: 65%;
+  height: 65%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #9932cc;
+  border-radius: 50%;
+}
+
+.radio-show.active {
+  border-color: #9932cc;
+}
+
+.radio-show.active::before {
+  display: block;
 }
 
 .btn {
@@ -2660,6 +2706,7 @@ button {
 }
 
 .pay-submit-header--btn:hover {
+  background-color: inherit;
   border-color: #9932cc;
   color: #9932cc;
 }
@@ -2707,7 +2754,7 @@ button {
   margin-bottom: 15px;
 }
 
-.pay-submit-body__debit .pay-submit-body--card-item input {
+.pay-submit-body__debit .pay-submit-body--card-item .radio {
   margin-right: 10px;
 }
 

@@ -85,6 +85,13 @@ $(function () {
         $(this).parents('.checkbox').toggleClass("checkbox__active");
     })
 
+    // JS for input radio
+    $('input[type="radio"]').on("change", function(){
+        const name = $(this).attr('name');
+        $(`input[type="radio"][name=${name}]`).next().removeClass('active');
+        $(this).next().addClass('active');
+    })
+
     // Js for cart footer is sticky
     if ($('.cart__list .cart-footer').length) {
         $(window).on('scroll', function () {

@@ -159,6 +159,7 @@
                 height: 40px;
 
                 &:hover {
+                    background-color: inherit;
                     border-color: $color-primary01;
                     color: $color-primary01;
                 }
@@ -181,7 +182,7 @@
                         @include flex($justify: flex-start);
                         margin-bottom: 15px;
 
-                        input {
+                        .radio{
                             margin-right: 10px;
                         }
 
