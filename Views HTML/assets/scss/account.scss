@@ -3,7 +3,24 @@
         background-color: white;
     }
 
-    .shopping-order{
+    &__address {
+        .split-main {
+            padding: 0 15px;
+            @include box-shadow();
+        }
+
+        .split-header {
+            @include flex($justify:space-between);
+            margin: 0;
+
+            &--add{
+                height: 40px;
+                padding: 2px 18px;
+            }
+        }
+    }
+
+    .shopping-order {
         background: inherit;
     }
 
@@ -22,12 +39,12 @@
         }
 
         & .dropdown-item {
-            a{
+            a {
                 padding: 5px 0;
                 display: block;
             }
 
-            &:last-child{
+            &:last-child {
                 margin-bottom: 5px;
             }
         }
@@ -84,37 +101,75 @@
         }
     }
 
-    &-edit-form{
+    &-edit-form {
         @include flex($justify: flex-start, $align: flex-start);
         padding-bottom: 20px;
 
-        &--left{
+        &--left {
             width: 70%;
             border-right: 1px solid $color-bd;
             padding-right: 50px;
         }
 
-        &--right{
+        &--right {
             padding: 0 15px;
             @include flex(center, flex-start, column);
             width: 30%;
         }
 
-        &--update-btn{
+        &--update-btn {
             height: 40px;
             padding: 1px 10px;
             margin-bottom: 10px;
         }
 
-        &--pic{
+        &--pic {
             width: 100px;
             height: 100px;
             margin: 20px auto 20px;
         }
 
-        &--pic-note{
+        &--pic-note {
             text-align: center;
             color: $color-txt-grey;
+        }
+    }
+
+    &-address {
+        &-item {
+            @include flex($justify: space-between, $align: flex-start);
+            border-bottom: 1px solid $color-bd;
+            padding: 15px 0;
+        }
+
+        &-left {
+            &--row {
+                @include flex($justify: flex-start, $align: flex-start);
+                margin-bottom: 10px;
+            }
+
+            &--key {
+                width: 160px;
+                margin-right: 25px;
+                text-align: right;
+                color: $color-txt-white-grey;
+            }
+
+            &--value {
+                font-size: 1.6rem;
+            }
+        }
+
+        &-right {
+            .link {
+                padding: 15px 0;
+                color: $color-txt-grey;
+                text-decoration: underline;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
         }
     }
 }

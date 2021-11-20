@@ -1,0 +1,121 @@
+.modal2 {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 560px;
+    border: 1px solid red;
+    padding: 30px;
+    background-color: white;
+    @include box-shadow();
+
+    .modal2-input {
+        display: block;
+        height: 40px;
+
+        &__name,
+        &__phone {
+            width: calc(50% - 5px);
+        }
+
+        &__phone {
+            margin-left: auto;
+        }
+    }
+
+    &-header {
+        z-index: 2;
+        @include flex($justify: flex-start);
+        position: fixed;
+        top: 30px;
+        left: 0;
+        padding: 0 30px;
+        width: 100%;
+        max-width: 500px;
+        height: 60px;
+        font-size: 2rem;
+        background-color: inherit;
+    }
+
+    &-body {
+        margin-top: 60px;
+    }
+
+    &-form {
+        &>*:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
+
+    &-card {
+        &-input {
+            @include flex($justify: space-between);
+        }
+
+        &-address {
+            position: relative;
+            @include box-shadow();
+            border: 1px solid $color-bd;
+
+            &--value {
+                @include flex($justify: flex-start);
+                border: 1px solid $color-bd-ipt;
+                height: 40px;
+                padding: 0 10px;
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            &--legend {
+                @include flex($justify: flex-start);
+                position: absolute;
+                top: -8px;
+                left: 10px;
+                height: 16px;
+                padding: 0 5px;
+                font-size: 1.2rem;
+                background-color: white;
+                color: $color-txt-white-grey;
+            }
+
+            &--header {
+                @include flex($justify: space-between);
+                padding: 15px 0;
+                color: $color-txt-grey;
+                @include box-shadow();
+                border: 1px solid $color-bd;
+
+                &>* {
+                    position: relative;
+                    text-align: center;
+                    width: 33.3%;
+
+                    &.active {
+                        &::after {
+                            content: "";
+                            display: block;
+                            width: 100%;
+                            height: 3px;
+                            position: absolute;
+                            bottom: -15px;
+                            background-color: $color-primary01;
+                        }
+                    }
+                }
+            }
+
+            &--list{
+                overflow-y: scroll;
+                & > *{
+                    padding: 12px;
+                    cursor: pointer;
+                    &.active{
+                        color: $color-primary01;
+                    }
+                    &:hover{
+                        background-color: $color-bg-yellow-white;
+                    }
+                }
+            }
+        }
+    }
+}

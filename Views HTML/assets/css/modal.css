@@ -1,0 +1,12 @@
+.modal2 {
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid red;
+  padding: 30px;
+}
+
+.modal2-header {
+  position: fixed;
+  top: 0;
+}
+/*# sourceMappingURL=modal.css.map */
