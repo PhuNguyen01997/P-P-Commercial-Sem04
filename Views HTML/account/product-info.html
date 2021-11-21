@@ -88,70 +88,60 @@
             </div>
             <div class="split-main split-main__form">
                 <div class="split-header">
-                    <h2 class="split-header--title">Tạo products</h2>
+                    <h2 class="split-header--title">Sản phẩm mới</h2>
+                    <p class="split-header--text">Thêm sản phẩm mới vào cửa hàng</p>
                 </div>
-                <form method="POST" class="form">
-                    <div class="form-item">
-                        <label class="form-item--left" for="name_product">Tên sản phẩm</label>
-                        <div class="form-item--right">
-                            <input type="text" name="name_product" id="name_product">
+                <form method="POST" class="account-form product-edit-form">
+                    <div class="account-form--left">
+                        <div class="form-item">
+                            <label class="form-item--left" for="name_product">Tên sản phẩm</label>
+                            <div class="form-item--right">
+                                <input type="text" name="name_product" id="name_product">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-item">
-                        <label class="form-item--left" for="number">Giá sản phẩm</label>
-                        <div class="form-item--right">
-                            <input type="text" name="number" id="number">
+                        <div class="form-item">
+                            <label class="form-item--left" for="number">Giá sản phẩm</label>
+                            <div class="form-item--right">
+                                <input type="number" name="number" id="number">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="gender">Thương hiệu</label>
-                        <div class="form-item--right">
-                            <div class="select">
-                                <!-- <select name="" id="">
-                                    <option value="">--Chọn--</option>
-                                    <option value="01">Nam</option>
-                                    <option value="02">Nữ</option>
-                                    <option value="02">Khác</option>
-                                </select> -->
-                                <p class="select--default">Price</p>
-                                <ul class="select--list">
-                                    <li class="select--item" data-value="increase" data-text="Vip">
-                                        <span>Vip</span>
-                                        <span class="icon"><i class="fas fa-angle-down"></i></span>
-                                    </li>
-                                    <li class="select--item active" data-value="decrease" data-text="Bình thường">
-                                        <span>Bình thường</span>
-                                        <span class="icon"><i class="fas fa-angle-down"></i></span>
-                                    </li>
-                                    <li class="select--item active" data-value="decrease" data-text="Supper Víp">
-                                        <span>Supper Víp</span>
-                                        <span class="icon"><i class="fas fa-angle-down"></i></span>
-                                    </li>
-                                </ul>
-                                <p class="icon"><i class="fas fa-angle-down"></i></p>
+                        <div class="form-item">
+                            <label class="form-item--left" for="gender">Phân loại</label>
+                            <div class="form-item--right">
+                                <div class="select">
+                                    <select name="" id="">
+                                        <option value="">Chọn phân loại</option>
+                                        <option value="01" selected>Option 01</option>
+                                        <option value="02">Option 02</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label class="form-item--left" for="product features">Mô tả</label>
+                            <textarea class="form-item--right" rows="6" cols="20"></textarea>
+                        </div>
+                        <div class="form-item">
+                            <label class="form-item--left"></label>
+                            <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button>
                             </div>
                         </div>
                     </div>
-                   
-                    <div class="form-item">
-                        <label class="form-item--left" for="discount code">Mã giảm giá</label>
-                        <div class="form-item--right">
-                            <input type="text" name="discount code" id="discount code">
+                    <div class="account-form--right">
+                        <p class="circle pic account-form--pic account-form--pic__png">
+                            <img src="/assets/img/common/img_default_product.png" alt="">
+                        </p>
+                        <button class="btn btn__primary-outline account-form--update-btn">Choose picture</button>
+                        <p class="account-form--pic-note">Dụng lượng file tối đa 1 MB<br>Định dạng:.JPEG, .PNG</p>
+                        <div class="account-form--pic-list">
+                            <img src="/assets/img/products/product_01.jpg" alt="">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                            <img src="/assets/img/products/product_03.jpg" alt="">
+                            <img src="/assets/img/products/product_01.jpg" alt="">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                            <img src="/assets/img/products/product_03.jpg" alt="">
                         </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="product features">Tính năng của sản phẩm</label>
-                        <textarea class="form-item--right" rows="3" cols="20">
-                        </textarea>
-                    </div>
-                   
-                   
-                
-
-                    <div class="form-item">
-                        <label class="form-item--left"></label>
-                        <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button></div>
+                        <p>Khúc này chắc cho max 10 tấm</p>
                     </div>
                 </form>
             </div>
@@ -197,5 +187,4 @@
     <script src="/assets/js/script.js"></script>
 </body>
 
-</html> 
-
+</html>

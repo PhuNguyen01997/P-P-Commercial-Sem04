@@ -100,9 +100,39 @@
                             </div>
                         </div>
                         <div class="form-item">
+                            <label class="form-item--left" for="number">Số điện thoại</label>
+                            <div class="form-item--right">
+                                <input type="text" name="number" id="number">
+                            </div>
+                        </div>
+                        <div class="form-item">
                             <label class="form-item--left" for="address_shop">Địa chỉ shop</label>
                             <div class="form-item--right">
-                                <input type="text" name="describe_shop" id="describe_shop">
+                                <div class="select">
+                                    <select name="" id="">
+                                        <option value="">Chọn địa chỉ</option>
+                                        <option value="01">Option 01</option>
+                                        <option value="02">Option 02</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label class="form-item--left" for="number">Tài khoản</label>
+                            <div class="form-item--right">
+                                <div class="select">
+                                    <select name="" id="">
+                                        <option value="">Chọn tài khoản trong list tài khoản</option>
+                                        <option value="01">Option 01</option>
+                                        <option value="02">Option 02</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label class="form-item--left" for="number">Tài khoản</label>
+                            <div class="form-item--right">
+                                <p class="text">Bạn chưa có tài khoản(địa chỉ) nào, <a class="link" href="#">Tạo mới</a>    </p>
                             </div>
                         </div>
                         <div class="form-item">
@@ -112,29 +142,22 @@
                             </div>
                         </div>
                         <div class="form-item">
-                            <label class="form-item--left" for="number">Số điện thoại</label>
-                            <div class="form-item--right">
-                                <input type="text" name="number" id="number">
-                            </div>
-                        </div>
-                        <div class="form-item">
-                            <label class="form-item--left" for="number">Số tài khoản</label>
-                            <div class="form-item--right">
-                                <input type="text" name="number" id="number">
-                            </div>
-                        </div>
-                        <div class="form-item">
                             <label class="form-item--left"></label>
                             <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button>
                             </div>
                         </div>
                     </div>
                     <div class="account-form--right">
-                        <p class="circle pic account-form--pic">
-                            <img src="/assets/img/common/img_default_user.png" alt="">
+                        <p class="circle pic account-form--pic account-form--pic__png">
+                            <img src="/assets/img/common/img_default_shop.png" alt="">
                         </p>
                         <button class="btn btn__primary-outline account-form--update-btn">Choose picture</button>
                         <p class="account-form--pic-note">Dụng lượng file tối đa 1 MB<br>Định dạng:.JPEG, .PNG</p>
+                        <div class="account-form--pic-list account-form--pic-list__shop">
+                            <img src="/assets/img/products/product_04.jpg" alt="">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                        </div>
+                        <p>Khúc này chắc cho max 2 tấm (1 tấm avatar shop, 1 tấm banner)</p>
                     </div>
                 </form>
             </div>

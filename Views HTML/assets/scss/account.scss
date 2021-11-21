@@ -126,11 +126,66 @@
             width: 100px;
             height: 100px;
             margin: 20px auto 20px;
+
+            &__png {
+                padding: 15px;
+                background-color: $color-bg-white;
+            }
         }
 
         &--pic-note {
             text-align: center;
             color: $color-txt-grey;
+            margin-bottom: 10px;
+        }
+
+        &--pic-list {
+            @include flex($justify: flex-start);
+            width: 100%;
+            overflow-x: auto;
+
+            /* width */
+            &::-webkit-scrollbar {
+                height: 10px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: none;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: $color-primary01;
+                border-radius: 5px;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+                background: rgba(153, 50, 204, 0.6);
+                cursor: pointer;
+            }
+
+            &>img {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                border-color: white;
+                border-style: solid;
+                border-width: 0 2px;
+            }
+
+            &__shop {
+                flex-direction: column;
+
+                img {
+                    max-width: 100%;
+                    width: auto;
+                    height: auto;
+                    max-height: 150px;
+                    margin: 0 auto 10px;
+                }
+            }
         }
     }
 

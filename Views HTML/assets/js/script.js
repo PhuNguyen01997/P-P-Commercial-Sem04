@@ -10,7 +10,7 @@ $(function () {
 
     $(".select").each(function () {
         const selected = $(this).find('option:selected')[0];
-        const showDefault = `<button class="select--default">${selected.text}</button>`;
+        const showDefault = `<p class="select--default">${selected.text}</p>`;
         let list = `<ul class="select--list">`;
         $(this).find('option').each((index, option) => {
             list += `<li class="select--item ${selected.value === option.value ? "active" : ""}" data-value="${option.value}" data-text="${option.text}">`
