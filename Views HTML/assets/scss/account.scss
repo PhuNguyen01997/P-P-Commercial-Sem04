@@ -3,20 +3,10 @@
         background-color: white;
     }
 
-    &__address {
-        .split-main {
-            padding: 0 15px;
-            @include box-shadow();
-        }
-
-        .split-header {
-            @include flex($justify:space-between);
-            margin: 0;
-
-            &--add{
-                height: 40px;
-                padding: 2px 18px;
-            }
+    .form {
+        button[type="submit"] {
+            padding: 0px 10px;
+            min-width: 100px;
         }
     }
 
@@ -24,10 +14,21 @@
         background: inherit;
     }
 
-    .form {
-        button[type="submit"] {
-            padding: 0px 10px;
-            min-width: 100px;
+    &__address,
+    &__card {
+        .split-main {
+            padding: 0 30px;
+            @include box-shadow();
+        }
+
+        .split-header {
+            @include flex($justify:space-between);
+            margin: 0;
+
+            &--add {
+                height: 40px;
+                padding: 2px 18px;
+            }
         }
     }
 
@@ -169,6 +170,53 @@
                 &:not(:last-child) {
                     margin-right: 10px;
                 }
+            }
+        }
+    }
+
+    &-card {
+        &-item {
+            position: relative;
+            @include flex($justify: flex-start);
+            height: 90px;
+            padding: 25px 0 25px;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid $color-bd;
+            }
+
+            &>* {
+                white-space: nowrap;
+            }
+
+            &--pic {
+                @include flex();
+                width: 67px;
+                height: 100%;
+                padding: 5px;
+                margin-right: 20px;
+                border: 1px solid $color-bd;
+            }
+
+            &--name {
+                font-size: 1.6rem;
+                margin-right: auto;
+            }
+
+            &--number {
+                font-family: "OCR A Std";
+                margin: 0 20px;
+
+            }
+
+            &--action {
+                width: 300px;
+                text-align: right;
+            }
+
+            &--link {
+                text-decoration: underline;
+                color: $color-txt-white-grey;
             }
         }
     }
