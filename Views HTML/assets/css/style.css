@@ -1726,11 +1726,6 @@ label {
   background-color: white;
 }
 
-.account .form button[type="submit"] {
-  padding: 0px 10px;
-  min-width: 100px;
-}
-
 .account .shopping-order {
   background: inherit;
 }
@@ -1839,7 +1834,7 @@ label {
   color: #9932cc;
 }
 
-.account-edit-form {
+.account-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1856,13 +1851,18 @@ label {
   padding-bottom: 20px;
 }
 
-.account-edit-form--left {
+.account-form--left {
   width: 70%;
   border-right: 1px solid rgba(0, 0, 0, 0.09);
   padding-right: 50px;
 }
 
-.account-edit-form--right {
+.account-form--left button[type="submit"] {
+  padding: 0px 10px;
+  min-width: 100px;
+}
+
+.account-form--right {
   padding: 0 15px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1880,19 +1880,19 @@ label {
   width: 30%;
 }
 
-.account-edit-form--update-btn {
+.account-form--update-btn {
   height: 40px;
   padding: 1px 10px;
   margin-bottom: 10px;
 }
 
-.account-edit-form--pic {
+.account-form--pic {
   width: 100px;
   height: 100px;
   margin: 20px auto 20px;
 }
 
-.account-edit-form--pic-note {
+.account-form--pic-note {
   text-align: center;
   color: #555;
 }

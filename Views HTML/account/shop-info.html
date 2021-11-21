@@ -12,10 +12,10 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
+    </script>
 
 
 
@@ -62,7 +62,7 @@
         </div>
     </header>
     <main>
-        <div class="inner split account account__info">
+        <div class="inner split account account__shop">
             <div class="account-side split-side">
                 <div class="account-head">
                     <p class="pic circle account-head--avatar pic"><img src="/assets/img/products/product_01.jpg"
@@ -88,27 +88,27 @@
             </div>
             <div class="split-main split-main__form">
                 <div class="split-header">
-                    <h2 class="split-header--title">Hồ Sơ Của Tôi</h2>
-                    <p class="split-header--text">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                    <h2 class="split-header--title">Tạo Shop</h2>
+                    <p class="split-header--text">Đăng ký shop bán hàng</p>
                 </div>
-                <form method="POST" class="account-form account-edit-form">
+                <form method="POST" class="account-form shop-edit-form">
                     <div class="account-form--left">
                         <div class="form-item">
-                            <label class="form-item--left" for="username">Tên đăng nhập</label>
+                            <label class="form-item--left" for="name_shop">Tên shop</label>
                             <div class="form-item--right">
-                                <input type="text" name="username" id="username">
+                                <input type="text" name="name_shop" id="name_shop">
                             </div>
                         </div>
                         <div class="form-item">
-                            <label class="form-item--left" for="userinfo">Tên</label>
+                            <label class="form-item--left" for="address_shop">Địa chỉ shop</label>
                             <div class="form-item--right">
-                                <input type="text" name="userinfo">
+                                <input type="text" name="describe_shop" id="describe_shop">
                             </div>
                         </div>
                         <div class="form-item">
-                            <label class="form-item--left" for="email">Email</label>
+                            <label class="form-item--left" for="describe_shop">Miêu tả shop</label>
                             <div class="form-item--right">
-                                <input type="text" name="email" id="email">
+                                <textarea class="form-item--right" rows="3" cols="20"></textarea>
                             </div>
                         </div>
                         <div class="form-item">
@@ -118,45 +118,14 @@
                             </div>
                         </div>
                         <div class="form-item">
-                            <label class="form-item--left" for="gender">Giới tính</label>
+                            <label class="form-item--left" for="number">Số tài khoản</label>
                             <div class="form-item--right">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
-                                    </select>
-                                </div>
+                                <input type="text" name="number" id="number">
                             </div>
                         </div>
                         <div class="form-item">
                             <label class="form-item--left"></label>
-                            <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button></div>
-                        </div>
-                        <div class="form-item">
-                            <label class="form-item--left" for="gender">Giới tính</label>
-                            <div class="form-item--right form-item--right__flex">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
-                                    </select>
-                                </div>
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
-                                    </select>
-                                </div>
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
-                                    </select>
-                                </div>
+                            <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button>
                             </div>
                         </div>
                     </div>
