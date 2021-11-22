@@ -432,12 +432,12 @@ label {
 }
 
 .split-main__form {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .split-main__shopping-product {
-  padding: 15px 15px 20px;
+  padding: 15px 30px 20px;
 }
 
 .split-header {
@@ -2003,6 +2003,22 @@ label {
   height: auto;
   max-height: 150px;
   margin: 0 auto 10px;
+}
+
+.account-form--pic-list__identity {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.account-form--pic-list__identity img {
+  width: auto;
+  max-height: 100px;
+}
+
+.account-form--pic-list__identity img:first-child {
+  margin-bottom: 10px;
 }
 
 .account-address-item {

@@ -186,6 +186,18 @@
                     margin: 0 auto 10px;
                 }
             }
+
+            &__identity{
+                flex-direction: column;
+                img{
+                    width: auto;
+                    max-height: 100px;
+
+                    &:first-child{
+                        margin-bottom: 10px;
+                    }
+                }
+            }
         }
     }
 
