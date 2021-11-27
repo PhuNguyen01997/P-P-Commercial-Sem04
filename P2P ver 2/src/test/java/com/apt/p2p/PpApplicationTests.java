@@ -1,13 +1,13 @@
-package PP.PAndP;
+package com.apt.p2p;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PAndPApplicationTests {
+class PpApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
