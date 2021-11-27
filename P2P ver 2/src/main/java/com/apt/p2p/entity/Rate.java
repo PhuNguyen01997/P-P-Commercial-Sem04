@@ -2,15 +2,23 @@ package com.apt.p2p.entity;
 
 import com.sun.istack.NotNull;
 
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Cart")
-public class Cart {
+@Table(name = "Rate")
+public class Rate {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(columnDefinition="TEXT")
+    @NotNull
+    private String description;
+
+    @NotNull
+    private Integer star;
 
     private Date createdAt;
 
@@ -21,8 +29,7 @@ public class Cart {
     @JoinColumn(name = "userId")
     private User user;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productId")
-    private Product product;
+    @JoinColumn(name = "shopId")
+    private Shop shop;
 }

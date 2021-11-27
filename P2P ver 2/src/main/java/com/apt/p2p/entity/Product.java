@@ -32,19 +32,17 @@ public class Product {
 
     private Date updatedAt;
 
-    //    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "category_Id")
-//    private Category categoryId;
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shopId")
     private Shop shop;
 
-    // Not neccessary because we don't have business logic to find product -> carts
+//    Not neccessary because we don't have business logic to find product -> carts
 //    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 //    private List<Cart> carts;
-//    @OneToMany(mappedBy = "productId", fetch = FetchType.LAZY)
-//    private List<OrderDetail> orderDetails;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails;
 
     @NotNull
     @ManyToOne

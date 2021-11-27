@@ -3,26 +3,28 @@ package com.apt.p2p.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "Cart")
-public class Cart {
+@Table(name = "OrderDetail")
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    private Date createdAt;
-
-    private Date updatedAt;
+    @NotNull
+    private Double lastPrice;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User user;
+    private Integer quantity;
 
-    @NotNull
+    @Transient
+    private Double subtotal;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
     private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderId")
+    private Order order;
 }

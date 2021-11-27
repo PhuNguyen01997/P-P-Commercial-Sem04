@@ -14,9 +14,6 @@ public class Shop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @OneToOne
-//    private User userId;
-
     @Column(length = 20)
     @NotNull
     private String logo;
@@ -31,12 +28,25 @@ public class Shop {
 
     private Date updatedAt;
 
+    @NotNull
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Product> products;
-//
-//    @OneToMany(mappedBy = "shopId", fetch = FetchType.LAZY)
-//    private List<Rate> rates;
-//
-//    @OneToMany(mappedBy = "shopId", fetch = FetchType.LAZY)
-//    private List<Order> orders;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId")
+    private Address address;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "paymentId")
+    private Payment payment;
+
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
+    private List<Rate> rates;
+
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
+    private List<Order> orders;
 }
