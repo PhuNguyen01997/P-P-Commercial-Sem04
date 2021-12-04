@@ -1,10 +1,11 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.entity.Payment;
 import com.apt.p2p.model.PaymentModel;
-import com.apt.p2p.model.TestModel;
 import com.apt.p2p.service.PaymentService;
-import org.aspectj.weaver.ast.Test;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/Payment")
@@ -16,8 +17,7 @@ public class PaymentController {
     }
 
     @PostMapping("")
-    public String create(@RequestBody TestModel paymentModel) {
-        return paymentModel.getId().toString();
+    public String create(@Valid @RequestBody PaymentModel paymentModel) {
+        return "User is valid " + paymentModel.getDue().toString();
     }
-
 }

@@ -1,9 +1,7 @@
 package com.apt.p2p.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Address")
