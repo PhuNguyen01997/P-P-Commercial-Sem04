@@ -1,11 +1,16 @@
 package com.apt.p2p.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "Payment")
+@Getter
+@Setter
 public class Payment {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

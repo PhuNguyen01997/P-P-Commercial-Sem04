@@ -30,9 +30,9 @@ public class User {
     @NotNull
     private String avatar;
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
-    private Date updatedAt;
+    private Date updatedAt = new Date();
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Shop shop;

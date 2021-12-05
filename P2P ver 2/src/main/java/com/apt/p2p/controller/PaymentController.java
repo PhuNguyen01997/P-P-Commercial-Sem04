@@ -18,6 +18,7 @@ public class PaymentController {
 
     @PostMapping("")
     public String create(@Valid @RequestBody PaymentModel paymentModel) {
-        return "User is valid " + paymentModel.getDue().toString();
+        service.create(paymentModel);
+        return "boo";
     }
 }
