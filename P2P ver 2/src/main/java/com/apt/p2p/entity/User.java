@@ -16,7 +16,7 @@ public class User {
     private String email;
 
     @NotNull
-    private String userName;
+    private String username;
 
     @Column(length = 16)
     @NotNull
