@@ -22,9 +22,9 @@ public class Shop {
 
     private Boolean permission = false;
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
-    private Date updatedAt;
+    private Date updatedAt = new Date();
 
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)

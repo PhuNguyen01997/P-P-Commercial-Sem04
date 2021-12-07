@@ -18,7 +18,6 @@ public class PaymentController {
 
     @PostMapping("")
     public String create(@Valid @RequestBody PaymentModel paymentModel) {
-        paymentModel.setUserId(1);
         service.create(paymentModel);
         return "boo";
     }

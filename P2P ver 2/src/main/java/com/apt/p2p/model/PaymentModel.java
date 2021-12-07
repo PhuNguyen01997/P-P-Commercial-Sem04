@@ -38,5 +38,12 @@ public class PaymentModel {
     @NotNull(message = "Postal Code can't be empty")
     private Integer postalCode;
 
+    private Integer shopId;
+
+    private ShopModel shop;
+
+    @NotNull
     private Integer userId;
+
+    private UserModel user;
 }
