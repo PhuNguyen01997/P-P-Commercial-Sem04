@@ -1,0 +1,35 @@
+.auth {
+    &-title {
+        font-size: 3rem;
+        font-weight: bold;
+        padding: 0 2.2rem 2.2rem;
+    }
+
+    &-container {
+        border: 1px solid red;
+        padding: 15px;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    &-navi {
+        @include flex($justify: space-between);
+    }
+
+    &--ipt {
+        width: 100%;
+
+        &__txt {
+            display: block;
+            height: 32px;
+            padding: 4px;
+            margin-bottom: 10px;
+        }
+
+        &__submit {
+            border-radius: 2px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+    }
+}

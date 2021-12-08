@@ -1,0 +1,342 @@
+.order {
+    font-size: 1.4rem;
+
+    .order {
+        &-section {
+            @include box-shadow();
+            border-radius: 2px;
+            background-color: white;
+            margin-bottom: 12px;
+        }
+
+        &-submit {
+            background-color: $color-bg-yellow-white;
+        }
+    }
+
+    &-item {
+        @include flex($justify: flex-start, $align: flex-start);
+        border-bottom: 1px solid $color-bd;
+        padding: 0 15px;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        &--pic {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        &--text {
+            padding: 0 20px 0 10px;
+
+            &>* {
+                margin-bottom: 5px;
+            }
+        }
+
+        &--name {
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            font-size: 16px;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+
+        &--category {
+            color: $color-txt-white-grey;
+        }
+
+        &--quantity {
+            color: $color-txt-grey;
+        }
+
+        &--price {
+            font-size: 18px;
+            align-self: center;
+            color: $color-red;
+        }
+    }
+
+    &-shop {
+        @include flex($justify: flex-start);
+        width: calc(100% - 30px);
+        padding: 20px 0 15px;
+        margin: 0 auto 15px;
+        border-bottom: 1px solid $color-bd-ipt;
+
+        &>*:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        &--name {
+            font-weight: bold;
+        }
+
+        &--btn {
+            font-size: 1.2rem;
+            padding: 5px 8px;
+        }
+
+        &--status {
+            color: $color-red;
+            margin-left: auto;
+        }
+    }
+
+    &-submit {
+        padding: 0 15px;
+
+        &--total {
+            @include flex($justify: flex-end);
+            padding: 24px 0px 12px;
+
+            span:last-child {
+                margin-left: 10px;
+                color: $color-red;
+                font-size: 2.4rem;
+            }
+        }
+
+        &--info {
+            @include flex($justify: flex-end);
+            padding: 12px 0 24px;
+        }
+
+        &--text {
+            color: $color-txt-white-grey;
+        }
+
+        &--btn {
+            height: 40px;
+            margin-left: 10px;
+
+            &:first-of-type {
+                margin-left: auto;
+            }
+        }
+    }
+
+    &-summary {
+        &--item {
+            @include flex($justify: flex-end);
+            border-radius: 2px;
+            border-bottom: 1px solid $color-bd-ipt;
+
+            &>*:first-child {
+                font-size: 1.2rem;
+                color: $color-txt-white-grey;
+                padding-right: 13px;
+            }
+
+            &>*:last-child {
+                width: 240px;
+                text-align: right;
+                padding: 10px 15px 10px 13px;
+                border-left: 1px solid $color-bd-ipt;
+            }
+
+            &__total {
+                &>*:last-child {
+                    color: $color-primary01;
+                    font-size: 2.4rem;
+                }
+            }
+        }
+    }
+
+    &-step {
+        @include flex($justify: space-between, $align: flex-start);
+
+        &--item {
+            position: relative;
+            text-align: center;
+            border-color: $color-gray;
+            color: $color-gray;
+            flex-grow: 1;
+
+            &.current,
+            &.success {
+                color: $color-green;
+                border-color: $color-green;
+            }
+
+            &.success {
+                .order-step--icon {
+
+                    &::before,
+                    &::after {
+                        background-color: $color-green;
+                    }
+                }
+            }
+
+            &.current {
+                .order-step--icon {
+                    background-color: $color-green;
+                    color: white;
+
+                    &::before {
+                        background-color: $color-green;
+                    }
+                }
+            }
+
+            &:last-child {
+                .order-step--icon {
+                    &::after {
+                        display: none;
+                    }
+                }
+            }
+
+            &:first-child {
+                .order-step--icon {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &--status,
+        &--time {
+            width: 140px;
+            margin: 0 auto;
+        }
+
+        &--icon {
+            @include flex();
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+            border-width: 4px;
+            border-style: solid;
+            border-color: inherit;
+            font-size: 2.4rem;
+
+            &:before,
+            &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                height: 4px;
+                width: calc(50% - 30px);
+                top: 30px;
+                transform: translateY(-50%);
+                background-color: $color-gray;
+            }
+
+            &:before {
+                left: 0;
+            }
+
+            &:after {
+                right: 0;
+            }
+        }
+
+        &--status {
+            color: #000;
+            margin: 20px auto 4px;
+        }
+
+        &--time {
+            color: $color-gray;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.order-detail {
+    font-size: 1.4rem;
+    @include box-shadow();
+
+    .order {
+        &-shop {
+            background-color: $color-bg-yellow-white;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        &-item {
+            padding-top: 15px;
+        }
+    }
+
+    &-main {
+        background-color: white;
+    }
+
+    &-header,
+    &-info {
+        @include flex($justify: flex-start);
+        padding: 20px 15px;
+        border-bottom: 1px solid $color-bd;
+    }
+
+    &-header {
+        &--back {
+            color: $color-txt-white-grey;
+        }
+
+        &--id {
+            color: $color-txt-grey;
+            margin: 0 20px 0 auto;
+            padding-right: 20px;
+            border-right: 1px solid $color-bd;
+        }
+
+        &--status {
+            color: $color-primary01;
+        }
+    }
+
+    &-info {
+        border: none;
+        position: relative;
+
+        &>*:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        &--name {
+            font-weight: bold;
+        }
+
+        &--address,
+        &--phone {
+            color: $color-txt-grey;
+            font-size: 1.2rem;
+        }
+    }
+
+    &-list {
+        background-color: $color-bg-yellow-white;
+    }
+
+    &-status {
+        padding: 40px 30px;
+
+        .order-step {
+            margin-bottom: 20px;
+        }
+    }
+
+    &-control {
+        text-align: right;
+
+        &--btn {
+            height: 40px;
+
+            &:first-child {
+                margin-right: 20px;
+            }
+        }
+    }
+}
