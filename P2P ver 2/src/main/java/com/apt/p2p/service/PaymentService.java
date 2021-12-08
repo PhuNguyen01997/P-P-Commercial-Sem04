@@ -6,5 +6,5 @@ import com.apt.p2p.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public interface PaymentService {
-    public Payment create(PaymentModel paymentModel);
+    public PaymentModel create(PaymentModel paymentModel);
 }
