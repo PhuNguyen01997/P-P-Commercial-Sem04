@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <h1>Kiếm layout khác</h1>
+
+  <div class="inner">
+    <div class="auth-container">
+      <h1 class="auth-title">Forgot password</h1>
+      <form action="#" class="form">
+        <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Input your email to reset password">
+        <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Send</button>
+      </form>
+      <div class="auth-navi">
+        <a href="#">Sign in</a>
+        <a href="#">Forgot password ?</a>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
