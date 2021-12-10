@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:replace="${title}">PP Title</title>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+    <script src="/plugins/jquery v3.6.0.js/jquery v3.6.0.min.js"></script>
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
-    <!--    Other inclue js, css static file-->
-    <th:block th:replace="${otherStaticResources} ?: ~{}"></th:block>
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <th:block layout:fragment="style"></th:block>
 </head>
 <body>
 <header th:insert="fragments/general.html :: header" class="header">
     <h1>Header</h1>
 </header>
-<main th:insert="">
-    <h1>COntent</h1>
+<main layout:fragment="content">
+    <h1>Content</h1>
 </main>
-<footer class="footer" th:insert="fragments/general.html :: footer.html">
+<footer class="footer" th:insert="fragments/general.html :: footer">
     <h1>Footer</h1>
 </footer>
+
+<script src="/js/script.js"></script>
+<th:block layout:fragment="script"></th:block>
 </body>
 </html>

@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("")
     public String index(){
-        return "user/index/index";
+        return "user/main/index";
+    }
+
+    @GetMapping("pay")
+    public String payment(){
+        return "user/main/payment";
     }
 }
