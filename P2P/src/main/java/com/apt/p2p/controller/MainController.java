@@ -11,11 +11,6 @@ public class MainController {
         return "user/main/index";
     }
 
-    @GetMapping("pay")
-    public String payment(){
-        return "user/main/payment";
-    }
-
     @GetMapping("shop/{id}")
     public String shopDetail(@PathVariable int id){
         return "user/main/shop-detail";
@@ -24,16 +19,6 @@ public class MainController {
     @GetMapping("product/{productSlug}")
     public String productDetail(@PathVariable String productSlug){
         return "user/main/product-detail";
-    }
-
-    @GetMapping("address")
-    public String address(){
-        return "user/account/address";
-    }
-
-    @GetMapping("card")
-    public String card(){
-        return "user/account/card";
     }
 
     @GetMapping("order")
@@ -94,25 +79,5 @@ public class MainController {
     @GetMapping("shop/{id}/edit")
     public String shopEdit(@PathVariable  int id){
         return "user/account/shop-form";
-    }
-
-    @GetMapping("signin")
-    public String signin(){
-        return "user/auth/signin";
-    }
-
-    @GetMapping("signup")
-    public String signup(){
-        return "user/auth/signup";
-    }
-
-    @GetMapping("reset-password")
-    public String resetPassword(){
-        return "user/auth/reset";
-    }
-
-    @GetMapping("forgot-password")
-    public String forgotPassword(){
-        return "user/auth/forgot";
     }
 }
