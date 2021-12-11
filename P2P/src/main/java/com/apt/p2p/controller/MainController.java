@@ -43,7 +43,7 @@ public class MainController {
 
     @GetMapping("shop/order")
     public String orderShop(){
-        return "user/account/shop-order";
+        return "user/account/order-shop";
     }
 
     @GetMapping("order/{id}")
@@ -94,6 +94,11 @@ public class MainController {
     @GetMapping("shop/{id}/edit")
     public String shopEdit(@PathVariable  int id){
         return "user/account/shop-form";
+    }
+
+    @GetMapping("signin")
+    public String signin(){
+        return "user/auth/signin";
     }
 
     @GetMapping("signup")

@@ -61,9 +61,15 @@ html {
 }
 
 body {
+  min-height: 100vh;
   line-height: 1.4;
   font-size: 1.4rem;
   background-color: $color-bg-white;
+  display: flex;
+  flex-direction: column;
+}
+main{
+  flex-grow: 1;
 }
 
 input,
@@ -441,12 +447,12 @@ label {
     &--right {
       width: 100%;
 
-      .link{
+      .link {
         text-decoration: underline;
         color: $color-primary01;
       }
 
-      .text{
+      .text {
         @include flex($justify: flex-start);
         min-height: 40px;
       }
@@ -637,6 +643,23 @@ label {
 .modal {
   width: 100%;
   height: 100vh;
+}
+
+.logo-text {
+  @include flex($align: flex-end);
+  position: relative;
+  height: 42px;
+
+  img {
+    &:first-child {
+      height: 100%;
+      margin-right: 10px;
+    }
+
+    &:last-child {
+      height: 70%;
+    }
+  }
 }
 
 @import "./header";

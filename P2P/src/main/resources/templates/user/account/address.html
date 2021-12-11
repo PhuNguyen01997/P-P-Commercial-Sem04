@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="inner split account account__address">
+        <div class="account-side split-side">
+            <div class="account-head">
+                <p class="pic circle account-head--avatar pic"><img src="/img/products/product_01.jpg"
+                                                                    alt=""></p>
+                <div class="account-head--text">
+                    <p class="account-head--name">Uwu Bu Bu</p>
+                    <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
+                    </p>
+                </div>
+            </div>
+            <ul class="account-body">
+                <li class="account-body--item account-body--item__dropdown dropdown">
+                    <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
+                    <ul class="dropdown-list">
+                        <li class="dropdown-item"><a href="#">Profile</a></li>
+                        <li class="dropdown-item"><a href="#">Change password</a></li>
+                    </ul>
+                </li>
+                <li class="account-body--item"><a href="javascript: void(0)"><i
+                        class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
+                </li>
+            </ul>
+        </div>
+        <div class="split-main">
+            <div class="split-header">
+                <h2 class="split-header--title">Địa Chỉ Của Tôi</h2>
+                <button class="btn btn__primary split-header--add"><i
+                        class="icon icon__left fas fa-plus"></i>Thêm địa chỉ mới
+                </button>
+            </div>
+            <ul class="account-address">
+                <li class="account-address-item">
+                    <div class="account-address-left">
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Họ và tên</p>
+                            <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
+                        </div>
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Số điện thoại</p>
+                            <p class="account-address-left--value">0999999999</p>
+                        </div>
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Địa chỉ</p>
+                            <p class="account-address-left--value">
+                                99 Họ tên đường<br>
+                                Phường xx<br>
+                                Quận yy<br>
+                                Tp. Hồ Chí Minh
+                            </p>
+                        </div>
+                    </div>
+                    <div class="account-address-right">
+                        <p>
+                            <a class="link" href="#">Sửa</a>
+                            <a class="link" href="#">Xóa</a>
+                        </p>
+                    </div>
+                </li>
+                <li class="account-address-item">
+                    <div class="account-address-left">
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Họ và tên</p>
+                            <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
+                        </div>
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Số điện thoại</p>
+                            <p class="account-address-left--value">0999999999</p>
+                        </div>
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Địa chỉ</p>
+                            <p class="account-address-left--value">
+                                99 Họ tên đường<br>
+                                Phường xx<br>
+                                Quận yy<br>
+                                Tp. Hồ Chí Minh
+                            </p>
+                        </div>
+                    </div>
+                    <div class="account-address-right">
+                        <p>
+                            <a class="link" href="#">Sửa</a>
+                            <a class="link" href="#">Xóa</a>
+                        </p>
+                    </div>
+                </li>
+                <li class="account-address-item">
+                    <div class="account-address-left">
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Họ và tên</p>
+                            <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
+                        </div>
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Số điện thoại</p>
+                            <p class="account-address-left--value">0999999999</p>
+                        </div>
+                        <div class="account-address-left--row">
+                            <p class="account-address-left--key">Địa chỉ</p>
+                            <p class="account-address-left--value">
+                                99 Họ tên đường<br>
+                                Phường xx<br>
+                                Quận yy<br>
+                                Tp. Hồ Chí Minh
+                            </p>
+                        </div>
+                    </div>
+                    <div class="account-address-right">
+                        <p>
+                            <a class="link" href="#">Sửa</a>
+                            <a class="link" href="#">Xóa</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

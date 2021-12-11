@@ -2,6 +2,34 @@
     @include background-primary();
     color: white;
 
+    &-auth{
+        background: white;
+        .inner{
+            padding-top: 26px;
+            padding-bottom: 26px;
+            @include flex(center, space-between);
+        }
+
+        &--left{
+            @include flex($align: flex-end);
+            color: $color-primary01;
+
+            .logo-text{
+                margin-right: 20px;
+            }
+
+            h2{
+                color: #000;
+                line-height: 1;
+                font-size: 24px;
+            }
+        }
+
+        &--right{
+                color: $color-primary01;
+        }
+    }
+
     &-container {
         @include flex($justify: space-between);
     }

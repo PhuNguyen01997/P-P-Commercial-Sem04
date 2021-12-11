@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App Fragments</title>
+</head>
+<body>
+<div th:fragment="header" class="inner">
+    <div class="header-auth--left">
+        <p class="logo-text">
+            <img src="/img/common/logo.png" alt="">
+            <img src="/img/common/logo-text.png" alt="">
+        </p>
+        <h2>Đăng ký</h2>
+    </div>
+    <div class="header-auth--right">
+        <a href="#">Cần trợ giúp</a>
+    </div>
+</div>
+
+<div th:fragment="footer" class="inner">
+    <div class="footer-item footer-item__contact">
+        <p class="footer-head">Contact & support</p>
+        <p class="footer-item--line">Address: 590 CMNT, P3, Q10, TPHCM</p>
+        <p class="footer-item--line">Hotline: <a href="tel:1900-0000">1900-0000</a></p>
+        <p class="footer-item--line">Email: <a
+                href="mailto:phunguyen01997@gmail.com">phunguyen01997@gmail.com</a></p>
+        <a class="footer-item--line" href="#">FAQ</a>
+        <a class="footer-item--line" href="#">Support request</a>
+        <a class="footer-item--line" href="#">Return policy</a>
+    </div>
+    <div class="footer-item footer-item__payment">
+        <p class="footer-head">Online pay method</p>
+        <p class="icon icon__visa"><img src="/img/common/icon-visa.png" alt=""></p>
+    </div>
+    <div class="footer-item footer-item__connect">
+        <p class="footer-head">Connect with us</p>
+        <p class="footer-item--social">
+            <a class="icon" href="#"><img src="/img/common/icon-fb.png" alt="Facebook"></a>
+            <a class="icon" href="#"><img src="/img/common/icon-yt.png" alt="Youtube"></a>
+            <a class="icon" href="#"><img src="/img/common/icon-zl.png" alt="Zalo"></a>
+        </p>
+    </div>
+    <div class="footer-item footer-item__mobile">
+        <p class="footer-head">Download on mobile</p>
+        <div class="footer-item--mobile">
+            <p class="icon icon__qr"><img src="/img/common/icon-qr.png" alt=""></p>
+            <div class="">
+                <a class="icon icon__store" href="#"><img src="/img/common/icon-gg-play.png" alt=""></a>
+                <a class="icon icon__store" href="#"><img src="/img/common/icon-apple.png" alt=""></a>
+            </div>
+            </d>
+        </div>
+    </div>
+</div>
+</body>
+</html>

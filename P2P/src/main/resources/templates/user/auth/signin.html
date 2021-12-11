@@ -2,29 +2,23 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/main-layout}">
+      layout:decorate="~{layouts/auth-layout}">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
 <body>
-<main layout:fragment="content">
-  <h1>Kiếm layout khác</h1>
-
-    <div class="inner">
-        <div class="auth-container">
-            <h1 class="auth-title">Sign In</h1>
-            <form action="#" class="form">
-                <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Email">
-                <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Passowrd">
-                <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Login</button>
-            </form>
-            <div class="auth-navi">
-                <a href="#">Sign up</a>
-                <a href="#">Forgot password ?</a>
-            </div>
-        </div>
+<div layout:fragment="content-form" class="auth-container">
+    <h1 class="auth-title">Sign In</h1>
+    <form action="#" class="form">
+        <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Email">
+        <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Passowrd">
+        <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Login</button>
+    </form>
+    <div class="auth-navi">
+        <a href="#">Sign up</a>
+        <a href="#">Forgot password ?</a>
     </div>
-</main>
+</div>
 </body>
 </html>

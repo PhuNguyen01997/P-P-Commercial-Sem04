@@ -9,287 +9,134 @@
 </head>
 <body>
 <main layout:fragment="content">
-  <div class="inner shopping">
-    <div class="shopping-side">
-      <p class="shopping-side--headline"><i class="icon fas fa-filter"></i>Filter</p>
-      <div class="shopping-side--item">
-        <p class="shopping-side--title">Locations</p>
-        <ul class="shopping-side--content shopping-side--content__list-check">
-          <li class="">
-            <label for="location-01">
-              <input id="location-01" type="checkbox">
-              TP.HCM
-            </label>
-          </li>
-          <li class="">
-            <label for="location-02">
-              <input id="location-02" type="checkbox">
-              Hà nội
-            </label>
-          </li>
-          <li class="">
-            <label for="location-03">
-              <input id="location-03" type="checkbox">
-              Hà nội
-            </label>
-          </li>
-          <li class="">
-            <label for="location-04">
-              <input id="location-04" type="checkbox">
-              Hà nội
-            </label>
-          </li>
-          <li class="">
-            <label for="location-05">
-              <input id="location-05" type="checkbox">
-              Hà nội
-            </label>
-          </li>
-          <li class="">
-            <label for="location-06">
-              <input id="location-06" type="checkbox">
-              Hà nội
-            </label>
-          </li>
-        </ul>
-      </div>
-      <div class="shopping-side--item">
-        <p class="shopping-side--title">Price range</p>
-        <form action="">
-          <div class="shopping-side--content shopping-side--content__price-range">
-            <input type="number">
-            <span><i class="fas fa-exchange-alt"></i></span>
-            <input type="number">
-          </div>
-          <button class="btn btn__red" type="submit">Apply</button>
-        </form>
-      </div>
-      <div class="shopping-side--item">
-        <p class="shopping-side--title">Rate</p>
-        <ul class="shopping-side--content shopping-side--content__list-rate">
-          <li>
-                            <span class="icon icon__star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </span>
-          </li>
-          <li>
-                            <span class="icon icon__star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-            <span>Above</span>
-          </li>
-          <li>
-                            <span class="icon icon__star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-            <span>Above</span>
-          </li>
-          <li>
-                            <span class="icon icon__star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-            <span>Above</span>
-          </li>
-          <li>
-                            <span class="icon icon__star">
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-            <span>Above</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="shopping-main">
-      <div class="shopping-sort">
-        <p>Sort by</p>
-        <button class="btn shopping-sort--btn active">New</button>
-        <button class="btn shopping-sort--btn">Selling</button>
-        <div class="select shopping-sort--select">
-          <select name="" id="">
-            <option value="">Price</option>
-            <option value="increase">Low to high</option>
-            <option value="decrease" selected>High to low</option>
-          </select>
+    <div class="inner split order-detail">
+        <div class="account-side split-side">
+            <div class="account-head">
+                <p class="pic circle account-head--avatar pic"><img src="/img/products/product_01.jpg"
+                                                                    alt=""></p>
+                <div class="account-head--text">
+                    <p class="account-head--name">Uwu Bu Bu</p>
+                    <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
+                    </p>
+                </div>
+            </div>
+            <ul class="account-body">
+                <li class="account-body--item account-body--item__dropdown dropdown">
+                    <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
+                    <ul class="dropdown-list">
+                        <li class="dropdown-item"><a href="#">Profile</a></li>
+                        <li class="dropdown-item"><a href="#">Change password</a></li>
+                    </ul>
+                </li>
+                <li class="account-body--item"><a href="javascript: void(0)"><i
+                        class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
+                </li>
+            </ul>
         </div>
-        <div class="pagi-simplify">
-          <p>1/5</p>
-          <button><i class="fas fa-angle-left"></i></button>
-          <button><i class="fas fa-angle-right"></i></button>
+        <div class="split-main order-detail-main">
+            <div class="order-detail-header">
+                <a class="order-detail-header--back" href="#"><i class="fas fa-angle-left mr10"></i>Back</a>
+                <p class="order-detail-header--id">Order ID: 12837218736126</p>
+                <p class="order-detail-header--status">chỗ này ghi trạng thái đơn hàng</p>
+            </div>
+            <div class="order-detail-status">
+                <div class="order-step">
+                    <div class="order-step--item success">
+                        <p class="order-step--icon circle">
+                            <i class="far fa-file-alt"></i>
+                        </p>
+                        <p class="order-step--status">Đơn hàng đã đặt</p>
+                        <p class="order-step--time">11:14 11:11:2021</p>
+                    </div>
+                    <div class="order-step--item success">
+                        <p class="order-step--icon circle">
+                            <i class="fas fa-dollar-sign"></i>
+                        </p>
+                        <p class="order-step--status">Đơn hàng dã thanh toán ($99.99)</p>
+                        <p class="order-step--time">11:14 11:11:2021</p>
+                    </div>
+                    <div class="order-step--item success">
+                        <p class="order-step--icon circle">
+                            <i class="fas fa-truck"></i>
+                        </p>
+                        <p class="order-step--status">Đang giao hàng</p>
+                        <p class="order-step--time">11:14 11:11:2021</p>
+                    </div>
+                    <div class="order-step--item current">
+                        <p class="order-step--icon circle">
+                            <i class="fas fa-dolly-flatbed"></i>
+                        </p>
+                        <p class="order-step--status">Chờ xác nhận</p>
+                        <p class="order-step--time">11:14 11:11:2021</p>
+                    </div>
+                    <div class="order-step--item">
+                        <p class="order-step--icon circle">
+                            <i class="far fa-star"></i>
+                        </p>
+                        <p class="order-step--status">Đánh giá</p>
+                        <p class="order-step--time">11:14 11:11:2021</p>
+                    </div>
+                    <div class="order-step--item">
+                        <p class="order-step--icon circle">
+                            <i class="far fa-window-close"></i>
+                        </p>
+                        <p class="order-step--status">Đánh giá</p>
+                        <p class="order-step--time">11:14 11:11:2021</p>
+                    </div>
+                </div>
+                <div class="order-detail-control">
+                    <button class="order-detail-control--btn btn btn__white">(Shop bấm trực tiếp status update status) Save</button>
+                    <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
+                    <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
+                </div>
+            </div>
+            <div class="top-envelope"></div>
+            <div class="order-detail-info">
+                <p class="order-detail-info--name">Nguyễn Hoàng Phú</p>
+                <p class="order-detail-info--phone">0937441896</p>
+                <p class="order-detail-info--address">99 wưsxng bw xrwc, Phường 9, Quận 9, TP. Hồ Chí Minh</p>
+            </div>
+            <div class="order-shop">
+                <p class="order-shop--name">qw qpwoqw qwoqowpqpw</p>
+                <button class="order-shop--btn order-shop--btn__visit btn btn__primary">
+                    <i class="fas fa-store"></i> Visit shop
+                </button>
+                <!-- <p class="order-shop--status">Status</p> -->
+            </div>
+            <ul class="order-detail-list">
+                <li class="order-item">
+                    <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
+                                                        alt=""></p>
+                    <div class="order-item--text">
+                        <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
+                            A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
+                            X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
+                        <p class="order-item--category">Category: category-name</p>
+                        <p class="order-item--quantity">x99</p>
+                    </div>
+                    <p class="order-item--price">$99</p>
+                </li>
+            </ul>
+            <ul class="order-summary">
+                <li class="order-summary--item">
+                    <p>Tổng tiền hàng</p>
+                    <p>$20.00</p>
+                </li>
+                <div class="order-summary--item">
+                    <p>Phí vận chuyển</p>
+                    <p>$5.00</p>
+                </div>
+                <div class="order-summary--item order-summary--item__total">
+                    <p>Tổng số tiền</p>
+                    <p>$25.00</p>
+                </div>
+                <div class="order-summary--item">
+                    <p>Phương thức thanh toán</p>
+                    <p>Thẻ tín dụng / ghi nợ</p>
+                </div>
+            </ul>
         </div>
-      </div>
-      <div class="shopping-list product">
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-              Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy </p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-              Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-              Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-              Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-              Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-        <a href="#" class="product-item">
-          <div class="product-item--picture">
-            <img src="/img/products/product_01.jpg" alt="">
-          </div>
-          <div class="product-item--content">
-            <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-              Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-            <p class="product-item--price">$ 99.99</p>
-            <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-            </p>
-            <p class="product-item--location">TP.HCM</p>
-          </div>
-        </a>
-      </div>
-      <div class="shopping-pagi">
-        <ul class="pagi">
-          <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
-          <li class="pagi-item btn active">1</li>
-          <li class="pagi-item btn">2</li>
-          <li class="pagi-item btn">3</li>
-          <li class="pagi-item btn">4</li>
-          <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
-        </ul>
-      </div>
     </div>
-  </div>
 </main>
 </body>
 </html>
