@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App Fragments</title>
+</head>
+<body>
+<div th:fragment="content-side" class="account-side split-side">
+    <div class="account-head">
+        <p class="pic circle account-head--avatar pic"><img src="/img/products/product_01.jpg"
+                                                            alt=""></p>
+        <div class="account-head--text">
+            <p class="account-head--name">Uwu Bu Bu</p>
+            <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
+            </p>
+        </div>
+    </div>
+    <ul class="account-body">
+        <li class="account-body--item account-body--item__dropdown dropdown">
+            <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
+            <ul class="dropdown-list">
+                <li class="dropdown-item"><a href="#">Profile</a></li>
+                <li class="dropdown-item"><a href="#">Change password</a></li>
+            </ul>
+        </li>
+        <li class="account-body--item"><a href="javascript: void(0)"><i
+                class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
+        </li>
+        <li class="account-body--item account-body--item__dropdown dropdown">
+            <a href="javascript: void(0)"><i class="icon icon__left icon__shop fas fa-store"></i></i>My
+                Shop</a>
+            <ul class="dropdown-list">
+                <li class="dropdown-item"><a href="#">Create</a></li>
+                <li class="dropdown-item"><a href="#">Information</a></li>
+                <li class="dropdown-item"><a href="#">Order</a></li>
+                <li class="dropdown-item"><a href="#">Products</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

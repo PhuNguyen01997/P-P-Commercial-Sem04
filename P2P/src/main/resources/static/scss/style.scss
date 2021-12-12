@@ -14,7 +14,7 @@ $time-primary: 0.3s;
 
 @font-face {
   font-family: OCR A Std;
-  src: url("/assets/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
+  src: url("//fonts/ocr-a-std/OCRAStd.otf") format("opentype");
 }
 
 @mixin flex($align: center, $justify: center, $direction: row) {
@@ -145,12 +145,12 @@ label {
     cursor: pointer;
 
     &[data-value="minus"] {
-      background: url("/assets/img/common/icon-minus.png") no-repeat 50% 50%;
+      background: url("//img/common/icon-minus.png") no-repeat 50% 50%;
       background-size: 50% 50%;
     }
 
     &[data-value="plus"] {
-      background: url("/assets/img/common/icon-plus.png") no-repeat 50% 50%;
+      background: url("//img/common/icon-plus.png") no-repeat 50% 50%;
       background-size: 50% 50%;
     }
   }
