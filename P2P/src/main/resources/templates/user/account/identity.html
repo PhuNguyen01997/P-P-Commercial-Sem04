@@ -2,90 +2,68 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/main-layout}">
+      layout:decorate="~{layouts/account-layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>ShoPP</title>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
 </head>
 <body>
-<main layout:fragment="content">
-    <div class="inner split account account__identity">
-        <div class="account-side split-side">
-            <div class="account-head">
-                <p class="pic circle account-head--avatar pic"><img src="/img/products/product_01.jpg"
-                                                                    alt=""></p>
-                <div class="account-head--text">
-                    <p class="account-head--name">Uwu Bu Bu</p>
-                    <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
-                    </p>
+<div layout:fragment="content" class="inner split account account__identity">
+    <div th:replace="fragments/general-account.html :: content-side"></div>
+
+    <div class="split-main split-main__form">
+        <div class="split-header">
+            <h2 class="split-header--title">Xác thực người dùng</h2>
+            <p class="split-header--text">Xác minh danh tính người dùng</p>
+        </div>
+        <form method="POST" class="account-form user-identity-form">
+            <div class="account-form--left">
+                <div class="form-item">
+                    <label class="form-item--left" for="name_product">Họ và tên</label>
+                    <div class="form-item--right">
+                        <input type="text" name="name_product" id="name_product">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left" for="number">CMND/CCCD</label>
+                    <div class="form-item--right">
+                        <input type="number" name="number" id="number">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left" for="name_product">Ngày cấp</label>
+                    <div class="form-item--right">
+                        <input type="date" name="name_product" id="name_product">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left" for="name_product">Nơi cấp</label>
+                    <div class="form-item--right">
+                        <input type="text" name="name_product" id="name_product">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left"></label>
+                    <div class="form-item--right">
+                        <button type="submit" class="btn btn__primary">Lưu</button>
+                    </div>
                 </div>
             </div>
-            <ul class="account-body">
-                <li class="account-body--item account-body--item__dropdown dropdown">
-                    <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
-                    <ul class="dropdown-list">
-                        <li class="dropdown-item"><a href="#">Profile</a></li>
-                        <li class="dropdown-item"><a href="#">Change password</a></li>
-                    </ul>
-                </li>
-                <li class="account-body--item"><a href="javascript: void(0)"><i
-                        class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
-                </li>
-            </ul>
-        </div>
-        <div class="split-main split-main__form">
-            <div class="split-header">
-                <h2 class="split-header--title">Xác thực người dùng</h2>
-                <p class="split-header--text">Xác minh danh tính người dùng</p>
+            <div class="account-form--right">
+                <p class="circle pic account-form--pic">
+                    <img src="/img/common/img_default_user.png" alt="">
+                </p>
+                <button class="btn btn__primary-outline account-form--update-btn">Choose avatar</button>
+                <button class="btn btn__primary-outline account-form--update-btn">Mặt trước, mặt sau cmnd</button>
+                <p class="account-form--pic-note">Dụng lượng file tối đa 1 MB<br>Định dạng:.JPEG, .PNG</p>
+                <div class="account-form--pic-list account-form--pic-list__identity">
+                    <img src="/img/products/product_04.jpg" alt="">
+                    <img src="/img/products/product_03.jpg" alt="">
+                </div>
+                <p>Khúc này chắc cho max 2 tấm (1 tấm avatar shop, 1 tấm banner)</p>
             </div>
-            <form method="POST" class="account-form user-identity-form">
-                <div class="account-form--left">
-                    <div class="form-item">
-                        <label class="form-item--left" for="name_product">Họ và tên</label>
-                        <div class="form-item--right">
-                            <input type="text" name="name_product" id="name_product">
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="number">CMND/CCCD</label>
-                        <div class="form-item--right">
-                            <input type="number" name="number" id="number">
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="name_product">Ngày cấp</label>
-                        <div class="form-item--right">
-                            <input type="date" name="name_product" id="name_product">
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="name_product">Nơi cấp</label>
-                        <div class="form-item--right">
-                            <input type="text" name="name_product" id="name_product">
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left"></label>
-                        <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="account-form--right">
-                    <p class="circle pic account-form--pic">
-                        <img src="/img/common/img_default_user.png" alt="">
-                    </p>
-                    <button class="btn btn__primary-outline account-form--update-btn">Choose avatar</button>
-                    <button class="btn btn__primary-outline account-form--update-btn">Mặt trước, mặt sau cmnd</button>
-                    <p class="account-form--pic-note">Dụng lượng file tối đa 1 MB<br>Định dạng:.JPEG, .PNG</p>
-                    <div class="account-form--pic-list account-form--pic-list__identity">
-                        <img src="/img/products/product_04.jpg" alt="">
-                        <img src="/img/products/product_03.jpg" alt="">
-                    </div>
-                    <p>Khúc này chắc cho max 2 tấm (1 tấm avatar shop, 1 tấm banner)</p>
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
-</main>
+</div>
 </body>
 </html>

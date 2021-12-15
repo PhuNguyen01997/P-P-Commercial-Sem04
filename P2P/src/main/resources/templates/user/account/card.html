@@ -2,63 +2,81 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/main-layout}">
+      layout:decorate="~{layouts/account-layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>ShoPP</title>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
 </head>
 <body>
-<main layout:fragment="content">
-    <div class="inner split account account__card">
-        <div class="account-side split-side">
-            <div class="account-head">
-                <p class="pic circle account-head--avatar pic"><img src="/img/products/product_01.jpg"
-                                                                    alt=""></p>
-                <div class="account-head--text">
-                    <p class="account-head--name">Uwu Bu Bu</p>
-                    <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
-                    </p>
+<div layout:fragment="content" class="inner split account account__card">
+    <div th:replace="fragments/general-account.html :: content-side"></div>
+
+    <div class="split-main">
+        <div class="split-header">
+            <h2 class="split-header--title">Thẻ tín dụng/Ghi nợ</h2>
+            <button data-id="create-card" class="js-modal btn btn__primary split-header--add"><i
+                    class="icon icon__left fas fa-plus"></i>Thêm thẻ mới
+            </button>
+        </div>
+        <ul class="account-card">
+            <li class="account-card-item">
+                <p class="account-card-item--pic pic"><img src="/img/common/icon-master-card.png" alt=""></p>
+                <p class="account-card-item--name">VISA</p>
+                <p class="account-card-item--number">**** **** **** 1234</p>
+                <div class="account-card-item--action">
+                    <a href="#" class="account-card-item--link">Xóa</a>
                 </div>
-            </div>
-            <ul class="account-body">
-                <li class="account-body--item account-body--item__dropdown dropdown">
-                    <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
-                    <ul class="dropdown-list">
-                        <li class="dropdown-item"><a href="#">Profile</a></li>
-                        <li class="dropdown-item"><a href="#">Change password</a></li>
-                    </ul>
-                </li>
-                <li class="account-body--item"><a href="javascript: void(0)"><i
-                        class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
-                </li>
-            </ul>
-        </div>
-        <div class="split-main">
-            <div class="split-header">
-                <h2 class="split-header--title">Thẻ tín dụng/Ghi nợ</h2>
-                <button class="btn btn__primary split-header--add"><i
-                        class="icon icon__left fas fa-plus"></i>Thêm thẻ mới</button>
-            </div>
-            <ul class="account-card">
-                <li class="account-card-item">
-                    <p class="account-card-item--pic pic"><img src="/img/common/icon-master-card.png" alt=""></p>
-                    <p class="account-card-item--name">VISA</p>
-                    <p class="account-card-item--number">**** **** **** 1234</p>
-                    <div class="account-card-item--action">
-                        <a href="#" class="account-card-item--link">Xóa</a>
-                    </div>
-                </li>
-                <li class="account-card-item">
-                    <p class="account-card-item--pic pic"><img src="/img/common/icon-visa.png" alt=""></p>
-                    <p class="account-card-item--name">Master Card</p>
-                    <p class="account-card-item--number">**** **** **** 9999</p>
-                    <div class="account-card-item--action">
-                        <a href="#" class="account-card-item--link">Xóa</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+            </li>
+            <li class="account-card-item">
+                <p class="account-card-item--pic pic"><img src="/img/common/icon-visa.png" alt=""></p>
+                <p class="account-card-item--name">Master Card</p>
+                <p class="account-card-item--number">**** **** **** 9999</p>
+                <div class="account-card-item--action">
+                    <a href="#" class="account-card-item--link">Xóa</a>
+                </div>
+            </li>
+        </ul>
     </div>
-</main>
+</div>
+<div layout:fragment="modal" id="create-card" class="modal2-container">
+    <form action="@{/card}" method="post" class="modal2 modal2__card">
+        <div class="modal2-header">
+            <h3>Thêm thẻ</h3>
+        </div>
+        <div action="" class="modal2-body modal2-form modal2-form__card-create">
+            <div class="modal2-input-container">
+                <input name="fullname" class="modal2-input modal2-input__name" type="text" placeholder="Họ tên trên thẻ">
+            </div>
+            <div class="modal2-input-container">
+                <input name="number" class="modal2-input modal2-input__number" type="text" placeholder="Số thẻ">
+            </div>
+            <div class="modal2-input modal2-input__card-choose">
+                <select  name="type">
+                    <option value=""></option>
+                </select>
+                <p class="pic">
+                    <img src="/img/common/icon-visa.png" alt="">
+                </p>
+                <p class="pic">
+                    <img src="/img/common/icon-master-card.png" alt="">
+                </p>
+            </div>
+            <div class="modal2-input-container">
+                <input name="due" class="modal2-input modal2-input__date" type="date" placeholder="Ngày hết hạn">
+                <input name="cvv" class="modal2-input modal2-input__CVV" type="text" placeholder="Mã CVV">
+            </div>
+            <div class="modal2-input-container">
+                <input name="addressRegister" class="modal2-input modal2-input__address" type="text" placeholder="Địa chỉ hóa đơn">
+            </div>
+            <div class="modal2-input-container">
+                <input name="postalCode" class="modal2-input modal2-input__postal" type="text" placeholder="Potal code">
+            </div>
+        </div>
+        <div class="modal2-footer">
+            <button class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
+            <button class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

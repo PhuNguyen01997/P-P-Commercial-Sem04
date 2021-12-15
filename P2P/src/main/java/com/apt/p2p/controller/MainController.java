@@ -26,18 +26,18 @@ public class MainController {
         return "user/account/order-user";
     }
 
-    @GetMapping("shop/order")
-    public String orderShop(){
+    @GetMapping("shop/{shopId}/order")
+    public String orderShop(@PathVariable("shopId") int shopId){
         return "user/account/order-shop";
     }
 
     @GetMapping("order/{id}")
-    public String orderDetail(@PathVariable int id){
+    public String orderDetail(@PathVariable("id") int id){
         return "user/account/order-detail";
     }
 
-    @GetMapping("shop/order/{id}")
-    public String orderDetailShop(@PathVariable int id){
+    @GetMapping("shop/{shopId}/order/{orderId}")
+    public String orderDetailShop(@PathVariable("shopId") int shopId, @PathVariable("orderId") int orderId){
         return "user/account/order-detail";
     }
 
@@ -48,7 +48,7 @@ public class MainController {
 
     @GetMapping("cart")
     public String cart(){
-        return "user/account/cart";
+        return "user/main/cart";
     }
 
     @GetMapping("identity")
@@ -56,18 +56,18 @@ public class MainController {
         return "user/account/identity";
     }
 
-    @GetMapping("product")
-    public String products(){
+    @GetMapping("/shop/{shopId}/product")
+    public String products(@PathVariable("shopId") int shopId){
         return "user/account/product";
     }
 
-    @GetMapping("product/create")
-    public String productCreate(){
+    @GetMapping("/shop/{shopId}/product/create")
+    public String productCreate(@PathVariable("shopId") int shopId){
         return "user/account/product-form";
     }
 
-    @GetMapping("product/{id}/edit")
-    public String productEdit(@PathVariable int id){
+    @GetMapping("/shop/{shopId}/product/{productId}/edit")
+    public String productEdit(@PathVariable("shopId") int shopId, @PathVariable("shopId") int productId){
         return "user/account/product-form";
     }
 
@@ -76,8 +76,8 @@ public class MainController {
         return "user/account/shop-form";
     }
 
-    @GetMapping("shop/{id}/edit")
-    public String shopEdit(@PathVariable  int id){
+    @GetMapping("shop/{shopId}/edit")
+    public String shopEdit(@PathVariable("shopId") int shopId){
         return "user/account/shop-form";
     }
 }

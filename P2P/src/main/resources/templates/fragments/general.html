@@ -18,7 +18,10 @@
         </div>
     </nav>
     <div class="header-container">
-        <div class="icon header-logo"><img height="100" src="/img/common/logo-white.png" alt="logo"></div>
+        <a th:href="@{/}" class="icon header-logo">
+            <img class="pic" src="/img/common/logo-white.png" alt="logo">
+            <img class="txt" src="/img/common/logo-text-white.png" alt="P&P">
+        </a>
         <div class="header-search">
             <form action="#" class="header-form">
                 <input class="header-form--search" type="text" name="search">

@@ -19,21 +19,23 @@
         <li class="account-body--item account-body--item__dropdown dropdown">
             <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
             <ul class="dropdown-list">
-                <li class="dropdown-item"><a href="#">Profile</a></li>
-                <li class="dropdown-item"><a href="#">Change password</a></li>
+                <li class="dropdown-item"><a th:href="@{/edit}">Profile</a></li>
+                <li class="dropdown-item"><a th:href="@{/edit}">Change password</a></li>
+                <li class="dropdown-item"><a th:href="@{/card}">Card</a></li>
+                <li class="dropdown-item"><a th:href="@{/address}">Address</a></li>
             </ul>
         </li>
-        <li class="account-body--item"><a href="javascript: void(0)"><i
+        <li class="account-body--item"><a th:href="@{/order}"><i
                 class="icon icon__order fas fa-file-invoice-dollar"></i>Orders</a>
         </li>
         <li class="account-body--item account-body--item__dropdown dropdown">
             <a href="javascript: void(0)"><i class="icon icon__left icon__shop fas fa-store"></i></i>My
                 Shop</a>
             <ul class="dropdown-list">
-                <li class="dropdown-item"><a href="#">Create</a></li>
-                <li class="dropdown-item"><a href="#">Information</a></li>
-                <li class="dropdown-item"><a href="#">Order</a></li>
-                <li class="dropdown-item"><a href="#">Products</a></li>
+                <li class="dropdown-item"><a th:href="@{/shop/create}">Create</a></li>
+                <li class="dropdown-item"><a th:href="@{/shop/1/edit}">Information</a></li>
+                <li class="dropdown-item"><a th:href="@{/shop/1/order}">Order</a></li>
+                <li class="dropdown-item"><a th:href="@{/shop/1/product/1}">Products</a></li>
             </ul>
         </li>
     </ul>

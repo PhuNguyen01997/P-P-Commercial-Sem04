@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.util.Date;
 
@@ -14,12 +16,13 @@ import java.util.Date;
 public class PaymentModel {
     private Integer id;
 
-    @NotBlank(message = "Fullname can't be empty")
+    @NotBlank(message = "Họ tên không thể trống")
     private String fullname;
 
-    @NotBlank(message = "Number can't be empty")
+    @NotBlank(message = "Số thẻ không thể trống")
     private String number;
 
+    @Enumerated(EnumType.STRING)
     private  Integer type;
 
     @JsonDeserialize(using = DateDeserializer.class)

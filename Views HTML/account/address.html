@@ -89,8 +89,8 @@
             <div class="split-main">
                 <div class="split-header">
                     <h2 class="split-header--title">Địa Chỉ Của Tôi</h2>
-                    <button class="btn btn__primary split-header--add"><i
-                        class="icon icon__left fas fa-plus"></i>Thêm địa chỉ mới</button>
+                    <button data-id="create-address" class="btn btn__primary split-header--add js-modal"><i
+                            class="icon icon__left fas fa-plus"></i>Thêm địa chỉ mới</button>
                 </div>
                 <ul class="account-address">
                     <li class="account-address-item">
@@ -214,6 +214,59 @@
                 </div>
             </div>
     </footer>
+    <div id="create-address" class="modal2-container">
+        <div class="modal2 modal2__address">
+            <div class="modal2-header">
+                <h3>Địa chỉ mới</h3>
+            </div>
+            <form action="" class="modal2-body modal2-form modal2-form__address-create">
+                <div class="modal2-input-container">
+                    <input class="modal2-input modal2-input__name" type="text" placeholder="Họ và tên">
+                    <input class="modal2-input modal2-input__phone" type="text" placeholder="Số điện thoại">
+                </div>
+                <div class="modal2-input-container modal2-input-container__address">
+                    <p class="modal2-input modal2-input__legend">Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã</p>
+                    <p class="modal2-input modal2-input__value">Gia Lai, Huyện Đăk Pơ, Xã An Thành</p>
+                    <div class="modal2-input modal2-input__box">
+                        <div class="modal2-input modal2-input__header">
+                            <p>Tỉnh/Thành phố</p>
+                            <p class="active">Quận/Huyện</p>
+                            <p>Phường/Xã</p>
+                        </div>
+                        <ul class="modal2-input modal2-input__list">
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                            <li>SAHDG sAHDs JHJDS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal2-card-input">
+                    <textarea type="text" class="" placeholder="Địa chỉ cụ thể" rows="3" resize></textarea>
+                </div>
+            </form>
+            <div class="modal2-footer">
+                <button class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
+                <button class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+            </div>
+        </div>
+    </div>
 
     <script src="/assets/js/script.js"></script>
 </body>

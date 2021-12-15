@@ -17,15 +17,11 @@ import java.util.Optional;
 @Service
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository repository;
-    private final UserRepository userRepository;
-    private final ShopRepository shopRepository;
     private final ModelMapper mapper;
 
     @Autowired
     public PaymentServiceImpl(PaymentRepository repository, UserRepository userRepository, ShopRepository shopRepository, ModelMapper mapper) {
         this.repository = repository;
-        this.userRepository = userRepository;
-        this.shopRepository = shopRepository;
         this.mapper = mapper;
     }
 
@@ -33,8 +29,7 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentModel create(PaymentModel paymentModel) {
         try {
             Payment payment = modelMapEntity(paymentModel);
-            payment.setUser(userRepository.findById(1).get());
-            repository.save(payment);
+//            repository.save(payment);
             return entityMapModel(payment);
         } catch (Exception e) {
             return null;
