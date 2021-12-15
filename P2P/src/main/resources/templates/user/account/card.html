@@ -39,44 +39,56 @@
     </div>
 </div>
 <div layout:fragment="modal" id="create-card" class="modal2-container">
-    <form action="@{/card}" method="post" class="modal2 modal2__card">
+    <form th:object="${card}" th:action="@{/card}" method="post" class="modal2 modal2__card">
         <div class="modal2-header">
             <h3>Thêm thẻ</h3>
         </div>
         <div action="" class="modal2-body modal2-form modal2-form__card-create">
             <div class="modal2-input-container">
-                <input name="fullname" class="modal2-input modal2-input__name" type="text" placeholder="Họ tên trên thẻ">
+                <input th:field="*{fullname}" class="modal2-input modal2-input__name" type="text"
+                       placeholder="Họ tên trên thẻ">
             </div>
             <div class="modal2-input-container">
-                <input name="number" class="modal2-input modal2-input__number" type="text" placeholder="Số thẻ">
+                <input th:field="*{number}" class="modal2-input modal2-input__number" placeholder="Số thẻ">
             </div>
             <div class="modal2-input modal2-input__card-choose">
-                <select  name="type">
-                    <option value=""></option>
+                <select id="select-card" class="d-none" th:field="*{type}">
+                    <option th:each="payType : ${paymentTypes}" th:value="${payType}"
+                            th:text="${payType.displayValue}"></option>
                 </select>
-                <p class="pic">
-                    <img src="/img/common/icon-visa.png" alt="">
-                </p>
-                <p class="pic">
-                    <img src="/img/common/icon-master-card.png" alt="">
-                </p>
+                <th:block th:each="payType : ${paymentTypes}">
+                    <p th:switch="${payType}" class="pic">
+                        <img th:case="${T(com.apt.p2p.entity.CardType).VISA}" src="/img/common/icon-visa.png" alt="">
+                        <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
+                             src="/img/common/icon-master-card.png" alt="">
+                    </p>
+                </th:block>
             </div>
             <div class="modal2-input-container">
-                <input name="due" class="modal2-input modal2-input__date" type="date" placeholder="Ngày hết hạn">
-                <input name="cvv" class="modal2-input modal2-input__CVV" type="text" placeholder="Mã CVV">
+                <input th:field="*{due}" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
+                <input th:field="*{cvv}" class="modal2-input modal2-input__CVV" placeholder="Mã CVV">
             </div>
             <div class="modal2-input-container">
-                <input name="addressRegister" class="modal2-input modal2-input__address" type="text" placeholder="Địa chỉ hóa đơn">
+                <input th:field="*{addressRegister}" class="modal2-input modal2-input__address" type="text"
+                       placeholder="Địa chỉ hóa đơn">
             </div>
             <div class="modal2-input-container">
-                <input name="postalCode" class="modal2-input modal2-input__postal" type="text" placeholder="Potal code">
+                <input th:field="*{postalCode}" class="modal2-input modal2-input__postal" placeholder="Potal code">
             </div>
         </div>
         <div class="modal2-footer">
-            <button class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
-            <button class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+            <button type="button" class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
+            <button type="submit" class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
         </div>
     </form>
 </div>
+
+<script layout:fragment="script">
+    $('.modal2-input__card-choose .pic').on('click', function () {
+        $('.modal2-input__card-choose .pic').removeClass('active');
+        $(this).addClass('active');
+        $('select#select-card').val(this.dataset.value).change();
+    })
+</script>
 </body>
 </html>

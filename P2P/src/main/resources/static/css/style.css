@@ -1,6 +1,6 @@
 @font-face {
   font-family: OCR A Std;
-  src: url("/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
+  src: url("/assets/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
 }
 
 * {
@@ -140,12 +140,12 @@ label {
 }
 
 .attachAdjust--button[data-value="minus"] {
-  background: url("/img/common/icon-minus.png") no-repeat 50% 50%;
+  background: url("/assets/img/common/icon-minus.png") no-repeat 50% 50%;
   background-size: 50% 50%;
 }
 
 .attachAdjust--button[data-value="plus"] {
-  background: url("/img/common/icon-plus.png") no-repeat 50% 50%;
+  background: url("/assets/img/common/icon-plus.png") no-repeat 50% 50%;
   background-size: 50% 50%;
 }
 
@@ -3643,10 +3643,15 @@ label {
   width: 60px;
   height: 50px;
   border: 1px solid rgba(0, 0, 0, 0.09);
+  cursor: pointer;
 }
 
-.modal2-form__card-create .modal2-input__card-choose .pic:not(:first-child) {
+.modal2-form__card-create .modal2-input__card-choose .pic:not(:first-of-type) {
   margin-left: 10px;
+}
+
+.modal2-form__card-create .modal2-input__card-choose .pic.active {
+  border: 1px solid #9932cc;
 }
 
 .modal2-form__card-create .modal2-input__date, .modal2-form__card-create .modal2-input__CVV {

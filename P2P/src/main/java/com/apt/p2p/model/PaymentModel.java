@@ -23,7 +23,7 @@ public class PaymentModel {
     private String number;
 
     @Enumerated(EnumType.STRING)
-    private  Integer type;
+    private String type;
 
     @JsonDeserialize(using = DateDeserializer.class)
     @NotNull(message = "Due date can't be empty")

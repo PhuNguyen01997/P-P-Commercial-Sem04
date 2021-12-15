@@ -3643,10 +3643,15 @@ label {
   width: 60px;
   height: 50px;
   border: 1px solid rgba(0, 0, 0, 0.09);
+  cursor: pointer;
 }
 
-.modal2-form__card-create .modal2-input__card-choose .pic:not(:first-child) {
+.modal2-form__card-create .modal2-input__card-choose .pic:not(:first-of-type) {
   margin-left: 10px;
+}
+
+.modal2-form__card-create .modal2-input__card-choose .pic.active {
+  border: 1px solid #9932cc;
 }
 
 .modal2-form__card-create .modal2-input__date, .modal2-form__card-create .modal2-input__CVV {
