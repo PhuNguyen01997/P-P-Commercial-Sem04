@@ -18,8 +18,8 @@ public class DateDeserializer extends StdDeserializer<Date> {
     }
 
     @Override
-    public Date deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException
-    {
+    public Date deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+            throws IOException, JsonProcessingException {
         String value = jsonParser.readValueAs(String.class);
         try {
             return new SimpleDateFormat("yyyy-MM-dd").parse(value);
