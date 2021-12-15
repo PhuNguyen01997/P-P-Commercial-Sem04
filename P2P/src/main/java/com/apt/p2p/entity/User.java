@@ -1,10 +1,17 @@
 package com.apt.p2p.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "User")
 public class User {
@@ -17,6 +24,9 @@ public class User {
 
     @NotNull
     private String username;
+
+    @NotNull
+    private boolean enabled;
 
     @Column(length = 16)
     @NotNull
@@ -53,4 +63,5 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<OrderDebt> orderDebts;
+
 }
