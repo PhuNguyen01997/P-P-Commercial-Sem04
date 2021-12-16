@@ -22,23 +22,24 @@ public class PaymentModel {
     @NotBlank(message = "Số thẻ không thể trống")
     private String number;
 
+    @NotBlank(message = "Loại thẻ không thể trống")
     @Enumerated(EnumType.STRING)
     private String type;
 
     @JsonDeserialize(using = DateDeserializer.class)
-    @NotNull(message = "Due date can't be empty")
+    @NotNull(message = "Ngày hết hạn không thể trống")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date due;
 
-    @NotNull(message = "CVV can't be empty")
-    @Min(value = 1, message = "CVV is not valid (ex: XXX)")
-    @Max(value = 999, message = "CVV is not valid (ex: XXX)")
+    @NotNull(message = "CVV không thể trống")
+    @Min(value = 1, message = "CVV không hợp lệ (ex: XXX)")
+    @Max(value = 999, message = "CVV không hợp lệ (ex: XXX)")
     private Integer cvv;
 
-    @NotBlank(message = "Address can't be empty")
+    @NotBlank(message = "Địa chỉ không thể trống")
     private String addressRegister;
 
-    @NotNull(message = "Postal Code can't be empty")
+    @NotNull(message = "Postal code không thể trống")
     private Integer postalCode;
 
     private Integer shopId;

@@ -38,7 +38,8 @@
         </ul>
     </div>
 </div>
-<div layout:fragment="modal" id="create-card" class="modal2-container">
+<div layout:fragment="modal" id="create-card" th:classappend="${hasAnyError != null && hasAnyError} ? 'js-close' : ''"
+     class="modal2-container">
     <form th:object="${card}" th:action="@{/card}" method="post" class="modal2 modal2__card">
         <div class="modal2-header">
             <h3>Thêm thẻ</h3>
@@ -47,34 +48,48 @@
             <div class="modal2-input-container">
                 <input th:field="*{fullname}" class="modal2-input modal2-input__name" type="text"
                        placeholder="Họ tên trên thẻ">
-                <p th:if="${#fields.hasErrors('fullname')}" class="error">Uwu uuuu</p>
+                <p th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{number}" class="modal2-input modal2-input__number" placeholder="Số thẻ">
+                <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container modal2-input-container__card-choose">
                 <select id="select-card" class="d-none" th:field="*{type}">
-                    <option th:each="payType : ${paymentTypes}" th:value="${payType}"
-                            th:text="${payType.displayValue}"></option>
+                    <option value=""></option>
+                    <option th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}"
+                            th:value="${payType}"
+                            th:text="${payType.displayValue}"
+                            th:selected="${payType == type}"></option>
                 </select>
-                <th:block th:each="payType : ${paymentTypes}">
-                    <p th:attr="data-value=${payType}"  th:switch="${payType}" class="pic">
-                        <img th:case="${T(com.apt.p2p.entity.CardType).VISA}" src="/img/common/icon-visa.png" alt="">
+                <th:block th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}">
+<!--                Nhớ:    Thêm deisgn lại layout chỗ này, sửa không active được sau khi back-->
+                    <p th:attr="data-value=${payType}" th:switch="${payType}"
+                       th:classappend="${payType == type} ? 'active' : ''"
+                       class="pic">
+                        <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
+                             src="/img/common/icon-visa.png" alt="">
                         <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
                              src="/img/common/icon-master-card.png" alt="">
                     </p>
                 </th:block>
+                <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{due}" type="date" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
                 <input th:field="*{cvv}" class="modal2-input modal2-input__CVV" placeholder="Mã CVV">
+                <p th:if="${#fields.hasErrors('due')}" th:errors="*{due}" class="error">Invalid value</p>
+                <p th:if="${#fields.hasErrors('cvv')}" th:errors="*{cvv}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{addressRegister}" class="modal2-input modal2-input__address" type="text"
-                       placeholder="Địa chỉ hóa đơn">
+                       placeholder="Địa chỉ nhận hóa đơn">
+                <p th:if="${#fields.hasErrors('addressRegister')}" th:errors="*{addressRegister}" class="error">Invalid
+                    value</p>
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{postalCode}" class="modal2-input modal2-input__postal" placeholder="Potal code">
+                <p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error">Invalid value</p>
             </div>
         </div>
         <div class="modal2-footer">
@@ -85,8 +100,8 @@
 </div>
 
 <script layout:fragment="script">
-    $('.modal2-input__card-choose .pic').on('click', function () {
-        $('.modal2-input__card-choose .pic').removeClass('active');
+    $('.modal2-input-container__card-choose .pic').on('click', function () {
+        $('.modal2-input-container__card-choose .pic').removeClass('active');
         $(this).addClass('active');
         $('select#select-card').val(this.dataset.value).change();
     })

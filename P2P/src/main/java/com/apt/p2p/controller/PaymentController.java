@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -36,20 +37,20 @@ public class PaymentController {
     @GetMapping("card")
     public String card(Model model) {
         model.addAttribute("card", new Payment());
-        model.addAttribute("paymentTypes", Arrays.asList(CardType.values()));
         return "user/account/card";
     }
 
     @PostMapping("card")
     public String create(
             Model model,
-            @Valid PaymentModel paymentModel,
+            @Valid @ModelAttribute("card") PaymentModel paymentModel,
             BindingResult result
     ) {
         PaymentModelValidator paymentModelValidator = new PaymentModelValidator();
         paymentModelValidator.validate(paymentModel, result);
         if(result.hasErrors()){
             model.addAttribute("card", paymentModel);
+            model.addAttribute("hasAnyError", true);
             return "user/account/card";
         }
         PaymentModel paymentResult = service.create(paymentModel);
