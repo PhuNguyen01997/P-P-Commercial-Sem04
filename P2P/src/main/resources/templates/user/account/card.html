@@ -47,17 +47,18 @@
             <div class="modal2-input-container">
                 <input th:field="*{fullname}" class="modal2-input modal2-input__name" type="text"
                        placeholder="Họ tên trên thẻ">
+                <p th:if="${#fields.hasErrors('fullname')}" class="error">Uwu uuuu</p>
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{number}" class="modal2-input modal2-input__number" placeholder="Số thẻ">
             </div>
-            <div class="modal2-input modal2-input__card-choose">
+            <div class="modal2-input-container modal2-input-container__card-choose">
                 <select id="select-card" class="d-none" th:field="*{type}">
                     <option th:each="payType : ${paymentTypes}" th:value="${payType}"
                             th:text="${payType.displayValue}"></option>
                 </select>
                 <th:block th:each="payType : ${paymentTypes}">
-                    <p th:switch="${payType}" class="pic">
+                    <p th:attr="data-value=${payType}"  th:switch="${payType}" class="pic">
                         <img th:case="${T(com.apt.p2p.entity.CardType).VISA}" src="/img/common/icon-visa.png" alt="">
                         <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
                              src="/img/common/icon-master-card.png" alt="">
@@ -65,7 +66,7 @@
                 </th:block>
             </div>
             <div class="modal2-input-container">
-                <input th:field="*{due}" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
+                <input th:field="*{due}" type="date" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
                 <input th:field="*{cvv}" class="modal2-input modal2-input__CVV" placeholder="Mã CVV">
             </div>
             <div class="modal2-input-container">

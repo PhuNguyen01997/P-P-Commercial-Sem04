@@ -581,6 +581,11 @@ label {
   min-height: 40px;
 }
 
+.error {
+  color: red;
+  font-size: 13px;
+}
+
 .dropdown-list {
   display: none;
 }
@@ -3356,6 +3361,10 @@ label {
           box-shadow: 1px 1px 13px -10px #adadad;
 }
 
+.modal2 .error {
+  padding: 5px 8px 0;
+}
+
 .modal2 > * {
   padding: 0 30px;
 }
@@ -3383,22 +3392,6 @@ label {
 
 .modal2-input {
   min-height: 40px;
-}
-
-.modal2-input-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
 }
 
 .modal2-header {
@@ -3608,7 +3601,7 @@ label {
   width: 100%;
 }
 
-.modal2-form__card-create .modal2-input__card-choose {
+.modal2-form__card-create .modal2-input-container__card-choose {
   height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3625,7 +3618,7 @@ label {
           flex-direction: row;
 }
 
-.modal2-form__card-create .modal2-input__card-choose .pic {
+.modal2-form__card-create .modal2-input-container__card-choose .pic {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3646,11 +3639,11 @@ label {
   cursor: pointer;
 }
 
-.modal2-form__card-create .modal2-input__card-choose .pic:not(:first-of-type) {
+.modal2-form__card-create .modal2-input-container__card-choose .pic:not(:first-of-type) {
   margin-left: 10px;
 }
 
-.modal2-form__card-create .modal2-input__card-choose .pic.active {
+.modal2-form__card-create .modal2-input-container__card-choose .pic.active {
   border: 1px solid #9932cc;
 }
 

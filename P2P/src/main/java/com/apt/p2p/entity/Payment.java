@@ -24,7 +24,7 @@ public class Payment {
     private String number;
 
     @NotNull
-    private  Integer type;
+    private  String type;
 
     @NotNull
     private Date due;

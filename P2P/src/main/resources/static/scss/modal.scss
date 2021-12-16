@@ -10,6 +10,10 @@
     background-color: white;
     @include box-shadow();
 
+    .error{
+        padding: 5px 8px 0;
+    }
+
     &>* {
         padding: 0 30px;
     }
@@ -36,9 +40,9 @@
     &-input {
         min-height: 40px;
 
-        &-container {
-            @include flex($justify: space-between);
-        }
+        // &-container {
+        //     @include flex($justify: space-between);
+        // }
     }
 
     &-header {
@@ -195,24 +199,26 @@
             .modal2-input {
                 width: 100%;
 
-                &__card-choose {
-                    height: auto;
-                    @include flex($justify: flex-start);
-
-                    .pic {
-                        @include flex();
-                        padding: 5px;
-                        width: 60px;
-                        height: 50px;
-                        border: 1px solid $color-bd;
-                        cursor: pointer;
-
-                        &:not(:first-of-type) {
-                            margin-left: 10px;
-                        }
-
-                        &.active{
-                            border: 1px solid $color-primary01;
+                &-container{
+                    &__card-choose {
+                        height: auto;
+                        @include flex($justify: flex-start);
+    
+                        .pic {
+                            @include flex();
+                            padding: 5px;
+                            width: 60px;
+                            height: 50px;
+                            border: 1px solid $color-bd;
+                            cursor: pointer;
+    
+                            &:not(:first-of-type) {
+                                margin-left: 10px;
+                            }
+    
+                            &.active{
+                                border: 1px solid $color-primary01;
+                            }
                         }
                     }
                 }

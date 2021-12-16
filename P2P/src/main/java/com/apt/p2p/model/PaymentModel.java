@@ -2,6 +2,7 @@ package com.apt.p2p.model;
 
 import com.apt.p2p.common.DateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,8 +12,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 public class PaymentModel {
     private Integer id;
 
@@ -45,7 +45,6 @@ public class PaymentModel {
 
     private ShopModel shop;
 
-    @NotNull
     private Integer userId;
 
     private UserModel user;

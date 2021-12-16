@@ -1,4 +1,4 @@
-package com.apt.p2p.common;
+package com.apt.p2p.config;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
@@ -8,9 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ModelMapperConfig {
-
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
                 .setMatchingStrategy(MatchingStrategies.STANDARD);
