@@ -8,12 +8,17 @@
     <title>Login</title>
 </head>
 <body>
+<div th:if="${#request.getParameter('error') == 'true'}">
+    <h4>Invalid username or password</h4>
+    <p>Reason: <span th:if="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+                     th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span></p>
+</div>
 <div layout:fragment="content-form" class="auth-container">
     <h1 class="auth-title">Sign In</h1>
-    <form action="#" class="form">
-        <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Email">
-        <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Passowrd">
-        <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Login</button>
+    <form th:action="@{/j_spring_security_check}" method="post" class="form">
+        <input class="auth--ipt auth--ipt__txt" name="username" placeholder="Username">
+        <input class="auth--ipt auth--ipt__txt" name="password" type="password" placeholder="Password">
+        <button class="btn btn__red auth--ipt auth--ipt__submit" th:type="submit" th:value="Login">Login</button>
     </form>
     <div class="auth-navi">
         <a href="#">Sign up</a>

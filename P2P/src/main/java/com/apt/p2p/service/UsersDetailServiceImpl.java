@@ -40,7 +40,6 @@ public class UsersDetailServiceImpl implements UserDetailsService {
         }else {
             grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
-
         boolean enabled = user.isEnabled();
         boolean accountNonExpired = true;
         boolean credentialNonExpired = true;
