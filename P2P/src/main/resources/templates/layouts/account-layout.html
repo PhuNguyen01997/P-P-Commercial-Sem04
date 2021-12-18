@@ -18,21 +18,18 @@
     <th:block layout:fragment="style"></th:block>
 </head>
 <body>
-<header th:insert="fragments/general-auth.html :: header" class="header header-auth">
+<header th:insert="fragments/general.html :: header" class="header">
     <h1>Header</h1>
 </header>
-<main class="auth">
-    <div class="inner">
-        <div class="auth-ads">
-            <img src="/img/auth/bg_primary.jpg" alt="">
-        </div>
-        <div layout:fragment="content-form">
-        </div>
+<main>
+    <div layout:fragment="content">
     </div>
 </main>
-<footer class="footer" th:insert="fragments/general-auth.html :: footer">
+<footer class="footer" th:insert="fragments/general.html :: footer">
     <h1>Footer</h1>
 </footer>
+<div layout:fragment="modal"></div>
+
 <script src="/js/script.js"></script>
 <th:block layout:fragment="script"></th:block>
 </body>

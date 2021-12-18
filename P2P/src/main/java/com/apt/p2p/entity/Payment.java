@@ -20,11 +20,11 @@ public class Payment {
     private String fullname;
 
     @NotNull
-    @Column(length = 16)
+    @Column(length = 20)
     private String number;
 
     @NotNull
-    private  Integer type;
+    private  String type;
 
     @NotNull
     private Date due;

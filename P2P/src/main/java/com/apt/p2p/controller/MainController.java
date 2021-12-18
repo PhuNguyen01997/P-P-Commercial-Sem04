@@ -9,78 +9,77 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class MainController {
     @GetMapping("")
-    public String index(){
+    public String index() {
         return "user/main/index";
     }
 
     @GetMapping("shop/{id}")
-    public String shopDetail(@PathVariable int id){
+    public String shopDetail(@PathVariable int id) {
         return "user/main/shop-detail";
     }
 
     @GetMapping("product/{productSlug}")
-    public String productDetail(@PathVariable String productSlug){
+    public String productDetail(@PathVariable String productSlug) {
         return "user/main/product-detail";
     }
 
     @GetMapping("order")
-    public String order(){
+    public String order() {
         return "user/account/order-user";
     }
 
-    @GetMapping("shop/order")
-    public String orderShop(){
+    @GetMapping("shop/{shopId}/order")
+    public String orderShop(@PathVariable("shopId") int shopId) {
         return "user/account/order-shop";
     }
 
     @GetMapping("order/{id}")
-    public String orderDetail(@PathVariable int id){
+    public String orderDetail(@PathVariable("id") int id) {
         return "user/account/order-detail";
     }
 
-    @GetMapping("shop/order/{id}")
-    public String orderDetailShop(@PathVariable int id){
+    @GetMapping("shop/{shopId}/order/{orderId}")
+    public String orderDetailShop(@PathVariable("shopId") int shopId, @PathVariable("orderId") int orderId) {
         return "user/account/order-detail";
     }
 
     @GetMapping("edit")
-    public String userEdit(){
+    public String userEdit() {
         return "user/account/user-form";
     }
 
     @GetMapping("cart")
-    public String cart(){
-        return "user/account/cart";
+    public String cart() {
+        return "user/main/cart";
     }
 
     @GetMapping("identity")
-    public String identity(){
+    public String identity() {
         return "user/account/identity";
     }
 
-    @GetMapping("product")
-    public String products(){
+    @GetMapping("/shop/{shopId}/product")
+    public String products(@PathVariable("shopId") int shopId) {
         return "user/account/product";
     }
 
-    @GetMapping("product/create")
-    public String productCreate(){
+    @GetMapping("/shop/{shopId}/product/create")
+    public String productCreate(@PathVariable("shopId") int shopId) {
         return "user/account/product-form";
     }
 
-    @GetMapping("product/{id}/edit")
-    public String productEdit(@PathVariable int id){
+    @GetMapping("/shop/{shopId}/product/{productId}/edit")
+    public String productEdit(@PathVariable("shopId") int shopId, @PathVariable("shopId") int productId) {
         return "user/account/product-form";
     }
 
     @GetMapping("shop/create")
-    public String shopCreate(){
+    public String shopCreate() {
         return "user/account/shop-form";
     }
 
-    @GetMapping("shop/{id}/edit")
-    public String shopEdit(@PathVariable  int id){
+    @GetMapping("shop/{shopId}/edit")
+    public String shopEdit(@PathVariable("shopId") int shopId) {
         return "user/account/shop-form";
     }
-
 }

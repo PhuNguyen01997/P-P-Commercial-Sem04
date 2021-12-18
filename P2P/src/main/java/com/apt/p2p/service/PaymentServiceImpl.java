@@ -17,15 +17,11 @@ import java.util.Optional;
 @Service
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository repository;
-    private final UserRepository userRepository;
-    private final ShopRepository shopRepository;
     private final ModelMapper mapper;
 
     @Autowired
     public PaymentServiceImpl(PaymentRepository repository, UserRepository userRepository, ShopRepository shopRepository, ModelMapper mapper) {
         this.repository = repository;
-        this.userRepository = userRepository;
-        this.shopRepository = shopRepository;
         this.mapper = mapper;
     }
 
@@ -33,10 +29,11 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentModel create(PaymentModel paymentModel) {
         try {
             Payment payment = modelMapEntity(paymentModel);
-            payment.setUser(userRepository.findById(1).get());
-            repository.save(payment);
+            payment.setUser(new User());
+//            repository.save(payment);
             return entityMapModel(payment);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -68,9 +65,6 @@ public class PaymentServiceImpl implements PaymentService {
         protected void configure() {
             skip(destination.getShop());
             skip(destination.getUser());
-//            Optional<User> userEntity = userRepository.findById(source.getUserId());
-//            User entity = userEntity.get();
-//            map().setUser(userEntity.isPresent() ? userEntity.get() : null);
         }
     };
 
@@ -78,7 +72,9 @@ public class PaymentServiceImpl implements PaymentService {
         @Override
         protected void configure() {
             skip(destination.getShopId());
-//            destination.setUserId(source.getUser());
+            skip(destination.getUserId());
+            skip(destination.getShop());
+            skip(destination.getUser());
         }
     };
 }

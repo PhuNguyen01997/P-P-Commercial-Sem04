@@ -2,47 +2,52 @@ package com.apt.p2p.model;
 
 import com.apt.p2p.common.DateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 public class PaymentModel {
     private Integer id;
 
-    @NotBlank(message = "Fullname can't be empty")
+    @NotBlank(message = "Họ tên không thể trống")
     private String fullname;
 
-    @NotBlank(message = "Number can't be empty")
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Mã thẻ không hợp lệ")
+    @NotBlank(message = "Mã thẻ không thể trống")
     private String number;
 
-    private  Integer type;
+    @NotBlank(message = "Loại thẻ không thể trống")
+    @Enumerated(EnumType.STRING)
+    private String type;
 
     @JsonDeserialize(using = DateDeserializer.class)
-    @NotNull(message = "Due date can't be empty")
+    @NotNull(message = "Ngày hết hạn không thể trống")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date due;
 
-    @NotNull(message = "CVV can't be empty")
-    @Min(value = 1, message = "CVV is not valid (ex: XXX)")
-    @Max(value = 999, message = "CVV is not valid (ex: XXX)")
+    @NotNull(message = "CVV không thể trống")
+    @Min(value = 1, message = "CVV không hợp lệ (ex: XXX)")
+    @Max(value = 999, message = "CVV không hợp lệ (ex: XXX)")
     private Integer cvv;
 
-    @NotBlank(message = "Address can't be empty")
+    @NotBlank(message = "Địa chỉ không thể trống")
     private String addressRegister;
 
-    @NotNull(message = "Postal Code can't be empty")
-    private Integer postalCode;
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Postal code không hợp lệ")
+    @NotNull(message = "Postal code không thể trống")
+    private String postalCode;
 
     private Integer shopId;
 
     private ShopModel shop;
 
-    @NotNull
     private Integer userId;
 
     private UserModel user;

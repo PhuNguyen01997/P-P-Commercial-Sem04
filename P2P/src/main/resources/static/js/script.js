@@ -104,4 +104,15 @@ $(function () {
             }
         });
     }
+
+    // Js for modal
+    $('.js-modal').on('click', function(){
+        const id = this.dataset.id;
+        $(`#${id}`).addClass('js-close');
+    })
+    $('.modal2-container').on('click', function(e){
+        if(e.target.classList.contains('js-close')){
+            $(this).removeClass('js-close');
+        }
+    })
 });
