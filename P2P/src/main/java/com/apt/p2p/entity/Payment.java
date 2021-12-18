@@ -20,7 +20,7 @@ public class Payment {
     private String fullname;
 
     @NotNull
-    @Column(length = 16)
+    @Column(length = 20)
     private String number;
 
     @NotNull

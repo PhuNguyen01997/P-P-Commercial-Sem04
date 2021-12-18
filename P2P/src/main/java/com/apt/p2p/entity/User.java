@@ -1,5 +1,8 @@
 package com.apt.p2p.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;

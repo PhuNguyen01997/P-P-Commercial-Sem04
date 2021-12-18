@@ -35,7 +35,8 @@
         <div action="" class="modal2-body modal2-form modal2-form__card-create">
             <div class="modal2-input-container">
                 <input class="modal2-input modal2-input__name" type="text" placeholder="Họ tên trên thẻ">
-                <p class="error">ASD SADsa qwjkl askl asld ql aso ASD SADsa qwjkl askl asld ql aso ASD SADsa qwjkl askl asld ql aso ASD SADsa qwjkl askl asld ql aso</p>
+                <p class="error">ASD SADsa qwjkl askl asld ql aso ASD SADsa qwjkl askl asld ql aso ASD SADsa qwjkl askl
+                    asld ql aso ASD SADsa qwjkl askl asld ql aso</p>
                 <p class="error">ASD SADsa qwjkl askl asld ql aso</p>
             </div>
             <div class="modal2-input-container">
@@ -46,12 +47,15 @@
                     <option value="VISA">Visa</option>
                     <option value="MASTER_CARD">Master card</option>
                 </select>
-                <p data-value="VISA" class="pic">
-                    <img src="/assets/img/common/icon-visa.png" alt="">
-                </p>
-                <p data-value="MASTER_CARD" class="pic">
-                    <img src="/assets/img/common/icon-master-card.png" alt="">
-                </p>
+                <div class=modal2--pic-type>
+                    <p data-value="VISA" class="pic">
+                        <img src="/assets/img/common/icon-visa.png" alt="">
+                    </p>
+                    <p data-value="MASTER_CARD" class="pic">
+                        <img src="/assets/img/common/icon-master-card.png" alt="">
+                    </p>
+                </div>
+                <p class="error">ASD SADsa qwjkl askl asld ql aso</p>   
             </div>
             <div class="modal2-input-container">
                 <input class="modal2-input modal2-input__date" type="text" placeholder="Ngày hết hạn">
@@ -73,8 +77,8 @@
     <script src="/assets/js/script.js"></script>
 
     <script>
-        $('.modal2-input__card-choose .pic').on('click', function(){
-            $('.modal2-input__card-choose .pic').removeClass('active');
+        $('.modal2-input-container__card-choose .pic').on('click', function () {
+            $('.modal2-input-container__card-choose .pic').removeClass('active');
             $(this).addClass('active');
             $('select#select-card').val(this.dataset.value).change();
         })

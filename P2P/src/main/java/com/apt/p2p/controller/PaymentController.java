@@ -6,6 +6,7 @@ import com.apt.p2p.model.PaymentModel;
 import com.apt.p2p.service.PaymentService;
 import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,11 +24,14 @@ public class PaymentController {
     @Autowired
     private PaymentService service;
 
-    @InitBinder("PaymentModel")
+    @InitBinder("card")
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new PaymentModelValidator());
+        // trim at start and end String
+        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
+        binder.registerCustomEditor(String.class, stringTrimmer);
+        System.out.println("A binder for object: " + binder.getObjectName());
+        binder.addValidators(new PaymentModelValidator());
     }
-
 
     @GetMapping("pay")
     public String payment() {
@@ -36,7 +40,7 @@ public class PaymentController {
 
     @GetMapping("card")
     public String card(Model model) {
-        model.addAttribute("card", new Payment());
+        model.addAttribute("card", new PaymentModel());
         return "user/account/card";
     }
 
@@ -46,8 +50,8 @@ public class PaymentController {
             @Valid @ModelAttribute("card") PaymentModel paymentModel,
             BindingResult result
     ) {
-        PaymentModelValidator paymentModelValidator = new PaymentModelValidator();
-        paymentModelValidator.validate(paymentModel, result);
+//        PaymentModelValidator paymentModelValidator = new PaymentModelValidator();
+//        paymentModelValidator.validate(paymentModel, result);
         if(result.hasErrors()){
             model.addAttribute("card", paymentModel);
             model.addAttribute("hasAnyError", true);

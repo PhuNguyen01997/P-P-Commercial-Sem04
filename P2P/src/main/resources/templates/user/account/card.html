@@ -60,19 +60,20 @@
                     <option th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}"
                             th:value="${payType}"
                             th:text="${payType.displayValue}"
-                            th:selected="${payType == type}"></option>
+                            th:selected="${payType == card.getType()}"></option>
                 </select>
-                <th:block th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}">
-<!--                Nhớ:    Thêm deisgn lại layout chỗ này, sửa không active được sau khi back-->
-                    <p th:attr="data-value=${payType}" th:switch="${payType}"
-                       th:classappend="${payType == type} ? 'active' : ''"
-                       class="pic">
-                        <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
-                             src="/img/common/icon-visa.png" alt="">
-                        <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
-                             src="/img/common/icon-master-card.png" alt="">
-                    </p>
-                </th:block>
+                <div class="modal2--pic-type">
+                    <th:block th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}">
+                        <p th:attr="data-value=${payType}" th:switch="${payType}"
+                           th:classappend="${payType.toString() == card.getType()} ? 'active' : 'no-active'"
+                           class="pic">
+                            <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
+                                 src="/img/common/icon-visa.png" alt="">
+                            <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
+                                 src="/img/common/icon-master-card.png" alt="">
+                        </p>
+                    </th:block>
+                </div>
                 <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">

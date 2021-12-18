@@ -1,6 +1,6 @@
 @font-face {
   font-family: OCR A Std;
-  src: url("/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
+  src: url("/assets/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
 }
 
 * {
@@ -140,12 +140,12 @@ label {
 }
 
 .attachAdjust--button[data-value="minus"] {
-  background: url("/img/common/icon-minus.png") no-repeat 50% 50%;
+  background: url("/assets/img/common/icon-minus.png") no-repeat 50% 50%;
   background-size: 50% 50%;
 }
 
 .attachAdjust--button[data-value="plus"] {
-  background: url("/img/common/icon-plus.png") no-repeat 50% 50%;
+  background: url("/assets/img/common/icon-plus.png") no-repeat 50% 50%;
   background-size: 50% 50%;
 }
 
@@ -3601,7 +3601,15 @@ label {
   width: 100%;
 }
 
-.modal2-form__card-create .modal2-input-container__card-choose {
+.modal2-form__card-create .modal2-input__date, .modal2-form__card-create .modal2-input__CVV {
+  width: calc(50% - 5px);
+}
+
+.modal2-form__card-create .modal2-input__CVV {
+  margin-left: auto;
+}
+
+.modal2-form__card-create .modal2--pic-type {
   height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3618,7 +3626,7 @@ label {
           flex-direction: row;
 }
 
-.modal2-form__card-create .modal2-input-container__card-choose .pic {
+.modal2-form__card-create .modal2--pic-type .pic {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3639,19 +3647,11 @@ label {
   cursor: pointer;
 }
 
-.modal2-form__card-create .modal2-input-container__card-choose .pic:not(:first-of-type) {
+.modal2-form__card-create .modal2--pic-type .pic:not(:first-of-type) {
   margin-left: 10px;
 }
 
-.modal2-form__card-create .modal2-input-container__card-choose .pic.active {
+.modal2-form__card-create .modal2--pic-type .pic.active {
   border: 1px solid #9932cc;
-}
-
-.modal2-form__card-create .modal2-input__date, .modal2-form__card-create .modal2-input__CVV {
-  width: calc(50% - 5px);
-}
-
-.modal2-form__card-create .modal2-input__CVV {
-  margin-left: auto;
 }
 /*# sourceMappingURL=style.css.map */

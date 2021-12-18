@@ -10,6 +10,9 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class SeedData {
 //    @Autowired
@@ -23,15 +26,9 @@ public class SeedData {
     }
 
     private void seedUser(int number){
-        EasyRandom easyRandom = new EasyRandom();
-        EasyRandomParameters easyRandomParameters = new EasyRandomParameters()
-                .excludeField(FieldPredicates.named("avatar").and(FieldPredicates.ofType(String.class)).and(FieldPredicates.inClass(User.class)))
-                .stringLengthRange(3, 10);
-        User user = easyRandom.nextObject(User.class);
-        userRepository.save(user);
-//        for (int i = 0; i < number; i++) {
-//            easyRandom.nextObject(User.class);
-//        }
-//        new Exception().printStackTrace();
+        List<User> users = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+
+        }
     }
 }

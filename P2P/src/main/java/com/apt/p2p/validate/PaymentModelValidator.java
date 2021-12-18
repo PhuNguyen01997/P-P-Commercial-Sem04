@@ -15,10 +15,8 @@ public class PaymentModelValidator implements Validator {
     public void validate(Object target, Errors errors) {
         PaymentModel payment = (PaymentModel) target;
 
-//        if(payment.getPostalCode() == 123) {
-//            errors.rejectValue("postalCode", "postalCode not valid");
-//        }
-        // do "complex" validation here
-
+        if(payment.getPostalCode().equals("123")) {
+            errors.rejectValue("postalCode", "example.error.code", "Custom message error validate");
+        }
     }
 }

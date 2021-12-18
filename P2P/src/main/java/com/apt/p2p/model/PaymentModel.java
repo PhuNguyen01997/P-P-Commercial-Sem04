@@ -19,7 +19,8 @@ public class PaymentModel {
     @NotBlank(message = "Họ tên không thể trống")
     private String fullname;
 
-    @NotBlank(message = "Số thẻ không thể trống")
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Mã thẻ không hợp lệ")
+    @NotBlank(message = "Mã thẻ không thể trống")
     private String number;
 
     @NotBlank(message = "Loại thẻ không thể trống")
@@ -39,8 +40,9 @@ public class PaymentModel {
     @NotBlank(message = "Địa chỉ không thể trống")
     private String addressRegister;
 
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Postal code không hợp lệ")
     @NotNull(message = "Postal code không thể trống")
-    private Integer postalCode;
+    private String postalCode;
 
     private Integer shopId;
 
