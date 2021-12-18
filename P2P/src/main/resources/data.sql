@@ -1,0 +1,2 @@
+INSERT INTO user (username, email, enabled, password, phone, avatar, created_at, updated_at)
+values('test', 'test@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0937441896', "", NOW(), NOW());

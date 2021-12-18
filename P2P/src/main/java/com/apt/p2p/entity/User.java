@@ -26,9 +26,9 @@ public class User {
     private String username;
 
     @NotNull
-    private boolean enabled;
+    private boolean enabled = false;
 
-    @Column(length = 16)
+    @Column(length = 60)
     @NotNull
     private String password;
 
