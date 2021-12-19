@@ -11,4 +11,6 @@ public interface PaymentService {
     public PaymentModel create(PaymentModel paymentModel);
 
     public List<PaymentModel> findAll();
+
+    public boolean delete(int id);
 }

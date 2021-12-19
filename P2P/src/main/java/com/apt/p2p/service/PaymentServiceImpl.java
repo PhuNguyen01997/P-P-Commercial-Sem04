@@ -1,6 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Payment;
+import com.apt.p2p.entity.Shop;
 import com.apt.p2p.entity.User;
 import com.apt.p2p.model.PaymentModel;
 import com.apt.p2p.repository.PaymentRepository;
@@ -115,5 +116,21 @@ public class PaymentServiceImpl implements PaymentService {
         mapper.validate();
 
         return repository.findAll().stream().map(pe -> mapper.map(pe, PaymentModel.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean delete(int id) {
+        try {
+            Payment test = repository.findById(id).get();
+            Shop shop = repository.findShopByPaymentId(id);
+            if(shop != null){
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            return false;
+        }
     }
 }

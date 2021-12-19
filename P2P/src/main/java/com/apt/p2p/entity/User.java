@@ -1,15 +1,15 @@
 package com.apt.p2p.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-@Data
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
