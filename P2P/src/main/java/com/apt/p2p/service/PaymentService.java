@@ -5,6 +5,10 @@ import com.apt.p2p.model.PaymentModel;
 import com.apt.p2p.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 public interface PaymentService {
     public PaymentModel create(PaymentModel paymentModel);
+
+    public List<PaymentModel> findAll();
 }

@@ -24,19 +24,21 @@ public class Payment {
     private String number;
 
     @NotNull
-    private  String type;
+    private String type;
 
     @NotNull
     private Date due;
 
     @NotNull
-    private Integer cvv;
+    @Column(length = 10)
+    private String cvv;
 
     @NotNull
     private String addressRegister;
 
     @NotNull
-    private Integer postalCode;
+    @Column(length = 10)
+    private String postalCode;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,18 +1,18 @@
 package com.apt.p2p.model;
 
 import com.apt.p2p.common.DateDeserializer;
+import com.apt.p2p.entity.CardType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PaymentModel {
     private Integer id;
 
@@ -23,9 +23,9 @@ public class PaymentModel {
     @NotBlank(message = "Mã thẻ không thể trống")
     private String number;
 
-    @NotBlank(message = "Loại thẻ không thể trống")
+    @NotNull(message = "Vui lòng chọn loại thẻ")
     @Enumerated(EnumType.STRING)
-    private String type;
+    private CardType type;
 
     @JsonDeserialize(using = DateDeserializer.class)
     @NotNull(message = "Ngày hết hạn không thể trống")
@@ -33,9 +33,8 @@ public class PaymentModel {
     private Date due;
 
     @NotNull(message = "CVV không thể trống")
-    @Min(value = 1, message = "CVV không hợp lệ (ex: XXX)")
-    @Max(value = 999, message = "CVV không hợp lệ (ex: XXX)")
-    private Integer cvv;
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Cvv không hợp lệ")
+    private String cvv;
 
     @NotBlank(message = "Địa chỉ không thể trống")
     private String addressRegister;

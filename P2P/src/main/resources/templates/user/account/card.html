@@ -19,20 +19,19 @@
             </button>
         </div>
         <ul class="account-card">
-            <li class="account-card-item">
-                <p class="account-card-item--pic pic"><img src="/img/common/icon-master-card.png" alt=""></p>
-                <p class="account-card-item--name">VISA</p>
-                <p class="account-card-item--number">**** **** **** 1234</p>
+            <li th:each="item : ${cards}" class="account-card-item">
+                <p th:switch="${item.type}" class="account-card-item--pic pic">
+                    <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
+                         src="/img/common/icon-visa.png" alt="">
+                    <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
+                         src="/img/common/icon-master-card.png" alt="">
+                </p>
+                <p th:text="${item.type.displayValue}" class="account-card-item--name">VISA</p>
+                <p th:text="${item.number}" class="account-card-item--number">**** **** **** ****</p>
                 <div class="account-card-item--action">
-                    <a href="#" class="account-card-item--link">Xóa</a>
-                </div>
-            </li>
-            <li class="account-card-item">
-                <p class="account-card-item--pic pic"><img src="/img/common/icon-visa.png" alt=""></p>
-                <p class="account-card-item--name">Master Card</p>
-                <p class="account-card-item--number">**** **** **** 9999</p>
-                <div class="account-card-item--action">
-                    <a href="#" class="account-card-item--link">Xóa</a>
+                    <form th:action="@{/card/{id}(id=${item.id})}" th:method="delete">
+                        <button type="submit" class="account-card-item--link">Xóa</button>
+                    </form>
                 </div>
             </li>
         </ul>
@@ -60,12 +59,12 @@
                     <option th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}"
                             th:value="${payType}"
                             th:text="${payType.displayValue}"
-                            th:selected="${payType == card.getType()}"></option>
+                            th:selected="${payType == card.type}"></option>
                 </select>
                 <div class="modal2--pic-type">
                     <th:block th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}">
                         <p th:attr="data-value=${payType}" th:switch="${payType}"
-                           th:classappend="${payType.toString() == card.getType()} ? 'active' : 'no-active'"
+                           th:classappend="${payType == card.type} ? 'active' : 'no-active'"
                            class="pic">
                             <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
                                  src="/img/common/icon-visa.png" alt="">

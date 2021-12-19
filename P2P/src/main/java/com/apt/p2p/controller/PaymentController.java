@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class PaymentController {
@@ -41,6 +43,8 @@ public class PaymentController {
     @GetMapping("card")
     public String card(Model model) {
         model.addAttribute("card", new PaymentModel());
+        model.addAttribute("cards", service.findAll());
+
         return "user/account/card";
     }
 
@@ -50,11 +54,11 @@ public class PaymentController {
             @Valid @ModelAttribute("card") PaymentModel paymentModel,
             BindingResult result
     ) {
-//        PaymentModelValidator paymentModelValidator = new PaymentModelValidator();
-//        paymentModelValidator.validate(paymentModel, result);
         if(result.hasErrors()){
             model.addAttribute("card", paymentModel);
+            model.addAttribute("cards", service.findAll());
             model.addAttribute("hasAnyError", true);
+
             return "user/account/card";
         }
         PaymentModel paymentResult = service.create(paymentModel);
