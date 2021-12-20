@@ -14,6 +14,7 @@ import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -119,18 +120,33 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    public List<PaymentModel> findAllByUserId(int userId) {
+        ModelMapper mapper = new ModelMapper();
+        mapper.typeMap(Payment.class, PaymentModel.class);
+        mapper.addMappings(mapEntityToModel);
+        mapper.validate();
+
+        Iterable<Payment> test = repository.findAllByUserId(userId);
+        List<PaymentModel> result = repository.findAllByUserId(userId).stream().map(pe -> mapper.map(pe, PaymentModel.class)).collect(Collectors.toList());
+        return result;
+    }
+
+    @Override
     public boolean delete(int id) {
         try {
-            Payment test = repository.findById(id).get();
-            Shop shop = repository.findShopByPaymentId(id);
-            if(shop != null){
-
+            Payment payment = repository.findById(id).get();
+            if(payment.getShop() != null){
+                payment.setUser(null);
+                repository.save(payment);
+            }else{
+                repository.deleteById(id);
             }
         } catch (Exception e){
             e.printStackTrace();
+            return false;
         }
         finally {
-            return false;
+            return true;
         }
     }
 }

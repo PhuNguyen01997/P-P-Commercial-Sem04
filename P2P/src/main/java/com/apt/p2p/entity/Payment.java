@@ -41,7 +41,6 @@ public class Payment {
     @Column(length = 10)
     private String postalCode;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;

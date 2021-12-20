@@ -12,5 +12,7 @@ public interface PaymentService {
 
     public List<PaymentModel> findAll();
 
+    public List<PaymentModel> findAllByUserId(int id);
+
     public boolean delete(int id);
 }
