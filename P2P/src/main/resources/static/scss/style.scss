@@ -668,6 +668,17 @@ label {
   }
 }
 
+#globalError{
+  .modal-header{
+    background-color: red;
+    color: white;
+  }
+  .close{
+    color: white;
+    font-size: 20px;
+  }
+}
+
 @import "./header";
 @import "./footer";
 @import "./auth";

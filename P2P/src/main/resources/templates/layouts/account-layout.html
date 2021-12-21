@@ -21,14 +21,19 @@
 <header th:insert="fragments/general.html :: header" class="header">
     <h1>Header</h1>
 </header>
+
 <main>
     <div layout:fragment="content">
     </div>
 </main>
+
 <footer class="footer" th:insert="fragments/general.html :: footer">
     <h1>Footer</h1>
 </footer>
+
 <div layout:fragment="modal"></div>
+
+<div th:replace="fragments/modal.html :: global-error"></div>
 
 <script src="/js/script.js"></script>
 <th:block layout:fragment="script"></th:block>

@@ -21,6 +21,7 @@
 <header th:insert="fragments/general-auth.html :: header" class="header header-auth">
     <h1>Header</h1>
 </header>
+
 <main class="auth">
     <div class="inner">
         <div class="auth-ads">
@@ -30,9 +31,12 @@
         </div>
     </div>
 </main>
+
 <footer class="footer" th:insert="fragments/general-auth.html :: footer">
     <h1>Footer</h1>
 </footer>
+
+<div th:if="${globalError != null}" th:replace="fragments/modal.html :: global-error"></div>
 
 <script src="/js/script.js"></script>
 <th:block layout:fragment="script"></th:block>

@@ -1,2 +1,0 @@
-tạo modal báo lỗi global nếu có lỗi
-nếu không có list nào báo trống
