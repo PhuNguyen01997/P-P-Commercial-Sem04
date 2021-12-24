@@ -111,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
 //            result = entityMapModel(product.get());
             Product productEntity = product.get();
             productEntity.setShop(repository.findShopByProductId(productEntity.getId()));
-            productEntity.setRate(repository.(productEntity.getId()));
+//            productEntity.setRate(repository.(productEntity.getId()));
         }
         return result;
     }

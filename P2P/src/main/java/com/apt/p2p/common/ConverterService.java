@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ConverterService {
-    @Bean
+    @Bean(name = "hideCardNumber")
     Converter HideCardNumberConverter() {
         return new Converter<String, String>() {
             @Override
@@ -26,7 +26,7 @@ public class ConverterService {
         };
     }
 
-    @Bean
+    @Bean(name = "removeSpaceNumber")
     Converter RemoveSpaceNumberConverter(){
         return new Converter<String, String>() {
             @Override
