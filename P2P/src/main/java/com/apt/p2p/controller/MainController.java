@@ -18,11 +18,6 @@ public class MainController {
         return "user/main/shop-detail";
     }
 
-    @GetMapping("product/{productSlug}")
-    public String productDetail(@PathVariable String productSlug) {
-        return "user/main/product-detail";
-    }
-
     @GetMapping("order")
     public String order() {
         return "user/account/order-user";

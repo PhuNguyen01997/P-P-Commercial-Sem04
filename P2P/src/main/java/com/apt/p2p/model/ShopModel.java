@@ -1,9 +1,18 @@
 package com.apt.p2p.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class ShopModel {
     private Integer id;
 
@@ -19,25 +28,5 @@ public class ShopModel {
 
     private Date updatedAt = new Date();
 
-    @NotNull
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "userId")
     private UserModel user;
-
-//    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
-//    private List<Product> products;
-//
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "addressId")
-//    private Address address;
-//
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "paymentId")
-//    private Payment payment;
-//
-//    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
-//    private List<Rate> rates;
-//
-//    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
-//    private List<Order> orders;
 }
