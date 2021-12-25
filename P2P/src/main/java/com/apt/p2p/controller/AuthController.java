@@ -30,8 +30,8 @@ public class AuthController {
     @Autowired
     private UserService service;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("signin")
     public String signin(){
@@ -76,7 +76,6 @@ public class AuthController {
                 service.findById(user.getUserId()).ifPresent(p -> user.setAvatar(p.getAvatar()));
             }
         }
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         service.save(user);
         return "redirect:/";
