@@ -10,8 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role,Integer> {
-    // đây là custom method của người dùng
-    // -> Spring boot không sinh mã câu truy vấn được, chúng ta cần cung cấp câu truy vấn
-    @Query("SELECT o.role FROM UserRole o WHERE o.user.username = :username")
+    @Query("SELECT o.primaryKey.role FROM UserRole o WHERE o.primaryKey.user.username = :username")
     List<Role> FindRoleByUsername(@Param("username") String username);
 }

@@ -11,13 +11,14 @@
 <div layout:fragment="content-form" class="auth-container">
     <h1 class="auth-title">Sign In</h1>
     <form th:action="@{/j_spring_security_check}" method="post" class="form">
-        <input class="auth--ipt auth--ipt__txt" name="username" placeholder="Username">
-        <input class="auth--ipt auth--ipt__txt" name="password" type="password" placeholder="Password">
+        <input class="auth--ipt auth--ipt__txt" name="username" placeholder="Username" required>
+        <input class="auth--ipt auth--ipt__txt" name="password" type="password" placeholder="Password" required>
         <button class="btn btn__red auth--ipt auth--ipt__submit" th:type="submit" th:value="Login">Login</button>
+        <p th:if="${#request.getParameter('error') == 'true'}" class="form--error-mess" for="">Invalid username or password</p>
     </form>
     <div class="auth-navi">
-        <a href="#">Sign up</a>
-        <a href="#">Forgot password ?</a>
+        <a th:href="@{/signup}">Sign up</a>
+        <a th:href="@{/forgot-password}">Forgot password ?</a>
     </div>
 </div>
 </body>

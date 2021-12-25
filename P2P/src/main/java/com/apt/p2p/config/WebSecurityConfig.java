@@ -42,28 +42,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        //http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/", "/signin", "/signup").permitAll();
         http.authorizeRequests().antMatchers("/order/{id}").authenticated();
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/signin")
                 .defaultSuccessUrl("/")
-                .failureUrl("/login?error=true")
+                .failureUrl("/signin?error=true")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout().logoutUrl("/logout")
-                .logoutSuccessUrl("/signin");
+                .logoutSuccessUrl("/");
 
         http.authorizeRequests().and().rememberMe()
                 .tokenRepository(persistenceTokenRepository())
-                .tokenValiditySeconds(24 * 60 * 60);
+                .tokenValiditySeconds(60);
 
     }
 
     @Bean
-    public PersistentTokenRepository persistenceTokenRepository()
-
-    {
+    public PersistentTokenRepository persistenceTokenRepository() {
         return new InMemoryTokenRepositoryImpl();
     }
 }

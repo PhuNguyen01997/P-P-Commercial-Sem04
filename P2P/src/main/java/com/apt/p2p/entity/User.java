@@ -16,8 +16,9 @@ import java.util.List;
 @Table(name = "User")
 public class User {
     @Id
+    @Column (name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer userId;
 
     @NotNull
     private String email;
@@ -26,7 +27,7 @@ public class User {
     private String username;
 
     @NotNull
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     @Column(length = 60)
     @NotNull
@@ -36,12 +37,14 @@ public class User {
     @NotNull
     private String phone;
 
-    @Column(length = 20)
     private String avatar;
 
     private Date createdAt = new Date();
 
     private Date updatedAt = new Date();
+
+    @OneToMany(mappedBy = "primaryKey.user" ,fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+    private List<UserRole> userRoles;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Shop shop;

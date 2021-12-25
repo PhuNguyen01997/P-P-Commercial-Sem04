@@ -12,15 +12,18 @@
   <div class="inner">
     <div class="auth-container">
       <h1 class="auth-title">Sign Up</h1>
-      <form action="#" method="post" class="form">
-        <input class="auth--ipt auth--ipt__txt form--error-ipt" type="email" placeholder="Email">
-        <p class="form--error-mess" for="">Error message</p>
-        <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Passowrd">
+      <form th:action="@{/save-user}" th:object="${user}" method="POST" enctype="multipart/form-data" class="form">
+        <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Email" th:field="*{email}">
+        <input class="auth--ipt auth--ipt__txt" placeholder="Phone" th:field="*{phone}">
+        <!--        <p class="form&#45;&#45;error-mess" for="">Error message</p>-->
+        <input class="auth--ipt auth--ipt__txt" type="text" placeholder="Username" th:field="*{username}">
+        <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}">
+        <input class="auth--ipt auth--ipt__txt" type="file" name="pic">
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Sign Up</button>
       </form>
       <div class="auth-navi">
-        <a href="#">Sign in</a>
-        <a href="#">Forgot password ?</a>
+        <a th:href="@{/signin}">Sign in</a>
+        <a th:href="@{/forgot-password}">Forgot password ?</a>
       </div>
     </div>
   </div>

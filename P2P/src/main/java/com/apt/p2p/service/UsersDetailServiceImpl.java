@@ -15,14 +15,35 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UsersDetailServiceImpl implements UserDetailsService {
+public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> findById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -48,4 +69,6 @@ public class UsersDetailServiceImpl implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), enabled, accountNonExpired,
                 credentialNonExpired, accountNonLocked, grantList);
     }
+
+
 }
