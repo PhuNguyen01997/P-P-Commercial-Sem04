@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RateService {
     public List<RateModel> findByProductId(int productId);
+
+    public Integer countByShopId(int shopId);
 }

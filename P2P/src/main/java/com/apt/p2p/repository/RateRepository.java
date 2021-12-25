@@ -11,6 +11,6 @@ public interface RateRepository extends JpaRepository<Rate, Integer> {
     @Query("SELECT p.rates FROM Product p WHERE p.id=:id")
     public List<Rate> findByProductId(@Param("id") int productId);
 
-    @Query("SELECT size(p.rates) FROM Product p WHERE p.shop.id=:id")
+    @Query("SELECT COUNT(r) FROM Rate r WHERE r.product.shop.id=:id")
     public Integer countByShopId(@Param("id") int shopId);
 }

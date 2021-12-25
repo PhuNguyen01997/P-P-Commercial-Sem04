@@ -35,3 +35,14 @@ INSERT INTO product (created_at, description, image, name, price, updated_at, ca
 VALUES(NOW(), 'Ma túy đá', '1.img', 'Ma túy đá', 2900000.0, NOW(), 3, 1);
 INSERT INTO product (created_at, description, image, name, price, updated_at, category_id, shop_id)
 VALUES(NOW(), 'Mã tấu', '1.img', 'Mã tấu', 4200000.0, NOW(), 4, 1);
+
+INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id)
+VALUES(NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2);
+INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id)
+VALUES(NOW(), 'Mùa dịch nhưng giao hàng khá nhanh, chưa dùng nên chưa biết chất lượng thế nào', 2, NOW(), 2, 2);
+INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id)
+VALUES(NOW(), 'Giao thiếu sp ( hơn 130 ngàn) . Nhắn tin ko trả lời. Làm ơn nếu đọc đc bình luận này thì trả lại tiền giúp đi. Bán hàng ko có tâm !', 1, NOW(), 3, 2);
+INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id)
+VALUES(NOW(), 'Trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Do đó, trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Định lí 3: Trong một đường tròn, đường kính đi qua trung điểm của một dây không đi qua tâm thì vuông góc với dây ấy', 4, NOW(), 4, 2);
+INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id)
+VALUES(NOW(), 'Vòng cũng OK nhưng vòng nó toàn đấy nhau thôi đeo mà tức kinh khủng luôn. Chúc shop mọi người nên tham khảo nhiều TRC khi mua nhá. Hình ảnh mang tính chất nhận xu', 3, NOW(), 5, 2);

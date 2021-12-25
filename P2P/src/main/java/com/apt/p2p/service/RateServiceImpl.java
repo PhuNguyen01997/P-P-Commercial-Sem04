@@ -21,4 +21,8 @@ public class RateServiceImpl implements RateService {
     public List<RateModel> findByProductId(int productId) {
         return repository.findByProductId(productId).stream().map(re -> rateMapper.rateEntityToModel(re)).collect(Collectors.toList());
     }
+
+    public Integer countByShopId(int shopId){
+        return repository.countByShopId(shopId);
+    }
 }

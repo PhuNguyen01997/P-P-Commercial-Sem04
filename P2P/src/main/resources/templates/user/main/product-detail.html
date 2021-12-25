@@ -39,13 +39,13 @@
             <div class="detail-content">
                 <h1 th:text="${product.name}" class="detail-content--title">[Product Name]</h1>
                 <p class="detail-content--rate">
-                        <span class="icon icon__star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </span>
+                    <span class="icon icon__star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </span>
                 </p>
                 <p th:text="${product.price}" class="detail-content--price">[Product price]đ</p>
                 <p class="detail-content--line">
@@ -56,8 +56,8 @@
                 </p>
                 <div class="detail-content--button">
                     <button class="btn btn__primary-outline detail-content--button-cart"><i
-                            class="fas fa-shopping-cart"></i><span>Add to Cart</span></button>
-                    <button class="btn btn__primary detail-content--button-buy">Buy now</button>
+                            class="fas fa-shopping-cart"></i><span>Thêm vào giỏ hàng</span></button>
+                    <button class="btn btn__primary detail-content--button-buy">Mua ngay</button>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 <img src="./img/products/product_01.jpg" alt="">
             </div>
             <div class="detail-shop--content">
-                <p th:text="${product.shop.name}" class="detail-shop--content-title">[Shop Name]</p>
+                <p th:text="${shop.name}" class="detail-shop--content-title">[Shop Name]</p>
                 <div class="detail-shop--content-btn">
                     <a href="#">
                         <button class="btn btn__primary-outline see">Xem cửa hàng</button>
@@ -75,10 +75,12 @@
             </div>
             <div class="detail-shop--description">
                 <div class="detail-shop--description-item">
-                    <p>Đánh giá <span th:text="${product.rates.size()}" class="txt__primary">[Product Rate Count]</span></p>
+                    <p>Đánh giá <span th:text="${shop.countRates}" class="txt__primary">[Product Rate Count]</span>
+                    </p>
                 </div>
                 <div class="detail-shop--description-item">
-                    <p>Sản phẩm <span th:text="${product.shop.countProduct}" class="txt__primary">[Shop Rate Count]</span></p>
+                    <p>Sản phẩm <span th:text="${shop.countProducts}"
+                                      class="txt__primary">[Shop Rate Count]</span></p>
                 </div>
                 <div class="detail-shop--description-item">
                     <p>Ngày tham gia <span class="txt__primary">45 month</span></p>
@@ -86,28 +88,18 @@
             </div>
         </div>
         <div class="detail-product">
-            <h2 class="detail-product--title detail--title">Product Description</h2>
-            <div class="detail-product--content">
-                <p>Bdjab askjd asd jkasd ashdkjsadjhsakjd</p>
-                <p> asjdkja sdk hsad kjasdjk asd ashdk</p>
-                <p>asdlkasjdklasdlajsdkajsdlkjdlkasjdlkasjd</p>
-                <hr>
-                <p>ajsdjkahdjasdjkahjdhasjkda</p>
-                <ul>
-                    <li>asdlsad</li>
-                    <li>akdjasdkashdj</li>
-                    <li>asjd aslkd qioroi qfwoiu qwruiorw</li>
-                </ul>
+            <h2 class="detail-product--title detail--title">Thông tin sản phẩm</h2>
+            <div th:text="${product.description}" class="detail-product--content">
             </div>
         </div>
         <div class="detail-rate">
             <h2 class="detail-rate--headline detail--title">Product Review</h2>
             <div class="detail-rate--list">
-                <div class="detail-rate--item">
+                <div th:each="rateItem : ${rates}" class="detail-rate--item">
                     <p class="pic detail-rate--pic"><img src="./img/products/product_01.jpg"
                                                          alt=""></p>
                     <div class="detail-rate--content">
-                        <p class="detail-rate--name">Bu Bu uWu</p>
+                        <p class="detail-rate--name">[Rate name]</p>
                         <p class="detail-rate--star">
                                 <span class="icon icon__star">
                                     <i class="fas fa-star"></i>
@@ -117,36 +109,8 @@
                                     <i class="fas fa-star"></i>
                                 </span>
                         </p>
-                        <p class="detail-rate--text">Đặt đồng hồ mặt tròn thì giao mặt HCN
-                            Nhắn tin cho shop thì rep kiểu như :"ừ sai thì kệ mày". Nhắn kiểu ức chế lắm nha mặc
-                            dù mình đang rất kiềm chế
-                            Lúc đầu có rep sau thì onl cũng chả thèm trả lời 1 câu.Thà nói shop nhầm hay gì đó
-                            thì mình cũng k trách đâu chứ k đến mức mà k thèm seen đâu ạ</p>
-                        <p class="detail-rate--date">2021-11-06 14:59</p>
-                    </div>
-                </div>
-                <div class="detail-rate--item">
-                    <p class="pic detail-rate--pic"><img src="./img/products/product_01.jpg"
-                                                         alt=""></p>
-                    <div class="detail-rate--content">
-                        <p class="detail-rate--name">Bu Bu uWu</p>
-                        <p class="detail-rate--star">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="detail-rate--text">Đặt đồng hồ mặt tròn thì giao mặt HCN
-                            Nhắn tin cho shop thì rep kiểu như :"ừ sai thì kệ mày". Nhắn kiểu ức chế lắm nha mặc
-                            dù mình đang rất kiềm chế
-                            Lúc đầu có rep sau thì onl cũng chả thèm trả lời 1 câu.Thà nói shop nhầm hay gì đó
-                            thì mình cũng k trách đâu chứ k đến mức mà k thèm seen đâu ạ
-                            Shop như cc
-                        </p>
-                        <p class="detail-rate--date">2021-11-06 14:59</p>
+                        <p th:text="${rateItem.description}" class="detail-rate--text">[Rate Description]</p>
+                        <p th:text="${rateItem.createdAt}" class="detail-rate--date">[Rate Time]</p>
                     </div>
                 </div>
                 <div style="margin-top: 20px;">Pagination hoặc See more ở đây (tùy mày)</div>

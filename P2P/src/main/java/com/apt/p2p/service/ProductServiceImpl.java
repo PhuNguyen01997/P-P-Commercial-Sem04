@@ -28,10 +28,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository repository;
     @Autowired
     private ProductMapper productMapper;
-    @Autowired
-    private ShopServiceImpl shopService;
-    @Autowired
-    private RateServiceImpl rateService;
 
     public List<ProductModel> findByShopId(int shopId){
         return repository.findByShopId(shopId).stream().map(pe -> productMapper.productEntityToModel(pe)).collect(Collectors.toList());
@@ -48,13 +44,6 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> product = repository.findById(id);
         if (product.isPresent()) {
             result = productMapper.productEntityToModel(product.get());
-
-            ShopModel shopModel = shopService.findByProductId(id);
-            shopModel.setCountProducts(this.countByShopId(id));
-//            shopModel.setCountRates(rateService.count);
-
-            result.setShop(shopModel);
-            result.setRates(rateService.findByProductId(id));
         }
         return result;
     }

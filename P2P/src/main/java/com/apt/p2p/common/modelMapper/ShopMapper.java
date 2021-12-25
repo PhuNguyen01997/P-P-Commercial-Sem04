@@ -28,7 +28,7 @@ public class ShopMapper {
             }
         });
 
-        mapper.validate();
+//        mapper.validate();
         return mapper.map(model, Shop.class);
     }
 
@@ -43,7 +43,7 @@ public class ShopMapper {
             }
         });
 
-        mapper.validate();
+//        mapper.validate();
         return mapper.map(entity, ShopModel.class);
     }
 }

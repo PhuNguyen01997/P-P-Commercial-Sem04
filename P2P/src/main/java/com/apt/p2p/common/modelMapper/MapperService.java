@@ -10,9 +10,10 @@ public class MapperService {
     public ModelMapper getModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STANDARD)
+                .setMatchingStrategy(MatchingStrategies.STRICT)
                 .setSkipNullEnabled(true)
                 .setPropertyCondition(Conditions.isNotNull());
+
         ;
 
         return modelMapper;
