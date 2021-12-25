@@ -10,9 +10,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    @Query("SELECT p.shop FROM Product p WHERE p.id = :id")
-    public Shop findShopByProductId(@Param("id") int productId);
+    @Query("SELECT s.products FROM Shop s WHERE s.id = :id")
+    public List<Product> findByShopId(@Param("id") int shopId);
 
-    @Query("SELECT p.shop.rates FROM Product p WHERE p.id = :id")
-    public List<Rate> findRatesByProductId(@Param("id") int productId);
+    @Query("SELECT size(s.products) FROM Shop s WHERE s.id = :id")
+    public Integer countByShopId(@Param("id") int shopId);
 }

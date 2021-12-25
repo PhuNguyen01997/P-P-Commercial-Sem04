@@ -1,2 +1,0 @@
-INSERT INTO user (username, email, password, phone, avatar, created_at, updated_at) values('Phu', 'phu@gmail.com', '123456', '0937441896', "", NOW(), NOW());
-INSERT INTO user (username, email, password, phone, avatar, created_at, updated_at) values('Phu2', 'phu2@gmail.com', '123456', '0937441896', "", NOW(), NOW());

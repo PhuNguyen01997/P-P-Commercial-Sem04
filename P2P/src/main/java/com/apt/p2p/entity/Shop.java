@@ -25,6 +25,9 @@ public class Shop {
     @NotNull
     private String logo;
 
+    @NotNull
+    private String name;
+
     @Column(length = 14)
     @NotNull
     private String phone;
@@ -50,9 +53,6 @@ public class Shop {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paymentId")
     private Payment payment;
-
-    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
-    private List<Rate> rates;
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Order> orders;

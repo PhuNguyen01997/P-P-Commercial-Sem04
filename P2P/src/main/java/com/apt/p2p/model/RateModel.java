@@ -22,7 +22,7 @@ public class RateModel {
 
     private Date updatedAt;
 
-//    private User user;
-//
-//    private Shop shop;
+    private UserModel user;
+
+    private ProductModel product;
 }

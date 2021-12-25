@@ -16,7 +16,7 @@ public class ProductController {
     @GetMapping("product/{id}")
     public String productDetail(Model model, @PathVariable int id) {
         ProductModel productModel = service.findById(id);
-        model.addAttribute("product", new ProductModel());
+        model.addAttribute("product", productModel);
         return "user/main/product-detail";
     }
 }

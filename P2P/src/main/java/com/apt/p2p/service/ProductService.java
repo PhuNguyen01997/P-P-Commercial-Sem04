@@ -4,4 +4,6 @@ import com.apt.p2p.model.ProductModel;
 
 public interface ProductService {
     public ProductModel findById(int id);
+
+    public Integer countByShopId(int shopId);
 }

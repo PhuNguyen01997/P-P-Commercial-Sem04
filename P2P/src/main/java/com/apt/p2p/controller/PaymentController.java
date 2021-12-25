@@ -29,6 +29,7 @@ public class PaymentController {
         // trim at start and end String
         StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
         binder.registerCustomEditor(String.class, stringTrimmer);
+
         System.out.println("A binder for object: " + binder.getObjectName());
         binder.addValidators(new PaymentModelValidator());
     }

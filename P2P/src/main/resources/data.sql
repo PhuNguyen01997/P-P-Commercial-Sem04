@@ -13,8 +13,8 @@ VALUES('93 Lê Hoàn, Thanh Hóa', 272, NOW(), 'Mai Hường', '8593820481039402
 INSERT INTO address(district, `number`, province, ward, user_id)
 VALUES('1', '123 Lê Lợi', 'TP. HCM', '2', 1);
 
-INSERT INTO shop(created_at, logo, permission, phone, updated_at, address_id, payment_id, user_id)
-VALUES(NOW(), 'no', 1, '0907982932', NOW(), 1, 1, 1);
+INSERT INTO shop(created_at, logo, name, permission, phone, updated_at, address_id, payment_id, user_id)
+VALUES(NOW(), 'no', 'Shốp Tếst 01', 1, '0907982932', NOW(), 1, 1, 1);
 
 INSERT INTO category (created_at, name, updated_at)
 VALUES(NOW(), 'Điện tử', NOW());

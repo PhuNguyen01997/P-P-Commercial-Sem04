@@ -35,4 +35,14 @@ public class ConverterService {
             }
         };
     }
+
+    @Bean(name = "productAddPathImage")
+    Converter productAddPathImage(){
+        return new Converter<String, String>() {
+            @Override
+            public String convert(MappingContext<String, String> mappingContext) {
+                return "/images/product/" + mappingContext.getSource();
+            }
+        };
+    }
 }

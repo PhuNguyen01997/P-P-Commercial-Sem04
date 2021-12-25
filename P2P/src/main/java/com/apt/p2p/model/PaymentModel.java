@@ -43,11 +43,7 @@ public class PaymentModel {
     @NotNull(message = "Postal code không thể trống")
     private String postalCode;
 
-//    private Integer shopId;
-
     private ShopModel shop;
-
-//    private Integer userId;
 
     private UserModel user;
 }
