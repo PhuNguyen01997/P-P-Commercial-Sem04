@@ -1,8 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ShopMapper;
-import com.apt.p2p.model.ShopModel;
-import com.apt.p2p.repository.ProductRepository;
+import com.apt.p2p.model.modelview.ShopModel;
 import com.apt.p2p.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,4 +19,7 @@ public class ShopServiceImpl implements ShopService {
         result = shopMapper.shopEntityToModel(repository.findByProductId(productId));
         return result;
     }
+
+//    @Override
+//    public
 }

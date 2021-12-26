@@ -2,7 +2,7 @@ package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.PaymentMapper;
 import com.apt.p2p.entity.Payment;
-import com.apt.p2p.model.PaymentModel;
+import com.apt.p2p.model.modelview.PaymentModel;
 import com.apt.p2p.repository.PaymentRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

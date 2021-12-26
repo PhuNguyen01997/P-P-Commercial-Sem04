@@ -1,4 +1,4 @@
-package com.apt.p2p.model;
+package com.apt.p2p.model.modelview;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

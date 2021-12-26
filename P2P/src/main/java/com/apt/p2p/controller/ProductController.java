@@ -1,8 +1,9 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.model.ProductModel;
-import com.apt.p2p.model.RateModel;
-import com.apt.p2p.model.ShopModel;
+import com.apt.p2p.model.modalform.ProductAddCartModel;
+import com.apt.p2p.model.modelview.ProductModel;
+import com.apt.p2p.model.modelview.RateModel;
+import com.apt.p2p.model.modelview.ShopModel;
 import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.ShopService;
@@ -36,6 +37,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("rates", rates);
         model.addAttribute("shop", shop);
+        model.addAttribute("addCartModel", new ProductAddCartModel(1, id));
 
         return "user/main/product-detail";
     }

@@ -1,21 +1,10 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ProductMapper;
-import com.apt.p2p.common.modelMapper.ShopMapper;
 import com.apt.p2p.entity.Product;
-import com.apt.p2p.entity.Shop;
-import com.apt.p2p.model.ProductModel;
-import com.apt.p2p.model.RateModel;
-import com.apt.p2p.model.ShopModel;
+import com.apt.p2p.model.modelview.ProductModel;
 import com.apt.p2p.repository.ProductRepository;
-import com.apt.p2p.repository.ShopRepository;
-import org.modelmapper.Converter;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.ValidationException;
-import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

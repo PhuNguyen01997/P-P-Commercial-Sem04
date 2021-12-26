@@ -43,11 +43,6 @@ public class MainController {
         return "user/account/user-form";
     }
 
-    @GetMapping("cart")
-    public String cart() {
-        return "user/main/cart";
-    }
-
     @GetMapping("identity")
     public String identity() {
         return "user/account/identity";

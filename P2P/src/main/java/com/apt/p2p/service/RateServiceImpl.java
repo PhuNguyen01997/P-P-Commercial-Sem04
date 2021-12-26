@@ -1,8 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.RateMapper;
-import com.apt.p2p.entity.Rate;
-import com.apt.p2p.model.RateModel;
+import com.apt.p2p.model.modelview.RateModel;
 import com.apt.p2p.repository.RateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

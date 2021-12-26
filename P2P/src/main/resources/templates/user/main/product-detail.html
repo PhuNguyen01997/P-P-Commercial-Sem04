@@ -36,7 +36,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="detail-content">
+            <form class="detail-content" th:action="@{/cart-add}" th:object="${addCartModel}" method="post" >
+                <input type="hidden" name="productId" th:value="${product.id}">
                 <h1 th:text="${product.name}" class="detail-content--title">[Product Name]</h1>
                 <p class="detail-content--rate">
                     <span class="icon icon__star">
@@ -51,15 +52,15 @@
                 <p class="detail-content--line">
                     <span class="detail-content--line-key">Quantity</span>
                     <span class="detail-content--line-value detail-content--line-value__quantity attachAdjust">
-                            <input type="number" name="" value="1" min="1">
-                        </span>
+                        <input name="quantity" type="number" value="1" min="1">
+                    </span>
                 </p>
                 <div class="detail-content--button">
-                    <button class="btn btn__primary-outline detail-content--button-cart"><i
+                    <button type="submit" class="btn btn__primary-outline detail-content--button-cart"><i
                             class="fas fa-shopping-cart"></i><span>Thêm vào giỏ hàng</span></button>
-                    <button class="btn btn__primary detail-content--button-buy">Mua ngay</button>
+                    <button type="button" class="btn btn__primary detail-content--button-buy">Mua ngay</button>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="detail-shop">
             <div class="detail-shop--picture pic">
@@ -93,7 +94,7 @@
             </div>
         </div>
         <div class="detail-rate">
-            <h2 class="detail-rate--headline detail--title">Product Review</h2>
+            <h2 class="detail-rate--headline detail--title">Đánh giá sản phẩm</h2>
             <div class="detail-rate--list">
                 <div th:each="rateItem : ${rates}" class="detail-rate--item">
                     <p class="pic detail-rate--pic"><img src="./img/products/product_01.jpg"

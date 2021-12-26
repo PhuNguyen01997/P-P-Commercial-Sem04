@@ -1,8 +1,6 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.entity.CardType;
-import com.apt.p2p.entity.Payment;
-import com.apt.p2p.model.PaymentModel;
+import com.apt.p2p.model.modelview.PaymentModel;
 import com.apt.p2p.service.PaymentService;
 import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class PaymentController {

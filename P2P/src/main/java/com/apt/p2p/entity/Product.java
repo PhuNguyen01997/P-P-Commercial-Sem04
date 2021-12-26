@@ -44,9 +44,8 @@ public class Product {
     @JoinColumn(name = "shopId")
     private Shop shop;
 
-//    Not neccessary because we don't have business logic to find product -> carts
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-//    private List<Cart> carts;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Cart> carts;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Rate> rates;

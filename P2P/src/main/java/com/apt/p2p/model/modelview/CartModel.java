@@ -1,22 +1,18 @@
-package com.apt.p2p.model;
-
+package com.apt.p2p.model.modelview;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RateModel {
+@Data
+public class CartModel {
     private Integer id;
 
-    private String description;
-
-    private Integer star;
+    private Integer quantity;
 
     private Date createdAt;
 
