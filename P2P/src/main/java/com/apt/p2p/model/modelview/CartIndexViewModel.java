@@ -11,5 +11,5 @@ import java.util.List;
 @Data
 public class CartIndexViewModel {
     private int shopId;
-    private List<ProductModel> products;
+    private List<CartModel> carts;
 }

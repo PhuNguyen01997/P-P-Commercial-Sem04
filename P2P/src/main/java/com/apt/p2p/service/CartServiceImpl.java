@@ -61,10 +61,18 @@ public class CartServiceImpl implements CartService {
 
     public List<CartIndexViewModel> getCartListChunkByShop() {
         int userId = 2;
-        List<Cart> cartlist = cartRepository.findByUserId(userId);
-//        List<Shop> shopEntityList = shopRepository.findHasCartByUserId(userId);
-//        shopEntityList.stream().map(s -> {
+        List<Shop> shopList = shopRepository.findHasCartByUserId(userId);
+//        List<CartIndexViewModel> result = new ArrayList<>();
+//        for (Shop shop : shopList) {
+//            for (Product p: shop.getProducts()) {
 //
-//        });
+//            }
+//            shop.getProducts().stream().map(p -> {
+//                List<Cart> carts = p.getCarts().stream().filter(c -> c.getUser().getId() == userId).collect(Collectors.toList());
+//                List <CartModel> cartsModel = carts.stream().map(ce -> mapper.cartEntityToModel(ce)).collect(Collectors.toList());
+//                result.add(new CartIndexViewModel(shop.getId(), cartsModel));
+//            }).collect(Collectors.toList());
+//        }
+        return null;
     }
 }
