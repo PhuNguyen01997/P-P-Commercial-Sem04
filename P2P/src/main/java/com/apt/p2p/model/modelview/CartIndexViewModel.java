@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class CartIndexViewModel {
-    private int shopId;
-    private List<CartModel> carts;
+//    private int shopId;
+    private ShopModel shop;
+    private List<ProductCartModel> productCarts;
 }
