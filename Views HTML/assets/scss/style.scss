@@ -163,6 +163,16 @@ label {
     width: 50px; //default
     height: 100%;
     text-align: center;
+
+    /* Firefox */
+    -moz-appearance: textfield;
+
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 
@@ -668,12 +678,13 @@ label {
   }
 }
 
-#globalError{
-  .modal-header{
+#globalError {
+  .modal-header {
     background-color: red;
     color: white;
   }
-  .close{
+
+  .close {
     color: white;
     font-size: 20px;
   }

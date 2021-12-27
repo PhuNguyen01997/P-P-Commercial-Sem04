@@ -77,7 +77,7 @@ public class CartServiceImpl implements CartService {
 //                    .filter(cv -> cv.getShop().getId() == cart.getProduct().getShop().getId()).collect(Collectors.toList());
             Integer index = IntStream.range(0, result.size()).filter(i -> result.get(i).getShop().getId() == cart.getProduct().getShop().getId()).findFirst().orElse(-1);
 
-            if(index > 0){
+            if(index >= 0){
                 ShopModel shopModel = shopMapper.shopEntityToModel(cart.getProduct().getShop());
                 ProductModel productModel = productMapper.productEntityToModel(cart.getProduct());
                 CartModel cartModel = cartMapper.cartEntityToModel(cart);

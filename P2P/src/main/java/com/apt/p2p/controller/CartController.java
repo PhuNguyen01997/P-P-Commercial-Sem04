@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,6 +24,9 @@ public class CartController {
     @GetMapping("/cart")
     public String cart(Model model){
         List<CartIndexViewModel> cartList = cartService.getCartListChunkByShop();
+
+        model.addAttribute("cartList", cartList);
+
         return "user/main/cart";
     }
 
