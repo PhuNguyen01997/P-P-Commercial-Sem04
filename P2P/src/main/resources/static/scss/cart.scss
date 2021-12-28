@@ -95,6 +95,7 @@
             }
 
             &--name {
+                flex-grow: 1;
                 display: -webkit-box;
                 text-overflow: ellipsis;
                 overflow: hidden;

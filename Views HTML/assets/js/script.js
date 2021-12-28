@@ -57,11 +57,11 @@ $(function () {
         const input = $(this).siblings("input")[0];
         switch ($(this).attr("data-value")) {
             case 'plus': {
-                input.value = (parseInt(input.value) + 1 > 99 ? 99 : parseInt(input.value) + 1);
+                $(input).attr('value', parseInt(input.value) + 1 > 99 ? 99 : parseInt(input.value) + 1).trigger('change');
                 break;
             }
             case 'minus': {
-                input.value = (parseInt(input.value) - 1 < 1 ? 1 : parseInt(input.value) - 1);
+                $(input).attr('value', parseInt(input.value) - 1 < 1 ? 1 : parseInt(input.value) - 1).trigger('change');
                 break;
             }
             default:
@@ -82,11 +82,16 @@ $(function () {
         $(this).parents('.checkbox').addClass("checkbox__active");
     })
     $('.checkbox').on('change', "input[type='checkbox']", function () {
-        $(this).parents('.checkbox').toggleClass("checkbox__active");
+        const isCheck = this.checked;
+        if (isCheck) {
+            $(this).parents('.checkbox').addClass("checkbox__active");
+        } else {
+            $(this).parents('.checkbox').removeClass("checkbox__active");
+        }
     })
 
     // JS for input radio
-    $('input[type="radio"]').on("change", function(){
+    $('input[type="radio"]').on("change", function () {
         const name = $(this).attr('name');
         $(`input[type="radio"][name=${name}]`).next().removeClass('active');
         $(this).next().addClass('active');
@@ -106,12 +111,12 @@ $(function () {
     }
 
     // Js for modal
-    $('.js-modal').on('click', function(){
+    $('.js-modal').on('click', function () {
         const id = this.dataset.id;
         $(`#${id}`).addClass('js-close');
     })
-    $('.modal2-container').on('click', function(e){
-        if(e.target.classList.contains('js-close')){
+    $('.modal2-container').on('click', function (e) {
+        if (e.target.classList.contains('js-close')) {
             $(this).removeClass('js-close');
         }
     })

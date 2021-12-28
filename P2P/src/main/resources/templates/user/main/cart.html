@@ -12,10 +12,10 @@
     <div class="inner cart cart__list">
         <div class="cart-header">
             <div class="cart-header-item cart-checkbox">
-                <label for="check01" class="checkbox">
+                <label for="allCheck01" class="checkbox">
                     <i class="icon fas fa-check"></i>
                     <span></span>
-                    <input id="check01" type="checkbox">
+                    <input id="allCheck01" type="checkbox" class="allCheck">
                 </label>
             </div>
             <p class="cart-header-item cart-header-item__name">Sản phẩm</p>
@@ -27,33 +27,34 @@
         <div th:each="cart : ${cartList}" class="cart-section">
             <div class="cart-section-shop">
                 <div class="cart-section-shop--checkbox cart-checkbox">
-                    <label for="check02" class="checkbox">
+                    <label th:for="'shop' + ${cart.shop.id}" class="checkbox">
                         <i class="icon fas fa-check"></i>
                         <span></span>
-                        <input id="check02" type="checkbox">
+                        <input th:id="'shop' + ${cart.shop.id}" type="checkbox">
                     </label>
                 </div>
                 <div class="cart-section-shop--info">
-                    <p><span th:text="${cart.shop.name}"></span> <a href="javascript: void(0);"><i class="icon icon__right fas fa-comment-alt"></i></a></p>
+                    <p><span th:text="${cart.shop.name}"></span> <a href="javascript: void(0);"><i
+                            class="icon icon__right fas fa-comment-alt"></i></a></p>
                 </div>
             </div>
             <ul class="cart-section-product">
                 <li th:each="pc : ${cart.getProductCarts()}" class="cart-section-product--item">
                     <div class="cart-section-product--checkbox cart-checkbox">
-                        <label for="check03" class="checkbox">
+                        <label th:for="'cart' + ${pc.cart.id}" class="checkbox">
                             <i class="icon fas fa-check"></i>
                             <span></span>
-                            <input id="check03" type="checkbox">
+                            <input th:id="'cart' + ${pc.cart.id}" type="checkbox">
                         </label>
                     </div>
-                    <a th:href="@{/product/{id}(id=${pc.product.id})}"   class="cart-section-product--img pic">
+                    <a th:href="@{/product/{id}(id=${pc.product.id})}" class="cart-section-product--img pic">
                         <img src="/img/products/product_02.jpg" alt="">
                     </a>
                     <a th:href="@{/product/{id}(id=${pc.product.id})}"
                        th:text="${pc.product.name}"
                        class="cart-section-product--name"></a>
                     <div class="cart-section-product--price cart-w15">
-<!--                        <span class="strikethrough">$99.99</span>-->
+                        <!--                        <span class="strikethrough">$99.99</span>-->
                         <p>
                             <span th:text="${pc.product.price}"></span>
                             <span>vnđ</span>
@@ -65,7 +66,8 @@
                             </span>
                     </div>
                     <div class="cart-section-product--total cart-w10">0 vnđ</div>
-                    <form th:action="@{/product/{id}(id=${pc.product.id})}" th:method="delete" class="cart-section-product--action cart-w10">
+                    <form th:action="@{/product/{id}(id=${pc.product.id})}" th:method="delete"
+                          class="cart-section-product--action cart-w10">
                         <button class="btn btn__red">Xóa</button>
                     </form>
                 </li>
@@ -74,10 +76,10 @@
         <div class="cart-footer">
             <div class="cart-footer-block cart-footer-block__03">
                 <div class="cart-footer-block--checkbox cart-checkbox">
-                    <label for="check04" class="checkbox">
+                    <label for="allCheck02" class="checkbox">
                         <i class="icon fas fa-check"></i>
                         <span></span>
-                        <input id="check04" type="checkbox">
+                        <input id="allCheck02" type="checkbox" class="allCheck">
                     </label>
                 </div>
                 <a class="cart-footer-block--txt cart-footer-block--txt__delete" href="#">Xóa</a>
@@ -88,5 +90,11 @@
         </div>
     </div>
 </main>
+
+<script layout:fragment="script">
+    $('input[type="checkbox"].allCheck').on('click', function(){
+        console.log($(this).checked);
+    })
+</script>
 </body>
 </html>

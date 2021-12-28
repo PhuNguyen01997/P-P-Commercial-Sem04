@@ -156,6 +156,14 @@ label {
   width: 50px;
   height: 100%;
   text-align: center;
+  /* Firefox */
+  -moz-appearance: textfield;
+  /* Chrome, Safari, Edge, Opera */
+}
+
+.attachAdjust input::-webkit-outer-spin-button, .attachAdjust input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .select {
@@ -2891,6 +2899,9 @@ label {
 }
 
 .cart-section-product--name {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   display: -webkit-box;
   text-overflow: ellipsis;
   overflow: hidden;
