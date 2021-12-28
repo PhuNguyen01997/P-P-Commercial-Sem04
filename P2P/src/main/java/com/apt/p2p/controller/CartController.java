@@ -7,12 +7,13 @@ import com.apt.p2p.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class CartController {
@@ -34,5 +35,17 @@ public class CartController {
     public String addCart(Model model, @ModelAttribute("addCartModel") ProductAddCartModel cartModel){
         cartService.save(cartModel);
         return "redirect:/product/" + cartModel.getProductId();
+    }
+
+    @DeleteMapping("/cart/{id}")
+    public String deleteCart(Model model, @PathVariable("id") int id){
+        cartService.delete(id);
+        return "redirect:/cart";
+    }
+
+    @DeleteMapping("/cart")
+    public String deleteCart(Model model, @RequestParam(value = "ids[]") Integer[] ids){
+        cartService.deleteAllById(Arrays.stream(ids).collect(Collectors.toList()));
+        return "redirect:/cart";
     }
 }

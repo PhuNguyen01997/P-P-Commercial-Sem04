@@ -57,11 +57,11 @@ $(function () {
         const input = $(this).siblings("input")[0];
         switch ($(this).attr("data-value")) {
             case 'plus': {
-                $(input).attr('value', parseInt(input.value) + 1 > 99 ? 99 : parseInt(input.value) + 1).trigger('change');
+                $(input).val(parseInt(input.value) + 1 > 99 ? 99 : parseInt(input.value) + 1).trigger('change');
                 break;
             }
             case 'minus': {
-                $(input).attr('value', parseInt(input.value) - 1 < 1 ? 1 : parseInt(input.value) - 1).trigger('change');
+                $(input).val(parseInt(input.value) - 1 < 1 ? 1 : parseInt(input.value) - 1).trigger('change');
                 break;
             }
             default:

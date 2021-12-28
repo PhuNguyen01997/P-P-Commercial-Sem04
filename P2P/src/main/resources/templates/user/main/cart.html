@@ -39,7 +39,7 @@
                 </div>
             </div>
             <ul class="cart-section-product">
-                <li th:each="pc : ${cart.getProductCarts()}" class="cart-section-product--item">
+                <li th:attr="data-id=${pc.cart.id}" th:each="pc : ${cart.getProductCarts()}" class="cart-section-product--item">
                     <div class="cart-section-product--checkbox cart-checkbox">
                         <label th:for="'cart' + ${pc.cart.id}" class="checkbox">
                             <i class="icon fas fa-check"></i>
@@ -54,19 +54,19 @@
                        th:text="${pc.product.name}"
                        class="cart-section-product--name"></a>
                     <div class="cart-section-product--price cart-w15">
-                        <!--                        <span class="strikethrough">$99.99</span>-->
+<!--                        <span class="strikethrough">$99.99</span>-->
                         <p>
                             <span th:text="${pc.product.price}"></span>
-                            <span>vnđ</span>
+                            <span class="jsPrice" th:attr="data-value=${pc.product.price}">vnđ</span>
                         </p>
                     </div>
                     <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
+                                <input type="number" name="" value="1" min="1" max="99" class="jsQuantity">
                             </span>
                     </div>
-                    <div class="cart-section-product--total cart-w10">0 vnđ</div>
-                    <form th:action="@{/product/{id}(id=${pc.product.id})}" th:method="delete"
+                    <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">0 vnđ</div>
+                    <form th:action="@{/cart/{id}(id=${pc.product.id})}" th:method="delete"
                           class="cart-section-product--action cart-w10">
                         <button class="btn btn__red">Xóa</button>
                     </form>
@@ -82,9 +82,12 @@
                         <input id="allCheck02" type="checkbox" class="allCheck">
                     </label>
                 </div>
-                <a class="cart-footer-block--txt cart-footer-block--txt__delete" href="#">Xóa</a>
+                <form th:action="@{/cart}" th:method="delete" class="jsDeleteForm cart-footer-block--txt cart-footer-block--txt__delete">
+                    <button>Xóa</button>
+                    <div class="inputContainer"></div>
+                </form>
                 <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (99 sản phẩm):</p>
-                <p class="cart-footer-block--price">$12.323.123</p>
+                <p class="cart-footer-block--price jsSum">0 vnđ</p>
                 <button class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
             </div>
         </div>
@@ -92,8 +95,68 @@
 </main>
 
 <script layout:fragment="script">
-    $('input[type="checkbox"].allCheck').on('click', function(){
-        console.log($(this).checked);
+    function checkInput(label, value) {
+        const input = $(label).find('input[type="checkbox"]')[0];
+        if (value) {
+            $(label).addClass('checkbox__active');
+        } else {
+            $(label).removeClass('checkbox__active');
+        }
+        input.checked = value;
+    }
+
+    function sumAll() {
+        let sum = 0;
+        $('.jsDeleteForm .inputContainer').empty();
+
+        $('.cart-section-product--item').each(function (index, item) {
+            if ($(item).find('.checkbox__active').length) {
+                // tính total
+                sum += parseFloat($(item).find('.jsTotal')[0].dataset.total);
+
+                // set check list id vào form delete
+                const id = $(item).attr('data-id');
+                $('.jsDeleteForm .inputContainer').append(`<input type='hidden' name="ids[]" value='${id}'>`);
+            }
+        })
+
+        $('.jsSum').text(`${sum} vnđ`);
+    }
+
+    function setTotal(item) {
+        const price = $(item).find(`.jsPrice`)[0].dataset.value;
+        const quantity = $(item).find(`.jsQuantity`)[0].value;
+        const totalContainer = $(item).find(`.jsTotal`)[0];
+        totalContainer.innerText = `${price * quantity} vnđ`;
+        $(totalContainer).attr('data-total', price * quantity);
+    }
+
+    $('.cart-section-product--item').each(function () {
+        setTotal(this);
+    })
+
+    $('input[type="checkbox"].allCheck').on('change', function () {
+        const isCheck = this.checked;
+        $('.checkbox').each((index, item) => checkInput(item, isCheck));
+    })
+
+    $('input[type="checkbox"].shopCheck').on('change', function () {
+        const isCheck = this.checked;
+
+        const parent = $(this).parents('.cart-section');
+        parent.find('.checkbox').each((index, item) => checkInput(item, isCheck));
+    })
+
+    $('.cart-section .attachAdjust input[type="number"]').on('change', function () {
+        const parent = $(this).parents('.cart-section-product--item')[0];
+
+        setTotal(parent);
+
+        sumAll();
+    })
+
+    $('input[type="checkbox"]').on('change', function () {
+        setTimeout(() => sumAll(), 10);
     })
 </script>
 </body>

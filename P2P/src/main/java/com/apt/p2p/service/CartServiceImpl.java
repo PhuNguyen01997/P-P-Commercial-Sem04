@@ -105,4 +105,14 @@ public class CartServiceImpl implements CartService {
 
         return result;
     }
+
+    @Override
+    public void delete(int id) {
+        cartRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllById(List<Integer> idList) {
+        cartRepository.deleteAllById(idList);
+    }
 }

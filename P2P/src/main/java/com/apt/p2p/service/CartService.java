@@ -7,9 +7,13 @@ import com.apt.p2p.model.modelview.CartModel;
 import java.util.List;
 
 public interface CartService {
-    public List<CartModel> findByUserId(int userId);
+    List<CartModel> findByUserId(int userId);
 
-    public CartModel save(ProductAddCartModel productAddCartModel);
+    CartModel save(ProductAddCartModel productAddCartModel);
 
-    public List<CartIndexViewModel> getCartListChunkByShop();
+    List<CartIndexViewModel> getCartListChunkByShop();
+
+    void delete(int id);
+
+    void deleteAllById(List<Integer> id);
 }
