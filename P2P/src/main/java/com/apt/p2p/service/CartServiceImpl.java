@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -114,5 +115,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public void deleteAllById(List<Integer> idList) {
         cartRepository.deleteAllById(idList);
+    }
+
+    @Override
+    public boolean edit(CartModel cartModel) {
+        Cart cart = cartRepository.findById(cartModel.getId()).get();
+        if(cart != null){
+            cart.setQuantity(cartModel.getQuantity());
+            cartRepository.save(cart);
+            return true;
+        }
+        return false;
     }
 }

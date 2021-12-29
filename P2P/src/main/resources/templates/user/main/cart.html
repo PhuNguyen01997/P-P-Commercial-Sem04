@@ -62,11 +62,11 @@
                     </div>
                     <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1" max="99" class="jsQuantity">
+                                <input type="number" name="" th:value="${pc.cart.quantity}" min="1" max="99" class="jsQuantity">
                             </span>
                     </div>
                     <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">0 vnđ</div>
-                    <form th:action="@{/cart/{id}(id=${pc.product.id})}" th:method="delete"
+                    <form th:action="@{/cart/{id}(id=${pc.cart.id})}" th:method="delete"
                           class="cart-section-product--action cart-w10">
                         <button class="btn btn__red">Xóa</button>
                     </form>
@@ -131,6 +131,25 @@
         $(totalContainer).attr('data-total', price * quantity);
     }
 
+    function editCart(id, quantity, callback){
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/cart-edit`,
+            cache: false,
+            type: 'POST',
+            success: function(result){
+                if(result){
+                    callback();
+                }else{
+                    console.error("Error ajax");
+                }
+            },
+            data: {
+                id: id,
+                quantity: quantity,
+            }
+        });
+    }
+
     $('.cart-section-product--item').each(function () {
         setTotal(this);
     })
@@ -150,14 +169,18 @@
     $('.cart-section .attachAdjust input[type="number"]').on('change', function () {
         const parent = $(this).parents('.cart-section-product--item')[0];
 
-        setTotal(parent);
+        const id = $(parent).attr('data-id');
+        const quantity = $(this).val();
 
-        sumAll();
+        editCart(id, quantity, function(){
+            setTotal(parent);
+            sumAll();
+        });
     })
 
     $('input[type="checkbox"]').on('change', function () {
         setTimeout(() => sumAll(), 10);
-    })
+    });
 </script>
 </body>
 </html>

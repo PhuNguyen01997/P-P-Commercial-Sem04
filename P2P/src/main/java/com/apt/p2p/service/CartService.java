@@ -16,4 +16,6 @@ public interface CartService {
     void delete(int id);
 
     void deleteAllById(List<Integer> id);
+
+    boolean edit(CartModel cartModel);
 }
