@@ -1,6 +1,7 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.modalform.ProductAddCartModel;
+import com.apt.p2p.model.modalform.ShopCartToPayModel;
 import com.apt.p2p.model.modelview.CartIndexViewModel;
 import com.apt.p2p.model.modelview.CartModel;
 import com.apt.p2p.service.CartService;
@@ -27,34 +28,46 @@ public class CartController {
     private ShopService shopService;
 
     @GetMapping("/cart")
-    public String cart(Model model){
+    public String cart(Model model) {
         List<CartIndexViewModel> cartList = cartService.getCartListChunkByShop();
 
         model.addAttribute("cartList", cartList);
+
+        List<ShopCartToPayModel> test = new ArrayList<>();
+        List<Integer> list01 = new ArrayList<>();
+        list01.add(99);
+        list01.add(98);
+        List<Integer> list02 = new ArrayList<>();
+        list01.add(56);
+        list01.add(57);
+        test.add(new ShopCartToPayModel(1, list01));
+        test.add(new ShopCartToPayModel(2, list02));
+
+        model.addAttribute("tests", test);
 
         return "user/main/cart";
     }
 
     @PostMapping("/cart-add")
-    public String addCart(Model model, @ModelAttribute("addCartModel") ProductAddCartModel cartModel){
+    public String addCart(Model model, @ModelAttribute("addCartModel") ProductAddCartModel cartModel) {
         cartService.save(cartModel);
         return "redirect:/product/" + cartModel.getProductId();
     }
 
     @PostMapping("/cart-edit")
-    public ResponseEntity editCart(@ModelAttribute("cartModel") CartModel cartModel){
+    public ResponseEntity editCart(@ModelAttribute("cartModel") CartModel cartModel) {
         Boolean success = cartService.edit(cartModel);
         return new ResponseEntity(success.toString(), HttpStatus.OK);
     }
 
     @DeleteMapping("/cart/{id}")
-    public String deleteCart(Model model, @PathVariable("id") int id){
+    public String deleteCart(Model model, @PathVariable("id") int id) {
         cartService.delete(id);
         return "redirect:/cart";
     }
 
     @DeleteMapping("/cart")
-    public String deleteCart(Model model, @RequestParam(value = "ids[]") Integer[] ids){
+    public String deleteCart(Model model, @RequestParam(value = "ids[]", required = false) Integer[] ids) {
         cartService.deleteAllById(Arrays.stream(ids).collect(Collectors.toList()));
         return "redirect:/cart";
     }

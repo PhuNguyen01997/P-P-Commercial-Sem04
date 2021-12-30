@@ -70,15 +70,10 @@ public class CartServiceImpl implements CartService {
                 .sorted((c1, c2) ->
                         c1.getProduct().getShop().getId().compareTo(c2.getProduct().getShop().getId())
                 ).collect(Collectors.toList());
-//        cartList.stream().map(c -> {
-//
-//        })
         for (Cart cart : cartList) {
-//            List<CartIndexViewModel> isHadShop = result.stream()
-//                    .filter(cv -> cv.getShop().getId() == cart.getProduct().getShop().getId()).collect(Collectors.toList());
             Integer index = IntStream.range(0, result.size()).filter(i -> result.get(i).getShop().getId() == cart.getProduct().getShop().getId()).findFirst().orElse(-1);
 
-            if(index >= 0){
+            if (index >= 0) {
                 ShopModel shopModel = shopMapper.shopEntityToModel(cart.getProduct().getShop());
                 ProductModel productModel = productMapper.productEntityToModel(cart.getProduct());
                 CartModel cartModel = cartMapper.cartEntityToModel(cart);
@@ -90,7 +85,7 @@ public class CartServiceImpl implements CartService {
                 cartIndexViewModel.setProductCarts(productCartModelList);
 
                 result.set(index, cartIndexViewModel);
-            }else{
+            } else {
                 ShopModel shopModel = shopMapper.shopEntityToModel(cart.getProduct().getShop());
                 ProductModel productModel = productMapper.productEntityToModel(cart.getProduct());
                 CartModel cartModel = cartMapper.cartEntityToModel(cart);
@@ -120,7 +115,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public boolean edit(CartModel cartModel) {
         Cart cart = cartRepository.findById(cartModel.getId()).get();
-        if(cart != null){
+        if (cart != null) {
             cart.setQuantity(cartModel.getQuantity());
             cartRepository.save(cart);
             return true;

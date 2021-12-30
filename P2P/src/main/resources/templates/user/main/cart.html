@@ -30,7 +30,7 @@
                     <label th:for="'shop' + ${cart.shop.id}" class="checkbox">
                         <i class="icon fas fa-check"></i>
                         <span></span>
-                        <input th:id="'shop' + ${cart.shop.id}" type="checkbox">
+                        <input th:id="'shop' + ${cart.shop.id}" type="checkbox" class="shopCheck">
                     </label>
                 </div>
                 <div class="cart-section-shop--info">
@@ -73,7 +73,19 @@
                 </li>
             </ul>
         </div>
-        <div class="cart-footer">
+        <form class="cart-footer" th:action="@{/pay}" th:method="post" th:object="${tests}">
+            <div class="inputContainer d-none">
+<!--                <input type="text" name="shopCart[].shopId" value="1">-->
+<!--                <input type="text" name="shopCart[].carts[]" value="99">-->
+<!--                <input type="text" name="shopCart[].carts[]" value="98">-->
+
+<!--                <input type="text" name="shopCart[].shopId" value="2">-->
+<!--                <input type="text" name="shopCart[].carts[]" value="56">-->
+<!--                <input type="text" name="shopCart[].carts[]" value="57">-->
+                <th:block th:each="test, itemStat : ${tests}">
+                    <input type="text" th:field="*{tests[__${itemStat.index}__].shopId}">
+                </th:block>
+            </div>
             <div class="cart-footer-block cart-footer-block__03">
                 <div class="cart-footer-block--checkbox cart-checkbox">
                     <label for="allCheck02" class="checkbox">
@@ -82,15 +94,17 @@
                         <input id="allCheck02" type="checkbox" class="allCheck">
                     </label>
                 </div>
-                <form th:action="@{/cart}" th:method="delete" class="jsDeleteForm cart-footer-block--txt cart-footer-block--txt__delete">
-                    <button>Xóa</button>
-                    <div class="inputContainer"></div>
-                </form>
-                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (99 sản phẩm):</p>
+                <a class="jsDeleteArchor" href="javascript: void(0)">Xóa</a>
+                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (<span class="jsCountProduct">0</span> sản phẩm):</p>
                 <p class="cart-footer-block--price jsSum">0 vnđ</p>
                 <button class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
             </div>
-        </div>
+        </form>
+        <form th:action="@{/cart}" th:method="delete" class="jsDeleteForm d-none cart-footer-block--txt cart-footer-block--txt__delete">
+            <div class="inputContainer">
+                <input type="text" name="ids[]">
+            </div>
+        </form>
     </div>
 </main>
 
@@ -107,10 +121,15 @@
 
     function sumAll() {
         let sum = 0;
+        let count = 0;
         $('.jsDeleteForm .inputContainer').empty();
+        $('.jsPayForm .inputContainer').empty();
 
         $('.cart-section-product--item').each(function (index, item) {
             if ($(item).find('.checkbox__active').length) {
+                // đếm số sản phẩm check
+                count ++;
+
                 // tính total
                 sum += parseFloat($(item).find('.jsTotal')[0].dataset.total);
 
@@ -121,6 +140,7 @@
         })
 
         $('.jsSum').text(`${sum} vnđ`);
+        $('.jsCountProduct').text(count);
     }
 
     function setTotal(item) {
@@ -181,6 +201,8 @@
     $('input[type="checkbox"]').on('change', function () {
         setTimeout(() => sumAll(), 10);
     });
+
+    $('.jsDeleteArchor').on('click', function(){ document.querySelector('.jsDeleteForm').submit() })
 </script>
 </body>
 </html>

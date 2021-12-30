@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.model.modalform.ShopCartToPayModel;
 import com.apt.p2p.model.modelview.PaymentModel;
 import com.apt.p2p.service.PaymentService;
 import com.apt.p2p.validate.PaymentModelValidator;
@@ -31,7 +32,12 @@ public class PaymentController {
 
     @GetMapping("pay")
     public String payment() {
-        return "user/main/payment";
+        return "redirect:/cart";
+    }
+
+    @PostMapping("pay")
+    public String payment(@RequestParam("shopCart[]") ShopCartToPayModel[] modelList){
+        return "user/main/cart";
     }
 
     @GetMapping("card")
