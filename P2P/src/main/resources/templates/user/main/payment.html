@@ -118,7 +118,7 @@
     const listTotal = $('.jsTotal');
     let sumTotal = 0;
     listTotal.each((index, item) => {
-        sumTotal += item.dataset.total;
+        sumTotal += parseFloat(item.dataset.total);
     })
     $('.jsSumTotal').text(`${sumTotal} vnđ`);
     $('.jsCount').text(listTotal.length);

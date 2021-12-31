@@ -36,11 +36,4 @@ public class Address {
 
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Shop shop;
-
-    public Address(String number, String ward, String district, String province) {
-        this.number = number;
-        this.ward = ward;
-        this.district = district;
-        this.province = province;
-    }
 }

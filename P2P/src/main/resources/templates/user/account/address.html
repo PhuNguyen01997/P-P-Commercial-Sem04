@@ -19,77 +19,23 @@
             </button>
         </div>
         <ul class="account-address">
-            <li class="account-address-item">
+            <li th:each="address : ${addressList}" class="account-address-item">
                 <div class="account-address-left">
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Họ và tên</p>
-                        <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
+                        <p th:text="${address.na}" class="account-address-left--value">[Address Username]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">0999999999</p>
+                        <p class="account-address-left--value">[Address Phone]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Địa chỉ</p>
                         <p class="account-address-left--value">
-                            99 Họ tên đường<br>
-                            Phường xx<br>
-                            Quận yy<br>
-                            Tp. Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-                <div class="account-address-right">
-                    <p>
-                        <a class="link" href="#">Sửa</a>
-                        <a class="link" href="#">Xóa</a>
-                    </p>
-                </div>
-            </li>
-            <li class="account-address-item">
-                <div class="account-address-left">
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Họ và tên</p>
-                        <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">0999999999</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Địa chỉ</p>
-                        <p class="account-address-left--value">
-                            99 Họ tên đường<br>
-                            Phường xx<br>
-                            Quận yy<br>
-                            Tp. Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-                <div class="account-address-right">
-                    <p>
-                        <a class="link" href="#">Sửa</a>
-                        <a class="link" href="#">Xóa</a>
-                    </p>
-                </div>
-            </li>
-            <li class="account-address-item">
-                <div class="account-address-left">
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Họ và tên</p>
-                        <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">0999999999</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Địa chỉ</p>
-                        <p class="account-address-left--value">
-                            99 Họ tên đường<br>
-                            Phường xx<br>
-                            Quận yy<br>
-                            Tp. Hồ Chí Minh
+                            <span>[Address Number]</span><br>
+                            <span>[Address Province]</span><br>
+                            <span>[Address District]</span><br>
+                            <span>[Address City]</span>
                         </p>
                     </div>
                 </div>
