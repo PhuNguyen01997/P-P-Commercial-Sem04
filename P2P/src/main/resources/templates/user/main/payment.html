@@ -17,8 +17,8 @@
         <div class="pay-address">
             <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
             <p class="pay-address--text">
-                <span class="name">Nguyễn Bành Trần Võ 0999999999</span>
-                <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                <span class="name">[Address Name]</span>
+                <span class="number">[Address Full]</span>
                 <a class="change" href="#">Thay đổi</a>
             </p>
         </div>
@@ -29,33 +29,28 @@
                 <p>Đơn giá</p>
                 <p>Thành tiền</p>
             </div>
-            <div class="pay-cart-shop">
-                <p class="pay-cart-shop--name">FOCALLURE.vn</p>
-                <a class="pay-cart-shop--chat" href="#"><i class="icon icon__left fas fa-comment-alt"></i>Chat
-                    ngay</a>
-            </div>
-            <ul class="pay-cart-list">
-                <li class="pay-cart-item">
-                    <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
-                    <p class="pay-cart-item--name">Màn chụp tự bung đỉnh vuông Kiều Phi - Mẫu mùng chụp tự
-                        bung người lớn chống muỗi gấp gọn tiện dụng</p>
-                    <p class="pay-cart-item--price">$99.999.999</p>
-                    <p class="pay-cart-item--quantity">99</p>
-                    <p class="pay-cart-item--total">$99.999.999</p>
-                </li>
-                <li class="pay-cart-item">
-                    <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
-                    <p class="pay-cart-item--name">Màn chụp tự bung đỉnh vuông Kiều Phi - Mẫu mùng chụp tự
-                        bung người lớn chống muỗi gấp gọn tiện dụng</p>
-                    <p class="pay-cart-item--price">$99.999.999</p>
-                    <p class="pay-cart-item--quantity">99</p>
-                    <p class="pay-cart-item--total">$99.999.999</p>
-                </li>
-            </ul>
+            <th:block th:each="shopCart : ${shopCarts}">
+                <div class="pay-cart-shop">
+                    <p th:text="${shopCart.shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
+                    <a class="pay-cart-shop--chat" href="javascript: void(0);"><i class="icon icon__left fas fa-comment-alt"></i>Chat
+                        ngay</a>
+                </div>
+                <ul class="pay-cart-list">
+                    <li th:each="productCart : ${shopCart.productCarts}" class="pay-cart-item">
+                        <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
+                        <p th:text="${productCart.product.name}" class="pay-cart-item--name">[Product Name]</p>
+                        <p th:text="${productCart.product.price + ' vnđ'}" class="pay-cart-item--price">[Product Price]</p>
+                        <p th:text="${productCart.cart.quantity}" class="pay-cart-item--quantity">[Cart Quantity]</p>
+                        <p th:text="${(productCart.cart.quantity * productCart.product.price) + ' vnđ'}"
+                           th:attr="data-total=${productCart.cart.quantity * productCart.product.price}"
+                           class="pay-cart-item--total jsTotal">[Total: price x quantity]</p>
+                    </li>
+                </ul>
+            </th:block>
             <div class="pay-cart-footer">
                 <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
-                <p class="pay-cart-footer--text">Tổng số tiền (99 sản phẩm)</p>
-                <p class="pay-cart-footer--total">$99.999.999</p>
+                <p class="pay-cart-footer--text">Tổng số tiền (<span class="jsCount">[Count]</span> sản phẩm)</p>
+                <p class="pay-cart-footer--total jsSumTotal">[Total]</p>
             </div>
         </div>
         <div class="pay-submit">
@@ -118,5 +113,15 @@
         </div>
     </div>
 </main>
+
+<script layout:fragment="script">
+    const listTotal = $('.jsTotal');
+    let sumTotal = 0;
+    listTotal.each((index, item) => {
+        sumTotal += item.dataset.total;
+    })
+    $('.jsSumTotal').text(`${sumTotal} vnđ`);
+    $('.jsCount').text(listTotal.length);
+</script>
 </body>
 </html>

@@ -31,6 +31,9 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
+    private ShopRepository shopRepository;
+
+    @Autowired
     private CartMapper cartMapper;
     @Autowired
     private ShopMapper shopMapper;
@@ -62,6 +65,7 @@ public class CartServiceImpl implements CartService {
         return cartMapper.cartEntityToModel(cartRepository.save(cart));
     }
 
+    @Override
     public List<CartIndexViewModel> getCartListChunkByShop() {
         int userId = 2;
         List<Cart> cartList = cartRepository.findByUserId(userId);
@@ -98,6 +102,25 @@ public class CartServiceImpl implements CartService {
                 result.add(cartIndexViewModel);
             }
         }
+
+        return result;
+    }
+
+    @Override
+    public CartIndexViewModel getCartProductByShopIdAndCartId(int shopId, List<Integer> cartIdList){
+        CartIndexViewModel result = new CartIndexViewModel();
+        List<ProductCartModel> productCartModelList = new ArrayList<>();
+        result.setShop(shopMapper.shopEntityToModel(shopRepository.findById(shopId).get()));
+
+        for (Integer cardId: cartIdList) {
+            ProductModel productModel = productMapper.productEntityToModel(productRepository.findByCartId(cardId));
+            CartModel cartModel = cartMapper.cartEntityToModel(cartRepository.findById(cardId).get());
+
+            ProductCartModel productCartModel = new ProductCartModel(productModel, cartModel);
+            productCartModelList.add(productCartModel);
+        }
+
+        result.setProductCarts(productCartModelList);
 
         return result;
     }

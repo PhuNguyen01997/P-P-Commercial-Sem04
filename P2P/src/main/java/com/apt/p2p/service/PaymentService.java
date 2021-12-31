@@ -1,5 +1,6 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.model.modelview.CartIndexViewModel;
 import com.apt.p2p.model.modelview.PaymentModel;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface PaymentService {
     public List<PaymentModel> findAllByUserId(int id);
 
     public boolean delete(int id);
+
+    public List<CartIndexViewModel> processViewPayment(String[] shopCardIdList);
 }

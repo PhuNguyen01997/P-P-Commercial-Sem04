@@ -1,7 +1,8 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.model.modalform.ShopCartToPayModel;
+import com.apt.p2p.model.modelview.CartIndexViewModel;
 import com.apt.p2p.model.modelview.PaymentModel;
+import com.apt.p2p.service.CartService;
 import com.apt.p2p.service.PaymentService;
 import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Controller
 public class PaymentController {
     @Autowired
-    private PaymentService service;
+    private PaymentService paymentService;
+
+    @Autowired
+    private CartService cartService;
 
     @InitBinder("card")
     protected void initBinder(WebDataBinder binder) {
@@ -36,14 +46,22 @@ public class PaymentController {
     }
 
     @PostMapping("pay")
-    public String payment(@RequestParam("shopCart[]") ShopCartToPayModel[] modelList){
-        return "user/main/cart";
+    public String payment(Model model,
+                          @RequestParam("shopCart[]") String[] idList) {
+        if (idList.length < 1) {
+            return "redirect:/cart";
+        }
+
+        List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
+        model.addAttribute("shopCarts", shopCarts);
+
+        return "user/main/payment";
     }
 
     @GetMapping("card")
     public String card(Model model) {
         model.addAttribute("card", new PaymentModel());
-        model.addAttribute("cards", service.findAllByUserId(1));
+        model.addAttribute("cards", paymentService.findAllByUserId(1));
 
         return "user/account/card";
     }
@@ -56,12 +74,12 @@ public class PaymentController {
     ) {
         if (result.hasErrors()) {
             model.addAttribute("card", paymentModel);
-            model.addAttribute("cards", service.findAll());
+            model.addAttribute("cards", paymentService.findAll());
             model.addAttribute("hasAnyError", true);
 
             return "user/account/card";
         }
-        PaymentModel paymentResult = service.create(paymentModel);
+        PaymentModel paymentResult = paymentService.create(paymentModel);
         return "redirect:/card";
     }
 
@@ -70,7 +88,7 @@ public class PaymentController {
             @PathVariable("id") int id,
             RedirectAttributes redirectAttributes
     ) {
-        boolean result = service.delete(id);
+        boolean result = paymentService.delete(id);
         if (result) {
             return "redirect:/card";
         }

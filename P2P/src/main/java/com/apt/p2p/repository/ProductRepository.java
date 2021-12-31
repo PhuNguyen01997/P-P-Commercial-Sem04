@@ -16,4 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT COUNT(p) FROM Product p WHERE p.shop.id = :id")
     public Integer countByShopId(@Param("id") int shopId);
+
+    @Query("SELECT c.product FROM Cart c WHERE c.id=:id")
+    public Product findByCartId(@Param("id") int cartId);
 }

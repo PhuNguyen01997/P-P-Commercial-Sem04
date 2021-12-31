@@ -39,7 +39,8 @@
                 </div>
             </div>
             <ul class="cart-section-product">
-                <li th:attr="data-id=${pc.cart.id}" th:each="pc : ${cart.getProductCarts()}" class="cart-section-product--item">
+                <li th:attr="data-id=${pc.cart.id}, data-shop-id=${cart.shop.id}"
+                    th:each="pc : ${cart.getProductCarts()}" class="cart-section-product--item">
                     <div class="cart-section-product--checkbox cart-checkbox">
                         <label th:for="'cart' + ${pc.cart.id}" class="checkbox">
                             <i class="icon fas fa-check"></i>
@@ -54,7 +55,7 @@
                        th:text="${pc.product.name}"
                        class="cart-section-product--name"></a>
                     <div class="cart-section-product--price cart-w15">
-<!--                        <span class="strikethrough">$99.99</span>-->
+                        <!--                        <span class="strikethrough">$99.99</span>-->
                         <p>
                             <span th:text="${pc.product.price}"></span>
                             <span class="jsPrice" th:attr="data-value=${pc.product.price}">vnđ</span>
@@ -62,7 +63,8 @@
                     </div>
                     <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" th:value="${pc.cart.quantity}" min="1" max="99" class="jsQuantity">
+                                <input type="number" name="" th:value="${pc.cart.quantity}" min="1" max="99"
+                                       class="jsQuantity">
                             </span>
                     </div>
                     <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">0 vnđ</div>
@@ -73,18 +75,9 @@
                 </li>
             </ul>
         </div>
-        <form class="cart-footer" th:action="@{/pay}" th:method="post" th:object="${tests}">
+        <form class="cart-footer jsPayForm" th:method="POST" th:action="@{/pay}">
             <div class="inputContainer d-none">
-<!--                <input type="text" name="shopCart[].shopId" value="1">-->
-<!--                <input type="text" name="shopCart[].carts[]" value="99">-->
-<!--                <input type="text" name="shopCart[].carts[]" value="98">-->
-
-<!--                <input type="text" name="shopCart[].shopId" value="2">-->
-<!--                <input type="text" name="shopCart[].carts[]" value="56">-->
-<!--                <input type="text" name="shopCart[].carts[]" value="57">-->
-                <th:block th:each="test, itemStat : ${tests}">
-                    <input type="text" th:field="*{tests[__${itemStat.index}__].shopId}">
-                </th:block>
+                <input type="text" name="shopCart[]" value="">
             </div>
             <div class="cart-footer-block cart-footer-block__03">
                 <div class="cart-footer-block--checkbox cart-checkbox">
@@ -95,12 +88,14 @@
                     </label>
                 </div>
                 <a class="jsDeleteArchor" href="javascript: void(0)">Xóa</a>
-                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (<span class="jsCountProduct">0</span> sản phẩm):</p>
+                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (<span
+                        class="jsCountProduct">0</span> sản phẩm):</p>
                 <p class="cart-footer-block--price jsSum">0 vnđ</p>
-                <button class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
+                <button type="submit" class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
             </div>
         </form>
-        <form th:action="@{/cart}" th:method="delete" class="jsDeleteForm d-none cart-footer-block--txt cart-footer-block--txt__delete">
+        <form th:action="@{/cart}" th:method="delete"
+              class="jsDeleteForm d-none cart-footer-block--txt cart-footer-block--txt__delete">
             <div class="inputContainer">
                 <input type="text" name="ids[]">
             </div>
@@ -124,11 +119,12 @@
         let count = 0;
         $('.jsDeleteForm .inputContainer').empty();
         $('.jsPayForm .inputContainer').empty();
+        let dataPay = {};
 
         $('.cart-section-product--item').each(function (index, item) {
             if ($(item).find('.checkbox__active').length) {
                 // đếm số sản phẩm check
-                count ++;
+                count++;
 
                 // tính total
                 sum += parseFloat($(item).find('.jsTotal')[0].dataset.total);
@@ -136,7 +132,17 @@
                 // set check list id vào form delete
                 const id = $(item).attr('data-id');
                 $('.jsDeleteForm .inputContainer').append(`<input type='hidden' name="ids[]" value='${id}'>`);
+
+                // thêm sản phẩm check vào data gửi đi thanh toán
+                const shopId = item.dataset.shopId;
+                const cartId = item.dataset.id;
+                dataPay[shopId] = dataPay[shopId] ? [...dataPay[shopId], cartId] : dataPay[shopId] = [cartId];
             }
+        })
+
+        Object.keys(dataPay).map((key, index) => {
+            const cartIdString = dataPay[key].reduce((strResult, item, index) => { return strResult + `C${item}` }, "");
+            $('.jsPayForm .inputContainer').append(`<input type='text' name="shopCart[]" value='S${key + cartIdString}'>`);
         })
 
         $('.jsSum').text(`${sum} vnđ`);
@@ -151,15 +157,15 @@
         $(totalContainer).attr('data-total', price * quantity);
     }
 
-    function editCart(id, quantity, callback){
+    function editCart(id, quantity, callback) {
         $.ajax({
             url: `${window.location.protocol}//${window.location.host}/cart-edit`,
             cache: false,
             type: 'POST',
-            success: function(result){
-                if(result){
+            success: function (result) {
+                if (result) {
                     callback();
-                }else{
+                } else {
                     console.error("Error ajax");
                 }
             },
@@ -192,7 +198,7 @@
         const id = $(parent).attr('data-id');
         const quantity = $(this).val();
 
-        editCart(id, quantity, function(){
+        editCart(id, quantity, function () {
             setTotal(parent);
             sumAll();
         });
@@ -202,7 +208,9 @@
         setTimeout(() => sumAll(), 10);
     });
 
-    $('.jsDeleteArchor').on('click', function(){ document.querySelector('.jsDeleteForm').submit() })
+    $('.jsDeleteArchor').on('click', function () {
+        document.querySelector('.jsDeleteForm').submit()
+    })
 </script>
 </body>
 </html>

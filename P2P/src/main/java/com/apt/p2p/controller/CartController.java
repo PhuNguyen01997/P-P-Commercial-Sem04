@@ -1,7 +1,6 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.modalform.ProductAddCartModel;
-import com.apt.p2p.model.modalform.ShopCartToPayModel;
 import com.apt.p2p.model.modelview.CartIndexViewModel;
 import com.apt.p2p.model.modelview.CartModel;
 import com.apt.p2p.service.CartService;
@@ -13,12 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Controller
 public class CartController {
@@ -32,18 +28,6 @@ public class CartController {
         List<CartIndexViewModel> cartList = cartService.getCartListChunkByShop();
 
         model.addAttribute("cartList", cartList);
-
-        List<ShopCartToPayModel> test = new ArrayList<>();
-        List<Integer> list01 = new ArrayList<>();
-        list01.add(99);
-        list01.add(98);
-        List<Integer> list02 = new ArrayList<>();
-        list01.add(56);
-        list01.add(57);
-        test.add(new ShopCartToPayModel(1, list01));
-        test.add(new ShopCartToPayModel(2, list02));
-
-        model.addAttribute("tests", test);
 
         return "user/main/cart";
     }

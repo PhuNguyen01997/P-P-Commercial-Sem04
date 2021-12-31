@@ -9,13 +9,15 @@ import java.util.List;
 public interface CartService {
     List<CartModel> findByUserId(int userId);
 
-    CartModel save(ProductAddCartModel productAddCartModel);
-
-    List<CartIndexViewModel> getCartListChunkByShop();
-
     void delete(int id);
 
     void deleteAllById(List<Integer> id);
 
     boolean edit(CartModel cartModel);
+
+    CartModel save(ProductAddCartModel productAddCartModel);
+
+    List<CartIndexViewModel> getCartListChunkByShop();
+
+    CartIndexViewModel getCartProductByShopIdAndCartId(int shopId, List<Integer> cartIdList);
 }
