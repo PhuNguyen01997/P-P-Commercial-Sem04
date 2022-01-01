@@ -42,9 +42,9 @@
                 <p class="modal2-input modal2-input__value">Gia Lai, Huyện Đăk Pơ, Xã An Thành</p>
                 <div class="modal2-input modal2-input__box">
                     <div class="modal2-input modal2-input__header">
-                        <p>Tỉnh/Thành phố</p>
-                        <p class="active">Quận/Huyện</p>
-                        <p>Phường/Xã</p>
+                        <p data-type="province" class="active jsAddressSelect">Tỉnh/Thành phố</p>
+                        <p data-type="dictrict" class="jsAddressSelect">Quận/Huyện</p>
+                        <p data-type="ward" class="jsAddressSelect">Phường/Xã</p>
                     </div>
                     <ul class="modal2-input modal2-input__list">
                         <li>SAHDG sAHDs JHJDS</li>
@@ -81,6 +81,22 @@
     </div>
 
     <script src="/assets/js/script.js"></script>
+    <script>
+        $('.modal2-input-container__address .modal2-input__value').on('click', function(){
+            $('.modal2-input-container__address .modal2-input__box').toggleClass('show');
+        })
+        $('.modal2-input__list>li').on('click', function(){
+                const curr = $('.jsAddressSelect.active')[0];
+                const type = curr.dataset.type;
+                const next = $(curr).next();
+                curr.classList.remove('active');
+                
+                next.addClass('active');
+                if(!next[0]){
+                    $('.modal2-input-container__address .modal2-input__box').removeClass('show');
+                }
+            })
+    </script>
 </body>
 
 </html>

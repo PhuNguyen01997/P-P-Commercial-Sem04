@@ -17,6 +17,13 @@ public class Address {
     private Integer id;
 
     @NotNull
+    private String ownName;
+
+    @NotNull
+    @Column(length = 14)
+    private String ownPhone;
+
+    @NotNull
     @Column(length = 100)
     private String number;
 

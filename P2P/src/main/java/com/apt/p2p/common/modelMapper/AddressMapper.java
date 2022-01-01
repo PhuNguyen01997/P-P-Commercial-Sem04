@@ -19,7 +19,10 @@ public class AddressMapper {
         mapper.typeMap(AddressModel.class, Address.class);
         mapper.addMappings(new PropertyMap<AddressModel, Address>() {
             @Override
-            protected void configure() {}
+            protected void configure() {
+                skip(destination.getShop());
+                skip(destination.getUser());
+            }
         });
 
 //        mapper.validate();
@@ -31,7 +34,10 @@ public class AddressMapper {
         mapper.typeMap(Address.class, AddressModel.class);
         mapper.addMappings(new PropertyMap<Address, AddressModel>() {
             @Override
-            protected void configure() {}
+            protected void configure() {
+                skip(destination.getShop());
+                skip(destination.getUser());
+            }
         });
 
 //        mapper.validate();

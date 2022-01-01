@@ -13,9 +13,17 @@ public class SeedData {
 
     @EventListener
     public void appReady(ApplicationReadyEvent event){
-        seedUser(10);
+//        seedUser(10);
+        boolean set = true;
+        if(set){
+            seedLocation();
+        }
     }
 
-    private void seedUser(int number){
+//    private void seedUser(int number){
+//    }
+
+    private void seedLocation(){
+
     }
 }

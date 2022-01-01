@@ -17,6 +17,10 @@ import javax.validation.constraints.NotNull;
 public class AddressModel {
     private Integer id;
 
+    private String ownName;
+
+    private String ownPhone;
+
     private String number;
 
     private String ward;

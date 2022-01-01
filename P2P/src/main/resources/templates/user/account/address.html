@@ -23,19 +23,19 @@
                 <div class="account-address-left">
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Họ và tên</p>
-                        <p th:text="${address.na}" class="account-address-left--value">[Address Username]</p>
+                        <p th:text="${address.ownName}" class="account-address-left--value">[Address Username]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">[Address Phone]</p>
+                        <p th:text="${address.ownPhone}" class="account-address-left--value">[Address Phone]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Địa chỉ</p>
                         <p class="account-address-left--value">
-                            <span>[Address Number]</span><br>
-                            <span>[Address Province]</span><br>
-                            <span>[Address District]</span><br>
-                            <span>[Address City]</span>
+                            <span th:text="${address.number}">[Address Number]</span><br>
+                            <span th:text="${address.ward}">[Address Ward]</span><br>
+                            <span th:text="${address.district}">[Address District]</span><br>
+                            <span th:text="${address.province}">[Address Province]</span>
                         </p>
                     </div>
                 </div>
@@ -64,9 +64,9 @@
                 <p class="modal2-input modal2-input__value">Gia Lai, Huyện Đăk Pơ, Xã An Thành</p>
                 <div class="modal2-input modal2-input__box">
                     <div class="modal2-input modal2-input__header">
-                        <p>Tỉnh/Thành phố</p>
-                        <p class="active">Quận/Huyện</p>
-                        <p>Phường/Xã</p>
+                        <p class="jsAddressSelect active">Tỉnh/Thành phố</p>
+                        <p class="jsAddressSelect">Quận/Huyện</p>
+                        <p class="jsAddressSelect">Phường/Xã</p>
                     </div>
                     <ul class="modal2-input modal2-input__list">
                         <li>SAHDG sAHDs JHJDS</li>
@@ -102,5 +102,21 @@
         </div>
     </div>
 </div>
+<script layout:fragment="script">
+    $('.modal2-input-container__address .modal2-input__value').on('click', function(){
+        $('.modal2-input-container__address .modal2-input__box').toggleClass('show');
+    })
+    $('.modal2-input__list>li').on('click', function(){
+        const curr = $('.jsAddressSelect.active')[0];
+        const type = curr.dataset.type;
+        const next = $(curr).next();
+        curr.classList.remove('active');
+
+        next.addClass('active');
+        if(!next[0]){
+            $('.modal2-input-container__address .modal2-input__box').removeClass('show');
+        }
+    })
+</script>
 </body>
 </html>
