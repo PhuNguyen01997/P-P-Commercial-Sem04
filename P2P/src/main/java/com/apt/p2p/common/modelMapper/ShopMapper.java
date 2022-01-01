@@ -1,7 +1,7 @@
 package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
-import com.apt.p2p.model.modelview.ShopModel;
+import com.apt.p2p.model.view.ShopModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;

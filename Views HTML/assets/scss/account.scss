@@ -187,13 +187,14 @@
                 }
             }
 
-            &__identity{
+            &__identity {
                 flex-direction: column;
-                img{
+
+                img {
                     width: auto;
                     max-height: 100px;
 
-                    &:first-child{
+                    &:first-child {
                         margin-bottom: 10px;
                     }
                 }

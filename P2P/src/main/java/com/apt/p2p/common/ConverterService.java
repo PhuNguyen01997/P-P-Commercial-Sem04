@@ -45,4 +45,14 @@ public class ConverterService {
             }
         };
     }
+
+    @Bean(name = "setNullDestination")
+    Converter setNullDestination(){
+        return new Converter() {
+            @Override
+            public Object convert(MappingContext mappingContext) {
+                return null;
+            }
+        };
+    }
 }

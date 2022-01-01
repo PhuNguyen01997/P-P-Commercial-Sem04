@@ -14,8 +14,6 @@ public class MapperService {
                 .setSkipNullEnabled(true)
                 .setPropertyCondition(Conditions.isNotNull());
 
-        ;
-
         return modelMapper;
     }
 }

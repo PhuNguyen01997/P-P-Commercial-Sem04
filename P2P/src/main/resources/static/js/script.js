@@ -91,7 +91,7 @@ $(function () {
     })
 
     // JS for input radio
-    $('input[type="radio"]').on("change", function(){
+    $('input[type="radio"]').on("change", function () {
         const name = $(this).attr('name');
         $(`input[type="radio"][name=${name}]`).next().removeClass('active');
         $(this).next().addClass('active');
@@ -111,12 +111,12 @@ $(function () {
     }
 
     // Js for modal
-    $('.js-modal').on('click', function(){
+    $('.js-modal').on('click', function () {
         const id = this.dataset.id;
         $(`#${id}`).addClass('js-close');
     })
-    $('.modal2-container').on('click', function(e){
-        if(e.target.classList.contains('js-close')){
+    $('.modal2-container').on('click', function (e) {
+        if (e.target.classList.contains('js-close')) {
             $(this).removeClass('js-close');
         }
     })

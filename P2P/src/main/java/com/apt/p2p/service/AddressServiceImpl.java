@@ -2,7 +2,7 @@ package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.AddressMapper;
 import com.apt.p2p.entity.Address;
-import com.apt.p2p.model.modelview.AddressModel;
+import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

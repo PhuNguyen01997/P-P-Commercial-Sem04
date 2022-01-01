@@ -1,4 +1,4 @@
-package com.apt.p2p.model.modelview;
+package com.apt.p2p.model.view;
 
 import com.apt.p2p.common.DateDeserializer;
 import com.apt.p2p.entity.CardType;

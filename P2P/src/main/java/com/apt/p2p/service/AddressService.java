@@ -1,7 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Address;
-import com.apt.p2p.model.modelview.AddressModel;
+import com.apt.p2p.model.view.AddressModel;
 
 import java.util.List;
 

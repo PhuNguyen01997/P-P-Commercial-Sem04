@@ -1,14 +1,9 @@
-package com.apt.p2p.model.modelview;
+package com.apt.p2p.model.view;
 
-import com.apt.p2p.entity.Shop;
-import com.apt.p2p.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor

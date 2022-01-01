@@ -1,9 +1,9 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.model.modalform.ProductAddCartModel;
-import com.apt.p2p.model.modelview.ProductModel;
-import com.apt.p2p.model.modelview.RateModel;
-import com.apt.p2p.model.modelview.ShopModel;
+import com.apt.p2p.model.form.ProductAddCartModel;
+import com.apt.p2p.model.view.ProductModel;
+import com.apt.p2p.model.view.RateModel;
+import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.ShopService;

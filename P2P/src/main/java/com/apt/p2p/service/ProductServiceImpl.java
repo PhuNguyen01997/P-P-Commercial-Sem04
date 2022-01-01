@@ -2,7 +2,7 @@ package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Product;
-import com.apt.p2p.model.modelview.ProductModel;
+import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

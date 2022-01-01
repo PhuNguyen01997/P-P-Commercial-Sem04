@@ -39,10 +39,6 @@
 
     &-input {
         min-height: 40px;
-
-        // &-container {
-        //     @include flex($justify: space-between);
-        // }
     }
 
     &-header {
@@ -93,7 +89,7 @@
         &__address-create {
 
             .modal2-input {
-                display: block;
+                display: inline-block;
                 height: 40px;
 
                 &-container {
@@ -102,6 +98,7 @@
                         position: relative;
                         @include box-shadow();
                         margin-bottom: 15px;
+                        cursor: pointer;
 
                         .modal2-input {
                             &__value {
@@ -121,6 +118,10 @@
                                 height: auto;
                                 border: 1px solid $color-bd;
                                 background-color: white;
+
+                                &.show{
+                                    display: block;
+                                }
                             }
 
                             &__legend {
@@ -164,6 +165,7 @@
                             }
 
                             &__list {
+                                width: 100%;
                                 height: 230px;
                                 overflow-y: scroll;
 

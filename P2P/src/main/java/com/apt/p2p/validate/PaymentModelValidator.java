@@ -1,6 +1,6 @@
 package com.apt.p2p.validate;
 
-import com.apt.p2p.model.modelview.PaymentModel;
+import com.apt.p2p.model.view.PaymentModel;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

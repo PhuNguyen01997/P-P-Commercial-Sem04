@@ -1,7 +1,7 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.model.modelview.CartIndexViewModel;
-import com.apt.p2p.model.modelview.PaymentModel;
+import com.apt.p2p.model.view.CartIndexViewModel;
+import com.apt.p2p.model.view.PaymentModel;
 import com.apt.p2p.service.CartService;
 import com.apt.p2p.service.PaymentService;
 import com.apt.p2p.validate.PaymentModelValidator;
@@ -15,12 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Controller
 public class PaymentController {

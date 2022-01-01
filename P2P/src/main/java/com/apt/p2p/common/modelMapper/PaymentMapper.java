@@ -1,7 +1,7 @@
 package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
-import com.apt.p2p.model.modelview.PaymentModel;
+import com.apt.p2p.model.view.PaymentModel;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;

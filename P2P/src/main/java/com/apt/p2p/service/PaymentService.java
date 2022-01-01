@@ -1,7 +1,7 @@
 package com.apt.p2p.service;
 
-import com.apt.p2p.model.modelview.CartIndexViewModel;
-import com.apt.p2p.model.modelview.PaymentModel;
+import com.apt.p2p.model.view.CartIndexViewModel;
+import com.apt.p2p.model.view.PaymentModel;
 
 import java.util.List;
 

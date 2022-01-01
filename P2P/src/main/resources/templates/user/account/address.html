@@ -103,6 +103,19 @@
     </div>
 </div>
 <script layout:fragment="script">
+    function fetchProvinces(){
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/provinces`,
+            cache: false,
+            type: 'GET',
+            success: function (result) {
+                console.log(result)
+            }
+        });
+    }
+
+    fetchProvinces();
+
     $('.modal2-input-container__address .modal2-input__value').on('click', function(){
         $('.modal2-input-container__address .modal2-input__box').toggleClass('show');
     })

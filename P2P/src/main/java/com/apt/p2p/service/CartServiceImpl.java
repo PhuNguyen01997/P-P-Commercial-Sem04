@@ -6,8 +6,8 @@ import com.apt.p2p.common.modelMapper.ShopMapper;
 import com.apt.p2p.entity.Cart;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.entity.User;
-import com.apt.p2p.model.modalform.ProductAddCartModel;
-import com.apt.p2p.model.modelview.*;
+import com.apt.p2p.model.form.ProductAddCartModel;
+import com.apt.p2p.model.view.*;
 import com.apt.p2p.repository.CartRepository;
 import com.apt.p2p.repository.ProductRepository;
 import com.apt.p2p.repository.ShopRepository;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

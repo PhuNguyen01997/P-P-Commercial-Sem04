@@ -1,8 +1,8 @@
 package com.apt.p2p.service;
 
-import com.apt.p2p.model.modalform.ProductAddCartModel;
-import com.apt.p2p.model.modelview.CartIndexViewModel;
-import com.apt.p2p.model.modelview.CartModel;
+import com.apt.p2p.model.form.ProductAddCartModel;
+import com.apt.p2p.model.view.CartIndexViewModel;
+import com.apt.p2p.model.view.CartModel;
 
 import java.util.List;
 
