@@ -49,85 +49,211 @@
         </ul>
     </div>
 </div>
-<div layout:fragment="modal" id="create-address" class="modal2-container">
-    <div class="modal2 modal2__address">
+<div layout:fragment="modal" id="create-address" class="modal2-container"
+     th:classappend="${hasAnyError != null && hasAnyError} ? 'js-close' : ''">
+    <form th:action="@{/address}" th:object="${addressForm}" method="post" class="modal2 modal2__address">
         <div class="modal2-header">
             <h3>Địa chỉ mới</h3>
         </div>
-        <form action="" class="modal2-body modal2-form modal2-form__address-create">
+        <div class="modal2-body modal2-form modal2-form__address-create">
             <div class="modal2-input-container">
-                <input class="modal2-input modal2-input__name" type="text" placeholder="Họ và tên">
-                <input class="modal2-input modal2-input__phone" type="text" placeholder="Số điện thoại">
+                <input th:field="*{ownName}"
+                       class="modal2-input modal2-input__name" type="text" placeholder="Họ và tên">
+                <input th:field="*{ownPhone}" th:type="number"
+                       class="modal2-input modal2-input__phone" type="text" placeholder="Số điện thoại">
+                <p th:if="${#fields.hasErrors('ownName')}" th:errors="*{ownName}" class="error">Invalid value</p>
+                <p th:if="${#fields.hasErrors('ownPhone')}" th:errors="*{ownPhone}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container modal2-input-container__address">
-                <p class="modal2-input modal2-input__legend">Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã</p>
-                <p class="modal2-input modal2-input__value">Gia Lai, Huyện Đăk Pơ, Xã An Thành</p>
+                <p class="modal2-input modal2-input__legend">Tỉnh/Thành phố, Quận/Huyện, Phường/Xã</p>
+                <p class="modal2-input modal2-input__value">Chọn địa chỉ</p>
+                <input th:field="*{province}" type="hidden">
+                <input th:field="*{district}" type="hidden">
+                <input th:field="*{ward}" type="hidden">
                 <div class="modal2-input modal2-input__box">
                     <div class="modal2-input modal2-input__header">
-                        <p class="jsAddressSelect active">Tỉnh/Thành phố</p>
-                        <p class="jsAddressSelect">Quận/Huyện</p>
-                        <p class="jsAddressSelect">Phường/Xã</p>
+                        <p data-type="province" class="jsAddressSelect active">Tỉnh/Thành phố</p>
+                        <p data-type="district" class="jsAddressSelect">Quận/Huyện</p>
+                        <p data-type="ward" class="jsAddressSelect">Phường/Xã</p>
                     </div>
-                    <ul class="modal2-input modal2-input__list">
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
+                    <ul class="jsAddressContainer modal2-input modal2-input__list">
                     </ul>
                 </div>
             </div>
             <div class="modal2-card-input">
-                <textarea type="text" class="" placeholder="Địa chỉ cụ thể" rows="3" resize></textarea>
+                <textarea th:field="*{number}" placeholder="Địa chỉ cụ thể" rows="3" resize></textarea>
+                <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="error">Invalid value</p>
             </div>
-        </form>
-        <div class="modal2-footer">
-            <button class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
-            <button class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
         </div>
-    </div>
+        <div class="modal2-footer">
+            <button type="button" class="js-close modal2-footer--back btn btn__white">Trở lại</button>
+            <button type="submit" class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+        </div>
+    </form>
 </div>
 <script layout:fragment="script">
-    function fetchProvinces(){
+    let tempLocation = {};
+
+    function setLoading(bool) {
+        if (bool) {
+            $('.jsAddressContainer').addClass('loading');
+        } else {
+            $('.jsAddressContainer').removeClass('loading');
+        }
+    }
+
+    function fetchProvinces(callback = null) {
+        setLoading(true);
         $.ajax({
             url: `${window.location.protocol}//${window.location.host}/provinces`,
             cache: false,
             type: 'GET',
-            success: function (result) {
-                console.log(result)
+            success: function (arrVal) {
+                arrVal = arrVal.map(item => {
+                    return `<li data-id="${item.provinceId}">${item.name}</li>`
+                })
+                $('.jsAddressContainer').html(arrVal);
+
+                setLoading(false);
+
+                if (callback) {
+                    callback();
+                }
             }
         });
     }
 
+    function fetchDistricts(province, callback = null) {
+        setLoading(true);
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/${province}/districts`,
+            cache: false,
+            type: 'GET',
+            success: function (arrVal) {
+                arrVal = arrVal.map(item => {
+                    return `<li data-id="${item.districtId}">${item.name}</li>`
+                })
+                $('.jsAddressContainer').html(arrVal);
+
+                setLoading(false);
+
+                if (callback) {
+                    callback();
+                }
+            }
+        });
+    }
+
+    function fetchWards(district, callback = null) {
+        setLoading(true);
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/${district}/wards`,
+            cache: false,
+            type: 'GET',
+            success: function (arrVal) {
+                setLoading(false);
+
+                arrVal = arrVal.map(item => {
+                    return `<li data-id="${item.wardId}">${item.name}</li>`
+                })
+                $('.jsAddressContainer').html(arrVal);
+
+                if (callback) {
+                    callback();
+                }
+            }
+        });
+    }
+
+    function setValueAddress() {
+        let address = '';
+        address += tempLocation['province'] ? tempLocation['province'] : '';
+        address += tempLocation['district'] ? `, ${tempLocation['district']}` : '';
+        address += tempLocation['ward'] ? `, ${tempLocation['ward']}` : '';
+
+        $('input#province').val(tempLocation['province']);
+        $('input#district').val(tempLocation['district']);
+        $('input#ward').val(tempLocation['ward']);
+
+        $('.modal2-input-container__address .modal2-input__value').text(address);
+    }
+
     fetchProvinces();
 
-    $('.modal2-input-container__address .modal2-input__value').on('click', function(){
+    $('.modal2-input-container__address .modal2-input__value').on('click', function () {
         $('.modal2-input-container__address .modal2-input__box').toggleClass('show');
     })
-    $('.modal2-input__list>li').on('click', function(){
+
+    $('.jsAddressContainer').on('click', 'li', function () {
         const curr = $('.jsAddressSelect.active')[0];
         const type = curr.dataset.type;
         const next = $(curr).next();
-        curr.classList.remove('active');
+        const nextId = this.dataset.id;
 
-        next.addClass('active');
-        if(!next[0]){
+        curr.dataset.id = this.dataset.id;
+        tempLocation[type] = this.innerText;
+        console.log(tempLocation);
+
+        if (!next[0]) {
             $('.modal2-input-container__address .modal2-input__box').removeClass('show');
+
+            fetchProvinces();
+
+            $('.jsAddressSelect').removeClass('active');
+            $('.jsAddressSelect[data-type="province"]').addClass('active');
+            setValueAddress();
+            return;
+        }
+
+        switch (next.attr('data-type')) {
+            case 'district': {
+                $('.jsAddressSelect[data-type="district"]').removeAttr('data-id');
+                $('.jsAddressSelect[data-type="ward"]').removeAttr('data-id');
+                tempLocation['district'] = '';
+                tempLocation['ward'] = '';
+
+                fetchDistricts(nextId);
+                break;
+            }
+            case 'ward': {
+                $('.jsAddressSelect[data-type="ward"]').removeAttr('data-id');
+                tempLocation['ward'] = '';
+
+                fetchWards(nextId);
+                break;
+            }
+        }
+        curr.classList.remove('active');
+        next.addClass('active');
+
+        setValueAddress();
+    })
+
+    $('.jsAddressSelect').on('click', function () {
+        switch (this.dataset.type) {
+            case 'province': {
+                fetchProvinces(() => {
+                    $('.jsAddressSelect').removeClass('active');
+                    $('.jsAddressSelect[data-type="province"]').addClass('active');
+                });
+                break;
+            }
+            case 'district': {
+                const provinceId = $('.jsAddressSelect[data-type="province"]').attr('data-id');
+                fetchDistricts(provinceId, () => {
+                    $('.jsAddressSelect').removeClass('active');
+                    $('.jsAddressSelect[data-type="district"]').addClass('active');
+                });
+                break;
+            }
+            case 'ward': {
+                const districtId = $('.jsAddressSelect[data-type="district"]').attr('data-id');
+                fetchWards(districtId, () => {
+                    $('.jsAddressSelect').removeClass('active');
+                    $('.jsAddressSelect[data-type="ward"]').addClass('active');
+                });
+                break;
+            }
         }
     })
 </script>

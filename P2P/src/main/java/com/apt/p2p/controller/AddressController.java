@@ -2,12 +2,19 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.service.AddressService;
+import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +23,38 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
+    @InitBinder("addressForm")
+    protected void initBinder(WebDataBinder binder) {
+        // trim at start and end String
+        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
+        binder.registerCustomEditor(String.class, stringTrimmer);
+
+//        binder.addValidators(new PaymentModelValidator());
+    }
+
     @GetMapping("address")
     public String index(Model model) {
         List<AddressModel> addressList = addressService.findByUserId(1);
         model.addAttribute("addressList", addressList);
+        model.addAttribute("addressForm", new AddressModel());
 
         return "user/account/address";
     }
 
     @PostMapping("address")
-    public String create() {
-        return "redirect/address";
+    public String create(Model model,
+                         @Valid @ModelAttribute("addressForm") AddressModel address,
+                         BindingResult result) {
+        if(result.hasErrors()){
+            List<AddressModel> addressList = addressService.findByUserId(1);
+            model.addAttribute("addressList", addressList);
+            model.addAttribute("addressForm", address);
+            model.addAttribute("hasAnyError", true);
+
+            return "user/account/address";
+        }
+
+        return "redirect:/address";
     }
 
     private List<Integer> calPagiPage(int index, int total) {

@@ -139,7 +139,6 @@
 
                             &__header {
                                 @include flex($justify: space-between);
-                                padding: 15px 0;
                                 height: auto;
                                 color: $color-txt-grey;
                                 @include box-shadow();
@@ -149,6 +148,7 @@
                                     position: relative;
                                     text-align: center;
                                     width: 33.3%;
+                                    padding: 15px 0;
 
                                     &.active {
                                         &::after {
@@ -157,7 +157,7 @@
                                             width: 100%;
                                             height: 3px;
                                             position: absolute;
-                                            bottom: -15px;
+                                            bottom: 0px;
                                             background-color: $color-primary01;
                                         }
                                     }
@@ -168,6 +168,7 @@
                                 width: 100%;
                                 height: 230px;
                                 overflow-y: scroll;
+                                position: relative;
 
                                 &>* {
                                     padding: 12px;
@@ -179,6 +180,26 @@
 
                                     &:hover {
                                         background-color: $color-gray;
+                                    }
+                                }
+
+                                &:before{
+                                    display: none;
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: url('/img/common/spinner.svg'), linear-gradient(to bottom, rgba($color: #fff, $alpha: 0.8), rgba($color: #fff, $alpha: 0.8));
+                                    background-repeat: no-repeat;
+                                    background-size: 150px 150px, 100% 100%;
+                                    background-position: center;
+                                }
+
+                                &.loading{
+                                    overflow: hidden;
+                                    &::before{
+                                        display: block;
                                     }
                                 }
                             }

@@ -54,7 +54,7 @@ public class LocationController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{province}")
+    @GetMapping("/{province}/districts")
     @ResponseBody
     public List<DistrictModel> getDistrictByProvince(@PathVariable("province") String provinceId){
         return locationService.districtFindByProvinceId(provinceId)
@@ -62,7 +62,7 @@ public class LocationController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{province}/{district}")
+    @GetMapping("/{district}/wards")
     @ResponseBody
     public List<WardModel> getWardByProvince(@PathVariable("district") String districtId){
         return locationService.wardFindByDistrictId(districtId)
