@@ -14,10 +14,11 @@ public class AddressModelValidator implements Validator {
     public void validate(Object target, Errors errors) {
         AddressModel address = (AddressModel) target;
 
-//        if(address.getProvince())
-
-//        if(payment.getPostalCode().equals("123")) {
-//            errors.rejectValue("postalCode", "example.error.code", "Custom message error validate");
-//        }
+        boolean hasLocation = false;
+        if (address.getProvince() == null ||
+                address.getDistrict() == null ||
+                address.getWard() == null) {
+            errors.rejectValue("province", "001", "Khu vực không được để trống");
+        }
     }
 }

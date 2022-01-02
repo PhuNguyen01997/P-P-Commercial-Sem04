@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.service.AddressService;
+import com.apt.p2p.validate.AddressModelValidator;
 import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -9,10 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class AddressController {
         StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
         binder.registerCustomEditor(String.class, stringTrimmer);
 
-//        binder.addValidators(new PaymentModelValidator());
+        binder.addValidators(new AddressModelValidator());
     }
 
     @GetMapping("address")
@@ -45,7 +44,7 @@ public class AddressController {
     public String create(Model model,
                          @Valid @ModelAttribute("addressForm") AddressModel address,
                          BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             List<AddressModel> addressList = addressService.findByUserId(1);
             model.addAttribute("addressList", addressList);
             model.addAttribute("addressForm", address);
@@ -54,11 +53,23 @@ public class AddressController {
             return "user/account/address";
         }
 
+        AddressModel addressModel = addressService.save(address);
+
+        return "redirect:/address";
+    }
+
+    @DeleteMapping("address/{id}")
+    public String delete(@PathVariable("id") int id,
+                         RedirectAttributes redirectAttributes) {
+        boolean success = addressService.delete(id);
+        if (!success) {
+            redirectAttributes.addFlashAttribute("globalError", "Can't delete this card, please try again later!");
+        }
         return "redirect:/address";
     }
 
     private List<Integer> calPagiPage(int index, int total) {
-        if(index + 1 > total){
+        if (index + 1 > total) {
             throw new IllegalArgumentException("Index is > Pagi length");
         }
         List<Integer> result = new ArrayList<>();

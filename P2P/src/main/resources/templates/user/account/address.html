@@ -40,10 +40,10 @@
                     </div>
                 </div>
                 <div class="account-address-right">
-                    <p>
-                        <a class="link" href="#">Sửa</a>
-                        <a class="link" href="#">Xóa</a>
-                    </p>
+                    <a class="link" href="#">Sửa</a>
+                    <form th:action="@{/address/{id}(id=${address.id})}" th:method="delete">
+                        <button type="submit">Xóa</button>
+                    </form>
                 </div>
             </li>
         </ul>
@@ -66,10 +66,17 @@
             </div>
             <div class="modal2-input-container modal2-input-container__address">
                 <p class="modal2-input modal2-input__legend">Tỉnh/Thành phố, Quận/Huyện, Phường/Xã</p>
-                <p class="modal2-input modal2-input__value">Chọn địa chỉ</p>
+                <p th:if="${addressForm.province != null && !addressForm.province.isEmpty()}"
+                   th:text="${addressForm.province
+                   + (addressForm.district == null ? '' : ', ' + addressForm.district)
+                   + (addressForm.ward == null ? '' : ', ' + addressForm.ward)}"
+                   class="modal2-input modal2-input__value">Chọn địa chỉ</p>
+                <p th:unless="${addressForm.province != null && !addressForm.province.isEmpty()}"
+                   class="modal2-input modal2-input__value">Chọn địa chỉ</p>
                 <input th:field="*{province}" type="hidden">
                 <input th:field="*{district}" type="hidden">
                 <input th:field="*{ward}" type="hidden">
+                <p th:if="${#fields.hasErrors('province')}" th:errors="*{province}" class="error">Invalid value</p>
                 <div class="modal2-input modal2-input__box">
                     <div class="modal2-input modal2-input__header">
                         <p data-type="province" class="jsAddressSelect active">Tỉnh/Thành phố</p>

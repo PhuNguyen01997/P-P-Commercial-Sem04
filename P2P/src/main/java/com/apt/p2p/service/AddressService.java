@@ -10,9 +10,9 @@ public interface AddressService {
 
     List<AddressModel> findByUserId(int userId);
 
-    AddressModel save(Address address);
+    AddressModel save(AddressModel address);
 
     AddressModel findById(int id);
 
-    void delete(int id);
+    boolean delete(int id);
 }
