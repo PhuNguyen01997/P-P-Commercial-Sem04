@@ -107,8 +107,8 @@
 
     function checkHeaderForm(){
         if($('input[name="id"]').val()){
-            const ownName = $('input[name="ownName"]');
-            const ownPhone = $('input[name="ownPhone"]');
+            const ownName = $('input[name="ownName"]').val();
+            const ownPhone = $('input[name="ownPhone"]').val();
             $('.modal2-header h3').text(`${ownName} - ${ownPhone}`);
         }else{
             $('.modal2-header h3').text(`Địa chỉ mới`);
@@ -303,7 +303,7 @@
         setValueAddress();
 
         $('.modal2__address').attr('action', `/address/${address.id}`);
-        // checkHeaderForm();
+        checkHeaderForm();
         $('.modal2-container').addClass('js-close');
     })
 

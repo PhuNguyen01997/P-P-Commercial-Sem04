@@ -22,17 +22,17 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<Province> provinceFindAll() {
-        return provinceRepository.findAll();
+        return provinceRepository.findAllByOrderByName();
     }
 
     @Override
     public List<District> districtFindAll() {
-        return districtRepository.findAll();
+        return districtRepository.findAllByOrderByName();
     }
 
     @Override
     public List<Ward> wardFindAll() {
-        return wardRepository.findAll();
+        return wardRepository.findAllByOrderByName();
     }
 
     @Override

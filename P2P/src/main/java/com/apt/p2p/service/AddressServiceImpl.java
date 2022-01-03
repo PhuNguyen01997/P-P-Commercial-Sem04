@@ -47,6 +47,21 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public AddressModel update(AddressModel addressModel) {
+        try {
+            Address newAddress = addressMapper.addressModelToEntity(addressModel);
+            Address oldAddress = addressRepository.findById(newAddress.getId()).get();
+            newAddress.setUser(oldAddress.getUser());
+            newAddress.setShop(oldAddress.getShop());
+            addressRepository.save(newAddress);
+            return addressModel;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public AddressModel findById(int id) {
         return null;
     }

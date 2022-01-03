@@ -16,11 +16,21 @@
         <div class="top-envelope"></div>
         <div class="pay-address">
             <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
-            <p class="pay-address--text">
-                <span class="name">[Address Name]</span>
-                <span class="number">[Address Full]</span>
-                <a class="change" href="#">Thay đổi</a>
-            </p>
+            <p th:if="${addresses.isEmpty()}">Bạn chưa có địa chỉ nào. <a class="" th:href="@{/address}">Thêm địa chỉ</a></p>
+            <th:block th:unless="${addresses.isEmpty()}">
+                <p class="pay-address--text">
+                    <span th:text="${addresses.get(0).ownName + addresses.get(0).ownPhone}" class="name">[Address Name]</span>
+                    <span th:text="${addresses.get(0).getFull()" class="number">[Address Full]</span>
+                    <a class="change" href="#">Thay đổi</a>
+                </p>
+                <ul class="pay-address--list">
+                    <li th:each="address : ${addresses}">
+                        <span></span>
+                        <span th:text="${address.ownName + address.ownPhone}"></span>
+                        <span th:text="${address.getFull()"></span>
+                    </li>
+                </ul>
+            </th:block>
         </div>
         <div class="pay-cart">
             <div class="pay-cart-header">

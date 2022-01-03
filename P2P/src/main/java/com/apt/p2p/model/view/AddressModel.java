@@ -34,4 +34,12 @@ public class AddressModel {
     private UserModel user;
 
     private ShopModel shop;
+
+    public  String getFull(){
+        StringBuilder stringBuilder = new StringBuilder(number);
+        stringBuilder.append(", " + ward);
+        stringBuilder.append(", " + district);
+        stringBuilder.append(", " + province);
+        return stringBuilder.toString();
+    }
 }

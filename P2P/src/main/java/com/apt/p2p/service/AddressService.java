@@ -14,5 +14,7 @@ public interface AddressService {
 
     AddressModel findById(int id);
 
+    AddressModel update(AddressModel addressModel);
+
     boolean delete(int id);
 }

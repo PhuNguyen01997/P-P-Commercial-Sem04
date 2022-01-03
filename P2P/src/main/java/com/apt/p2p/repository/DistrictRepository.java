@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface DistrictRepository extends JpaRepository<District, String> {
-    @Query("SELECT p.districts FROM Province p WHERE p.provinceId=:id")
+    @Query("SELECT d FROM District d WHERE d.province.provinceId=:id ORDER BY d.name")
     List<District> findAllByProvinceId(@Param("id") String provinceId);
+
+    List<District> findAllByOrderByName();
 }

@@ -2,8 +2,10 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.PaymentModel;
+import com.apt.p2p.service.AddressService;
 import com.apt.p2p.service.CartService;
 import com.apt.p2p.service.PaymentService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -21,9 +23,10 @@ import java.util.List;
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
-
     @Autowired
     private CartService cartService;
+    @Autowired
+    private AddressService addressService;
 
     @InitBinder("card")
     protected void initBinder(WebDataBinder binder) {
@@ -49,6 +52,7 @@ public class PaymentController {
 
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
+        model.addAttribute("addresses", addressService.findByUserId(1));
 
         return "user/main/payment";
     }

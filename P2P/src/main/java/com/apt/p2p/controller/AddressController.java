@@ -61,7 +61,8 @@ public class AddressController {
     @PostMapping("address/{id}")
     public String edit(Model model,
                        @Valid @ModelAttribute("addressForm") AddressModel address,
-                       BindingResult result) {
+                       BindingResult result,
+                       RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             List<AddressModel> addressList = addressService.findByUserId(1);
             model.addAttribute("addressList", addressList);
@@ -70,7 +71,12 @@ public class AddressController {
 
             return "user/account/address";
         }
-        return "";
+
+        AddressModel success = addressService.update(address);
+        if(success == null){
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra khi cập nhật, xin hãy thử lại sau");
+        }
+        return "redirect:/address";
     }
 
     @DeleteMapping("address/{id}")
