@@ -36,7 +36,6 @@ public class Address {
     @NotNull
     private String province;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;

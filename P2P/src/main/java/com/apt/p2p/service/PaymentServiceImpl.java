@@ -61,11 +61,10 @@ public class PaymentServiceImpl implements PaymentService {
             } else {
                 repository.deleteById(id);
             }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-        } finally {
-            return true;
         }
     }
 

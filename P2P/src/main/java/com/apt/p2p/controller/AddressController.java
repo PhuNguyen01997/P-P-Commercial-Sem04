@@ -58,12 +58,27 @@ public class AddressController {
         return "redirect:/address";
     }
 
+    @PostMapping("address/{id}")
+    public String edit(Model model,
+                       @Valid @ModelAttribute("addressForm") AddressModel address,
+                       BindingResult result) {
+        if (result.hasErrors()) {
+            List<AddressModel> addressList = addressService.findByUserId(1);
+            model.addAttribute("addressList", addressList);
+            model.addAttribute("addressForm", address);
+            model.addAttribute("hasAnyError", true);
+
+            return "user/account/address";
+        }
+        return "";
+    }
+
     @DeleteMapping("address/{id}")
     public String delete(@PathVariable("id") int id,
                          RedirectAttributes redirectAttributes) {
         boolean success = addressService.delete(id);
         if (!success) {
-            redirectAttributes.addFlashAttribute("globalError", "Can't delete this card, please try again later!");
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
         }
         return "redirect:/address";
     }

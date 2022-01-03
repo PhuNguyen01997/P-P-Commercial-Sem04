@@ -85,7 +85,7 @@ public class PaymentController {
     ) {
         boolean result = paymentService.delete(id);
         if (!result) {
-            redirectAttributes.addFlashAttribute("globalError", "Can't delete this card, please try again later!");
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
         }
         return "redirect:/card";
     }

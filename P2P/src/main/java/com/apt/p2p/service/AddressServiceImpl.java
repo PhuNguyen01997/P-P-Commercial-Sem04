@@ -61,11 +61,10 @@ public class AddressServiceImpl implements AddressService {
             } else {
                 addressRepository.deleteById(id);
             }
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-        } finally {
-            return true;
         }
     }
 }

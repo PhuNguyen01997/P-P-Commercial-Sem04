@@ -19,28 +19,31 @@
             </button>
         </div>
         <ul class="account-address">
-            <li th:each="address : ${addressList}" class="account-address-item">
+            <li th:each="address : ${addressList}" th:attr="data-id=${address.id}"
+                class="account-address-item">
                 <div class="account-address-left">
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Họ và tên</p>
-                        <p th:text="${address.ownName}" class="account-address-left--value">[Address Username]</p>
+                        <p th:text="${address.ownName}" class="account-address-left--value jsOwnName">[Address
+                            Username]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Số điện thoại</p>
-                        <p th:text="${address.ownPhone}" class="account-address-left--value">[Address Phone]</p>
+                        <p th:text="${address.ownPhone}" class="account-address-left--value jsOwnPhone">[Address
+                            Phone]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Địa chỉ</p>
                         <p class="account-address-left--value">
-                            <span th:text="${address.number}">[Address Number]</span><br>
-                            <span th:text="${address.ward}">[Address Ward]</span><br>
-                            <span th:text="${address.district}">[Address District]</span><br>
-                            <span th:text="${address.province}">[Address Province]</span>
+                            <span th:text="${address.number}" class="jsNumber">[Address Number]</span><br>
+                            <span th:text="${address.ward}" class="jsWard">[Address Ward]</span><br>
+                            <span th:text="${address.district}" class="jsDistrict">[Address District]</span><br>
+                            <span th:text="${address.province}" class="jsProvince">[Address Province]</span>
                         </p>
                     </div>
                 </div>
                 <div class="account-address-right">
-                    <a class="link" href="#">Sửa</a>
+                    <a class="link jsEditBtn" href="#">Sửa</a>
                     <form th:action="@{/address/{id}(id=${address.id})}" th:method="delete">
                         <button type="submit">Xóa</button>
                     </form>
@@ -52,6 +55,7 @@
 <div layout:fragment="modal" id="create-address" class="modal2-container"
      th:classappend="${hasAnyError != null && hasAnyError} ? 'js-close' : ''">
     <form th:action="@{/address}" th:object="${addressForm}" method="post" class="modal2 modal2__address">
+        <input type="hidden" th:field="*{id}">
         <div class="modal2-header">
             <h3>Địa chỉ mới</h3>
         </div>
@@ -100,6 +104,16 @@
 </div>
 <script layout:fragment="script">
     let tempLocation = {};
+
+    function checkHeaderForm(){
+        if($('input[name="id"]').val()){
+            const ownName = $('input[name="ownName"]');
+            const ownPhone = $('input[name="ownPhone"]');
+            $('.modal2-header h3').text(`${ownName} - ${ownPhone}`);
+        }else{
+            $('.modal2-header h3').text(`Địa chỉ mới`);
+        }
+    }
 
     function setLoading(bool) {
         if (bool) {
@@ -186,6 +200,7 @@
     }
 
     fetchProvinces();
+    checkHeaderForm();
 
     $('.modal2-input-container__address .modal2-input__value').on('click', function () {
         $('.modal2-input-container__address .modal2-input__box').toggleClass('show');
@@ -262,6 +277,60 @@
                 break;
             }
         }
+    })
+
+    $('.jsEditBtn').on('click', function () {
+        const container = $(this).parents('.account-address-item')[0];
+        $('.error').remove();
+
+        const address = {
+            id: container.dataset.id,
+            ownName: $(container).find('.jsOwnName')[0].innerText,
+            ownPhone: $(container).find('.jsOwnPhone')[0].innerText,
+            number: $(container).find('.jsNumber')[0].innerText,
+            ward: $(container).find('.jsWard')[0].innerText,
+            district: $(container).find('.jsDistrict')[0].innerText,
+            province: $(container).find('.jsProvince')[0].innerText,
+        }
+
+        Object.keys(address).forEach(key => {
+            $(`[name='${key}']`).val(address[key]);
+        })
+
+        tempLocation['province'] = address["province"];
+        tempLocation['district'] = address["district"];
+        tempLocation['ward'] = address["ward"];
+        setValueAddress();
+
+        $('.modal2__address').attr('action', `/address/${address.id}`);
+        // checkHeaderForm();
+        $('.modal2-container').addClass('js-close');
+    })
+
+    $('.js-modal').on('click', function () {
+        $('.modal2__address').attr('action', `/address`);
+        $('.error').remove();
+
+        const address = {
+            id: '',
+            ownName: '',
+            ownPhone: '',
+            number: '',
+            ward: '',
+            district: '',
+            province: '',
+        }
+
+        Object.keys(address).forEach(key => {
+            $(`[name='${key}']`).val(address[key]);
+        })
+
+        tempLocation['province'] = address["province"];
+        tempLocation['district'] = address["district"];
+        tempLocation['ward'] = address["ward"];
+
+        setValueAddress();
+        checkHeaderForm();
     })
 </script>
 </body>
