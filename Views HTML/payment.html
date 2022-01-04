@@ -12,10 +12,10 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
@@ -69,6 +69,36 @@
                     <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
                     <a class="change" href="#">Thay đổi</a>
                 </p>
+                <ul class="pay-address--change d-none">
+                    <li class="pay-address--change-item">
+                        <label class="radio">
+                            <input checked name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span class="name">Nguyễn Bành Trần Võ 1</span>
+                        <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <label class="radio">
+                            <input name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span class="name">Nguyễn Bành Trần Võ 2</span>
+                        <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <label class="radio">
+                            <input name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span class="name">Nguyễn Bành Trần Võ 3</span>
+                        <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <button class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
+                        <button class="btn btn__outline jsAddressBack">Trở lại</button>
+                    </li>
+                </ul>
             </div>
             <div class="pay-cart">
                 <div class="pay-cart-header">
@@ -203,6 +233,25 @@
     </footer>
 
     <script src="/assets/js/script.js"></script>
+    <script>
+        $('.pay-address--text').on('click', '.change', function () {
+            $('.pay-address--change').removeClass('d-none');
+            $('.pay-address--text').addClass('d-none');
+        })
+
+        $('.jsAddressSubmit').on('click', function () {
+            const currAddress = $('.pay-address--change-item .radio-show.active').parents('.pay-address--change-item')[0];
+            const name = $(currAddress).find('.name').text();
+            const number = $(currAddress).find('.number').text();
+            $('.pay-address--text .name').text(name);
+            $('.pay-address--text .number').text(number);
+        })
+
+        $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
+            $('.pay-address--change').addClass('d-none');
+            $('.pay-address--text').removeClass('d-none');
+        })
+    </script>
 </body>
 
 </html>

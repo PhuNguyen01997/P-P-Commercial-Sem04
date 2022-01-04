@@ -20,14 +20,22 @@
             <th:block th:unless="${addresses.isEmpty()}">
                 <p class="pay-address--text">
                     <span th:text="${addresses.get(0).ownName + addresses.get(0).ownPhone}" class="name">[Address Name]</span>
-                    <span th:text="${addresses.get(0).getFull()" class="number">[Address Full]</span>
+                    <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(addresses.get(0))}"
+                          class="number">[Address Full]</span>
                     <a class="change" href="#">Thay đổi</a>
                 </p>
-                <ul class="pay-address--list">
-                    <li th:each="address : ${addresses}">
-                        <span></span>
-                        <span th:text="${address.ownName + address.ownPhone}"></span>
-                        <span th:text="${address.getFull()"></span>
+                <ul class="pay-address--change d-none">
+                    <li th:each="address : ${addresses}" class="pay-address--change-item">
+                        <label class="radio">
+                            <input checked name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span th:text="${address.ownName + address.ownPhone}" class="name">[Address Name]</span>
+                        <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}" class="number">[Address Full]</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <button class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
+                        <button class="btn btn__outline jsAddressBack">Trở lại</button>
                     </li>
                 </ul>
             </th:block>
@@ -132,6 +140,24 @@
     })
     $('.jsSumTotal').text(`${sumTotal} vnđ`);
     $('.jsCount').text(listTotal.length);
+
+    $('.pay-address--text').on('click', '.change', function () {
+        $('.pay-address--change').removeClass('d-none');
+        $('.pay-address--text').addClass('d-none');
+    })
+
+    $('.jsAddressSubmit').on('click', function () {
+        const currAddress = $('.pay-address--change-item .radio-show.active').parents('.pay-address--change-item')[0];
+        const name = $(currAddress).find('.name').text();
+        const number = $(currAddress).find('.number').text();
+        $('.pay-address--text .name').text(name);
+        $('.pay-address--text .number').text(number);
+    })
+
+    $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
+        $('.pay-address--change').addClass('d-none');
+        $('.pay-address--text').removeClass('d-none');
+    })
 </script>
 </body>
 </html>

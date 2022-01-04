@@ -10,7 +10,7 @@
     background-color: white;
     @include box-shadow();
 
-    .error{
+    .error {
         padding: 5px 8px 0;
     }
 
@@ -18,7 +18,7 @@
         padding: 0 30px;
     }
 
-    &-container{
+    &-container {
         visibility: hidden;
         opacity: 0;
         width: 100vw;
@@ -27,13 +27,13 @@
         background: linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .8));
         transition: 0.5s;
 
-        &.js-close{
-            visibility: visible;   
+        &.js-close {
+            visibility: visible;
             opacity: 1;
         }
     }
 
-    &__address{
+    &__address {
         height: 560px;
     }
 
@@ -119,7 +119,7 @@
                                 border: 1px solid $color-bd;
                                 background-color: white;
 
-                                &.show{
+                                &.show {
                                     display: block;
                                 }
                             }
@@ -183,7 +183,7 @@
                                     }
                                 }
 
-                                &:before{
+                                &:before {
                                     display: none;
                                     content: "";
                                     position: absolute;
@@ -196,9 +196,10 @@
                                     background-position: center;
                                 }
 
-                                &.loading{
+                                &.loading {
                                     overflow: hidden;
-                                    &::before{
+
+                                    &::before {
                                         display: block;
                                     }
                                 }
@@ -232,26 +233,26 @@
                 }
             }
 
-            .modal2--pic-type{
-                    height: auto;
-                    @include flex($justify: flex-start);
+            .modal2--pic-type {
+                height: auto;
+                @include flex($justify: flex-start);
 
-                    .pic {
-                        @include flex();
-                        padding: 5px;
-                        width: 60px;
-                        height: 50px;
-                        border: 1px solid $color-bd;
-                        cursor: pointer;
+                .pic {
+                    @include flex();
+                    padding: 5px;
+                    width: 60px;
+                    height: 50px;
+                    border: 1px solid $color-bd;
+                    cursor: pointer;
 
-                        &:not(:first-of-type) {
-                            margin-left: 10px;
-                        }
-
-                        &.active{
-                            border: 1px solid $color-primary01;
-                        }
+                    &:not(:first-of-type) {
+                        margin-left: 10px;
                     }
+
+                    &.active {
+                        border: 1px solid $color-primary01;
+                    }
+                }
             }
         }
     }

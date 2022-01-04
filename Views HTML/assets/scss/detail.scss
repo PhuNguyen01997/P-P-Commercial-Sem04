@@ -2,11 +2,11 @@
     padding-top: 20px;
     margin-bottom: 40px;
 
-    & > *:not(:last-child){
+    &>*:not(:last-child) {
         margin-bottom: 15px;
     }
 
-    & > * {
+    &>* {
         @include box-shadow();
     }
 
@@ -24,6 +24,7 @@
         .pic {
             position: relative;
             overflow: hidden;
+
             img {
                 position: absolute;
                 width: 100%;
@@ -115,7 +116,7 @@
             margin-right: 20px;
             flex-shrink: 0;
 
-            img{
+            img {
                 height: 100%;
             }
         }
@@ -173,23 +174,24 @@
     &-product {
         padding-top: 25px;
         background-color: white;
-        &--content{
+
+        &--content {
             font-size: 1.4rem;
             padding: 15px;
         }
     }
 
-    &-rate{
+    &-rate {
         padding: 25px 0 15px;
         background-color: white;
 
-        &--item{
+        &--item {
             @include flex($align: flex-start, $justify: flex-start);
             padding: 15px;
             border-bottom: 1px solid $color-bd;
         }
 
-        &--pic{
+        &--pic {
             width: 40px;
             height: 40px;
             margin-right: 10px;
@@ -198,20 +200,21 @@
             overflow: hidden;
         }
 
-        &--name{
+        &--name {
             font-size: 1.2rem;
         }
-        &--star{
+
+        &--star {
             margin-bottom: 10px;
         }
 
-        &--text{
+        &--text {
             padding: 10px 0;
             font-size: 1.4rem;
             line-height: 1.4;
         }
 
-        &--date{
+        &--date {
             font-size: 1.2rem;
             color: $color-txt-white-grey;
         }

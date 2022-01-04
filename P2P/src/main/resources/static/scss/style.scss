@@ -346,6 +346,12 @@ label {
     border: 1px solid $color-primary01;
   }
 
+  &__outline {
+    color: $color-txt-white-grey;
+    border: 1px solid $color-bd-ipt;
+    background-color: white;
+  }
+
   &__red {
     background-color: $color-red;
   }

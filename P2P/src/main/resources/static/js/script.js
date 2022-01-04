@@ -96,6 +96,11 @@ $(function () {
         $(`input[type="radio"][name=${name}]`).next().removeClass('active');
         $(this).next().addClass('active');
     })
+    $('input[type="radio"]').each((index, item) =>   {
+        if(item.checked){
+            $(item).next().addClass('active');
+        }
+    });
 
     // Js for cart footer is sticky
     if ($('.cart__list .cart-footer').length) {

@@ -387,6 +387,12 @@ label {
   border: 1px solid #9932cc;
 }
 
+.btn__outline {
+  color: rgba(85, 85, 85, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background-color: white;
+}
+
 .btn__red {
   background-color: #ff3945;
 }
@@ -2267,6 +2273,22 @@ label {
   font-size: 1.6rem;
 }
 
+.account-address-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
 .account-address-right .link {
   padding: 15px 0;
   color: #555;
@@ -2993,6 +3015,16 @@ label {
   margin-bottom: 15px;
 }
 
+.pay-address--text .name,
+.pay-address--text .number, .pay-address--change .name,
+.pay-address--change .number {
+  font-size: 1.6rem;
+}
+
+.pay-address--text .name, .pay-address--change .name {
+  font-weight: bold;
+}
+
 .pay-address--text {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3017,18 +3049,45 @@ label {
   margin-right: 20px;
 }
 
-.pay-address--text .name,
-.pay-address--text .number {
-  font-size: 1.6rem;
-}
-
-.pay-address--text .name {
-  font-weight: bold;
-}
-
 .pay-address--text .change {
   margin-left: auto;
   color: #2dc258;
+}
+
+.pay-address--change-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.pay-address--change-item > *:not(:last-child) {
+  margin-right: 20px;
+}
+
+.pay-address--change-item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.pay-address--change-item:last-child {
+  padding: 10px 40px 0px;
+}
+
+.pay-address--change-item:last-child .btn {
+  padding: 10px 24px;
+}
+
+.pay-address--change-item:last-child .btn:first-child {
+  margin-right: 20px;
 }
 
 .pay-cart-header {
