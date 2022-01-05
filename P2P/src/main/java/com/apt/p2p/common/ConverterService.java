@@ -1,5 +1,6 @@
 package com.apt.p2p.common;
 
+import com.apt.p2p.entity.CardType;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConverterService {
     @Bean(name = "hideCardNumber")
-    Converter HideCardNumberConverter() {
+    Converter hideCardNumberConverter() {
         return new Converter<String, String>() {
             @Override
             public String convert(MappingContext<String, String> mappingContext) {
@@ -27,7 +28,7 @@ public class ConverterService {
     }
 
     @Bean(name = "removeSpaceNumber")
-    Converter RemoveSpaceNumberConverter(){
+    Converter removeSpaceNumberConverter(){
         return new Converter<String, String>() {
             @Override
             public String convert(MappingContext<String, String> mappingContext) {
@@ -52,6 +53,27 @@ public class ConverterService {
             @Override
             public Object convert(MappingContext mappingContext) {
                 return null;
+            }
+        };
+    }
+
+    @Bean(name = "setImageCard")
+    Converter setImageCard(){
+        return new Converter<String, String>() {
+            @Override
+            public String convert(MappingContext mappingContext) {
+                String url = "";
+                switch (CardType.valueOf((String)mappingContext.getSource())) {
+                    case VISA: {
+                        url = "/img/common/icon-visa.png";
+                        break;
+                    }
+                    case MASTER_CARD: {
+                        url = "/img/common/icon-master-card.png";
+                        break;
+                    }
+                }
+                return url;
             }
         };
     }

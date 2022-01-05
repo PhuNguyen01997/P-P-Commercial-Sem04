@@ -19,7 +19,8 @@
             <p th:if="${addresses.isEmpty()}">Bạn chưa có địa chỉ nào. <a class="" th:href="@{/address}">Thêm địa chỉ</a></p>
             <th:block th:unless="${addresses.isEmpty()}">
                 <p class="pay-address--text">
-                    <span th:text="${addresses.get(0).ownName + addresses.get(0).ownPhone}" class="name">[Address Name]</span>
+                    <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
+                    <span th:text="${addresses.get(0).ownPhone}" class="phone">[Address Phone]</span>
                     <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(addresses.get(0))}"
                           class="number">[Address Full]</span>
                     <a class="change" href="#">Thay đổi</a>
@@ -83,34 +84,20 @@
                 </div>
                 <div class="pay-submit-body--right">
                     <div class="pay-submit-body--card-list">
-                        <label for="radioDemo01" class="pay-submit-body--card-item">
+                        <label th:each="creditCard : ${creditCards}" th:for="${creditCard.id}" class="pay-submit-body--card-item">
                             <div class="radio">
-                                <input name="card-radio" id="radioDemo01" type="radio">
-                                <div class="radio-show active"></div>
-                            </div>
-                            <p class="pic"><img src="/img/common/icon-visa.png" alt=""></p>
-                            <p class="number">9999 9999 9999</p>
-                        </label>
-                        <label for="radioDemo02" class="pay-submit-body--card-item">
-                            <div class="radio">
-                                <input name="card-radio" id="radioDemo02" type="radio">
+                                <input name="card" th:id="${creditCard.id}" type="radio">
                                 <div class="radio-show"></div>
                             </div>
-                            <p class="pic"><img src="/img/common/icon-visa.png" alt=""></p>
-                            <p class="number">9999 9999 9999</p>
-                        </label>
-                        <label for="radioDemo03" class="pay-submit-body--card-item">
-                            <div class="radio">
-                                <input name="card-radio" id="radioDemo03" type="radio">
-                                <div class="radio-show"></div>
-                            </div>
-                            <p class="pic"><img src="/img/common/icon-visa.png" alt=""></p>
-                            <p class="number">9999 9999 9999</p>
+                            <p class="pic">
+                                <img th:src="${creditCard.imgUrl}" alt="">
+                            </p>
+                            <p th:text="${creditCard.number}" class="number">[Credit Card Number]</p>
                         </label>
                     </div>
-                    <button class="btn btn__white pay-submit-body--card-order"><i
+                    <a th:href="@{/card}" class="btn btn__white pay-submit-body--card-order"><i
                             class="icon icon__left fas fa-plus"></i>Thẻ khác
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="pay-submit-footer">

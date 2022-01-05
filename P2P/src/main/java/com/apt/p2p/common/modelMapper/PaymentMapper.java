@@ -22,6 +22,10 @@ public class PaymentMapper {
     @Qualifier("removeSpaceNumber")
     private Converter removeSpaceNumber;
 
+    @Autowired
+    @Qualifier("setImageCard")
+    private Converter setImageCard;
+
     public Payment paymentModelToEntity(PaymentModel model) {
         ModelMapper mapper = mapperService.getModelMapper();
         mapper.typeMap(PaymentModel.class, Payment.class);
@@ -30,6 +34,7 @@ public class PaymentMapper {
             protected void configure() {
                 skip(destination.getShop());
                 skip(destination.getUser());
+                skip(source.getImgUrl());
                 using(removeSpaceNumber).map(source.getCvv()).setCvv("error");
                 using(removeSpaceNumber).map(source.getNumber()).setNumber("error");
                 using(removeSpaceNumber).map(source.getPostalCode()).setPostalCode("error");
@@ -48,6 +53,7 @@ public class PaymentMapper {
             protected void configure() {
                 skip(destination.getShop());
                 skip(destination.getUser());
+                using(setImageCard).map(source.getType(), destination.getImgUrl());
                 using(hideCardNumberConverter).map(source.getNumber()).setNumber("Error mapping");
             }
         });

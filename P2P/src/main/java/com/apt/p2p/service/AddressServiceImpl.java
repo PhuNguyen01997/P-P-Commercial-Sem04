@@ -23,7 +23,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public List<AddressModel> findAll() {
-        return addressRepository.findAll()
+        return addressRepository.findAllByOrderById()
                 .stream()
                 .map(ae -> addressMapper.addressEntityToModel(ae))
                 .collect(Collectors.toList());
