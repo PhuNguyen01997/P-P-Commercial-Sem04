@@ -31,7 +31,8 @@
                             <input checked name="address" type="radio">
                             <div class="radio-show"></div>
                         </label>
-                        <span th:text="${address.ownName + address.ownPhone}" class="name">[Address Name]</span>
+                        <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
+                        <span th:text="${addresses.get(0).ownPhone}" class="phone">[Address Phone]</span>
                         <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}" class="number">[Address Full]</span>
                     </li>
                     <li class="pay-address--change-item">
@@ -75,8 +76,12 @@
         <div class="pay-submit">
             <div class="pay-submit-header">
                 <p class="pay-submit-header--txt">Phương thức thanh toán</p>
-                <button class="pay-submit-header--btn btn btn__white">Thẻ tín dụng/ghi nợ</button>
-                <button class="pay-submit-header--btn btn btn__white">Thanh toán khi nhận hàng</button>
+                <button data-div="debit" class="jsMethod active pay-submit-header--btn btn btn__white">
+                    Thẻ tín dụng/ghi nợ <i class="icon fas fa-check"></i>
+                </button>
+                <button data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
+                    Thanh toán khi nhận hàng <i class="icon fas fa-check"></i>
+                </button>
             </div>
             <div class="pay-submit-body pay-submit-body__debit">
                 <div class="pay-submit-body--left">
@@ -98,6 +103,14 @@
                     <a th:href="@{/card}" class="btn btn__white pay-submit-body--card-order"><i
                             class="icon icon__left fas fa-plus"></i>Thẻ khác
                     </a>
+                </div>
+            </div>
+            <div class="d-none pay-submit-body pay-submit-body__cod">
+                <div class="pay-submit-body--left">
+                    <p>Thanh toán khi nhận hàng</p>
+                </div>
+                <div class="pay-submit-body--right">
+                    <p>Phí thu hộ: ₫0 VNĐ. Ưu đãi về phí vận chuyển (nếu có) áp dụng cả với phí thu hộ.</p>
                 </div>
             </div>
             <div class="pay-submit-footer">
@@ -144,6 +157,15 @@
     $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
         $('.pay-address--change').addClass('d-none');
         $('.pay-address--text').removeClass('d-none');
+    })
+
+    $('.jsMethod').on('click', function () {
+        $('.jsMethod').removeClass('active');
+        $(this).addClass('active');
+
+        $('.pay-submit-body').addClass('d-none');
+        const div = this.dataset.div;
+        $(`.pay-submit-body__${div}`).removeClass('d-none');
     })
 </script>
 </body>

@@ -65,7 +65,8 @@
             <div class="pay-address">
                 <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
                 <p class="pay-address--text">
-                    <span class="name">Nguyễn Bành Trần Võ 0999999999</span>
+                    <span class="name">Nguyễn Bành Trần Võ</span>
+                    <span class="phone">0999999999</span>
                     <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
                     <a class="change" href="#">Thay đổi</a>
                 </p>
@@ -76,6 +77,7 @@
                             <div class="radio-show"></div>
                         </label>
                         <span class="name">Nguyễn Bành Trần Võ 1</span>
+                        <span class="phone">0937441896</span>
                         <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
                     </li>
                     <li class="pay-address--change-item">
@@ -84,6 +86,7 @@
                             <div class="radio-show"></div>
                         </label>
                         <span class="name">Nguyễn Bành Trần Võ 2</span>
+                        <span class="phone">0937441896</span>
                         <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
                     </li>
                     <li class="pay-address--change-item">
@@ -92,6 +95,7 @@
                             <div class="radio-show"></div>
                         </label>
                         <span class="name">Nguyễn Bành Trần Võ 3</span>
+                        <span class="phone">0937441896</span>
                         <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
                     </li>
                     <li class="pay-address--change-item">
@@ -139,8 +143,14 @@
             <div class="pay-submit">
                 <div class="pay-submit-header">
                     <p class="pay-submit-header--txt">Phương thức thanh toán</p>
-                    <button class="pay-submit-header--btn btn btn__white">Thẻ tín dụng/ghi nợ</button>
-                    <button class="pay-submit-header--btn btn btn__white">Thanh toán khi nhận hàng</button>
+                    <button data-div="debit" class="jsMethod active pay-submit-header--btn btn btn__white">
+                        Thẻ tín dụng/ghi nợ
+                        <i class="icon fas fa-check"></i>
+                    </button>
+                    <button data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
+                        Thanh toán khi nhận hàng
+                        <i class="icon fas fa-check"></i>
+                    </button>
                 </div>
                 <div class="pay-submit-body pay-submit-body__debit">
                     <div class="pay-submit-body--left">
@@ -173,8 +183,16 @@
                                 <p class="number">9999 9999 9999</p>
                             </label>
                         </div>
-                        <button class="btn btn__white pay-submit-body--card-order"><i
-                                class="icon icon__left fas fa-plus"></i>Thẻ khác</button>
+                        <a class="btn btn__white pay-submit-body--card-order"><i
+                                class="icon icon__left fas fa-plus"></i>Thẻ khác</a>
+                    </div>
+                </div>
+                <div class="pay-submit-body pay-submit-body__cod d-none">
+                    <div class="pay-submit-body--left">
+                        <p>Thanh toán khi nhận hàng</p>
+                    </div>
+                    <div class="pay-submit-body--right">
+                        <p>Phí thu hộ: ₫0 VNĐ. Ưu đãi về phí vận chuyển (nếu có) áp dụng cả với phí thu hộ.</p>
                     </div>
                 </div>
                 <div class="pay-submit-footer">
@@ -250,6 +268,15 @@
         $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
             $('.pay-address--change').addClass('d-none');
             $('.pay-address--text').removeClass('d-none');
+        })
+
+        $('.jsMethod').on('click', function () {
+            $('.jsMethod').removeClass('active');
+            $(this).addClass('active');
+
+            $('.pay-submit-body').addClass('d-none');
+            const div = this.dataset.div;
+            $(`.pay-submit-body__${div}`).removeClass('d-none');
         })
     </script>
 </body>

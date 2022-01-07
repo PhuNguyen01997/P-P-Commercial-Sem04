@@ -22,17 +22,20 @@
         &--change {
 
             .name,
+            .phone,
             .number {
                 font-size: 1.6rem;
             }
 
-            .name {
+            .name,
+            .phone,
+                {
                 font-weight: bold;
             }
         }
 
         &--text {
-            @include flex($justify: flex-start);
+            @include flex($justify: flex-start, $align: flex-start);
 
             &>* {
                 margin-bottom: 5px;
@@ -50,7 +53,7 @@
 
         &--change {
             &-item {
-                @include flex($justify: flex-start);
+                @include flex($justify: flex-start, $align: flex-start);
 
                 &>*:not(:last-child) {
                     margin-right: 20px;
@@ -187,13 +190,46 @@
             }
 
             &--btn {
+                position: relative;
                 margin-left: 10px;
                 height: 40px;
+                overflow: hidden;
+                padding: 5px 15px;
 
                 &:hover {
                     background-color: inherit;
                     border-color: $color-primary01;
                     color: $color-primary01;
+                }
+
+                &:before {
+                    display: none;
+                    content: "";
+                    position: absolute;
+                    right: -15px;
+                    bottom: -15px;
+                    width: 30px;
+                    height: 30px;
+                    background-color: $color-primary01;
+                    transform: rotate(45deg);
+                }
+
+                .icon {
+                    display: none;
+                    position: absolute;
+                    bottom: 1px;
+                    right: 1px;
+                    font-size: 10px;
+                    color: white;
+                }
+
+                &.active {
+                    border: 2px solid $color-primary01;
+                    color: $color-primary01;
+
+                    &::before, .icon{
+                        display: block;
+                    }
                 }
             }
         }
@@ -235,6 +271,17 @@
                         .icon {
                             color: $color-txt-white-grey;
                         }
+                    }
+                }
+            }
+
+            &__cod{
+                display: flex;
+                flex-wrap: wrap;
+
+                .pay-submit-body{
+                    &--left{
+                        margin-right: 40px;
                     }
                 }
             }
