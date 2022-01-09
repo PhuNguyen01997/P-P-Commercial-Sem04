@@ -1,8 +1,17 @@
 package com.apt.p2p.model.form;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PurchaseModel {
     private List<Integer> cartIds;
 

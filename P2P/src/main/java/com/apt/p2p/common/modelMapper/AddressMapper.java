@@ -20,6 +20,7 @@ public class AddressMapper {
             protected void configure() {
                 skip(destination.getShop());
                 skip(destination.getUser());
+                skip(destination.getOrders());
             }
         });
 
@@ -35,6 +36,7 @@ public class AddressMapper {
             protected void configure() {
                 skip(destination.getShop());
                 skip(destination.getUser());
+                skip(destination.getOrders());
             }
         });
 

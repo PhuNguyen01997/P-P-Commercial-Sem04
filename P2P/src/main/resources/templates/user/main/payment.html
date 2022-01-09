@@ -11,7 +11,7 @@
     </th:block>
 </head>
 <body>
-<form layout:fragment="content">
+<form th:action="@{/checkout}" th:object="${purchase}" th:method="POST" layout:fragment="content">
     <div class="inner pay">
         <div class="top-envelope"></div>
         <div class="pay-address">
@@ -28,7 +28,7 @@
                 <ul class="pay-address--change d-none">
                     <li th:each="address : ${addresses}" class="pay-address--change-item">
                         <label class="radio">
-                            <input checked name="addressId" type="radio">
+                            <input checked th:value="${address.id}" name="addressId" type="radio">
                             <div class="radio-show"></div>
                         </label>
                         <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
@@ -36,8 +36,8 @@
                         <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}" class="number">[Address Full]</span>
                     </li>
                     <li class="pay-address--change-item">
-                        <button class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
-                        <button class="btn btn__outline jsAddressBack">Trở lại</button>
+                        <button type="button" class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
+                        <button type="button" class="btn btn__outline jsAddressBack">Trở lại</button>
                     </li>
                 </ul>
             </th:block>
@@ -57,6 +57,7 @@
                 </div>
                 <ul class="pay-cart-list">
                     <li th:each="productCart : ${shopCart.productCarts}" class="pay-cart-item">
+                        <input type="hidden" name="cardIds[]" th:value="${productCart.cart.id}">
                         <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
                         <p th:text="${productCart.product.name}" class="pay-cart-item--name">[Product Name]</p>
                         <p th:text="${productCart.product.price + ' vnđ'}" class="pay-cart-item--price">[Product Price]</p>
@@ -76,10 +77,10 @@
         <div class="pay-submit">
             <div class="pay-submit-header">
                 <p class="pay-submit-header--txt">Phương thức thanh toán</p>
-                <button data-div="debit" class="jsMethod active pay-submit-header--btn btn btn__white">
+                <button type="button" data-div="debit" class="jsMethod active pay-submit-header--btn btn btn__white">
                     Thẻ tín dụng/ghi nợ <i class="icon fas fa-check"></i>
                 </button>
-                <button data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
+                <button type="button" data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
                     Thanh toán khi nhận hàng <i class="icon fas fa-check"></i>
                 </button>
             </div>
@@ -91,7 +92,7 @@
                     <div class="pay-submit-body--card-list">
                         <label th:each="creditCard : ${creditCards}" th:for="${creditCard.id}" class="pay-submit-body--card-item">
                             <div class="radio">
-                                <input name="card" th:id="${creditCard.id}" type="radio">
+                                <input th:checked="${creditCardStat.index == 0}" th:value="${creditCard.id}" name="paymentId" th:id="${creditCard.id}" type="radio">
                                 <div class="radio-show"></div>
                             </div>
                             <p class="pic">
@@ -125,7 +126,7 @@
                 <div class="pay-submit-footer--final">
                     <p class="txt">Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <a href="#">Điều khoản
                         Shopee</a></p>
-                    <button class="btn btn__primary">Đặt hàng</button>
+                    <button type="submit" class="btn btn__primary">Đặt hàng</button>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,11 +28,13 @@ public class AddressModel {
 
     private String ward;
 
-    private  String district;
+    private String district;
 
     private String province;
 
     private UserModel user;
 
     private ShopModel shop;
+
+    private List<OrderModel> orders;
 }

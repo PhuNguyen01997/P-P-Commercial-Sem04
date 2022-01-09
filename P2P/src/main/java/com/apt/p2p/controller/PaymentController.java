@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.PaymentModel;
 import com.apt.p2p.service.AddressService;
@@ -54,6 +55,7 @@ public class PaymentController {
         model.addAttribute("shopCarts", shopCarts);
         model.addAttribute("addresses", addressService.findByUserId(1));
         model.addAttribute("creditCards", paymentService.findAllByUserId(1));
+        model.addAttribute("purchase", new PurchaseModel());
 
         return "user/main/payment";
     }
@@ -95,5 +97,9 @@ public class PaymentController {
         return "redirect:/card";
     }
 
+    @PostMapping("checkout")
+    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel) {
 
+        return "wuw";
+    }
 }

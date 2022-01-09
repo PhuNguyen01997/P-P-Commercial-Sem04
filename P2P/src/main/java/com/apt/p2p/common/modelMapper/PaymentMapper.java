@@ -35,6 +35,7 @@ public class PaymentMapper {
                 skip(destination.getShop());
                 skip(destination.getUser());
                 skip(source.getImgUrl());
+                skip(destination.getOrders());
                 using(removeSpaceNumber).map(source.getCvv()).setCvv("error");
                 using(removeSpaceNumber).map(source.getNumber()).setNumber("error");
                 using(removeSpaceNumber).map(source.getPostalCode()).setPostalCode("error");
@@ -53,6 +54,7 @@ public class PaymentMapper {
             protected void configure() {
                 skip(destination.getShop());
                 skip(destination.getUser());
+                skip(destination.getOrders());
                 using(setImageCard).map(source.getType(), destination.getImgUrl());
                 using(hideCardNumberConverter).map(source.getNumber()).setNumber("Error mapping");
             }

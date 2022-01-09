@@ -48,4 +48,6 @@ public class PaymentModel {
     private ShopModel shop;
 
     private UserModel user;
+
+    private OrderModel orders;
 }
