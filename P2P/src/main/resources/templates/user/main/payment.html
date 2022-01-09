@@ -11,7 +11,7 @@
     </th:block>
 </head>
 <body>
-<main layout:fragment="content">
+<form layout:fragment="content">
     <div class="inner pay">
         <div class="top-envelope"></div>
         <div class="pay-address">
@@ -28,7 +28,7 @@
                 <ul class="pay-address--change d-none">
                     <li th:each="address : ${addresses}" class="pay-address--change-item">
                         <label class="radio">
-                            <input checked name="address" type="radio">
+                            <input checked name="addressId" type="radio">
                             <div class="radio-show"></div>
                         </label>
                         <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
@@ -130,7 +130,7 @@
             </div>
         </div>
     </div>
-</main>
+</form>
 
 <script layout:fragment="script">
     const listTotal = $('.jsTotal');

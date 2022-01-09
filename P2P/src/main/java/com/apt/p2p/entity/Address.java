@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "Address")
@@ -42,4 +43,7 @@ public class Address {
 
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Shop shop;
+
+    @OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
+    private List<Order> orders;
 }

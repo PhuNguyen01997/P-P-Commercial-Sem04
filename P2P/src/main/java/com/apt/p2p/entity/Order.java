@@ -44,6 +44,13 @@ public class Order {
     @JoinColumn(name = "shopId")
     private Shop shop;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId")
+    private Address address;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "paymentId")
+    private Payment payment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderDeptId")

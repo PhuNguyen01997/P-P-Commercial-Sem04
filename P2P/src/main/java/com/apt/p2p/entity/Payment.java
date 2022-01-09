@@ -5,6 +5,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -47,4 +48,7 @@ public class Payment {
 
     @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
     private Shop shop;
+
+    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
+    private List<Order> orders;
 }
