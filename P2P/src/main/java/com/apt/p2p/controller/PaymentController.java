@@ -52,7 +52,7 @@ public class PaymentController {
 
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
-        model.addAttribute("addresses", addressService.findByUserId(1));
+        model.addAttribute("addresses", addressService.findAllByUserId(1));
         model.addAttribute("creditCards", paymentService.findAllByUserId(1));
         model.addAttribute("purchase", new PurchaseModel());
 

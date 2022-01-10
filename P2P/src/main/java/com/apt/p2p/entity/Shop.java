@@ -54,6 +54,6 @@ public class Shop {
     @JoinColumn(name = "paymentId")
     private Payment payment;
 
-    @ManyToMany(mappedBy = "shop", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "shops", fetch = FetchType.LAZY)
     private List<Order> orders;
 }

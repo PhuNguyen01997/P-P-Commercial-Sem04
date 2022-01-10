@@ -8,7 +8,7 @@ import java.util.List;
 public interface AddressService {
     List<AddressModel> findAll();
 
-    List<AddressModel> findByUserId(int userId);
+    List<AddressModel> findAllByUserId(int userId);
 
     AddressModel save(AddressModel address);
 

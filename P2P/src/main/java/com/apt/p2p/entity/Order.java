@@ -1,5 +1,10 @@
 package com.apt.p2p.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
@@ -7,6 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "\"Order\"")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,11 +62,11 @@ public class Order {
     @JoinColumn(name = "orderDeptId")
     private OrderDebt orderDebt;
 
-    public Order(Boolean methodPayment, Double total, Date createdAt, Date updatedAt, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt) {
+    public Order(Boolean methodPayment, Double total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt) {
         this.methodPayment = methodPayment;
         this.total = total;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
         this.user = user;
         this.orderDetails = orderDetails;
         this.shops = shops;

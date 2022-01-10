@@ -30,8 +30,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<AddressModel> findByUserId(int userId) {
-        return addressRepository.findByUserId(userId).stream()
+    public List<AddressModel> findAllByUserId(int userId) {
+        return addressRepository.findAllByUserId(userId).stream()
                 .map(ae -> addressMapper.addressEntityToModel(ae))
                 .collect(Collectors.toList());
     }

@@ -11,6 +11,9 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
     @Query("SELECT p.shop FROM Product p WHERE p.id = :id")
     Shop findByProductId(@Param("id") int productId);
 
+    @Query("SELECT p.shop FROM Product p WHERE p.id in :ids")
+    List<Shop> findAllByProductId(@Param("ids") List<Integer> ids);
+
 ////    @Query("SELECT c.product.shop, c.user FROM Cart c LEFT JOIN User u ON c.user.id = u.id WHERE u.id=:id")
 //    @Query("SELECT s FROM Product p " +
 //            "JOIN Cart c ON p.id = c.product.id " +

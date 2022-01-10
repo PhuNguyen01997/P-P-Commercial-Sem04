@@ -33,7 +33,7 @@ public class AddressController {
 
     @GetMapping("address")
     public String index(Model model) {
-        List<AddressModel> addressList = addressService.findByUserId(1);
+        List<AddressModel> addressList = addressService.findAllByUserId(1);
         model.addAttribute("addressList", addressList);
         model.addAttribute("addressForm", new AddressModel());
 
@@ -45,7 +45,7 @@ public class AddressController {
                          @Valid @ModelAttribute("addressForm") AddressModel address,
                          BindingResult result) {
         if (result.hasErrors()) {
-            List<AddressModel> addressList = addressService.findByUserId(1);
+            List<AddressModel> addressList = addressService.findAllByUserId(1);
             model.addAttribute("addressList", addressList);
             model.addAttribute("addressForm", address);
             model.addAttribute("hasAnyError", true);
@@ -64,7 +64,7 @@ public class AddressController {
                        BindingResult result,
                        RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            List<AddressModel> addressList = addressService.findByUserId(1);
+            List<AddressModel> addressList = addressService.findAllByUserId(1);
             model.addAttribute("addressList", addressList);
             model.addAttribute("addressForm", address);
             model.addAttribute("hasAnyError", true);
