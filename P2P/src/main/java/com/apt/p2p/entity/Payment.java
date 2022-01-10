@@ -42,12 +42,12 @@ public class Payment {
     @Column(length = 10)
     private String postalCode;
 
+    @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
+    private Shop shop;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
-
-    @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
-    private Shop shop;
 
     @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
     private List<Order> orders;

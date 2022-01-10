@@ -24,7 +24,7 @@ public class AddressMapper {
             }
         });
 
-//        mapper.validate();
+        mapper.validate();
         return mapper.map(model, Address.class);
     }
 
@@ -40,7 +40,7 @@ public class AddressMapper {
             }
         });
 
-//        mapper.validate();
+        mapper.validate();
         return mapper.map(entity, AddressModel.class);
     }
 }

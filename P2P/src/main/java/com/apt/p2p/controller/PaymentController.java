@@ -3,10 +3,7 @@ package com.apt.p2p.controller;
 import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.PaymentModel;
-import com.apt.p2p.service.AddressService;
-import com.apt.p2p.service.CartService;
-import com.apt.p2p.service.PaymentService;
-import com.apt.p2p.service.UsersDetailServiceImpl;
+import com.apt.p2p.service.*;
 import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -28,6 +25,8 @@ public class PaymentController {
     private CartService cartService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private OrderService orderService;
 
     @InitBinder("card")
     protected void initBinder(WebDataBinder binder) {
@@ -72,7 +71,8 @@ public class PaymentController {
     public String create(
             Model model,
             @Valid @ModelAttribute("card") PaymentModel paymentModel,
-            BindingResult result
+            BindingResult result,
+            RedirectAttributes redirectAttributes
     ) {
         if (result.hasErrors()) {
             model.addAttribute("card", paymentModel);
@@ -82,6 +82,9 @@ public class PaymentController {
             return "user/account/card";
         }
         PaymentModel paymentResult = paymentService.create(paymentModel);
+        if(paymentResult == null){
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thêm thẻ thanh toán, xin hãy thử lại sau");
+        }
         return "redirect:/card";
     }
 

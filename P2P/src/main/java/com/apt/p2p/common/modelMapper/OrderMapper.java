@@ -22,7 +22,7 @@ public class OrderMapper {
             protected void configure() {
                 skip(source.getUser());
                 skip(source.getOrderDetails());
-                skip(source.getShop());
+                skip(source.getShops());
                 skip(source.getAddress());
                 skip(source.getPayment());
                 skip(source.getOrderDebt());
@@ -42,7 +42,7 @@ public class OrderMapper {
             protected void configure() {
                 skip(destination.getUser());
                 skip(destination.getOrderDetails());
-                skip(destination.getShop());
+                skip(destination.getShops());
                 skip(destination.getAddress());
                 skip(destination.getPayment());
                 skip(destination.getOrderDebt());

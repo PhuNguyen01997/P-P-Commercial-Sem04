@@ -34,11 +34,10 @@ public class PaymentMapper {
             protected void configure() {
                 skip(destination.getShop());
                 skip(destination.getUser());
-                skip(source.getImgUrl());
                 skip(destination.getOrders());
+                using(removeSpaceNumber).map(source.getPostalCode()).setPostalCode("error");
                 using(removeSpaceNumber).map(source.getCvv()).setCvv("error");
                 using(removeSpaceNumber).map(source.getNumber()).setNumber("error");
-                using(removeSpaceNumber).map(source.getPostalCode()).setPostalCode("error");
             }
         });
 

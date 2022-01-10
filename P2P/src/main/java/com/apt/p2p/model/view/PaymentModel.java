@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -49,5 +50,5 @@ public class PaymentModel {
 
     private UserModel user;
 
-    private OrderModel orders;
+    private List<OrderModel> orders;
 }

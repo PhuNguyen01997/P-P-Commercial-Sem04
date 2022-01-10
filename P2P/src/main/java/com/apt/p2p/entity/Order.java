@@ -21,9 +21,6 @@ public class Order {
     @NotNull
     private Double percentPermission;
 
-    @Transient
-    private Double debt;
-
     private Date createdAt;
 
     private Date updatedAt;
@@ -40,9 +37,9 @@ public class Order {
     @JoinColumn(name = "statusOrderId")
     private StatusOrder statusOrder;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shopId")
-    private Shop shop;
+    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "shopId")
+    private List<Shop> shops;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "addressId")
@@ -55,4 +52,17 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderDeptId")
     private OrderDebt orderDebt;
+
+    public Order(Boolean methodPayment, Double total, Date createdAt, Date updatedAt, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt) {
+        this.methodPayment = methodPayment;
+        this.total = total;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.user = user;
+        this.orderDetails = orderDetails;
+        this.shops = shops;
+        this.address = address;
+        this.payment = payment;
+        this.orderDebt = orderDebt;
+    }
 }
