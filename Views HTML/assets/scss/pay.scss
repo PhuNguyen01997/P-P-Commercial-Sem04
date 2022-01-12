@@ -24,12 +24,12 @@
             .name,
             .phone,
             .number {
+                flex-shrink: 0;
                 font-size: 1.6rem;
             }
 
             .name,
-            .phone,
-                {
+            .phone {
                 font-weight: bold;
             }
         }
@@ -227,7 +227,8 @@
                     border: 2px solid $color-primary01;
                     color: $color-primary01;
 
-                    &::before, .icon{
+                    &::before,
+                    .icon {
                         display: block;
                     }
                 }
@@ -275,12 +276,12 @@
                 }
             }
 
-            &__cod{
+            &__cod {
                 display: flex;
                 flex-wrap: wrap;
 
-                .pay-submit-body{
-                    &--left{
+                .pay-submit-body {
+                    &--left {
                         margin-right: 40px;
                     }
                 }

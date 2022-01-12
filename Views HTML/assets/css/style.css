@@ -2272,6 +2272,8 @@ label {
 }
 
 .account-address-left--key {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   width: 160px;
   margin-right: 25px;
   text-align: right;
@@ -3029,6 +3031,8 @@ label {
 .pay-address--text .number, .pay-address--change .name,
 .pay-address--change .phone,
 .pay-address--change .number {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   font-size: 1.6rem;
 }
 
@@ -3315,7 +3319,8 @@ label {
   color: #9932cc;
 }
 
-.pay-submit-header--btn.active::before, .pay-submit-header--btn.active .icon {
+.pay-submit-header--btn.active::before,
+.pay-submit-header--btn.active .icon {
   display: block;
 }
 

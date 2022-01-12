@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.CartIndexViewModel;
+import com.apt.p2p.model.view.OrderModel;
 import com.apt.p2p.model.view.PaymentModel;
 import com.apt.p2p.service.*;
 import com.apt.p2p.validate.PaymentModelValidator;
@@ -101,8 +102,13 @@ public class PaymentController {
     }
 
     @PostMapping("checkout")
-    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel) {
-
-        return "wuw";
+    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
+                           RedirectAttributes redirectAttributes) {
+        OrderModel result = orderService.create(purchaseModel);
+        if(result == null){
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
+            return "redirect:/cart";
+        }
+        return "redirect:/order/" + result.getId();
     }
 }

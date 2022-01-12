@@ -62,9 +62,10 @@ public class Order {
     @JoinColumn(name = "orderDeptId")
     private OrderDebt orderDebt;
 
-    public Order(Boolean methodPayment, Double total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt) {
+    public Order(Boolean methodPayment, Double total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt, StatusOrder statusOrder) {
         this.methodPayment = methodPayment;
         this.total = total;
+        this.percentPermission = 0.05;
         this.createdAt = new Date();
         this.updatedAt = new Date();
         this.user = user;
@@ -73,5 +74,6 @@ public class Order {
         this.address = address;
         this.payment = payment;
         this.orderDebt = orderDebt;
+        this.statusOrder = statusOrder;
     }
 }

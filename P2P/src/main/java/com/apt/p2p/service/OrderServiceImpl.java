@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,12 +36,14 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDebtRepository orderDebtRepository;
     @Autowired
+    private StatusOrderRepository statusOrderRepository;
+    @Autowired
     private OrderMapper orderMapper;
 
     @Override
     @Transactional
     public OrderModel create(PurchaseModel purchaseModel) {
-        List<Cart> carts = cartRepository.findAllById(purchaseModel.getCartIds());
+        List<Cart> carts = cartRepository.findAllById(Arrays.asList(purchaseModel.getCartIds()));
         List<OrderDetail> orderDetails = carts.stream().map(c -> {
             Product product = productRepository.findById(c.getProduct().getId()).get();
             OrderDetail orderDetail = new OrderDetail(c.getProduct().getPrice(), c.getQuantity());
@@ -52,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
 
         double total = orderDetails.stream().mapToDouble(od -> od.getSubtotal()).sum();
 
-        User user = userRepository.findById(1).get();
+        User user = userRepository.findById(2).get();
 
         List<Integer> productIdList = orderDetails.stream().map(od -> od.getProduct().getId()).collect(Collectors.toList());
         List<Shop> shops = shopRepository.findAllByProductId(productIdList);
@@ -63,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
         LocalDate localDate = LocalDate.now();
         OrderDebt orderDebt;
-        Optional<OrderDebt> debtPresend = orderDebtRepository.findByUserIdAndMonth(1, localDate.getMonthValue(), localDate.getYear());
+        Optional<OrderDebt> debtPresend = orderDebtRepository.findByUserIdAndMonth(2, localDate.getMonthValue(), localDate.getYear());
         if (debtPresend.isPresent()) {
             orderDebt = debtPresend.get();
             orderDebt.setTotal(orderDebt.getTotal() + (total * 0.05));
@@ -73,8 +76,13 @@ public class OrderServiceImpl implements OrderService {
         }
         orderDebtRepository.save(orderDebt);
 
-        Order order = new Order(false, total, user, orderDetails, shops, address, payment, orderDebt);
+        StatusOrder status = statusOrderRepository.findById(1).get();
+
+        Order order = new Order(false, total, user, orderDetails, shops, address, payment, orderDebt, status);
         orderRepository.save(order);
+
+        // attach orderDetails to order
+        orderDetails.forEach(od -> od.setOrder(order));
 
         return orderMapper.orderEntityToModel(order);
     }

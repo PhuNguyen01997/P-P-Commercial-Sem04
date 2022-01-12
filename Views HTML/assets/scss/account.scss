@@ -216,6 +216,7 @@
             }
 
             &--key {
+                flex-shrink: 0;
                 width: 160px;
                 margin-right: 25px;
                 text-align: right;

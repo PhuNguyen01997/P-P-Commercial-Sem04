@@ -31,8 +31,8 @@
                             <input checked th:value="${address.id}" name="addressId" type="radio">
                             <div class="radio-show"></div>
                         </label>
-                        <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
-                        <span th:text="${addresses.get(0).ownPhone}" class="phone">[Address Phone]</span>
+                        <span th:text="${address.ownName}" class="name">[Address Name]</span>
+                        <span th:text="${address.ownPhone}" class="phone">[Address Phone]</span>
                         <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}" class="number">[Address Full]</span>
                     </li>
                     <li class="pay-address--change-item">
@@ -57,7 +57,7 @@
                 </div>
                 <ul class="pay-cart-list">
                     <li th:each="productCart : ${shopCart.productCarts}" class="pay-cart-item">
-                        <input type="hidden" name="cardIds[]" th:value="${productCart.cart.id}">
+                        <input type="hidden" name="cartIds[]" th:value="${productCart.cart.id}">
                         <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
                         <p th:text="${productCart.product.name}" class="pay-cart-item--name">[Product Name]</p>
                         <p th:text="${productCart.product.price + ' vnđ'}" class="pay-cart-item--price">[Product Price]</p>
@@ -117,11 +117,11 @@
             <div class="pay-submit-footer">
                 <div class="pay-submit-footer--list">
                     <span class="pay-submit-footer--txt">Tổng tiền hàng</span>
-                    <span class="pay-submit-footer--number">$99.999.999</span>
+                    <span class="pay-submit-footer--number jsSumTotal2"></span>
                     <span class="pay-submit-footer--txt">Phí vận chuyển</span>
-                    <span class="pay-submit-footer--number">$99.999.999</span>
+                    <span class="pay-submit-footer--number jsShipping"></span>
                     <span class="pay-submit-footer--txt">Tổng thanh toán:</span>
-                    <span class="pay-submit-footer--number pay-submit-footer--number__total">$99.999.999</span>
+                    <span class="pay-submit-footer--number pay-submit-footer--number__total jsSumTotal3"></span>
                 </div>
                 <div class="pay-submit-footer--final">
                     <p class="txt">Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <a href="#">Điều khoản
@@ -134,12 +134,17 @@
 </form>
 
 <script layout:fragment="script">
+    function calTotal(){
+        $('.jsSumTotal2').text(`${sumTotal} vnđ`);
+        $('.jsSumTotal3').text(`${sumTotal} vnđ`);
+    }
+
     const listTotal = $('.jsTotal');
     let sumTotal = 0;
     listTotal.each((index, item) => {
         sumTotal += parseFloat(item.dataset.total);
     })
-    $('.jsSumTotal').text(`${sumTotal} vnđ`);
+    $('.jsSumTotal').add('.jsSumTotal2').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
     $('.jsCount').text(listTotal.length);
 
     $('.pay-address--text').on('click', '.change', function () {
@@ -158,6 +163,10 @@
     $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
         $('.pay-address--change').addClass('d-none');
         $('.pay-address--text').removeClass('d-none');
+    })
+
+    $(`input[name="addressId"]`).on('change', function(){
+        console.log($(`input[name="addressId"]:checked`).val());
     })
 
     $('.jsMethod').on('click', function () {

@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchaseModel {
-    private List<Integer> cartIds;
+    private Integer[] cartIds;
 
     @NotNull
     private Integer addressId;

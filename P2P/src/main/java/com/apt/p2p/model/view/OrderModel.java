@@ -24,8 +24,6 @@ public class OrderModel {
 
     private Double percentPermission;
 
-    private Double debt;
-
     private Date createdAt;
 
     private Date updatedAt;

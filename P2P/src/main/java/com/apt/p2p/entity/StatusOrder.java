@@ -12,8 +12,10 @@ public class StatusOrder {
     private Integer id;
 
     @NotNull
-    @Column(length = 30)
     private String name;
+
+    @NotNull
+    private String doneName;
 
     @OneToMany(mappedBy = "statusOrder", fetch = FetchType.LAZY)
     private List<Order> orders;

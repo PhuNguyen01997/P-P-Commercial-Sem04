@@ -42,6 +42,12 @@ INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
 (NOW(), 1, NOW(), 5, 2);
 
 
+INSERT INTO status_order (id, done_name, name) VALUES
+(1, 'Đã đặt hàng', 'Chờ xác nhận'),
+(2, 'Đã giao cho ĐVVC', 'Shop đang chuẩn bị hàng'),
+(3, 'Đơn hàng đã nhận', 'Đang giao hàng'),
+(4, 'Đánh giá', 'Đánh giá');
+
 
 
 INSERT INTO `province` (`province_id`, `name`) VALUES
