@@ -23,7 +23,7 @@ public class DistrictMapper {
         mapper.addMappings(new PropertyMap<DistrictModel, District>() {
             @Override
             protected void configure() {
-                using(setNullDestination).map(source.getProvince()).setProvince(null);
+//                using(setNullDestination).map(source.getProvince()).setProvince(null);
                 using(setNullDestination).map(source.getWards()).setWards(null);
             }
         });
@@ -38,7 +38,7 @@ public class DistrictMapper {
         mapper.addMappings(new PropertyMap<District, DistrictModel>() {
             @Override
             protected void configure() {
-                using(setNullDestination).map(source.getProvince()).setProvince(null);
+//                using(setNullDestination).map(source.getProvince()).setProvince(null);
                 using(setNullDestination).map(source.getWards()).setWards(null);
             }
         });

@@ -3,12 +3,9 @@ package com.apt.p2p.controller;
 import com.apt.p2p.common.modelMapper.DistrictMapper;
 import com.apt.p2p.common.modelMapper.ProvinceMapper;
 import com.apt.p2p.common.modelMapper.WardMapper;
-import com.apt.p2p.entity.District;
-import com.apt.p2p.entity.Province;
-import com.apt.p2p.entity.Ward;
 import com.apt.p2p.model.form.DistrictModel;
-import com.apt.p2p.model.form.ProvinceModel;
 import com.apt.p2p.model.form.WardModel;
+import com.apt.p2p.model.view.ProvinceModel;
 import com.apt.p2p.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +30,9 @@ public class LocationController {
     @GetMapping("/provinces")
     @ResponseBody
     public List<ProvinceModel> getProvinces(){
-        return locationService.provinceFindAll()
-                .stream().map(pe -> provinceMapper.provinceEntityToModel(pe))
-                .collect(Collectors.toList());
+        return locationService.provinceFindAll();
+//                .stream().map(pe -> provinceMapper.provinceEntityToModel(pe))
+//                .collect(Collectors.toList());
     }
 
     @GetMapping("/districts")

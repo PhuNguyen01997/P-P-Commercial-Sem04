@@ -9,7 +9,9 @@ INSERT INTO payment (address_register, cvv, due, fullname, `number`, postal_code
 
 INSERT INTO address (district, `number`,own_name, own_phone, province, ward, user_id) VALUES
 ('Quận 1', '123 Lê Lợi', 'Name Test 01', '123456789', 'TP. HCM', 'Phường 2', 1),
-('Quận 20', '124 Nguyễn Thị Minh Khai', 'Name Test 02', '123456789', 'TP. HCM', 'Phường 42', 3);
+('Quận 20', '124 Nguyễn Thị Minh Khai', 'Name Test 02', '123456789', 'TP. HCM', 'Phường 42', 3),
+('Huyện Châu Đức', '123 ABC', 'Name Test 03', '891437983', 'Tỉnh Bà Rịa - Vũng Tàu', 'Xã Bàu Chinh', 3);
+
 
 INSERT INTO shop (created_at, logo, name, permission, phone, updated_at, address_id, payment_id, user_id) VALUES
 (NOW(), 'no', 'Shốp Tếst 01', 1, '0907982932', NOW(), 1, 1, 1),

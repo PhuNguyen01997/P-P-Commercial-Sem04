@@ -19,7 +19,7 @@ public class DistrictModel {
 
     private String name;
 
-    private ProvinceModel province;
+//    private ProvinceModel province;
 
     private List<WardModel> wards;
 }

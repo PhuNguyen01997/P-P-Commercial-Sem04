@@ -130,8 +130,9 @@
             cache: false,
             type: 'GET',
             success: function (arrVal) {
+                console.log(arrVal)
                 arrVal = arrVal.map(item => {
-                    return `<li data-id="${item.provinceId}">${item.name}</li>`
+                    return `<li data-id="${item.ProvinceId}">${item.NameExtension[1]}</li>`
                 })
                 $('.jsAddressContainer').html(arrVal);
 

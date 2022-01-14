@@ -89,6 +89,12 @@ public class AddressController {
         return "redirect:/address";
     }
 
+    @GetMapping("/calShipping/{shopAddressId}/{addressId}")
+    @ResponseBody
+    public String calShipping(@PathVariable("shopAddressId") int shopAddressId, @PathVariable("addressId") int addressId){
+        return null;
+    }
+
     private List<Integer> calPagiPage(int index, int total) {
         if (index + 1 > total) {
             throw new IllegalArgumentException("Index is > Pagi length");

@@ -135,8 +135,8 @@
 
 <script layout:fragment="script">
     function calTotal(){
-        $('.jsSumTotal2').text(`${sumTotal} vnđ`);
-        $('.jsSumTotal3').text(`${sumTotal} vnđ`);
+        $('.jsSumTotal2').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
+        $('.jsSumTotal3').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
     }
 
     const listTotal = $('.jsTotal');
@@ -144,8 +144,8 @@
     listTotal.each((index, item) => {
         sumTotal += parseFloat(item.dataset.total);
     })
-    $('.jsSumTotal').add('.jsSumTotal2').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
     $('.jsCount').text(listTotal.length);
+    calTotal();
 
     $('.pay-address--text').on('click', '.change', function () {
         $('.pay-address--change').removeClass('d-none');
@@ -166,7 +166,24 @@
     })
 
     $(`input[name="addressId"]`).on('change', function(){
-        console.log($(`input[name="addressId"]:checked`).val());
+        const addressId = $(`input[name="addressId"]:checked`).val();
+        // $.ajax({
+        //     url: `${window.location.protocol}//${window.location.host}/provinces`,
+        //     cache: false,
+        //     type: 'GET',
+        //     success: function (arrVal) {
+        //         arrVal = arrVal.map(item => {
+        //             return `<li data-id="${item.provinceId}">${item.name}</li>`
+        //         })
+        //         $('.jsAddressContainer').html(arrVal);
+        //
+        //         setLoading(false);
+        //
+        //         if (callback) {
+        //             callback();
+        //         }
+        //     }
+        // });
     })
 
     $('.jsMethod').on('click', function () {

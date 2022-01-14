@@ -53,8 +53,8 @@ public class PaymentController {
 
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
-        model.addAttribute("addresses", addressService.findAllByUserId(1));
-        model.addAttribute("creditCards", paymentService.findAllByUserId(1));
+        model.addAttribute("addresses", addressService.findAllByUserId(3));
+        model.addAttribute("creditCards", paymentService.findAllByUserId(3));
         model.addAttribute("purchase", new PurchaseModel());
 
         return "user/main/payment";
