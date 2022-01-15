@@ -28,7 +28,8 @@
                 <ul class="pay-address--change d-none">
                     <li th:each="address : ${addresses}" class="pay-address--change-item">
                         <label class="radio">
-                            <input checked th:value="${address.id}" name="addressId" type="radio">
+                            <input checked th:attr="data-province-id=${address.provinceId},data-district-id=${address.districtId}, data-ward-id=${address.wardId}"
+                                   th:value="${address.id}" name="addressId" type="radio">
                             <div class="radio-show"></div>
                         </label>
                         <span th:text="${address.ownName}" class="name">[Address Name]</span>
@@ -166,7 +167,11 @@
     })
 
     $(`input[name="addressId"]`).on('change', function(){
-        const addressId = $(`input[name="addressId"]:checked`).val();
+        const input = $(`input[name="addressId"]:checked`)[0];
+        const addressId = input.value;
+        const toProvinceId = input.data.provinceId;
+        const toWardId = input.data.wardId;
+
         // $.ajax({
         //     url: `${window.location.protocol}//${window.location.host}/provinces`,
         //     cache: false,
