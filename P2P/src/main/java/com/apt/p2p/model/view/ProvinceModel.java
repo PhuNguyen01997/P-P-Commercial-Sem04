@@ -21,10 +21,10 @@ public class ProvinceModel implements Serializable {
     public String provinceName;
     @JsonProperty("CountryID")
     public int countryID;
-    @JsonProperty("Code")
-    public String code;
     @JsonProperty("NameExtension")
     public String[] nameExtension;
     @JsonProperty("RegionID")
     public int regionID;
+    @JsonProperty("SupportType")
+    public int supportType;
 }

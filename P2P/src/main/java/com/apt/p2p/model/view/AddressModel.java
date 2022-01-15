@@ -32,6 +32,12 @@ public class AddressModel {
 
     private String province;
 
+    private int wardId;
+
+    private int districtId;
+
+    private String provinceId;
+
     private UserModel user;
 
     private ShopModel shop;

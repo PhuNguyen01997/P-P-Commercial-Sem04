@@ -32,10 +32,19 @@ public class Address {
     private String ward;
 
     @NotNull
+    private int wardId;
+
+    @NotNull
     private  String district;
 
     @NotNull
+    private int districtId;
+
+    @NotNull
     private String province;
+
+    @NotNull
+    private int provinceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")

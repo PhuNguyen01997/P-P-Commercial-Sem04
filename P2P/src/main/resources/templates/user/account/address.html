@@ -78,8 +78,11 @@
                 <p th:unless="${addressForm.province != null && !addressForm.province.isEmpty()}"
                    class="modal2-input modal2-input__value">Chọn địa chỉ</p>
                 <input th:field="*{province}" type="hidden">
+                <input th:field="*{provinceId}" type="hidden">
                 <input th:field="*{district}" type="hidden">
+                <input th:field="*{districtId}" type="hidden">
                 <input th:field="*{ward}" type="hidden">
+                <input th:field="*{wardId}" type="hidden">
                 <p th:if="${#fields.hasErrors('province')}" th:errors="*{province}" class="error">Invalid value</p>
                 <div class="modal2-input modal2-input__box">
                     <div class="modal2-input modal2-input__header">
@@ -130,9 +133,8 @@
             cache: false,
             type: 'GET',
             success: function (arrVal) {
-                console.log(arrVal)
                 arrVal = arrVal.map(item => {
-                    return `<li data-id="${item.ProvinceId}">${item.NameExtension[1]}</li>`
+                    return `<li data-id="${item.ProvinceID}">${item.ProvinceName}</li>`
                 })
                 $('.jsAddressContainer').html(arrVal);
 
@@ -153,7 +155,7 @@
             type: 'GET',
             success: function (arrVal) {
                 arrVal = arrVal.map(item => {
-                    return `<li data-id="${item.districtId}">${item.name}</li>`
+                    return `<li data-id="${item.DistrictID}">${item.DistrictName}</li>`
                 })
                 $('.jsAddressContainer').html(arrVal);
 
@@ -176,7 +178,7 @@
                 setLoading(false);
 
                 arrVal = arrVal.map(item => {
-                    return `<li data-id="${item.wardId}">${item.name}</li>`
+                    return `<li data-id="${item.WardCode}">${item.WardName}</li>`
                 })
                 $('.jsAddressContainer').html(arrVal);
 
@@ -196,6 +198,9 @@
         $('input#province').val(tempLocation['province']);
         $('input#district').val(tempLocation['district']);
         $('input#ward').val(tempLocation['ward']);
+        $('input#provinceId').val(tempLocation['provinceId']);
+        $('input#districtId').val(tempLocation['districtId']);
+        $('input#wardId').val(tempLocation['wardId']);
 
         $('.modal2-input-container__address .modal2-input__value').text(address);
     }
@@ -214,8 +219,8 @@
         const nextId = this.dataset.id;
 
         curr.dataset.id = this.dataset.id;
+        tempLocation[`${type}Id`] = this.dataset.id;
         tempLocation[type] = this.innerText;
-        console.log(tempLocation);
 
         if (!next[0]) {
             $('.modal2-input-container__address .modal2-input__box').removeClass('show');
