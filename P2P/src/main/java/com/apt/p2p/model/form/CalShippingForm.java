@@ -10,8 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalShippingForm {
-    private int fromDistrictId;
-    private int toDistrictId;
-    private String toWardCode;
+    private Integer[] fromAddressId;
+    private Integer toAddressId;
     private double insuranceValue;
 }

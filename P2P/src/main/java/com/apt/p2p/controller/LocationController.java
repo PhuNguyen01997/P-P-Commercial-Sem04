@@ -44,9 +44,9 @@ public class LocationController {
         return locationService.wardFindAllByDistrictId(Integer.parseInt(districtId));
     }
 
-    @PostMapping("/calFree")
+    @PostMapping("/calFee")
     @ResponseBody
-    public double calFree(@RequestBody CalShippingForm calForm){
+    public double calFee(@RequestBody CalShippingForm calForm){
         CalShippingResponseData infoFee = locationService.calShippingFree(calForm);
         return infoFee.getTotal();
     }

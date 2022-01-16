@@ -32,7 +32,7 @@ public class AddressModel {
 
     private String province;
 
-    private int wardId;
+    private String wardId;
 
     private int districtId;
 

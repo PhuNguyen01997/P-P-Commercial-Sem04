@@ -1,9 +1,14 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.common.modelMapper.AddressMapper;
 import com.apt.p2p.common.modelMapper.PaymentMapper;
+import com.apt.p2p.entity.Address;
 import com.apt.p2p.entity.Payment;
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.PaymentModel;
+import com.apt.p2p.model.view.ProductCartModel;
+import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.PaymentRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +27,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
     private CartService cartService;
     @Autowired
     private PaymentMapper paymentMapper;
+    @Autowired
+    private AddressMapper addressMapper;
 
     @Override
     public PaymentModel create(PaymentModel paymentModel) {
@@ -85,6 +94,13 @@ public class PaymentServiceImpl implements PaymentService {
 
             result.add(cartService.getCartProductByShopIdAndCartId(shopId, cartIdList));
         }
+
+        result.stream().map(cartIndexViewModel -> {
+            ShopModel shop = cartIndexViewModel.getShop();
+            Address addressEntity = addressRepository.findByShopId(shop.getId());
+            shop.setAddress(addressMapper.addressEntityToModel(addressEntity));
+            return cartIndexViewModel;
+        });
 
         return result;
     }

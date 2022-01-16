@@ -32,7 +32,7 @@ public class Address {
     private String ward;
 
     @NotNull
-    private int wardId;
+    private String wardId;
 
     @NotNull
     private  String district;

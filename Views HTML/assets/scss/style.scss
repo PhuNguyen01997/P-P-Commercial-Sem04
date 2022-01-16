@@ -699,6 +699,23 @@ label {
   }
 }
 
+#globalLoading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/img/common/spinner.svg'), linear-gradient(to bottom, rgba($color: #000, $alpha: 0.8), rgba($color: #000, $alpha: 0.8));
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 100% 100%;
+  background-position: center;
+
+  &.loading {
+    display: block;
+  }
+}
+
 @import "./header";
 @import "./footer";
 @import "./auth";

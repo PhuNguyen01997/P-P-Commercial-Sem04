@@ -1,3 +1,8 @@
+// JS for set loading
+var setGlobalLoading = function(isLoading){
+    $('#globalLoading')[isLoading ? 'addClass' : 'removeClass']('loading');
+}
+
 $(function () {
     // JS for custom select
     function setSelect(select, value, text) {

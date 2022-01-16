@@ -12,11 +12,12 @@
 </head>
 <body>
 <form th:action="@{/checkout}" th:object="${purchase}" th:method="POST" layout:fragment="content">
-    <div class="inner pay">
+    <div class="pay">
         <div class="top-envelope"></div>
         <div class="pay-address">
             <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
-            <p th:if="${addresses.isEmpty()}">Bạn chưa có địa chỉ nào. <a class="" th:href="@{/address}">Thêm địa chỉ</a></p>
+            <p th:if="${addresses.isEmpty()}">Bạn chưa có địa chỉ nào. <a class="" th:href="@{/address}">Thêm địa
+                chỉ</a></p>
             <th:block th:unless="${addresses.isEmpty()}">
                 <p class="pay-address--text">
                     <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
@@ -25,22 +26,24 @@
                           class="number">[Address Full]</span>
                     <a class="change" href="#">Thay đổi</a>
                 </p>
-                <ul class="pay-address--change d-none">
-                    <li th:each="address : ${addresses}" class="pay-address--change-item">
-                        <label class="radio">
-                            <input checked th:attr="data-province-id=${address.provinceId},data-district-id=${address.districtId}, data-ward-id=${address.wardId}"
+                <div class="pay-address--change d-none">
+                    <label th:each="address : ${addresses}" class="pay-address--change-item">
+                        <div class="radio">
+                            <input checked
+                                   th:attr="data-province-id=${address.provinceId},data-district-id=${address.districtId}, data-ward-id=${address.wardId}"
                                    th:value="${address.id}" name="addressId" type="radio">
                             <div class="radio-show"></div>
-                        </label>
+                        </div>
                         <span th:text="${address.ownName}" class="name">[Address Name]</span>
                         <span th:text="${address.ownPhone}" class="phone">[Address Phone]</span>
-                        <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}" class="number">[Address Full]</span>
-                    </li>
+                        <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}"
+                              class="number">[Address Full]</span>
+                    </label>
                     <li class="pay-address--change-item">
                         <button type="button" class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
                         <button type="button" class="btn btn__outline jsAddressBack">Trở lại</button>
                     </li>
-                </ul>
+                </div>
             </th:block>
         </div>
         <div class="pay-cart">
@@ -51,9 +54,10 @@
                 <p>Thành tiền</p>
             </div>
             <th:block th:each="shopCart : ${shopCarts}">
-                <div class="pay-cart-shop">
+                <div class="pay-cart-shop" th:attr="data-shop-address-id=${shopCart.shop.address.id}">
                     <p th:text="${shopCart.shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
-                    <a class="pay-cart-shop--chat" href="javascript: void(0);"><i class="icon icon__left fas fa-comment-alt"></i>Chat
+                    <a class="pay-cart-shop--chat" href="javascript: void(0);"><i
+                            class="icon icon__left fas fa-comment-alt"></i>Chat
                         ngay</a>
                 </div>
                 <ul class="pay-cart-list">
@@ -61,7 +65,8 @@
                         <input type="hidden" name="cartIds[]" th:value="${productCart.cart.id}">
                         <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
                         <p th:text="${productCart.product.name}" class="pay-cart-item--name">[Product Name]</p>
-                        <p th:text="${productCart.product.price + ' vnđ'}" class="pay-cart-item--price">[Product Price]</p>
+                        <p th:text="${productCart.product.price + ' vnđ'}" class="pay-cart-item--price">[Product
+                            Price]</p>
                         <p th:text="${productCart.cart.quantity}" class="pay-cart-item--quantity">[Cart Quantity]</p>
                         <p th:text="${(productCart.cart.quantity * productCart.product.price) + ' vnđ'}"
                            th:attr="data-total=${productCart.cart.quantity * productCart.product.price}"
@@ -72,18 +77,20 @@
             <div class="pay-cart-footer">
                 <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
                 <p class="pay-cart-footer--text">Tổng số tiền (<span class="jsCount">[Count]</span> sản phẩm)</p>
-                <p class="pay-cart-footer--total jsSumTotal">[Total]</p>
+                <p class="pay-cart-footer--total jsSumTotal2">[Total]</p>
             </div>
         </div>
         <div class="pay-submit">
             <div class="pay-submit-header">
                 <p class="pay-submit-header--txt">Phương thức thanh toán</p>
-                <button type="button" data-div="debit" class="jsMethod active pay-submit-header--btn btn btn__white">
+                <label type="button" data-div="debit" class="active jsMethod pay-submit-header--btn btn btn__white">
                     Thẻ tín dụng/ghi nợ <i class="icon fas fa-check"></i>
-                </button>
-                <button type="button" data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
+                    <input type="radio" class="d-none" checked name="methodPayment" value="1">
+                </label>
+                <label type="button" data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
                     Thanh toán khi nhận hàng <i class="icon fas fa-check"></i>
-                </button>
+                    <input type="radio" class="d-none" name="methodPayment" value="0">
+                </label>
             </div>
             <div class="pay-submit-body pay-submit-body__debit">
                 <div class="pay-submit-body--left">
@@ -91,9 +98,11 @@
                 </div>
                 <div class="pay-submit-body--right">
                     <div class="pay-submit-body--card-list">
-                        <label th:each="creditCard : ${creditCards}" th:for="${creditCard.id}" class="pay-submit-body--card-item">
+                        <label th:each="creditCard : ${creditCards}" th:for="${creditCard.id}"
+                               class="pay-submit-body--card-item">
                             <div class="radio">
-                                <input th:checked="${creditCardStat.index == 0}" th:value="${creditCard.id}" name="paymentId" th:id="${creditCard.id}" type="radio">
+                                <input th:checked="${creditCardStat.index == 0}" th:value="${creditCard.id}"
+                                       name="paymentId" th:id="${creditCard.id}" type="radio">
                                 <div class="radio-show"></div>
                             </div>
                             <p class="pic">
@@ -135,9 +144,46 @@
 </form>
 
 <script layout:fragment="script">
-    function calTotal(){
+    function calTotal() {
         $('.jsSumTotal2').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
         $('.jsSumTotal3').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
+    }
+
+    function calShippingFee(){
+        const input = $(`input[name="addressId"]:checked`)[0];
+        const toAddressId = input.value;
+        const fromAddressIdList = $('.pay-cart-shop').toArray().reduce((arr, item, index) => {
+            arr.push(parseInt(item.dataset.shopAddressId));
+            return arr;
+        }, []);
+
+        const requestBody = {
+            fromAddressId: fromAddressIdList,
+            toAddressId: toAddressId,
+            insuranceValue: $('.jsSumTotal2').attr('data-total'),
+        };
+
+        setGlobalLoading(true);
+
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/calFee`,
+            cache: false,
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(requestBody),
+            success: function (data) {
+                $('.jsShipping').text(`${data} vnđ`);
+                setGlobalLoading(false);
+            },
+            error: function (xhr, error, response) {
+                console.log({xhr, error, response});
+                setLoading(false);
+            }
+        });
+    }
+
+    function setLoading(isLoading){
+        console.log(isLoading);
     }
 
     const listTotal = $('.jsTotal');
@@ -146,7 +192,9 @@
         sumTotal += parseFloat(item.dataset.total);
     })
     $('.jsCount').text(listTotal.length);
+
     calTotal();
+    calShippingFee();
 
     $('.pay-address--text').on('click', '.change', function () {
         $('.pay-address--change').removeClass('d-none');
@@ -164,31 +212,10 @@
     $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
         $('.pay-address--change').addClass('d-none');
         $('.pay-address--text').removeClass('d-none');
-    })
 
-    $(`input[name="addressId"]`).on('change', function(){
-        const input = $(`input[name="addressId"]:checked`)[0];
-        const addressId = input.value;
-        const toProvinceId = input.data.provinceId;
-        const toWardId = input.data.wardId;
-
-        // $.ajax({
-        //     url: `${window.location.protocol}//${window.location.host}/provinces`,
-        //     cache: false,
-        //     type: 'GET',
-        //     success: function (arrVal) {
-        //         arrVal = arrVal.map(item => {
-        //             return `<li data-id="${item.provinceId}">${item.name}</li>`
-        //         })
-        //         $('.jsAddressContainer').html(arrVal);
-        //
-        //         setLoading(false);
-        //
-        //         if (callback) {
-        //             callback();
-        //         }
-        //     }
-        // });
+        if(this.classList.contains('jsAddressSubmit')){
+            calShippingFee();
+        }
     })
 
     $('.jsMethod').on('click', function () {

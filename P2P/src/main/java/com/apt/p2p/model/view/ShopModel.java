@@ -1,5 +1,6 @@
 package com.apt.p2p.model.view;
 
+import com.apt.p2p.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,8 @@ public class ShopModel {
     private Date updatedAt = new Date();
 
     private UserModel user;
+
+    private AddressModel address;
 
     private List<ProductModel> products;
 

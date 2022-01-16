@@ -76,11 +76,11 @@ public class CartServiceImpl implements CartService {
         for (Cart cart : cartList) {
             Integer index = IntStream.range(0, result.size()).filter(i -> result.get(i).getShop().getId() == cart.getProduct().getShop().getId()).findFirst().orElse(-1);
 
-            if (index >= 0) {
-                ShopModel shopModel = shopMapper.shopEntityToModel(cart.getProduct().getShop());
-                ProductModel productModel = productMapper.productEntityToModel(cart.getProduct());
-                CartModel cartModel = cartMapper.cartEntityToModel(cart);
+            ShopModel shopModel = shopMapper.shopEntityToModel(cart.getProduct().getShop());
+            ProductModel productModel = productMapper.productEntityToModel(cart.getProduct());
+            CartModel cartModel = cartMapper.cartEntityToModel(cart);
 
+            if (index >= 0) {
                 CartIndexViewModel cartIndexViewModel = result.get(index);
 
                 List<ProductCartModel> productCartModelList = cartIndexViewModel.getProductCarts();
@@ -89,10 +89,6 @@ public class CartServiceImpl implements CartService {
 
                 result.set(index, cartIndexViewModel);
             } else {
-                ShopModel shopModel = shopMapper.shopEntityToModel(cart.getProduct().getShop());
-                ProductModel productModel = productMapper.productEntityToModel(cart.getProduct());
-                CartModel cartModel = cartMapper.cartEntityToModel(cart);
-
                 List<ProductCartModel> productCartModelList = new ArrayList<ProductCartModel>();
                 productCartModelList.add(new ProductCartModel(productModel, cartModel));
 

@@ -41,7 +41,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Override
-    @Transactional
     public OrderModel create(PurchaseModel purchaseModel) {
         List<Cart> carts = cartRepository.findAllById(Arrays.asList(purchaseModel.getCartIds()));
         List<OrderDetail> orderDetails = carts.stream().map(c -> {
@@ -62,7 +61,10 @@ public class OrderServiceImpl implements OrderService {
 
         Address address = addressRepository.findById(purchaseModel.getAddressId()).get();
 
-        Payment payment = paymentRepository.findById(purchaseModel.getPaymentId()).get();
+        Payment payment = null;
+        if(purchaseModel.getMethodPayment()){
+            payment = paymentRepository.findById(purchaseModel.getPaymentId()).get();
+        }
 
         LocalDate localDate = LocalDate.now();
         OrderDebt orderDebt;
@@ -78,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
 
         StatusOrder status = statusOrderRepository.findById(1).get();
 
-        Order order = new Order(false, total, user, orderDetails, shops, address, payment, orderDebt, status);
+        Order order = new Order(purchaseModel.getMethodPayment(), total, user, orderDetails, shops, address, payment, orderDebt, status);
         orderRepository.save(order);
 
         // attach orderDetails to order

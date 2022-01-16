@@ -1,3 +1,8 @@
+// JS for set loading
+var setGlobalLoading = function (isLoading) {
+    $('#globalLoading')[isLoading ? 'addClass' : 'removeClass']('loading');
+}
+
 $(function () {
     // JS for custom select
     function setSelect(select, value, text) {
@@ -96,8 +101,8 @@ $(function () {
         $(`input[type="radio"][name=${name}]`).next().removeClass('active');
         $(this).next().addClass('active');
     })
-    $('input[type="radio"]').each((index, item) =>   {
-        if(item.checked){
+    $('input[type="radio"]').each((index, item) => {
+        if (item.checked) {
             $(item).next().addClass('active');
         }
     });

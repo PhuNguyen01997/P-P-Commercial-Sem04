@@ -19,4 +19,6 @@ public class PurchaseModel {
     private Integer addressId;
 
     private Integer paymentId;
+
+    private Boolean methodPayment;
 }

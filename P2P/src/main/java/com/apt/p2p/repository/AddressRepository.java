@@ -12,4 +12,7 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
     List<Address> findAllByUserId(@Param("id") int userId);
 
     List<Address> findAllByOrderById();
+
+    @Query("SELECT a FROM Address a WHERE a.shop.id=:id")
+    Address findByShopId(@Param("id") int shopId);
 }

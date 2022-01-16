@@ -15,7 +15,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -53,8 +55,8 @@ public class PaymentController {
 
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
-        model.addAttribute("addresses", addressService.findAllByUserId(3));
-        model.addAttribute("creditCards", paymentService.findAllByUserId(3));
+        model.addAttribute("addresses", addressService.findAllByUserId(2));
+        model.addAttribute("creditCards", paymentService.findAllByUserId(2));
         model.addAttribute("purchase", new PurchaseModel());
 
         return "user/main/payment";
@@ -102,13 +104,18 @@ public class PaymentController {
     }
 
     @PostMapping("checkout")
+    @Transactional
     public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
                            RedirectAttributes redirectAttributes) {
         OrderModel result = orderService.create(purchaseModel);
+
         if(result == null){
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
             return "redirect:/cart";
         }
+
+        cartService.deleteAllById(Arrays.asList(purchaseModel.getCartIds()));
+
         return "redirect:/order/" + result.getId();
     }
 }

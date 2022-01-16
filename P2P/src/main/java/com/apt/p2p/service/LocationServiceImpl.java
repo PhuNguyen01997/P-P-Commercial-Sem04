@@ -1,5 +1,6 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.entity.Address;
 import com.apt.p2p.entity.District;
 import com.apt.p2p.entity.Province;
 import com.apt.p2p.entity.Ward;
@@ -7,6 +8,7 @@ import com.apt.p2p.model.form.CalShippingForm;
 import com.apt.p2p.model.form.CalShippingResponse;
 import com.apt.p2p.model.form.CalShippingResponseData;
 import com.apt.p2p.model.view.*;
+import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.DistrictRepository;
 import com.apt.p2p.repository.ProvinceRepository;
 import com.apt.p2p.repository.WardRepository;
@@ -21,10 +23,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +35,8 @@ public class LocationServiceImpl implements LocationService {
     private ProvinceRepository provinceRepository;
     @Autowired
     private DistrictRepository districtRepository;
+    @Autowired
+    private AddressRepository addressRepository;
     @Autowired
     private WardRepository wardRepository;
     @Autowired
@@ -82,34 +83,39 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public CalShippingResponseData calShippingFree(CalShippingForm form) {
         String url = "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
+        Address toAddress = addressRepository.findById(form.getToAddressId()).get();
+        List<Address> fromAddresses = addressRepository.findAllById(Arrays.asList(form.getFromAddressId()));
 
-        try {
-//        MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
-            JSONObject paramsMap = new JSONObject();
-            paramsMap.put("service_type_id", 2);
-            paramsMap.put("insurance_value", form.getInsuranceValue());
-            paramsMap.put("coupon", null);
-            paramsMap.put("from_district_id", form.getFromDistrictId());
-            paramsMap.put("to_district_id", form.getToDistrictId());
-            paramsMap.put("to_ward_code", form.getToWardCode());
-            paramsMap.put("weight", 2000);
-            paramsMap.put("length", 30);
-            paramsMap.put("width", 15);
-            paramsMap.put("height", 15);
+        CalShippingResponseData data = fromAddresses.stream().map(shopAddress -> {
+            CalShippingResponseData result = null;
+            try {
+                JSONObject paramsMap = new JSONObject();
+                paramsMap.put("service_type_id", 2);
+                paramsMap.put("insurance_value", form.getInsuranceValue());
+                paramsMap.put("coupon", null);
+                paramsMap.put("from_district_id", shopAddress.getDistrictId());
+                paramsMap.put("to_district_id", toAddress.getDistrictId());
+                paramsMap.put("to_ward_code", toAddress.getWardId());
+                paramsMap.put("weight", 2000);
+                paramsMap.put("length", 30);
+                paramsMap.put("width", 15);
+                paramsMap.put("height", 15);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("token", ghnToken);
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<String> request = new HttpEntity<String>(paramsMap.toString(), headers);
+                HttpHeaders headers = new HttpHeaders();
+                headers.set("token", ghnToken);
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<String> request = new HttpEntity<String>(paramsMap.toString(), headers);
 
-            ResponseEntity<CalShippingResponse> response = restTemplate.postForEntity(url, request, CalShippingResponse.class);
-            CalShippingResponseData data = response.getBody().getData();
-            return data;
+                ResponseEntity<CalShippingResponse> response = restTemplate.postForEntity(url, request, CalShippingResponse.class);
+                result = response.getBody().getData();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+            return result;
+        }).max(Comparator.comparing(CalShippingResponseData::getTotal)).get();
+
+        return data;
     }
 
     private HttpEntity<String> getHeader() {

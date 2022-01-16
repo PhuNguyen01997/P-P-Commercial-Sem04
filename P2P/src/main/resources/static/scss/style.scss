@@ -14,7 +14,7 @@ $time-primary: 0.3s;
 
 @font-face {
   font-family: OCR A Std;
-  src: url("/assets/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
+  src: url("/fonts/ocr-a-std/OCRAStd.otf") format("opentype");
 }
 
 @mixin flex($align: center, $justify: center, $direction: row) {
@@ -146,12 +146,12 @@ label {
     cursor: pointer;
 
     &[data-value="minus"] {
-      background: url("/assets/img/common/icon-minus.png") no-repeat 50% 50%;
+      background: url("/img/common/icon-minus.png") no-repeat 50% 50%;
       background-size: 50% 50%;
     }
 
     &[data-value="plus"] {
-      background: url("/assets/img/common/icon-plus.png") no-repeat 50% 50%;
+      background: url("/img/common/icon-plus.png") no-repeat 50% 50%;
       background-size: 50% 50%;
     }
   }
@@ -696,6 +696,23 @@ label {
   .close {
     color: white;
     font-size: 20px;
+  }
+}
+
+#globalLoading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/img/common/spinner.svg'), linear-gradient(to bottom, rgba($color: #000, $alpha: 0.8), rgba($color: #000, $alpha: 0.8));
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 100% 100%;
+  background-position: center;
+
+  &.loading {
+    display: block;
   }
 }
 

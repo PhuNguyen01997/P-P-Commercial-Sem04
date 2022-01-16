@@ -844,6 +844,24 @@ label {
   font-size: 20px;
 }
 
+#globalLoading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("/assets/img/common/spinner.svg"), -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.8)), to(rgba(0, 0, 0, 0.8)));
+  background: url("/assets/img/common/spinner.svg"), linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 100% 100%;
+  background-position: center;
+}
+
+#globalLoading.loading {
+  display: block;
+}
+
 .header {
   background-color: #9932cc;
   color: white;
@@ -2272,6 +2290,8 @@ label {
 }
 
 .account-address-left--key {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   width: 160px;
   margin-right: 25px;
   text-align: right;
@@ -3029,6 +3049,8 @@ label {
 .pay-address--text .number, .pay-address--change .name,
 .pay-address--change .phone,
 .pay-address--change .number {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   font-size: 1.6rem;
 }
 
@@ -3315,7 +3337,8 @@ label {
   color: #9932cc;
 }
 
-.pay-submit-header--btn.active::before, .pay-submit-header--btn.active .icon {
+.pay-submit-header--btn.active::before,
+.pay-submit-header--btn.active .icon {
   display: block;
 }
 
