@@ -43,6 +43,8 @@ public class User {
 
     private Date updatedAt = new Date();
 
+    private String stripeCustomerId;
+
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Shop shop;
 

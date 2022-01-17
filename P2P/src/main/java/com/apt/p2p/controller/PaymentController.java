@@ -30,6 +30,8 @@ public class PaymentController {
     private AddressService addressService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private StripeService stripeService;
 
     @InitBinder("card")
     protected void initBinder(WebDataBinder binder) {
@@ -107,6 +109,8 @@ public class PaymentController {
     @Transactional
     public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
                            RedirectAttributes redirectAttributes) {
+        boolean payed = stripeService.checkout();
+
         OrderModel result = orderService.create(purchaseModel);
 
         if(result == null){
