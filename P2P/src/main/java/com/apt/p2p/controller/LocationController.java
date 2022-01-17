@@ -1,8 +1,5 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.common.modelMapper.DistrictMapper;
-import com.apt.p2p.common.modelMapper.ProvinceMapper;
-import com.apt.p2p.common.modelMapper.WardMapper;
 import com.apt.p2p.model.form.CalShippingForm;
 import com.apt.p2p.model.form.CalShippingResponseData;
 import com.apt.p2p.model.view.DistrictModel;
