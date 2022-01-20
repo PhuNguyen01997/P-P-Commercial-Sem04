@@ -16,12 +16,6 @@ import java.util.List;
 public class LocationController {
     @Autowired
     private LocationService locationService;
-    @Autowired
-    private ProvinceMapper provinceMapper;
-    @Autowired
-    private DistrictMapper districtMapper;
-    @Autowired
-    private WardMapper wardMapper;
 
     @GetMapping("/provinces")
     @ResponseBody
