@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class StripeServiceImpl implements StripeService {
     private String customerUrl = "https://api.stripe.com/v1/customers";
-    @Value("${stripe.secrect.key}")
+    @Value("${stripe.secret.key}")
     private String stripeApiKey;
 
     @Autowired
