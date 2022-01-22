@@ -19,28 +19,10 @@ public class Payment {
     private Integer id;
 
     @NotNull
-    private String fullname;
-
-    @NotNull
-    @Column(length = 20)
-    private String number;
-
-    @NotNull
-    private String type;
-
-    @NotNull
-    private Date due;
-
-    @NotNull
-    @Column(length = 10)
-    private String cvv;
+    private String stripeCardId;
 
     @NotNull
     private String addressRegister;
-
-    @NotNull
-    @Column(length = 10)
-    private String postalCode;
 
     @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
     private Shop shop;

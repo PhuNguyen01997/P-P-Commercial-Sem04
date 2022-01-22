@@ -30,7 +30,7 @@ public class TestController {
     }
 
     @GetMapping("/add-card")
-    public String addCard(){
+    public String addCard() {
         Stripe.apiKey = secretKey;
         String customerId = "cus_KvkJ3kC7wpHVlT";
 //        try {
@@ -65,7 +65,7 @@ public class TestController {
             Map<String, Object> attachCardMap = new HashMap<>();
             attachCardMap.put("source", token.getId());
 
-             PaymentSourceCollection source = customer.getSources();
+            PaymentSourceCollection source = customer.getSources();
 
             card = (Card) customer.getSources().create(attachCardMap);
 
@@ -79,7 +79,7 @@ public class TestController {
     }
 
     @GetMapping("/charge")
-    public String charge(){
+    public String charge() {
         Stripe.apiKey = secretKey;
         String customerId = "cus_KvkJ3kC7wpHVlT";
 
@@ -102,7 +102,31 @@ public class TestController {
             );
             Charge charge = Charge.create(params);
 
-            String s =  "";
+            String s = "";
+        } catch (StripeException e) {
+            e.printStackTrace();
+        }
+        return "user/main/test.html";
+    }
+
+    @GetMapping("/delete-card")
+    public String deleteCard() {
+        Stripe.apiKey = secretKey;
+        String customerId = "cus_KvkJ3kC7wpHVlT";
+
+        try {
+            Map<String, Object> retrieveParams = new HashMap<>();
+            List<String> expandList = new ArrayList<>();
+            expandList.add("sources");
+            retrieveParams.put("expand", expandList);
+            Customer customer = Customer.retrieve(customerId, retrieveParams, null);
+            PaymentSourceCollection source = customer.getSources();
+
+            Card card = (Card) source.retrieve(source.getData().get(1).getId());
+
+            Card deletedCard = (Card) card.delete();
+
+            String s = "";
         } catch (StripeException e) {
             e.printStackTrace();
         }

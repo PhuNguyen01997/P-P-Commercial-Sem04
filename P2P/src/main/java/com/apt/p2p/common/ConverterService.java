@@ -8,24 +8,24 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ConverterService {
-    @Bean(name = "hideCardNumber")
-    Converter hideCardNumberConverter() {
-        return new Converter<String, String>() {
-            @Override
-            public String convert(MappingContext<String, String> mappingContext) {
-                StringBuilder builder = new StringBuilder(mappingContext.getSource());
-                int mark = builder.length() - 4;
-                for (int i = 0; i < mark; i++) {
-                    builder.replace(i, i + 1, "*");
-                }
-                for (int i = 4; i < builder.length(); i += 5) {
-                    builder.insert(i, " ");
-                }
-
-                return builder.toString();
-            }
-        };
-    }
+//    @Bean(name = "hideCardNumber")
+//    Converter hideCardNumberConverter() {
+//        return new Converter<String, String>() {
+//            @Override
+//            public String convert(MappingContext<String, String> mappingContext) {
+//                StringBuilder builder = new StringBuilder(mappingContext.getSource());
+//                int mark = builder.length() - 4;
+//                for (int i = 0; i < mark; i++) {
+//                    builder.replace(i, i + 1, "*");
+//                }
+//                for (int i = 4; i < builder.length(); i += 5) {
+//                    builder.insert(i, " ");
+//                }
+//
+//                return builder.toString();
+//            }
+//        };
+//    }
 
     @Bean(name = "removeSpaceNumber")
     Converter removeSpaceNumberConverter(){

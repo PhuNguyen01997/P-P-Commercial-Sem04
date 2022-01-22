@@ -11,6 +11,8 @@ import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.PaymentRepository;
 import com.apt.p2p.repository.UserRepository;
+import com.stripe.model.Card;
+import com.stripe.model.PaymentSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,33 +33,44 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private CartService cartService;
     @Autowired
+    private StripeService stripeService;
+    @Autowired
     private PaymentMapper paymentMapper;
     @Autowired
     private AddressMapper addressMapper;
 
     @Override
     public PaymentModel create(PaymentModel paymentModel) {
-        try {
-            Payment payment = paymentMapper.paymentModelToEntity(paymentModel);
-            payment.setUser(userRepository.findById(1).get());
-            repository.save(payment);
-            return paymentMapper.paymentEntityToModel(payment);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+//        try {
+//            Payment payment = paymentMapper.paymentModelToEntity(paymentModel);
+//            payment.setUser(userRepository.findById(1).get());
+//            repository.save(payment);
+//            return paymentMapper.paymentEntityToModel(payment);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+        return null;
     }
 
     @Override
     public List<PaymentModel> findAll() {
-        return repository.findAll().stream().map(pe -> paymentMapper.paymentEntityToModel(pe)).collect(Collectors.toList());
+//        return repository.findAll().stream().map(pe -> paymentMapper.paymentEntityToModel(pe)).collect(Collectors.toList());
+        return null;
     }
 
     @Override
     public List<PaymentModel> findAllByUserId(int userId) {
-        Iterable<Payment> test = repository.findAllByUserId(userId);
-        List<PaymentModel> result = repository.findAllByUserId(userId).stream().map(pe -> paymentMapper.paymentEntityToModel(pe)).collect(Collectors.toList());
-        return result;
+        List<Card> cards = stripeService.getCards(userId);
+
+        try {
+            List<PaymentModel> result = cards.stream().map(ca -> paymentMapper.stripeCardToPaymentModel(ca)).collect(Collectors.toList());
+            String s = "";
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override

@@ -105,21 +105,21 @@ public class PaymentController {
         return "redirect:/card";
     }
 
-    @PostMapping("checkout")
-    @Transactional
-    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
-                           RedirectAttributes redirectAttributes) {
-        boolean payed = stripeService.checkout();
-
-        OrderModel result = orderService.create(purchaseModel);
-
-        if(result == null){
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
-            return "redirect:/cart";
-        }
-
-        cartService.deleteAllById(Arrays.asList(purchaseModel.getCartIds()));
-
-        return "redirect:/order/" + result.getId();
-    }
+//    @PostMapping("checkout")
+//    @Transactional
+//    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
+//                           RedirectAttributes redirectAttributes) {
+//        boolean payed = stripeService.checkout();
+//
+//        OrderModel result = orderService.create(purchaseModel);
+//
+//        if(result == null){
+//            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
+//            return "redirect:/cart";
+//        }
+//
+//        cartService.deleteAllById(Arrays.asList(purchaseModel.getCartIds()));
+//
+//        return "redirect:/order/" + result.getId();
+//    }
 }

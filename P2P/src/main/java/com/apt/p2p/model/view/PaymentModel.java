@@ -17,6 +17,8 @@ import java.util.List;
 public class PaymentModel {
     private Integer id;
 
+    private String stripeCardId;
+
     @NotBlank(message = "Họ tên không thể trống")
     private String fullname;
 
@@ -24,13 +26,15 @@ public class PaymentModel {
     @NotBlank(message = "Mã thẻ không thể trống")
     private String number;
 
+    private String last4;
+
     @NotNull(message = "Vui lòng chọn loại thẻ")
-    @Enumerated(EnumType.STRING)
-    private CardType type;
+//    @Enumerated(EnumType.STRING)
+    private String type;
 
     @JsonDeserialize(using = DateDeserializer.class)
     @NotNull(message = "Ngày hết hạn không thể trống")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM")
     private Date due;
 
     @NotNull(message = "CVV không thể trống")
