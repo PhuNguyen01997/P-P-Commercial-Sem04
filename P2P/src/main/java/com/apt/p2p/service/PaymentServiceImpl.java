@@ -11,7 +11,9 @@ import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.PaymentRepository;
 import com.apt.p2p.repository.UserRepository;
+import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
+import com.stripe.model.Customer;
 import com.stripe.model.PaymentSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,54 +42,52 @@ public class PaymentServiceImpl implements PaymentService {
     private AddressMapper addressMapper;
 
     @Override
-    public PaymentModel create(PaymentModel paymentModel) {
-//        try {
-//            Payment payment = paymentMapper.paymentModelToEntity(paymentModel);
-//            payment.setUser(userRepository.findById(1).get());
-//            repository.save(payment);
-//            return paymentMapper.paymentEntityToModel(payment);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-        return null;
+    public PaymentModel create(PaymentModel paymentModel) throws StripeException {
+        int userId = 1;
+        Card card = stripeService.createCard(userId, paymentModel);
+
+        return paymentMapper.stripeCardToPaymentModel(card);
     }
 
-    @Override
-    public List<PaymentModel> findAll() {
-//        return repository.findAll().stream().map(pe -> paymentMapper.paymentEntityToModel(pe)).collect(Collectors.toList());
-        return null;
-    }
+//    @Override
+//    public List<PaymentModel> findAll() {
+////        return repository.findAll().stream().map(pe -> paymentMapper.paymentEntityToModel(pe)).collect(Collectors.toList());
+//        return null;
+//    }
 
     @Override
     public List<PaymentModel> findAllByUserId(int userId) {
         List<Card> cards = stripeService.getCards(userId);
-        List<PaymentModel> result = new ArrayList<>();
 
-        try {
-            result = cards.stream().map(ca -> paymentMapper.stripeCardToPaymentModel(ca)).collect(Collectors.toList());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        List<PaymentModel> result = cards.stream().map(ca -> paymentMapper.stripeCardToPaymentModel(ca)).collect(Collectors.toList());
 
         return result;
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String stripeCardId) {
+        int userId = 1;
+        boolean result = false;
         try {
-            Payment payment = repository.findById(id).get();
-            if (payment.getShop() != null) {
-                payment.setUser(null);
-                repository.save(payment);
-            } else {
-                repository.deleteById(id);
-            }
-            return true;
-        } catch (Exception e) {
+            stripeService.deleteCard(userId, stripeCardId);
+            result = true;
+        } catch (Exception e){
             e.printStackTrace();
-            return false;
         }
+        return result;
+//        try {
+//            Payment payment = repository.findById(id).get();
+//            if (payment.getShop() != null) {
+//                payment.setUser(null);
+//                repository.save(payment);
+//            } else {
+//                repository.deleteById(id);
+//            }
+//            return true;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
     }
 
     @Override
@@ -103,7 +103,7 @@ public class PaymentServiceImpl implements PaymentService {
             shopId = Integer.parseInt(shopMatcher.group());
 
             Matcher cartMatcher = cartPattern.matcher(str);
-            List<Integer> cartIdList =  cartMatcher.results().map(matchResult -> Integer.parseInt(matchResult.group())).collect(Collectors.toList());
+            List<Integer> cartIdList = cartMatcher.results().map(matchResult -> Integer.parseInt(matchResult.group())).collect(Collectors.toList());
 
             result.add(cartService.getCartProductByShopIdAndCartId(shopId, cartIdList));
         }

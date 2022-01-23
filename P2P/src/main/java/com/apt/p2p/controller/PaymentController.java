@@ -6,6 +6,7 @@ import com.apt.p2p.model.view.OrderModel;
 import com.apt.p2p.model.view.PaymentModel;
 import com.apt.p2p.service.*;
 import com.apt.p2p.validate.PaymentModelValidator;
+import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -81,24 +82,28 @@ public class PaymentController {
     ) {
         if (result.hasErrors()) {
             model.addAttribute("card", paymentModel);
-            model.addAttribute("cards", paymentService.findAll());
+            model.addAttribute("cards", paymentService.findAllByUserId(1));
             model.addAttribute("hasAnyError", true);
 
             return "user/account/card";
         }
-        PaymentModel paymentResult = paymentService.create(paymentModel);
-        if(paymentResult == null){
+
+        try {
+            PaymentModel paymentResult = paymentService.create(paymentModel);
+        } catch (StripeException e) {
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra, vui lòng kiểm tra lại thông tin thẻ");
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thêm thẻ thanh toán, xin hãy thử lại sau");
         }
         return "redirect:/card";
     }
 
-    @DeleteMapping("card/{id}")
+    @DeleteMapping("card/{stripeCardId}")
     public String delete(
-            @PathVariable("id") int id,
+            @PathVariable("stripeCardId") String stripeCardId,
             RedirectAttributes redirectAttributes
     ) {
-        boolean result = paymentService.delete(id);
+        boolean result = paymentService.delete(stripeCardId);
         if (!result) {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
         }

@@ -1,13 +1,11 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.view.PaymentModel;
 import com.apt.p2p.repository.UserRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Card;
-import com.stripe.model.Customer;
-import com.stripe.model.PaymentSource;
-import com.stripe.model.PaymentSourceCollection;
+import com.stripe.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -60,6 +58,22 @@ public class StripeServiceImpl implements StripeService {
     }
 
     @Override
+    public Customer createCustomer(int userId) throws StripeException {
+        User user = userRepository.findById(userId).get();
+
+        Customer customer = null;
+        Map<String, Object> createParams = new HashMap<>();
+        String address = user.getAddresses().size() > 0 ? user.getAddresses().get(0).getNumber() : "";
+        createParams.put("address", address);
+        createParams.put("email", user.getEmail());
+        createParams.put("name", user.getUsername());
+        createParams.put("phone", user.getPhone());
+
+        customer = Customer.create(createParams);
+        return customer;
+    }
+
+    @Override
     public List<Card> getCards(int userId) {
         List<Card> result = new ArrayList<>();
         Customer customer = getCustomer(userId, true);
@@ -80,8 +94,50 @@ public class StripeServiceImpl implements StripeService {
         return result;
     }
 
+    @Override
+    public Card createCard(int userId, PaymentModel cardInfo) throws StripeException {
+        Customer customer = this.getCustomer(userId, true);
+        if (customer == null) {
+            this.createCustomer(userId);
+            customer = getCustomer(userId, true);
+        }
 
-//    @Override
+        Card newCard = null;
+        Map<String, Object> cardMap = new HashMap<>();
+        cardMap.put("number", cardInfo.getNumber());
+        cardMap.put("exp_month", cardInfo.getDue().getMonth() + 1);
+        cardMap.put("exp_year", cardInfo.getDue().getYear() + 1900);
+        cardMap.put("cvc", cardInfo.getCvv());
+        cardMap.put("name", cardInfo.getFullname());
+        cardMap.put("address_country", cardInfo.getAddressRegister());
+        cardMap.put("address_zip", cardInfo.getPostalCode());
+        // brand stripe can auto detect
+
+        Map<String, Object> cardParams = new HashMap<>();
+        cardParams.put("card", cardMap);
+        Token token = Token.create(cardParams);
+
+        Map<String, Object> attachCardMap = new HashMap<>();
+        attachCardMap.put("source", token.getId());
+
+        newCard = (Card) customer.getSources().create(attachCardMap);
+
+        return newCard;
+    }
+
+    @Override
+    public boolean deleteCard(int userId, String stripeCardId) throws StripeException {
+        Customer customer = this.getCustomer(userId, true);
+        Card card = (Card) customer.getSources().retrieve(stripeCardId);
+        card.delete();
+        return true;
+    }
+
+    private String convertCardTypeToAdd(String type) {
+        return type.toLowerCase().replaceAll("/\\s/", "_");
+    }
+
+    //    @Override
 //    public boolean checkout() {
 //        User user = userRepository.findById(3).get();
 //        Customer customer = findCustomer(user.getStripeCustomerId());
