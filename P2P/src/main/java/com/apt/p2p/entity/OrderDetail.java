@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "OrderDetail")
@@ -20,13 +21,13 @@ public class OrderDetail {
     private Integer id;
 
     @NotNull
-    private Double lastPrice;
+    private BigDecimal lastPrice;
 
     @NotNull
     private Integer quantity;
 
     @Transient
-    private Double subtotal;
+    private BigDecimal subtotal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
@@ -36,9 +37,9 @@ public class OrderDetail {
     @JoinColumn(name = "orderId")
     private Order order;
 
-    public OrderDetail(Double lastPrice, Integer quantity) {
+    public OrderDetail(BigDecimal lastPrice, Integer quantity) {
         this.lastPrice = lastPrice;
         this.quantity = quantity;
-        this.subtotal = lastPrice * quantity;
+        this.subtotal = lastPrice.multiply(BigDecimal.valueOf(quantity));
     }
 }

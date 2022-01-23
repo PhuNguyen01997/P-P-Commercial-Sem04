@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Order {
     private Boolean methodPayment;
 
     @NotNull
-    private Double total;
+    private BigDecimal total;
 
     @NotNull
     private Double percentPermission;
@@ -62,7 +63,7 @@ public class Order {
     @JoinColumn(name = "orderDeptId")
     private OrderDebt orderDebt;
 
-    public Order(Boolean methodPayment, Double total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt, StatusOrder statusOrder) {
+    public Order(Boolean methodPayment, BigDecimal total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt, StatusOrder statusOrder) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.percentPermission = 0.05;

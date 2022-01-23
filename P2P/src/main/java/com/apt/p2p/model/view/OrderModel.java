@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class OrderModel {
 
     private Boolean methodPayment;
 
-    private Double total;
+    private BigDecimal total;
 
     private Double percentPermission;
 

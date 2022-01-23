@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
             return orderDetail;
         }).collect(Collectors.toList());
 
-        double total = orderDetails.stream().mapToDouble(od -> od.getSubtotal()).sum();
+        BigDecimal total = orderDetails.stream().map(OrderDetail::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
 
         User user = userRepository.findById(2).get();
 
@@ -69,11 +70,12 @@ public class OrderServiceImpl implements OrderService {
         LocalDate localDate = LocalDate.now();
         OrderDebt orderDebt;
         Optional<OrderDebt> debtPresend = orderDebtRepository.findByUserIdAndMonth(2, localDate.getMonthValue(), localDate.getYear());
+        BigDecimal plusValue = total.multiply(BigDecimal.valueOf(0.05));
         if (debtPresend.isPresent()) {
             orderDebt = debtPresend.get();
-            orderDebt.setTotal(orderDebt.getTotal() + (total * 0.05));
+            orderDebt.setTotal(orderDebt.getTotal().add(plusValue));
         } else {
-            orderDebt = new OrderDebt(total * 0.05);
+            orderDebt = new OrderDebt(plusValue);
             orderDebt.setUser(user);
         }
         orderDebtRepository.save(orderDebt);

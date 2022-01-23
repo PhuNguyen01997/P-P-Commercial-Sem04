@@ -74,10 +74,10 @@ public class StripeServiceImpl implements StripeService {
             for (PaymentSource card : listPaymentSource) {
                 result.add((Card) card);
             }
-        } catch (StripeException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return result.size() > 0 ? result : null;
+        return result;
     }
 
 

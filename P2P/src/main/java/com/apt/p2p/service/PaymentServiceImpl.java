@@ -62,15 +62,15 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public List<PaymentModel> findAllByUserId(int userId) {
         List<Card> cards = stripeService.getCards(userId);
+        List<PaymentModel> result = new ArrayList<>();
 
         try {
-            List<PaymentModel> result = cards.stream().map(ca -> paymentMapper.stripeCardToPaymentModel(ca)).collect(Collectors.toList());
-            String s = "";
+            result = cards.stream().map(ca -> paymentMapper.stripeCardToPaymentModel(ca)).collect(Collectors.toList());
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        return null;
+        return result;
     }
 
     @Override

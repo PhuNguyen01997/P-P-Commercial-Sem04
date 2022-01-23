@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Product {
     private String name;
 
     @NotNull
-    private Double price;
+    private BigDecimal price;
 
     @Column(columnDefinition = "TEXT")
     @NotNull

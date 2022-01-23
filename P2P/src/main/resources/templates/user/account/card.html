@@ -21,12 +21,6 @@
         <ul class="account-card">
             <p th:if="${cards.isEmpty()}" class="py-5">Bạn không có tài khoản nào</p>
             <li th:each="item : ${cards}" class="account-card-item">
-                <!--                <p th:switch="${item.type}" class="account-card-item&#45;&#45;pic pic">-->
-                <!--                    <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"-->
-                <!--                         src="/img/common/icon-visa.png" alt="">-->
-                <!--                    <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"-->
-                <!--                         src="/img/common/icon-master-card.png" alt="">-->
-                <!--                </p>-->
                 <p class="account-card-item--pic pic">
                     <img th:src="${item.imgUrl}" alt="">
                 </p>

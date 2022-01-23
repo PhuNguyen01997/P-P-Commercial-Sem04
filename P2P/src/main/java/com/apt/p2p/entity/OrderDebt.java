@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjuster;
@@ -28,7 +29,7 @@ public class OrderDebt {
     private Integer id;
 
     @NotNull
-    private Double total;
+    private BigDecimal total;
 
     private Date isPaid = null;
 
@@ -53,7 +54,7 @@ public class OrderDebt {
     @OneToMany(mappedBy = "orderDebt", fetch = FetchType.LAZY)
     private List<Order> orders;
 
-    public OrderDebt(Double total) {
+    public OrderDebt(BigDecimal total) {
         LocalDate localDate = LocalDate.now();
         this.month = localDate.getMonthValue();
         this.year = localDate.getYear();

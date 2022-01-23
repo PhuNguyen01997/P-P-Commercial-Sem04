@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class ProductModel {
 
     private String name;
 
-    private Double price;
+    private BigDecimal price;
 
     private String image;
 

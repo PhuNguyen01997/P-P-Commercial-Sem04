@@ -5,15 +5,16 @@ import com.apt.p2p.entity.Product;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public class OrderDetailModel {
     private Integer id;
 
-    private Double lastPrice;
+    private BigDecimal lastPrice;
 
     private Integer quantity;
 
-    private Double subtotal;
+    private BigDecimal subtotal;
 
     private Product product;
 
