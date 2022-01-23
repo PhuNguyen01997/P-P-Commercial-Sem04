@@ -11,4 +11,19 @@ public class StringProcessForView {
         stringBuilder.append(", " + addressModel.getProvince());
         return stringBuilder.toString();
     }
+
+    public static String getImgUrlByType(String type){
+        String url = "";
+        switch (type.toUpperCase()) {
+            case "VISA": {
+                url = "/img/common/icon-visa.png";
+                break;
+            }
+            case "MASTERCARD": {
+                url = "/img/common/icon-master-card.png";
+                break;
+            }
+        }
+        return url;
+    }
 }

@@ -1,5 +1,6 @@
 package com.apt.p2p.common.modelMapper;
 
+import com.apt.p2p.common.StringProcessForView;
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.view.PaymentModel;
 import com.stripe.model.Card;
@@ -68,32 +69,19 @@ public class PaymentMapper {
 //        return mapper.map(entity, PaymentModel.class);
 //    }
 
-    public PaymentModel stripeCardToPaymentModel(Card source) {
-        ModelMapper mapper = mapperService.getModelMapper();
-
-        try {
-            mapper.typeMap(Card.class, PaymentModel.class);
-//            mapper.addMappings(new PropertyMap<Card, PaymentModel>() {
-//                @Override
-//                protected void configure() {
-//                    skip(destination.getShop());
-//                    skip(destination.getUser());
-//                    skip(destination.getOrders());
-////                map().setFullname(source.getName());
-////                map().setAddressRegister(source.getAddressCountry());
-////                map().setPostalCode(source.getAddressZip());
-////                map().setDue(new Date(source.getExpYear().intValue(), source.getExpMonth().intValue(), 1));
-////                map().setType(source.getBrand());
-//
-////                using(setImageCard).map(source.getType(), destination.getImgUrl());
-////                using(hideCardNumberConverter).map(source.getNumber()).setNumber("Error mapping");
-//                }
-//            });
-        } catch (Exception e){
-            e.printStackTrace();
+    public PaymentModel stripeCardToPaymentModel(Card card) {
+        PaymentModel result = new PaymentModel();
+        if(card == null){
+            return null;
         }
-
-        mapper.validate();
-        return mapper.map(source, PaymentModel.class);
+        result.setStripeCardId(card.getId());
+        result.setFullname(card.getName());
+        result.setLast4(card.getLast4());
+        result.setType(card.getBrand());
+        result.setDue(new Date(card.getExpYear().intValue(), card.getExpMonth().intValue(), 1));
+        result.setAddressRegister(card.getAddressCountry());
+        result.setPostalCode(card.getAddressZip());
+        result.setImgUrl(StringProcessForView.getImgUrlByType(card.getBrand()));
+        return result;
     }
 }

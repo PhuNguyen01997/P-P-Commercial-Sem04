@@ -1,7 +1,7 @@
 package com.apt.p2p.entity;
 
 public enum CardType {
-    VISA("Visa"), MASTER_CARD("Master card");
+    VISA("Visa"), MASTER_CARD("MasterCard");
 
     private final String displayValue;
 
