@@ -55,15 +55,17 @@ public class Order {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paymentId")
-    private Payment payment;
+    private String stripeCardId;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "paymentId")
+//    private Payment payment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderDeptId")
     private OrderDebt orderDebt;
 
-    public Order(Boolean methodPayment, BigDecimal total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, Payment payment, OrderDebt orderDebt, StatusOrder statusOrder) {
+    public Order(Boolean methodPayment, BigDecimal total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, String stripeCardId, OrderDebt orderDebt, StatusOrder statusOrder) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.percentPermission = 0.05;
@@ -73,7 +75,7 @@ public class Order {
         this.orderDetails = orderDetails;
         this.shops = shops;
         this.address = address;
-        this.payment = payment;
+        this.stripeCardId = stripeCardId;
         this.orderDebt = orderDebt;
         this.statusOrder = statusOrder;
     }

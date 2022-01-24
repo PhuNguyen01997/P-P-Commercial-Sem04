@@ -58,8 +58,8 @@ public class PaymentController {
 
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
-        model.addAttribute("addresses", addressService.findAllByUserId(2));
-        model.addAttribute("creditCards", paymentService.findAllByUserId(2));
+        model.addAttribute("addresses", addressService.findAllByUserId(3));
+        model.addAttribute("creditCards", paymentService.findAllByUserId(3));
         model.addAttribute("purchase", new PurchaseModel());
 
         return "user/main/payment";
@@ -68,7 +68,7 @@ public class PaymentController {
     @GetMapping("card")
     public String card(Model model) {
         model.addAttribute("card", new PaymentModel());
-        model.addAttribute("cards", paymentService.findAllByUserId(1));
+        model.addAttribute("cards", paymentService.findAllByUserId(3));
 
         return "user/account/card";
     }
@@ -82,12 +82,11 @@ public class PaymentController {
     ) {
         if (result.hasErrors()) {
             model.addAttribute("card", paymentModel);
-            model.addAttribute("cards", paymentService.findAllByUserId(1));
+            model.addAttribute("cards", paymentService.findAllByUserId(3));
             model.addAttribute("hasAnyError", true);
 
             return "user/account/card";
         }
-
         try {
             PaymentModel paymentResult = paymentService.create(paymentModel);
         } catch (StripeException e) {
@@ -110,21 +109,19 @@ public class PaymentController {
         return "redirect:/card";
     }
 
-//    @PostMapping("checkout")
-//    @Transactional
-//    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
-//                           RedirectAttributes redirectAttributes) {
-//        boolean payed = stripeService.checkout();
-//
-//        OrderModel result = orderService.create(purchaseModel);
-//
-//        if(result == null){
-//            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
-//            return "redirect:/cart";
-//        }
-//
-//        cartService.deleteAllById(Arrays.asList(purchaseModel.getCartIds()));
-//
-//        return "redirect:/order/" + result.getId();
-//    }
+    @PostMapping("checkout")
+    @Transactional
+    public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
+                           RedirectAttributes redirectAttributes) {
+        OrderModel result = orderService.create(purchaseModel);
+
+        if(result == null){
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
+            return "redirect:/cart";
+        }
+
+        cartService.deleteAllById(Arrays.asList(purchaseModel.getCartIds()));
+
+        return "redirect:/order/" + result.getId();
+    }
 }

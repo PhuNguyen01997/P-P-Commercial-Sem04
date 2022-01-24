@@ -1,6 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.PaymentModel;
 import com.apt.p2p.repository.UserRepository;
 import com.stripe.Stripe;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,13 +66,15 @@ public class StripeServiceImpl implements StripeService {
 
         Customer customer = null;
         Map<String, Object> createParams = new HashMap<>();
-        String address = user.getAddresses().size() > 0 ? user.getAddresses().get(0).getNumber() : "";
-        createParams.put("address", address);
         createParams.put("email", user.getEmail());
         createParams.put("name", user.getUsername());
         createParams.put("phone", user.getPhone());
 
         customer = Customer.create(createParams);
+
+        user.setStripeCustomerId(customer.getId());
+        userRepository.save(user);
+
         return customer;
     }
 
@@ -77,6 +82,10 @@ public class StripeServiceImpl implements StripeService {
     public List<Card> getCards(int userId) {
         List<Card> result = new ArrayList<>();
         Customer customer = getCustomer(userId, true);
+
+        if (customer == null) {
+            return result;
+        }
 
         try {
             Map<String, Object> params = new HashMap<>();
@@ -133,51 +142,22 @@ public class StripeServiceImpl implements StripeService {
         return true;
     }
 
-    private String convertCardTypeToAdd(String type) {
-        return type.toLowerCase().replaceAll("/\\s/", "_");
-    }
+    @Override
+    public boolean checkout(int userId, BigDecimal total, String stripeCardId) throws StripeException{
+        BigDecimal totalUsd = total.divide(BigDecimal.valueOf(2000));
+        Customer customer = getCustomer(userId, true);
+        if (customer == null) {
+            return false;
+        }
 
-    //    @Override
-//    public boolean checkout() {
-//        User user = userRepository.findById(3).get();
-//        Customer customer = findCustomer(user.getStripeCustomerId());
-//        if(customer == null){
-//            customer = createCustomer(user.getId());
-//        }
-//        if(customer == null){
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public Customer createCustomer(int userId) {
-//        User user = userRepository.findById(userId).get();
-//        Stripe.apiKey = stripeApiKey;
-//        Customer customer = null;
-//        try {
-//            Map<String, Object> params = new HashMap<>();
-//            params.put("email", user.getEmail());
-//            params.put("name", user.getUsername());
-//            params.put("phone", user.getPhone());
-//            customer = Customer.create(params);
-//            user.setStripeCustomerId(customer.getId());
-//            userRepository.save(user);
-//        } catch (StripeException e) {
-//            e.printStackTrace();
-//        }
-//        return customer;
-//    }
-//
-//
-//    public Customer findCustomer(String customerId) {
-//        Customer customer = null;
-//        try {
-//            Stripe.apiKey = stripeApiKey;
-//            customer = Customer.retrieve(customerId);
-//        } catch (StripeException e) {
-//            e.printStackTrace();
-//        }
-//        return customer;
-//    }
+        Map<String, Object> chargeParams = new HashMap<>();
+        chargeParams.put("amount", totalUsd.multiply(BigDecimal.valueOf(100)).setScale(0, RoundingMode.HALF_UP));
+        chargeParams.put("currency", "usd");
+        chargeParams.put("source", stripeCardId);
+        chargeParams.put("customer", customer.getId());
+
+        Charge charge = Charge.create(chargeParams);
+
+        return true;
+    }
 }

@@ -101,14 +101,17 @@
                         <label th:each="creditCard : ${creditCards}" th:for="${creditCard.id}"
                                class="pay-submit-body--card-item">
                             <div class="radio">
-                                <input th:checked="${creditCardStat.index == 0}" th:value="${creditCard.id}"
-                                       name="paymentId" th:id="${creditCard.id}" type="radio">
+                                <input th:checked="${creditCardStat.index == 0}" th:value="${creditCard.stripeCardId}"
+                                       name="stripeCardId" th:id="${creditCard.id}" type="radio">
                                 <div class="radio-show"></div>
                             </div>
                             <p class="pic">
                                 <img th:src="${creditCard.imgUrl}" alt="">
                             </p>
-                            <p th:text="${creditCard.number}" class="number">[Credit Card Number]</p>
+                            <p class="number">
+                                <span>**** **** ****</span>
+                                <span th:text="${creditCard.last4}">[Credit Card Last 4]</span>
+                            </p>
                         </label>
                     </div>
                     <a th:href="@{/card}" class="btn btn__white pay-submit-body--card-order"><i

@@ -43,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentModel create(PaymentModel paymentModel) throws StripeException {
-        int userId = 1;
+        int userId = 3;
         Card card = stripeService.createCard(userId, paymentModel);
 
         return paymentMapper.stripeCardToPaymentModel(card);
@@ -66,7 +66,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public boolean delete(String stripeCardId) {
-        int userId = 1;
+        int userId = 3;
         boolean result = false;
         try {
             stripeService.deleteCard(userId, stripeCardId);

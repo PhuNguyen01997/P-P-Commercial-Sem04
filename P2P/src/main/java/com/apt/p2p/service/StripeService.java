@@ -1,16 +1,16 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.PaymentModel;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
 import com.stripe.model.Customer;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface StripeService {
-//    public boolean checkout();
-//    public Customer createCustomer(int userId);
-//    public Customer findCustomer(String customerId);
+    public boolean checkout(int userId, BigDecimal total, String stripeCardId) throws StripeException;
 
     public Customer getCustomer(int userId, boolean withSource);
 

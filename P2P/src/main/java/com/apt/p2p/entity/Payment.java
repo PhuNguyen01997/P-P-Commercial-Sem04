@@ -31,6 +31,6 @@ public class Payment {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY)
+//    private List<Order> orders;
 }

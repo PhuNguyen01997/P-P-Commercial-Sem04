@@ -18,7 +18,7 @@ public class PurchaseModel {
     @NotNull
     private Integer addressId;
 
-    private Integer paymentId;
+    private String stripeCardId;
 
     private Boolean methodPayment;
 }
