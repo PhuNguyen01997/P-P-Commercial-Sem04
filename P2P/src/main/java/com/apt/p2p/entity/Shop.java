@@ -50,9 +50,8 @@ public class Shop {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paymentId")
-    private Payment payment;
+    @NotNull
+    private String stripeCardId;
 
     @ManyToMany(mappedBy = "shops", fetch = FetchType.LAZY)
     private List<Order> orders;

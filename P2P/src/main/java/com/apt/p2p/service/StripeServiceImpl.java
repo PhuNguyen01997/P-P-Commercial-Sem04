@@ -1,8 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.User;
-import com.apt.p2p.model.form.PurchaseModel;
-import com.apt.p2p.model.view.PaymentModel;
+import com.apt.p2p.model.view.CardModel;
 import com.apt.p2p.repository.UserRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -104,7 +103,7 @@ public class StripeServiceImpl implements StripeService {
     }
 
     @Override
-    public Card createCard(int userId, PaymentModel cardInfo) throws StripeException {
+    public Card createCard(int userId, CardModel cardInfo) throws StripeException {
         Customer customer = this.getCustomer(userId, true);
         if (customer == null) {
             this.createCustomer(userId);

@@ -1,22 +1,17 @@
 package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.common.StringProcessForView;
-import com.apt.p2p.entity.*;
-import com.apt.p2p.model.view.PaymentModel;
+import com.apt.p2p.model.view.CardModel;
 import com.stripe.model.Card;
-import com.stripe.model.PaymentSource;
 import org.modelmapper.Converter;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.print.attribute.standard.Destination;
 import java.util.Date;
 
 @Service
-public class PaymentMapper {
+public class CardMapper {
     @Autowired
     private MapperService mapperService;
 
@@ -32,10 +27,10 @@ public class PaymentMapper {
     @Qualifier("setImageCard")
     private Converter setImageCard;
 
-//    public Payment paymentModelToEntity(PaymentModel model) {
+//    public Card cardModelToEntity(CardModel model) {
 //        ModelMapper mapper = mapperService.getModelMapper();
-//        mapper.typeMap(PaymentModel.class, Payment.class);
-//        mapper.addMappings(new PropertyMap<PaymentModel, Payment>() {
+//        mapper.typeMap(CardModel.class, Card.class);
+//        mapper.addMappings(new PropertyMap<CardModel, Card>() {
 //            @Override
 //            protected void configure() {
 //                skip(destination.getShop());
@@ -48,13 +43,13 @@ public class PaymentMapper {
 //        });
 //
 //        mapper.validate();
-//        return mapper.map(model, Payment.class);
+//        return mapper.map(model, Card.class);
 //    }
 
-//    public PaymentModel paymentEntityToModel(Payment entity) {
+//    public CardModel cardEntityToModel(Card entity) {
 //        ModelMapper mapper = mapperService.getModelMapper();
-//        mapper.typeMap(Payment.class, PaymentModel.class);
-//        mapper.addMappings(new PropertyMap<Payment, PaymentModel>() {
+//        mapper.typeMap(Card.class, CardModel.class);
+//        mapper.addMappings(new PropertyMap<Card, CardModel>() {
 //            @Override
 //            protected void configure() {
 //                skip(destination.getShop());
@@ -66,11 +61,11 @@ public class PaymentMapper {
 //        });
 //
 //        mapper.validate();
-//        return mapper.map(entity, PaymentModel.class);
+//        return mapper.map(entity, CardModel.class);
 //    }
 
-    public PaymentModel stripeCardToPaymentModel(Card card) {
-        PaymentModel result = new PaymentModel();
+    public CardModel stripeCardToCardModel(Card card) {
+        CardModel result = new CardModel();
         if(card == null){
             return null;
         }

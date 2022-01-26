@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentModel {
+public class CardModel {
     private Integer id;
 
     private String stripeCardId;

@@ -1,7 +1,6 @@
 package com.apt.p2p.service;
 
-import com.apt.p2p.model.form.PurchaseModel;
-import com.apt.p2p.model.view.PaymentModel;
+import com.apt.p2p.model.view.CardModel;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
 import com.stripe.model.Customer;
@@ -18,7 +17,7 @@ public interface StripeService {
 
     public List<Card> getCards(int userId);
 
-    public Card createCard(int userId, PaymentModel cardInfo) throws StripeException;
+    public Card createCard(int userId, CardModel cardInfo) throws StripeException;
 
     public boolean deleteCard(int userId, String stripeCardId) throws StripeException;
 }

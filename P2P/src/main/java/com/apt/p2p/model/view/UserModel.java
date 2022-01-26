@@ -31,7 +31,7 @@ public class UserModel {
 //    private List<Address> addresses;
 //
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<PaymentModel> payments;
+    private List<CardModel> payments;
 //
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Cart> carts;

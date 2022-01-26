@@ -1,7 +1,6 @@
 package com.apt.p2p.entity;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
@@ -51,8 +50,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Address> addresses;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Payment> payments;
+//    private List<Card> cards;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Cart> carts;

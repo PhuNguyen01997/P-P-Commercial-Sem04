@@ -10,8 +10,8 @@ INSERT INTO user (avatar, created_at, email, enabled, password, phone, stripe_cu
 -- ('237 SDAJ SDAKJH, phường 3, Quận 12, Thành phố Hồ Chí Minh', 743, NOW(), 'Buyer 01', '3895293053124463', 70000, 'VISA', 2),
 -- ('355 UGHEDA SFE, phường 1, Quận 1, Thành phố Hồ Chí Minh', 743, NOW(), 'Buyer 02', '8567053029543134', 6437, 'VISA', 2);
 
-INSERT INTO payment (address_register, stripe_card_id, user_id) VALUES
-('504 Cách Mạng Tháng Tám, phường 11, Quận 3, Thành phố Hồ Chí Minh', 'CAR_KJFGHBKQ12312', 1);
+-- INSERT INTO card (address_register, stripe_card_id, user_id) VALUES
+-- ('504 Cách Mạng Tháng Tám, phường 11, Quận 3, Thành phố Hồ Chí Minh', 'CAR_KJFGHBKQ12312', 1);
 
 INSERT INTO address (district, district_id, `number`, own_name, own_phone, province, province_id, ward, ward_id, user_id) VALUES
 ('Huyện Mường Khương', 2171, '123 ABC', 'Seller 01', '0937441896', 'Lào Cai', 269, 'Xã Thanh Bình', '80915', 1),
@@ -19,9 +19,9 @@ INSERT INTO address (district, district_id, `number`, own_name, own_phone, provi
 ('Huyện Bình Đại', 1895, '123 CBX XYZ', 'Buyer 01', '093285435', 'Bến Tre', 213, 'Xã Thạnh Trị', '560615', 3),
 ('Quận 3', 1444, '123 EOIWT', 'Buyer 02', '9183473932', 'Hồ Chí Minh', 202, 'Phường 4', '20304', 3);
 
-INSERT INTO shop (created_at, logo, name, permission, phone, updated_at, address_id, payment_id, user_id) VALUES
-(NOW(), 'no', 'Shốp Tếst 01', 1, '0907982932', NOW(), 1, 1, 1),
-(NOW(), 'No', 'Shop Test 02', 1, '0497238647', NOW(), 2, 1, 3);
+INSERT INTO shop (created_at, logo, name, permission, phone, updated_at, address_id, stripe_card_id, user_id) VALUES
+(NOW(), 'no', 'Shốp Tếst 01', 1, '0907982932', NOW(), 1, "None", 1),
+(NOW(), 'No', 'Shop Test 02', 1, '0497238647', NOW(), 2, "None", 3);
 
 INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Điện tử', NOW()),

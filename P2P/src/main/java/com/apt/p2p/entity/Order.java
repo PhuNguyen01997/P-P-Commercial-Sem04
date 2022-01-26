@@ -58,8 +58,8 @@ public class Order {
     private String stripeCardId;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "paymentId")
-//    private Payment payment;
+//    @JoinColumn(name = "cardId")
+//    private Card card;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderDeptId")

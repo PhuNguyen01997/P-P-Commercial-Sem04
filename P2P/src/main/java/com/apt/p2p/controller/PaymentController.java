@@ -3,9 +3,9 @@ package com.apt.p2p.controller;
 import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.OrderModel;
-import com.apt.p2p.model.view.PaymentModel;
+import com.apt.p2p.model.view.CardModel;
 import com.apt.p2p.service.*;
-import com.apt.p2p.validate.PaymentModelValidator;
+import com.apt.p2p.validate.CardModelValidator;
 import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -26,23 +26,13 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
     @Autowired
+    private CardService cardService;
+    @Autowired
     private CartService cartService;
     @Autowired
     private AddressService addressService;
     @Autowired
     private OrderService orderService;
-    @Autowired
-    private StripeService stripeService;
-
-    @InitBinder("card")
-    protected void initBinder(WebDataBinder binder) {
-        // trim at start and end String
-        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
-        binder.registerCustomEditor(String.class, stringTrimmer);
-
-        System.out.println("A binder for object: " + binder.getObjectName());
-        binder.addValidators(new PaymentModelValidator());
-    }
 
     @GetMapping("pay")
     public String payment() {
@@ -59,54 +49,10 @@ public class PaymentController {
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
         model.addAttribute("addresses", addressService.findAllByUserId(3));
-        model.addAttribute("creditCards", paymentService.findAllByUserId(3));
+        model.addAttribute("creditCards", cardService.findAllByUserId(3));
         model.addAttribute("purchase", new PurchaseModel());
 
         return "user/main/payment";
-    }
-
-    @GetMapping("card")
-    public String card(Model model) {
-        model.addAttribute("card", new PaymentModel());
-        model.addAttribute("cards", paymentService.findAllByUserId(3));
-
-        return "user/account/card";
-    }
-
-    @PostMapping("card")
-    public String create(
-            Model model,
-            @Valid @ModelAttribute("card") PaymentModel paymentModel,
-            BindingResult result,
-            RedirectAttributes redirectAttributes
-    ) {
-        if (result.hasErrors()) {
-            model.addAttribute("card", paymentModel);
-            model.addAttribute("cards", paymentService.findAllByUserId(3));
-            model.addAttribute("hasAnyError", true);
-
-            return "user/account/card";
-        }
-        try {
-            PaymentModel paymentResult = paymentService.create(paymentModel);
-        } catch (StripeException e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra, vui lòng kiểm tra lại thông tin thẻ");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thêm thẻ thanh toán, xin hãy thử lại sau");
-        }
-        return "redirect:/card";
-    }
-
-    @DeleteMapping("card/{stripeCardId}")
-    public String delete(
-            @PathVariable("stripeCardId") String stripeCardId,
-            RedirectAttributes redirectAttributes
-    ) {
-        boolean result = paymentService.delete(stripeCardId);
-        if (!result) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
-        }
-        return "redirect:/card";
     }
 
     @PostMapping("checkout")
@@ -115,7 +61,7 @@ public class PaymentController {
                            RedirectAttributes redirectAttributes) {
         OrderModel result = orderService.create(purchaseModel);
 
-        if(result == null){
+        if (result == null) {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
             return "redirect:/cart";
         }

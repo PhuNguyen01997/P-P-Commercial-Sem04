@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +37,7 @@ public class OrderModel {
 
     private AddressModel address;
 
-    private PaymentModel payment;
+    private CardModel payment;
 
     private OrderDebtModel orderDebt;
 }

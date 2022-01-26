@@ -3,7 +3,6 @@ package com.apt.p2p.controller;
 import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.service.AddressService;
 import com.apt.p2p.validate.AddressModelValidator;
-import com.apt.p2p.validate.PaymentModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
