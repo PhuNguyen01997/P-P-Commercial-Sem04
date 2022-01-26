@@ -2,11 +2,19 @@ package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.Order;
 import com.apt.p2p.entity.Product;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderDetailModel {
     private Integer id;
 
@@ -16,8 +24,7 @@ public class OrderDetailModel {
 
     private BigDecimal subtotal;
 
-    private Product product;
+    private ProductModel product;
 
-    private Order order;
-
+    private OrderModel order;
 }

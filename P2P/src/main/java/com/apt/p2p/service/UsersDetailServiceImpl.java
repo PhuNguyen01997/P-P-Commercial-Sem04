@@ -3,6 +3,7 @@ package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Role;
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.repository.RoleRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

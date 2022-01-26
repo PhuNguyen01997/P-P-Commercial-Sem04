@@ -18,11 +18,6 @@ public class MainController {
         return "user/main/shop-detail";
     }
 
-    @GetMapping("order")
-    public String order() {
-        return "user/account/order-user";
-    }
-
     @GetMapping("shop/{shopId}/order")
     public String orderShop(@PathVariable("shopId") int shopId) {
         return "user/account/order-shop";

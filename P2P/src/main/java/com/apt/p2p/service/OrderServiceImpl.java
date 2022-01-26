@@ -3,7 +3,9 @@ package com.apt.p2p.service;
 import com.apt.p2p.common.modelMapper.OrderMapper;
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.form.PurchaseModel;
+import com.apt.p2p.model.view.OrderDetailModel;
 import com.apt.p2p.model.view.OrderModel;
+import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Autowired
-    private StripeService stripeService;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -38,6 +38,14 @@ public class OrderServiceImpl implements OrderService {
     private OrderDebtRepository orderDebtRepository;
     @Autowired
     private StatusOrderRepository statusOrderRepository;
+    @Autowired
+    private OrderDetailService orderDetailService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ShopService shopService;
+    @Autowired
+    private StripeService stripeService;
     @Autowired
     private OrderMapper orderMapper;
 
@@ -105,5 +113,26 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderModel updateStatus(int statusId) {
         return null;
+    }
+
+    @Override
+    public List<OrderModel> findAllByUserId(int userId, boolean joinOrderDetailAndProduct, boolean joinShop) {
+//        List<Order> orders = orderRepository.findAllByUserId(userId);
+//        List<OrderModel> orderModels = orders.stream().map(od -> orderMapper.orderEntityToModel(od)).collect(Collectors.toList());
+//
+//        for (OrderModel order : orderModels) {
+//            if (joinOrderDetailAndProduct) {
+//                order.setOrderDetails(orderDetailService.findAllByOrderId(order.getId()));
+//
+//                for (OrderDetailModel ode : order.getOrderDetails()) {
+//                    ode.setProduct(productService.findByOrderDetailId(ode.getId()));
+//                }
+//            }
+//            if (joinShop) {
+//                List<ShopModel> shopModels = shopService.findByOrderId()
+//                order.setShops();
+//            }
+//        }
+        return  null;
     }
 }

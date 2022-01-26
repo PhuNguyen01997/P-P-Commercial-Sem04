@@ -14,23 +14,29 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
-    private ProductRepository repository;
+    private ProductRepository productRepository;
     @Autowired
     private ProductMapper productMapper;
 
-    public List<ProductModel> findByShopId(int shopId){
-        return repository.findByShopId(shopId).stream().map(pe -> productMapper.productEntityToModel(pe)).collect(Collectors.toList());
+    @Override
+    public List<ProductModel> findAllByShopId(int shopId){
+        return productRepository.findAllByShopId(shopId).stream().map(pe -> productMapper.productEntityToModel(pe)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductModel findByOrderDetailId(int orderDetailId) {
+        return productMapper.productEntityToModel(productRepository.findByOrderDetailId(orderDetailId));
     }
 
     @Override
     public Integer countByShopId(int shopId) {
-        return repository.countByShopId(shopId);
+        return productRepository.countByShopId(shopId);
     }
 
     @Override
     public ProductModel findById(int id) {
         ProductModel result = null;
-        Optional<Product> product = repository.findById(id);
+        Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
             result = productMapper.productEntityToModel(product.get());
         }

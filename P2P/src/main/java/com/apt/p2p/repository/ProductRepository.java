@@ -12,11 +12,14 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT s.products FROM Shop s WHERE s.id = :id")
-    public List<Product> findByShopId(@Param("id") int shopId);
+    List<Product> findAllByShopId(@Param("id") int shopId);
+
+    @Query("SELECT ode.product FROM OrderDetail ode WHERE ode.id = :id")
+    Product findByOrderDetailId(@Param("id") int orderDetailId);
 
     @Query("SELECT COUNT(p) FROM Product p WHERE p.shop.id = :id")
-    public Integer countByShopId(@Param("id") int shopId);
+    Integer countByShopId(@Param("id") int shopId);
 
     @Query("SELECT c.product FROM Cart c WHERE c.id=:id")
-    public Product findByCartId(@Param("id") int cartId);
+    Product findByCartId(@Param("id") int cartId);
 }

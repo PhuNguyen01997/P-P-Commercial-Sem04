@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT o FROM Order o WHERE o.user.id=:id ORDER BY o.id DESC")
-    public List<Order> findAllByUserId(@Param("id") int userId);
+    List<Order> findAllByUserId(@Param("id") int userId);
 }
