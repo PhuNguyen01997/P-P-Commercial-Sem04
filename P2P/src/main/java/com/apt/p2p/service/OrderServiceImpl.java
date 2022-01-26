@@ -3,19 +3,13 @@ package com.apt.p2p.service;
 import com.apt.p2p.common.modelMapper.OrderMapper;
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.form.PurchaseModel;
-import com.apt.p2p.model.view.OrderDetailModel;
 import com.apt.p2p.model.view.OrderModel;
-import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,15 +29,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
-    private OrderDebtRepository orderDebtRepository;
+    private ShopFundRepository shopFundRepository;
     @Autowired
     private StatusOrderRepository statusOrderRepository;
-    @Autowired
-    private OrderDetailService orderDetailService;
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private ShopService shopService;
     @Autowired
     private StripeService stripeService;
     @Autowired
@@ -51,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderModel create(PurchaseModel purchaseModel) {
+        int userId = 3;
         OrderModel result = null;
         try {
             // handle save to db
@@ -66,31 +55,50 @@ public class OrderServiceImpl implements OrderService {
 
             BigDecimal total = orderDetails.stream().map(OrderDetail::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
 
-            User user = userRepository.findById(3).get();
+            User user = userRepository.findById(userId).get();
 
-            List<Integer> productIdList = orderDetails.stream().map(od -> od.getProduct().getId()).collect(Collectors.toList());
-            List<Shop> shops = shopRepository.findAllByProductId(productIdList);
+//            List<Integer> productIdList = orderDetails.stream().map(od -> od.getProduct().getId()).collect(Collectors.toList());
+//            List<Shop> shops = shopRepository.findAllByProductId(productIdList);
+            HashMap<Integer, List<OrderDetail>> shopMap = new HashMap<>();
+            for (OrderDetail orderDetail : orderDetails) {
+                Shop shop = shopRepository.findByOrderDetailId(orderDetail.getId());
+                if (shopMap.get(shop.getId()) == null) {
+                    List<OrderDetail> odeList = new ArrayList<>();
+                    odeList.add(orderDetail);
+                    shopMap.put(shop.getId(), odeList);
+                } else {
+                    shopMap.get(shop.getId()).add(orderDetail);
+                }
+            }
 
             Address address = addressRepository.findById(purchaseModel.getAddressId()).get();
 
             String stripeCardId = purchaseModel.getMethodPayment() ? purchaseModel.getStripeCardId() : null;
 
-            LocalDate localDate = LocalDate.now();
-            OrderDebt orderDebt;
-            Optional<OrderDebt> debtPresend = orderDebtRepository.findByUserIdAndMonth(2, localDate.getMonthValue(), localDate.getYear());
-            BigDecimal plusValue = total.multiply(BigDecimal.valueOf(0.05));
-            if (debtPresend.isPresent()) {
-                orderDebt = debtPresend.get();
-                orderDebt.setTotal(orderDebt.getTotal().add(plusValue));
-            } else {
-                orderDebt = new OrderDebt(plusValue);
-                orderDebt.setUser(user);
+//            LocalDate localDate = LocalDate.now();
+//            ShopFund shopFund;
+//            Optional<ShopFund> debtPresent = orderDebtRepository.findByUserIdAndMonth(userId, localDate.getMonthValue(), localDate.getYear());
+//            BigDecimal plusValue = total.multiply(BigDecimal.valueOf(0.05));
+//            if (debtPresent.isPresent()) {
+//                shopFund = debtPresent.get();
+//                shopFund.setTotal(shopFund.getTotal().add(plusValue));
+//            } else {
+//                shopFund = new ShopFund(plusValue);
+//                shopFund.setUser(user);
+//            }
+//            orderDebtRepository.save(shopFund);
+            for (Integer shopId : shopMap.keySet()) {
+//                ShopFund shopFund;
+//                Optional<ShopFund> shopFundPresent = shopFundRepository.findByShopId(shop.getId());
+//                if (shopFundPresent.isPresent()) {
+//                    shopFund = shopFundPresent.get();
+//                    shopFund.setFund();
+//                }
             }
-            orderDebtRepository.save(orderDebt);
 
             StatusOrder status = statusOrderRepository.findById(1).get();
 
-            Order order = new Order(purchaseModel.getMethodPayment(), total, user, orderDetails, shops, address, stripeCardId, orderDebt, status);
+            Order order = new Order(purchaseModel.getMethodPayment(), total, user, orderDetails, shops, address, stripeCardId, shopFund, status);
             orderRepository.save(order);
 
             // attach orderDetails to order
@@ -133,6 +141,6 @@ public class OrderServiceImpl implements OrderService {
 //                order.setShops();
 //            }
 //        }
-        return  null;
+        return null;
     }
 }

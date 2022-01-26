@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 public class CartController {
     @Autowired
     private CartService cartService;
-    @Autowired
-    private ShopService shopService;
 
     @GetMapping("/cart")
     public String cart(Model model) {

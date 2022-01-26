@@ -53,6 +53,9 @@ public class Shop {
     @NotNull
     private String stripeCardId;
 
-    @ManyToMany(mappedBy = "shops", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    @OneToOne(mappedBy = "shop", fetch = FetchType.LAZY)
+    private ShopFund shopFunds;
 }

@@ -47,9 +47,10 @@ public class Order {
     @JoinColumn(name = "statusOrderId")
     private StatusOrder statusOrder;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shopId")
-    private List<Shop> shops;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shopId")
+    private Shop shop;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "addressId")
@@ -62,10 +63,10 @@ public class Order {
 //    private Card card;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderDeptId")
-    private OrderDebt orderDebt;
+    @JoinColumn(name = "shopFundId")
+    private ShopFund shopFund;
 
-    public Order(Boolean methodPayment, BigDecimal total, User user, List<OrderDetail> orderDetails, List<Shop> shops, Address address, String stripeCardId, OrderDebt orderDebt, StatusOrder statusOrder) {
+    public Order(Boolean methodPayment, BigDecimal total, User user, List<OrderDetail> orderDetails, Shop shop, Address address, String stripeCardId, ShopFund shopFund, StatusOrder statusOrder) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.percentPermission = 0.05;
@@ -73,10 +74,10 @@ public class Order {
         this.updatedAt = new Date();
         this.user = user;
         this.orderDetails = orderDetails;
-        this.shops = shops;
+        this.shop = shop;
         this.address = address;
         this.stripeCardId = stripeCardId;
-        this.orderDebt = orderDebt;
+        this.shopFund = shopFund;
         this.statusOrder = statusOrder;
     }
 }

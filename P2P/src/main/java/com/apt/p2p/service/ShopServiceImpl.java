@@ -26,8 +26,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public List<ShopModel> findAllByOrderId(int orderId) {
-        List<ShopModel> result = new ArrayList<>();
-        result = repository.findByOrderId(orderId).stream().map(shopModel -> shopMapper.shopEntityToModel(shopModel)).collect(Collectors.toList());
-        return result;
+//        List<ShopModel> result = new ArrayList<>();
+//        result = repository.findByOrderId(orderId).stream().map(shopModel -> shopMapper.shopEntityToModel(shopModel)).collect(Collectors.toList());
+//        return result;
+        return null;
     }
 }

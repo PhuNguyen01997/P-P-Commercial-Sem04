@@ -145,6 +145,10 @@
             $('.jsPayForm .inputContainer').append(`<input type='text' name="shopCart[]" value='S${key + cartIdString}'>`);
         })
 
+        if(!Object.keys(dataPay).length){
+            $('.jsPayForm .inputContainer').append(`<input type='text' name="shopCart[]" value=''>`);
+        }
+
         $('.jsSum').text(`${sum} vnđ`);
         $('.jsCountProduct').text(count);
     }

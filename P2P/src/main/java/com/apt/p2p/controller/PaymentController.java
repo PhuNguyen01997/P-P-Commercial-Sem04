@@ -40,8 +40,7 @@ public class PaymentController {
     }
 
     @PostMapping("pay")
-    public String payment(Model model,
-                          @RequestParam("shopCart[]") String[] idList) {
+    public String payment(Model model, @RequestParam("shopCart[]") String[] idList) {
         if (idList.length < 1) {
             return "redirect:/cart";
         }
