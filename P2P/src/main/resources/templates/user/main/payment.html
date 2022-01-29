@@ -11,7 +11,7 @@
     </th:block>
 </head>
 <body>
-<form th:action="@{/checkout}" th:object="${purchase}" th:method="POST" layout:fragment="content">
+<form class="checkoutForm" th:action="@{/checkout}" th:object="${purchase}" th:method="POST" layout:fragment="content">
     <div class="pay inner">
         <div class="top-envelope"></div>
         <div class="pay-address">
@@ -57,6 +57,7 @@
                 <div class="pay-cart-shop"
                      th:attr="data-shop-address-id=${shopCart.shop.address.id}, data-shop-id=${shopCart.shop.id}"
                 >
+                    <input type="hidden" name="shopIds[]" th:value="${shopCart.shop.id}">
                     <p th:text="${shopCart.shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
                     <a class="pay-cart-shop--chat" href="javascript: void(0);"><i
                             class="icon icon__left fas fa-comment-alt"></i>Chat
@@ -81,6 +82,8 @@
                         <p class="pay-cart-footer--shipping">
                             <span>Phí vận chuyển: </span>
                             <span class="jsShipping" th:attr="data-shop-id=${shopCart.shop.id}">[Shipping cost]</span>
+                            <input type="hidden" name="shipping[]"
+                                   th:attr="data-shop-id=${shopCart.shop.id}" value="">
                         </p>
                     </div>
                     <div class="pay-cart-footer--block">
@@ -198,8 +201,9 @@
                 let sumShipping = 0;
                 dataArr.forEach((shippingCost, index) => {
                     $($('.jsShipping')[index]).text(shippingCost + ' vnđ').attr("data-shipping", shippingCost);
+                    $($(`input[name="shipping[]"]`)[index]).val(shippingCost);
 
-                    const currentTotal = $('.jsTotal')[index].dataset.total;
+                    const currentTotal = parseInt($('.jsSumTotal')[index].dataset.total);
                     $($('.jsSumTotal')[index]).text(`${currentTotal + shippingCost} vnđ`).attr("data-total", shippingCost + currentTotal);
 
                     sumShipping += parseInt(shippingCost);
@@ -207,7 +211,7 @@
 
                 $('.jsShipping2').text(sumShipping + ' vnđ').attr('data-shipping', sumShipping);
 
-                const allTotal = $('.jsSumTotal2').attr('data-total') + sumShipping;
+                const allTotal = parseInt($('.jsSumTotal2').attr('data-total')) + sumShipping;
                 $('.jsSumTotal3').text(allTotal + ' vnđ').attr('data-total', allTotal);
 
                 setGlobalLoading(false);
@@ -232,10 +236,10 @@
         })
 
         $(`.jsCount[data-shop-id="${shopId}"]`).text(listTotal.length);
-
-        calTotal();
-        calShippingFee();
     })
+
+    calTotal();
+    calShippingFee();
 
     $('.pay-address--text').on('click', '.change', function () {
         $('.pay-address--change').removeClass('d-none');
@@ -267,6 +271,20 @@
         const div = this.dataset.div;
         $(`.pay-submit-body__${div}`).removeClass('d-none');
     })
+
+    $('.checkoutForm').on('submit', function(e){
+       e.preventDefault();
+       if($('input[name="methodPayment"]:checked').val() == 1){
+           const hasStripeCard = $('input[name="stripeCardId"]:checked').length;
+           if(hasStripeCard){
+               this.submit();
+           }
+       }
+       else {
+        this.submit();
+       }
+       console.log()
+    });
 </script>
 </body>
 </html>

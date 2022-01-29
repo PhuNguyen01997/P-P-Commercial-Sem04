@@ -16,7 +16,9 @@ import java.util.List;
 public class PurchaseModel {
     private Integer[] cartIds;
 
-    private BigDecimal shipping;
+    private Integer[] shopIds;
+
+    private BigDecimal[] shipping;
 
     @NotNull
     private Integer addressId;

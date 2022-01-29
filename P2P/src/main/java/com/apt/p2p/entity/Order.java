@@ -29,6 +29,9 @@ public class Order {
     private BigDecimal total;
 
     @NotNull
+    private BigDecimal shippingCost;
+
+    @NotNull
     private Double percentPermission;
 
     private Date createdAt;
@@ -66,9 +69,10 @@ public class Order {
     @JoinColumn(name = "shopFundId")
     private ShopFund shopFund;
 
-    public Order(Boolean methodPayment, BigDecimal total, User user, List<OrderDetail> orderDetails, Shop shop, Address address, String stripeCardId, ShopFund shopFund, StatusOrder statusOrder) {
+    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, Shop shop, Address address, String stripeCardId, ShopFund shopFund, StatusOrder statusOrder) {
         this.methodPayment = methodPayment;
         this.total = total;
+        this.shippingCost = shippingCost;
         this.percentPermission = 0.05;
         this.createdAt = new Date();
         this.updatedAt = new Date();

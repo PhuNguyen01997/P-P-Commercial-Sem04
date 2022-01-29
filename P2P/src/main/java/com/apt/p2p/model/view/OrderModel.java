@@ -21,6 +21,8 @@ public class OrderModel {
 
     private BigDecimal total;
 
+    private BigDecimal shippingCost;
+
     private Double percentPermission;
 
     private Date createdAt;

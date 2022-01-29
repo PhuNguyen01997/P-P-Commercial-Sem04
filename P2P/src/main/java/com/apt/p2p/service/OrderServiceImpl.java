@@ -64,17 +64,17 @@ public class OrderServiceImpl implements OrderService {
 
             User user = userRepository.findById(userId).get();
 
-            HashMap<Integer, List<OrderDetail>> shopMap = new HashMap<>();
-            for (OrderDetail orderDetail : orderDetails) {
-                Shop shop = shopRepository.findByOrderDetailId(orderDetail.getId());
-                if (shopMap.get(shop.getId()) == null) {
-                    List<OrderDetail> odeList = new ArrayList<>();
-                    odeList.add(orderDetail);
-                    shopMap.put(shop.getId(), odeList);
-                } else {
-                    shopMap.get(shop.getId()).add(orderDetail);
-                }
-            }
+//            HashMap<Integer, List<OrderDetail>> shopMap = new HashMap<>();
+//            for (OrderDetail orderDetail : orderDetails) {
+//                Shop shop = shopRepository.findByOrderDetailId(orderDetail.getId());
+//                if (shopMap.get(shop.getId()) == null) {
+//                    List<OrderDetail> odeList = new ArrayList<>();
+//                    odeList.add(orderDetail);
+//                    shopMap.put(shop.getId(), odeList);
+//                } else {
+//                    shopMap.get(shop.getId()).add(orderDetail);
+//                }
+//            }
 
             Address address = addressRepository.findById(purchaseModel.getAddressId()).get();
 
@@ -82,10 +82,24 @@ public class OrderServiceImpl implements OrderService {
 
             StatusOrder status = statusOrderRepository.findById(1).get();
 
+
+//            for (Integer shopId : shopMap.keySet()) {
+//
+//            }
+
             BigDecimal sumTotal = BigDecimal.valueOf(0);
-            for (Integer shopId : shopMap.keySet()) {
-                BigDecimal total = shopMap.get(shopId).stream().map(OrderDetail::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-                sumTotal = sumTotal.add(total);
+            Integer tempIndex = 0;
+//            HashMap<Integer, List<OrderDetail>> shopMap = new HashMap<>();
+            for (Integer shopId : purchaseModel.getShopIds()) {
+                List<OrderDetail> filterOrderDetails = orderDetails
+                        .stream().filter(ode -> ode.getProduct().getShop().getId() == shopId)
+                        .collect(Collectors.toList());
+
+                BigDecimal shipCost = purchaseModel.getShipping()[tempIndex];
+                BigDecimal total = filterOrderDetails.stream().map(OrderDetail::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+                BigDecimal totalWithShipCost = total.add(shipCost);
+
+                sumTotal = sumTotal.add(totalWithShipCost);
 
                 Shop shop = shopRepository.findById(shopId).get();
 
@@ -100,13 +114,15 @@ public class OrderServiceImpl implements OrderService {
                 }
                 shopFundRepository.save(shopFund);
 
-                Order order = new Order(purchaseModel.getMethodPayment(), total, user, orderDetails, shop, address, stripeCardId, shopFund, status);
+                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, shop, address, stripeCardId, shopFund, status);
                 orderRepository.save(order);
 
                 // attach orderDetails to order
-                shopMap.get(shopId).forEach(ode -> ode.setOrder(order));
+                filterOrderDetails.forEach(ode -> ode.setOrder(order));
 
                 result.add(orderMapper.orderEntityToModel(order));
+
+                tempIndex ++;
             }
 
             // Stripe charge
