@@ -32,6 +32,10 @@
             .phone {
                 font-weight: bold;
             }
+
+            .number {
+                flex-shrink: 1;
+            }
         }
 
         &--text {
@@ -48,6 +52,7 @@
             .change {
                 margin-left: auto;
                 color: $color-green;
+                white-space: nowrap;
             }
         }
 
@@ -93,7 +98,7 @@
             &>* {
                 &:nth-child(n + 2) {
                     color: $color-txt-white-grey;
-                    width: 100px;
+                    width: 120px;
                     flex-shrink: 0;
                     text-align: center;
                     margin-right: 10px;
@@ -128,7 +133,7 @@
             &--price,
             &--quantity,
             &--total {
-                width: 100px;
+                width: 120px;
                 flex-shrink: 0;
                 text-align: center;
             }
@@ -153,8 +158,19 @@
         }
 
         &-footer {
-            @include flex($justify: flex-start);
-            padding: 18px 30px;
+            border-top: 2px solid $color-bd;
+            &--block {
+                @include flex($justify: flex-start);
+                padding: 10px 30px;
+
+                &__01 {
+                    border-bottom: 1px solid $color-bd;
+                }
+            }
+
+            &--shipping {
+                margin-left: auto;
+            }
 
             &--note {
                 padding: 5px 10px;

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 public class PurchaseModel {
     private Integer[] cartIds;
+
+    private BigDecimal shipping;
 
     @NotNull
     private Integer addressId;

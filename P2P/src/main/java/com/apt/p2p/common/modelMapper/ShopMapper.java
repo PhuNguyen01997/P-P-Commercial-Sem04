@@ -22,6 +22,7 @@ public class ShopMapper {
                 skip(destination.getProducts());
                 skip(destination.getAddress());
                 skip(destination.getOrders());
+                skip(destination.getShopFunds());
             }
         });
 
@@ -37,7 +38,9 @@ public class ShopMapper {
             protected void configure() {
                 skip(destination.getUser());
                 skip(destination.getOrders());
-
+                skip(destination.getShopFund());
+                skip(destination.getAddress());
+                skip(destination.getProducts());
             }
         });
 

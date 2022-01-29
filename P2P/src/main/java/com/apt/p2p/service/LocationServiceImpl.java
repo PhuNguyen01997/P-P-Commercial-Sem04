@@ -23,6 +23,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,14 +32,9 @@ public class LocationServiceImpl implements LocationService {
     @Value("${GHN.sandbox.token}")
     private String ghnToken;
     private String url = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data";
-    @Autowired
-    private ProvinceRepository provinceRepository;
-    @Autowired
-    private DistrictRepository districtRepository;
+
     @Autowired
     private AddressRepository addressRepository;
-    @Autowired
-    private WardRepository wardRepository;
     @Autowired
     private RestTemplate restTemplate;
 
@@ -81,12 +77,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public CalShippingResponseData calShippingFree(CalShippingForm form) {
+    public List<BigDecimal> calShippingFree(CalShippingForm form) {
         String url = "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
         Address toAddress = addressRepository.findById(form.getToAddressId()).get();
         List<Address> fromAddresses = addressRepository.findAllById(Arrays.asList(form.getFromAddressId()));
 
-        CalShippingResponseData data = fromAddresses.stream().map(shopAddress -> {
+        List<BigDecimal> arrResult = fromAddresses.stream().map(shopAddress -> {
             CalShippingResponseData result = null;
             try {
                 JSONObject paramsMap = new JSONObject();
@@ -112,10 +108,10 @@ public class LocationServiceImpl implements LocationService {
                 e.printStackTrace();
             }
 
-            return result;
-        }).max(Comparator.comparing(CalShippingResponseData::getTotal)).get();
+            return BigDecimal.valueOf(result.getTotal());
+        }).collect(Collectors.toList());
 
-        return data;
+        return arrResult;
     }
 
     private HttpEntity<String> getHeader() {

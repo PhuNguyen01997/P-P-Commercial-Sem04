@@ -22,10 +22,10 @@ public class OrderMapper {
             protected void configure() {
                 skip(source.getUser());
                 skip(source.getOrderDetails());
-                skip(source.getShops());
+                skip(source.getShop());
                 skip(source.getAddress());
                 skip(source.getPayment());
-                skip(source.getOrderDebt());
+                skip(source.getShopFund());
 //                using(removeSpaceNumber).map(source.getCvv()).setCvv("error");
             }
         });
@@ -42,10 +42,10 @@ public class OrderMapper {
             protected void configure() {
                 skip(destination.getUser());
                 skip(destination.getOrderDetails());
-                skip(destination.getShops());
+                skip(destination.getShop());
                 skip(destination.getAddress());
                 skip(destination.getPayment());
-                skip(destination.getOrderDebt());
+                skip(destination.getShopFund());
             }
         });
 

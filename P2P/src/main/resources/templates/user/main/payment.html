@@ -12,7 +12,7 @@
 </head>
 <body>
 <form th:action="@{/checkout}" th:object="${purchase}" th:method="POST" layout:fragment="content">
-    <div class="pay">
+    <div class="pay inner">
         <div class="top-envelope"></div>
         <div class="pay-address">
             <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
@@ -46,15 +46,17 @@
                 </div>
             </th:block>
         </div>
-        <div class="pay-cart">
-            <div class="pay-cart-header">
-                <p>Sản phẩm</p>
-                <p>Số lượng</p>
-                <p>Đơn giá</p>
-                <p>Thành tiền</p>
-            </div>
-            <th:block th:each="shopCart : ${shopCarts}">
-                <div class="pay-cart-shop" th:attr="data-shop-address-id=${shopCart.shop.address.id}">
+        <th:block th:each="shopCart : ${shopCarts}">
+            <div class="pay-cart" th:attr="data-shop-id=${shopCart.shop.id}">
+                <div class="pay-cart-header">
+                    <p>Sản phẩm</p>
+                    <p>Số lượng</p>
+                    <p>Đơn giá</p>
+                    <p>Thành tiền</p>
+                </div>
+                <div class="pay-cart-shop"
+                     th:attr="data-shop-address-id=${shopCart.shop.address.id}, data-shop-id=${shopCart.shop.id}"
+                >
                     <p th:text="${shopCart.shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
                     <a class="pay-cart-shop--chat" href="javascript: void(0);"><i
                             class="icon icon__left fas fa-comment-alt"></i>Chat
@@ -69,17 +71,29 @@
                             Price]</p>
                         <p th:text="${productCart.cart.quantity}" class="pay-cart-item--quantity">[Cart Quantity]</p>
                         <p th:text="${(productCart.cart.quantity * productCart.product.price) + ' vnđ'}"
-                           th:attr="data-total=${productCart.cart.quantity * productCart.product.price}"
+                           th:attr="data-total=${productCart.cart.quantity * productCart.product.price}, data-shop-id=${shopCart.shop.id}"
                            class="pay-cart-item--total jsTotal">[Total: price x quantity]</p>
                     </li>
                 </ul>
-            </th:block>
-            <div class="pay-cart-footer">
-                <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
-                <p class="pay-cart-footer--text">Tổng số tiền (<span class="jsCount">[Count]</span> sản phẩm)</p>
-                <p class="pay-cart-footer--total jsSumTotal2">[Total]</p>
+                <div class="pay-cart-footer">
+                    <div class="pay-cart-footer--block pay-cart-footer--block__01">
+                        <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
+                        <p class="pay-cart-footer--shipping">
+                            <span>Phí vận chuyển: </span>
+                            <span class="jsShipping" th:attr="data-shop-id=${shopCart.shop.id}">[Shipping cost]</span>
+                        </p>
+                    </div>
+                    <div class="pay-cart-footer--block">
+                        <p class="pay-cart-footer--text">Tổng số tiền (
+                            <span th:attr="data-shop-id=${shopCart.shop.id}" class="jsCount">[Count]</span>
+                            sản phẩm)
+                        </p>
+                        <p th:attr="data-shop-id=${shopCart.shop.id}"
+                           class="pay-cart-footer--total jsSumTotal">[Total]</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </th:block>
         <div class="pay-submit">
             <div class="pay-submit-header">
                 <p class="pay-submit-header--txt">Phương thức thanh toán</p>
@@ -132,7 +146,7 @@
                     <span class="pay-submit-footer--txt">Tổng tiền hàng</span>
                     <span class="pay-submit-footer--number jsSumTotal2"></span>
                     <span class="pay-submit-footer--txt">Phí vận chuyển</span>
-                    <span class="pay-submit-footer--number jsShipping"></span>
+                    <span class="pay-submit-footer--number jsShipping2"></span>
                     <span class="pay-submit-footer--txt">Tổng thanh toán:</span>
                     <span class="pay-submit-footer--number pay-submit-footer--number__total jsSumTotal3"></span>
                 </div>
@@ -148,25 +162,31 @@
 
 <script layout:fragment="script">
     function calTotal() {
-        $('.jsSumTotal2').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
-        $('.jsSumTotal3').text(`${sumTotal} vnđ`).attr('data-total', sumTotal);
+        let sumTotal2 = 0;
+        Object.keys(sumTotal).forEach(key => {
+            $(`.jsSumTotal[data-shop-id="${key}"]`).text(`${sumTotal[key]} vnđ`).attr('data-total', sumTotal[key]);
+            sumTotal2 += sumTotal[key];
+        })
+
+        $('.jsSumTotal2').text(`${sumTotal2} vnđ`).attr('data-total', sumTotal2);
     }
 
-    function calShippingFee(){
+    function calShippingFee() {
         const input = $(`input[name="addressId"]:checked`)[0];
         const toAddressId = input.value;
         const fromAddressIdList = $('.pay-cart-shop').toArray().reduce((arr, item, index) => {
-            arr.push(parseInt(item.dataset.shopAddressId));
+            arr.push({shopId: item.dataset.shopId, addressId: parseInt(item.dataset.shopAddressId)});
             return arr;
         }, []);
 
-        const requestBody = {
-            fromAddressId: fromAddressIdList,
-            toAddressId: toAddressId,
-            insuranceValue: $('.jsSumTotal2').attr('data-total'),
-        };
-
         setGlobalLoading(true);
+
+        const requestBody = {
+            fromAddressId: fromAddressIdList.map(obj => obj.addressId),
+            toAddressId: toAddressId,
+            // insuranceValue: $(`.jsSumTotal[data-shop-id="${obj.shopId}"]`).attr('data-total'),
+            insuranceValue: 0,
+        };
 
         $.ajax({
             url: `${window.location.protocol}//${window.location.host}/calFee`,
@@ -174,30 +194,48 @@
             type: 'POST',
             contentType: "application/json",
             data: JSON.stringify(requestBody),
-            success: function (data) {
-                $('.jsShipping').text(`${data} vnđ`);
+            success: function (dataArr) {
+                let sumShipping = 0;
+                dataArr.forEach((shippingCost, index) => {
+                    $($('.jsShipping')[index]).text(shippingCost + ' vnđ').attr("data-shipping", shippingCost);
+
+                    const currentTotal = $('.jsTotal')[index].dataset.total;
+                    $($('.jsSumTotal')[index]).text(`${currentTotal + shippingCost} vnđ`).attr("data-total", shippingCost + currentTotal);
+
+                    sumShipping += parseInt(shippingCost);
+                })
+
+                $('.jsShipping2').text(sumShipping + ' vnđ').attr('data-shipping', sumShipping);
+
+                const allTotal = $('.jsSumTotal2').attr('data-total') + sumShipping;
+                $('.jsSumTotal3').text(allTotal + ' vnđ').attr('data-total', allTotal);
+
                 setGlobalLoading(false);
             },
             error: function (xhr, error, response) {
                 console.log({xhr, error, response});
-                setLoading(false);
+                setGlobalLoading(false);
             }
         });
     }
 
-    function setLoading(isLoading){
-        console.log(isLoading);
-    }
+    let sumTotal = {};
 
-    const listTotal = $('.jsTotal');
-    let sumTotal = 0;
-    listTotal.each((index, item) => {
-        sumTotal += parseFloat(item.dataset.total);
+    $('.pay-cart').each((index, item) => {
+        const shopId = item.dataset.shopId;
+
+        sumTotal[shopId] = 0;
+
+        const listTotal = $(`.jsTotal[data-shop-id="${shopId}"]`);
+        listTotal.each((index, item) => {
+            sumTotal[shopId] = sumTotal[shopId] + parseFloat(item.dataset.total);
+        })
+
+        $(`.jsCount[data-shop-id="${shopId}"]`).text(listTotal.length);
+
+        calTotal();
+        calShippingFee();
     })
-    $('.jsCount').text(listTotal.length);
-
-    calTotal();
-    calShippingFee();
 
     $('.pay-address--text').on('click', '.change', function () {
         $('.pay-address--change').removeClass('d-none');
@@ -216,7 +254,7 @@
         $('.pay-address--change').addClass('d-none');
         $('.pay-address--text').removeClass('d-none');
 
-        if(this.classList.contains('jsAddressSubmit')){
+        if (this.classList.contains('jsAddressSubmit')) {
             calShippingFee();
         }
     })

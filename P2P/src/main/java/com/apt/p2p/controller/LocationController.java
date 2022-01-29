@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -37,8 +38,8 @@ public class LocationController {
 
     @PostMapping("/calFee")
     @ResponseBody
-    public double calFee(@RequestBody CalShippingForm calForm){
-        CalShippingResponseData infoFee = locationService.calShippingFree(calForm);
-        return infoFee.getTotal();
+    public List<BigDecimal> calFee(@RequestBody CalShippingForm calForm){
+        List<BigDecimal> infoFee = locationService.calShippingFree(calForm);
+        return infoFee;
     }
 }

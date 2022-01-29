@@ -8,10 +8,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "OrderDebt")
+@Table(name = "ShopFund")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -61,5 +62,11 @@ public class ShopFund {
             BigDecimal minus = o.getTotal().multiply(BigDecimal.valueOf(o.getPercentPermission()));
             return o.getTotal().subtract(minus);
         }).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public ShopFund(Shop shop, BigDecimal fund) {
+        this.fund = fund;
+        this.shop = shop;
+        this.orders = new ArrayList<>();
     }
 }

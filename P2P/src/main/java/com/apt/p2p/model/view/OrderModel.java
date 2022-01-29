@@ -33,11 +33,11 @@ public class OrderModel {
 
     private StatusOrder statusOrder;
 
-    private List<ShopModel> shops;
+    private ShopModel shop;
 
     private AddressModel address;
 
     private CardModel payment;
 
-    private OrderDebtModel orderDebt;
+    private ShopFundModel shopFund;
 }

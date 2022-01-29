@@ -30,7 +30,7 @@ public class OrderController {
     public String order(Model model) {
         int userId = 3;
 
-        List<OrderModel> orders = orderService.findAllByUserId(userId, true, true);
+        List<OrderModel> orders = orderService.findAllByUserId(userId);
 
         model.addAttribute("orders", orders);
 

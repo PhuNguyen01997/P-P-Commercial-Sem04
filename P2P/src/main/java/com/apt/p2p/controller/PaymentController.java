@@ -58,7 +58,7 @@ public class PaymentController {
     @Transactional
     public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
                            RedirectAttributes redirectAttributes) {
-        OrderModel result = orderService.create(purchaseModel);
+        List<OrderModel> result = orderService.create(purchaseModel);
 
         if (result == null) {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
@@ -67,6 +67,6 @@ public class PaymentController {
 
         cartService.deleteAllById(Arrays.asList(purchaseModel.getCartIds()));
 
-        return "redirect:/order/" + result.getId();
+        return "redirect:/order/";
     }
 }

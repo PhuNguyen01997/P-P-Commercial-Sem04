@@ -9,6 +9,7 @@ import com.apt.p2p.model.view.DistrictModel;
 import com.apt.p2p.model.view.ProvinceModel;
 import com.apt.p2p.model.view.WardModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface LocationService {
@@ -18,5 +19,5 @@ public interface LocationService {
 
     List<WardModel> wardFindAllByDistrictId(int districtId);
 
-    CalShippingResponseData calShippingFree(CalShippingForm form);
+    List<BigDecimal> calShippingFree(CalShippingForm form);
 }

@@ -40,6 +40,8 @@ public class ShopModel {
 
     public List<OrderModel> orders;
 
+    public ShopFundModel shopFund;
+
     public Integer countProducts;
 
     public Integer countRates;

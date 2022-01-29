@@ -7,5 +7,5 @@ import java.util.List;
 public interface ShopService {
     ShopModel findByProductId(int productId);
 
-    List<ShopModel> findAllByOrderId(int orderId);
+    ShopModel findByOrderId(int orderId);
 }
