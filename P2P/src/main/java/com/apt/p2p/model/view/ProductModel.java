@@ -1,5 +1,6 @@
 package com.apt.p2p.model.view;
 
+import com.apt.p2p.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +32,6 @@ public class ProductModel {
     private ShopModel shop;
 
     private List<RateModel> rates;
+
+    private Category category;
 }

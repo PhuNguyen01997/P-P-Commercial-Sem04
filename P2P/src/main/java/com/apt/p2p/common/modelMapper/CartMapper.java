@@ -21,7 +21,7 @@ public class CartMapper {
             }
         });
 
-//        mapper.validate();
+        mapper.validate();
         return mapper.map(model, Cart.class);
     }
 
@@ -34,7 +34,7 @@ public class CartMapper {
             }
         });
 
-//        mapper.validate();
+        mapper.validate();
         return mapper.map(entity, CartModel.class);
     }
 }

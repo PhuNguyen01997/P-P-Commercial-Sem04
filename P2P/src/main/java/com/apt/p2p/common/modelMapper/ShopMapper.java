@@ -26,7 +26,7 @@ public class ShopMapper {
             }
         });
 
-//        mapper.validate();
+        mapper.validate();
         return mapper.map(model, Shop.class);
     }
 
@@ -41,10 +41,17 @@ public class ShopMapper {
                 skip(destination.getShopFund());
                 skip(destination.getAddress());
                 skip(destination.getProducts());
+                skip(destination.getCountProducts());
+                skip(destination.getCountRates());
             }
         });
 
-//        mapper.validate();
-        return mapper.map(entity, ShopModel.class);
+        mapper.validate();
+        ShopModel model = mapper.map(entity, ShopModel.class);
+
+        model.setCountProducts(entity.getProducts().size());
+        model.setCountRates(entity.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum));
+
+        return model;
     }
 }

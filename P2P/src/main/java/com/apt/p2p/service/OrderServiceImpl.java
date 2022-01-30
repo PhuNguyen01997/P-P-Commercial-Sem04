@@ -154,6 +154,8 @@ public class OrderServiceImpl implements OrderService {
                 ode.setProduct(productModel);
             }
 
+            model.setOrderDetails(orderDetails);
+
             ShopModel shopModel = shopService.findByOrderId(model.getId());
             model.setShop(shopModel);
 

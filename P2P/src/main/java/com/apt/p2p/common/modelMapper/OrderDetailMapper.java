@@ -7,6 +7,9 @@ import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.print.attribute.standard.Destination;
+import java.math.BigDecimal;
+
 @Service
 public class OrderDetailMapper {
     @Autowired
@@ -33,12 +36,17 @@ public class OrderDetailMapper {
         mapper.addMappings(new PropertyMap<OrderDetail, OrderDetailModel>() {
             @Override
             protected void configure() {
-                skip(source.getOrder());
-                skip(source.getProduct());
+                skip(destination.getSubtotal());
+                skip(destination.getOrder());
+                skip(destination.getProduct());
             }
         });
 
         mapper.validate();
-        return mapper.map(entity, OrderDetailModel.class);
+        OrderDetailModel model = mapper.map(entity, OrderDetailModel.class);
+
+        model.setSubtotal(entity.getLastPrice().multiply(BigDecimal.valueOf(entity.getQuantity())));
+
+        return model;
     }
 }
