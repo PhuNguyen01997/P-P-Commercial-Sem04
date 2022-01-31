@@ -64,32 +64,14 @@ public class OrderServiceImpl implements OrderService {
 
             User user = userRepository.findById(userId).get();
 
-//            HashMap<Integer, List<OrderDetail>> shopMap = new HashMap<>();
-//            for (OrderDetail orderDetail : orderDetails) {
-//                Shop shop = shopRepository.findByOrderDetailId(orderDetail.getId());
-//                if (shopMap.get(shop.getId()) == null) {
-//                    List<OrderDetail> odeList = new ArrayList<>();
-//                    odeList.add(orderDetail);
-//                    shopMap.put(shop.getId(), odeList);
-//                } else {
-//                    shopMap.get(shop.getId()).add(orderDetail);
-//                }
-//            }
-
             Address address = addressRepository.findById(purchaseModel.getAddressId()).get();
 
             String stripeCardId = purchaseModel.getMethodPayment() ? purchaseModel.getStripeCardId() : null;
 
             StatusOrder status = statusOrderRepository.findById(1).get();
 
-
-//            for (Integer shopId : shopMap.keySet()) {
-//
-//            }
-
             BigDecimal sumTotal = BigDecimal.valueOf(0);
             Integer tempIndex = 0;
-//            HashMap<Integer, List<OrderDetail>> shopMap = new HashMap<>();
             for (Integer shopId : purchaseModel.getShopIds()) {
                 List<OrderDetail> filterOrderDetails = orderDetails
                         .stream().filter(ode -> ode.getProduct().getShop().getId() == shopId)
@@ -122,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
 
                 result.add(orderMapper.orderEntityToModel(order));
 
-                tempIndex ++;
+                tempIndex++;
             }
 
             // Stripe charge
@@ -163,5 +145,13 @@ public class OrderServiceImpl implements OrderService {
         }).collect(Collectors.toList());
 
         return orderModels;
+    }
+
+    @Override
+    public OrderModel findById(int orderId) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        Order order = optionalOrder.orElse(null);
+
+        return orderMapper.orderEntityToModel(order);
     }
 }

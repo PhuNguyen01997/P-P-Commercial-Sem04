@@ -18,6 +18,8 @@ public class CartMapper {
         mapper.addMappings(new PropertyMap<CartModel, Cart>() {
             @Override
             protected void configure() {
+                skip(destination.getUser());
+                skip(destination.getProduct());
             }
         });
 
@@ -31,6 +33,8 @@ public class CartMapper {
         mapper.addMappings(new PropertyMap<Cart, CartModel>() {
             @Override
             protected void configure() {
+                skip(destination.getUser());
+                skip(destination.getProduct());
             }
         });
 

@@ -14,8 +14,11 @@
     <div class="split-main order-detail-main">
         <div class="order-detail-header">
             <a class="order-detail-header--back" href="#"><i class="fas fa-angle-left mr10"></i>Back</a>
-            <p class="order-detail-header--id">Order ID: 12837218736126</p>
-            <p class="order-detail-header--status">chỗ này ghi trạng thái đơn hàng</p>
+            <p class="order-detail-header--id">
+                <span>Order ID:</span>
+                <span th:text="${order.id}">[Order Id]</span>
+            </p>
+            <p th:text="${order.statusOrder.name}" class="order-detail-header--status">[Order Status]</p>
         </div>
         <div class="order-detail-status">
             <div class="order-step">
@@ -72,7 +75,7 @@
         </div>
         <div class="top-envelope"></div>
         <div class="order-detail-info">
-            <p class="order-detail-info--name">Nguyễn Hoàng Phú</p>
+            <p th:text="${order.user.name}" class="order-detail-info--name">[Order User Name]</p>
             <p class="order-detail-info--phone">0937441896</p>
             <p class="order-detail-info--address">99 wưsxng bw xrwc, Phường 9, Quận 9, TP. Hồ Chí Minh</p>
         </div>

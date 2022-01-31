@@ -11,4 +11,6 @@ public interface OrderService {
     OrderModel updateStatus(int statusId);
 
     List<OrderModel> findAllByUserId(int userId);
+
+    OrderModel findById(int orderId);
 }
