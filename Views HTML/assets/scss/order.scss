@@ -30,6 +30,7 @@
         }
 
         &--text {
+            flex-grow: 1;
             padding: 0 20px 0 10px;
 
             &>* {
@@ -77,8 +78,13 @@
         }
 
         &--btn {
+            color: white !important;
             font-size: 1.2rem;
             padding: 5px 8px;
+
+            i{
+                margin-right: 5px;
+            }
         }
 
         &--status {

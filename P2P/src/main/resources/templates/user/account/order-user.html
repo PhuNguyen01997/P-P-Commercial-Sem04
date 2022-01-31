@@ -27,20 +27,28 @@
                             <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
                                                                 alt=""></p>
                             <div class="order-item--text">
-                                <p th:text="${orderDetail.product.name}" class="order-item--name">[Order Product Name]</p>
-                                <p th:text="${orderDetail.product.category.name}" class="order-item--category">[Order Product Category]</p>
-                                <p th:text="${orderDetail.quantity}" class="order-item--quantity">[Order Quantity]</p>
+                                <p th:text="${orderDetail.product.name}" class="order-item--name">[Order Product
+                                    Name]</p>
+                                <p th:text="${orderDetail.product.category.name}" class="order-item--category">[Order
+                                    Product Category]</p>
+                                <p th:attr="data-value=${orderDetail.quantity}"
+                                   th:text="${orderDetail.quantity}" class="order-item--quantity jsQuantity">[Order
+                                    Quantity]</p>
                             </div>
-                            <p th:text="${orderDetail.lastPrice}" class="order-item--price">[Order Product Price]</p>
+                            <p class="order-item--price">
+                                <span class="jsPrice" th:attr="data-value=${orderDetail.lastPrice}"
+                                      th:text="${orderDetail.lastPrice}">[Order Product Price]</span>
+                                <span> vnđ</span>
+                            </p>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="order-submit">
-                <p class="order-submit--total"><span>Total: </span><span>$99.99</span></p>
+                <p class="order-submit--total"><span>Total: </span><span class="jsTotal">[Total Order]</span></p>
                 <div class="order-submit--info">
                     <p class="order-submit--text">Bạn đã hủy</p>
-<!--                    <button class="order-submit&#45;&#45;btn order-submit&#45;&#45;btn btn btn__primary">Mua lại</button>-->
+                    <!--                    <button class="order-submit&#45;&#45;btn order-submit&#45;&#45;btn btn btn__primary">Mua lại</button>-->
                     <button class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</button>
                     <button class="order-submit--btn btn btn__white">Liên hệ người bán</button>
                     <button class="order-submit--btn btn btn__white">Chi tiết đon hàng</button>
@@ -49,5 +57,15 @@
         </div>
     </div>
 </div>
+
+<script layout:fragment="script">
+    $('.order-section').each((index, container) => {
+        const sumTotal = $(container).find('.order-item').toArray().reduce((sum, item, index) => {
+            sum += $(item).find('.jsPrice')[0].dataset.value * $(item).find('.jsQuantity')[0].dataset.value;
+            return sum;
+        }, 0)
+        $(container).find('.jsTotal')[0].textContent = `${sumTotal} vnđ`;
+    })
+</script>
 </body>
 </html>

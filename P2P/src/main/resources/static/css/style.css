@@ -2442,6 +2442,9 @@ label {
 }
 
 .order-item--text {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   padding: 0 20px 0 10px;
 }
 
@@ -2503,8 +2506,13 @@ label {
 }
 
 .order-shop--btn {
+  color: white !important;
   font-size: 1.2rem;
   padding: 5px 8px;
+}
+
+.order-shop--btn i {
+  margin-right: 5px;
 }
 
 .order-shop--status {
