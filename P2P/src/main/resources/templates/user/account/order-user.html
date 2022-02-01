@@ -16,8 +16,9 @@
             <div class="order-content">
                 <div class="order-shop">
                     <p th:text="${order.shop.name}" class="order-shop--name">[Shop Name]</p>
-                    <a th:href="@{/shop/{id}(id = ${order.shop.id})}" class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                        <i class="fas fa-store"></i> Visit shop
+                    <a th:href="@{/shop/{id}(id = ${order.shop.id})}"
+                       class="order-shop--btn order-shop--btn__visit btn btn__primary">
+                        <i class="fas fa-store"></i> Ghé thăm shop
                     </a>
                     <p th:text="${order.statusOrder.name}" class="order-shop--status">[Order Status]</p>
                 </div>
@@ -49,9 +50,12 @@
                 <div class="order-submit--info">
                     <p class="order-submit--text">Bạn đã hủy</p>
                     <!--                    <button class="order-submit&#45;&#45;btn order-submit&#45;&#45;btn btn btn__primary">Mua lại</button>-->
-                    <a th:href="@{/rate/{id}(id = ${order.id})}" class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</a>
+                    <a th:href="@{/rate/{id}(id = ${order.id})}">
+                        <button class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</button>
+                    </a>
                     <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Liên hệ người bán</a>
-                    <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">Chi tiết đon hàng</a>
+                    <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">Chi tiết đon
+                        hàng</a>
                 </div>
             </div>
         </div>

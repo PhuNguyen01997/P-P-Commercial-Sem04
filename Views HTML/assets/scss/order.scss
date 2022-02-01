@@ -27,6 +27,7 @@
             width: 80px;
             height: 80px;
             flex-shrink: 0;
+            margin-bottom: 5px;
         }
 
         &--text {
@@ -78,7 +79,7 @@
         }
 
         &--btn {
-            color: white !important;
+            color: white;
             font-size: 1.2rem;
             padding: 5px 8px;
 
@@ -122,6 +123,10 @@
 
             &:first-of-type {
                 margin-left: auto;
+            }
+
+            &.btn__primary{
+                color: #fff;
             }
         }
     }

@@ -1,14 +1,8 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.entity.OrderDetail;
-import com.apt.p2p.model.view.OrderDetailModel;
 import com.apt.p2p.model.view.OrderModel;
-import com.apt.p2p.service.OrderDetailService;
-import com.apt.p2p.service.OrderService;
-import com.apt.p2p.service.ProductService;
-import com.apt.p2p.service.ShopService;
+import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +14,10 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private UsersDetailServiceImpl userService;
+    @Autowired
+    private ShopService shopService;
 
     @GetMapping("order")
     public String order(Model model) {
@@ -35,7 +33,10 @@ public class OrderController {
     @GetMapping("order/{id}")
     public String orderDetail(@PathVariable("id") int id,
                               Model model) {
+        int userId = 3;
         model.addAttribute("order", orderService.findById(id));
+        model.addAttribute("user", userService.findById(userId));
+        model.addAttribute("shop", shopService.findByOrderId(id));
         return "user/account/order-detail";
     }
 }

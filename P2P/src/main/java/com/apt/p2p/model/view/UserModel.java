@@ -1,9 +1,18 @@
 package com.apt.p2p.model.view;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class UserModel {
     private Integer id;
 
@@ -24,24 +33,15 @@ public class UserModel {
 
     private String stripeCustomerId;
 
-//    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-//    private Shop shop;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Address> addresses;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<CardModel> payments;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Cart> carts;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Rate> rates;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<Order> orders;
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private List<OrderDebt> orderDebts;
+    private ShopModel shop;
+
+    private List<AddressModel> addresses;
+
+    private List<CardModel> cards;
+
+    private List<CartModel> carts;
+
+    private List<RateModel> rates;
+
+    private List<OrderModel> orders;
 }

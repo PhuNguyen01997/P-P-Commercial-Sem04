@@ -49,13 +49,6 @@ public class ShopFund {
     private List<Order> orders;
 
     public ShopFund(Shop shop, List<Order> orders) {
-//        LocalDate localDate = LocalDate.now();
-//        this.month = localDate.getMonthValue();
-//        this.year = localDate.getYear();
-
-//        LocalDate lastDayofMonth = localDate.with(TemporalAdjusters.lastDayOfMonth());
-//        lastDayofMonth = lastDayofMonth.plusDays(11);
-//        this.deadlinePayment = Date.from(lastDayofMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
         this.shop = shop;
         this.orders = orders;
         this.fund = orders.stream().map(o -> {

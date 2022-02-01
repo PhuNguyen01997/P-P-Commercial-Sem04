@@ -75,47 +75,66 @@
         </div>
         <div class="top-envelope"></div>
         <div class="order-detail-info">
-            <p th:text="${order.user.name}" class="order-detail-info--name">[Order User Name]</p>
-            <p class="order-detail-info--phone">0937441896</p>
-            <p class="order-detail-info--address">99 wưsxng bw xrwc, Phường 9, Quận 9, TP. Hồ Chí Minh</p>
+            <p th:text="${user.username}" class="order-detail-info--name">[User Name]</p>
+            <p th:text="${user.phone}" class="order-detail-info--phone">[User Phone]</p>
+            <p th:text="${order.address}"
+               class="order-detail-info--address">[User Full Address]</p>
         </div>
         <div class="order-shop">
-            <p class="order-shop--name">qw qpwoqw qwoqowpqpw</p>
-            <button class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                <i class="fas fa-store"></i> Visit shop
-            </button>
+            <p th:text="${shop.name}" class="order-shop--name">[Shop Name]</p>
+            <a href="#" class="order-shop--btn order-shop--btn__visit btn btn__primary">
+                <i class="fas fa-store"></i> Ghé thăm shop
+            </a>
             <!-- <p class="order-shop--status">Status</p> -->
         </div>
         <ul class="order-detail-list">
-            <li class="order-item">
+            <li th:each="orderDetail : ${order.orderDetails}" class="order-item">
                 <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
                                                     alt=""></p>
                 <div class="order-item--text">
-                    <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
-                        A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
-                        X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                    <p class="order-item--category">Category: category-name</p>
-                    <p class="order-item--quantity">x99</p>
+                    <p th:text="${orderDetail.product.name}" class="order-item--name">[Product Name]</p>
+                    <p class="order-item--category">
+                        <span>Category:</span>
+                        <span th:text="${orderDetail.product.category.name}">[Category Name]</span>
+                    </p>
+                    <p th:text="${orderDetail.quantity}" class="order-item--quantity">x[Order Quantity]</p>
                 </div>
-                <p class="order-item--price">$99</p>
+                <p class="order-item--price">
+                    <span th:text="${orderDetail.lastPrice}"></span>
+                    <span> vnđ</span>
+                </p>
             </li>
         </ul>
         <ul class="order-summary">
             <li class="order-summary--item">
                 <p>Tổng tiền hàng</p>
-                <p>$20.00</p>
+                <p>
+                    <span th:text="${order.calTotal().toString()}">
+                        [Order Total]
+                    </span>
+                    <span> vnđ</span>
+                </p>
             </li>
             <div class="order-summary--item">
                 <p>Phí vận chuyển</p>
-                <p>$5.00</p>
+                <p>
+                    <span th:text="${order.shippingCost}">[Order Shipping]</span>
+                    <span> vnđ</span>
+                </p>
             </div>
             <div class="order-summary--item order-summary--item__total">
                 <p>Tổng số tiền</p>
-                <p>$25.00</p>
+                <p>
+                    <span th:text="${order.calTotal().add(order.shippingCost)}">[Summary Total]</span>
+                    <span>vnđ</span>
+                </p>
             </div>
             <div class="order-summary--item">
                 <p>Phương thức thanh toán</p>
-                <p>Thẻ tín dụng / ghi nợ</p>
+                <p th:switch="${order.methodPayment}">
+                    <span th:case="true">Thẻ tín dụng / ghi nợ</span>
+                    <span th:case="false">Thanh toán khi nhận hàng</span>
+                </p>
             </div>
         </ul>
     </div>

@@ -27,6 +27,7 @@
             width: 80px;
             height: 80px;
             flex-shrink: 0;
+            margin-bottom: 5px;
         }
 
         &--text {
@@ -122,6 +123,10 @@
 
             &:first-of-type {
                 margin-left: auto;
+            }
+
+            &.btn__primary{
+                color: #fff;
             }
         }
     }

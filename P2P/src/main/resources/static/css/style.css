@@ -18,6 +18,8 @@ a {
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
 
 a:hover, a:active {
@@ -2439,6 +2441,7 @@ label {
   height: 80px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  margin-bottom: 5px;
 }
 
 .order-item--text {
@@ -2575,6 +2578,10 @@ label {
 
 .order-submit--btn:first-of-type {
   margin-left: auto;
+}
+
+.order-submit--btn.btn__primary {
+  color: #fff;
 }
 
 .order-summary--item {

@@ -2,6 +2,11 @@ package com.apt.p2p.common;
 
 import com.apt.p2p.entity.CardType;
 import com.apt.p2p.model.view.AddressModel;
+import com.apt.p2p.model.view.OrderDetailModel;
+import com.apt.p2p.model.view.OrderModel;
+import com.apt.p2p.model.view.UserModel;
+
+import java.math.BigDecimal;
 
 public class StringProcessForView {
     public static String getFullAddress(AddressModel addressModel) {
@@ -25,5 +30,10 @@ public class StringProcessForView {
             }
         }
         return url;
+    }
+
+    public static String getTotalOrder(OrderModel orderModel){
+        BigDecimal total = orderModel.getOrderDetails().stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+        return total.toString();
     }
 }
