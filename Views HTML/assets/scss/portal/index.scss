@@ -12,7 +12,7 @@
         @include flex($justify: space-between);
 
         &+* {
-            padding-top: $header-height;
+            margin-top: $header-height;
         }
 
         &-block {

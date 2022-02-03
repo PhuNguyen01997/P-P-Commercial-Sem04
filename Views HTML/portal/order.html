@@ -98,14 +98,71 @@
                     <li class="order-header--bar"></li>
                 </ul>
                 <div class="order-block order-block__date">
-                    <p class="txt">Ngày đặt hàng</p>
-                    <input type="text" name="date" class="jsDateRangePicker">
+                    <label for="date" class="txt">Ngày đặt hàng</label>
+                    <input id="date" type="text" name="date" class="jsDateRangePicker ipt">
                 </div>
                 <div class="order-block order-block__name">
-                    <input type="select">
-                    <input type="text">
-                    <button>Tìm kiếm</button>
-                    <button>Đặt lại</button>
+                    <div class="select">
+                        <select name="type" id="">
+                            <option value="">Price</option>
+                            <option value="increase">Low to high</option>
+                            <option value="decrease" selected>High to low</option>
+                        </select>
+                    </div>
+                    <input class="ipt" type="text">
+                    <button class="btn submit btn__primary">Tìm kiếm</button>
+                    <button class="btn clear btn__white">Đặt lại</button>
+                </div>
+                <p class="order-block order-block__count">[Order Count]</p>
+                <div class="order-block order-block__table">
+                    <div class="table-header">
+                        <div class="table-col table-col__header">
+                            <p>Sản phẩm</p>
+                        </div>
+                        <div class="table-col table-col__header">
+                            <p>Tổng đơn hàng</p>
+                        </div>
+                        <div class="table-col table-col__header">
+                            <p>Thời gian tạo</p>
+                        </div>
+                        <div class="table-col table-col__header">
+                            <p>Thạng thái</p>
+                        </div>
+                        <div class="table-col table-col__header">
+                            <p>Thao tác</p>
+                        </div>
+                    </div>
+                    <ul class="table-body">
+                        <li class="table-body--row">
+                            <div class="table-body--row-header">
+                                <p><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                                <p>[Buyer Name]</p>
+                                <p>ID đơn hàng: <span>[Order Id]</span></p>
+                            </div>
+                            <ul class="table-body-row-list">
+                                <li>
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_01.jpg" alt="">
+                                        <p>Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl</p>
+                                        <p>x99</p>
+                                    </div>
+                                    <div class="table-col">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col">
+                                        <p>[Date Order]</p>
+                                        <p>[Time Order]</p>
+                                    </div>
+                                    <div class="table-col">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </main>

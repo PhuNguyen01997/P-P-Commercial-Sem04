@@ -13,7 +13,7 @@
                 transition: color .15s;
                 cursor: pointer;
 
-                &:hover{
+                &:hover {
                     color: $color-primary01;
                 }
 
@@ -36,13 +36,56 @@
         }
 
         &-block {
-            padding: 20px 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+
             &__date {
                 @include flex($justify: flex-end);
+                padding-top: 20px;
+                padding-bottom: 10px;
 
                 .txt {
                     margin-right: 20px;
                 }
+
+                .ipt {
+                    padding: 5px 10px;
+                }
+            }
+
+            &__name {
+                position: relative;
+                @include flex($justify: flex-start);
+                padding-top: 10px;
+                padding-bottom: 20px;
+                height: 62px;
+
+                &>* {
+                    height: 100%;
+                }
+
+                .select {
+                    flex-shrink: 0;
+                    width: 190px;
+                }
+
+                .ipt {
+                    flex-grow: 1;
+                }
+
+                .submit,
+                .clear {
+                    width: 90px;
+                }
+
+                .submit {
+                    margin: 0 20px;
+                }
+            }
+
+            &__count {
+                font-size: 22px;
+                font-weight: bold;
             }
         }
     }
