@@ -22,7 +22,7 @@
                 <p class="pay-address--text">
                     <span th:text="${addresses.get(0).ownName}" class="name">[Address Name]</span>
                     <span th:text="${addresses.get(0).ownPhone}" class="phone">[Address Phone]</span>
-                    <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(addresses.get(0))}"
+                    <span th:text="${addresses.get(0).getFullAddress()}"
                           class="number">[Address Full]</span>
                     <a class="change" href="#">Thay đổi</a>
                 </p>
@@ -36,7 +36,7 @@
                         </div>
                         <span th:text="${address.ownName}" class="name">[Address Name]</span>
                         <span th:text="${address.ownPhone}" class="phone">[Address Phone]</span>
-                        <span th:text="${T(com.apt.p2p.common.StringProcessForView).getFullAddress(address)}"
+                        <span th:text="${address.getFullAddress()}"
                               class="number">[Address Full]</span>
                     </label>
                     <li class="pay-address--change-item">
@@ -272,18 +272,17 @@
         $(`.pay-submit-body__${div}`).removeClass('d-none');
     })
 
-    $('.checkoutForm').on('submit', function(e){
-       e.preventDefault();
-       if($('input[name="methodPayment"]:checked').val() == 1){
-           const hasStripeCard = $('input[name="stripeCardId"]:checked').length;
-           if(hasStripeCard){
-               this.submit();
-           }
-       }
-       else {
-        this.submit();
-       }
-       console.log()
+    $('.checkoutForm').on('submit', function (e) {
+        e.preventDefault();
+        if ($('input[name="methodPayment"]:checked').val() == 1) {
+            const hasStripeCard = $('input[name="stripeCardId"]:checked').length;
+            if (hasStripeCard) {
+                this.submit();
+            }
+        } else {
+            this.submit();
+        }
+        console.log()
     });
 </script>
 </body>

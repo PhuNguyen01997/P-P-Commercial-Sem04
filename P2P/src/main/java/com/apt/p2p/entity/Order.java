@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +47,8 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "statusOrderId")
-    private StatusOrder statusOrder;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private List<OrderStatusOrder> orderStatusOrders;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -61,15 +61,11 @@ public class Order {
 
     private String stripeCardId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "cardId")
-//    private Card card;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopFundId")
     private ShopFund shopFund;
 
-    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, Shop shop, Address address, String stripeCardId, ShopFund shopFund, StatusOrder statusOrder) {
+    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, Shop shop, Address address, String stripeCardId, ShopFund shopFund) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.shippingCost = shippingCost;
@@ -82,6 +78,5 @@ public class Order {
         this.address = address;
         this.stripeCardId = stripeCardId;
         this.shopFund = shopFund;
-        this.statusOrder = statusOrder;
     }
 }

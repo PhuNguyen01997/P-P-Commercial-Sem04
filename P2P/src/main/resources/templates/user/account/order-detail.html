@@ -18,7 +18,7 @@
                 <span>Order ID:</span>
                 <span th:text="${order.id}">[Order Id]</span>
             </p>
-            <p th:text="${order.statusOrder.name}" class="order-detail-header--status">[Order Status]</p>
+            <p th:text="${order.currentStatus.name}" class="order-detail-header--status">[Order Status]</p>
         </div>
         <div class="order-detail-status">
             <div class="order-step">
@@ -77,12 +77,12 @@
         <div class="order-detail-info">
             <p th:text="${user.username}" class="order-detail-info--name">[User Name]</p>
             <p th:text="${user.phone}" class="order-detail-info--phone">[User Phone]</p>
-            <p th:text="${order.address}"
+            <p th:text="${order.address.getFullAddress()}"
                class="order-detail-info--address">[User Full Address]</p>
         </div>
         <div class="order-shop">
             <p th:text="${shop.name}" class="order-shop--name">[Shop Name]</p>
-            <a href="#" class="order-shop--btn order-shop--btn__visit btn btn__primary">
+            <a th:href="@{/shop/{id}(id=${shop.id})}" class="order-shop--btn order-shop--btn__visit btn btn__primary">
                 <i class="fas fa-store"></i> Ghé thăm shop
             </a>
             <!-- <p class="order-shop--status">Status</p> -->
@@ -97,7 +97,10 @@
                         <span>Category:</span>
                         <span th:text="${orderDetail.product.category.name}">[Category Name]</span>
                     </p>
-                    <p th:text="${orderDetail.quantity}" class="order-item--quantity">x[Order Quantity]</p>
+                    <p class="order-item--quantity">
+                        <span>x</span>
+                        <span th:text="${orderDetail.quantity}">[Order Quantity]</span>
+                    </p>
                 </div>
                 <p class="order-item--price">
                     <span th:text="${orderDetail.lastPrice}"></span>
@@ -109,7 +112,7 @@
             <li class="order-summary--item">
                 <p>Tổng tiền hàng</p>
                 <p>
-                    <span th:text="${order.calTotal().toString()}">
+                    <span th:text="${order.calTotal()}">
                         [Order Total]
                     </span>
                     <span> vnđ</span>

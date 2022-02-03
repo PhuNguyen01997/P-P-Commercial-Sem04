@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 @Service
 public class OrderMapper {
     @Autowired
@@ -26,7 +29,7 @@ public class OrderMapper {
                 skip(source.getAddress());
                 skip(source.getPayment());
                 skip(source.getShopFund());
-//                using(removeSpaceNumber).map(source.getCvv()).setCvv("error");
+                skip(source.getCurrentStatus());
             }
         });
 
@@ -46,10 +49,14 @@ public class OrderMapper {
                 skip(destination.getAddress());
                 skip(destination.getPayment());
                 skip(destination.getShopFund());
+                skip(destination.getCurrentStatus());
             }
         });
 
         mapper.validate();
-        return mapper.map(entity, OrderModel.class);
+
+        OrderModel result = mapper.map(entity, OrderModel.class);
+
+        return result;
     }
 }

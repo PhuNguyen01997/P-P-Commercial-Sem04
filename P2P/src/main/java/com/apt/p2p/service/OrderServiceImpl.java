@@ -30,6 +30,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private StatusOrderRepository statusOrderRepository;
     @Autowired
+    private OrderStatusOrderRepository orderStatusOrderRepository;
+    @Autowired
     private ProductRepository productRepository;
     @Autowired
     private ShopRepository shopRepository;
@@ -96,8 +98,14 @@ public class OrderServiceImpl implements OrderService {
                 }
                 shopFundRepository.save(shopFund);
 
-                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, shop, address, stripeCardId, shopFund, status);
+                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, shop, address, stripeCardId, shopFund);
                 orderRepository.save(order);
+
+                // attach many to many relation ship order - order_status_order - status_order
+                OrderStatusOrder orderStatusOrder = new OrderStatusOrder();
+                orderStatusOrder.setStatus(status);
+                orderStatusOrder.setOrder(order);
+                orderStatusOrderRepository.save(orderStatusOrder);
 
                 // attach orderDetails to order
                 filterOrderDetails.forEach(ode -> ode.setOrder(order));
@@ -152,6 +160,13 @@ public class OrderServiceImpl implements OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
         Order order = optionalOrder.orElse(null);
 
-        return orderMapper.orderEntityToModel(order);
+        if(order == null){
+            return null;
+        }
+
+        OrderModel orderModel = orderMapper.orderEntityToModel(order);
+        orderModel.setOrderDetails(orderDetailService.findAllByOrderId(orderId));
+
+        return orderModel;
     }
 }

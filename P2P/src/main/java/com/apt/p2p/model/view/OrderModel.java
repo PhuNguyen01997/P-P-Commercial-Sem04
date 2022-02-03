@@ -33,7 +33,9 @@ public class OrderModel {
 
     private List<OrderDetailModel> orderDetails;
 
-    private StatusOrder statusOrder;
+    private List<OrderStatusOrder> orderStatusOrders;
+
+    private StatusOrder currentStatus;
 
     private ShopModel shop;
 
@@ -44,6 +46,7 @@ public class OrderModel {
     private ShopFundModel shopFund;
 
     public BigDecimal calTotal(){
-        return orderDetails.stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal result = orderDetails.stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
+        return result;
     }
 }

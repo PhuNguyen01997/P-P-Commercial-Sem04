@@ -31,9 +31,4 @@ public class StringProcessForView {
         }
         return url;
     }
-
-    public static String getTotalOrder(OrderModel orderModel){
-        BigDecimal total = orderModel.getOrderDetails().stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-        return total.toString();
-    }
 }

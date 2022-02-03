@@ -20,7 +20,7 @@
                        class="order-shop--btn order-shop--btn__visit btn btn__primary">
                         <i class="fas fa-store"></i> Ghé thăm shop
                     </a>
-                    <p th:text="${order.statusOrder.name}" class="order-shop--status">[Order Status]</p>
+                    <p th:text="${order.currentStatus.name}" class="order-shop--status">[Order Status]</p>
                 </div>
                 <div class="order-body">
                     <ul class="order-body--list">
@@ -33,8 +33,10 @@
                                 <p th:text="${orderDetail.product.category.name}" class="order-item--category">[Order
                                     Product Category]</p>
                                 <p th:attr="data-value=${orderDetail.quantity}"
-                                   th:text="${orderDetail.quantity}" class="order-item--quantity jsQuantity">[Order
-                                    Quantity]</p>
+                                   class="order-item--quantity">
+                                    <span>x</span>
+                                    <span th:text="${orderDetail.quantity}" class="jsQuantity">[Order Quantity]</span>
+                                </p>
                             </div>
                             <p class="order-item--price">
                                 <span class="jsPrice" th:attr="data-value=${orderDetail.lastPrice}"
@@ -46,7 +48,10 @@
                 </div>
             </div>
             <div class="order-submit">
-                <p class="order-submit--total"><span>Total: </span><span class="jsTotal">[Total Order]</span></p>
+                <p class="order-submit--total">
+                    <span>Total:</span>
+                    <span th:text="${order.calTotal()}" class="jsTotal">[Total Order]</span>
+                </p>
                 <div class="order-submit--info">
                     <p class="order-submit--text">Bạn đã hủy</p>
                     <!--                    <button class="order-submit&#45;&#45;btn order-submit&#45;&#45;btn btn btn__primary">Mua lại</button>-->
@@ -61,15 +66,5 @@
         </div>
     </div>
 </div>
-
-<script layout:fragment="script">
-    $('.order-section').each((index, container) => {
-        const sumTotal = $(container).find('.order-item').toArray().reduce((sum, item, index) => {
-            sum += $(item).find('.jsPrice')[0].dataset.value * $(item).find('.jsQuantity')[0].dataset.value;
-            return sum;
-        }, 0)
-        $(container).find('.jsTotal')[0].textContent = `${sumTotal} vnđ`;
-    })
-</script>
 </body>
 </html>

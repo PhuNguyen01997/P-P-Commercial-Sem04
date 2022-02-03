@@ -43,4 +43,12 @@ public class AddressModel {
     private ShopModel shop;
 
     private List<OrderModel> orders;
+
+    public String getFullAddress(){
+        StringBuilder stringBuilder = new StringBuilder(this.number);
+        stringBuilder.append(", " + this.ward);
+        stringBuilder.append(", " + this.district);
+        stringBuilder.append(", " + this.province);
+        return stringBuilder.toString();
+    }
 }
