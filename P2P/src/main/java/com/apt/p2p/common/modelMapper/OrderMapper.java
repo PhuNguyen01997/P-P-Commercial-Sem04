@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,8 +55,13 @@ public class OrderMapper {
         });
 
         mapper.validate();
-
         OrderModel result = mapper.map(entity, OrderModel.class);
+
+        StatusOrder currentStatus = entity.getOrderStatusOrders()
+                .stream().sorted(Comparator.comparing(OrderStatusOrder::getId))
+                .collect(Collectors.toList())
+                .get(0).getStatus();
+        result.setCurrentStatus(currentStatus);
 
         return result;
     }

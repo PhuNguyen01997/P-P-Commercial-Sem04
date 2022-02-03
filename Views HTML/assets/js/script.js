@@ -52,7 +52,6 @@ $(function () {
         $(select).find('.select--list')[0].classList.remove('show');
     })
 
-
     // JS for custom input has increase, decrease button
     $('.attachAdjust').each(function () {
         $(this).prepend('<span class="attachAdjust--button" data-value="minus"></span>');
@@ -130,4 +129,9 @@ $(function () {
             $(this).removeClass('js-close');
         }
     })
+
+    // Js for input date range
+    if($('.jsDateRangePicker').length){
+        $('.jsDateRangePicker').daterangepicker();
+    }
 });

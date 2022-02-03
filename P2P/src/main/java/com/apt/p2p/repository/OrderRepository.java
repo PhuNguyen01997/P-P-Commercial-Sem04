@@ -14,7 +14,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Override
     @Query("SELECT o FROM Order o" +
-            " INNER JOIN StatusOrder s" +
+            " JOIN OrderStatusOrder oso ON oso.order.id = o.id" +
+            " JOIN StatusOrder s ON oso.status.id = s.id" +
             " WHERE o.id = :id")
     Optional<Order> findById(@Param("id") Integer id);
 }

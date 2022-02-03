@@ -1,0 +1,140 @@
+.portal {
+    $header-height: 62px;
+
+    .header {
+        z-index: 2;
+        min-height: $header-height;
+        width: 100%;
+        position: fixed;
+        padding: 10px 30px;
+        background-color: white;
+        box-shadow: 0px 6px 8px -8px #696969;
+        @include flex($justify: space-between);
+
+        &+* {
+            padding-top: $header-height;
+        }
+
+        &-block {
+            &__right {
+                @include flex($justify: flex-start);
+                color: #000;
+            }
+
+            &__left {
+                font-weight: bold;
+                font-size: 18px;
+                @include flex($justify: flex-start, $align: flex-end);
+            }
+
+            &--logo {
+                @include flex($align: flex-end);
+
+                .icon {
+                    height: 30px;
+                    margin-right: 10px;
+                }
+
+                .txt {
+                    color: #999;
+                }
+            }
+
+            &--angle {
+                color: #999;
+                padding: 0 15px;
+            }
+
+            &--text02 {
+                color: #333;
+            }
+
+            &--info {
+                @include flex();
+                padding: 4px 4px;
+                transition: background-color 0.15s;
+                padding-right: 20px;
+
+                .avatar {
+                    overflow: hidden;
+                    display: block;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                &:hover {
+                    background-color: $color-bg-white;
+                    border-radius: 16px;
+                }
+            }
+
+            &--noti {
+                padding: 0 20px;
+                border-left: 1px solid $color-bd;
+                font-size: 20px;
+            }
+
+            &--edu {
+                &>* {
+                    color: #000;
+                    height: 34px;
+                    border-radius: calc(34px / 2);
+                    padding: 0 10px;
+                }
+            }
+        }
+    }
+
+    .content {
+        min-height: 100vh;
+        position: relative;
+
+        aside {
+            padding: 15px;
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #fff;
+        }
+
+        main {
+            margin-left: auto;
+            width: calc(100% - 200px);
+        }
+    }
+
+    .aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        &-container {
+            &:not(:last-child){
+                margin-bottom: 20px;
+            }
+        }
+        &-title {
+            color: #999;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        &-item {
+            line-height: 1.8;
+        }
+    }
+
+    .main {
+        padding: 20px 50px;
+        &-inner {
+            background-color: white;
+        }
+    }
+}
+
+@import "./order";

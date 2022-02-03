@@ -28,4 +28,8 @@ public class StatusOrder {
 
     @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
     private List<OrderStatusOrder> orderStatusOrders;
+
+    public String getIconUrl(){
+        return "imgUrl";
+    }
 }
