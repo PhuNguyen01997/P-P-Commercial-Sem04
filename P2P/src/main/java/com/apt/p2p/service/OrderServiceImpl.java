@@ -169,4 +169,24 @@ public class OrderServiceImpl implements OrderService {
 
         return orderModel;
     }
+
+    @Override
+    public List<OrderModel> findALlByShopId(int shopId) {
+        List<Order> orders = orderRepository.findAllByShopId(shopId);
+        List<OrderModel> orderModels = orders.stream().map(od -> {
+            OrderModel model = orderMapper.orderEntityToModel(od);
+
+            List<OrderDetailModel> orderDetails = orderDetailService.findAllByOrderId(model.getId());
+            for (OrderDetailModel ode : orderDetails) {
+                ProductModel productModel = productService.findByOrderDetailId(ode.getId());
+                ode.setProduct(productModel);
+            }
+
+            model.setOrderDetails(orderDetails);
+
+            return model;
+        }).collect(Collectors.toList());
+
+        return orderModels;
+    }
 }

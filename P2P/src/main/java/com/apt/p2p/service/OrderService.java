@@ -12,5 +12,7 @@ public interface OrderService {
 
     List<OrderModel> findAllByUserId(int userId);
 
+    List<OrderModel> findALlByShopId(int shopId);
+
     OrderModel findById(int orderId);
 }

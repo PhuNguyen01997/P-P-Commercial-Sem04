@@ -52,7 +52,6 @@ $(function () {
         $(select).find('.select--list')[0].classList.remove('show');
     })
 
-
     // JS for custom input has increase, decrease button
     $('.attachAdjust').each(function () {
         $(this).prepend('<span class="attachAdjust--button" data-value="minus"></span>');
@@ -130,4 +129,21 @@ $(function () {
             $(this).removeClass('js-close');
         }
     })
+
+    // Js for input date range
+    if ($('.jsDateRangePicker').length) {
+        const now = new Date(Date.now());
+        let last2Week = new Date();
+        last2Week.setDate(now.getDate() - 14);
+        $('.jsDateRangePicker').daterangepicker({
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            autoApply: true,
+            showDropdowns: true,
+            startDate: `${last2Week.getFullYear()}-${last2Week.getMonth() + 1}-${last2Week.getDate()}`, 
+            endDate: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
+            maxDate: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
+        });
+    }
 });

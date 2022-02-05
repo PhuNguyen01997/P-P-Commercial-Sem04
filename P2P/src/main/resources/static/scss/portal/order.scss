@@ -1,0 +1,214 @@
+.portal {
+    .order {
+        &-header {
+            height: 56px;
+            position: relative;
+            border-bottom: 1px solid $color-bd;
+            @include flex($justify: flex-start);
+
+            &--item {
+                padding: 0 20px;
+                line-height: 56px;
+                height: 100%;
+                transition: color .15s;
+                cursor: pointer;
+
+                &:hover {
+                    color: $color-primary01;
+                }
+
+                &.active {
+                    color: $color-primary01;
+                    font-weight: bold;
+                }
+            }
+
+            &--bar {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 200px;
+                height: 3px;
+                background-color: $color-primary01;
+                transform: translateX(0);
+                transition: transform 0.3s, width 0.3s;
+            }
+        }
+
+        &-block {
+            padding-left: 20px;
+            padding-right: 20px;
+
+            &__date {
+                @include flex($justify: flex-end);
+                padding-top: 20px;
+                padding-bottom: 10px;
+
+                .txt {
+                    margin-right: 20px;
+                }
+
+                .ipt {
+                    padding: 5px 10px;
+                }
+            }
+
+            &__name {
+                position: relative;
+                @include flex($justify: flex-start);
+                padding-top: 10px;
+                padding-bottom: 20px;
+                height: 62px;
+
+                &>* {
+                    height: 100%;
+                }
+
+                .select {
+                    flex-shrink: 0;
+                    width: 190px;
+                }
+
+                .ipt {
+                    flex-grow: 1;
+                }
+
+                .submit,
+                .clear {
+                    width: 90px;
+                }
+
+                .submit {
+                    margin: 0 20px;
+                }
+            }
+
+            &__count {
+                font-size: 22px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            &__table {
+                padding-bottom: 20px;
+            }
+        }
+
+        .table {
+            &-header {
+                @include flex($justify: flex-start, $align: stretch);
+                background-color: #f6f6f6;
+                color: #757575;
+                padding: 16px;
+            }
+
+            &-body {
+                &--row {
+                    margin-top: 10px;
+                    border: 1px solid $color-bd;
+
+                    &-header {
+                        background-color: #f3f2f2;
+                        padding: 14px 20px;
+                        color: $color-txt-grey;
+                        @include flex($justify: flex-start);
+
+                        .avatar {
+                            width: 32px;
+                            height: 32px;
+                            margin-right: 10px;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+
+                        .order-info {
+                            margin-left: auto;
+                        }
+                    }
+
+                    &-item {
+                        @include flex();
+                        border: 1px solid $color-bd-ipt;
+                        border-bottom: none;
+                        padding: 10px 16px;
+
+                        &:nth-child(n + 2) {
+                            border-bottom: 1px solid $color-bd-ipt;
+                        }
+                    }
+                }
+
+                .table-col {
+                    &:nth-child(n + 2) {
+                        border-left: 1px solid $color-bd-ipt;
+                    }
+                }
+            }
+
+            &-col {
+                flex-shrink: 0;
+                padding: 0 8px;
+                text-align: center;
+
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &:last-child {
+                    padding-right: 0;
+                }
+
+                &__name {
+                    @include flex($justify: flex-start, $align: flex-start);
+                    text-align: left;
+                    flex-shrink: 1;
+                    width: 100%;
+                    position: relative;
+
+                    img {
+                        margin-right: 10px;
+                        flex-shrink: 0;
+                        display: block;
+                        width: 60px;
+                        height: 60px;
+                    }
+
+                    .info {
+                        padding-top: 6px;
+                    }
+
+                    .txt {
+                        display: -webkit-box;
+                        text-overflow: ellipsis;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                    }
+                }
+
+                &__price {
+                    width: 122px;
+                }
+
+                &__date {
+                    width: 90px;
+                }
+
+                &__status {
+                    width: 150px;
+                }
+
+                &__action {
+                    width: 150px;
+
+                     a{
+                         color: #007bff;
+                     }
+                }
+            }
+        }
+    }
+}

@@ -20,7 +20,7 @@ public class OrderController {
     private ShopService shopService;
 
     @GetMapping("order")
-    public String order(Model model) {
+    public String index(Model model) {
         int userId = 3;
 
         List<OrderModel> orders = orderService.findAllByUserId(userId);
@@ -39,4 +39,13 @@ public class OrderController {
         model.addAttribute("shop", shopService.findByOrderId(id));
         return "user/account/order-detail";
     }
+
+    @GetMapping("/portal/order")
+    public String portalIndex(Model model) {
+//        int shopId = 1;
+//        model.addAttribute("orders", orderService.findALlByShopId(shopId));
+        return "user/portal/order";
+    }
+
+
 }

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-inner order">
+    <ul class="order-header">
+        <li class="order-header--item jsStatus active" data.status.id="0">
+            <p>Tất cả</p>
+        </li>
+        <li class="order-header--item jsStatus" data.status.id="1">
+            <p>Chờ xác nhận</p>
+        </li>
+        <li class="order-header--item jsStatus" data.status.id="2">
+            <p>Chờ lấy hàng</p>
+        </li>
+        <li class="order-header--item jsStatus" data.status.id="3">
+            <p>Đang giao</p>
+        </li>
+        <li class="order-header--item jsStatus" data.status.id="4">
+            <p>Đã giao</p>
+        </li>
+<!--        <li class="order-header&#45;&#45;item">-->
+<!--            <p>Đơn hủy</p>-->
+<!--        </li>-->
+<!--        <li class="order-header&#45;&#45;item">-->
+<!--            <p>Trả hàng/Hoàn tiền</p>-->
+<!--        </li>-->
+        <li class="order-header--bar"></li>
+    </ul>
+    <div class="order-block order-block__date">
+        <label for="date" class="txt">Ngày đặt hàng</label>
+        <input id="date" type="text" name="date" class="jsDateRangePicker ipt">
+    </div>
+    <div class="order-block order-block__name">
+        <div class="select">
+            <select name="type" id="" class="jsFilterBy">
+                <option value="">Price</option>
+                <option value="increase">Low to high</option>
+                <option value="decrease" selected>High to low</option>
+            </select>
+        </div>
+        <input class="ipt jsName" type="text">
+        <button class="btn submit btn__primary jsSubmit">Tìm kiếm</button>
+        <button class="btn clear btn__white jsClear">Đặt lại</button>
+    </div>
+    <p class="order-block order-block__count">0 Đơn Hàng</p>
+    <div class="order-block order-block__table">
+        <div class="table-header">
+            <div class="table-col table-col__name">
+                <p>Sản phẩm</p>
+            </div>
+            <div class="table-col table-col__price">
+                <p>Tổng đơn hàng</p>
+            </div>
+            <div class="table-col table-col__date">
+                <p>Thời gian tạo</p>
+            </div>
+            <div class="table-col table-col__status">
+                <p>Thạng thái</p>
+            </div>
+            <div class="table-col table-col__action">
+                <p>Thao tác</p>
+            </div>
+        </div>
+        <ul class="table-body">
+            <li class="table-body--row">
+                <div class="table-body--row-header">
+                    <p class="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                    <p class="name">[Buyer Name]</p>
+                    <p class="order-info">ID đơn hàng: <span>[Order Id]</span></p>
+                </div>
+                <ul class="table-body--row-list">
+                    <li class="table-body--row-item">
+                        <div class="table-col table-col__name">
+                            <img src="/assets/img/products/product_01.jpg" alt="">
+                            <div class="info">
+                                <p class="txt">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là
+                                    1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài
+                                    cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái
+                                    tên thật dài cmnl
+                                </p>
+                                <p class="number">x99</p>
+                            </div>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>900.000.000 vnđ</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>[Date Order]</p>
+                            <p>[Time Order]</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            [Order Status]
+                        </div>
+                        <div class="table-col table-col__action">
+                            <a href="javascript: void(0);">[Next update status order]</a>
+                        </div>
+                    </li>
+                    <li class="table-body--row-item">
+                        <div class="table-col table-col__name">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                            <div class="info">
+                                <p class="txt">Đây là 1 cái</p>
+                                <p class="number">x1</p>
+                            </div>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>900.000.000 vnđ</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>00-00-0000</p>
+                            <p>00:00</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            [Order Status]
+                        </div>
+                        <div class="table-col table-col__action">
+                            <a href="javascript: void(0);">[Next update status order]</a>
+                        </div>
+                    </li>
+                    <li class="table-body--row-item">
+                        <div class="table-col table-col__name">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                            <div class="info">
+                                <p class="txt">Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây
+                                    là 1 cái Đây là 1 cái</p>
+                                <p class="number">x1</p>
+                            </div>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>900.000.000 vnđ</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>00-00-0000</p>
+                            <p>00:00</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            [Order Status]
+                        </div>
+                        <div class="table-col table-col__action">
+                            <a href="javascript: void(0);">[Next update status order]</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="table-body--row">
+                <div class="table-body--row-header">
+                    <p class="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                    <p class="name">[Buyer Name]</p>
+                    <p class="order-info">ID đơn hàng: <span>[Order Id]</span></p>
+                </div>
+                <ul class="table-body--row-list">
+                    <li class="table-body--row-item">
+                        <div class="table-col table-col__name">
+                            <img src="/assets/img/products/product_01.jpg" alt="">
+                            <div class="info">
+                                <p class="txt">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là
+                                    1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài
+                                    cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái
+                                    tên thật dài cmnl
+                                </p>
+                                <p class="number">x99</p>
+                            </div>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>900.000.000 vnđ</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>[Date Order]</p>
+                            <p>[Time Order]</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            [Order Status]
+                        </div>
+                        <div class="table-col table-col__action">
+                            <a href="javascript: void(0);">[Next update status order]</a>
+                        </div>
+                    </li>
+                    <li class="table-body--row-item">
+                        <div class="table-col table-col__name">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                            <div class="info">
+                                <p class="txt">Đây là 1 cái</p>
+                                <p class="number">x1</p>
+                            </div>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>900.000.000 vnđ</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>00-00-0000</p>
+                            <p>00:00</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            [Order Status]
+                        </div>
+                        <div class="table-col table-col__action">
+                            <a href="javascript: void(0);">[Next update status order]</a>
+                        </div>
+                    </li>
+                    <li class="table-body--row-item">
+                        <div class="table-col table-col__name">
+                            <img src="/assets/img/products/product_02.jpg" alt="">
+                            <div class="info">
+                                <p class="txt">Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây
+                                    là 1 cái Đây là 1 cái</p>
+                                <p class="number">x1</p>
+                            </div>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>900.000.000 vnđ</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>00-00-0000</p>
+                            <p>00:00</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            [Order Status]
+                        </div>
+                        <div class="table-col table-col__action">
+                            <a href="javascript: void(0);">[Next update status order]</a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script layout:fragment="script">
+    setGlobalLoading(true);
+
+</script>
+</body>
+</html>

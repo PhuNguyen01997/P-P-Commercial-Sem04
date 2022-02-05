@@ -46,7 +46,7 @@ a {
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
-  transition: all .3s;
+  transition: all .15s;
 
   &:hover,
   &:active {
@@ -727,3 +727,4 @@ label {
 @import "./cart";
 @import "./pay";
 @import "./modal";
+@import "./portal/index";

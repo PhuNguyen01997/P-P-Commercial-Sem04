@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+
+    <script src="/plugins/jquery v3.6.0.js/jquery v3.6.0.min.js"></script>
+    <script src="/plugins/bootstrap-4.0.0/js/bootstrap.js"></script>
+    <script src="/plugins/daterangepicker v3.1/moment.min.js"></script>
+    <script src="/plugins/daterangepicker v3.1/daterangepicker.js"></script>
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="/plugins/bootstrap-4.0.0/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugins/daterangepicker v3.1/daterangepicker.css">
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <th:block layout:fragment="style"></th:block>
+</head>
+<body class="portal">
+<header th:insert="fragments/general-portal.html :: header" class="header">
+    <h1>Header</h1>
+</header>
+
+<section class="content">
+    <aside th:replace="fragments/general-portal.html :: content-side" class="aside">
+        <h1>Aside</h1>
+    </aside>
+
+    <main class="main">
+        <div layout:fragment="content"></div>
+    </main>
+</section>
+
+<div id="globalLoading"></div>
+
+<div th:replace="fragments/modal.html :: global-error"></div>
+
+<script src="/js/script.js"></script>
+<th:block layout:fragment="script"></th:block>
+</body>
+</html>
