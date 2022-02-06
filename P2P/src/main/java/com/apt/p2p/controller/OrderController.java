@@ -53,7 +53,7 @@ public class OrderController {
         return "user/portal/order";
     }
 
-    @PostMapping("/api/order/{id}")
+    @PostMapping("/api/shop/{id}/order")
     @ResponseBody
     public List<OrderModel> apiIndex(@PathVariable("id") int shopId, @RequestBody FilterOrder input) {
         LocalDateTime ldtMaxDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(input.getMaxDate().getTime()), ZoneOffset.UTC);

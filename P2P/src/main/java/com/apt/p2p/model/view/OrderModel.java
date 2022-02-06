@@ -1,7 +1,7 @@
 package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,31 +30,31 @@ public class OrderModel {
 
     private Date updatedAt;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"shop", "addresses", "orders"})
     private UserModel user;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"order", "product"})
     private List<OrderDetailModel> orderDetails;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"order"})
     private List<OrderStatusOrder> orderStatusOrders;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"orders"})
     private StatusOrder currentStatus;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"orders", "user"})
     private ShopModel shop;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("user")
     private AddressModel address;
 
-    @JsonIgnore
+    @JsonIgnoreProperties
     private CardModel payment;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("user")
     private ShopFundModel shopFund;
 
-    public BigDecimal calTotal(){
+    public BigDecimal calTotal() {
         BigDecimal result = orderDetails.stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
         return result;
     }
