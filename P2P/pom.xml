@@ -97,13 +97,6 @@
             <artifactId>stripe-java</artifactId>
             <version>20.95.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.guicedee.services</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>1.2.1.1-jre17</version>
-        </dependency>
-
-
     </dependencies>
 
     <build>

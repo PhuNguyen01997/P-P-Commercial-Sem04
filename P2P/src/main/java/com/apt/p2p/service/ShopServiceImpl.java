@@ -34,4 +34,11 @@ public class ShopServiceImpl implements ShopService {
         }
         return result;
     }
+
+    @Override
+    public ShopModel findById(int id) {
+        Shop shop = shopRepository.findById(id).orElse(null);
+
+        return shopMapper.shopEntityToModel(shop);
+    }
 }

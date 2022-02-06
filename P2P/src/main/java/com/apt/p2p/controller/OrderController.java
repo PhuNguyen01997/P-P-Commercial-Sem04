@@ -7,12 +7,14 @@ import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class OrderController {
@@ -44,17 +46,22 @@ public class OrderController {
         return "user/account/order-detail";
     }
 
-    @GetMapping("/portal/order")
-    public String portalIndex(Model model) {
-//        int shopId = 1;
-//        model.addAttribute("orders", orderService.findALlByShopId(shopId));
+    @GetMapping("/portal/{id}/order")
+    public String portalIndex(Model model, @PathVariable("id") int shopId) {
+        model.addAttribute("shop", shopService.findById(shopId));
+
         return "user/portal/order";
     }
 
-    @GetMapping("/order/api")
+    @PostMapping("/api/order/{id}")
     @ResponseBody
-    public List<OrderModel> apiIndex(@RequestBody FilterOrder input){
-        List<OrderModel> result = orderService.findAllWithFilter(input);
+    public List<OrderModel> apiIndex(@PathVariable("id") int shopId, @RequestBody FilterOrder input) {
+        LocalDateTime ldtMaxDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(input.getMaxDate().getTime()), ZoneOffset.UTC);
+        ldtMaxDate = ldtMaxDate.plusDays(1);
+        Date dMaxDate = Date.from(ldtMaxDate.toInstant(ZoneOffset.UTC));
+        input.setMaxDate(dMaxDate);
+
+        List<OrderModel> result = orderService.findAllByShopIdWithFilter(shopId, input);
 
         return result;
     }

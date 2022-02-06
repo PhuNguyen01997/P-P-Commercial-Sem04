@@ -1,6 +1,7 @@
 package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,20 +30,28 @@ public class OrderModel {
 
     private Date updatedAt;
 
+    @JsonIgnore
     private UserModel user;
 
+    @JsonIgnore
     private List<OrderDetailModel> orderDetails;
 
+    @JsonIgnore
     private List<OrderStatusOrder> orderStatusOrders;
 
+    @JsonIgnore
     private StatusOrder currentStatus;
 
+    @JsonIgnore
     private ShopModel shop;
 
+    @JsonIgnore
     private AddressModel address;
 
+    @JsonIgnore
     private CardModel payment;
 
+    @JsonIgnore
     private ShopFundModel shopFund;
 
     public BigDecimal calTotal(){

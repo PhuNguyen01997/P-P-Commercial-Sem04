@@ -15,7 +15,7 @@ public interface OrderService {
 
     List<OrderModel> findALlByShopId(int shopId);
 
-    List<OrderModel> findAllWithFilter(FilterOrder filterOrder);
+    List<OrderModel> findAllByShopIdWithFilter(int shopId, FilterOrder filterOrder);
 
     OrderModel findById(int orderId);
 }

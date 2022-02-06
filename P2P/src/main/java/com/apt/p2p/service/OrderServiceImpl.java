@@ -10,6 +10,7 @@ import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -192,9 +193,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderModel> findAllWithFilter(FilterOrder filterOrder) {
-//        int statusId = filterOrder.getStatusId() == 0 ? 1 : filterOrder.getStatusId();
-//        int
-        return null;
+    public List<OrderModel> findAllByShopIdWithFilter(int shopId, FilterOrder filterOrder) {
+        Specification<Order> condition = Specification.where(OrderSpecification.hasDateIn(filterOrder.getMinDate(), filterOrder.getMaxDate()));
+
+        if (filterOrder.getStatusId() != 0) {
+            condition = condition.and(OrderSpecification.hasStatusId(filterOrder.getStatusId()));
+        }
+
+        if (!filterOrder.getName().isEmpty()) {
+            condition = condition.and(OrderSpecification.likeNameByType(filterOrder.getFilterBy(), filterOrder.getName()));
+        }
+
+        List<Order> orders = orderRepository.findAll(condition);
+
+        return orders.stream().map(o -> orderMapper.orderEntityToModel(o)).collect(Collectors.toList());
     }
 }
