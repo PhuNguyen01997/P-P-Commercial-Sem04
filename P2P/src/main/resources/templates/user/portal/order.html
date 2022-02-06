@@ -10,27 +10,27 @@
 <body>
 <div layout:fragment="content" class="main-inner order">
     <ul class="order-header">
-        <li class="order-header--item jsStatus active" data.status.id="0">
+        <li class="order-header--item jsStatus active" data-status-id="0">
             <p>Tất cả</p>
         </li>
-        <li class="order-header--item jsStatus" data.status.id="1">
+        <li class="order-header--item jsStatus" data-status-id="1">
             <p>Chờ xác nhận</p>
         </li>
-        <li class="order-header--item jsStatus" data.status.id="2">
+        <li class="order-header--item jsStatus" data-status-id="2">
             <p>Chờ lấy hàng</p>
         </li>
-        <li class="order-header--item jsStatus" data.status.id="3">
+        <li class="order-header--item jsStatus" data-status-id="3">
             <p>Đang giao</p>
         </li>
-        <li class="order-header--item jsStatus" data.status.id="4">
+        <li class="order-header--item jsStatus" data-status-id="4">
             <p>Đã giao</p>
         </li>
-<!--        <li class="order-header&#45;&#45;item">-->
-<!--            <p>Đơn hủy</p>-->
-<!--        </li>-->
-<!--        <li class="order-header&#45;&#45;item">-->
-<!--            <p>Trả hàng/Hoàn tiền</p>-->
-<!--        </li>-->
+        <!--        <li class="order-header&#45;&#45;item">-->
+        <!--            <p>Đơn hủy</p>-->
+        <!--        </li>-->
+        <!--        <li class="order-header&#45;&#45;item">-->
+        <!--            <p>Trả hàng/Hoàn tiền</p>-->
+        <!--        </li>-->
         <li class="order-header--bar"></li>
     </ul>
     <div class="order-block order-block__date">
@@ -40,9 +40,9 @@
     <div class="order-block order-block__name">
         <div class="select">
             <select name="type" id="" class="jsFilterBy">
-                <option value="">Price</option>
-                <option value="increase">Low to high</option>
-                <option value="decrease" selected>High to low</option>
+                <option value="1">Mã đơn hàng</option>
+                <option value="2">Tên người mua</option>
+                <option value="3" selected>Sản phẩm</option>
             </select>
         </div>
         <input class="ipt jsName" type="text">
@@ -234,8 +234,57 @@
 </div>
 
 <script layout:fragment="script">
-    setGlobalLoading(true);
+    function setActive(ele) {
+        const width = $(ele).outerWidth();
+        const position = $(ele).position();
 
+        $('.order-header--bar').css({
+            width,
+            transform: `translateX(${position.left}px)`
+        });
+    }
+
+    function setFilter() {
+        const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/);
+        filter = {
+            statusId: $('.jsStatus.active')[0].dataset.statusId,
+            filterBy: $('.jsFilterBy').val(),
+            name: $('.jsName').val(),
+            minDate: date[0],
+            maxDate: date[1],
+        }
+    }
+
+    function renderOrder() {
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/api/order`,
+            cache: false,
+            type: 'GET',
+            data: filter,
+            success: function (response) {
+                const orders = response.data;
+            },
+            error: function (xhr, error, response) {
+                console.log({xhr, error, response});
+            },
+        });
+    }
+
+    let filter = {};
+
+    // setGlobalLoading(true);
+
+    setActive($('.jsStatus')[0]);
+    $('.jsStatus').on('click', function () {
+        $('.jsStatus').removeClass('active');
+        $(this).addClass('active');
+        setActive(this);
+    })
+
+    $('.jsSubmit').on('click', function () {
+        setFilter();
+        renderOrder();
+    })
 </script>
 </body>
 </html>
