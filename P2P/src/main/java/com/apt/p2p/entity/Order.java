@@ -50,6 +50,10 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderStatusOrder> orderStatusOrders;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "currentStatusId")
+    private StatusOrder currentStatus;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopId")
@@ -65,7 +69,7 @@ public class Order {
     @JoinColumn(name = "shopFundId")
     private ShopFund shopFund;
 
-    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, Shop shop, Address address, String stripeCardId, ShopFund shopFund) {
+    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails,StatusOrder statusOrder, Shop shop, Address address, String stripeCardId, ShopFund shopFund) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.shippingCost = shippingCost;
@@ -74,6 +78,7 @@ public class Order {
         this.updatedAt = new Date();
         this.user = user;
         this.orderDetails = orderDetails;
+        this.currentStatus = statusOrder;
         this.shop = shop;
         this.address = address;
         this.stripeCardId = stripeCardId;

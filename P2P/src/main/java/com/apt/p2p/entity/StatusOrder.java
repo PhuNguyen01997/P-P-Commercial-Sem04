@@ -26,6 +26,9 @@ public class StatusOrder {
     @NotNull
     private String doneName;
 
+    @OneToMany(mappedBy = "currentStatus", fetch = FetchType.LAZY)
+    private List<Order> orders;
+
     @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
     private List<OrderStatusOrder> orderStatusOrders;
 

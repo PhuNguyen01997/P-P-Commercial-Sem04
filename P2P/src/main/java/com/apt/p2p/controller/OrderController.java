@@ -1,5 +1,7 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.model.form.CalShippingForm;
+import com.apt.p2p.model.form.FilterOrder;
 import com.apt.p2p.model.view.OrderModel;
 import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -47,5 +51,11 @@ public class OrderController {
         return "user/portal/order";
     }
 
+    @GetMapping("/order/api")
+    @ResponseBody
+    public List<OrderModel> apiIndex(@RequestBody FilterOrder input){
+        List<OrderModel> result = orderService.findAllWithFilter(input);
 
+        return result;
+    }
 }

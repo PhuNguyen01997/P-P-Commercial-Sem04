@@ -2,6 +2,7 @@ package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.OrderMapper;
 import com.apt.p2p.entity.*;
+import com.apt.p2p.model.form.FilterOrder;
 import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.OrderDetailModel;
 import com.apt.p2p.model.view.OrderModel;
@@ -98,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
                 }
                 shopFundRepository.save(shopFund);
 
-                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, shop, address, stripeCardId, shopFund);
+                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, status, shop, address, stripeCardId, shopFund);
                 orderRepository.save(order);
 
                 // attach many to many relation ship order - order_status_order - status_order
@@ -160,7 +161,7 @@ public class OrderServiceImpl implements OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
         Order order = optionalOrder.orElse(null);
 
-        if(order == null){
+        if (order == null) {
             return null;
         }
 
@@ -188,5 +189,12 @@ public class OrderServiceImpl implements OrderService {
         }).collect(Collectors.toList());
 
         return orderModels;
+    }
+
+    @Override
+    public List<OrderModel> findAllWithFilter(FilterOrder filterOrder) {
+//        int statusId = filterOrder.getStatusId() == 0 ? 1 : filterOrder.getStatusId();
+//        int
+        return null;
     }
 }
