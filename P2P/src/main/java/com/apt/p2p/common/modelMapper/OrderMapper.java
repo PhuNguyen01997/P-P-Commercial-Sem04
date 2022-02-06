@@ -30,7 +30,6 @@ public class OrderMapper {
                 skip(source.getAddress());
                 skip(source.getPayment());
                 skip(source.getShopFund());
-                skip(source.getCurrentStatus());
             }
         });
 
@@ -50,18 +49,17 @@ public class OrderMapper {
                 skip(destination.getAddress());
                 skip(destination.getPayment());
                 skip(destination.getShopFund());
-                skip(destination.getCurrentStatus());
             }
         });
 
         mapper.validate();
         OrderModel result = mapper.map(entity, OrderModel.class);
 
-        StatusOrder currentStatus = entity.getOrderStatusOrders()
-                .stream().sorted(Comparator.comparing(OrderStatusOrder::getId))
-                .collect(Collectors.toList())
-                .get(0).getStatus();
-        result.setCurrentStatus(currentStatus);
+//        StatusOrder currentStatus = entity.getOrderStatusOrders()
+//                .stream().sorted(Comparator.comparing(OrderStatusOrder::getId))
+//                .collect(Collectors.toList())
+//                .get(0).getStatus();
+//        result.setCurrentStatus(currentStatus);
 
         return result;
     }
