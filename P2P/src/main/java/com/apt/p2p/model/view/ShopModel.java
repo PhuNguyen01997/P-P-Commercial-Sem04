@@ -1,6 +1,7 @@
 package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.Address;
+import com.apt.p2p.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,4 +46,16 @@ public class ShopModel {
     public Integer countProducts;
 
     public Integer countRates;
+
+    public ShopModel(Shop shop) {
+        this.id = shop.getId();
+        this.logo = shop.getLogo();
+        this.name = shop.getName();
+        this.phone = shop.getPhone();
+        this.permission = shop.getPermission();
+        this.createdAt = shop.getCreatedAt();
+        this.updatedAt = shop.getUpdatedAt();
+        this.countProducts = shop.getProducts().size();
+        this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
+    }
 }

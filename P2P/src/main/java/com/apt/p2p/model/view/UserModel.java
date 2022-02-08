@@ -1,5 +1,6 @@
 package com.apt.p2p.model.view;
 
+import com.apt.p2p.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,4 +45,15 @@ public class UserModel {
     private List<RateModel> rates;
 
     private List<OrderModel> orders;
+
+    public UserModel(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.username = user.getUsername();
+        this.phone = user.getPhone();
+        this.avatar = user.getAvatar();
+        this.createdAt = user.getCreatedAt();
+        this.updatedAt = user.getUpdatedAt();
+        this.stripeCustomerId = user.getStripeCustomerId();
+    }
 }

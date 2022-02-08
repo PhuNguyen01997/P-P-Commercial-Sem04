@@ -51,7 +51,7 @@
         <button class="btn submit btn__primary jsSubmit">Tìm kiếm</button>
         <button class="btn clear btn__white jsClear">Đặt lại</button>
     </div>
-    <p class="order-block order-block__count">0 Đơn Hàng</p>
+    <p class="order-block order-block__count"><span class="jsCount">0</span> <span>Đơn Hàng</span></p>
     <div class="order-block order-block__table">
         <div class="table-header">
             <div class="table-col table-col__name">
@@ -72,94 +72,6 @@
         </div>
         <ul class="table-body jsContainer"></ul>
     </div>
-
-
-    <script type="text/html" id="templateTable">
-        <li className="table-body--row">
-            <div className="table-body--row-header">
-                <p className="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
-                <p className="name">[Buyer Name]</p>
-                <p className="order-info">ID đơn hàng: <span>[Order Id]</span></p>
-            </div>
-            <ul className="table-body--row-list">
-                <li className="table-body--row-item">
-                    <div className="table-col table-col__name">
-                        <img src="/assets/img/products/product_01.jpg" alt="">
-                        <div className="info">
-                            <p className="txt">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl
-                                Đây là
-                                1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật
-                                dài
-                                cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1
-                                cái
-                                tên thật dài cmnl
-                            </p>
-                            <p className="number">x99</p>
-                        </div>
-                    </div>
-                    <div className="table-col table-col__price">
-                        <p>900.000.000 vnđ</p>
-                    </div>
-                    <div className="table-col table-col__date">
-                        <p>[Date Order]</p>
-                        <p>[Time Order]</p>
-                    </div>
-                    <div className="table-col table-col__status">
-                        [Order Status]
-                    </div>
-                    <div className="table-col table-col__action">
-                        <a href="javascript: void(0);">[Next update status order]</a>
-                    </div>
-                </li>
-                <li className="table-body--row-item">
-                    <div className="table-col table-col__name">
-                        <img src="/assets/img/products/product_02.jpg" alt="">
-                        <div className="info">
-                            <p className="txt">Đây là 1 cái</p>
-                            <p className="number">x1</p>
-                        </div>
-                    </div>
-                    <div className="table-col table-col__price">
-                        <p>900.000.000 vnđ</p>
-                    </div>
-                    <div className="table-col table-col__date">
-                        <p>00-00-0000</p>
-                        <p>00:00</p>
-                    </div>
-                    <div className="table-col table-col__status">
-                        [Order Status]
-                    </div>
-                    <div className="table-col table-col__action">
-                        <a href="javascript: void(0);">[Next update status order]</a>
-                    </div>
-                </li>
-                <li className="table-body--row-item">
-                    <div className="table-col table-col__name">
-                        <img src="/assets/img/products/product_02.jpg" alt="">
-                        <div className="info">
-                            <p className="txt">Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1
-                                cái Đây
-                                là 1 cái Đây là 1 cái</p>
-                            <p className="number">x1</p>
-                        </div>
-                    </div>
-                    <div className="table-col table-col__price">
-                        <p>900.000.000 vnđ</p>
-                    </div>
-                    <div className="table-col table-col__date">
-                        <p>00-00-0000</p>
-                        <p>00:00</p>
-                    </div>
-                    <div className="table-col table-col__status">
-                        [Order Status]
-                    </div>
-                    <div className="table-col table-col__action">
-                        <a href="javascript: void(0);">[Next update status order]</a>
-                    </div>
-                </li>
-            </ul>
-        </li>
-    </script>
 </div>
 
 <script layout:fragment="script">
@@ -196,45 +108,39 @@
                 contentType: "application/json",
                 data: JSON.stringify(filter),
                 success: function (orders) {
+                    $('.jsCount').text(orders.length)
+
                     let htmlText = "";
                     orders.forEach((order) => {
-                        console.log(order)
+                        const createdDate = new Date(Date.parse(order.createdAt));
 
-                        htmlText += `<li className="table-body--row">` +
-                            `<div className="table-body--row-header">` +
-                            `<p className="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>` +
-                            `<p className="name">[Buyer Name]</p>` +
-                            `<p className="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
+                        htmlText += `<li class="table-body--row">` +
+                            `<div class="table-body--row-header">` +
+                            `<p class="avatar circle"><img src="/img/common/img_default_user.png" alt=""></p>` +
+                            `<p class="name">${order.user.username}</p>` +
+                            `<p class="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
                             `</div>` +
-                            `<ul className="table-body--row-list">` +
-
-                            `<li className="table-body--row-item">` +
-                            `<div className="table-col table-col__name">` +
-                            `<img src="/assets/img/products/product_01.jpg" alt="">` +
-                            `<div className="info">` +
-                            `<p className="txt">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl` +
-                            `</p>` +
-                            `<p className="number">x99</p>` +
-                            `</div>` +
-                            `</div>` +
-                            `<div className="table-col table-col__price">` +
-                            `<p>900.000.000 vnđ</p>` +
-                            `</div>` +
-                            `<div className="table-col table-col__date">` +
-                            `<p>[Date Order]</p>` +
-                            `<p>[Time Order]</p>` +
-                            `</div>` +
-                            `<div className="table-col table-col__status">` +
-                            `[Order Status]` +
-                            `</div>` +
-                            `<div className="table-col table-col__action">` +
-                            `<a href="javascript: void(0);">[Next update status order]</a>` +
-                            `</div>` +
-                            `</li>` +
-
-                            `</ul>` +
-                            `</li>`;
+                            `<ul class="table-body--row-list">`;
+                        order.orderDetails.forEach(ode => {
+                            htmlText += `<li class="table-body--row-item">` +
+                                `<div class="table-col table-col__name">` +
+                                `<img src="/img/products/product_01.jpg" alt="">` +
+                                `<div class="info"><p class="txt">${ode.product.name}</p><p class="number">x${ode.quantity}</p></div>` +
+                                `</div>` +
+                                `<div class="table-col table-col__price"><p>${ode.lastPrice} vnđ</p></div>` +
+                                `<div class="table-col table-col__date">` +
+                                `<p>${getStringDateFormat(createdDate)}</p>` +
+                                `<p>${getStringTimeFormat(createdDate)}</p>` +
+                                `</div>` +
+                                `<div class="table-col table-col__status">${order.currentStatus.name}</div>` +
+                                `<div class="table-col table-col__action">` +
+                                `<a href="javascript: void(0);">[Next update status order]</a>` +
+                                `</div>` +
+                                `</li>`;
+                        })
+                        htmlText += `</ul>` + `</li>`;
                     })
+                    $('.jsContainer').html(htmlText);
 
                     setGlobalLoading(false);
                 },
@@ -245,7 +151,7 @@
             });
         }
 
-            let filter = {};
+        let filter = {};
 
         setActive($('.jsStatus')[0]);
         renderOrder();

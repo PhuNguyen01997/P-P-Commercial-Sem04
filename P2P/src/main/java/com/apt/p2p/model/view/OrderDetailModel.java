@@ -1,6 +1,7 @@
 package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.Order;
+import com.apt.p2p.entity.OrderDetail;
 import com.apt.p2p.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +28,11 @@ public class OrderDetailModel {
     private ProductModel product;
 
     private OrderModel order;
+
+    public OrderDetailModel(OrderDetail entity) {
+        this.id = entity.getId();
+        this.lastPrice = entity.getLastPrice();
+        this.quantity = entity.getQuantity();
+        this.subtotal = entity.getSubtotal();
+    }
 }

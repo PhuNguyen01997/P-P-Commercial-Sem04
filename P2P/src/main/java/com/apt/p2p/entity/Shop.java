@@ -1,5 +1,6 @@
 package com.apt.p2p.entity;
 
+import com.apt.p2p.model.view.ShopModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

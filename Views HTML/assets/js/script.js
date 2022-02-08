@@ -3,6 +3,27 @@ var setGlobalLoading = function (isLoading) {
     $('#globalLoading')[isLoading ? 'addClass' : 'removeClass']('loading');
 }
 
+var getStringDateFormat = function (date) {
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    day = day < 10 ? '0' + day : day;
+    month = month < 10 ? '0' + month : month;
+
+    return `${day}-${month}-${year}`;
+}
+
+var getStringTimeFormat = function (date) {
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+
+    hour = hour < 10 ? '0' + hour : hour;
+    minute = minute < 10 ? '0' + minute : minute;
+
+    return `${hour}:${minute}`
+}
+
 $(function () {
     // JS for custom select
     function setSelect(select, value, text) {
@@ -141,7 +162,7 @@ $(function () {
             },
             autoApply: true,
             showDropdowns: true,
-            startDate: `${last2Week.getFullYear()}-${last2Week.getMonth() + 1}-${last2Week.getDate()}`, 
+            startDate: `${last2Week.getFullYear()}-${last2Week.getMonth() + 1}-${last2Week.getDate()}`,
             endDate: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
             maxDate: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
         });

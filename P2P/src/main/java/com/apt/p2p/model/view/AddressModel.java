@@ -1,5 +1,6 @@
 package com.apt.p2p.model.view;
 
+import com.apt.p2p.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,13 +37,26 @@ public class AddressModel {
 
     private int districtId;
 
-    private String provinceId;
+    private int provinceId;
 
     private UserModel user;
 
     private ShopModel shop;
 
     private List<OrderModel> orders;
+
+    public AddressModel(Address address) {
+        this.id = address.getId();
+        this.ownName = address.getOwnName();
+        this.ownPhone = address.getOwnPhone();
+        this.number = address.getNumber();
+        this.ward = address.getWard();
+        this.district = address.getDistrict();
+        this.province = address.getProvince();
+        this.wardId = address.getWardId();
+        this.districtId = address.getDistrictId();
+        this.provinceId = address.getProvinceId();
+    }
 
     public String getFullAddress(){
         StringBuilder stringBuilder = new StringBuilder(this.number);

@@ -206,6 +206,14 @@ public class OrderServiceImpl implements OrderService {
 
         List<Order> orders = orderRepository.findAll(condition);
 
-        return orders.stream().map(o -> orderMapper.orderEntityToModel(o)).collect(Collectors.toList());
+        List<OrderModel> orderModels = orders.stream().map(o -> {
+            OrderModel model = orderMapper.orderEntityToModel(o);
+            for (OrderDetailModel ode : model.getOrderDetails()) {
+                ode.setProduct(productService.findByOrderDetailId(ode.getId()));
+            }
+            return model;
+        }).collect(Collectors.toList());
+
+        return orderModels;
     }
 }

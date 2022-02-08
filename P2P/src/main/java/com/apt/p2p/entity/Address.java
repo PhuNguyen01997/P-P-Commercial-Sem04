@@ -1,5 +1,6 @@
 package com.apt.p2p.entity;
 
+import com.apt.p2p.model.view.AddressModel;
 import lombok.*;
 
 import javax.persistence.*;

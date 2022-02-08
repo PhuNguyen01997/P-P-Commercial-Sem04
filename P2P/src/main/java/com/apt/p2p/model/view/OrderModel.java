@@ -33,7 +33,7 @@ public class OrderModel {
     @JsonIgnoreProperties({"shop", "addresses", "orders"})
     private UserModel user;
 
-    @JsonIgnoreProperties({"order", "product"})
+//    @JsonIgnoreProperties({"order", "product"})
     private List<OrderDetailModel> orderDetails;
 
     @JsonIgnoreProperties({"order"})
@@ -42,16 +42,16 @@ public class OrderModel {
     @JsonIgnoreProperties({"orders"})
     private StatusOrder currentStatus;
 
-    @JsonIgnoreProperties({"orders", "user"})
+    @JsonIgnoreProperties({"orders", "user", "address", "products"})
     private ShopModel shop;
 
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"user", "orders", "shop"})
     private AddressModel address;
 
     @JsonIgnoreProperties
     private CardModel payment;
 
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"shop", "orders"})
     private ShopFundModel shopFund;
 
     public BigDecimal calTotal() {

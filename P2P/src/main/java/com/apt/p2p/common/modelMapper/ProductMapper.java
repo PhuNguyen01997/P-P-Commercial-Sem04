@@ -2,6 +2,8 @@ package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.view.ProductModel;
+import com.apt.p2p.model.view.RateModel;
+import com.apt.p2p.model.view.ShopModel;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -9,14 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 public class ProductMapper {
     @Autowired
     private MapperService mapperService;
-
-    @Autowired
-    @Qualifier("productAddPathImage")
-    private Converter productAddPathImage;
 
     public Product productModelToEntity(ProductModel model) {
         ModelMapper mapper = mapperService.getModelMapper();
@@ -36,18 +36,36 @@ public class ProductMapper {
     }
 
     public ProductModel productEntityToModel(Product entity) {
-        ModelMapper mapper = mapperService.getModelMapper();
-        mapper.typeMap(Product.class, ProductModel.class);
-        mapper.addMappings(new PropertyMap<Product, ProductModel>() {
-            @Override
-            protected void configure() {
-                skip(destination.getShop());
-                skip(destination.getRates());
-                using(productAddPathImage).map(source.getImage()).setImage("Error mapping images");
-            }
-        });
+//        ModelMapper mapper = mapperService.getModelMapper();
+//        mapper.typeMap(Product.class, ProductModel.class);
+//        mapper.addMappings(new PropertyMap<Product, ProductModel>() {
+//            @Override
+//            protected void configure() {
+//                skip(destination.getShop());
+//                skip(destination.getRates());
+//                using(productAddPathImage).map(source.getImage()).setImage("Error mapping images");
+//            }
+//        });
+//
+//        mapper.validate();
+//        return mapper.map(entity, ProductModel.class);
+        ProductModel model = new ProductModel();
+        model.setId(entity.getId());
+        model.setName(entity.getName());
+        model.setPrice(entity.getPrice());
+        model.setImage(this.productAddPathImage(entity.getImage()));
+        model.setDescription(entity.getDescription());
+        model.setCreatedAt(entity.getCreatedAt());
+        model.setUpdatedAt(entity.getUpdatedAt());
 
-        mapper.validate();
-        return mapper.map(entity, ProductModel.class);
+        model.setShop(new ShopModel(entity.getShop()));
+        model.setRates(entity.getRates().stream().map(re -> new RateModel(re)).collect(Collectors.toList()));
+        model.setCategory(entity.getCategory().removeRelationShip());
+
+        return model;
+    }
+
+    private String productAddPathImage(String img){
+        return "/images/product/" + img;
     }
 }
