@@ -29,9 +29,9 @@ public class OrderStatusOrder {
 
     private Date date;
 
-    public OrderStatusOrder(StatusOrder statusOrder) {
+    public OrderStatusOrder(StatusOrder statusOrder, Order order) {
         this.status = statusOrder;
-        this.order = null;
+        this.order = order;
         this.date = new Date();
     }
 }

@@ -53,6 +53,12 @@ public class OrderController {
         return "user/portal/order";
     }
 
+    @PostMapping("/api/order/{id}")
+    public boolean updateStatus(@PathVariable("id") int orderId, @RequestParam("statusId") int statusId) {
+        boolean result = orderService.updateStatus(orderId, statusId);
+        return result;
+    }
+
     @PostMapping("/api/shop/{id}/order")
     @ResponseBody
     public List<OrderModel> apiIndex(@PathVariable("id") int shopId, @RequestBody FilterOrder input) {

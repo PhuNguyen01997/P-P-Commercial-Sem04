@@ -112,7 +112,21 @@
 
                     let htmlText = "";
                     orders.forEach((order) => {
+                        console.log(order);
                         const createdDate = new Date(Date.parse(order.createdAt));
+                        // const actionStatus = order.
+                        const currentStatus = status[order.currentStatus.id - 1];
+                        let statusText;
+                        switch (currentStatus.id) {
+                            case 1: {
+                                statusText = 'Chuyển sang chuẩn bị hàng';
+                                break;
+                            }
+                            case 2: {
+                                statusText = 'Thông báo shiper giao hàng';
+                                break;
+                            }
+                        }
 
                         htmlText += `<li class="table-body--row">` +
                             `<div class="table-body--row-header">` +
@@ -121,6 +135,7 @@
                             `<p class="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
                             `</div>` +
                             `<ul class="table-body--row-list">`;
+
                         order.orderDetails.forEach(ode => {
                             htmlText += `<li class="table-body--row-item">` +
                                 `<div class="table-col table-col__name">` +
@@ -133,12 +148,17 @@
                                 `<p>${getStringTimeFormat(createdDate)}</p>` +
                                 `</div>` +
                                 `<div class="table-col table-col__status">${order.currentStatus.name}</div>` +
-                                `<div class="table-col table-col__action">` +
-                                `<a href="javascript: void(0);">[Next update status order]</a>` +
-                                `</div>` +
-                                `</li>`;
+                                `<div class="table-col table-col__action">`;
+                            if (statusText) {
+                                htmlText += `<a data-id="${order.id}" class="jsAction" href="javascript: void(0);">${statusText}</a>`;
+                            }
+                            htmlText += `</div>` + `</li>`;
                         })
                         htmlText += `</ul>` + `</li>`;
+
+                        htmlText += `<form data-id="${order.id}" class="d-none" method="post" action="${window.location.protocol}//${window.location.host}/api/order/${order.id}">` +
+                            // `<input type="text" name="statusId" value="${currentStatus.id + 1}">` +
+                            `</form>`;
                     })
                     $('.jsContainer').html(htmlText);
 
@@ -151,15 +171,34 @@
             });
         }
 
+        function fetchStatus() {
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/status`,
+                cache: false,
+                type: 'GET',
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                    status = data;
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                },
+            });
+        }
+
         let filter = {};
+        let status = [];
 
         setActive($('.jsStatus')[0]);
         renderOrder();
+        fetchStatus();
 
         $('.jsStatus').on('click', function () {
             $('.jsStatus').removeClass('active');
             $(this).addClass('active');
             setActive(this);
+            renderOrder();
         })
 
         $('.jsSubmit').on('click', function () {

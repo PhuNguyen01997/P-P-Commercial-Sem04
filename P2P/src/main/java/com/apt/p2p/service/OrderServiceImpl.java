@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -130,8 +131,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderModel updateStatus(int statusId) {
-        return null;
+    @Transactional
+    public boolean updateStatus(int orderId, int statusId) {
+        boolean result = false;
+        Order order = orderRepository.findById(orderId).orElse(null);
+        if (order == null) {
+            StatusOrder statusOrder = statusOrderRepository.findById(statusId).get();
+            order.setCurrentStatus(statusOrder);
+
+            OrderStatusOrder orderStatusOrder = new OrderStatusOrder(statusOrder, order);
+            orderStatusOrderRepository.save(orderStatusOrder);
+
+            order.getOrderStatusOrders().add(orderStatusOrder);
+
+            orderRepository.save(order);
+
+            result = true;
+        }
+        return result;
     }
 
     @Override

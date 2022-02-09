@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrderService {
     List<OrderModel> create(PurchaseModel purchaseModel);
 
-    OrderModel updateStatus(int statusId);
+    boolean updateStatus(int orderId, int statusId);
 
     List<OrderModel> findAllByUserId(int userId);
 
