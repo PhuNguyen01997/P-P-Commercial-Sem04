@@ -34,6 +34,29 @@ public class StatusOrder {
 //    private List<OrderStatusOrder> orderStatusOrders;
 
     public String getIconUrl(){
-        return "imgUrl";
+        String url = "";
+        switch (this.id){
+            case 1: {
+                url = "far fa-file-alt";
+                break;
+            }
+            case 2: {
+                url = "fas fa-dollar-sign";
+                break;
+            }
+            case 3: {
+                url = "fas fa-dolly-flatbed";
+                break;
+            }
+            case 4: {
+                url = "fas fa-truck";
+                break;
+            }
+            case 5: {
+                url = "far fa-star";
+                break;
+            }
+        }
+        return url;
     }
 }

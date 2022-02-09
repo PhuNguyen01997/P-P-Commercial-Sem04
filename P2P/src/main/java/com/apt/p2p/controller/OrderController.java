@@ -23,6 +23,8 @@ public class OrderController {
     @Autowired
     private UsersDetailServiceImpl userService;
     @Autowired
+    private StatusOrderService statusOrderService;
+    @Autowired
     private ShopService shopService;
 
     @GetMapping("order")
@@ -41,8 +43,8 @@ public class OrderController {
                               Model model) {
         int userId = 3;
         model.addAttribute("order", orderService.findById(id));
-        model.addAttribute("user", userService.findById(userId));
-        model.addAttribute("shop", shopService.findByOrderId(id));
+        model.addAttribute("statusList", statusOrderService.findAll());
+
         return "user/account/order-detail";
     }
 
@@ -54,6 +56,7 @@ public class OrderController {
     }
 
     @PostMapping("/api/order/{id}")
+    @ResponseBody
     public boolean updateStatus(@PathVariable("id") int orderId, @RequestParam("statusId") int statusId) {
         boolean result = orderService.updateStatus(orderId, statusId);
         return result;

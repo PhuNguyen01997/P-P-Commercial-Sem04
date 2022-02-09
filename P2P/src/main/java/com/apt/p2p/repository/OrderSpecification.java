@@ -10,6 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 public final class OrderSpecification {
+    public static Specification<Order> hasShopId(int shopId) {
+        return (root, query, cb) -> {
+            Join<Order, Shop> joinShop = root.join("shop");
+            return cb.equal(joinShop.get("id"), shopId);
+        };
+    }
+
     public static Specification<Order> hasStatusId(int statusId) {
         return (root, query, cb) -> {
             Join<Order, StatusOrder> joinOrderStatusOrder = root.join("currentStatus");

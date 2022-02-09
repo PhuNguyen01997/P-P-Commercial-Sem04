@@ -19,12 +19,15 @@
             <p>Chờ xác nhận</p>
         </li>
         <li class="order-header--item jsStatus" data-status-id="2">
-            <p>Chờ lấy hàng</p>
+            <p>Đã thanh toán</p>
         </li>
         <li class="order-header--item jsStatus" data-status-id="3">
-            <p>Đang giao</p>
+            <p>Chờ lấy hàng</p>
         </li>
         <li class="order-header--item jsStatus" data-status-id="4">
+            <p>Đang giao</p>
+        </li>
+        <li class="order-header--item jsStatus" data-status-id="5">
             <p>Đã giao</p>
         </li>
         <!--        <li class="order-header&#45;&#45;item">-->
@@ -112,18 +115,24 @@
 
                     let htmlText = "";
                     orders.forEach((order) => {
-                        console.log(order);
                         const createdDate = new Date(Date.parse(order.createdAt));
-                        // const actionStatus = order.
                         const currentStatus = status[order.currentStatus.id - 1];
-                        let statusText;
-                        switch (currentStatus.id) {
-                            case 1: {
-                                statusText = 'Chuyển sang chuẩn bị hàng';
+                        let nextStatus = {
+                            statusId: status[order.currentStatus.id],
+                            statusText: "",
+                        };
+
+                        switch (nextStatus.id) {
+                            case 2: {
+                                nextStatus.statusText = 'Chuyển sang chuẩn bị hàng';
                                 break;
                             }
-                            case 2: {
-                                statusText = 'Thông báo shiper giao hàng';
+                            case 3: {
+                                nextStatus.statusText = 'Chuyển sang chuẩn bị hàng';
+                                break;
+                            }
+                            case 4: {
+                                nextStatus.statusText = 'Thông báo shiper lấy/giao hàng';
                                 break;
                             }
                         }
@@ -149,16 +158,12 @@
                                 `</div>` +
                                 `<div class="table-col table-col__status">${order.currentStatus.name}</div>` +
                                 `<div class="table-col table-col__action">`;
-                            if (statusText) {
-                                htmlText += `<a data-id="${order.id}" class="jsAction" href="javascript: void(0);">${statusText}</a>`;
+                            if (nextStatus.statusText) {
+                                htmlText += `<a data-id="${order.id}" data-status-id="${nextStatus.statusId}" class="jsAction" href="javascript: void(0);">${nextStatus.statusText}</a>`;
                             }
                             htmlText += `</div>` + `</li>`;
                         })
                         htmlText += `</ul>` + `</li>`;
-
-                        htmlText += `<form data-id="${order.id}" class="d-none" method="post" action="${window.location.protocol}//${window.location.host}/api/order/${order.id}">` +
-                            // `<input type="text" name="statusId" value="${currentStatus.id + 1}">` +
-                            `</form>`;
                     })
                     $('.jsContainer').html(htmlText);
 
@@ -178,7 +183,6 @@
                 type: 'GET',
                 contentType: "application/json",
                 success: function (data) {
-                    console.log(data);
                     status = data;
                 },
                 error: function (xhr, error, response) {
@@ -190,9 +194,9 @@
         let filter = {};
         let status = [];
 
+        fetchStatus();
         setActive($('.jsStatus')[0]);
         renderOrder();
-        fetchStatus();
 
         $('.jsStatus').on('click', function () {
             $('.jsStatus').removeClass('active');
@@ -203,6 +207,27 @@
 
         $('.jsSubmit').on('click', function () {
             renderOrder();
+        })
+
+        $('.jsContainer').on('click', '.jsAction', function () {
+            const orderId = this.dataset.id;
+            const statusId = this.dataset.statusId;
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/order/${orderId}?statusId=${statusId}`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (success) {
+                    if(success){
+                        window.location.reload();
+                    }else {
+                        showModal("Không thể chỉnh sửa trạng thái đơn hàng, vui lòng liên hệ hỗ trợ");
+                    }
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                },
+            });
         })
     });
 </script>

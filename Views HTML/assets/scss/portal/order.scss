@@ -130,7 +130,7 @@
                     }
 
                     &-item {
-                        @include flex();
+                        @include flex($align: stretch);
                         border: 1px solid $color-bd-ipt;
                         border-bottom: none;
                         padding: 10px 16px;
@@ -142,6 +142,10 @@
                 }
 
                 .table-col {
+                    &__name {
+                        align-items: flex-start;
+                    }
+
                     &:nth-child(n + 2) {
                         border-left: 1px solid $color-bd-ipt;
                     }
@@ -152,6 +156,7 @@
                 flex-shrink: 0;
                 padding: 0 8px;
                 text-align: center;
+                @include flex($direction: column);
 
                 &:first-child {
                     padding-left: 0;
@@ -162,7 +167,7 @@
                 }
 
                 &__name {
-                    @include flex($justify: flex-start, $align: flex-start);
+                    @include flex($justify: flex-start);
                     text-align: left;
                     flex-shrink: 1;
                     width: 100%;
@@ -204,9 +209,9 @@
                 &__action {
                     width: 150px;
 
-                     a{
-                         color: #007bff;
-                     }
+                    a {
+                        color: #007bff;
+                    }
                 }
             }
         }

@@ -52,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Override
+    @Transactional
     public List<OrderModel> create(PurchaseModel purchaseModel) {
         int userId = 3;
         List<OrderModel> result = new ArrayList<>();
@@ -135,7 +136,7 @@ public class OrderServiceImpl implements OrderService {
     public boolean updateStatus(int orderId, int statusId) {
         boolean result = false;
         Order order = orderRepository.findById(orderId).orElse(null);
-        if (order == null) {
+        if (order != null) {
             StatusOrder statusOrder = statusOrderRepository.findById(statusId).get();
             order.setCurrentStatus(statusOrder);
 
@@ -211,7 +212,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderModel> findAllByShopIdWithFilter(int shopId, FilterOrder filterOrder) {
-        Specification<Order> condition = Specification.where(OrderSpecification.hasDateIn(filterOrder.getMinDate(), filterOrder.getMaxDate()));
+        Specification<Order> condition = Specification
+                .where(OrderSpecification.hasShopId(shopId))
+                .and(OrderSpecification.hasDateIn(filterOrder.getMinDate(), filterOrder.getMaxDate()));
 
         if (filterOrder.getStatusId() != 0) {
             condition = condition.and(OrderSpecification.hasStatusId(filterOrder.getStatusId()));
