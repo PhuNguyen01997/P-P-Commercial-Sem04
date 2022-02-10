@@ -15,7 +15,6 @@
       <form th:action="@{/save-user}" th:object="${user}" method="POST" enctype="multipart/form-data" class="form">
         <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Email" th:field="*{email}">
         <input class="auth--ipt auth--ipt__txt" placeholder="Phone" th:field="*{phone}">
-        <!--        <p class="form&#45;&#45;error-mess" for="">Error message</p>-->
         <input class="auth--ipt auth--ipt__txt" type="text" placeholder="Username" th:field="*{username}">
         <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}">
         <input class="auth--ipt auth--ipt__txt" type="file" name="pic">

@@ -1,12 +1,11 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.UserModel;
 import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,31 +52,33 @@ public class AuthController {
 
     @PostMapping("/save-user")
     public String save(Model model
-                        ,@ModelAttribute("user") User user
+                        ,@ModelAttribute("user") UserModel userModel
                         ,@RequestParam("pic") MultipartFile image
                         , BindingResult result,
                         final RedirectAttributes attributes
                         ) {
-
-        System.out.println("information: " + user);
-
+        String email = service.findByEmail(userModel.getEmail());
+        System.out.println("email:" + email);
+        User usr = new User();
+        System.out.println("information: " + userModel);
         if (!image.isEmpty()) {
             try {
                 byte[] bytes = image.getBytes();
                 File uploadFolder = ResourceUtils.getFile("classpath:static/img/auth");
                 Path imagePath = Paths.get(uploadFolder.getPath(), image.getOriginalFilename());
                 Files.write(imagePath, bytes);
-                user.setAvatar(image.getOriginalFilename());
+                userModel.setAvatar(image.getOriginalFilename());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            if (user.getUserId() != 0) {
-                service.findById(user.getUserId()).ifPresent(p -> user.setAvatar(p.getAvatar()));
-            }
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        service.save(user);
+        usr.setEmail(userModel.getEmail());
+        usr.setAvatar(userModel.getAvatar());
+        usr.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        usr.setPhone(userModel.getPhone());
+        usr.setUsername(userModel.getUsername());
+        System.out.println(usr);
+        service.save(usr);
         return "redirect:/";
     }
 

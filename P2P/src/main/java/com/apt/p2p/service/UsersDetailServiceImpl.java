@@ -46,6 +46,13 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     }
 
     @Override
+    public String findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user == null){
@@ -69,6 +76,5 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), enabled, accountNonExpired,
                 credentialNonExpired, accountNonLocked, grantList);
     }
-
 
 }
