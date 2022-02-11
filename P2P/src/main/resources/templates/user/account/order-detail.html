@@ -22,15 +22,18 @@
         </div>
         <div class="order-detail-status">
             <div class="order-step">
-                <div th:each="status: ${statusList}" class="order-step--item"
-                     th:classappend="${order.currentStatus.id >= status.id ? 'success' : ''}">
+                <div class="order-step--item"
+                     th:each="status: ${statusList}"
+                     th:if="${(status.id != 2) || (status.id == 2 && order.methodPayment)}"
+                     th:classappend="${order.currentStatus.id > status.id ? 'success' : (order.currentStatus.id == status.id ? 'current' : '')}">
                     <p class="order-step--icon circle">
                         <i th:class="${status.getIconUrl()}"></i>
                     </p>
                     <p class="order-step--status"
-                       th:text="${status.doneName}"></p>
-                    <!--                    <p class="order-step&#45;&#45;status">Đơn hàng đã đặt</p>-->
-                    <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
+                       th:text="${order.currentStatus.id > status.id ? status.doneName : status.name}"></p>
+                    <th:block th:if="order.currentStatus.id > status.id">
+                        <p th:text="${statusMapStatusHistory.get(status.id)}" class="order-step--time">[Order History Date]</p>
+                    </th:block>
                 </div>
                 <!--                <div class="order-step&#45;&#45;item success">-->
                 <!--                    <p class="order-step&#45;&#45;icon circle">-->

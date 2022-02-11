@@ -19,7 +19,7 @@ import java.util.List;
 public class StatusOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @NotNull
     private String name;

@@ -16,13 +16,13 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpeci
     @Query("SELECT o FROM Order o WHERE o.shop.id=:id ORDER BY o.id DESC")
     List<Order> findAllByShopId(@Param("id") int shopId);
 
-//    @Query("SELECT o FROM Order o WHERE o.st")
-//    List<Order> findAllWithFilter();
-
     @Override
     @Query("SELECT o FROM Order o" +
-            " JOIN OrderStatusOrder oso ON oso.order.id = o.id" +
-            " JOIN StatusOrder s ON oso.status.id = s.id" +
+            " JOIN StatusHistory sh ON sh.order.id = o.id" +
+            " JOIN StatusOrder s ON sh.status.id = s.id" +
             " WHERE o.id = :id")
     Optional<Order> findById(@Param("id") Integer id);
+
+    @Query("SELECT sh.order FROM StatusHistory sh WHERE sh.id = :id")
+    Order findByStatusHistoryId(@Param("id") int statusHistoryId);
 }

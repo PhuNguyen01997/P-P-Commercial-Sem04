@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "OrderStatusOrder")
-public class OrderStatusOrder {
+public class StatusHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -29,7 +29,7 @@ public class OrderStatusOrder {
 
     private Date date;
 
-    public OrderStatusOrder(StatusOrder statusOrder, Order order) {
+    public StatusHistory(StatusOrder statusOrder, Order order) {
         this.status = statusOrder;
         this.order = order;
         this.date = new Date();

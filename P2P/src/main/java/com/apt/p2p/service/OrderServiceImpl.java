@@ -106,10 +106,10 @@ public class OrderServiceImpl implements OrderService {
                 orderRepository.save(order);
 
                 // attach many to many relation ship order - order_status_order - status_order
-                OrderStatusOrder orderStatusOrder = new OrderStatusOrder();
-                orderStatusOrder.setStatus(status);
-                orderStatusOrder.setOrder(order);
-                orderStatusOrderRepository.save(orderStatusOrder);
+                StatusHistory statusHistory = new StatusHistory();
+                statusHistory.setStatus(status);
+                statusHistory.setOrder(order);
+                orderStatusOrderRepository.save(statusHistory);
 
                 // attach orderDetails to order
                 filterOrderDetails.forEach(ode -> ode.setOrder(order));
@@ -140,10 +140,10 @@ public class OrderServiceImpl implements OrderService {
             StatusOrder statusOrder = statusOrderRepository.findById(statusId).get();
             order.setCurrentStatus(statusOrder);
 
-            OrderStatusOrder orderStatusOrder = new OrderStatusOrder(statusOrder, order);
-            orderStatusOrderRepository.save(orderStatusOrder);
+            StatusHistory statusHistory = new StatusHistory(statusOrder, order);
+            orderStatusOrderRepository.save(statusHistory);
 
-            order.getOrderStatusOrders().add(orderStatusOrder);
+            order.getStatusHistories().add(statusHistory);
 
             orderRepository.save(order);
 
@@ -186,6 +186,10 @@ public class OrderServiceImpl implements OrderService {
 
         OrderModel orderModel = orderMapper.orderEntityToModel(order);
         orderModel.setOrderDetails(orderDetailService.findAllByOrderId(orderId));
+
+        for (StatusHistory sh : orderModel.getStatusHistories()) {
+            sh.setStatus(statusOrderRepository.findByStatusHistory(sh.getId()));
+        }
 
         return orderModel;
     }

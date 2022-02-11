@@ -37,7 +37,7 @@ public class OrderModel {
     private List<OrderDetailModel> orderDetails;
 
     @JsonIgnoreProperties({"order"})
-    private List<OrderStatusOrder> orderStatusOrders;
+    private List<StatusHistory> statusHistories;
 
     @JsonIgnoreProperties({"orders"})
     private StatusOrder currentStatus;

@@ -1,6 +1,5 @@
 package com.apt.p2p.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class Order {
     private List<OrderDetail> orderDetails;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private List<OrderStatusOrder> orderStatusOrders;
+    private List<StatusHistory> statusHistories;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currentStatusId")

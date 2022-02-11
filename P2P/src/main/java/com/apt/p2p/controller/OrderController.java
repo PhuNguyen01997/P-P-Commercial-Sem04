@@ -25,6 +25,8 @@ public class OrderController {
     @Autowired
     private StatusOrderService statusOrderService;
     @Autowired
+    private StatusHistoryService statusHistoryService;
+    @Autowired
     private ShopService shopService;
 
     @GetMapping("order")
@@ -42,8 +44,10 @@ public class OrderController {
     public String orderDetail(@PathVariable("id") int id,
                               Model model) {
         int userId = 3;
-        model.addAttribute("order", orderService.findById(id));
+        OrderModel order = orderService.findById(id);
+        model.addAttribute("order", order);
         model.addAttribute("statusList", statusOrderService.findAll());
+        model.addAttribute("statusMapStatusHistory", statusHistoryService.findStatusOrderMapStatusHistoryByOrderId(order.getId()));
 
         return "user/account/order-detail";
     }

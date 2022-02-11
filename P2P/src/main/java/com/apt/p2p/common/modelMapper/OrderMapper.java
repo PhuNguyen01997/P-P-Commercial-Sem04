@@ -2,15 +2,11 @@ package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.view.*;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,8 +58,7 @@ public class OrderMapper {
         result.setPercentPermission(entity.getPercentPermission());
         result.setCreatedAt(entity.getCreatedAt());
         result.setUpdatedAt(entity.getUpdatedAt());
-
-        result.setOrderStatusOrders(entity.getOrderStatusOrders());
+        result.setStatusHistories(entity.getStatusHistories());
         result.setCurrentStatus(entity.getCurrentStatus());
 
         result.setUser(new UserModel(entity.getUser()));
