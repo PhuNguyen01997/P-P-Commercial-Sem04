@@ -55,6 +55,7 @@ public class ShopModel {
         this.permission = shop.getPermission();
         this.createdAt = shop.getCreatedAt();
         this.updatedAt = shop.getUpdatedAt();
+
         this.countProducts = shop.getProducts().size();
         this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
     }

@@ -31,9 +31,10 @@
                     </p>
                     <p class="order-step--status"
                        th:text="${order.currentStatus.id > status.id ? status.doneName : status.name}"></p>
-                    <th:block th:if="order.currentStatus.id > status.id">
-                        <p th:text="${statusMapStatusHistory.get(status.id)}" class="order-step--time">[Order History Date]</p>
-                    </th:block>
+                    <p th:if="${order.currentStatus.id > status.id}"
+                       th:text="${#dates.format(statusMapStatusHistory.get(status.id).date, 'dd-MM-yyyy HH:mm')}"
+                       class="order-step--time">[Order History Date]</p>
+
                 </div>
                 <!--                <div class="order-step&#45;&#45;item success">-->
                 <!--                    <p class="order-step&#45;&#45;icon circle">-->

@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -29,9 +28,13 @@ public class StatusHistory {
 
     private Date date;
 
+    public StatusHistory() {
+        this.date = new Date();
+    }
+
     public StatusHistory(StatusOrder statusOrder, Order order) {
+        this();
         this.status = statusOrder;
         this.order = order;
-        this.date = new Date();
     }
 }

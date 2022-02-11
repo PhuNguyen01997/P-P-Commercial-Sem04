@@ -115,14 +115,15 @@
 
                     let htmlText = "";
                     orders.forEach((order) => {
+                        console.log(order)
                         const createdDate = new Date(Date.parse(order.createdAt));
-                        const currentStatus = status[order.currentStatus.id - 1];
+                        const currentStatus = order.currentStatus;
                         let nextStatus = {
-                            statusId: status[order.currentStatus.id],
+                            statusId: [1, 2].includes(currentStatus.id) ? 3 : currentStatus.id + 1,
                             statusText: "",
                         };
 
-                        switch (nextStatus.id) {
+                        switch (nextStatus.statusId) {
                             case 2: {
                                 nextStatus.statusText = 'Chuyển sang chuẩn bị hàng';
                                 break;
@@ -136,6 +137,8 @@
                                 break;
                             }
                         }
+
+                        console.log({currentStatus, nextStatus});
 
                         htmlText += `<li class="table-body--row">` +
                             `<div class="table-body--row-header">` +

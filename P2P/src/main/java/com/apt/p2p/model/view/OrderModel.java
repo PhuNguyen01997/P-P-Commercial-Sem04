@@ -30,28 +30,20 @@ public class OrderModel {
 
     private Date updatedAt;
 
-    @JsonIgnoreProperties({"shop", "addresses", "orders"})
     private UserModel user;
 
-//    @JsonIgnoreProperties({"order", "product"})
     private List<OrderDetailModel> orderDetails;
 
-    @JsonIgnoreProperties({"order"})
     private List<StatusHistory> statusHistories;
 
-    @JsonIgnoreProperties({"orders"})
     private StatusOrder currentStatus;
 
-    @JsonIgnoreProperties({"orders", "user", "address", "products"})
     private ShopModel shop;
 
-    @JsonIgnoreProperties({"user", "orders", "shop"})
     private AddressModel address;
 
-    @JsonIgnoreProperties
     private CardModel payment;
 
-    @JsonIgnoreProperties({"shop", "orders"})
     private ShopFundModel shopFund;
 
     public BigDecimal calTotal() {

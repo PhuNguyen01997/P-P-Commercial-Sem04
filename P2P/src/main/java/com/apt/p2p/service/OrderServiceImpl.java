@@ -106,9 +106,7 @@ public class OrderServiceImpl implements OrderService {
                 orderRepository.save(order);
 
                 // attach many to many relation ship order - order_status_order - status_order
-                StatusHistory statusHistory = new StatusHistory();
-                statusHistory.setStatus(status);
-                statusHistory.setOrder(order);
+                StatusHistory statusHistory = new StatusHistory(status, order);
                 orderStatusOrderRepository.save(statusHistory);
 
                 // attach orderDetails to order
@@ -229,6 +227,11 @@ public class OrderServiceImpl implements OrderService {
         }
 
         List<Order> orders = orderRepository.findAll(condition);
+        // trick dump for join orderDetails and status history
+        for (Order o : orders) {
+            int size1 = o.getStatusHistories().size();
+            int size2 = o.getOrderDetails().size();
+        }
 
         List<OrderModel> orderModels = orders.stream().map(o -> {
             OrderModel model = orderMapper.orderEntityToModel(o);

@@ -12,6 +12,7 @@ import java.util.List;
 public final class OrderSpecification {
     public static Specification<Order> hasShopId(int shopId) {
         return (root, query, cb) -> {
+            root = joinAllRelation(root);
             Join<Order, Shop> joinShop = root.join("shop");
             return cb.equal(joinShop.get("id"), shopId);
         };
@@ -19,6 +20,7 @@ public final class OrderSpecification {
 
     public static Specification<Order> hasStatusId(int statusId) {
         return (root, query, cb) -> {
+            root = joinAllRelation(root);
             Join<Order, StatusOrder> joinOrderStatusOrder = root.join("currentStatus");
             return cb.equal(joinOrderStatusOrder.get("id"), statusId);
         };
@@ -26,6 +28,7 @@ public final class OrderSpecification {
 
     public static Specification<Order> hasDateIn(Date minDate, Date maxDate) {
         return (root, query, cb) -> {
+            root = joinAllRelation(root);
             return cb.between(root.get("createdAt"), minDate, maxDate);
         };
     }
@@ -61,5 +64,14 @@ public final class OrderSpecification {
             }
         }
         return result;
+    }
+
+    private static Root joinAllRelation(Root root) {
+        root.fetch("shop");
+        root.fetch("user");
+        root.fetch("address");
+        root.fetch("currentStatus");
+        root.fetch("shopFund");
+        return root;
     }
 }

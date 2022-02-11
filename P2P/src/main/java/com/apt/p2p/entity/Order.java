@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
@@ -68,7 +70,7 @@ public class Order {
     @JoinColumn(name = "shopFundId")
     private ShopFund shopFund;
 
-    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails,StatusOrder statusOrder, Shop shop, Address address, String stripeCardId, ShopFund shopFund) {
+    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, StatusOrder statusOrder, Shop shop, Address address, String stripeCardId, ShopFund shopFund) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.shippingCost = shippingCost;

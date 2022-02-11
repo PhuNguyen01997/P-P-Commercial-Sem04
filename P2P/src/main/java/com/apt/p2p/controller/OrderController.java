@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.entity.StatusHistory;
 import com.apt.p2p.model.form.CalShippingForm;
 import com.apt.p2p.model.form.FilterOrder;
 import com.apt.p2p.model.view.OrderModel;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +47,8 @@ public class OrderController {
                               Model model) {
         int userId = 3;
         OrderModel order = orderService.findById(id);
+        HashMap<Integer, StatusHistory> statusMapStatusHistory = statusHistoryService.findStatusOrderMapStatusHistoryByOrderId(order.getId());
+        Date date = statusMapStatusHistory.get(1).getDate();
         model.addAttribute("order", order);
         model.addAttribute("statusList", statusOrderService.findAll());
         model.addAttribute("statusMapStatusHistory", statusHistoryService.findStatusOrderMapStatusHistoryByOrderId(order.getId()));

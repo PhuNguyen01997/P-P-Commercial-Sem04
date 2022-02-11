@@ -51,7 +51,7 @@ INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
 
 INSERT INTO status_order (id, done_name, name) VALUES
 (1, 'Đã đặt hàng', 'Chờ xác nhận'),
-(2, 'Đã thanh toán', 'Chờ thanh toán'),
+(2, 'Đã thanh toán', 'Đã thanh toán'),
 (3, 'Đã giao cho ĐVVC', 'Shop đang chuẩn bị hàng'),
 (4, 'Đơn hàng đã nhận', 'Đang giao hàng'),
 (5, 'Đánh giá', 'Đánh giá');
