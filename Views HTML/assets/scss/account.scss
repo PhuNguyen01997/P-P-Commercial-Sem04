@@ -187,13 +187,14 @@
                 }
             }
 
-            &__identity{
+            &__identity {
                 flex-direction: column;
-                img{
+
+                img {
                     width: auto;
                     max-height: 100px;
 
-                    &:first-child{
+                    &:first-child {
                         margin-bottom: 10px;
                     }
                 }
@@ -215,6 +216,7 @@
             }
 
             &--key {
+                flex-shrink: 0;
                 width: 160px;
                 margin-right: 25px;
                 text-align: right;
@@ -227,6 +229,7 @@
         }
 
         &-right {
+            @include flex($justify: flex-end, $align: center);
             .link {
                 padding: 15px 0;
                 color: $color-txt-grey;

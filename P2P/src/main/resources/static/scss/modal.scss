@@ -10,7 +10,7 @@
     background-color: white;
     @include box-shadow();
 
-    .error{
+    .error {
         padding: 5px 8px 0;
     }
 
@@ -18,7 +18,7 @@
         padding: 0 30px;
     }
 
-    &-container{
+    &-container {
         visibility: hidden;
         opacity: 0;
         width: 100vw;
@@ -27,22 +27,18 @@
         background: linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .8));
         transition: 0.5s;
 
-        &.js-close{
-            visibility: visible;   
+        &.js-close {
+            visibility: visible;
             opacity: 1;
         }
     }
 
-    &__address{
+    &__address {
         height: 560px;
     }
 
     &-input {
         min-height: 40px;
-
-        // &-container {
-        //     @include flex($justify: space-between);
-        // }
     }
 
     &-header {
@@ -93,7 +89,7 @@
         &__address-create {
 
             .modal2-input {
-                display: block;
+                display: inline-block;
                 height: 40px;
 
                 &-container {
@@ -102,6 +98,7 @@
                         position: relative;
                         @include box-shadow();
                         margin-bottom: 15px;
+                        cursor: pointer;
 
                         .modal2-input {
                             &__value {
@@ -121,6 +118,10 @@
                                 height: auto;
                                 border: 1px solid $color-bd;
                                 background-color: white;
+
+                                &.show {
+                                    display: block;
+                                }
                             }
 
                             &__legend {
@@ -138,7 +139,6 @@
 
                             &__header {
                                 @include flex($justify: space-between);
-                                padding: 15px 0;
                                 height: auto;
                                 color: $color-txt-grey;
                                 @include box-shadow();
@@ -148,6 +148,7 @@
                                     position: relative;
                                     text-align: center;
                                     width: 33.3%;
+                                    padding: 15px 0;
 
                                     &.active {
                                         &::after {
@@ -156,7 +157,7 @@
                                             width: 100%;
                                             height: 3px;
                                             position: absolute;
-                                            bottom: -15px;
+                                            bottom: 0px;
                                             background-color: $color-primary01;
                                         }
                                     }
@@ -164,8 +165,10 @@
                             }
 
                             &__list {
+                                width: 100%;
                                 height: 230px;
                                 overflow-y: scroll;
+                                position: relative;
 
                                 &>* {
                                     padding: 12px;
@@ -177,6 +180,27 @@
 
                                     &:hover {
                                         background-color: $color-gray;
+                                    }
+                                }
+
+                                &:before {
+                                    display: none;
+                                    content: "";
+                                    position: absolute;
+                                    top: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: url('/assets/img/common/spinner.svg'), linear-gradient(to bottom, rgba($color: #fff, $alpha: 0.8), rgba($color: #fff, $alpha: 0.8));
+                                    background-repeat: no-repeat;
+                                    background-size: 150px 150px, 100% 100%;
+                                    background-position: center;
+                                }
+
+                                &.loading {
+                                    overflow: hidden;
+
+                                    &::before {
+                                        display: block;
                                     }
                                 }
                             }
@@ -209,26 +233,26 @@
                 }
             }
 
-            .modal2--pic-type{
-                    height: auto;
-                    @include flex($justify: flex-start);
+            .modal2--pic-type {
+                height: auto;
+                @include flex($justify: flex-start);
 
-                    .pic {
-                        @include flex();
-                        padding: 5px;
-                        width: 60px;
-                        height: 50px;
-                        border: 1px solid $color-bd;
-                        cursor: pointer;
+                .pic {
+                    @include flex();
+                    padding: 5px;
+                    width: 60px;
+                    height: 50px;
+                    border: 1px solid $color-bd;
+                    cursor: pointer;
 
-                        &:not(:first-of-type) {
-                            margin-left: 10px;
-                        }
-
-                        &.active{
-                            border: 1px solid $color-primary01;
-                        }
+                    &:not(:first-of-type) {
+                        margin-left: 10px;
                     }
+
+                    &.active {
+                        border: 1px solid $color-primary01;
+                    }
+                }
             }
         }
     }

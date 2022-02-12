@@ -18,24 +18,9 @@ public class MainController {
         return "user/main/shop-detail";
     }
 
-    @GetMapping("product/{productSlug}")
-    public String productDetail(@PathVariable String productSlug) {
-        return "user/main/product-detail";
-    }
-
-    @GetMapping("order")
-    public String order() {
-        return "user/account/order-user";
-    }
-
     @GetMapping("shop/{shopId}/order")
     public String orderShop(@PathVariable("shopId") int shopId) {
         return "user/account/order-shop";
-    }
-
-    @GetMapping("order/{id}")
-    public String orderDetail(@PathVariable("id") int id) {
-        return "user/account/order-detail";
     }
 
     @GetMapping("shop/{shopId}/order/{orderId}")
@@ -46,11 +31,6 @@ public class MainController {
     @GetMapping("edit")
     public String userEdit() {
         return "user/account/user-form";
-    }
-
-    @GetMapping("cart")
-    public String cart() {
-        return "user/main/cart";
     }
 
     @GetMapping("identity")

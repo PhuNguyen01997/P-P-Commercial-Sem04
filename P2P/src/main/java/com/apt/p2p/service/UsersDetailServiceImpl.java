@@ -1,8 +1,10 @@
 package com.apt.p2p.service;
 
 
+import com.apt.p2p.common.modelMapper.UserMapper;
 import com.apt.p2p.entity.Role;
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.repository.RoleRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,8 @@ import java.util.Optional;
 public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     @Autowired
     private RoleRepository roleRepository;
-
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private UserRepository userRepository;
 
@@ -77,4 +80,8 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
                 credentialNonExpired, accountNonLocked, grantList);
     }
 
+    public UserModel findById(int userId){
+        User user =  userRepository.findById(userId).orElse(null);
+        return userMapper.userEntityToModel(user);
+    }
 }

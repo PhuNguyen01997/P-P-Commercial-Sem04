@@ -12,101 +12,55 @@
     <div th:replace="fragments/general-account.html :: content-side"></div>
 
     <div class="split-main">
-        <div class="order-section">
+        <div th:each="order : ${orders}" class="order-section">
             <div class="order-content">
                 <div class="order-shop">
-                    <p class="order-shop--name">qw qpwoqw qwoqowpqpw</p>
-                    <button class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                        <i class="fas fa-store"></i> Visit shop
-                    </button>
-                    <p class="order-shop--status">Status</p>
+                    <p th:text="${order.shop.name}" class="order-shop--name">[Shop Name]</p>
+                    <a th:href="@{/shop/{id}(id = ${order.shop.id})}"
+                       class="order-shop--btn order-shop--btn__visit btn btn__primary">
+                        <i class="fas fa-store"></i> Ghé thăm shop
+                    </a>
+                    <p th:text="${order.currentStatus.name}" class="order-shop--status">[Order Status]</p>
                 </div>
                 <div class="order-body">
                     <ul class="order-body--list">
-                        <li class="order-item">
+                        <li th:each="orderDetail : ${order.orderDetails}" class="order-item">
                             <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
                                                                 alt=""></p>
                             <div class="order-item--text">
-                                <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
-                                    A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
-                                    X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                                <p class="order-item--category">Category: category-name</p>
-                                <p class="order-item--quantity">x99</p>
+                                <p th:text="${orderDetail.product.name}" class="order-item--name">[Order Product
+                                    Name]</p>
+                                <p th:text="${orderDetail.product.category.name}" class="order-item--category">[Order
+                                    Product Category]</p>
+                                <p th:attr="data-value=${orderDetail.quantity}"
+                                   class="order-item--quantity">
+                                    <span>x</span>
+                                    <span th:text="${orderDetail.quantity}" class="jsQuantity">[Order Quantity]</span>
+                                </p>
                             </div>
-                            <p class="order-item--price">$99</p>
-                        </li>
-                        <li class="order-item">
-                            <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
-                                                                alt=""></p>
-                            <div class="order-item--text">
-                                <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
-                                    A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
-                                    X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                                <p class="order-item--category">Category: category-name</p>
-                                <p class="order-item--quantity">x99</p>
-                            </div>
-                            <p class="order-item--price">$99</p>
+                            <p class="order-item--price">
+                                <span class="jsPrice" th:attr="data-value=${orderDetail.lastPrice}"
+                                      th:text="${orderDetail.lastPrice}">[Order Product Price]</span>
+                                <span> vnđ</span>
+                            </p>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="order-submit">
-                <p class="order-submit--total"><span>Total: </span><span>$99.99</span></p>
+                <p class="order-submit--total">
+                    <span>Total:</span>
+                    <span th:text="${order.calTotal()}" class="jsTotal">[Total Order]</span>
+                </p>
                 <div class="order-submit--info">
                     <p class="order-submit--text">Bạn đã hủy</p>
-                    <button class="order-submit--btn order-submit--btn btn btn__primary">Mua lại</button>
-                    <button class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</button>
-                    <button class="order-submit--btn btn btn__white">Liên hệ người bán</button>
-                    <button class="order-submit--btn btn btn__white">Chi tiết đon hàng</button>
-                </div>
-            </div>
-        </div>
-        <div class="order-section">
-            <div class="order-content">
-                <div class="order-shop">
-                    <p class="order-shop--name">qw qpwoqw qwoqowpqpw</p>
-                    <button class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                        <i class="fas fa-store"></i> Visit shop
-                    </button>
-                    <p class="order-shop--status">Status</p>
-                </div>
-                <div class="order-body">
-                    <ul class="order-body--list">
-                        <li class="order-item">
-                            <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
-                                                                alt=""></p>
-                            <div class="order-item--text">
-                                <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
-                                    A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
-                                    X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                                <p class="order-item--category">Category: category-name</p>
-                                <p class="order-item--quantity">x99</p>
-                            </div>
-                            <p class="order-item--price">$99</p>
-                        </li>
-                        <li class="order-item">
-                            <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
-                                                                alt=""></p>
-                            <div class="order-item--text">
-                                <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
-                                    A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
-                                    X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                                <p class="order-item--category">Category: category-name</p>
-                                <p class="order-item--quantity">x99</p>
-                            </div>
-                            <p class="order-item--price">$99</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="order-submit">
-                <p class="order-submit--total"><span>Total: </span><span>$99.99</span></p>
-                <div class="order-submit--info">
-                    <p class="order-submit--text">Bạn đã hủy</p>
-                    <button class="order-submit--btn order-submit--btn btn btn__primary">Mua lại</button>
-                    <button class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</button>
-                    <button class="order-submit--btn btn btn__white">Liên hệ người bán</button>
-                    <button class="order-submit--btn btn btn__white">Chi tiết đon hàng</button>
+                    <!--                    <button class="order-submit&#45;&#45;btn order-submit&#45;&#45;btn btn btn__primary">Mua lại</button>-->
+                    <a th:href="@{/rate/{id}(id = ${order.id})}">
+                        <button class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</button>
+                    </a>
+                    <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Liên hệ người bán</a>
+                    <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">Chi tiết đon
+                        hàng</a>
                 </div>
             </div>
         </div>

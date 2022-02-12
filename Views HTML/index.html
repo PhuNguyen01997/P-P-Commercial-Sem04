@@ -382,6 +382,29 @@
         </div>
     </footer>
 
+    <div id="globalError" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myLargeModalLabel">Xin lỗi</h4>
+                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <i class="far fa-times-circle"></i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Có lỗi xảy ra, vui lòng thử lại sau</p>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    <script>
+        const error = false;
+        if(error){
+            $('#globalError').modal('show');
+        }
+    </script>
+
     <script src="/assets/js/script.js"></script>
 </body>
 

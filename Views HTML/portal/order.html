@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/daterangepicker v3.1/daterangepicker.css" />
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="portal">
+    <header class="header">
+        <div class="header-block header-block__left">
+            <h1 class="header-block--logo">
+                <img class="icon" src="/assets/img/common/logo.png" alt="">
+                <span class="txt">Trang chủ</span>
+            </h1>
+            <p class="header-block--angle"><i class="fas fa-angle-right"></i></p>
+            <h2 class="header-block--text02">Đơn Hàng</h2>
+        </div>
+        <div class="header-block header-block__right">
+            <p class="header-block--info">
+                <span class="avatar"><img src="/assets/img/common/img_default_user.png" alt=""></span>
+                <span class="name">Username</span>
+            </p>
+            <p class="header-block--noti"><i class="far fa-bell"></i></p>
+            <p class="header-block--edu"><button href="#" class="btn btn__outline">ShoPP Edu</button></p>
+        </div>
+    </header>
+    <section class="content">
+        <aside class="aside">
+            <div class="aside-container">
+                <p class="aside-title">Quản lý đơn hàng</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Đơn hủy</a></li>
+                    <li class="aside-item"><a href="#">Trả hàng/Hoàn tiền</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý Shop</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Đánh giá Shop</a></li>
+                    <li class="aside-item"><a href="#">Hồ sơ Shop</a></li>
+                    <li class="aside-item"><a href="#">Địa chỉ</a></li>
+                    <li class="aside-item"><a href="#">Tài khoản</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý sản phẩm</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Thêm sản phẩm</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="main-inner order">
+                <ul class="order-header">
+                    <li class="order-header--item active">
+                        <p>Tất cả</p>
+                    </li>
+                    <li class="order-header--item">
+                        <p>Chờ xác nhận</p>
+                    </li>
+                    <li class="order-header--item">
+                        <p>Chờ lấy hàng</p>
+                    </li>
+                    <li class="order-header--item">
+                        <p>Đang giao</p>
+                    </li>
+                    <li class="order-header--item">
+                        <p>Đã giao</p>
+                    </li>
+                    <li class="order-header--item">
+                        <p>Đơn hủy</p>
+                    </li>
+                    <li class="order-header--item">
+                        <p>Trả hàng/Hoàn tiền</p>
+                    </li>
+                    <li class="order-header--bar"></li>
+                </ul>
+                <div class="order-block order-block__date">
+                    <label for="date" class="txt">Ngày đặt hàng</label>
+                    <input id="date" type="text" name="date" class="jsDateRangePicker ipt">
+                </div>
+                <div class="order-block order-block__name">
+                    <div class="select">
+                        <select name="type" id="">
+                            <option value="">Price</option>
+                            <option value="increase">Low to high</option>
+                            <option value="decrease" selected>High to low</option>
+                        </select>
+                    </div>
+                    <input class="ipt" type="text">
+                    <button class="btn submit btn__primary">Tìm kiếm</button>
+                    <button class="btn clear btn__white">Đặt lại</button>
+                </div>
+                <p class="order-block order-block__count">[Order Count]</p>
+                <div class="order-block order-block__table">
+                    <div class="table-header">
+                        <div class="table-col table-col__name">
+                            <p>Sản phẩm</p>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>Tổng đơn hàng</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>Thời gian tạo</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            <p>Thạng thái</p>
+                        </div>
+                        <div class="table-col table-col__action">
+                            <p>Thao tác</p>
+                        </div>
+                    </div>
+                    <ul class="table-body">
+                        <li class="table-body--row">
+                            <div class="table-body--row-header">
+                                <p class="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                                <p class="name">[Buyer Name]</p>
+                                <p class="order-info">ID đơn hàng: <span>[Order Id]</span></p>
+                            </div>
+                            <ul class="table-body--row-list">
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_01.jpg" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl
+                                            </p>
+                                            <p class="number">x99</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>[Date Order]</p>
+                                        <p>[Time Order]</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_02.jpg" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đây là 1 cái</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>00-00-0000</p>
+                                        <p>00:00</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_02.jpg" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>00-00-0000</p>
+                                        <p>00:00</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="table-body--row">
+                            <div class="table-body--row-header">
+                                <p class="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                                <p class="name">[Buyer Name]</p>
+                                <p class="order-info">ID đơn hàng: <span>[Order Id]</span></p>
+                            </div>
+                            <ul class="table-body--row-list">
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_01.jpg" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl
+                                            </p>
+                                            <p class="number">x99</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>[Date Order]</p>
+                                        <p>[Time Order]</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_02.jpg" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đây là 1 cái</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>00-00-0000</p>
+                                        <p>00:00</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="/assets/img/products/product_02.jpg" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái Đây là 1 cái</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>900.000.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>00-00-0000</p>
+                                        <p>00:00</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        [Order Status]
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">[Next update status order]</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>

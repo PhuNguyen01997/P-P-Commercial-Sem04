@@ -1,7 +1,6 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.User;
-import com.apt.p2p.model.PaymentModel;
 import com.apt.p2p.model.UserModel;
 
 import java.util.List;

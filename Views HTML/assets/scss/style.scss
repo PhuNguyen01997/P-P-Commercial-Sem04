@@ -46,6 +46,7 @@ a {
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
+  transition: all .15s;
 
   &:hover,
   &:active {
@@ -163,6 +164,16 @@ label {
     width: 50px; //default
     height: 100%;
     text-align: center;
+
+    /* Firefox */
+    -moz-appearance: textfield;
+
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 
@@ -316,6 +327,9 @@ label {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   border-radius: 2px;
   cursor: pointer;
@@ -334,6 +348,12 @@ label {
     background-color: rgba($color-primary01, 0.1);
     color: $color-primary01;
     border: 1px solid $color-primary01;
+  }
+
+  &__outline {
+    color: $color-txt-white-grey;
+    border: 1px solid $color-bd-ipt;
+    background-color: white;
   }
 
   &__red {
@@ -668,6 +688,35 @@ label {
   }
 }
 
+#globalError {
+  .modal-header {
+    background-color: red;
+    color: white;
+  }
+
+  .close {
+    color: white;
+    font-size: 20px;
+  }
+}
+
+#globalLoading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/assets/img/common/spinner.svg'), linear-gradient(to bottom, rgba($color: #000, $alpha: 0.8), rgba($color: #000, $alpha: 0.8));
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 100% 100%;
+  background-position: center;
+
+  &.loading {
+    display: block;
+  }
+}
+
 @import "./header";
 @import "./footer";
 @import "./auth";
@@ -678,3 +727,4 @@ label {
 @import "./cart";
 @import "./pay";
 @import "./modal";
+@import "./portal/index";

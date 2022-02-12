@@ -1,11 +1,21 @@
 package com.apt.p2p.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Product")
 public class Product {
     @Id
@@ -16,7 +26,7 @@ public class Product {
     private String name;
 
     @NotNull
-    private Double price;
+    private BigDecimal price;
 
     @Column(columnDefinition = "TEXT")
     @NotNull
@@ -31,13 +41,15 @@ public class Product {
     private Date updatedAt;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopId")
     private Shop shop;
 
-//    Not neccessary because we don't have business logic to find product -> carts
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-//    private List<Cart> carts;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Cart> carts;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<Rate> rates;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails;

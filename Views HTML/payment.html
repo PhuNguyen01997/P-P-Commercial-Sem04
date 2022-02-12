@@ -12,10 +12,10 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
@@ -65,10 +65,44 @@
             <div class="pay-address">
                 <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
                 <p class="pay-address--text">
-                    <span class="name">Nguyễn Bành Trần Võ 0999999999</span>
+                    <span class="name">Nguyễn Bành Trần Võ</span>
+                    <span class="phone">0999999999</span>
                     <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
                     <a class="change" href="#">Thay đổi</a>
                 </p>
+                <ul class="pay-address--change d-none">
+                    <li class="pay-address--change-item">
+                        <label class="radio">
+                            <input checked name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span class="name">Nguyễn Bành Trần Võ 1</span>
+                        <span class="phone">0937441896</span>
+                        <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <label class="radio">
+                            <input name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span class="name">Nguyễn Bành Trần Võ 2</span>
+                        <span class="phone">0937441896</span>
+                        <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <label class="radio">
+                            <input name="address" type="radio">
+                            <div class="radio-show"></div>
+                        </label>
+                        <span class="name">Nguyễn Bành Trần Võ 3</span>
+                        <span class="phone">0937441896</span>
+                        <span class="number">99/99 XXX XXX XXX, Phường 11, Quận YYY YYYY, TP. Hồ Chí Minh</span>
+                    </li>
+                    <li class="pay-address--change-item">
+                        <button class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
+                        <button class="btn btn__outline jsAddressBack">Trở lại</button>
+                    </li>
+                </ul>
             </div>
             <div class="pay-cart">
                 <div class="pay-cart-header">
@@ -101,16 +135,27 @@
                     </li>
                 </ul>
                 <div class="pay-cart-footer">
-                    <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
-                    <p class="pay-cart-footer--text">Tổng số tiền (99 sản phẩm)</p>
-                    <p class="pay-cart-footer--total">$99.999.999</p>
+                    <div class="pay-cart-footer--block pay-cart-footer--block__01">
+                        <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
+                        <p class="pay-cart-footer--shipping">123.456 vnđ</p>
+                    </div>
+                    <div class="pay-cart-footer--block">
+                        <p class="pay-cart-footer--text">Tổng số tiền (99 sản phẩm)</p>
+                        <p class="pay-cart-footer--total">$99.999.999</p>
+                    </div>
                 </div>
             </div>
             <div class="pay-submit">
                 <div class="pay-submit-header">
                     <p class="pay-submit-header--txt">Phương thức thanh toán</p>
-                    <button class="pay-submit-header--btn btn btn__white">Thẻ tín dụng/ghi nợ</button>
-                    <button class="pay-submit-header--btn btn btn__white">Thanh toán khi nhận hàng</button>
+                    <button data-div="debit" class="jsMethod active pay-submit-header--btn btn btn__white">
+                        Thẻ tín dụng/ghi nợ
+                        <i class="icon fas fa-check"></i>
+                    </button>
+                    <button data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
+                        Thanh toán khi nhận hàng
+                        <i class="icon fas fa-check"></i>
+                    </button>
                 </div>
                 <div class="pay-submit-body pay-submit-body__debit">
                     <div class="pay-submit-body--left">
@@ -143,8 +188,16 @@
                                 <p class="number">9999 9999 9999</p>
                             </label>
                         </div>
-                        <button class="btn btn__white pay-submit-body--card-order"><i
-                                class="icon icon__left fas fa-plus"></i>Thẻ khác</button>
+                        <a class="btn btn__white pay-submit-body--card-order"><i
+                                class="icon icon__left fas fa-plus"></i>Thẻ khác</a>
+                    </div>
+                </div>
+                <div class="pay-submit-body pay-submit-body__cod d-none">
+                    <div class="pay-submit-body--left">
+                        <p>Thanh toán khi nhận hàng</p>
+                    </div>
+                    <div class="pay-submit-body--right">
+                        <p>Phí thu hộ: ₫0 VNĐ. Ưu đãi về phí vận chuyển (nếu có) áp dụng cả với phí thu hộ.</p>
                     </div>
                 </div>
                 <div class="pay-submit-footer">
@@ -165,6 +218,8 @@
             </div>
         </div>
     </main>
+    <div id="globalLoading">
+    </div>
     <footer class="footer">
         <div class="inner">
             <div class="footer-item footer-item__contact">
@@ -203,6 +258,34 @@
     </footer>
 
     <script src="/assets/js/script.js"></script>
+    <script>
+        $('.pay-address--text').on('click', '.change', function () {
+            $('.pay-address--change').removeClass('d-none');
+            $('.pay-address--text').addClass('d-none');
+        })
+
+        $('.jsAddressSubmit').on('click', function () {
+            const currAddress = $('.pay-address--change-item .radio-show.active').parents('.pay-address--change-item')[0];
+            const name = $(currAddress).find('.name').text();
+            const number = $(currAddress).find('.number').text();
+            $('.pay-address--text .name').text(name);
+            $('.pay-address--text .number').text(number);
+        })
+
+        $('.jsAddressBack, .jsAddressSubmit').on('click', function () {
+            $('.pay-address--change').addClass('d-none');
+            $('.pay-address--text').removeClass('d-none');
+        })
+
+        $('.jsMethod').on('click', function () {
+            $('.jsMethod').removeClass('active');
+            $(this).addClass('active');
+
+            $('.pay-submit-body').addClass('d-none');
+            const div = this.dataset.div;
+            $(`.pay-submit-body__${div}`).removeClass('d-none');
+        })
+    </script>
 </body>
 
 </html>

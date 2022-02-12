@@ -1,11 +1,21 @@
 package com.apt.p2p.entity;
 
+import com.apt.p2p.model.view.ShopModel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Shop")
 public class Shop {
     @Id
@@ -15,6 +25,9 @@ public class Shop {
     @Column(length = 20)
     @NotNull
     private String logo;
+
+    @NotNull
+    private String name;
 
     @Column(length = 14)
     @NotNull
@@ -38,13 +51,12 @@ public class Shop {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paymentId")
-    private Payment payment;
-
-    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
-    private List<Rate> rates;
+    @NotNull
+    private String stripeCardId;
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    @OneToOne(mappedBy = "shop", fetch = FetchType.LAZY)
+    private ShopFund shopFunds;
 }

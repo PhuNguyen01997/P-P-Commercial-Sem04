@@ -46,5 +46,4 @@ public class UserRole {
     public void setType(User user) {
         getPrimaryKey().setUser(user);
     }
-
 }
