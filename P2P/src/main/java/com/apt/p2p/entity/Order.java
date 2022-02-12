@@ -10,6 +10,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,5 +85,9 @@ public class Order {
         this.address = address;
         this.stripeCardId = stripeCardId;
         this.shopFund = shopFund;
+
+        this.statusHistories = new ArrayList<StatusHistory>();
+        StatusHistory firstHistory = new StatusHistory(statusOrder, this);
+        this.statusHistories.add(firstHistory);
     }
 }

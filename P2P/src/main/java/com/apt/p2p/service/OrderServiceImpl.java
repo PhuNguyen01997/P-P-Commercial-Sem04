@@ -74,7 +74,7 @@ public class OrderServiceImpl implements OrderService {
 
             String stripeCardId = purchaseModel.getMethodPayment() ? purchaseModel.getStripeCardId() : null;
 
-            StatusOrder status = statusOrderRepository.findById(1).get();
+            StatusOrder status = statusOrderRepository.findById(purchaseModel.getMethodPayment() ? 2 : 1).get();
 
             BigDecimal sumTotal = BigDecimal.valueOf(0);
             Integer tempIndex = 0;
