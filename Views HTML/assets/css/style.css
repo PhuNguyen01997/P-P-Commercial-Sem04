@@ -111,6 +111,35 @@ label {
   text-decoration: line-through;
 }
 
+.ipt {
+  cursor: pointer;
+}
+
+.ipt__date {
+  display: inline-block;
+  position: relative;
+}
+
+.ipt__date input {
+  cursor: pointer;
+  padding: 10px 30px 10px 30px;
+}
+
+.ipt__date i {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.ipt__date i.calendar {
+  left: 10px;
+}
+
+.ipt__date i.angle {
+  right: 10px;
+}
+
 .attachAdjust {
   position: relative;
   display: -webkit-box;
@@ -4075,6 +4104,11 @@ label {
 
 .portal .main-inner {
   background-color: white;
+  padding: 20px;
+}
+
+.portal .order {
+  padding: 0;
 }
 
 .portal .order-header {
@@ -4154,10 +4188,6 @@ label {
 
 .portal .order-block__date .txt {
   margin-right: 20px;
-}
-
-.portal .order-block__date .ipt {
-  padding: 5px 10px;
 }
 
 .portal .order-block__name {
@@ -4394,5 +4424,275 @@ label {
 
 .portal .order .table-col__action a {
   color: #007bff;
+}
+
+.portal .fund-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.portal .fund-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  padding: 10px;
+  margin-bottom: 26px;
+}
+
+.portal .fund-info > * {
+  width: 50%;
+}
+
+.portal .fund-info--left .text {
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.portal .fund-info--left .form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.portal .fund-info--left .price {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 16px;
+  color: #000;
+}
+
+.portal .fund-info--left .direct {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 2px;
+}
+
+.portal .fund-info--right-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 16px;
+}
+
+.portal .fund-info--right-header .text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.portal .fund-info--right-header .link {
+  color: #007bff;
+}
+
+.portal .fund-info--right-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.portal .fund-info--right-body > *:nth-child(n + 2) {
+  margin-left: 16px;
+}
+
+.portal .fund-info--right-body .icon {
+  padding: 0 5px;
+  color: #fff;
+  font-size: 30px;
+  background-color: #DEDEDE;
+  border-radius: 4px;
+}
+
+.portal .fund-info--right-body .name span {
+  display: block;
+}
+
+.portal .fund-info--right-body .name span:first-child {
+  color: #000;
+  font-weight: bold;
+}
+
+.portal .fund-info--right-body .name span:last-child {
+  color: rgba(85, 85, 85, 0.8);
+}
+
+.portal .fund-info--right-body .more {
+  font-size: 18px;
+}
+
+.portal .fund-info--right-body .priority {
+  color: #00f7f7;
+  background-color: #eaffff;
+  border-radius: 2px;
+  font-weight: bold;
+  padding: 4px 6px;
+  margin-right: auto;
+}
+
+.portal .fund-date {
+  margin-bottom: 10px;
+}
+
+.portal .fund-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  margin-bottom: 20px;
+}
+
+.portal .fund-filter--item {
+  background-color: #f6f6f6;
+  color: #666;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  border-bottom: none;
+  cursor: pointer;
+}
+
+.portal .fund-filter--item:nth-child(n+ 2) {
+  margin-left: 4px;
+}
+
+.portal .fund-filter--item.active {
+  height: 49px;
+  margin-bottom: -1px;
+  border-bottom: 1px solid #fff;
+  background-color: #fff;
+  color: #9932cc;
+  font-weight: bold;
+}
+
+.portal .fund-table {
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 4px;
+}
+
+.portal .fund-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 56px;
+}
+
+.portal .fund-row:nth-child(n+2) {
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.portal .fund-row__header {
+  font-weight: bold;
+  background-color: #f6f6f6;
+  height: 48px;
+  text-align: center;
+  border-top: none;
+}
+
+.portal .fund-row__header .fund-row--item__date {
+  text-align: left;
+}
+
+.portal .fund-row--item {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  padding: 0 20px;
+}
+
+.portal .fund-row--item:first-child {
+  padding-left: 40px;
+}
+
+.portal .fund-row--item:last-child {
+  padding-right: 40px;
+}
+
+.portal .fund-row--item__date {
+  width: 140px;
+}
+
+.portal .fund-row--item__desc {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color: #000;
+  font-weight: bold;
+}
+
+.portal .fund-row--item__price {
+  width: 130px;
+}
+
+.portal .fund-row--item__status {
+  width: 150px;
+  color: #000;
 }
 /*# sourceMappingURL=style.css.map */

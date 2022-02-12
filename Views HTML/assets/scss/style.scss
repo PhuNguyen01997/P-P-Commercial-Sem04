@@ -2,6 +2,7 @@ $color-red: rgb(255, 57, 69);
 $color-bd-ipt: rgba(0, 0, 0, 0.14);
 $color-bd: rgba(0, 0, 0, 0.09);
 $color-txt-grey: #555;
+$color-txt-link-default: #007bff;
 $color-bg-white: #f5f5f5;
 $color-bg-yellow-white: #FFFEFB;
 $color-txt-white-grey: rgba(85, 85, 85, .8);
@@ -130,6 +131,33 @@ label {
 
 .strikethrough {
   text-decoration: line-through;
+}
+
+.ipt {
+  cursor: pointer;
+  &__date {
+    display: inline-block;
+    position: relative;
+
+    input {
+      cursor: pointer;
+      padding: 10px 30px 10px 30px;
+    }
+
+    i {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &.calendar {
+        left: 10px;
+      }
+
+      &.angle {
+        right: 10px;
+      }
+    }
+  }
 }
 
 .attachAdjust {
