@@ -111,7 +111,7 @@
 
     .aside {
         position: fixed;
-        top: 0;
+        top: $header-height;
         left: 0;
         &-container {
             &:not(:last-child){
