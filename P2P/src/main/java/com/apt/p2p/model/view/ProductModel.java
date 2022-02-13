@@ -1,6 +1,7 @@
 package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.Category;
+import com.apt.p2p.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,18 @@ public class ProductModel {
     private List<RateModel> rates;
 
     private Category category;
+
+    public ProductModel(Product entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.price = entity.getPrice();
+        this.image = entity.getImage();
+        this.description = entity.getDescription();
+        this.createdAt = entity.getCreatedAt();
+        this.updatedAt = entity.getUpdatedAt();
+        this.category = entity.getCategory();
+
+        this.shop = null;
+        this.rates = null;
+    }
 }

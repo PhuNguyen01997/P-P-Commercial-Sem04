@@ -24,7 +24,6 @@ public class OrderMapper {
                 skip(destination.getOrderDetails());
                 skip(destination.getShop());
                 skip(destination.getAddress());
-                skip(destination.getShopFund());
             }
         });
 
@@ -33,22 +32,6 @@ public class OrderMapper {
     }
 
     public OrderModel orderEntityToModel(Order entity) {
-//        ModelMapper mapper = mapperService.getModelMapper();
-//        mapper.typeMap(Order.class, OrderModel.class);
-//        mapper.addMappings(new PropertyMap<Order, OrderModel>() {
-//            @Override
-//            protected void configure() {
-//                skip(destination.getUser());
-//                skip(destination.getOrderDetails());
-//                skip(destination.getShop());
-//                skip(destination.getAddress());
-//                skip(destination.getPayment());
-//                skip(destination.getShopFund());
-//            }
-//        });
-//
-//        mapper.validate();
-//        OrderModel result = mapper.map(entity, OrderModel.class);
         OrderModel result = new OrderModel();
 
         result.setId(entity.getId());
@@ -68,7 +51,6 @@ public class OrderMapper {
         result.setAddress(new AddressModel(entity.getAddress()));
 
         result.setPayment(null);
-        result.setShopFund(null);
 
         return result;
     }

@@ -71,7 +71,6 @@ public final class OrderSpecification {
         root.fetch("user");
         root.fetch("address");
         root.fetch("currentStatus");
-        root.fetch("shopFund");
         return root;
     }
 }

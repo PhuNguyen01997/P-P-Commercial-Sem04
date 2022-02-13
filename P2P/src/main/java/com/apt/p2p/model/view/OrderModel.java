@@ -44,8 +44,6 @@ public class OrderModel {
 
     private CardModel payment;
 
-    private ShopFundModel shopFund;
-
     public BigDecimal calTotal() {
         BigDecimal result = orderDetails.stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
         return result;

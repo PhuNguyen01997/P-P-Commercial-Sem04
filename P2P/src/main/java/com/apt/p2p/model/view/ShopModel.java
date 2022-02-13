@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class ShopModel {
     @NotBlank
     private String phone;
 
+    private BigDecimal fund;
+
     private Boolean permission = false;
 
     private Date createdAt = new Date();
@@ -40,8 +43,6 @@ public class ShopModel {
     private List<ProductModel> products;
 
     public List<OrderModel> orders;
-
-    public ShopFundModel shopFund;
 
     public Integer countProducts;
 

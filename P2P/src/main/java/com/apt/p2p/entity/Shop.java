@@ -60,7 +60,4 @@ public class Shop {
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Order> orders;
-
-    @OneToOne(mappedBy = "shop", fetch = FetchType.LAZY)
-    private ShopFund shopFunds;
 }

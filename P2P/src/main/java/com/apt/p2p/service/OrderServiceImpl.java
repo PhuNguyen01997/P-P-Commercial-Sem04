@@ -29,8 +29,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
-    private ShopFundRepository shopFundRepository;
-    @Autowired
     private StatusOrderRepository statusOrderRepository;
     @Autowired
     private OrderStatusOrderRepository orderStatusOrderRepository;
@@ -94,17 +92,9 @@ public class OrderServiceImpl implements OrderService {
                 Shop shop = shopRepository.findById(shopId).get();
 
                 BigDecimal totalGetPermission = total.subtract(total.multiply(BigDecimal.valueOf(0.05)));
-                ShopFund shopFund;
-                Optional<ShopFund> shopFundPresent = shopFundRepository.findByShopId(shopId);
-                if (shopFundPresent.isPresent()) {
-                    shopFund = shopFundPresent.get();
-                    shopFund.setFund(shopFund.getFund().add(totalGetPermission));
-                } else {
-                    shopFund = new ShopFund(shop, totalGetPermission);
-                }
-                shopFundRepository.save(shopFund);
+                shop.setFund(shop.getFund().add(totalGetPermission));
 
-                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, status, shop, address, stripeCardId, shopFund);
+                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, status, shop, address, stripeCardId);
                 orderRepository.save(order);
 
                 // attach many to many relation ship order - order_status_history - status_history

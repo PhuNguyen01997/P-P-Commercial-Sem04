@@ -67,11 +67,7 @@ public class Order {
 
     private String stripeCardId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shopFundId")
-    private ShopFund shopFund;
-
-    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, StatusOrder statusOrder, Shop shop, Address address, String stripeCardId, ShopFund shopFund) {
+    public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, StatusOrder statusOrder, Shop shop, Address address, String stripeCardId) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.shippingCost = shippingCost;
@@ -84,7 +80,6 @@ public class Order {
         this.shop = shop;
         this.address = address;
         this.stripeCardId = stripeCardId;
-        this.shopFund = shopFund;
 
         this.statusHistories = new ArrayList<StatusHistory>();
         StatusHistory firstHistory = new StatusHistory(statusOrder, this);
