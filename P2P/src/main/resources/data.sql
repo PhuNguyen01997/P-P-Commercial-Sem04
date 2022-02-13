@@ -19,9 +19,9 @@ INSERT INTO address (district, district_id, `number`, own_name, own_phone, provi
 ('Huyện Bình Đại', 1895, '123 CBX XYZ', 'Buyer 01', '093285435', 'Bến Tre', 213, 'Xã Thạnh Trị', '560615', 3),
 ('Quận 3', 1444, '123 EOIWT', 'Buyer 02', '9183473932', 'Hồ Chí Minh', 202, 'Phường 4', '20304', 3);
 
-INSERT INTO shop (created_at, logo, name, permission, phone, updated_at, address_id, stripe_card_id, user_id) VALUES
-(NOW(), 'no', 'Shốp Tếst 01', 1, '0907982932', NOW(), 1, "None", 1),
-(NOW(), 'No', 'Shop Test 02', 1, '0497238647', NOW(), 2, "None", 3);
+INSERT INTO shop (created_at, fund, logo, name, permission, phone, updated_at, address_id, stripe_card_id, user_id) VALUES
+(NOW(), 0, 'no', 'Shốp Tếst 01', 1, '0907982932', NOW(), 1, "None", 1),
+(NOW(), 0, 'No', 'Shop Test 02', 1, '0497238647', NOW(), 2, "None", 3);
 
 INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Điện tử', NOW()),

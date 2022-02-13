@@ -133,8 +133,10 @@
         padding: 20px 50px;
         &-inner {
             background-color: white;
+            padding: 20px;
         }
     }
 }
 
 @import "./order";
+@import "./fund.scss";

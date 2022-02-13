@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "OrderStatusOrder")
+@Table(name = "StatusHistory")
 public class StatusHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

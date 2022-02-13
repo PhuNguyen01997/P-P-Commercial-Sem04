@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-inner fund">
+    <h3 class="fund-title">Tổng quan</h3>
+    <div class="fund-info">
+        <div class="fund-info--left">
+            <p class="text">Số dư</p>
+            <div class="form">
+                <p class="price">999.999.999 vnđ</p>
+                <a href="javascript: void(0)">
+                    <button class="direct btn btn__primary">Yêu cầu thanh toán</button>
+                </a>
+            </div>
+        </div>
+        <div class="fund-info--right">
+            <div class="fund-info--right-header">
+                <p class="text">Tài khoản ngân hàng</p>
+                <a class="link" href="#">Xem thêm</a>
+            </div>
+            <div class="fund-info--right-body">
+                <p class="icon"><i class="fas fa-university"></i></p>
+                <p class="name">
+                    <span>Techcombank - NHTMCP Ky Thuong VN</span>
+                    <span>Đã kiểm tra</span>
+                </p>
+                <p class="priority">Mặc định</p>
+                <a href="javascript: void()" class="more"><i class="fas fa-ellipsis-h"></i></a>
+            </div>
+        </div>
+    </div>
+    <h3 class="fund-title">Các giao dịch gần đây</h3>
+    <div class="ipt ipt__date fund-date">
+        <input id="date" type="text" name="date" class="jsDateRangePicker">
+        <i class="angle fas fa-angle-down"></i>
+        <i class="calendar far fa-calendar-alt"></i>
+    </div>
+    <ul class="jsFilter fund-filter">
+        <li class="fund-filter--item active">
+            <p>Tất cả</p>
+        </li>
+        <li class="fund-filter--item">
+            <p>Doanh thu</p>
+        </li>
+        <li class="fund-filter--item">
+            <p>Rút tiền</p>
+        </li>
+    </ul>
+    <div class="jsContainer fund-table">
+        <div class="fund-row fund-row__header">
+            <div class="fund-row--item fund-row--item__date">Ngày</div>
+            <div class="fund-row--item fund-row--item__desc">Loại giao dịch</div>
+            <div class="fund-row--item fund-row--item__price">Số tiền</div>
+            <div class="fund-row--item fund-row--item__status">Trạng thái</div>
+        </div>
+        <div class="fund-row">
+            <div class="fund-row--item fund-row--item__date">
+                <p>2022-22-22</p>
+            </div>
+            <div class="fund-row--item fund-row--item__desc">
+                <p>[Description]</p>
+            </div>
+            <div class="fund-row--item fund-row--item__price">
+                <p>+ 999.999.999</p>
+            </div>
+            <div class="fund-row--item fund-row--item__status">
+                <p>Chờ xác nhận</p>
+            </div>
+        </div>
+        <div class="fund-row">
+            <div class="fund-row--item fund-row--item__date">
+                <p>2022-22-22</p>
+            </div>
+            <div class="fund-row--item fund-row--item__desc">
+                <p>[Description]</p>
+            </div>
+            <div class="fund-row--item fund-row--item__price">
+                <p>+ 999.999.999</p>
+            </div>
+            <div class="fund-row--item fund-row--item__status">
+                <p>Chờ xác nhận</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script">
+    $(function () {
+        $('.jsFilter>*').on('click', function () {
+            $('.jsFilter>*').removeClass('active');
+            this.classList.add('active');
+        })
+    });
+</script>
+</body>
+</html>

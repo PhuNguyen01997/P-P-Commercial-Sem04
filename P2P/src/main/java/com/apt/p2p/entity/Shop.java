@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,9 @@ public class Shop {
     @Column(length = 14)
     @NotNull
     private String phone;
+
+    @NotNull
+    private BigDecimal fund = BigDecimal.ZERO;
 
     private Boolean permission = false;
 

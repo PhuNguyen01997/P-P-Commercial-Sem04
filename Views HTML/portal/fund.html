@@ -160,6 +160,12 @@
     </section>
 
     <script src="/assets/js/script.js"></script>
+    <script>
+        $('.jsFilter>*').on('click', function(){
+            $('.jsFilter>*').removeClass('active');
+            this.classList.add('active');
+        })
+    </script>
 </body>
 
 </html>

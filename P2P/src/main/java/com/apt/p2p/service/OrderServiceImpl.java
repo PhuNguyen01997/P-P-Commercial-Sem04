@@ -41,6 +41,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
     @Autowired
+    private ShopTransactionRepository shopTransactionRepository;
+    @Autowired
     private StripeService stripeService;
     @Autowired
     private OrderDetailService orderDetailService;
@@ -105,12 +107,16 @@ public class OrderServiceImpl implements OrderService {
                 Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, status, shop, address, stripeCardId, shopFund);
                 orderRepository.save(order);
 
-                // attach many to many relation ship order - order_status_order - status_order
+                // attach many to many relation ship order - order_status_history - status_history
                 StatusHistory statusHistory = new StatusHistory(status, order);
                 orderStatusOrderRepository.save(statusHistory);
 
                 // attach orderDetails to order
                 filterOrderDetails.forEach(ode -> ode.setOrder(order));
+
+                // save transaction history
+                ShopTransaction transaction = new ShopTransaction(shop, order);
+                shopTransactionRepository.save(transaction);
 
                 result.add(orderMapper.orderEntityToModel(order));
 

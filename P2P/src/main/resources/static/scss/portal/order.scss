@@ -1,5 +1,6 @@
 .portal {
     .order {
+        padding: 0;
         &-header {
             height: 56px;
             position: relative;
@@ -46,10 +47,6 @@
 
                 .txt {
                     margin-right: 20px;
-                }
-
-                .ipt {
-                    padding: 5px 10px;
                 }
             }
 

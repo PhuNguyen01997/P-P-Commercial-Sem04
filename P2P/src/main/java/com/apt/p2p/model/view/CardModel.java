@@ -29,7 +29,6 @@ public class CardModel {
     private String last4;
 
     @NotNull(message = "Vui lòng chọn loại thẻ")
-//    @Enumerated(EnumType.STRING)
     private String type;
 
     @JsonDeserialize(using = DateDeserializer.class)
