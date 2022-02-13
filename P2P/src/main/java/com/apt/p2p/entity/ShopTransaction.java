@@ -30,7 +30,7 @@ public class ShopTransaction {
     private Date date = new Date();
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shopId")
     private Shop shop;
 
@@ -44,11 +44,12 @@ public class ShopTransaction {
     public ShopTransaction(Shop shop, Order order) {
         this.shop = shop;
         this.order = order;
-        this.amount = order.getTotal();
+        BigDecimal totalAfterSubtractPermission = order.getTotal().subtract(order.getTotal().multiply(BigDecimal.valueOf(0.05)));
+        this.amount = totalAfterSubtractPermission;
         this.status = order.getMethodPayment() ? ShopTransactionStatus.SUCCESS : ShopTransactionStatus.WAIT;
-        if(order != null){
+        if (order != null) {
             this.description = "Khách hàng mua hàng thanh toán";
-        }else{
+        } else {
             this.description = "Rút tiền từ cửa hàng vào tài khoản cá nhân";
         }
     }

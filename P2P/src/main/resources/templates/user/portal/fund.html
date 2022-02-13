@@ -43,13 +43,13 @@
         <i class="calendar far fa-calendar-alt"></i>
     </div>
     <ul class="jsFilter fund-filter">
-        <li class="fund-filter--item active">
+        <li class="fund-filter--item active" data-type="0">
             <p>Tất cả</p>
         </li>
-        <li class="fund-filter--item">
+        <li class="fund-filter--item" data-type="1">
             <p>Doanh thu</p>
         </li>
-        <li class="fund-filter--item">
+        <li class="fund-filter--item" data-type="2">
             <p>Rút tiền</p>
         </li>
     </ul>
@@ -93,9 +93,42 @@
 
 <script layout:fragment="script">
     $(function () {
+        function getFilter() {
+            const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/gm);
+            return {
+                minDate: date[0],
+                maxDate: date[1],
+                type: $('.jsFilter>*.active').attr('data-type'),
+            }
+        }
+
+        function fetchTransaction() {
+            const filter = getFilter();
+            setGlobalLoading(true);
+            const shopId = 1;
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/shop/${shopId}/fund`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(filter),
+                success: function (funds) {
+                    console.log(funds)
+
+                    setGlobalLoading(false);
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                    setGlobalLoading(false);
+                },
+            });
+        }
+
         $('.jsFilter>*').on('click', function () {
             $('.jsFilter>*').removeClass('active');
             this.classList.add('active');
+
+            fetchTransaction();
         })
     });
 </script>

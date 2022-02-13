@@ -48,4 +48,23 @@ public class OrderModel {
         BigDecimal result = orderDetails.stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
         return result;
     }
+
+    public OrderModel(Order entity) {
+        this.id = entity.getId();
+        this.methodPayment = entity.getMethodPayment();
+        this.total = entity.getTotal();
+        this.shippingCost = entity.getShippingCost();
+        this.percentPermission = entity.getPercentPermission();
+        this.createdAt = entity.getCreatedAt();
+        this.updatedAt = entity.getUpdatedAt();
+        this.statusHistories = entity.getStatusHistories();
+        this.currentStatus = entity.getCurrentStatus();
+
+        this.payment = null;
+        this.shop = null;
+        this.user = null;
+        this.orderDetails = null;
+        this.address = null;
+        this.statusHistories = null;
+    }
 }

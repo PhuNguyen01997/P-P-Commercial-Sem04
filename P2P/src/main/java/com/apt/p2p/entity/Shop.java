@@ -60,4 +60,7 @@ public class Shop {
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
+    private List<ShopTransaction> shopTransactions;
 }

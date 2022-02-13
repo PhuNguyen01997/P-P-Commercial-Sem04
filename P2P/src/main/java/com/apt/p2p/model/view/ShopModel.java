@@ -44,6 +44,8 @@ public class ShopModel {
 
     public List<OrderModel> orders;
 
+    public List<ShopTransactionModel> shopTransactions;
+
     public Integer countProducts;
 
     public Integer countRates;
