@@ -21,7 +21,7 @@
         </p>
         <p class="header-block--noti"><i class="far fa-bell"></i></p>
         <p class="header-block--edu">
-            <button href="#" class="btn btn__outline">ShoPP Edu</button>
+            <button class="btn btn__outline">ShoPP Edu</button>
         </p>
     </div>
 </th:block>
@@ -30,31 +30,31 @@
     <div class="aside-container">
         <p class="aside-title">Quản lý đơn hàng</p>
         <ul class="aside-list">
-            <li class="aside-item"><a href="#">Tất cả</a></li>
-            <li class="aside-item"><a href="#">Đơn hủy</a></li>
-            <li class="aside-item"><a href="#">Trả hàng/Hoàn tiền</a></li>
+            <li class="aside-item"><a th:href='@{/portal/{id}/order (id=${shop.id})}'>Tất cả</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Đơn hủy</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Trả hàng/Hoàn tiền</a></li>
         </ul>
     </div>
     <div class="aside-container">
         <p class="aside-title">Quản lý Shop</p>
         <ul class="aside-list">
-            <li class="aside-item"><a href="#">Đánh giá Shop</a></li>
-            <li class="aside-item"><a href="#">Hồ sơ Shop</a></li>
-            <li class="aside-item"><a href="#">Địa chỉ</a></li>
-            <li class="aside-item"><a href="#">Tài khoản</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Đánh giá Shop</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Hồ sơ Shop</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Địa chỉ</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Tài khoản</a></li>
         </ul>
     </div>
     <div class="aside-container">
         <p class="aside-title">Quản lý sản phẩm</p>
         <ul class="aside-list">
-            <li class="aside-item"><a href="#">Tất cả</a></li>
-            <li class="aside-item"><a href="#">Thêm sản phẩm</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Tất cả</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Thêm sản phẩm</a></li>
         </ul>
     </div>
     <div class="aside-container">
         <p class="aside-title">Tài Chính</p>
         <ul class="aside-list">
-            <li class="aside-item"><a href="#">Số dư tài khoản Shoppe</a></li>
+            <li class="aside-item"><a th:href='@{/portal/{id}/fund (id=${shop.id})}'>Số dư tài khoản Shoppe</a></li>
         </ul>
     </div>
 </aside>

@@ -14,8 +14,10 @@
         <div class="fund-info--left">
             <p class="text">Số dư</p>
             <div class="form">
-                <p class="price">999.999.999 vnđ</p>
-                <a href="javascript: void(0)">
+                <p class="price">
+                    <span th:text="${shop.fund}"></span>
+                    <span>vnđ</span></p>
+                <a href="withdraw">
                     <button class="direct btn btn__primary">Yêu cầu thanh toán</button>
                 </a>
             </div>
@@ -23,7 +25,7 @@
         <div class="fund-info--right">
             <div class="fund-info--right-header">
                 <p class="text">Tài khoản ngân hàng</p>
-                <a class="link" href="#">Xem thêm</a>
+                <a class="link" href="javascript: void(0)">Xem thêm</a>
             </div>
             <div class="fund-info--right-body">
                 <p class="icon"><i class="fas fa-university"></i></p>
@@ -32,7 +34,7 @@
                     <span>Đã kiểm tra</span>
                 </p>
                 <p class="priority">Mặc định</p>
-                <a href="javascript: void()" class="more"><i class="fas fa-ellipsis-h"></i></a>
+                <a href="javascript: void(0)" class="more"><i class="fas fa-ellipsis-h"></i></a>
             </div>
         </div>
     </div>
@@ -60,33 +62,8 @@
             <div class="fund-row--item fund-row--item__price">Số tiền</div>
             <div class="fund-row--item fund-row--item__status">Trạng thái</div>
         </div>
-        <div class="fund-row">
-            <div class="fund-row--item fund-row--item__date">
-                <p>2022-22-22</p>
-            </div>
-            <div class="fund-row--item fund-row--item__desc">
-                <p>[Description]</p>
-            </div>
-            <div class="fund-row--item fund-row--item__price">
-                <p>+ 999.999.999</p>
-            </div>
-            <div class="fund-row--item fund-row--item__status">
-                <p>Chờ xác nhận</p>
-            </div>
-        </div>
-        <div class="fund-row">
-            <div class="fund-row--item fund-row--item__date">
-                <p>2022-22-22</p>
-            </div>
-            <div class="fund-row--item fund-row--item__desc">
-                <p>[Description]</p>
-            </div>
-            <div class="fund-row--item fund-row--item__price">
-                <p>+ 999.999.999</p>
-            </div>
-            <div class="fund-row--item fund-row--item__status">
-                <p>Chờ xác nhận</p>
-            </div>
+        <div class="fund-body">
+
         </div>
     </div>
 </div>
@@ -113,7 +90,25 @@
                 contentType: "application/json",
                 data: JSON.stringify(filter),
                 success: function (funds) {
-                    console.log(funds)
+                    let html = "";
+                    funds.forEach(fund => {
+                        const date = new Date(Date.parse(fund.date));
+                        html += `<div class="fund-row">` +
+                            `<div class="fund-row--item fund-row--item__date">` +
+                            `<p>${getStringDateFormat(date)}</p>` +
+                            `</div>` +
+                            `<div class="fund-row--item fund-row--item__desc">` +
+                            `<p>${fund.description}</p>` +
+                            `</div>` +
+                            `<div class="fund-row--item fund-row--item__price">` +
+                            `<p>${fund.order ? '+' : '-'} ${fund.amount}</p>` +
+                            `</div>` +
+                            `<div class="fund-row--item fund-row--item__status">` +
+                            `<p>${fund.status}</p>` +
+                            `</div>` +
+                            `</div>`;
+                    })
+                    $('.fund-body').html(html);
 
                     setGlobalLoading(false);
                 },
@@ -123,6 +118,8 @@
                 },
             });
         }
+
+        fetchTransaction();
 
         $('.jsFilter>*').on('click', function () {
             $('.jsFilter>*').removeClass('active');

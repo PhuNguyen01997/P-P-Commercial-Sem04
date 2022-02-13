@@ -4695,4 +4695,107 @@ label {
   width: 150px;
   color: #000;
 }
+
+.portal .fund-withdraw {
+  padding: 50px;
+}
+
+.portal .fund-withdraw-title {
+  font-size: 28px;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 100px;
+}
+
+.portal .fund-withdraw-form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.portal .fund-withdraw-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.portal .fund-withdraw-row--left {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  text-align: right;
+  width: 190px;
+  margin-right: 16px;
+  color: #000;
+  font-weight: bold;
+}
+
+.portal .fund-withdraw-row--right__bank {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 2px;
+  padding: 4px 24px 4px 4px;
+}
+
+.portal .fund-withdraw-row--right__bank .expand {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  background-color: #f5f5f5;
+  color: #555;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.portal .fund-withdraw-row--right__bank .icon {
+  padding: 0 5px;
+  color: #fff;
+  font-size: 30px;
+  background-color: #DEDEDE;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+.portal .fund-withdraw-row--right__bank .txt {
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+}
 /*# sourceMappingURL=style.css.map */
