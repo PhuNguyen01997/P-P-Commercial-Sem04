@@ -53,6 +53,15 @@ main {
           flex-grow: 1;
 }
 
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input,
 textarea {
   font-size: inherit;
@@ -4709,7 +4718,9 @@ label {
 
 .portal .fund-withdraw-form {
   margin: 0 auto;
-  max-width: 500px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+  padding-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .portal .fund-withdraw-row {
@@ -4726,7 +4737,20 @@ label {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-bottom: 20px;
+  max-width: 500px;
+  margin: 0 auto 20px;
+}
+
+.portal .fund-withdraw-row__amount {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.portal .fund-withdraw-row__amount .fund-withdraw-row--left {
+  display: block;
+  height: 34px;
+  line-height: 34px;
 }
 
 .portal .fund-withdraw-row--left {
@@ -4797,5 +4821,46 @@ label {
   color: #000;
   font-size: 16px;
   font-weight: bold;
+}
+
+.portal .fund-withdraw-row--right__amount {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.portal .fund-withdraw-row--right__amount input {
+  display: block;
+  height: 34px;
+  margin-bottom: 10px;
+}
+
+.portal .fund-withdraw-row--right__amount .note {
+  color: #999;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.portal .fund-withdraw-row--right__fee .ignore {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.portal .fund-withdraw-submit {
+  display: block;
+  margin-left: auto;
+  height: 40px;
+  padding: 0 50px;
+}
+
+.portal .back {
+  display: block;
+  color: #555;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.portal .back i {
+  margin-right: 10px;
 }
 /*# sourceMappingURL=style.css.map */

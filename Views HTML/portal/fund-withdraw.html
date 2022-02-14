@@ -8,14 +8,11 @@
     <title>Document</title>
 
     <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/moment.min.js"></script>
     <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/plugins/daterangepicker v3.1/daterangepicker.css" />
@@ -77,37 +74,41 @@
             <form class="main-inner fund-withdraw">
                 <h3 class="fund-withdraw-title">Rút tiền</h3>
                 <div class="fund-withdraw-form">
-                    
-                <div class="fund-withdraw-row">
-                    <label class="fund-withdraw-row--left" for="">Tài khoản ngân hàng</label>
-                    <div class="fund-withdraw-row--right fund-withdraw-row--right__bank">
-                        <p class="icon"><i class="fas fa-university"></i></p>
-                        <p class="txt">Techcombank - NHTMCP Ky thuong VN</p>
-                        <p class="expand"><i class="angle fas fa-angle-down"></i></p>
+                    <div class="fund-withdraw-row">
+                        <label class="fund-withdraw-row--left" for="">Tài khoản ngân hàng</label>
+                        <div class="fund-withdraw-row--right fund-withdraw-row--right__bank">
+                            <p class="icon"><i class="fas fa-university"></i></p>
+                            <p class="txt">Techcombank - NHTMCP Ky thuong VN</p>
+                            <p class="expand"><i class="angle fas fa-angle-down"></i></p>
+                        </div>
+                    </div>
+                    <div class="fund-withdraw-row fund-withdraw-row__amount">
+                        <label class="fund-withdraw-row--left" for="amount">Giá trị yêu cầu thanh toán</label>
+                        <div class="fund-withdraw-row--right fund-withdraw-row--right__amount">
+                            <input type="number" id="amount">
+                            <p class="note">* Số dư hiện tại <span>999.999.999 vnđ</span></p>
+                            <p class="note">* Giới hạn rút tiền trong ngày 5.000.000 vnđ</p>
+                        </div>
+                    </div>
+                    <div class="fund-withdraw-row">
+                        <label class="fund-withdraw-row--left" for="fee">Giá trị yêu cầu thanh toán</label>
+                        <div class="fund-withdraw-row--right fund-withdraw-row--right__fee">
+                            <input type="hidden" id="fee" value="0">
+                            <p><span class="ignore">11.000</span> <span>0</span> vnđ</p>
+                        </div>
                     </div>
                 </div>
-                <div class="fund-withdraw-row">
-                    <label class="fund-withdraw-row--left" for="amount">Giá trị yêu cầu thanh toán</label>
-                    <div class="fund-withdraw-row--right">
-                        <input type="number" id="amount">
-                        <p>Số dư hiện tại <span>999.999.999 vnđ</span></p>
-                        <p>Giới hạn rút tiền trong ngày 5.000.000 vnđ</p>
-                    </div>
-                </div>
-                <div class="fund-withdraw-row">
-                    <label class="fund-withdraw-row--left" for="fee">Giá trị yêu cầu thanh toán</label>
-                    <div class="fund-withdraw-row--right">
-                        <input type="hidden" id="fee" value="0">
-                        <p><span>11.000</span> <span>0</span> vnđ</p>
-                    </div>
-                </div>
-                </div>
+                <button class="fund-withdraw-submit btn btn__primary">Xác nhận</button>
             </form>
         </main>
     </section>
 
     <script src="/assets/js/script.js"></script>
     <script>
+        $('.main').prepend(`<a class="back" href="javascript:void(0)"><i class="fas fa-angle-left"></i>Quay lại</a>`);
+        $('.back').on('click', function(){
+            window.history.back();
+        })
     </script>
 </body>
 

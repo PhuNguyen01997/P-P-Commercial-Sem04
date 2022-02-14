@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<form layout:fragment="content" class="main-inner fund-withdraw">
+    <h3 class="fund-withdraw-title">Rút tiền</h3>
+    <div class="fund-withdraw-form">
+        <div class="fund-withdraw-row">
+            <label class="fund-withdraw-row--left" for="">Tài khoản ngân hàng</label>
+            <div class="fund-withdraw-row--right fund-withdraw-row--right__bank">
+                <p class="icon"><i class="fas fa-university"></i></p>
+                <p class="txt">Techcombank - NHTMCP Ky thuong VN</p>
+                <p class="expand"><i class="angle fas fa-angle-down"></i></p>
+            </div>
+        </div>
+        <div class="fund-withdraw-row fund-withdraw-row__amount">
+            <label class="fund-withdraw-row--left" for="amount">Giá trị yêu cầu thanh toán</label>
+            <div class="fund-withdraw-row--right fund-withdraw-row--right__amount">
+                <input type="number" id="amount">
+                <p class="note">* Số dư hiện tại <span>999.999.999 vnđ</span></p>
+                <p class="note">* Giới hạn rút tiền trong ngày 5.000.000 vnđ</p>
+            </div>
+        </div>
+        <div class="fund-withdraw-row">
+            <label class="fund-withdraw-row--left" for="fee">Giá trị yêu cầu thanh toán</label>
+            <div class="fund-withdraw-row--right fund-withdraw-row--right__fee">
+                <input type="hidden" id="fee" value="0">
+                <p><span class="ignore">11.000</span> <span>0</span> vnđ</p>
+            </div>
+        </div>
+    </div>
+    <button class="fund-withdraw-submit btn btn__primary">Xác nhận</button>
+</form>
+
+<script layout:fragment="script">
+    $(function () {
+        $('.main').prepend(`<a class="back" href="javascript:void(0)"><i class="fas fa-angle-left"></i>Quay lại</a>`);
+        $('.back').on('click', function () {
+            window.history.back();
+        })
+    });
+</script>
+</body>
+</html>
