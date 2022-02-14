@@ -47,10 +47,14 @@ public class ShopTransaction {
         BigDecimal totalAfterSubtractPermission = order.getTotal().subtract(order.getTotal().multiply(BigDecimal.valueOf(0.05)));
         this.amount = totalAfterSubtractPermission;
         this.status = order.getMethodPayment() ? ShopTransactionStatus.SUCCESS : ShopTransactionStatus.WAIT;
-        if (order != null) {
-            this.description = "Khách hàng mua hàng thanh toán";
-        } else {
-            this.description = "Rút tiền từ cửa hàng vào tài khoản cá nhân";
-        }
+        this.description = "Khách hàng mua hàng thanh toán";
+    }
+
+    public ShopTransaction(Shop shop, BigDecimal amount) {
+        this.shop = shop;
+        this.order = null;
+        this.amount = amount;
+        this.status = ShopTransactionStatus.WAIT;
+        this.description = "Rút tiền từ cửa hàng vào tài khoản cá nhân";
     }
 }

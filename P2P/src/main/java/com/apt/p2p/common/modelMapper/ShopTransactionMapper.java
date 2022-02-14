@@ -39,7 +39,7 @@ public class ShopTransactionMapper {
         model.setStatus(entity.getStatus());
 
         model.setShop(new ShopModel(entity.getShop()));
-        model.setOrder(new OrderModel(entity.getOrder()));
+        model.setOrder(entity.getOrder() == null ? null : new OrderModel(entity.getOrder()));
 
         return model;
     }

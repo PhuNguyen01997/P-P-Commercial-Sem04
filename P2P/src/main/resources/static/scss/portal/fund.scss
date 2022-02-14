@@ -202,4 +202,126 @@
             }
         }
     }
+
+    .fund-withdraw {
+        padding: 50px;
+
+        &-title {
+            font-size: 28px;
+            color: #000;
+            font-weight: bold;
+            margin-bottom: 100px;
+        }
+
+        &-form {
+            margin: 0 auto;
+            border-bottom: 1px solid $color-bd;
+            padding-bottom: 50px;
+            margin-bottom: 20px;
+        }
+
+        &-row {
+            @include flex($justify: flex-start);
+            max-width: 500px;
+            margin: 0 auto 20px;
+
+            &__amount {
+                align-items: flex-start;
+
+                .fund-withdraw-row--left {
+                    display: block;
+                    height: 34px;
+                    line-height: 34px;
+                }
+            }
+
+            &--left {
+                flex-shrink: 0;
+                text-align: right;
+                width: 190px;
+                margin-right: 16px;
+                color: #000;
+                font-weight: bold;
+            }
+
+            &--right {
+                &__bank {
+                    @include flex($justify: flex-start);
+                    position: relative;
+                    border: 1px solid $color-bd;
+                    border-radius: 2px;
+                    padding: 4px 24px 4px 4px;
+
+                    .expand {
+                        @include flex();
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        height: 100%;
+                        width: 20px;
+                        background-color: $color-bg-white;
+                        color: $color-txt-grey;
+                        font-weight: normal;
+                        font-size: 16px;
+                    }
+
+                    .icon {
+                        padding: 0 5px;
+                        color: #fff;
+                        font-size: 30px;
+                        background-color: #DEDEDE;
+                        border-radius: 4px;
+                        margin-right: 16px;
+                    }
+
+                    .txt {
+                        color: #000;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                }
+
+                &__amount {
+                    align-items: flex-start;
+
+                    input {
+                        display: block;
+                        height: 34px;
+                        margin-bottom: 10px;
+                    }
+
+                    .note {
+                        color: #999;
+                        font-size: 12px;
+                        margin-bottom: 2px;
+                    }
+                }
+
+                &__fee {
+                    .ignore {
+                        color: #999;
+                        text-decoration: line-through;
+                    }
+                }
+            }
+        }
+
+        &-submit {
+            display: block;
+            margin-left: auto;
+            height: 40px;
+            padding: 0 50px;
+        }
+    }
+
+    .back {
+        display: block;
+        color: #555;
+        font-size: 20px;
+        margin-bottom: 20px;
+
+        i {
+            margin-right: 10px;
+        }
+    }
 }

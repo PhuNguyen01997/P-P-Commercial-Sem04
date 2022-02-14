@@ -39,8 +39,8 @@ public final class ShopTransactionSpecification {
     }
 
     private static Root joinAllRelation(Root root) {
-        root.fetch("shop");
-        root.fetch("order");
+        root.fetch("shop", JoinType.LEFT);
+        root.fetch("order", JoinType.LEFT);
         return root;
     }
 }

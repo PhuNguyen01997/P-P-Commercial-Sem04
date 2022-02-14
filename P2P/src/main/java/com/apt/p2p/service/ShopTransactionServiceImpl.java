@@ -35,7 +35,7 @@ public class ShopTransactionServiceImpl implements ShopTransactionService {
                 .where(ShopTransactionSpecification.hasShopId(shopId))
                 .and(ShopTransactionSpecification.hasDateIn(filter.getMinDate(), filter.getMaxDate()));
 
-        switch (filter.getType()){
+        switch (filter.getType()) {
             case 1: {
                 condition = condition.and(ShopTransactionSpecification.hasOrder());
                 break;

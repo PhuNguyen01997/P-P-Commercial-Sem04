@@ -67,10 +67,10 @@ public final class OrderSpecification {
     }
 
     private static Root joinAllRelation(Root root) {
-        root.fetch("shop");
-        root.fetch("user");
-        root.fetch("address");
-        root.fetch("currentStatus");
+        root.fetch("shop", JoinType.LEFT);
+        root.fetch("user", JoinType.LEFT);
+        root.fetch("address", JoinType.LEFT);
+        root.fetch("currentStatus", JoinType.LEFT);
         return root;
     }
 }
