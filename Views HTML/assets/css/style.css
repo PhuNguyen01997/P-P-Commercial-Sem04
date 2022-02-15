@@ -649,6 +649,11 @@ label {
   font-size: 13px;
 }
 
+.emptyText {
+  color: rgba(85, 85, 85, 0.8);
+  font-size: 20px;
+}
+
 .dropdown-list {
   display: none;
 }
@@ -4862,5 +4867,66 @@ label {
 
 .portal .back i {
   margin-right: 10px;
+}
+
+.portal .shop-title {
+  margin-bottom: 6px;
+  font-size: 22px;
+  color: black;
+  font-weight: bold;
+}
+
+.portal .shop-title-desc {
+  color: #555;
+  font-size: 14px;
+}
+
+.portal .shop-form {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 30px 0 20px;
+  padding: 20px 0;
+}
+
+.portal .shop-form:before {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 1px;
+  width: calc(100% + 40px);
+  top: 0;
+  left: -20px;
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+.portal .shop-form-left {
+  width: 375px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.portal .shop-form-right {
+  width: 100%;
+}
+
+.portal .shop-form-row > * {
+  display: block;
+}
+
+.portal .shop-form-row input {
+  height: 30px;
 }
 /*# sourceMappingURL=style.css.map */

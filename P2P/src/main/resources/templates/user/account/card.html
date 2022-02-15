@@ -19,7 +19,7 @@
             </button>
         </div>
         <ul class="account-card">
-            <p th:if="${cards.isEmpty()}" class="py-5">Bạn không có tài khoản nào</p>
+            <p th:if="${cards.isEmpty()}" class="py-5 emptyText">Bạn không có tài khoản nào</p>
             <li th:each="item : ${cards}" class="account-card-item">
                 <p class="account-card-item--pic pic">
                     <img th:src="${item.imgUrl}" alt="">

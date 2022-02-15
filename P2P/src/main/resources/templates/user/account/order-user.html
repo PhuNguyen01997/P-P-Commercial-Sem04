@@ -12,6 +12,7 @@
     <div th:replace="fragments/general-account.html :: content-side"></div>
 
     <div class="split-main">
+        <p th:if="${orders.size() == 0}" class="emptyText">Bạn hiện tại không có đơn hàng nào</p>
         <div th:each="order : ${orders}" class="order-section">
             <div class="order-content">
                 <div class="order-shop">

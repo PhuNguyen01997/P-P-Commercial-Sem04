@@ -19,7 +19,7 @@
             </button>
         </div>
         <ul class="account-address">
-            <p th:if="${addressList.isEmpty()}" class="py-5">Bạn không có địa chỉ nào</p>
+            <p th:if="${addressList.isEmpty()}" class="py-5 emptyText">Bạn không có địa chỉ nào</p>
             <li th:each="address : ${addressList}" th:attr="data-id=${address.id}"
                 class="account-address-item">
                 <div class="account-address-left">

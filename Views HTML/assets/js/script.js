@@ -167,4 +167,9 @@ $(function () {
             maxDate: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
         });
     }
+
+    // jsForBackButton
+    $('.jsBack').on('click', function(){
+        window.history.back();
+    })
 });

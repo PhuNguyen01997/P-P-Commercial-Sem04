@@ -13,7 +13,7 @@
 
     <div class="split-main order-detail-main">
         <div class="order-detail-header">
-            <a class="order-detail-header--back" href="#"><i class="fas fa-angle-left mr10"></i>Back</a>
+            <a class="order-detail-header--back jsBack" href="javascript: void(0)"><i class="fas fa-angle-left mr10"></i>Back</a>
             <p class="order-detail-header--id">
                 <span>Order ID:</span>
                 <span th:text="${order.id}">[Order Id]</span>
@@ -34,55 +34,12 @@
                     <p th:if="${order.currentStatus.id > status.id}"
                        th:text="${#dates.format(statusMapStatusHistory.get(status.id).date, 'dd-MM-yyyy HH:mm')}"
                        class="order-step--time">[Order History Date]</p>
-
                 </div>
-                <!--                <div class="order-step&#45;&#45;item success">-->
-                <!--                    <p class="order-step&#45;&#45;icon circle">-->
-                <!--                        <i class="far fa-file-alt"></i>-->
-                <!--                    </p>-->
-                <!--                    <p class="order-step&#45;&#45;status">Đơn hàng đã đặt</p>-->
-                <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
-                <!--                </div>-->
-                <!--                <div class="order-step&#45;&#45;item success">-->
-                <!--                    <p class="order-step&#45;&#45;icon circle">-->
-                <!--                        <i class="fas fa-dollar-sign"></i>-->
-                <!--                    </p>-->
-                <!--                    <p class="order-step&#45;&#45;status">Đơn hàng dã thanh toán ($99.99)</p>-->
-                <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
-                <!--                </div>-->
-                <!--                <div class="order-step&#45;&#45;item success">-->
-                <!--                    <p class="order-step&#45;&#45;icon circle">-->
-                <!--                        <i class="fas fa-truck"></i>-->
-                <!--                    </p>-->
-                <!--                    <p class="order-step&#45;&#45;status">Đang giao hàng</p>-->
-                <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
-                <!--                </div>-->
-                <!--                <div class="order-step&#45;&#45;item current">-->
-                <!--                    <p class="order-step&#45;&#45;icon circle">-->
-                <!--                        <i class="fas fa-dolly-flatbed"></i>-->
-                <!--                    </p>-->
-                <!--                    <p class="order-step&#45;&#45;status">Chờ xác nhận</p>-->
-                <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
-                <!--                </div>-->
-                <!--                <div class="order-step&#45;&#45;item">-->
-                <!--                    <p class="order-step&#45;&#45;icon circle">-->
-                <!--                        <i class="far fa-star"></i>-->
-                <!--                    </p>-->
-                <!--                    <p class="order-step&#45;&#45;status">Đánh giá</p>-->
-                <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
-                <!--                </div>-->
-                <!--                <div class="order-step&#45;&#45;item">-->
-                <!--                    <p class="order-step&#45;&#45;icon circle">-->
-                <!--                        <i class="far fa-window-close"></i>-->
-                <!--                    </p>-->
-                <!--                    <p class="order-step&#45;&#45;status">Đánh giá</p>-->
-                <!--                    <p class="order-step&#45;&#45;time">11:14 11:11:2021</p>-->
-                <!--                </div>-->
             </div>
             <div class="order-detail-control">
-                <button class="order-detail-control--btn btn btn__white">(Shop bấm trực tiếp status update status)
-                    Save
-                </button>
+<!--                <button class="order-detail-control&#45;&#45;btn btn btn__white">(Shop bấm trực tiếp status update status)-->
+<!--                    Save-->
+<!--                </button>-->
                 <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
                 <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
             </div>

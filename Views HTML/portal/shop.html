@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/daterangepicker v3.1/daterangepicker.css" />
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="portal">
+    <header class="header">
+        <div class="header-block header-block__left">
+            <h1 class="header-block--logo">
+                <img class="icon" src="/assets/img/common/logo.png" alt="">
+                <span class="txt">Trang chủ</span>
+            </h1>
+            <p class="header-block--angle"><i class="fas fa-angle-right"></i></p>
+            <h2 class="header-block--text02">Đơn Hàng</h2>
+        </div>
+        <div class="header-block header-block__right">
+            <p class="header-block--info">
+                <span class="avatar"><img src="/assets/img/common/img_default_user.png" alt=""></span>
+                <span class="name">Username</span>
+            </p>
+            <p class="header-block--noti"><i class="far fa-bell"></i></p>
+            <p class="header-block--edu"><button href="#" class="btn btn__outline">ShoPP Edu</button></p>
+        </div>
+    </header>
+    <section class="content">
+        <aside class="aside">
+            <div class="aside-container">
+                <p class="aside-title">Quản lý đơn hàng</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Đơn hủy</a></li>
+                    <li class="aside-item"><a href="#">Trả hàng/Hoàn tiền</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý Shop</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Đánh giá Shop</a></li>
+                    <li class="aside-item"><a href="#">Hồ sơ Shop</a></li>
+                    <li class="aside-item"><a href="#">Địa chỉ</a></li>
+                    <li class="aside-item"><a href="#">Tài khoản</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý sản phẩm</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Thêm sản phẩm</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="main-inner shop">
+                <h3 class="shop-title">Hồ Sơ Shop</h3>
+                <p class="shop-title-desc">Xem tình trạng Shop và cập nhật hồ sơ Shop của bạn</p>
+                <form class="shop-form">
+                    <div class="shop-form-left">
+                        <div class="shop-picture">
+                            <div class="shop-picture--text">
+                                <p class="name">dung1423asdjkhaskdj asjdh asdjk asjdjasdjkhsa adas</p>
+                                <p class="date">00/00/0000</p>
+                            </div>
+                            <img class="shop-picture--avatar jsAvatar" src="/assets/img/products/product_02.jpg" alt="">
+                            <img class="shop-picture--thumbnail jsThumbnail" src="/assets/img/products/product_01.jpg" alt="">
+                            <label for="thumbnail">Sửa ảnh bìa</label>
+                            <input id="thumbnail" class="d-none" type="file" name="thumbnail">
+                        </div>
+                        <div class="shop-info">
+                            <div class="shop-info--item">
+                                <p class="label">Sản phẩm</p>
+                                <a class="link" href="javascript: void(0)">0</a>
+                            </div>
+                            <div class="shop-info--item">
+                                <p class="label">Đánh giá shop</p>
+                                <a class="link" href="javascript: void(0)">0</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-form-right">
+                        <div class="shop-form-row">
+                            <label for="name">Tên Shop</label>
+                            <input id="name" type="text">
+                        </div>
+                        <div class="shop-form-row">
+                            <label for="description">Mô tả Shop</label>
+                            <input id="description" type="text">
+                        </div>
+                        <div class="shop-form-row">
+                            <label for="address">Địa chỉ Shop</label>
+                            <input id="address" type="text">
+                        </div>
+                        <div class="shop-form-row">
+                            <label for="phone">Số điện thoại</label>
+                            <input id="phone" type="text">
+                        </div>
+                        <div class="shop-form-row">
+                            <button type="submit" class="btn btn__primary">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>
