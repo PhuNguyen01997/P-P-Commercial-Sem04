@@ -1,6 +1,8 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.service.ShopService;
+import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ShopController {
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("portal/{id}")
     public String shopDetail(Model model, @PathVariable("id") int shopId) {
@@ -20,7 +24,9 @@ public class ShopController {
 
     @GetMapping("portal/create")
     public String shopCreate(Model model) {
-        model.addAttribute("shop", shopService.findById(0));
+        int userId = 2;
+        model.addAttribute("user", userService.findById(userId));
+        model.addAttribute("shop", new ShopModel());
         return "user/portal/shop-form";
     }
 }

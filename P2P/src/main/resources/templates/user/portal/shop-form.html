@@ -11,7 +11,7 @@
 <div layout:fragment="content" class="main-inner shop">
     <h3 class="shop-title">Hồ Sơ Shop</h3>
     <p class="shop-title-desc">Xem tình trạng Shop và cập nhật hồ sơ Shop của bạn</p>
-    <form class="shop-form">
+    <form class="shop-form" th:object="${shop}">
         <div class="shop-form-left">
             <div class="shop-picture">
                 <div class="shop-picture--avatar pic circle">
@@ -20,8 +20,8 @@
                     <input type="file" class="d-none" id="avatar">
                 </div>
                 <div class="shop-picture--text">
-                    <p class="name">dung1423asdjkhaskdj asjdh asdjk asjdjasdjkhsa adas</p>
-                    <p class="date">00/00/0000</p>
+                    <p class="name" th:text="${shop.name}">[Shop Name]</p>
+                    <p class="date" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attendant Date]</p>
                 </div>
                 <div class="shop-picture--thumbnail pic">
                     <img class=" jsThumbnail" src="/assets/img/products/product_01.jpg" alt="">
@@ -32,11 +32,13 @@
             <div class="shop-info">
                 <div class="shop-info--item">
                     <p class="label">Sản phẩm</p>
-                    <a class="link" href="javascript: void(0)">0</a>
+                    <a th:href="@{/portal/{id}/product(id=${shop.id})}" th:text="${shop.products.size()}" class="link"
+                       href="javascript: void(0)">0</a>
                 </div>
                 <div class="shop-info--item">
                     <p class="label">Đánh giá shop</p>
-                    <a class="link" href="javascript: void(0)">0</a>
+                    <a th:href="@{/portal/{id}/rate(id=${shop.id})}" th:text="${shop.countRates}"
+                       class="link" href="javascript: void(0)">0</a>
                 </div>
             </div>
         </div>
@@ -44,21 +46,26 @@
             <div class="shop-form-row">
                 <label for="name">Tên Shop</label>
                 <div class="ipt ipt__limit-length">
-                    <input max="30" id="name" type="text">
+                    <input max="30" th:field="*{name}" id="name" type="text">
                     <p class="length"><span class="jsCount-name">0</span><span>/30</span></p>
                 </div>
             </div>
             <div class="shop-form-row">
-                <label for="address">Địa chỉ Shop</label>
-                <input id="address" type="text">
+                <label>Địa chỉ Shop</label>
+                <div class="select">
+                    <select name="address">
+                        <!--                        <option th:each="address: ${user.addresses}" th:text="${address.getFullAddress()}" th:value="${address.id}"></option>-->
+                    </select>
+                </div>
             </div>
             <div class="shop-form-row">
                 <label for="phone">Số điện thoại</label>
-                <input id="phone" type="text">
+                <input id="phone" name="phone" th:field="*{phone}" type="text">
             </div>
             <div class="shop-form-row shop-form-row__textarea">
                 <label for="description">Mô tả Shop</label>
-                <textarea rows="5" id="description"
+                <textarea th:field="*{name}"
+                          rows="5" id="description"
                           placeholder="Nhập mô tả hoặc thông tin về Shop của bạn tại đây"></textarea>
                 <p class="length"><span class="jsCount-description">0</span><span>/500</span></p>
             </div>
