@@ -1,40 +1,6 @@
 .portal {
     .order {
         padding: 0;
-        &-header {
-            height: 56px;
-            position: relative;
-            border-bottom: 1px solid $color-bd;
-            @include flex($justify: flex-start);
-
-            &--item {
-                padding: 0 20px;
-                line-height: 56px;
-                height: 100%;
-                transition: color .15s;
-                cursor: pointer;
-
-                &:hover {
-                    color: $color-primary01;
-                }
-
-                &.active {
-                    color: $color-primary01;
-                    font-weight: bold;
-                }
-            }
-
-            &--bar {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 200px;
-                height: 3px;
-                background-color: $color-primary01;
-                transform: translateX(0);
-                transition: transform 0.3s, width 0.3s;
-            }
-        }
 
         &-block {
             padding-left: 20px;

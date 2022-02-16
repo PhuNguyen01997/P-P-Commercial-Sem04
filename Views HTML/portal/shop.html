@@ -77,13 +77,19 @@
                 <form class="shop-form">
                     <div class="shop-form-left">
                         <div class="shop-picture">
+                            <div class="shop-picture--avatar pic circle">
+                                <img class="jsAvatar" src="/assets/img/products/product_02.jpg" alt="">
+                                <label class="shop-picture--ipt shop-picture--ipt__avatar" for="avatar">Sửa</label>
+                                <input type="file" class="d-none" id="avatar">
+                            </div>
                             <div class="shop-picture--text">
                                 <p class="name">dung1423asdjkhaskdj asjdh asdjk asjdjasdjkhsa adas</p>
                                 <p class="date">00/00/0000</p>
                             </div>
-                            <img class="shop-picture--avatar jsAvatar" src="/assets/img/products/product_02.jpg" alt="">
-                            <img class="shop-picture--thumbnail jsThumbnail" src="/assets/img/products/product_01.jpg" alt="">
-                            <label for="thumbnail">Sửa ảnh bìa</label>
+                            <div class="shop-picture--thumbnail pic">
+                                <img class=" jsThumbnail" src="/assets/img/products/product_01.jpg" alt="">
+                            </div>
+                            <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
                             <input id="thumbnail" class="d-none" type="file" name="thumbnail">
                         </div>
                         <div class="shop-info">
@@ -100,11 +106,10 @@
                     <div class="shop-form-right">
                         <div class="shop-form-row">
                             <label for="name">Tên Shop</label>
-                            <input id="name" type="text">
-                        </div>
-                        <div class="shop-form-row">
-                            <label for="description">Mô tả Shop</label>
-                            <input id="description" type="text">
+                            <div class="ipt ipt__limit-length">
+                                <input max="30" id="name" type="text">
+                                <p class="length"><span class="jsCount-name">0</span><span>/30</span></p>
+                            </div>
                         </div>
                         <div class="shop-form-row">
                             <label for="address">Địa chỉ Shop</label>
@@ -114,7 +119,12 @@
                             <label for="phone">Số điện thoại</label>
                             <input id="phone" type="text">
                         </div>
-                        <div class="shop-form-row">
+                        <div class="shop-form-row shop-form-row__textarea">
+                            <label for="description">Mô tả Shop</label>
+                            <textarea rows="5" id="description" placeholder="Nhập mô tả hoặc thông tin về Shop của bạn tại đây"></textarea>
+                            <p class="length"><span class="jsCount-description">0</span><span>/500</span></p>
+                        </div>
+                        <div class="shop-form-row shop-form-row__submit">
                             <button type="submit" class="btn btn__primary">Lưu</button>
                         </div>
                     </div>

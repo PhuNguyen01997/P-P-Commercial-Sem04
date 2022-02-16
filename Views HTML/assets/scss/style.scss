@@ -169,6 +169,24 @@ label {
             }
         }
     }
+
+    &__limit-length {
+        position: relative;
+        input {
+            padding-right: 52px;
+        }
+        .length {
+            @include flex();
+            width: 52px;
+            color: $color-txt-white-grey;
+            position: absolute;
+            height: 100%;
+            top: 0;
+            right: 0;
+            padding: 0 10px;
+            border-left: 1px solid $color-bd;
+        }
+    }
 }
 
 .attachAdjust {

@@ -25,7 +25,7 @@ public class ProductController {
     private ShopService shopService;
 
     @GetMapping("product/{id}")
-    public String productDetail(Model model, @PathVariable int id) {
+    public String productDetail(Model model, @PathVariable("id") int id) {
         ProductModel product = productService.findById(id);
 
         List<RateModel> rates = rateService.findByProductId(id);
@@ -40,5 +40,23 @@ public class ProductController {
         model.addAttribute("addCartModel", new ProductAddCartModel(1, id));
 
         return "user/main/product-detail";
+    }
+
+    @GetMapping("portal/{id}/product")
+    public String portalProduct(Model model, @PathVariable("id") int shopId) {
+        model.addAttribute("shop", shopService.findById(shopId));
+        return "user/portal/product";
+    }
+
+    @GetMapping("portal/{id}/product/create")
+    public String portalProductCreate(Model model, @PathVariable("id") int shopId) {
+        model.addAttribute("shop", shopService.findById(shopId));
+        return "user/portal/product-form";
+    }
+
+    @GetMapping("portal/{shopId}/product/{productId}")
+    public String portalProductCreate(Model model, @PathVariable("shopId") int shopId, @PathVariable("productId") int productId) {
+        model.addAttribute("shop", shopService.findById(shopId));
+        return "user/portal/product-form";
     }
 }

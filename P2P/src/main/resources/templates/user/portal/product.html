@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="main-inner">
+        <div class="product-search">
+            <div class="product-search-item product-search-item__name">
+                <div class="select">
+                    <select name="filterBy" id="">
+                        <option value="name" selected>Tên sản phẩm</option>
+                        <option value="id">Mã sản phẩm</option>
+                    </select>
+                </div>
+                <input type="text" name="name" placeholder="Nhập vào">
+            </div>
+            <div class="product-search-item product-search-item__category">
+                <label>Danh mục</label>
+                <div class="select">
+                    <select name="category">
+                        <option value="0" selected>Tất cả</option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-search-item product-search-item__submit">
+                <button class="btn btn__primary">Tìm</button>
+            </div>
+        </div>
+    </div>
+    <div class="main-inner product">
+        <ul class="portal-category">
+            <li class="portal-category--item active">
+                <p>Tất cả</p>
+            </li>
+            <li class="portal-category--item">
+                <p>Đang hoạt động</p>
+            </li>
+            <li class="portal-category--item">
+                <p>Hêt hàng</p>
+            </li>
+            <li class="portal-category--bar"></li>
+        </ul>
+        <div class="product-body">
+            <div class="product-block">
+                <div class="product-count">
+                    <p class="txt01"><span>1000</span> Sản phẩm</p>
+                    <div class="percent-container">
+                        <span class="percent"></span>
+                    </div>
+                    <p class="txt02">Có thể đăng tải thêm 100 sản phẩm</p>
+                </div>
+                <div class="product-widget">
+                    <button class="btn btn__primary product-widget--create"><i class="icon icon__left fas fa-plus"></i>Thểm 1 sản phẩm mới</button>
+                </div>
+            </div>
+            <div class="product-table">
+                <div class="product-table-header">
+                    <div class="product-row product-row__header">
+                        <div class="product-row--item product-row--item__name">
+                            <p>Tên sản phẩm</p>
+                        </div>
+                        <div class="product-row--item product-row--item__category">
+                            <p>Danh mục</p>
+                        </div>
+                        <div class="product-row--item product-row--item__price">
+                            <p>Giá</p>
+                        </div>
+                        <div class="product-row--item product-row--item__sale">
+                            <p>Doanh số</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-table-body">
+                    <div class="product-row">
+                        <div class="product-row--item product-row--item__name">
+                            <p class="pic"><img src="/assets/img/products/product_01.jpg" alt=""></p>
+                            <p class="text">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl</p>
+                        </div>
+                        <div class="product-row--item product-row--item__category">
+                            <p>Danh mụSDAc ASD</p>
+                        </div>
+                        <div class="product-row--item product-row--item__price">
+                            <p>999.999.999 vnđ</p>
+                        </div>
+                        <div class="product-row--item product-row--item__sale">
+                            <p>12000</p>
+                        </div>
+                    </div>
+                    <div class="product-row">
+                        <div class="product-row--item product-row--item__name">
+                            <p class="pic"><img src="/assets/img/products/product_01.jpg" alt=""></p>
+                            <p class="text">Đây là 1</p>
+                        </div>
+                        <div class="product-row--item product-row--item__category">
+                            <p>Danh mụSDAc ASD</p>
+                        </div>
+                        <div class="product-row--item product-row--item__price">
+                            <p>999.999.999 vnđ</p>
+                        </div>
+                        <div class="product-row--item product-row--item__sale">
+                            <p>12000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script">
+</script>
+</body>
+</html>

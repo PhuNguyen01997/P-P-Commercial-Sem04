@@ -11,32 +11,32 @@
 <div layout:fragment="content" class="main-inner order">
     <input type="hidden" th:value="${shop.id}" name="shopId">
 
-    <ul class="order-header">
-        <li class="order-header--item jsStatus active" data-status-id="0">
+    <ul class="portal-category">
+        <li class="portal-category--item jsStatus active" data-status-id="0">
             <p>Tất cả</p>
         </li>
-        <li class="order-header--item jsStatus" data-status-id="1">
+        <li class="portal-category--item jsStatus" data-status-id="1">
             <p>Chờ xác nhận</p>
         </li>
-        <li class="order-header--item jsStatus" data-status-id="2">
+        <li class="portal-category--item jsStatus" data-status-id="2">
             <p>Đã thanh toán</p>
         </li>
-        <li class="order-header--item jsStatus" data-status-id="3">
+        <li class="portal-category--item jsStatus" data-status-id="3">
             <p>Chờ lấy hàng</p>
         </li>
-        <li class="order-header--item jsStatus" data-status-id="4">
+        <li class="portal-category--item jsStatus" data-status-id="4">
             <p>Đang giao</p>
         </li>
-        <li class="order-header--item jsStatus" data-status-id="5">
+        <li class="portal-category--item jsStatus" data-status-id="5">
             <p>Đã giao</p>
         </li>
-        <!--        <li class="order-header&#45;&#45;item">-->
+        <!--        <li class="portal-category&#45;&#45;item">-->
         <!--            <p>Đơn hủy</p>-->
         <!--        </li>-->
-        <!--        <li class="order-header&#45;&#45;item">-->
+        <!--        <li class="portal-category&#45;&#45;item">-->
         <!--            <p>Trả hàng/Hoàn tiền</p>-->
         <!--        </li>-->
-        <li class="order-header--bar"></li>
+        <li class="portal-category--bar"></li>
     </ul>
     <div class="order-block order-block__date">
         <label for="date" class="txt">Ngày đặt hàng</label>
@@ -83,7 +83,7 @@
             const width = $(ele).outerWidth();
             const position = $(ele).position();
 
-            $('.order-header--bar').css({
+            $('.portal-category--bar').css({
                 width,
                 transform: `translateX(${position.left}px)`
             });
