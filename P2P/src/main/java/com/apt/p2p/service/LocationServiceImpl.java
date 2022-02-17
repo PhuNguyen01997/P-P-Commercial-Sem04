@@ -1,26 +1,16 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Address;
-import com.apt.p2p.entity.District;
-import com.apt.p2p.entity.Province;
-import com.apt.p2p.entity.Ward;
 import com.apt.p2p.model.form.CalShippingForm;
 import com.apt.p2p.model.form.CalShippingResponse;
 import com.apt.p2p.model.form.CalShippingResponseData;
 import com.apt.p2p.model.view.*;
 import com.apt.p2p.repository.AddressRepository;
-import com.apt.p2p.repository.DistrictRepository;
-import com.apt.p2p.repository.ProvinceRepository;
-import com.apt.p2p.repository.WardRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;

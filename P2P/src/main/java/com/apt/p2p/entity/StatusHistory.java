@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -18,22 +20,20 @@ public class StatusHistory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "statusOrderId")
     private StatusOrder status;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderId")
     private Order order;
 
-    private Date date;
-
-    public StatusHistory() {
-        this.date = new Date();
-    }
+    @NotNull
+    private Date date = new Date();
 
     public StatusHistory(StatusOrder statusOrder, Order order) {
-        this();
         this.status = statusOrder;
         this.order = order;
     }

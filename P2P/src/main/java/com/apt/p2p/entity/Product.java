@@ -36,9 +36,9 @@ public class Product {
     @NotNull
     private String description;
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
-    private Date updatedAt;
+    private Date updatedAt = new Date();
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

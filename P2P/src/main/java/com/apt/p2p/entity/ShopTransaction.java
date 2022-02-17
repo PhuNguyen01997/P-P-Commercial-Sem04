@@ -23,11 +23,17 @@ public class ShopTransaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
     private BigDecimal amount;
 
+    @NotNull
     private String description;
 
+    @NotNull
     private Date date = new Date();
+
+    @Enumerated(EnumType.STRING)
+    private ShopTransactionStatus status;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,9 +43,6 @@ public class ShopTransaction {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderId")
     private Order order;
-
-    @Enumerated(EnumType.STRING)
-    private ShopTransactionStatus status;
 
     public ShopTransaction(Shop shop, Order order) {
         this.shop = shop;

@@ -27,15 +27,16 @@ public class Rate {
     @NotNull
     private Integer star;
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
-    private Date updatedAt;
+    private Date updatedAt = new Date();
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId")
     private Product product;

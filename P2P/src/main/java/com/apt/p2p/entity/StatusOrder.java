@@ -31,7 +31,7 @@ public class StatusOrder {
 //    private List<Order> orders;
 
 //    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
-//    private List<OrderStatusOrder> orderStatusOrders;
+//    private List<StatusHistory> StatusHistories;
 
     public String getIconUrl(){
         String url = "";

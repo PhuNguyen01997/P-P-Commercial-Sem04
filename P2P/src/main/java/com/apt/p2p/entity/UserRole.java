@@ -7,19 +7,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "user_role")
-@AssociationOverrides({ @AssociationOverride(name = "primaryKey.user", joinColumns = @JoinColumn(name = "user_id")),
-        @AssociationOverride(name = "primaryKey.role", joinColumns = @JoinColumn(name = "role_id")) })
+@Table(name = "user_role")
+@AssociationOverrides({@AssociationOverride(name = "primaryKey.user", joinColumns = @JoinColumn(name = "user_id")),
+        @AssociationOverride(name = "primaryKey.role", joinColumns = @JoinColumn(name = "role_id"))})
 public class UserRole {
-    @EmbeddedId
-    private UserRoleId primaryKey;
-
     public UserRole() {
     }
 
     public UserRole(UserRoleId primaryKey) {
         this.primaryKey = primaryKey;
     }
+
+    @EmbeddedId
+    private UserRoleId primaryKey;
 
     public UserRoleId getPrimaryKey() {
         return primaryKey;

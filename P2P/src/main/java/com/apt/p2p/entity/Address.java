@@ -33,18 +33,21 @@ public class Address {
     private String ward;
 
     @NotNull
+    @Column(length = 20)
     private String wardId;
 
     @NotNull
     private  String district;
 
     @NotNull
+    @Column(length = 20)
     private int districtId;
 
     @NotNull
     private String province;
 
     @NotNull
+    @Column(length = 20)
     private int provinceId;
 
     @ManyToOne(fetch = FetchType.LAZY)

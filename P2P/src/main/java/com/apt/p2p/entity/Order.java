@@ -32,14 +32,14 @@ public class Order {
     private BigDecimal total;
 
     @NotNull
-    private BigDecimal shippingCost;
+    private BigDecimal shippingCost = BigDecimal.ZERO;
 
     @NotNull
-    private Double percentPermission;
+    private Double percentPermission = 0.05;
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
-    private Date updatedAt;
+    private Date updatedAt = new Date();
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
@@ -52,6 +52,7 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<StatusHistory> statusHistories;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currentStatusId")
     private StatusOrder currentStatus;
@@ -65,15 +66,15 @@ public class Order {
     @JoinColumn(name = "addressId")
     private Address address;
 
+    @OneToOne(mappedBy = "order", fetch = FetchType.LAZY)
+    private ShopTransaction shopTransaction;
+
     private String stripeCardId;
 
     public Order(Boolean methodPayment, BigDecimal total, BigDecimal shippingCost, User user, List<OrderDetail> orderDetails, StatusOrder statusOrder, Shop shop, Address address, String stripeCardId) {
         this.methodPayment = methodPayment;
         this.total = total;
         this.shippingCost = shippingCost;
-        this.percentPermission = 0.05;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
         this.user = user;
         this.orderDetails = orderDetails;
         this.currentStatus = statusOrder;
