@@ -1,7 +1,7 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.User;
-import com.apt.p2p.model.UserModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

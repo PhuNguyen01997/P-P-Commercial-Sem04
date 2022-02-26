@@ -24,6 +24,9 @@ public class UserModel {
     private String username;
 
     @NotBlank
+    private String password;
+
+    @NotBlank
     private String phone;
 
     private String avatar;
