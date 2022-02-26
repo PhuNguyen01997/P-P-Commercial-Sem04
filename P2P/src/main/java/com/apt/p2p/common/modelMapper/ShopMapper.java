@@ -1,11 +1,13 @@
 package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
-import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.model.view.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class ShopMapper {
@@ -30,25 +32,14 @@ public class ShopMapper {
     }
 
     public ShopModel shopEntityToModel(Shop entity) {
-        ModelMapper mapper = mapperService.getModelMapper();
-        mapper.typeMap(Shop.class, ShopModel.class);
-        mapper.addMappings(new PropertyMap<Shop, ShopModel>() {
-            @Override
-            protected void configure() {
-                skip(destination.getUser());
-                skip(destination.getOrders());
-                skip(destination.getAddress());
-                skip(destination.getProducts());
-                skip(destination.getCountProducts());
-                skip(destination.getCountRates());
-            }
-        });
+        ShopModel model = new ShopModel(entity);
 
-        mapper.validate();
-        ShopModel model = mapper.map(entity, ShopModel.class);
+        model.setUser(new UserModel(entity.getUser()));
+        model.setAddress(new AddressModel(entity.getAddress()));
 
-        model.setCountProducts(entity.getProducts().size());
-        model.setCountRates(entity.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum));
+        model.setProducts(entity.getProducts().stream().map(e -> new ProductModel(e)).collect(Collectors.toList()));
+        model.setOrders(entity.getOrders().stream().map(e -> new OrderModel(e)).collect(Collectors.toList()));
+        model.setShopTransactions(entity.getShopTransactions().stream().map(e -> new ShopTransactionModel(e)).collect(Collectors.toList()));
 
         return model;
     }

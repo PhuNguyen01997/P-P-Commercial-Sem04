@@ -59,6 +59,12 @@ public class ShopModel {
         this.createdAt = shop.getCreatedAt();
         this.updatedAt = shop.getUpdatedAt();
 
+        this.user = null;
+        this.address = null;
+        this.products = null;
+        this.orders = null;
+        this.shopTransactions = null;
+
         this.countProducts = shop.getProducts().size();
         this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
     }

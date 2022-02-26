@@ -47,7 +47,7 @@ public class UserMapper {
         model.setUpdatedAt(entity.getUpdatedAt());
         model.setStripeCustomerId(entity.getStripeCustomerId());
 
-        model.setShop(new ShopModel(entity.getShop()));
+        model.setShop(entity.getShop() == null ? null : new ShopModel(entity.getShop()));
         model.setAddresses(entity.getAddresses().stream().map(ad -> new AddressModel(ad)).collect(Collectors.toList()));
         model.setCards(cardService.findAllByUserId(entity.getUserId()));
         model.setCarts(entity.getCarts().stream().map(c -> new CartModel(c)).collect(Collectors.toList()));

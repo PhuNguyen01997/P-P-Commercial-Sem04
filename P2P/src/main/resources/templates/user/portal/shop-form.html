@@ -21,13 +21,13 @@
                 </div>
                 <div class="shop-picture--text">
                     <p class="name" th:text="${shop.name}">[Shop Name]</p>
-                    <p class="date" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attendant Date]</p>
-                </div>
-                <div class="shop-picture--thumbnail pic">
-                    <img class=" jsThumbnail" src="/assets/img/products/product_01.jpg" alt="">
-                </div>
-                <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
-                <input id="thumbnail" class="d-none" type="file" name="thumbnail">
+                <p class="date" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attendant Date]</p>
+            </div>
+            <div class="shop-picture--thumbnail pic">
+                <img class=" jsThumbnail" src="/assets/img/products/product_01.jpg" alt="">
+            </div>
+            <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
+            <input id="thumbnail" class="d-none" type="file" name="thumbnail">
             </div>
             <div class="shop-info">
                 <div class="shop-info--item">
@@ -46,7 +46,7 @@
             <div class="shop-form-row">
                 <label for="name">Tên Shop</label>
                 <div class="ipt ipt__limit-length">
-                    <input max="30" th:field="*{name}" id="name" type="text">
+                    <input maxlength="30" th:field="*{name}" id="name" type="text">
                     <p class="length"><span class="jsCount-name">0</span><span>/30</span></p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <label>Địa chỉ Shop</label>
                 <div class="select">
                     <select name="address">
-                        <!--                        <option th:each="address: ${user.addresses}" th:text="${address.getFullAddress()}" th:value="${address.id}"></option>-->
+                        <option th:each="address: ${user.addresses}" th:text="${address.getFullAddress()}" th:value="${address.id}"></option>
                     </select>
                 </div>
             </div>

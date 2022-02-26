@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT distinct (u.email)FROM User u WHERE u.email = :email")
     String findByEmail(String email);
+
+
 }

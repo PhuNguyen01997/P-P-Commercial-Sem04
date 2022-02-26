@@ -18,7 +18,14 @@ public class ShopController {
 
     @GetMapping("portal/{id}")
     public String shopDetail(Model model, @PathVariable("id") int shopId) {
-        model.addAttribute("shop", shopService.findById(shopId));
+        int userId = 2;
+        ShopModel shopModel = shopService.findById(shopId);
+
+        if(shopModel == null){
+            return "Not Found";
+        }
+        model.addAttribute("shop", shopModel);
+        model.addAttribute("user", userService.findById(userId));
         return "user/portal/shop-form";
     }
 
