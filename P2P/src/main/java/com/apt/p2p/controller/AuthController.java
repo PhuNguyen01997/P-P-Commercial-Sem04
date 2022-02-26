@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,7 +34,7 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("signin")
-    public String signin(){
+    public String signin() {
         return "user/auth/signin";
     }
 
@@ -45,22 +46,32 @@ public class AuthController {
     }
 
     @GetMapping("signup")
-    public String signup(Model model){
-        model.addAttribute("user" , new User());
+    public String signup(Model model) {
+        model.addAttribute("user", new User());
         return "user/auth/signup";
     }
 
     @PostMapping("/save-user")
-    public String save(Model model
-                        ,@ModelAttribute("user") UserModel userModel
-                        ,@RequestParam("pic") MultipartFile image
-                        , BindingResult result,
-                        final RedirectAttributes attributes
-                        ) {
+    public String save(Model model,
+                       @RequestParam("pic") MultipartFile image,
+                       @Valid @ModelAttribute("user") UserModel userModel,
+                       BindingResult result,
+                       final RedirectAttributes attributes
+    ) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("user", userModel);
+            model.addAttribute("hasAnyError", true);
+            return "user/auth/signup";
+        }
         String email = service.findByEmail(userModel.getEmail());
-        System.out.println("email:" + email);
+
+        if (email.equals(userModel.getEmail())) {
+            model.addAttribute("duplicate", "Email already exists");
+            model.addAttribute("hasAnyError", true);
+            return "user/auth/signup";
+        }
         User usr = new User();
-        System.out.println("information: " + userModel);
         if (!image.isEmpty()) {
             try {
                 byte[] bytes = image.getBytes();
@@ -77,18 +88,17 @@ public class AuthController {
         usr.setPassword(passwordEncoder.encode(userModel.getPassword()));
         usr.setPhone(userModel.getPhone());
         usr.setUsername(userModel.getUsername());
-        System.out.println(usr);
         service.save(usr);
         return "redirect:/";
     }
 
     @GetMapping("reset-password")
-    public String resetPassword(){
+    public String resetPassword() {
         return "user/auth/reset";
     }
 
     @GetMapping("forgot-password")
-    public String forgotPassword(){
+    public String forgotPassword() {
         return "user/auth/forgot";
     }
 }

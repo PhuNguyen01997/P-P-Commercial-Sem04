@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
 
-    @Query("SELECT distinct (u.email)FROM User u WHERE u.email = :email")
+    @Query("SELECT distinct (u.email) FROM User u WHERE u.email = :email")
     String findByEmail(String email);
 }
