@@ -63,7 +63,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressModel findById(int id) {
-        return null;
+        Address entity = addressRepository.findById(id).orElse(null);
+        return addressMapper.addressEntityToModel(entity);
     }
 
     @Override

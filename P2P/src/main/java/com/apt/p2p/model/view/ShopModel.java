@@ -21,6 +21,8 @@ public class ShopModel {
 
     private String logo;
 
+    private String background;
+
     @NotBlank(message = "Tên cửa hàng không hợp lệ")
     private String name;
 
@@ -37,6 +39,8 @@ public class ShopModel {
     private Date createdAt = new Date();
 
     private Date updatedAt = new Date();
+
+    private String stripeCardId;
 
     private UserModel user;
 
@@ -55,12 +59,14 @@ public class ShopModel {
     public ShopModel(Shop shop) {
         this.id = shop.getId();
         this.logo = shop.getLogo();
+        this.background = shop.getBackground();
         this.name = shop.getName();
         this.phone = shop.getPhone();
         this.permission = shop.getPermission();
         this.description = shop.getDescription();
         this.createdAt = shop.getCreatedAt();
         this.updatedAt = shop.getUpdatedAt();
+        this.stripeCardId = shop.getStripeCardId();
 
         this.user = null;
         this.address = null;
@@ -68,7 +74,13 @@ public class ShopModel {
         this.orders = null;
         this.shopTransactions = null;
 
-        this.countProducts = shop.getProducts().size();
-        this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
+        if(shop.getProducts().size() > 0){
+            this.countProducts = shop.getProducts().size();
+            this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
+        }
+        else{
+            this.setCountProducts(0);
+            this.setCountRates(0);
+        }
     }
 }

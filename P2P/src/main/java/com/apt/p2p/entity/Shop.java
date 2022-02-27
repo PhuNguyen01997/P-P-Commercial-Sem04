@@ -26,6 +26,9 @@ public class Shop {
     @Column(length = 20)
     private String logo;
 
+    @Column(length = 20)
+    private String background;
+
     @NotNull
     private String name;
 
@@ -57,7 +60,7 @@ public class Shop {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @NotNull
+//    @NotNull
     private String stripeCardId;
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)

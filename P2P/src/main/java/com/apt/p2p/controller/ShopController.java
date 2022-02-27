@@ -1,7 +1,9 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.model.view.UserModel;
+import com.apt.p2p.service.AddressService;
 import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -20,10 +23,12 @@ public class ShopController {
     private ShopService shopService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AddressService addressService;
 
     @GetMapping("portal")
     public String shopDetail(Model model) {
-        int userId = 2;
+        int userId = 3;
         UserModel user = userService.findById(userId);
 
         model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : new ShopModel());
@@ -33,8 +38,11 @@ public class ShopController {
 
     @PostMapping("portal")
     public String updateShop(Model model, @RequestParam("teAddress") int addressId, @Valid @ModelAttribute("shop") ShopModel shop, BindingResult result) {
-        int userId = 2;
+        int userId = 3;
         UserModel user = userService.findById(userId);
+        AddressModel address = addressService.findById(addressId);
+        shop.setAddress(address);
+        shop.setUser(user);
 
         if(result.hasErrors()){
             model.addAttribute("shop", shop);
@@ -43,7 +51,7 @@ public class ShopController {
         }
 
         ShopModel shopModel = shopService.createOrUpdate(shop);
-        return "redirect:/portal/";
+        return "redirect:/portal";
     }
 
 //    @GetMapping("portal/create")

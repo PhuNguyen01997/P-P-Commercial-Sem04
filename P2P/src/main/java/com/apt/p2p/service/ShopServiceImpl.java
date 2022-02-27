@@ -1,11 +1,13 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ShopMapper;
+import com.apt.p2p.entity.Address;
 import com.apt.p2p.entity.Shop;
 import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.entity.User;
 import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.model.view.UserModel;
+import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.ShopRepository;
 import com.apt.p2p.repository.ShopTransactionRepository;
 import com.apt.p2p.repository.UserRepository;
@@ -24,6 +26,8 @@ public class ShopServiceImpl implements ShopService {
     private ShopRepository shopRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AddressRepository addressRepository;
     @Autowired
     private ShopTransactionRepository shopTransactionRepository;
     @Autowired
@@ -85,9 +89,10 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public ShopModel createOrUpdate(ShopModel shopModel) {
         Shop shop = null;
+        Address address = addressRepository.findById(shopModel.getAddress().getId()).get();
         if (shopModel.getId() == 0) {
             shop = new Shop(shopModel);
-            User user = userRepository.findById(shop.getUser().getUserId()).get();
+            User user = userRepository.findById(shopModel.getUser().getId()).get();
             shop.setUser(user);
         } else {
             shop = shopRepository.findById(shopModel.getId()).get();
@@ -100,9 +105,11 @@ public class ShopServiceImpl implements ShopService {
             shop.setDescription(shopModel.getDescription());
             shop.setCreatedAt(shopModel.getCreatedAt());
             shop.setUpdatedAt(shopModel.getUpdatedAt());
-
-            shopRepository.save(shop);
         }
+
+        shop.setAddress(address);
+        shopRepository.save(shop);
+
         return shopMapper.shopEntityToModel(shop);
     }
 }
