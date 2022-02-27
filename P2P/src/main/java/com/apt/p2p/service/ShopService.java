@@ -1,6 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.model.view.UserModel;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,4 +14,8 @@ public interface ShopService {
     ShopModel findByOrderId(int orderId);
 
     boolean shopWithDraw(int shopId, BigDecimal amount);
+
+    ShopModel findByUserId(int userId);
+
+    ShopModel createOrUpdate(ShopModel shopModel);
 }

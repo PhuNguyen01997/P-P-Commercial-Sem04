@@ -36,6 +36,8 @@ public class UserMapper {
     }
 
     public UserModel userEntityToModel(User entity) {
+        if(entity == null) return null;
+
         UserModel model = new UserModel();
 
         model.setId(entity.getUserId());
@@ -53,23 +55,6 @@ public class UserMapper {
         model.setCarts(entity.getCarts().stream().map(c -> new CartModel(c)).collect(Collectors.toList()));
         model.setRates(entity.getRates().stream().map(r -> new RateModel(r)).collect(Collectors.toList()));
         model.setOrders(entity.getOrders().stream().map(o -> new OrderModel(o)).collect(Collectors.toList()));
-
-//        ModelMapper mapper = mapperService.getModelMapper();
-//        mapper.typeMap(User.class, UserModel.class);
-//        mapper.addMappings(new PropertyMap<User, UserModel>() {
-//            @Override
-//            protected void configure() {
-//                skip(destination.getShop());
-//                skip(destination.getAddresses());
-//                skip(destination.getCarts());
-//                skip(destination.getCards());
-//                skip(destination.getRates());
-//                skip(destination.getOrders());
-//            }
-//        });
-//
-//        mapper.validate();
-//        return mapper.map(entity, UserModel.class);
 
         return model;
     }

@@ -36,19 +36,8 @@ public class ProductMapper {
     }
 
     public ProductModel productEntityToModel(Product entity) {
-//        ModelMapper mapper = mapperService.getModelMapper();
-//        mapper.typeMap(Product.class, ProductModel.class);
-//        mapper.addMappings(new PropertyMap<Product, ProductModel>() {
-//            @Override
-//            protected void configure() {
-//                skip(destination.getShop());
-//                skip(destination.getRates());
-//                using(productAddPathImage).map(source.getImage()).setImage("Error mapping images");
-//            }
-//        });
-//
-//        mapper.validate();
-//        return mapper.map(entity, ProductModel.class);
+        if(entity == null) return null;
+
         ProductModel model = new ProductModel();
         model.setId(entity.getId());
         model.setName(entity.getName());

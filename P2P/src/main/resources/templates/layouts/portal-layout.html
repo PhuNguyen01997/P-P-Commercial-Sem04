@@ -32,7 +32,11 @@
     </aside>
 
     <main class="main">
-        <div layout:fragment="content"></div>
+        <div th:if="${shop == null}" class="main-inner">
+            <p>Bạn chưa có cửa hàng, vui lòng đăng ký một cửa hàng cho riêng mình</p>
+            <a th:href="@{/portal/}">Đăng ký</a>
+        </div>
+        <div th:if="${shop != null}" layout:fragment="content"></div>
     </main>
 </section>
 

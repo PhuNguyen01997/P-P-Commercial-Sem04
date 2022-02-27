@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ShopRepository extends JpaRepository<Shop, Integer> {
     @Query("SELECT p.shop FROM Product p WHERE p.id = :id")
@@ -19,4 +20,7 @@ public interface ShopRepository extends JpaRepository<Shop, Integer> {
 
     @Query("SELECT ode.product.shop FROM OrderDetail ode WHERE ode.id = :id")
     Shop findByOrderDetailId(@Param("id") int orderDetailId);
+
+    @Query("SELECT s FROM Shop s WHERE s.user.userId = :id")
+    Shop findByUserId(@Param("id") int userId);
 }

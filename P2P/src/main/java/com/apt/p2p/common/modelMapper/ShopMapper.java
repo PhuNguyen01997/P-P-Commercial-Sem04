@@ -32,6 +32,8 @@ public class ShopMapper {
     }
 
     public ShopModel shopEntityToModel(Shop entity) {
+        if(entity == null) return null;
+
         ShopModel model = new ShopModel(entity);
 
         model.setUser(new UserModel(entity.getUser()));

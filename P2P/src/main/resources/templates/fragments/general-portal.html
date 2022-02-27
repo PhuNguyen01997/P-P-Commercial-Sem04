@@ -30,7 +30,7 @@
     <div class="aside-container">
         <p class="aside-title">Quản lý đơn hàng</p>
         <ul class="aside-list">
-            <li class="aside-item"><a th:href='@{/portal/{id}/order (id=${shop.id})}'>Tất cả</a></li>
+            <li class="aside-item"><a th:href='@{/portal/order}'>Tất cả</a></li>
             <li class="aside-item"><a href='javascript: void(0)'>Đơn hủy</a></li>
             <li class="aside-item"><a href='javascript: void(0)'>Trả hàng/Hoàn tiền</a></li>
         </ul>
@@ -39,7 +39,7 @@
         <p class="aside-title">Quản lý Shop</p>
         <ul class="aside-list">
             <li class="aside-item"><a href='javascript: void(0)'>Đánh giá Shop</a></li>
-            <li class="aside-item"><a th:href='@{/portal/{id} (id=${shop.id})}'>Hồ sơ Shop</a></li>
+            <li class="aside-item"><a th:href='@{/portal/}'>Hồ sơ Shop</a></li>
             <li class="aside-item"><a href='javascript: void(0)'>Địa chỉ</a></li>
             <li class="aside-item"><a href='javascript: void(0)'>Tài khoản</a></li>
         </ul>
@@ -54,9 +54,13 @@
     <div class="aside-container">
         <p class="aside-title">Tài Chính</p>
         <ul class="aside-list">
-            <li class="aside-item"><a th:href='@{/portal/{id}/fund (id=${shop.id})}'>Số dư tài khoản Shoppe</a></li>
+            <li class="aside-item"><a th:href='@{/portal/fund}'>Số dư tài khoản Shoppe</a></li>
         </ul>
     </div>
 </aside>
+
+<div th:fragment="error-shop">
+    <p class="error">Bạn chưa có cửa hàng, vui lòng đăng ký một cửa hàng cho riêng mình.</p>
+</div>
 </body>
 </html>

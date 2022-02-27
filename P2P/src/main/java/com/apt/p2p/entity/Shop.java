@@ -24,7 +24,6 @@ public class Shop {
     private Integer id;
 
     @Column(length = 20)
-    @NotNull
     private String logo;
 
     @NotNull
@@ -38,6 +37,9 @@ public class Shop {
     private BigDecimal fund = BigDecimal.ZERO;
 
     private Boolean permission = false;
+
+    @NotNull
+    private String description;
 
     private Date createdAt = new Date();
 
@@ -63,4 +65,23 @@ public class Shop {
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<ShopTransaction> shopTransactions;
+
+    public Shop(ShopModel model) {
+        this.id = model.getId();
+        this.logo = model.getLogo();
+        this.name = model.getName();
+        this.phone = model.getPhone();
+        this.fund = model.getFund();
+        this.permission = model.getPermission();
+        this.description = model.getDescription();
+        this.createdAt = model.getCreatedAt();
+        this.updatedAt = model.getUpdatedAt();
+
+        this.user = null;
+        this.products = null;
+        this.address = null;
+        this.stripeCardId = null;
+        this.orders = null;
+        this.shopTransactions = null;
+    }
 }

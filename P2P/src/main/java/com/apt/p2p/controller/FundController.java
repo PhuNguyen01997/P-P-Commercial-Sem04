@@ -1,7 +1,9 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.form.WithdrawForm;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.ShopService;
+import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,21 +21,29 @@ import java.math.BigDecimal;
 public class FundController {
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private UserService userService;
 
-    @GetMapping("/portal/{id}/fund")
-    public String portalIndex(Model model, @PathVariable("id") int shopId) {
-        model.addAttribute("shop", shopService.findById(shopId));
+    @GetMapping("portal/fund")
+    public String portalIndex(Model model) {
+        int userId = 2;
+        UserModel user = userService.findById(userId);
+
+        model.addAttribute("shop", user.getShop() != null ? shopService.findById(user.getShop().getId()) : null);
         return "user/portal/fund";
     }
 
-    @GetMapping("/portal/{id}/fund/withdraw")
-    public String portalWithdraw(Model model, @PathVariable("id") int shopId) {
-        model.addAttribute("shop", shopService.findById(shopId));
-        model.addAttribute("withdraw", new WithdrawForm(shopId, BigDecimal.ZERO));
+    @GetMapping("portal/fund/withdraw")
+    public String portalWithdraw(Model model) {
+        int userId = 2;
+        UserModel user = userService.findById(userId);
+
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
+        model.addAttribute("withdraw", new WithdrawForm(user.getShop() != null ? user.getShop().getId() : 0 , BigDecimal.ZERO));
         return "user/portal/fund-withdraw";
     }
 
-    @PostMapping("/portal/{id}/fund/withdraw")
+    @PostMapping("portal/fund/withdraw")
     public String portalWithdraw(Model model,
                                  @Valid @ModelAttribute("withdraw") WithdrawForm input,
                                  BindingResult result,

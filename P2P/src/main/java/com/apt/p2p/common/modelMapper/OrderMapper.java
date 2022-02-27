@@ -32,6 +32,8 @@ public class OrderMapper {
     }
 
     public OrderModel orderEntityToModel(Order entity) {
+        if(entity == null) return null;
+
         OrderModel result = new OrderModel();
 
         result.setId(entity.getId());

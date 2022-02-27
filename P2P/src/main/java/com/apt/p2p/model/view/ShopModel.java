@@ -17,20 +17,22 @@ import java.util.List;
 @Getter
 @Setter
 public class ShopModel {
-    private Integer id;
+    private int id;
 
-    @NotBlank
     private String logo;
 
-    @NotBlank
+    @NotBlank(message = "Tên cửa hàng không hợp lệ")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Số điện thoại không hợp lệ")
     private String phone;
 
-    private BigDecimal fund;
+    private BigDecimal fund = BigDecimal.ZERO;
 
     private Boolean permission = false;
+
+    @NotBlank(message = "Mô tả cửa hàng không hợp lệ")
+    private String description;
 
     private Date createdAt = new Date();
 
@@ -46,9 +48,9 @@ public class ShopModel {
 
     public List<ShopTransactionModel> shopTransactions;
 
-    public Integer countProducts;
+    public Integer countProducts = 0;
 
-    public Integer countRates;
+    public Integer countRates = 0;
 
     public ShopModel(Shop shop) {
         this.id = shop.getId();
@@ -56,6 +58,7 @@ public class ShopModel {
         this.name = shop.getName();
         this.phone = shop.getPhone();
         this.permission = shop.getPermission();
+        this.description = shop.getDescription();
         this.createdAt = shop.getCreatedAt();
         this.updatedAt = shop.getUpdatedAt();
 

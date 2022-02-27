@@ -30,6 +30,8 @@ public class ShopTransactionMapper {
     }
 
     public ShopTransactionModel shopTransactionEntityToModel(ShopTransaction entity) {
+        if(entity == null) return null;
+
         ShopTransactionModel model = new ShopTransactionModel();
 
         model.setId(entity.getId());

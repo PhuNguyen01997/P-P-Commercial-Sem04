@@ -4,8 +4,10 @@ import com.apt.p2p.entity.StatusHistory;
 import com.apt.p2p.model.form.CalShippingForm;
 import com.apt.p2p.model.form.FilterOrder;
 import com.apt.p2p.model.view.OrderModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,14 +58,17 @@ public class OrderController {
         return "user/account/order-detail";
     }
 
-    @GetMapping("/portal/{id}/order")
-    public String portalIndex(Model model, @PathVariable("id") int shopId) {
-        model.addAttribute("shop", shopService.findById(shopId));
+    @GetMapping("portal/order")
+    public String portalIndex(Model model) {
+        int userId = 2;
+        UserModel userModel = userService.findById(userId);
+
+        model.addAttribute("shop", userModel.getShop() != null ? shopService.findByUserId(userModel.getId()) : null);
 
         return "user/portal/order";
     }
 
-    @PostMapping("/api/order/{id}")
+    @PostMapping("api/order/{id}")
     @ResponseBody
     public boolean updateStatus(@PathVariable("id") int orderId, @RequestParam("statusId") int statusId) {
         boolean result = orderService.updateStatus(orderId, statusId);

@@ -30,6 +30,8 @@ public class CartMapper {
     }
 
     public CartModel cartEntityToModel(Cart entity) {
+        if(entity == null) return null;
+
         CartModel model = new CartModel();
 
         model.setId(entity.getId());

@@ -1,15 +1,18 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 @Controller
 public class ShopController {
@@ -18,30 +21,36 @@ public class ShopController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("portal/{id}")
-    public String shopDetail(Model model, @PathVariable("id") int shopId) {
+    @GetMapping("portal")
+    public String shopDetail(Model model) {
         int userId = 2;
-        ShopModel shopModel = shopService.findById(shopId);
+        UserModel user = userService.findById(userId);
 
-        if (shopModel == null) {
-            model.addAttribute("shop", new ShopModel());
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : new ShopModel());
+        model.addAttribute("user", user);
+        return "user/portal/shop-form";
+    }
+
+    @PostMapping("portal")
+    public String updateShop(Model model, @RequestParam("teAddress") int addressId, @Valid @ModelAttribute("shop") ShopModel shop, BindingResult result) {
+        int userId = 2;
+        UserModel user = userService.findById(userId);
+
+        if(result.hasErrors()){
+            model.addAttribute("shop", shop);
+            model.addAttribute("user", user);
+            return "user/portal/shop-form";
         }
-        model.addAttribute("shop", shopModel);
-        model.addAttribute("user", userService.findById(userId));
-        return "user/portal/shop-form";
+
+        ShopModel shopModel = shopService.createOrUpdate(shop);
+        return "redirect:/portal/";
     }
 
-    @PostMapping("/portal/{id}")
-    public String updateShop(Model model, @PathVariable("id") int shopId, @ModelAttribute("shop") ShopModel shop) {
-
-        return "redirect:/portal/" + shopId;
-    }
-
-    @GetMapping("portal/create")
-    public String shopCreate(Model model) {
-        int userId = 2;
-        model.addAttribute("user", userService.findById(userId));
-        model.addAttribute("shop", new ShopModel());
-        return "user/portal/shop-form";
-    }
+//    @GetMapping("portal/create")
+//    public String shopCreate(Model model) {
+//        int userId = 2;
+//        model.addAttribute("user", userService.findById(userId));
+//        model.addAttribute("shop", new ShopModel());
+//        return "user/portal/shop-form";
+//    }
 }
