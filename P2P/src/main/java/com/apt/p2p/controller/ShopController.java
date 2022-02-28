@@ -71,21 +71,11 @@ public class ShopController {
     private void saveFile(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-        String uploadDir = "img/shop/1";
+        String uploadDir = "img/shops";
         try {
             FileUploadUtil.saveFile(uploadDir, fileName, file);
         } catch (IOException ioE){
             ioE.printStackTrace();
         }
-
-
     }
-
-//    @GetMapping("portal/create")
-//    public String shopCreate(Model model) {
-//        int userId = 2;
-//        model.addAttribute("user", userService.findById(userId));
-//        model.addAttribute("shop", new ShopModel());
-//        return "user/portal/shop-form";
-//    }
 }

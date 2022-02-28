@@ -46,6 +46,9 @@ public class ShopMapper {
         if(entity.getOrders() == null){
             entity.setOrders(new ArrayList<>());
         }
+        if(entity.getShopTransactions() == null){
+            entity.setShopTransactions(new ArrayList<>());
+        }
         model.setProducts(entity.getProducts().stream().map(e -> new ProductModel(e)).collect(Collectors.toList()));
         model.setOrders(entity.getOrders().stream().map(e -> new OrderModel(e)).collect(Collectors.toList()));
         model.setShopTransactions(entity.getShopTransactions().stream().map(e -> new ShopTransactionModel(e)).collect(Collectors.toList()));
