@@ -90,25 +90,31 @@ public class ShopServiceImpl implements ShopService {
     public ShopModel createOrUpdate(ShopModel shopModel) {
         Shop shop = null;
         Address address = addressRepository.findById(shopModel.getAddress().getId()).get();
-        if (shopModel.getId() == 0) {
-            shop = new Shop(shopModel);
-            User user = userRepository.findById(shopModel.getUser().getId()).get();
-            shop.setUser(user);
-        } else {
-            shop = shopRepository.findById(shopModel.getId()).get();
 
-            shop.setLogo(shopModel.getLogo());
-            shop.setName(shopModel.getName());
-            shop.setPhone(shopModel.getPhone());
-            shop.setFund(shopModel.getFund());
-            shop.setPermission(shopModel.getPermission());
-            shop.setDescription(shopModel.getDescription());
-            shop.setCreatedAt(shopModel.getCreatedAt());
-            shop.setUpdatedAt(shopModel.getUpdatedAt());
+        try {
+            if (shopModel.getId() == 0) {
+                shop = new Shop(shopModel);
+                User user = userRepository.findById(shopModel.getUser().getId()).get();
+                shop.setUser(user);
+            } else {
+                shop = shopRepository.findById(shopModel.getId()).get();
+
+                shop.setLogo(shopModel.getLogo());
+                shop.setName(shopModel.getName());
+                shop.setPhone(shopModel.getPhone());
+                shop.setFund(shopModel.getFund());
+                shop.setPermission(shopModel.getPermission());
+                shop.setDescription(shopModel.getDescription());
+                shop.setCreatedAt(shopModel.getCreatedAt());
+                shop.setUpdatedAt(shopModel.getUpdatedAt());
+            }
+
+            shop.setAddress(address);
+            shopRepository.save(shop);
+        } catch (Exception e) {
+            e.printStackTrace();
+            shop = null;
         }
-
-        shop.setAddress(address);
-        shopRepository.save(shop);
 
         return shopMapper.shopEntityToModel(shop);
     }

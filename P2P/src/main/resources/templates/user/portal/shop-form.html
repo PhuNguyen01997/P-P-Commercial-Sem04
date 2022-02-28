@@ -11,14 +11,14 @@
 <div layout:fragment="content" class="main-inner shop">
     <h3 class="shop-title">Hồ Sơ Shop</h3>
     <p class="shop-title-desc">Xem tình trạng Shop và cập nhật hồ sơ Shop của bạn</p>
-    <form class="shop-form" th:object="${shop}" method="post">
+    <form class="shop-form" th:object="${shop}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
         <div class="shop-form-left">
             <div class="shop-picture">
                 <div class="shop-picture--avatar pic circle">
                     <img class="jsAvatar" th:src="${shop.logo != null ? shop.logo : ''}" alt="">
                     <label class="shop-picture--ipt shop-picture--ipt__avatar" for="avatar">Sửa</label>
-                    <input type="file" class="d-none" id="avatar">
+                    <input type="file" class="d-none" id="avatar" name="logoFile">
                 </div>
                 <div class="shop-picture--text">
                     <p class="name" th:text="${shop.name}">[Shop Name]</p>
@@ -28,7 +28,7 @@
                     <img class="jsThumbnail" th:src="${shop.background != null ? shop.background : ''}" alt="">
                 </div>
                 <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
-                <input id="thumbnail" class="d-none" type="file" name="thumbnail">
+                <input id="thumbnail" class="d-none" type="file" name="backgroundFile">
             </div>
             <div class="shop-info">
                 <div class="shop-info--item">
@@ -91,6 +91,12 @@
 </div>
 
 <script layout:fragment="script">
+    $('#avatar').on('change', function(){
+        readUrlImage(this, document.querySelector('.jsAvatar'));
+    });
+    $('#thumbnail').on('change', function(){
+        readUrlImage(this, document.querySelector('.jsThumbnail'));
+    });
     document.querySelector('.shop-form').addEventListener('submit', function(e){
         e.preventDefault();
         if(!$('[name="teAddress"]').val()){

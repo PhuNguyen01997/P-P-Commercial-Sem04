@@ -7,6 +7,7 @@ import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +40,12 @@ public class ShopMapper {
         model.setUser(new UserModel(entity.getUser()));
         model.setAddress(new AddressModel(entity.getAddress()));
 
+        if(entity.getProducts() == null){
+            entity.setProducts(new ArrayList<>());
+        }
+        if(entity.getOrders() == null){
+            entity.setOrders(new ArrayList<>());
+        }
         model.setProducts(entity.getProducts().stream().map(e -> new ProductModel(e)).collect(Collectors.toList()));
         model.setOrders(entity.getOrders().stream().map(e -> new OrderModel(e)).collect(Collectors.toList()));
         model.setShopTransactions(entity.getShopTransactions().stream().map(e -> new ShopTransactionModel(e)).collect(Collectors.toList()));

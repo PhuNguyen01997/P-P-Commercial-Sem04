@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +47,9 @@ public class ShopModel {
 
     private AddressModel address;
 
-    private List<ProductModel> products;
+    private List<ProductModel> products = new ArrayList<>();
 
-    public List<OrderModel> orders;
+    public List<OrderModel> orders  = new ArrayList<>();
 
     public List<ShopTransactionModel> shopTransactions;
 
@@ -74,7 +75,7 @@ public class ShopModel {
         this.orders = null;
         this.shopTransactions = null;
 
-        if(shop.getProducts().size() > 0){
+        if(shop.getProducts() != null && shop.getProducts().size() > 0){
             this.countProducts = shop.getProducts().size();
             this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
         }

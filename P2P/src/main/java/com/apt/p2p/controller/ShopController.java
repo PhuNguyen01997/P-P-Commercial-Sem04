@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.common.FileUploadUtil;
 import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.model.view.UserModel;
@@ -9,13 +10,16 @@ import com.apt.p2p.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.io.IOException;
 
 @Controller
 public class ShopController {
@@ -37,7 +41,12 @@ public class ShopController {
     }
 
     @PostMapping("portal")
-    public String updateShop(Model model, @RequestParam("teAddress") int addressId, @Valid @ModelAttribute("shop") ShopModel shop, BindingResult result) {
+    public String updateShop(Model model,
+                             @RequestParam("teAddress") int addressId,
+                             @RequestParam("logoFile") MultipartFile logoFile,
+                             @RequestParam("backgroundFile") MultipartFile backgroundFile,
+                             @Valid @ModelAttribute("shop") ShopModel shop,
+                             BindingResult result) {
         int userId = 3;
         UserModel user = userService.findById(userId);
         AddressModel address = addressService.findById(addressId);
@@ -51,7 +60,25 @@ public class ShopController {
         }
 
         ShopModel shopModel = shopService.createOrUpdate(shop);
+
+        if(shopModel != null){
+            saveFile(logoFile);
+        }
+
         return "redirect:/portal";
+    }
+
+    private void saveFile(MultipartFile file) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        String uploadDir = "img/shop/1";
+        try {
+            FileUploadUtil.saveFile(uploadDir, fileName, file);
+        } catch (IOException ioE){
+            ioE.printStackTrace();
+        }
+
+
     }
 
 //    @GetMapping("portal/create")

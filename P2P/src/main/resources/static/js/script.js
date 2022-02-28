@@ -24,6 +24,18 @@ var getStringTimeFormat = function(date) {
   return `${hour}:${minute}`
 }
 
+var readUrlImage = function(input, element) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $(element).attr('src', e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 $(function() {
   // JS for custom select
   function setSelect(select, value, text) {
@@ -175,14 +187,14 @@ $(function() {
 
   if ($('.ipt__limit-length').length) {
     $('.ipt__limit-length input, textarea').each((index, item) => {
-        const id = item.id;
-        const length = item.value.length;
-        $(`.jsCount-${id}`).text(length);
+      const id = item.id;
+      const length = item.value.length;
+      $(`.jsCount-${id}`).text(length);
     })
-    $('.ipt__limit-length input, textarea').on('keyup', function(){
-        const id = this.id;
-        const length = this.value.length;
-        $(`.jsCount-${id}`).text(length);
+    $('.ipt__limit-length input, textarea').on('keyup', function() {
+      const id = this.id;
+      const length = this.value.length;
+      $(`.jsCount-${id}`).text(length);
     })
   }
 });
