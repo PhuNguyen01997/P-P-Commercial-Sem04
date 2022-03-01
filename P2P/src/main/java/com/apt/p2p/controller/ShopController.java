@@ -59,23 +59,8 @@ public class ShopController {
             return "user/portal/shop-form";
         }
 
-        ShopModel shopModel = shopService.createOrUpdate(shop);
-
-        if(shopModel != null){
-            saveFile(logoFile);
-        }
+        ShopModel shopModel = shopService.createOrUpdate(shop, logoFile, backgroundFile);
 
         return "redirect:/portal";
-    }
-
-    private void saveFile(MultipartFile file) {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
-        String uploadDir = "img/shops";
-        try {
-            FileUploadUtil.saveFile(uploadDir, fileName, file);
-        } catch (IOException ioE){
-            ioE.printStackTrace();
-        }
     }
 }

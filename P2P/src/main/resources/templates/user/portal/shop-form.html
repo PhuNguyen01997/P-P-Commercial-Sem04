@@ -16,7 +16,7 @@
         <div class="shop-form-left">
             <div class="shop-picture">
                 <div class="shop-picture--avatar pic circle">
-                    <img class="jsAvatar" th:src="${shop.logo != null ? shop.logo : ''}" alt="">
+                    <img class="jsAvatar" th:src="${shop.logo != null ? shop.toUrl(shop.logo) : ''}" alt="">
                     <label class="shop-picture--ipt shop-picture--ipt__avatar" for="avatar">Sửa</label>
                     <input type="file" class="d-none" id="avatar" name="logoFile">
                 </div>
@@ -25,7 +25,7 @@
                     <p class="date" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attendant Date]</p>
                 </div>
                 <div class="shop-picture--thumbnail pic">
-                    <img class="jsThumbnail" th:src="${shop.background != null ? shop.background : ''}" alt="">
+                    <img class="jsThumbnail" th:src="${shop.background != null ? shop.toUrl(shop.background) : ''}" alt="">
                 </div>
                 <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
                 <input id="thumbnail" class="d-none" type="file" name="backgroundFile">

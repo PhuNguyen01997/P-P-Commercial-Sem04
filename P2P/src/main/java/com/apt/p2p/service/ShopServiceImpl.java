@@ -1,5 +1,6 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.common.FileUploadUtil;
 import com.apt.p2p.common.modelMapper.ShopMapper;
 import com.apt.p2p.entity.Address;
 import com.apt.p2p.entity.Shop;
@@ -13,10 +14,14 @@ import com.apt.p2p.repository.ShopTransactionRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,7 +92,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopModel createOrUpdate(ShopModel shopModel) {
+    public ShopModel createOrUpdate(ShopModel shopModel, MultipartFile logoFile, MultipartFile backgroundFile) {
         Shop shop = null;
         Address address = addressRepository.findById(shopModel.getAddress().getId()).get();
 
@@ -99,7 +104,6 @@ public class ShopServiceImpl implements ShopService {
             } else {
                 shop = shopRepository.findById(shopModel.getId()).get();
 
-                shop.setLogo(shopModel.getLogo());
                 shop.setName(shopModel.getName());
                 shop.setPhone(shopModel.getPhone());
                 shop.setFund(shopModel.getFund());
@@ -110,7 +114,38 @@ public class ShopServiceImpl implements ShopService {
             }
 
             shop.setAddress(address);
+
+            String uploadDir = "shops/";
+            if (!logoFile.isEmpty()) {
+                String extension = FileUploadUtil.getExtensionName(logoFile).orElse(null);
+                String fileName = shop.getLogo();
+                if (fileName == null) {
+                    fileName = "logo_" + String.valueOf(new Date().getTime()) + "." + extension;
+                }
+                else{
+                    fileName.replaceAll("\\w+$", extension);
+                }
+                FileUploadUtil.saveFile(uploadDir, fileName, logoFile);
+
+                shop.setLogo(fileName);
+            }
+            if (!backgroundFile.isEmpty()) {
+                String extension = FileUploadUtil.getExtensionName(backgroundFile).orElse(null);
+                String fileName = shop.getBackground();
+                if (fileName == null) {
+                    fileName = "thumbnal_" + String.valueOf(new Date().getTime()) + "." + extension;
+                }
+                else{
+                    fileName = fileName.replaceAll("\\w+$", extension);
+                }
+                FileUploadUtil.saveFile(uploadDir, fileName, backgroundFile);
+
+                shop.setBackground(fileName);
+            }
+
             shopRepository.save(shop);
+        } catch (IOException ioE) {
+            ioE.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
             shop = null;

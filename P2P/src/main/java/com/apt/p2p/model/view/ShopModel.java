@@ -84,4 +84,8 @@ public class ShopModel {
             this.setCountRates(0);
         }
     }
+
+    public String toUrl(String fileName){
+        return "/assets/shops/" + fileName;
+    }
 }
