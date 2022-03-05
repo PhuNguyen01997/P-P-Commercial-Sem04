@@ -18,18 +18,22 @@
                 <div class="shop-picture--avatar pic circle">
                     <img class="jsAvatar" th:src="${shop.logo != null ? shop.toUrl(shop.logo) : ''}" alt="">
                     <label class="shop-picture--ipt shop-picture--ipt__avatar" for="avatar">Sửa</label>
-                    <input type="file" class="d-none" id="avatar" name="logoFile">
+                    <input type="file" class="d-none" id="avatar"
+                           th:value="${imageFiles != null ? imageFiles.getImageFiles()[0] : ''}" name="imageFiles[0]">
                 </div>
                 <div class="shop-picture--text">
                     <p class="name" th:text="${shop.name}">[Shop Name]</p>
                     <p class="date" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attendant Date]</p>
                 </div>
                 <div class="shop-picture--thumbnail pic">
-                    <img class="jsThumbnail" th:src="${shop.background != null ? shop.toUrl(shop.background) : ''}" alt="">
+                    <img class="jsThumbnail" th:src="${shop.background != null ? shop.toUrl(shop.background) : ''}"
+                         alt="">
                 </div>
                 <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
-                <input id="thumbnail" class="d-none" type="file" name="backgroundFile">
+                <input id="thumbnail" class="d-none" type="file"
+                       th:value="${imageFiles != null ? imageFiles.getImageFiles()[1] : ''}" name="imageFiles[1]">
             </div>
+            <p class="error py-1 d-none" data-name="images">[Error Images]</p>
             <div class="shop-info">
                 <div class="shop-info--item">
                     <p class="label">Sản phẩm</p>
@@ -81,7 +85,8 @@
                           rows="5" id="description"
                           placeholder="Nhập mô tả hoặc thông tin về Shop của bạn tại đây"></textarea>
                 <p class="length"><span class="jsCount-description">0</span><span>/500</span></p>
-                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">[Error Description]</p>
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">[Error
+                    Description]</p>
             </div>
             <div class="shop-form-row shop-form-row__submit">
                 <button type="submit" class="btn btn__primary">Lưu</button>
@@ -91,19 +96,29 @@
 </div>
 
 <script layout:fragment="script">
-    $('#avatar').on('change', function(){
+    $('#avatar').on('change', function () {
         readUrlImage(this, document.querySelector('.jsAvatar'));
     });
-    $('#thumbnail').on('change', function(){
+    $('#thumbnail').on('change', function () {
         readUrlImage(this, document.querySelector('.jsThumbnail'));
     });
-    document.querySelector('.shop-form').addEventListener('submit', function(e){
+    removeEventListener('submit', document.querySelector('.shop-form'));
+    document.querySelector('.shop-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        if(!$('[name="teAddress"]').val()){
+        let canSubmit = true;
+        if (!$('[name="teAddress"]').val()) {
             $('.error[data-name="teAddress"]').text("Địa chỉ không thể trống").removeClass('d-none');
             return;
         }
-        this.submit();
+        const fileList = $('input[type=file]');
+        fileList.each((index, fileInput) => {
+            if (fileInput.files.length && fileInput.files[0].size / 1000000 > 2) {
+                canSubmit = false;
+                $('.error[data-name="images"]').text("Kích thước hình ảnh quá lớn (< 2MB)").removeClass('d-none');
+                return;
+            }
+        })
+        if (canSubmit) this.submit();
     });
 </script>
 </body>
