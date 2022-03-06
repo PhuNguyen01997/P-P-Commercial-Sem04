@@ -24,9 +24,9 @@ var getStringTimeFormat = function(date) {
   return `${hour}:${minute}`
 }
 
-var readUrlImage = function(input, element) {
+var readUrlImage = function(input, element, keyLocalStorage) {
   if (input.files && input.files[0]) {
-    var reader = new FileReader();
+    const reader = new FileReader();
 
     reader.onload = function(e) {
       $(element).attr('src', e.target.result);
@@ -34,6 +34,28 @@ var readUrlImage = function(input, element) {
 
     reader.readAsDataURL(input.files[0]);
   }
+}
+
+// var tempImagesLocal = function(imgElement) {
+//   const reader = new FileReader();
+
+//   reader.onload = function(e) {
+//     imgData = getBase64Image(imgElement);
+//     localStorage.setItem('img')
+//   };
+// }
+
+var getBase64Image = function(img) {
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  const dataURL = canvas.toDataURL("image/png");
+
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 
 $(function() {
