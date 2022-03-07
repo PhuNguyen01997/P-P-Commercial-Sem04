@@ -36,19 +36,10 @@ var readUrlImage = function(input, element, keyLocalStorage) {
   }
 }
 
-// var tempImagesLocal = function(imgElement) {
-//   const reader = new FileReader();
-
-//   reader.onload = function(e) {
-//     imgData = getBase64Image(imgElement);
-//     localStorage.setItem('img')
-//   };
-// }
-
 var getBase64Image = function(img) {
   const canvas = document.createElement("canvas");
-  canvas.width = img.width;
-  canvas.height = img.height;
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
 
   const ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0);

@@ -13,6 +13,7 @@
     <p class="shop-title-desc">Xem tình trạng Shop và cập nhật hồ sơ Shop của bạn</p>
     <form class="shop-form" th:object="${shop}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" name="checkImagesExists" th:value="${imageFiles == null ? '' : 1}">
         <div class="shop-form-left">
             <div class="shop-picture">
                 <div class="shop-picture--avatar pic circle">
@@ -97,21 +98,32 @@
 
 <script layout:fragment="script">
     $(function () {
-        let imagesLocal = {};
-        document.querySelector('.jsAvatar, .jsThumbnail').onload  = function(){
-            console.log(this);
+        if ($('input[name="checkImagesExists"]').val()) {
+            imagesLocal = JSON.parse(localStorage.getItem('tempImages'));
+            $('.jsAvatar').attr('src', 'data:image/png;base64,' + imagesLocal.logo);
+            $('.jsThumbnail').attr('src', 'data:image/png;base64,' + imagesLocal.thumbnail);
+        } else {
+            let imagesLocal = {};
+            $('.jsAvatar, .jsThumbnail').each(function (index, item) {
+                let key = '';
+                if (item.classList.contains('jsAvatar')) {
+                    key = 'logo';
+                } else if (item.classList.contains('jsThumbnail')) {
+                    key = 'thumbnail';
+                }
+                imagesLocal[key] = getBase64Image(item);
+                console.log(item)
+            })
+            localStorage.setItem("tempImages", JSON.stringify(imagesLocal));
         }
+
         $('#avatar').on('change', function () {
             const element = document.querySelector('.jsAvatar');
             readUrlImage(this, element);
-            // imagesLocal.logo = getBase64Image(element);
-            // localStorage.setItem("tempImages", JSON.stringify(imagesLocal));
         });
         $('#thumbnail').on('change', function () {
             const element = document.querySelector('.jsThumbnail');
             readUrlImage(this, element);
-            // imagesLocal.thumbnail = getBase64Image(element);
-            // localStorage.setItem("tempImages", JSON.stringify(imagesLocal));
         });
 
         document.querySelector('.shop-form').addEventListener('submit', function (e) {
