@@ -96,30 +96,42 @@
 </div>
 
 <script layout:fragment="script">
-    $('#avatar').on('change', function () {
-        readUrlImage(this, document.querySelector('.jsAvatar'));
-    });
-    $('#thumbnail').on('change', function () {
-        readUrlImage(this, document.querySelector('.jsThumbnail'));
-    });
-    removeEventListener('submit', document.querySelector('.shop-form'));
-    document.querySelector('.shop-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        let canSubmit = true;
-        if (!$('[name="teAddress"]').val()) {
-            $('.error[data-name="teAddress"]').text("Địa chỉ không thể trống").removeClass('d-none');
-            return;
+    $(function () {
+        let imagesLocal = {};
+        document.querySelector('.jsAvatar, .jsThumbnail').onload  = function(){
+            console.log(this);
         }
-        const fileList = $('input[type=file]');
-        fileList.each((index, fileInput) => {
-            if (fileInput.files.length && fileInput.files[0].size / 1000000 > 2) {
-                canSubmit = false;
-                $('.error[data-name="images"]').text("Kích thước hình ảnh quá lớn (< 2MB)").removeClass('d-none');
+        $('#avatar').on('change', function () {
+            const element = document.querySelector('.jsAvatar');
+            readUrlImage(this, element);
+            // imagesLocal.logo = getBase64Image(element);
+            // localStorage.setItem("tempImages", JSON.stringify(imagesLocal));
+        });
+        $('#thumbnail').on('change', function () {
+            const element = document.querySelector('.jsThumbnail');
+            readUrlImage(this, element);
+            // imagesLocal.thumbnail = getBase64Image(element);
+            // localStorage.setItem("tempImages", JSON.stringify(imagesLocal));
+        });
+
+        document.querySelector('.shop-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let canSubmit = true;
+            if (!$('[name="teAddress"]').val()) {
+                $('.error[data-name="teAddress"]').text("Địa chỉ không thể trống").removeClass('d-none');
                 return;
             }
-        })
-        if (canSubmit) this.submit();
-    });
+            const fileList = $('input[type=file]');
+            fileList.each((index, fileInput) => {
+                if (fileInput.files.length && fileInput.files[0].size / 1000000 > 2) {
+                    canSubmit = false;
+                    $('.error[data-name="images"]').text("Kích thước hình ảnh quá lớn (< 2MB)").removeClass('d-none');
+                    return;
+                }
+            })
+            if (canSubmit) this.submit();
+        });
+    })
 </script>
 </body>
 </html>

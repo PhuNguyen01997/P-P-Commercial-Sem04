@@ -23,10 +23,10 @@ public class Shop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 20)
+    @Column(length = 40)
     private String logo;
 
-    @Column(length = 20)
+    @Column(length = 40)
     private String background;
 
     @NotNull

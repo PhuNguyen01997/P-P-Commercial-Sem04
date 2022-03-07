@@ -37,6 +37,7 @@ public class User {
     @NotNull
     private String phone;
 
+    @Column(length = 40)
     private String avatar;
 
     private Date createdAt = new Date();
