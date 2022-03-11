@@ -28,28 +28,28 @@ public class MainController {
         return "user/account/identity";
     }
 
-    @GetMapping("/shop/{shopId}/product")
-    public String products(@PathVariable("shopId") int shopId) {
-        return "user/account/product";
-    }
+//    @GetMapping("/shop/{shopId}/product")
+//    public String products(@PathVariable("shopId") int shopId) {
+//        return "user/account/product";
+//    }
 
-    @GetMapping("/shop/{shopId}/product/create")
-    public String productCreate(@PathVariable("shopId") int shopId) {
-        return "user/account/product-form";
-    }
+//    @GetMapping("/shop/{shopId}/product/create")
+//    public String productCreate(@PathVariable("shopId") int shopId) {
+//        return "user/account/product-form";
+//    }
+//
+//    @GetMapping("/shop/{shopId}/product/{productId}/edit")
+//    public String productEdit(@PathVariable("shopId") int shopId, @PathVariable("shopId") int productId) {
+//        return "user/account/product-form";
+//    }
 
-    @GetMapping("/shop/{shopId}/product/{productId}/edit")
-    public String productEdit(@PathVariable("shopId") int shopId, @PathVariable("shopId") int productId) {
-        return "user/account/product-form";
-    }
+//    @GetMapping("shop/create")
+//    public String shopCreate() {
+//        return "user/account/shop-form";
+//    }
 
-    @GetMapping("shop/create")
-    public String shopCreate() {
-        return "user/account/shop-form";
-    }
-
-    @GetMapping("shop/{shopId}/edit")
-    public String shopEdit(@PathVariable("shopId") int shopId) {
-        return "user/account/shop-form";
-    }
+//    @GetMapping("shop/{shopId}/edit")
+//    public String shopEdit(@PathVariable("shopId") int shopId) {
+//        return "user/account/shop-form";
+//    }
 }

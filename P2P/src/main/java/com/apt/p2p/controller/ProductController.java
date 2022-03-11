@@ -1,9 +1,12 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.model.form.FilterProductPortal;
+import com.apt.p2p.model.form.FilterShopTransaction;
 import com.apt.p2p.model.form.ProductAddCartModel;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.service.CategoryService;
 import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.ShopService;
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -19,6 +24,8 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
     @Autowired
     private RateService rateService;
     @Autowired
@@ -42,15 +49,19 @@ public class ProductController {
         return "user/main/product-detail";
     }
 
-    @GetMapping("portal/{id}/product")
-    public String portalProduct(Model model, @PathVariable("id") int shopId) {
+    @GetMapping("portal/product")
+    public String portalProduct(Model model) {
+        int shopId = 2;
         model.addAttribute("shop", shopService.findById(shopId));
+        model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product";
     }
 
-    @GetMapping("portal/{id}/product/create")
-    public String portalProductCreate(Model model, @PathVariable("id") int shopId) {
+    @GetMapping("portal/product/create")
+    public String portalProductCreate(Model model) {
+        int shopId = 2;
         model.addAttribute("shop", shopService.findById(shopId));
+        model.addAttribute("products", productService.findAllByShopId(shopId));
         return "user/portal/product-form";
     }
 
@@ -58,5 +69,10 @@ public class ProductController {
     public String portalProductCreate(Model model, @PathVariable("shopId") int shopId, @PathVariable("productId") int productId) {
         model.addAttribute("shop", shopService.findById(shopId));
         return "user/portal/product-form";
+    }
+
+    @PostMapping("/api/products/portal")
+    public List<ProductModel> portalApiIndex(@RequestBody FilterProductPortal input){
+        return
     }
 }

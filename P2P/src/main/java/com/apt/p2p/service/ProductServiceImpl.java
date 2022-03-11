@@ -2,6 +2,7 @@ package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Product;
+import com.apt.p2p.model.form.FilterProductPortal;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,10 @@ public class ProductServiceImpl implements ProductService {
             result = productMapper.productEntityToModel(product.get());
         }
         return result;
+    }
+
+    @Override
+    public List<ProductModel> findAllByShopWithFilterPortal(FilterProductPortal filter) {
+        return null;
     }
 }

@@ -23,25 +23,27 @@
             <div class="product-search-item product-search-item__category">
                 <label>Danh mục</label>
                 <div class="select">
-                    <select name="category">
-                        <option value="0" selected>Tất cả</option>
+                    <select name="categoryId">
+                        <option value="" selected>Tất cả</option>
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}"></option>
                     </select>
                 </div>
             </div>
             <div class="product-search-item product-search-item__submit">
-                <button class="btn btn__primary">Tìm</button>
+                <button class="jsSubmit btn btn__primary">Tìm</button>
             </div>
         </div>
     </div>
     <div class="main-inner product">
         <ul class="portal-category">
-            <li class="portal-category--item active">
+            <li data-value="0" class="jsStatus portal-category--item active">
                 <p>Tất cả</p>
             </li>
-            <li class="portal-category--item">
+            <li data-value="1" class="jsStatus portal-category--item">
                 <p>Đang hoạt động</p>
             </li>
-            <li class="portal-category--item">
+            <li data-value="2" class="jsStatus portal-category--item">
                 <p>Hêt hàng</p>
             </li>
             <li class="portal-category--bar"></li>
@@ -49,38 +51,30 @@
         <div class="product-body">
             <div class="product-block">
                 <div class="product-count">
-                    <p class="txt01"><span>1000</span> Sản phẩm</p>
+                    <p class="txt01"><span class="jsCount" th:attr="data-value=${shop.countProducts}"
+                                           th:text="${shop.countProducts}">1000</span> Sản phẩm</p>
                     <div class="percent-container">
-                        <span class="percent"></span>
+                        <span class="jsPercent percent"></span>
                     </div>
                     <p class="txt02">Có thể đăng tải thêm 100 sản phẩm</p>
                 </div>
                 <div class="product-widget">
-                    <button class="btn btn__primary product-widget--create"><i class="icon icon__left fas fa-plus"></i>Thểm 1 sản phẩm mới</button>
+                    <a href="/portal/product/create">
+                        <button class="btn btn__primary product-widget--create"><i
+                                class="icon icon__left fas fa-plus"></i>Thểm
+                            1 sản phẩm mới
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="product-table">
-                <div class="product-table-header">
-                    <div class="product-row product-row__header">
-                        <div class="product-row--item product-row--item__name">
-                            <p>Tên sản phẩm</p>
-                        </div>
-                        <div class="product-row--item product-row--item__category">
-                            <p>Danh mục</p>
-                        </div>
-                        <div class="product-row--item product-row--item__price">
-                            <p>Giá</p>
-                        </div>
-                        <div class="product-row--item product-row--item__sale">
-                            <p>Doanh số</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="product-table-body">
                     <div class="product-row">
                         <div class="product-row--item product-row--item__name">
                             <p class="pic"><img src="/assets/img/products/product_01.jpg" alt=""></p>
-                            <p class="text">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl</p>
+                            <p class="text">Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái
+                                tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1
+                                cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl Đây là 1 cái tên thật dài cmnl</p>
                         </div>
                         <div class="product-row--item product-row--item__category">
                             <p>Danh mụSDAc ASD</p>
@@ -114,6 +108,40 @@
 </div>
 
 <script layout:fragment="script">
+    $(function () {
+        const maxCountProduct = 100;
+        const currentCount = $('.jsCount').attr('data-value');
+
+        function setActive(ele) {
+            const width = $(ele).outerWidth();
+            const position = $(ele).position();
+
+            $('.portal-category--item').removeClass('active');
+            $(ele).addClass('active');
+
+            $('.portal-category--bar').css({
+                width,
+                transform: `translateX(${position.left}px)`
+            });
+        }
+
+        setActive(document.querySelector('.portal-category--item.active'));
+
+
+        $('.jsPercent').css({width: `${Math.max(currentCount * 100 / maxCountProduct, 10)}%`});
+
+        $('.portal-category--item').on('click', function () {
+            setActive(this);
+        })
+
+        $('.jsSubmit').on('click', function (e) {
+            e.preventDefault();
+            const filterBy = $('[name="filterBy"]').val();
+            const name = $('[name="name"]').val();
+            const categoryId = $('[name="categoryId"]').val();
+            const status = $('.jsStatus').attr('data-value');
+        })
+    });
 </script>
 </body>
 </html>

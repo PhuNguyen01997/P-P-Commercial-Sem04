@@ -83,6 +83,9 @@
             const width = $(ele).outerWidth();
             const position = $(ele).position();
 
+            $('.jsStatus').removeClass('active');
+            $(ele).addClass('active');
+
             $('.portal-category--bar').css({
                 width,
                 transform: `translateX(${position.left}px)`
@@ -202,8 +205,6 @@
         renderOrder();
 
         $('.jsStatus').on('click', function () {
-            $('.jsStatus').removeClass('active');
-            $(this).addClass('active');
             setActive(this);
             renderOrder();
         })
@@ -221,9 +222,9 @@
                 type: 'POST',
                 contentType: "application/json",
                 success: function (success) {
-                    if(success){
+                    if (success) {
                         window.location.reload();
-                    }else {
+                    } else {
                         showModal("Không thể chỉnh sửa trạng thái đơn hàng, vui lòng liên hệ hỗ trợ");
                     }
                 },

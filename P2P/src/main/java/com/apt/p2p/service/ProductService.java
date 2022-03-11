@@ -1,5 +1,6 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.model.form.FilterProductPortal;
 import com.apt.p2p.model.view.ProductModel;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface ProductService {
     List<ProductModel> findAllByShopId(int shopId);
 
     ProductModel findByOrderDetailId(int orderDetailId);
+
+    List<ProductModel> findAllByShopWithFilterPortal(FilterProductPortal filter);
 }
