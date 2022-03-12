@@ -14,8 +14,8 @@
             <div class="product-search-item product-search-item__name">
                 <div class="select">
                     <select name="filterBy" id="">
-                        <option value="name" selected>Tên sản phẩm</option>
-                        <option value="id">Mã sản phẩm</option>
+                        <option value="1" selected>Tên sản phẩm</option>
+                        <option value="2">Mã sản phẩm</option>
                     </select>
                 </div>
                 <input type="text" name="name" placeholder="Nhập vào">
@@ -24,7 +24,7 @@
                 <label>Danh mục</label>
                 <div class="select">
                     <select name="categoryId">
-                        <option value="" selected>Tất cả</option>
+                        <option value="0" selected>Tất cả</option>
                         <option th:each="category : ${categories}" th:value="${category.id}"
                                 th:text="${category.name}"></option>
                     </select>
@@ -86,21 +86,6 @@
                             <p>12000</p>
                         </div>
                     </div>
-                    <div class="product-row">
-                        <div class="product-row--item product-row--item__name">
-                            <p class="pic"><img src="/assets/img/products/product_01.jpg" alt=""></p>
-                            <p class="text">Đây là 1</p>
-                        </div>
-                        <div class="product-row--item product-row--item__category">
-                            <p>Danh mụSDAc ASD</p>
-                        </div>
-                        <div class="product-row--item product-row--item__price">
-                            <p>999.999.999 vnđ</p>
-                        </div>
-                        <div class="product-row--item product-row--item__sale">
-                            <p>12000</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -136,10 +121,52 @@
 
         $('.jsSubmit').on('click', function (e) {
             e.preventDefault();
+            setGlobalLoading(true);
+
             const filterBy = $('[name="filterBy"]').val();
             const name = $('[name="name"]').val();
             const categoryId = $('[name="categoryId"]').val();
-            const status = $('.jsStatus').attr('data-value');
+            const status = $('.jsStatus.active').attr('data-value');
+
+            console.log({filterBy, name, categoryId, status});
+
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/products/portal`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({filterBy, name, categoryId, status}),
+                success: function (products) {
+                    console.log(products);
+                    let html = "";
+
+                    products.forEach(product => {
+                        html += `<div class="product-row">` +
+                            `<div class="product-row--item product-row--item__name">` +
+                            `<p class="pic"><img src="${product.image}" alt=""></p>` +
+                            `<p class="text">${product.name}</p>` +
+                            `</div>` +
+                            `<div class="product-row--item product-row--item__category">` +
+                            `<p>${product.category.name}</p>` +
+                            `</div>` +
+                            `<div class="product-row--item product-row--item__price">` +
+                            `<p>${product.price} vnđ</p>` +
+                            `</div>` +
+                            `<div class="product-row--item product-row--item__sale">` +
+                            `<p>12000</p>` +
+                            `</div>` +
+                            `</div>`;
+                    })
+
+                    $('.product-table-body').html(html);
+
+                    setGlobalLoading(false);
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                    setGlobalLoading(false);
+                },
+            });
         })
     });
 </script>

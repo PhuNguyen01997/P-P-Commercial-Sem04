@@ -44,6 +44,7 @@ public class ProductMapper {
         model.setPrice(entity.getPrice());
         model.setImage(this.productAddPathImage(entity.getImage()));
         model.setDescription(entity.getDescription());
+        model.setStock(entity.getStock());
         model.setCreatedAt(entity.getCreatedAt());
         model.setUpdatedAt(entity.getUpdatedAt());
 

@@ -26,6 +26,8 @@ public class ProductModel {
 
     private String description;
 
+    private int stock;
+
     private Date createdAt;
 
     private Date updatedAt;
@@ -42,6 +44,7 @@ public class ProductModel {
         this.price = entity.getPrice();
         this.image = entity.getImage();
         this.description = entity.getDescription();
+        this.stock = entity.getStock();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
         this.category = entity.getCategory();

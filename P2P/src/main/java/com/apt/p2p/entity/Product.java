@@ -36,6 +36,9 @@ public class Product {
     @NotNull
     private String description;
 
+    @NotNull
+    private int stock = 0;
+
     private Date createdAt = new Date();
 
     private Date updatedAt = new Date();

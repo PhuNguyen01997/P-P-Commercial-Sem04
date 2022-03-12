@@ -14,5 +14,5 @@ public interface ProductService {
 
     ProductModel findByOrderDetailId(int orderDetailId);
 
-    List<ProductModel> findAllByShopWithFilterPortal(FilterProductPortal filter);
+    List<ProductModel> findAllByShopWithFilterPortal(int shopId, FilterProductPortal filter);
 }

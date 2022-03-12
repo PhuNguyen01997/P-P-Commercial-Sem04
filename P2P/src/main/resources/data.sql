@@ -29,12 +29,12 @@ INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Chất gây nghiện', NOW()),
 (NOW(), 'Vũ khí', NOW());
 
-INSERT INTO product (created_at, description, image, name, price, updated_at, category_id, shop_id) VALUES
-(NOW(), 'Áo thun', '1.img', 'Áo thun', 200000.0, NOW(), 1, 1),
-(NOW(), 'Quần dài', '1.img', 'Quần dài', 350000.0, NOW(), 1, 1),
-(NOW(), 'Iphone13', '1.img', 'Iphone 13', 30000000, NOW(), 2, 1),
-(NOW(), 'Ma túy đá', '1.img', 'Ma túy đá', 2900000.0, NOW(), 3, 2),
-(NOW(), 'Mã tấu', '1.img', 'Mã tấu', 4200000.0, NOW(), 4, 2);
+INSERT INTO product (created_at, description, image, name, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), 'Áo thun', '1.img', 'Áo thun', 200000.0, NOW(), 1, 1, 0),
+(NOW(), 'Quần dài', '1.img', 'Quần dài', 350000.0, NOW(), 1, 1, 0),
+(NOW(), 'Iphone13', '1.img', 'Iphone 13', 30000000, NOW(), 2, 1, 0),
+(NOW(), 'Ma túy đá', '1.img', 'Ma túy đá', 2900000.0, NOW(), 3, 2, 0),
+(NOW(), 'Mã tấu', '1.img', 'Mã tấu', 4200000.0, NOW(), 4, 2, 0);
 
 INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES
 (NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
