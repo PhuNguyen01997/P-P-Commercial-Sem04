@@ -58,7 +58,8 @@ public class ProductController {
     public String portalProductCreate(Model model) {
         int shopId = 2;
         model.addAttribute("shop", shopService.findById(shopId));
-        model.addAttribute("products", productService.findAllByShopId(shopId));
+        model.addAttribute("product", new ProductModel());
+        model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product-form";
     }
 

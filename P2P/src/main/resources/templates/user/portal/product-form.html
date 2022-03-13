@@ -4,94 +4,69 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/portal-layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>ShoPP</title>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
 </head>
 <body>
 <div layout:fragment="content" class="product-create">
-  <h3 class="product-create-title">
-    <span class="txt01">Sản phẩm mới</span>
-    <span class="txt02">Thêm sản phẩm mới vào cửa hàng</span>
-    <form class="widget">
-      <div class="btn btn__red">Ẩn sản phẩm</div>
+    <h3 class="product-create-title">
+        <span class="txt01">Sản phẩm mới</span>
+        <span class="txt02">Thêm sản phẩm mới vào cửa hàng</span>
+        <form class="widget">
+            <div class="btn btn__red">Ẩn sản phẩm</div>
+        </form>
+    </h3>
+    <form th:object="${product}" class="product-create-form">
+        <div class="product-create-form--left">
+            <div class="form-item">
+                <label class="form-item--left" for="name">Tên sản phẩm</label>
+                <div class="form-item--right">
+                    <div class="ipt ipt__limit-length">
+                        <input type="text" th:field="*{name}" id="name" maxlength="120">
+                        <p class="length"><span class="jsCount-name">0</span><span>/120</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="form-item--left" for="price">Giá sản phẩm</label>
+                <div class="form-item--right">
+                    <input type="number" name="price" th:field="*{price}" id="price">
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="form-item--left">Phân loại</label>
+                <div class="form-item--right">
+                    <div class="select">
+                        <select name="category" id="">
+                            <option value="0" disabled selected>Phân loại</option>
+                            <option th:each="category : ${categories}" th:value="${category.id}"
+                                    th:text="${category.name}" th:selected="${product?.category != null && product.category.id == category.id}"
+                            ></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-item">
+                <label class="form-item--left" for="description">Mô tả</label>
+                <textarea class="form-item--right" rows="6" cols="20" id="description"
+                          th:field="*{description}"></textarea>
+            </div>
+            <div class="form-item">
+                <label class="form-item--left"></label>
+                <div class="form-item--right form-item--right__submit">
+                    <button type="submit" class="btn btn__primary">Lưu</button>
+                </div>
+            </div>
+        </div>
+        <div class="product-create-form--right">
+            <div class="product-create-form--right-pic-container">
+                <label class="product-create-form--right-pic">
+                    <input class="d-none" type="file" name="pic01">
+                    <img src="" data-id="pic01" alt="">
+                </label>
+            </div>
+        </div>
     </form>
-  </h3>
-  <form class="product-create-form">
-    <div class="product-create-form--left">
-      <div class="form-item">
-        <label class="form-item--left" for="name">Tên sản phẩm</label>
-        <div class="form-item--right">
-          <div class="ipt ipt__limit-length">
-            <input type="text" name="name" id="name" max="120">
-            <p class="length"><span class="jsCount-name">0</span><span>/120</span></p>
-          </div>
-        </div>
-      </div>
-      <div class="form-item">
-        <label class="form-item--left" for="number">Giá sản phẩm</label>
-        <div class="form-item--right">
-          <input type="number" name="number" id="number">
-        </div>
-      </div>
-      <div class="form-item">
-        <label class="form-item--left" for="gender">Phân loại</label>
-        <div class="form-item--right">
-          <div class="select">
-            <select name="" id="">
-              <option value="">Chọn phân loại</option>
-              <option value="01" selected>Option 01</option>
-              <option value="02">Option 02</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="form-item">
-        <label class="form-item--left" for="product features">Mô tả</label>
-        <textarea class="form-item--right" rows="6" cols="20"></textarea>
-      </div>
-      <div class="form-item">
-        <label class="form-item--left"></label>
-        <div class="form-item--right form-item--right__submit"><button type="submit" class="btn btn__primary">Lưu</button>
-        </div>
-      </div>
-    </div>
-    <div class="product-create-form--right">
-      <div class="product-create-form--right-pic-container">
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic01">
-          <img src="" data-id="pic01" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic02">
-          <img src="" data-id="pic02" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic03">
-          <img src="" data-id="pic03" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic04">
-          <img src="" data-id="pic04" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic05">
-          <img src="" data-id="pic05" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic06">
-          <img src="" data-id="pic06" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic07">
-          <img src="" data-id="pic07" alt="">
-        </label>
-        <label class="product-create-form--right-pic">
-          <input class="d-none" type="file" name="pic08">
-          <img src="" data-id="pic08" alt="">
-        </label>
-      </div>
-    </div>
-  </form>
 </div>
 
 <script layout:fragment="script">
