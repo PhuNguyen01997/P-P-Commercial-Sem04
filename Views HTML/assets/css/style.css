@@ -154,7 +154,7 @@ label {
 }
 
 .ipt__limit-length input {
-  padding-right: 52px;
+  padding-right: 70px;
 }
 
 .ipt__limit-length .length {
@@ -171,7 +171,7 @@ label {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  width: 52px;
+  width: 70px;
   color: rgba(85, 85, 85, 0.8);
   position: absolute;
   height: 100%;
