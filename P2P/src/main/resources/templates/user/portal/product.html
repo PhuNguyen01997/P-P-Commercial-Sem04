@@ -141,9 +141,8 @@
         }
 
         setActive(document.querySelector('.portal-category--item.active'));
-
-
         $('.jsPercent').css({width: `${Math.max(currentCount * 100 / maxCountProduct, 10)}%`});
+        fetchData();
 
         $('.portal-category--item').on('click', function () {
             setActive(this);

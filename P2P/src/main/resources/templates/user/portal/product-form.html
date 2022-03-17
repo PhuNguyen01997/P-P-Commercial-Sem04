@@ -16,7 +16,7 @@
             <div class="btn btn__red">Ẩn sản phẩm</div>
         </form>
     </h3>
-    <form th:object="${product}" class="product-create-form">
+    <form th:object="${product}" class="product-create-form" method="post" enctype="multipart/form-data">
         <div class="product-create-form--left">
             <div class="form-item">
                 <label class="form-item--left" for="name">Tên sản phẩm</label>
@@ -24,6 +24,7 @@
                     <div class="ipt ipt__limit-length">
                         <input type="text" th:field="*{name}" id="name" maxlength="120">
                         <p class="length"><span class="jsCount-name">0</span><span>/120</span></p>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">[Error Name]</p>
                     </div>
                 </div>
             </div>
@@ -31,6 +32,7 @@
                 <label class="form-item--left" for="price">Giá sản phẩm</label>
                 <div class="form-item--right">
                     <input type="number" name="price" th:field="*{price}" id="price">
+                    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error">[Error Price]</p>
                 </div>
             </div>
             <div class="form-item">
@@ -43,6 +45,7 @@
                                     th:text="${category.name}" th:selected="${product?.category != null && product.category.id == category.id}"
                             ></option>
                         </select>
+<!--                        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error">[Error Price]</p>-->
                     </div>
                 </div>
             </div>
@@ -50,6 +53,7 @@
                 <label class="form-item--left" for="description">Mô tả</label>
                 <textarea class="form-item--right" rows="6" cols="20" id="description"
                           th:field="*{description}"></textarea>
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">[Error Description]</p>
             </div>
             <div class="form-item">
                 <label class="form-item--left"></label>
@@ -61,8 +65,8 @@
         <div class="product-create-form--right">
             <div class="product-create-form--right-pic-container">
                 <label class="product-create-form--right-pic">
-                    <input class="d-none" type="file" name="pic01">
-                    <img src="" data-id="pic01" alt="">
+                    <input class="d-none" type="file" name="imageFiles[]" value="">
+                    <img src="" data-id="" alt="">
                 </label>
             </div>
         </div>

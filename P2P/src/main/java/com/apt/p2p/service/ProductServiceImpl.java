@@ -1,9 +1,11 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ProductMapper;
+import com.apt.p2p.entity.Category;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.model.form.FilterProductPortal;
 import com.apt.p2p.model.view.ProductModel;
+import com.apt.p2p.repository.CategoryRepository;
 import com.apt.p2p.repository.ProductRepository;
 import com.apt.p2p.repository.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Autowired
     private ProductMapper productMapper;
 
@@ -84,5 +88,21 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
 
         return productModels;
+    }
+
+    @Override
+    public ProductModel create(ProductModel model, int categoryId) {
+        try {
+            Product entity = new Product(model);
+            Category category = categoryRepository.findById(categoryId).orElse(null);
+            entity.setCategory(category);
+
+            productRepository.save(entity);
+
+            return productMapper.productEntityToModel(entity);
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

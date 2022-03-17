@@ -1,5 +1,6 @@
 package com.apt.p2p.entity;
 
+import com.apt.p2p.model.view.ProductModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -61,4 +63,22 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryId")
     private Category category;
+
+    public Product(ProductModel model) {
+        this.id = model.getId();
+        this.name = model.getName();
+        this.price = model.getPrice();
+        this.image = model.getImage();
+        this.description = model.getDescription();
+        this.stock = model.getStock();
+        this.createdAt = model.getCreatedAt();
+        this.updatedAt = model.getUpdatedAt();
+
+        this.shop = null;
+        this.category = null;
+
+        this.carts = null;
+        this.rates = null;
+        this.orderDetails = null;
+    }
 }

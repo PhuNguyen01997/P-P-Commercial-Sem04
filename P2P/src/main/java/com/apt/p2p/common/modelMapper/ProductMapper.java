@@ -38,24 +38,12 @@ public class ProductMapper {
     public ProductModel productEntityToModel(Product entity) {
         if(entity == null) return null;
 
-        ProductModel model = new ProductModel();
-        model.setId(entity.getId());
-        model.setName(entity.getName());
-        model.setPrice(entity.getPrice());
-        model.setImage(this.productAddPathImage(entity.getImage()));
-        model.setDescription(entity.getDescription());
-        model.setStock(entity.getStock());
-        model.setCreatedAt(entity.getCreatedAt());
-        model.setUpdatedAt(entity.getUpdatedAt());
+        ProductModel model = new ProductModel(entity);
 
         model.setShop(new ShopModel(entity.getShop()));
         model.setRates(entity.getRates().stream().map(re -> new RateModel(re)).collect(Collectors.toList()));
         model.setCategory(entity.getCategory().removeRelationShip());
 
         return model;
-    }
-
-    private String productAddPathImage(String img){
-        return "/images/product/" + img;
     }
 }

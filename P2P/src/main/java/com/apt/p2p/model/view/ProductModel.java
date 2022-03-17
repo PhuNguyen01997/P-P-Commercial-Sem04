@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -18,19 +21,23 @@ import java.util.List;
 public class ProductModel {
     private Integer id;
 
+    @NotBlank(message = "Tên sản phẩm không hợp lệ")
     private String name;
 
+    @Min(value = 1000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
+    @Max(value = 100000000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
     private BigDecimal price;
 
     private String image;
 
+    @NotBlank(message = "Mô tả sản phẩm không hợp lệ")
     private String description;
 
-    private int stock;
+    private int stock = 0;
 
-    private Date createdAt;
+    private Date createdAt = new Date();
 
-    private Date updatedAt;
+    private Date updatedAt = new Date();
 
     private ShopModel shop;
 
@@ -51,5 +58,9 @@ public class ProductModel {
 
         this.shop = null;
         this.rates = null;
+    }
+
+    public String toUrl(String fileName){
+        return "/assets/products/" + fileName;
     }
 }

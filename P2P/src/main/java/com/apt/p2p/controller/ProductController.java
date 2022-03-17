@@ -1,7 +1,6 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.form.FilterProductPortal;
-import com.apt.p2p.model.form.FilterShopTransaction;
 import com.apt.p2p.model.form.ProductAddCartModel;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
@@ -10,11 +9,17 @@ import com.apt.p2p.service.CategoryService;
 import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.ShopService;
+import com.apt.p2p.validate.PicturesValidator;
+import com.apt.p2p.validate.ShopPictureValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -27,6 +32,11 @@ public class ProductController {
     private RateService rateService;
     @Autowired
     private ShopService shopService;
+
+    @InitBinder("imageFiles")
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(new PicturesValidator());
+    }
 
     @GetMapping("product/{id}")
     public String productDetail(Model model, @PathVariable("id") int id) {
@@ -61,6 +71,31 @@ public class ProductController {
         model.addAttribute("product", new ProductModel());
         model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product-form";
+    }
+
+    @PostMapping("portal/product/create")
+    public String portalProductCreate(Model model,
+                                      @Valid @ModelAttribute ProductModel product,
+                                      BindingResult productResult,
+                                      @Valid @RequestParam("imageFiles") MultipartFile[] pictures,
+                                      BindingResult imageResult,
+                                      @RequestParam("category") int categoryId) {
+        int shopId = 2;
+        if (productResult.hasErrors() || imageResult.hasErrors()) {
+            model.addAttribute("shop", shopService.findById(shopId));
+            model.addAttribute("product", product);
+            model.addAttribute("categories", categoryService.findAll());
+        }
+
+        ProductModel newProduct = productService.create(product, categoryId);
+
+        if (newProduct == null) {
+            model.addAttribute("shop", shopService.findById(shopId));
+            model.addAttribute("product", new ProductModel());
+            model.addAttribute("categories", categoryService.findAll());
+            return "user/portal/product-form";
+        }
+        return "redirect:/portal/product/" + newProduct.getId();
     }
 
     @GetMapping("portal/{shopId}/product/{productId}")
