@@ -4,15 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.math.BigDecimal;
 
 @Controller
 public class MainController {
-    @GetMapping("")
-    public String index() {
-        return "user/main/index";
-    }
-
     @GetMapping("shop/{shopId}/order/{orderId}")
     public String orderDetailShop(@PathVariable("shopId") int shopId, @PathVariable("orderId") int orderId) {
         return "user/account/order-detail";

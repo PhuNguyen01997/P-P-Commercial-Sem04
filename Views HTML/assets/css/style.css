@@ -1597,7 +1597,7 @@ label {
   margin: 0 10px;
 }
 
-.shopping-side--content__price-range ~ button[type="submit"] {
+.shopping-side--content__price-range ~ .jsClick {
   display: block;
   width: 100%;
   height: 30px;

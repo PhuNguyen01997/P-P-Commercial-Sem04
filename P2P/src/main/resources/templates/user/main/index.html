@@ -17,37 +17,13 @@
                 <ul class="shopping-side--content shopping-side--content__list-check">
                     <li class="">
                         <label for="location-01">
-                            <input id="location-01" type="checkbox">
+                            <input id="location-01" name="location" type="checkbox">
                             TP.HCM
                         </label>
                     </li>
                     <li class="">
                         <label for="location-02">
-                            <input id="location-02" type="checkbox">
-                            Hà nội
-                        </label>
-                    </li>
-                    <li class="">
-                        <label for="location-03">
-                            <input name="abc" id="location-03" type="checkbox">
-                            Hà nội
-                        </label>
-                    </li>
-                    <li class="">
-                        <label for="location-04">
-                            <input id="location-04" type="checkbox">
-                            Hà nội
-                        </label>
-                    </li>
-                    <li class="">
-                        <label for="location-05">
-                            <input id="location-05" type="checkbox">
-                            Hà nội
-                        </label>
-                    </li>
-                    <li class="">
-                        <label for="location-06">
-                            <input id="location-06" type="checkbox">
+                            <input id="location-02" name="location" type="checkbox">
                             Hà nội
                         </label>
                     </li>
@@ -57,17 +33,17 @@
                 <p class="shopping-side--title">Price range</p>
                 <form action="">
                     <div class="shopping-side--content shopping-side--content__price-range">
-                        <input type="number">
+                        <input type="number" name="minPrice">
                         <span><i class="fas fa-exchange-alt"></i></span>
-                        <input type="number">
+                        <input type="number" name="maxPrice">
                     </div>
-                    <button class="btn btn__red" type="submit">Apply</button>
+                    <button class="jsClick btn btn__red" type="button">Áp dụng</button>
                 </form>
             </div>
             <div class="shopping-side--item">
                 <p class="shopping-side--title">Rate</p>
                 <ul class="shopping-side--content shopping-side--content__list-rate">
-                    <li>
+                    <li class="jsClick">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -76,7 +52,7 @@
                                 <i class="fas fa-star"></i>
                             </span>
                     </li>
-                    <li>
+                    <li class="jsClick">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -84,9 +60,9 @@
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Above</span>
+                        <span>Trở lên</span>
                     </li>
-                    <li>
+                    <li class="jsClick">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -94,9 +70,9 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Above</span>
+                        <span>Trở lên</span>
                     </li>
-                    <li>
+                    <li class="jsClick">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -104,9 +80,9 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Above</span>
+                        <span>Trở lên</span>
                     </li>
-                    <li>
+                    <li class="jsClick">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
@@ -114,7 +90,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Above</span>
+                        <span>Trở lên</span>
                     </li>
                 </ul>
             </div>
@@ -122,13 +98,12 @@
         <div class="shopping-main">
             <div class="shopping-sort">
                 <p>Sort by</p>
-                <button class="btn shopping-sort--btn active">New</button>
-                <button class="btn shopping-sort--btn">Selling</button>
+                <button data-value="NEW" class="jsSortBy btn shopping-sort--btn active">Mới</button>
+                <button data-value="PRICE" class="jsSortBy btn shopping-sort--btn">Giá tiền</button>
                 <div class="select shopping-sort--select">
-                    <select name="" id="">
-                        <option value="">Price</option>
-                        <option value="increase">Low to high</option>
-                        <option value="decrease" selected>High to low</option>
+                    <select name="sortDirection" id="">
+                        <option value="false" selected>Low to high</option>
+                        <option value="true">High to low</option>
                     </select>
                 </div>
                 <div class="pagi-simplify">
@@ -138,132 +113,13 @@
                 </div>
             </div>
             <div class="shopping-list product">
-                <a href="#" class="product-item">
+                <a th:unless="${products == null || products.size() == 0}" th:each="item: ${products}" href="#"
+                   class="product-item">
                     <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
+                        <img src="/img/products/product_03.jpg" alt="">
                     </div>
                     <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy </p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_01.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
+                        <p th:text="${item.name}" class="product-item--title"></p>
                         <p class="product-item--price">$ 99.99</p>
                         <p class="product-item--rate">
                                 <span class="icon icon__star">
@@ -278,18 +134,63 @@
                     </div>
                 </a>
             </div>
-            <div class="shopping-pagi">
-                <ul class="pagi">
-                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
-                    <li class="pagi-item btn active">1</li>
-                    <li class="pagi-item btn">2</li>
-                    <li class="pagi-item btn">3</li>
-                    <li class="pagi-item btn">4</li>
-                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
-                </ul>
-            </div>
+<!--            <div class="shopping-pagi">-->
+<!--                <ul class="pagi">-->
+<!--                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>-->
+<!--                    <li th:each="pageNumber : ${pageNumbers}"-->
+<!--                        th:classappend="${page == pageNumber ? 'active' : ''}"-->
+<!--                        class="pagi-item btn">-->
+<!--                        <a th:href="@{/(page=${pageNumber})}"-->
+<!--                           th:text="${pageNumber + 1}"></a>-->
+<!--                    </li>-->
+<!--                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
     </div>
 </main>
+<script layout:fragment="script">
+    $(function () {
+        function getFilter() {
+            const keyword = $('.header-form--search').val();
+            const location = $('[name="location"]:checked').toArray().map(node => node.value);
+            const minPrice = $('[name="minPrice"]').val();
+            const maxPrice = $('[name="maxPrice"]').val();
+            const sortBy = $('.jsSortBy.active').attr('data-value');
+            const sortDirection = $('[name="sortDirection"]').val();
+            return {keyword, location, minPrice, maxPrice, sortBy, sortDirection};
+        }
+
+        function handleEvent() {
+            const filter = getFilter();
+            console.log(filter);
+
+            const queryParam = Object.keys(filter).reduce((str, key, index) => {
+                const val = filter[key];
+                if (!val) return str;
+                if (Array.isArray(val)) {
+                    console.log('array', key);
+                } else str += `${key}=${val}&`;
+                return str;
+            }, '?');
+            console.log(queryParam);
+            location.replace(queryParam);
+        }
+
+        $('.jsClick').on('click', () => {
+            handleEvent();
+        })
+
+        $('[name="location"]').on('change', () => {
+            handleEvent();
+        })
+
+        $('.jsSortBy').on('click', function () {
+            $('.jsSortBy').removeClass('active');
+            $(this).addClass('active');
+            handleEvent();
+        })
+    });
+</script>
 </body>
 </html>

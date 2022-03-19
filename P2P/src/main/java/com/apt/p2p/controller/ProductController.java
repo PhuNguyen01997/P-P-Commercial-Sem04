@@ -1,10 +1,12 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.entity.Product;
 import com.apt.p2p.model.form.FilterProductPortal;
 import com.apt.p2p.model.form.ProductAddCartModel;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.repository.ProductRepository;
 import com.apt.p2p.service.CategoryService;
 import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
@@ -20,12 +22,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductRepository productRepository;
     @Autowired
     private CategoryService categoryService;
     @Autowired
@@ -36,6 +41,25 @@ public class ProductController {
     @InitBinder("imageFiles")
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(new PicturesValidator());
+    }
+
+    @GetMapping("")
+    public String index(Model model,
+                        @RequestParam(required = false, name = "keyword") String keyword,
+                        @RequestParam(required = false, name = "minPrice") BigDecimal minPrice,
+                        @RequestParam(required = false, name = "maxPrice") BigDecimal maxPrice,
+                        @RequestParam(required = false, name = "rate") Integer rate,
+                        @RequestParam(required = false, name = "name") String name,
+                        @RequestParam(required = false, name = "sortBy") String sortBy,
+                        @RequestParam(required = false, name = "sortDirection") Boolean sortDirection) {
+
+        // Sơn cặc xử lý cái biến "products" bao gồm các sản phẩm đã được lọc theo giá trị phái trên
+        List<Product> products = productRepository.findAll();
+
+        // ------------------------------
+
+        model.addAttribute("products", products);
+        return "user/main/index";
     }
 
     @GetMapping("product/{id}")
