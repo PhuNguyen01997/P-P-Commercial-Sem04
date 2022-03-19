@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -104,5 +105,14 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection) {
+        // Sơn cặc xử lý cái biến "products" bao gồm các sản phẩm đã được lọc theo giá trị phái trên
+        List<Product> products = null;
+
+        // ------------------------------
+        return products;
     }
 }

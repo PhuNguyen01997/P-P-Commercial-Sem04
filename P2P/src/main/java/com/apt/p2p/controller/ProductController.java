@@ -49,16 +49,11 @@ public class ProductController {
                         @RequestParam(required = false, name = "minPrice") BigDecimal minPrice,
                         @RequestParam(required = false, name = "maxPrice") BigDecimal maxPrice,
                         @RequestParam(required = false, name = "rate") Integer rate,
-                        @RequestParam(required = false, name = "name") String name,
                         @RequestParam(required = false, name = "sortBy") String sortBy,
                         @RequestParam(required = false, name = "sortDirection") Boolean sortDirection) {
 
-        // Sơn cặc xử lý cái biến "products" bao gồm các sản phẩm đã được lọc theo giá trị phái trên
-        List<Product> products = productRepository.findAll();
 
-        // ------------------------------
-
-        model.addAttribute("products", products);
+        model.addAttribute("products", productService.SonFindAllWithFilter(keyword, minPrice, maxPrice, rate, sortBy, sortDirection));
         return "user/main/index";
     }
 
