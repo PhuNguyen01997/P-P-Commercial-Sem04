@@ -12,8 +12,9 @@
   <div class="inner">
     <div class="auth-container">
       <h1 class="auth-title">Forgot password</h1>
-      <form action="#" class="form">
-        <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Input your email to reset password">
+      <form th:action="@{/forgot-password}" th:object="${userModel}" class="form" method="post">
+        <input class="auth--ipt auth--ipt__txt" type="email" placeholder="Input your email to reset password" th:field="*{email}">
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Invalid value</p>
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Send</button>
       </form>
       <div class="auth-navi">

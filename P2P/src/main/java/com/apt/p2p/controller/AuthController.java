@@ -66,7 +66,7 @@ public class AuthController {
         }
         String email = service.findByEmail(userModel.getEmail());
 
-        if (email.equals(userModel.getEmail())) {
+        if (email != null) {
             model.addAttribute("duplicate", "Email already exists");
             model.addAttribute("hasAnyError", true);
             return "user/auth/signup";
@@ -89,6 +89,7 @@ public class AuthController {
         usr.setPhone(userModel.getPhone());
         usr.setUsername(userModel.getUsername());
         service.save(usr);
+        //
         return "redirect:/";
     }
 
@@ -97,8 +98,24 @@ public class AuthController {
         return "user/auth/reset";
     }
 
-    @GetMapping("forgot-password")
-    public String forgotPassword() {
+    @GetMapping("forgot")
+    public String forgot(Model model) {
+        model.addAttribute("userModel", new UserModel());
         return "user/auth/forgot";
+    }
+
+    @PostMapping("forgot-password")
+    public String forgotPassword(Model model,
+                                 @Valid @ModelAttribute("userModel") UserModel userModel,
+                                 BindingResult result) {
+        String email = service.findByEmail(userModel.getEmail());
+        if (email == null) {
+            model.addAttribute("email",userModel.getEmail());
+            return "user/auth/reset";
+        } else {
+            model.addAttribute("email", "Email dose not exists");
+            model.addAttribute("hasAnyError", true);
+            return "user/auth/signup";
+        }
     }
 }

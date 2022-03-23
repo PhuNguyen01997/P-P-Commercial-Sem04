@@ -46,6 +46,8 @@ public class User {
     @OneToMany(mappedBy = "primaryKey.user" ,fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private List<UserRole> userRoles;
 
+
+
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Shop shop;
 

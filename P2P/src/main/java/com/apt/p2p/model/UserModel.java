@@ -24,8 +24,8 @@ public class UserModel {
 
     private boolean enabled = true;
 
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&!-+=()])(?=\\S+$).{8,20}$"
-            , message = "Weak password")
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&!-+=()])(?=\\S+$).{8,20}$"
+//            , message = "Weak password")
     @NotBlank(message = "field password is not null")
     private String password;
 
