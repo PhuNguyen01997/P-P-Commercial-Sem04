@@ -108,7 +108,6 @@
                 contentType: "application/json",
                 data: JSON.stringify({filterBy, name, categoryId, status}),
                 success: function (products) {
-                    console.log(products);
                     let html = "";
 
                     products.forEach(product => {

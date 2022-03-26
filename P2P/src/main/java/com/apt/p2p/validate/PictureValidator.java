@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Arrays;
 import java.util.List;
 
-public class ShopPictureValidator implements Validator {
+public class PictureValidator implements Validator {
     private static final List<String> contentTypes = Arrays.asList("image/png", "image/jpeg", "image/gif");
 
     @Override

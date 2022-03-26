@@ -24,16 +24,14 @@ var getStringTimeFormat = function(date) {
   return `${hour}:${minute}`
 }
 
-var readUrlImage = function(input, element, keyLocalStorage) {
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
+var readUrlImage = function(file, element) {
+  const reader = new FileReader();
 
-    reader.onload = function(e) {
-      $(element).attr('src', e.target.result);
-    };
+  reader.onload = function(e) {
+    $(element).attr('src', e.target.result);
+  };
 
-    reader.readAsDataURL(input.files[0]);
-  }
+  reader.readAsDataURL(file);
 }
 
 var getBase64Image = function(img) {

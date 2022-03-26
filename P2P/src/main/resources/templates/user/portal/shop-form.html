@@ -118,11 +118,15 @@
 
         $('#avatar').on('change', function () {
             const element = document.querySelector('.jsAvatar');
-            readUrlImage(this, element);
+            if (this.files && this.files[0]) {
+                readUrlImage(this.files[0], element);
+            }
         });
         $('#thumbnail').on('change', function () {
             const element = document.querySelector('.jsThumbnail');
-            readUrlImage(this, element);
+            if (this.files && this.files[0]) {
+                readUrlImage(this.files[0], element);
+            }
         });
 
         document.querySelector('.shop-form').addEventListener('submit', function (e) {

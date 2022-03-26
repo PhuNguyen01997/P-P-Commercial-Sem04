@@ -1,18 +1,25 @@
 package com.apt.p2p.service;
 
+import com.apt.p2p.common.FileUploadUtil;
 import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Category;
 import com.apt.p2p.entity.Product;
+import com.apt.p2p.entity.Shop;
 import com.apt.p2p.model.form.FilterProductPortal;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.repository.CategoryRepository;
 import com.apt.p2p.repository.ProductRepository;
 import com.apt.p2p.repository.ProductSpecification;
+import com.apt.p2p.repository.ShopRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,7 +31,11 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
+    private ShopRepository shopRepository;
+    @Autowired
     private ProductMapper productMapper;
+
+    private String imageUploadDir = "product/";
 
     @Override
     public List<ProductModel> findAllByShopId(int shopId) {
@@ -92,11 +103,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductModel create(ProductModel model, int categoryId) {
+    public ProductModel create(ProductModel model, MultipartFile[] imageFiles, int categoryId, int shopId) {
         try {
             Product entity = new Product(model);
+
             Category category = categoryRepository.findById(categoryId).orElse(null);
+            Shop shop = shopRepository.findById(shopId).orElse(null);
+
+            String ranName = String.valueOf(new Date().getTime());
+            List<String> fileNameList = new ArrayList<>();
+            for (int i = 0; i < imageFiles.length; i++) {
+                // save File to store
+                MultipartFile file = imageFiles[i];
+                String extension = FileUploadUtil.getExtensionName(file).orElse(null);
+                String fileName = "shop_" + shop.getId() + "_" + ranName + "_" + i + "." + extension;
+                FileUploadUtil.saveFile(imageUploadDir, fileName, file);
+
+                // save name to db
+                fileNameList.add(fileName);
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            String imageJson = mapper.writeValueAsString(fileNameList);
+
+            entity.setShop(shop);
             entity.setCategory(category);
+            entity.setImage(imageJson);
 
             productRepository.save(entity);
 

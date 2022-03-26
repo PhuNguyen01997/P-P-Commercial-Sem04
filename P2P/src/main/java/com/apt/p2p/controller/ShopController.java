@@ -7,7 +7,7 @@ import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.AddressService;
 import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UserService;
-import com.apt.p2p.validate.ShopPictureValidator;
+import com.apt.p2p.validate.PictureValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class ShopController {
 
     @InitBinder("imageFiles")
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new ShopPictureValidator());
+        binder.setValidator(new PictureValidator());
     }
 
     @GetMapping("portal")
