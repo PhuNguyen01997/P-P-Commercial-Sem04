@@ -23,4 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     @Query("SELECT c.product FROM Cart c WHERE c.id=:id")
     Product findByCartId(@Param("id") int cartId);
+
+    @Query("SELECT p FROM Product p WHERE p.shop.id=:shopId AND p.id=:productId")
+    Product findByShopIdAndProductId(@Param("shopId") int shopId, @Param("productId") int productId);
 }

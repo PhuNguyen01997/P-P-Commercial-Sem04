@@ -76,11 +76,11 @@ public class Order {
         this.total = total;
         this.shippingCost = shippingCost;
         this.user = user;
-        this.orderDetails = orderDetails;
         this.currentStatus = statusOrder;
         this.shop = shop;
         this.address = address;
         this.stripeCardId = stripeCardId;
+        this.orderDetails = new ArrayList<>();
 
         this.statusHistories = new ArrayList<StatusHistory>();
         StatusHistory firstHistory = new StatusHistory(statusOrder, this);

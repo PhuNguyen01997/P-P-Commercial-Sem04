@@ -38,6 +38,8 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopMapper shopMapper;
 
+    private String imgUploadDir = "shops/";
+
     @Override
     public ShopModel findByProductId(int productId) {
         ShopModel result = null;
@@ -115,7 +117,6 @@ public class ShopServiceImpl implements ShopService {
 
             shop.setAddress(address);
 
-            String uploadDir = "shops/";
             if (!logoFile.isEmpty()) {
                 String extension = FileUploadUtil.getExtensionName(logoFile).orElse(null);
                 String fileName = shop.getLogo();
@@ -125,7 +126,7 @@ public class ShopServiceImpl implements ShopService {
                 else{
                     fileName.replaceAll("\\w+$", extension);
                 }
-                FileUploadUtil.saveFile(uploadDir, fileName, logoFile);
+                FileUploadUtil.saveFile(imgUploadDir, fileName, logoFile);
 
                 shop.setLogo(fileName);
             }
@@ -138,7 +139,7 @@ public class ShopServiceImpl implements ShopService {
                 else{
                     fileName = fileName.replaceAll("\\w+$", extension);
                 }
-                FileUploadUtil.saveFile(uploadDir, fileName, backgroundFile);
+                FileUploadUtil.saveFile(imgUploadDir, fileName, backgroundFile);
 
                 shop.setBackground(fileName);
             }

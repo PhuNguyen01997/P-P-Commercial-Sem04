@@ -1,6 +1,9 @@
 package com.apt.p2p.entity;
 
 import com.apt.p2p.model.view.ProductModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -68,17 +71,23 @@ public class Product {
         this.id = model.getId();
         this.name = model.getName();
         this.price = model.getPrice();
-        this.image = model.getImage();
         this.description = model.getDescription();
         this.stock = model.getStock();
         this.createdAt = model.getCreatedAt();
         this.updatedAt = model.getUpdatedAt();
 
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            this.image = mapper.writeValueAsString(model.getImage());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         this.shop = null;
         this.category = null;
 
-        this.carts = null;
-        this.rates = null;
-        this.orderDetails = null;
+        this.carts = new ArrayList<>();
+        this.rates = new ArrayList<>();
+        this.orderDetails = new ArrayList<>();
     }
 }

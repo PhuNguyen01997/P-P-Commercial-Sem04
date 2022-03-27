@@ -2,6 +2,9 @@ package com.apt.p2p.model.view;
 
 import com.apt.p2p.entity.Category;
 import com.apt.p2p.entity.Product;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +14,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +32,7 @@ public class ProductModel {
     @Max(value = 100000000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
     private BigDecimal price;
 
-    private String image;
+    private List<String> image = new ArrayList<>();
 
     @NotBlank(message = "Mô tả sản phẩm không hợp lệ")
     private String description;
@@ -41,7 +45,7 @@ public class ProductModel {
 
     private ShopModel shop;
 
-    private List<RateModel> rates;
+    private List<RateModel> rates = new ArrayList<>();
 
     private Category category;
 
@@ -49,18 +53,28 @@ public class ProductModel {
         this.id = entity.getId();
         this.name = entity.getName();
         this.price = entity.getPrice();
-        this.image = entity.getImage();
         this.description = entity.getDescription();
         this.stock = entity.getStock();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
         this.category = entity.getCategory();
 
+        try {
+//            if (entity.getImage() == null) this.image = new ArrayList<>();
+//            else {
+                ObjectMapper mapper = new ObjectMapper();
+                this.image = mapper.readValue(entity.getImage(), new TypeReference<List<String>>() {
+                });
+//            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         this.shop = null;
-        this.rates = null;
+        this.rates = new ArrayList<>();
     }
 
-    public String toUrl(String fileName){
+    public String toUrl(String fileName) {
         return "/assets/products/" + fileName;
     }
 }

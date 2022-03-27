@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProductController {
@@ -114,9 +115,19 @@ public class ProductController {
         return "redirect:/portal/product/" + newProduct.getId();
     }
 
-    @GetMapping("portal/{shopId}/product/{productId}")
-    public String portalProductCreate(Model model, @PathVariable("shopId") int shopId, @PathVariable("productId") int productId) {
+    @GetMapping("portal/product/{productId}")
+    public String portalProductCreate(Model model, @PathVariable("productId") int productId) {
+        int shopId = 2;
+        ShopModel shop = shopService.findById(shopId);
+        List<ProductModel> productFind = shop.getProducts().stream().filter(p -> p.getId() == productId).collect(Collectors.toList());
+
+        if (productFind.isEmpty()) {
+            return "notfound";
+        }
+
+        ProductModel product = productService.findByShopIdAndProductId(shopId, productId);
         model.addAttribute("shop", shopService.findById(shopId));
+        model.addAttribute("product", product);
         return "user/portal/product-form";
     }
 

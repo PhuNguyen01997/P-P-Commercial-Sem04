@@ -73,6 +73,10 @@
                 <input class="d-none" type="file" multiple name="imageFiles[]" value="">
             </label>
             <div class="product-create-form--right-pic-container jsImageContainer">
+                <div class="product-create-form--right-pic"
+                th:each="image : ${product.image}">
+                    <img th:src="${product.toUrl(image)}">
+                </div>
             </div>
         </div>
     </form>

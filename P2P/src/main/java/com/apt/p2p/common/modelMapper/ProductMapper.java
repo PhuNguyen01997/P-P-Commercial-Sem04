@@ -4,6 +4,7 @@ import com.apt.p2p.entity.*;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.ShopModel;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -36,9 +37,10 @@ public class ProductMapper {
     }
 
     public ProductModel productEntityToModel(Product entity) {
-        if(entity == null) return null;
+        if (entity == null) return null;
 
-        ProductModel model = new ProductModel(entity);
+        ProductModel model = null;
+        model = new ProductModel(entity);
 
         model.setShop(new ShopModel(entity.getShop()));
         model.setRates(entity.getRates().stream().map(re -> new RateModel(re)).collect(Collectors.toList()));

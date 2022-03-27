@@ -139,6 +139,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductModel findByShopIdAndProductId(int shopId, int productId) {
+        ProductModel result = null;
+        Product product = productRepository.findByShopIdAndProductId(shopId, productId);
+        if (product != null) {
+            result = productMapper.productEntityToModel(product);
+        }
+        return result;
+    }
+
+    @Override
     public List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection) {
         // Sơn cặc xử lý cái biến "products" bao gồm các sản phẩm đã được lọc theo giá trị phái trên
         List<Product> products = null;

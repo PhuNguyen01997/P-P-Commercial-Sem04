@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,7 +61,6 @@ public class Shop {
     @JoinColumn(name = "addressId")
     private Address address;
 
-//    @NotNull
     private String stripeCardId;
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
@@ -81,10 +81,11 @@ public class Shop {
         this.updatedAt = model.getUpdatedAt();
 
         this.user = null;
-        this.products = null;
         this.address = null;
         this.stripeCardId = null;
-        this.orders = null;
-        this.shopTransactions = null;
+
+        this.products = new ArrayList<>();
+        this.orders = new ArrayList<>();
+        this.shopTransactions = new ArrayList<>();
     }
 }

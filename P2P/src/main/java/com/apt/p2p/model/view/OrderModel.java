@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,8 +64,9 @@ public class OrderModel {
         this.payment = null;
         this.shop = null;
         this.user = null;
-        this.orderDetails = null;
         this.address = null;
-        this.statusHistories = null;
+
+        this.orderDetails = new ArrayList<>();
+        this.statusHistories = new ArrayList<>();
     }
 }

@@ -15,6 +15,8 @@ public interface ProductService {
 
     List<ProductModel> findAllByShopId(int shopId);
 
+    ProductModel findByShopIdAndProductId(int shopId, int productId);
+
     ProductModel findByOrderDetailId(int orderDetailId);
 
     List<ProductModel> findAllByShopWithFilterPortal(int shopId, FilterProductPortal filter);

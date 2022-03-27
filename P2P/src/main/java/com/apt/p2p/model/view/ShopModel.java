@@ -71,9 +71,10 @@ public class ShopModel {
 
         this.user = null;
         this.address = null;
-        this.products = null;
-        this.orders = null;
-        this.shopTransactions = null;
+        
+        this.products = new ArrayList<>();
+        this.orders = new ArrayList<>();
+        this.shopTransactions = new ArrayList<>();
 
         if(shop.getProducts() != null && shop.getProducts().size() > 0){
             this.countProducts = shop.getProducts().size();
