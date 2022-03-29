@@ -23,5 +23,7 @@ public interface ProductService {
 
     ProductModel create(ProductModel model, MultipartFile[] imageFiles, int categoryId, int shopId);
 
+    ProductModel update(ProductModel model, MultipartFile[] imageFiles, int categoryId);
+
     List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection);
 }

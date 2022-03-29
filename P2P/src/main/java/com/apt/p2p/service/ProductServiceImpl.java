@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
-    private String imageUploadDir = "product/";
+    private String imageUploadDir = "products/";
 
     @Override
     public List<ProductModel> findAllByShopId(int shopId) {
@@ -136,6 +136,11 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public ProductModel update(ProductModel model, MultipartFile[] imageFiles, int categoryId) {
+        return null;
     }
 
     @Override

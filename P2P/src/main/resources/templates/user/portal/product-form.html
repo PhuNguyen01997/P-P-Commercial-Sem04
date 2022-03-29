@@ -16,7 +16,9 @@
             <div th:if="${product.id == null || product.id == 0}" class="btn btn__red">Ẩn sản phẩm</div>
         </form>
     </h3>
-    <form th:object="${product}" class="product-create-form" method="post" enctype="multipart/form-data">
+    <form th:object="${product}" th:action="@{/portal/product}"
+          class="product-create-form" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}">
         <div class="product-create-form--left">
             <div class="form-item">
                 <label class="form-item--left" for="name">Tên sản phẩm</label>
@@ -73,9 +75,11 @@
                 <input class="d-none" type="file" multiple name="imageFiles[]" value="">
             </label>
             <div class="product-create-form--right-pic-container jsImageContainer">
+<!--                <div class="product-create-form&#45;&#45;right-pic"-->
                 <div class="product-create-form--right-pic"
-                th:each="image : ${product.image}">
-                    <img th:src="${product.toUrl(image)}">
+                     th:each="image : ${product.image}">
+                    <input type="text" th:name="${'mapImage[`' + image + '`]'}">
+<!--                    <img th:src="${product.toUrl(image)}">-->
                 </div>
             </div>
         </div>
@@ -107,11 +111,11 @@
             $('.error[data-name="category"]').text("Danh mục sản phẩm không hợp lệ").removeClass('d-none');
         }
         $('input[type=file]').each((index, fileInput) => {
-            if (fileInput.files.length == 0) {
-                $('.error[data-name="images"]').text("Sản phẩm ít nhất phải có 1 ảnh").removeClass('d-none');
-                canSubmit = false;
-                return;
-            }
+            // if (fileInput.files.length == 0) {
+            //     $('.error[data-name="images"]').text("Sản phẩm ít nhất phải có 1 ảnh").removeClass('d-none');
+            //     canSubmit = false;
+            //     return;
+            // }
             Array.from(fileInput.files).forEach(file => {
                 if (file.size / 1000000 > 2) {
                     canSubmit = false;
