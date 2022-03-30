@@ -13,6 +13,7 @@ import lombok.Setter;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +31,7 @@ public class ProductModel {
 
     @Min(value = 1000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
     @Max(value = 100000000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
+    @NotNull(message = "Giá sản phẩm không hợp lệ")
     private BigDecimal price;
 
     private List<String> image = new ArrayList<>();
@@ -60,12 +62,9 @@ public class ProductModel {
         this.category = entity.getCategory();
 
         try {
-//            if (entity.getImage() == null) this.image = new ArrayList<>();
-//            else {
-                ObjectMapper mapper = new ObjectMapper();
-                this.image = mapper.readValue(entity.getImage(), new TypeReference<List<String>>() {
-                });
-//            }
+            ObjectMapper mapper = new ObjectMapper();
+            this.image = mapper.readValue(entity.getImage(), new TypeReference<List<String>>() {
+            });
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
