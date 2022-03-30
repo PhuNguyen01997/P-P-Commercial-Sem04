@@ -16,7 +16,7 @@
             <div th:if="${product.id == null || product.id == 0}" class="btn btn__red">Ẩn sản phẩm</div>
         </form>
     </h3>
-    <form th:object="${product}" th:action="@{/portal/product}"
+    <form th:object="${productForm}" th:action="@{/portal/product}"
           class="product-create-form" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
         <div class="product-create-form--left">
@@ -69,14 +69,10 @@
             </div>
         </div>
         <div class="product-create-form--right">
-            <p class="error d-none" data-name="images">[Error Images]</p>
-<!--            <label class="">-->
-<!--                <p class="btn btn__primary-outline">Thêm ảnh</p>-->
-<!--                <input class="d-none" type="file" multiple name="imageFiles[]" value="">-->
-<!--            </label>-->
+            <p th:errors="*{mapPictures}" class="error jsErrorImages">[Error Images]</p>
             <div class="product-create-form--right-pic-container jsImageContainer">
                 <label class="product-create-form--right-pic">
-                    <input class="jsMapImage" type="file" name="mapImage[new01]">
+                    <input class="jsMapImage d-none" type="file" data-id="1" name="mapPictures[new1]">
                 </label>
             </div>
         </div>
@@ -85,41 +81,59 @@
 
 <script layout:fragment="script">
     const container = $('.jsImageContainer');
-    $('input.jsMapImage').on('change', function () {
-        // $('.error[data-name="images"]').addClass('d-none');
+    container.on('change', 'input.jsMapImage', function () {
         if (this.files.size == 0) return;
-        // container.empty();
+
+        const id = $(this).attr('data-id');
         const file = this.files[0];
-        console.log(this);
         const label = $(this).parent();
-        // Array.from(this.files).forEach((file, index) => {
-        //     let html = `<div class="product-create-form--right-pic">`;
-        //     html += ``;
-        //     html += `</div>`;
-        label.append(`<img data-index="${index}" src="" data-id="" alt="">`);
+        const img = label.find(`img[data-id=${id}]`);
+        img.remove();
+        const isAddNewImg = img.length === 0;
+        const newLabel = label.clone();
 
-            const element = container.find(`img[data-index="${index}"]`)[0];
-            readUrlImage(file, element);
-        // })
+        console.log(id);
 
+        label.append(`<img data-id="${id}" src="" alt="">`);
+        const newImg = container.find(`img[data-id="${id}"]`)[0];
+        readUrlImage(file, newImg);
+
+        if (isAddNewImg) {
+            newLabel.find('input[type="file"]')
+                .attr('name', `mapPictures[new${parseInt(id) + 1}]`)
+                .attr('data-id', parseInt(id) + 1)
+                .val('');
+            container.append(newLabel);
+        }
     })
     document.querySelector('.product-create-form').addEventListener('submit', function (e) {
         e.preventDefault();
+
+        function setErrorImage(mess) {
+            const errorImageSpan = $('.jsErrorImages');
+            if (errorImageSpan.length) {
+                errorImageSpan.text(mess);
+            } else {
+                $('.product-create-form--right').prepend(`<p class="error jsErrorImages">${mess}</p>`);
+            }
+        }
+
         let canSubmit = true;
-        $('input[type=file]').each((index, fileInput) => {
-            // if (fileInput.files.length == 0) {
-            //     $('.error[data-name="images"]').text("Sản phẩm ít nhất phải có 1 ảnh").removeClass('d-none');
-            //     canSubmit = false;
-            //     return;
-            // }
-            Array.from(fileInput.files).forEach(file => {
-                if (file.size / 1000000 > 2) {
-                    canSubmit = false;
-                    $('.error[data-name="images"]').text("Kích thước hình ảnh quá lớn (< 2MB)").removeClass('d-none');
-                    return;
-                }
-            })
+
+        const imageFiles = $('input.jsMapImage');
+        if (imageFiles.length <= 1) {
+            canSubmit = false;
+            setErrorImage("Sản phẩm phải có ít nhất 1 ảnh.");
+        }
+        imageFiles.each((index, fileInput) => {
+            const file = fileInput.files[0];
+            if (file && file.size / 1000000 > 2) {
+                canSubmit = false;
+                setErrorImage("Kích thước hình ảnh quá lớn (< 2MB)");
+                return;
+            }
         })
+
         if (canSubmit) this.submit();
     })
 </script>

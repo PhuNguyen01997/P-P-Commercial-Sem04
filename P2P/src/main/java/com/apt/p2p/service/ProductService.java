@@ -21,7 +21,7 @@ public interface ProductService {
 
     List<ProductModel> findAllByShopWithFilterPortal(int shopId, FilterProductPortal filter);
 
-    ProductModel create(ProductModel model, MultipartFile[] imageFiles, int categoryId, int shopId);
+    ProductModel create(ProductModel model, List<MultipartFile> imageFiles, int categoryId, int shopId);
 
     ProductModel update(ProductModel model, MultipartFile[] imageFiles, int categoryId);
 

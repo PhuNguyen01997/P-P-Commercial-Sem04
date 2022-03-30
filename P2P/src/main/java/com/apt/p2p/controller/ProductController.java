@@ -9,10 +9,10 @@ import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.ShopService;
 import com.apt.p2p.validate.PictureValidator;
+import com.apt.p2p.validate.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,9 +36,9 @@ public class ProductController {
     @Autowired
     private ShopService shopService;
 
-    @InitBinder("imageFiles")
+    @InitBinder("productForm")
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new PictureValidator());
+        binder.setValidator(new ProductFormValidator());
     }
 
     @GetMapping("")
@@ -80,15 +81,6 @@ public class ProductController {
         return "user/portal/product";
     }
 
-//    @GetMapping("portal/product/create")
-//    public String portalProductCreate(Model model) {
-//        int shopId = 2;
-//        model.addAttribute("shop", shopService.findById(shopId));
-//        model.addAttribute("product", new ProductModel());
-//        model.addAttribute("categories", categoryService.findAll());
-//        return "user/portal/product-form";
-//    }
-
     @GetMapping("portal/product/create")
     public String portalProductCreate(Model model) {
         int shopId = 2;
@@ -98,53 +90,9 @@ public class ProductController {
         return "user/portal/product-form";
     }
 
-    @GetMapping("portal/product/test")
-    public String test(Model model) {
-        return "user/portal/test";
-    }
-
-    @PostMapping("portal/product/test")
-    public String test(Model model, @ModelAttribute TestForm testForm, BindingResult result) {
-        return "user/portal/test";
-    }
-
-//    @PostMapping("portal/product")
-//    public String portalProductCreate(Model model,
-//                                      @Valid @ModelAttribute("product") ProductModel product,
-//                                      BindingResult productResult,
-//                                      @Valid @ModelAttribute("imageFiles") ImageFilesModels pictures,
-//                                      BindingResult imageResult,
-//                                      @RequestParam("category") int categoryId,
-//                                      @ModelAttribute("mapImage") Map<String, String> mapFile) {
-//        int shopId = 2;
-//        if (productResult.hasErrors() || imageResult.hasErrors()) {
-//            model.addAttribute("shop", shopService.findById(shopId));
-//            model.addAttribute("product", product);
-//            model.addAttribute("categories", categoryService.findAll());
-//            return "user/portal/product-form";
-//        }
-//
-//        ProductModel newProduct = null;
-//        if (product.getId() == null) {
-//            newProduct = productService.create(product, pictures.getImageFiles(), categoryId, shopId);
-//        } else {
-////            newProduct = productService.
-//            String str = "";
-//        }
-//
-//
-//        if (newProduct == null) {
-//            model.addAttribute("shop", shopService.findById(shopId));
-//            model.addAttribute("product", new ProductModel());
-//            model.addAttribute("categories", categoryService.findAll());
-//            return "user/portal/product-form";
-//        }
-//        return "redirect:/portal/product/" + newProduct.getId();
-//    }
-
     @PostMapping("portal/product")
     public String portalProductCreate(Model model,
-                                      @Valid @ModelAttribute("product") ProductForm product,
+                                      @Valid @ModelAttribute("productForm") ProductForm product,
                                       BindingResult productResult) {
         int shopId = 2;
         if (productResult.hasErrors()) {
@@ -153,24 +101,24 @@ public class ProductController {
             model.addAttribute("categories", categoryService.findAll());
             return "user/portal/product-form";
         }
-//
-//        ProductModel newProduct = null;
-//        if (product.getId() == null) {
-//            newProduct = productService.create(product, pictures.getImageFiles(), categoryId, shopId);
-//        } else {
-////            newProduct = productService.
+
+        ProductModel newProduct = null;
+
+        if (product.getId() == null) {
+            List<MultipartFile> listImage = new ArrayList<>(product.getMapPictures().values());
+            newProduct = productService.create(product, listImage, product.getCategoryId(), shopId);
+        } else {
+//            newProduct = productService.
 //            String str = "";
-//        }
-//
-//
-//        if (newProduct == null) {
-//            model.addAttribute("shop", shopService.findById(shopId));
-//            model.addAttribute("product", new ProductModel());
-//            model.addAttribute("categories", categoryService.findAll());
-//            return "user/portal/product-form";
-//        }
-//        return "redirect:/portal/product/" + newProduct.getId();
-        return null;
+        }
+
+        if (newProduct == null) {
+            model.addAttribute("shop", shopService.findById(shopId));
+            model.addAttribute("product", new ProductModel());
+            model.addAttribute("categories", categoryService.findAll());
+            return "user/portal/product-form";
+        }
+        return "redirect:/portal/product/" + newProduct.getId();
     }
 
     @GetMapping("portal/product/{productId}")

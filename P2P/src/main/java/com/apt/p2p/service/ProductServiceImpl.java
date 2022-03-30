@@ -103,7 +103,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductModel create(ProductModel model, MultipartFile[] imageFiles, int categoryId, int shopId) {
+    public ProductModel create(ProductModel model, List<MultipartFile> imageFiles, int categoryId, int shopId) {
         try {
             Product entity = new Product(model);
 
@@ -112,11 +112,13 @@ public class ProductServiceImpl implements ProductService {
 
             String ranName = String.valueOf(new Date().getTime());
             List<String> fileNameList = new ArrayList<>();
-            for (int i = 0; i < imageFiles.length; i++) {
+
+            int index = -1;
+            for (MultipartFile file : imageFiles) {
+                index++;
                 // save File to store
-                MultipartFile file = imageFiles[i];
                 String extension = FileUploadUtil.getExtensionName(file).orElse(null);
-                String fileName = "shop_" + shop.getId() + "_" + ranName + "_" + i + "." + extension;
+                String fileName = "shop_" + shop.getId() + "_" + ranName + "_" + index + "." + extension;
                 FileUploadUtil.saveFile(imageUploadDir, fileName, file);
 
                 // save name to db
