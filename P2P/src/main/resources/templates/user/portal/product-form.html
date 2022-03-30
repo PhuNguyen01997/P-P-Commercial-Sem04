@@ -70,49 +70,42 @@
         </div>
         <div class="product-create-form--right">
             <p class="error d-none" data-name="images">[Error Images]</p>
-            <label class="">
-                <p class="btn btn__primary-outline">Thêm ảnh</p>
-                <input class="d-none" type="file" multiple name="imageFiles[]" value="">
-            </label>
+<!--            <label class="">-->
+<!--                <p class="btn btn__primary-outline">Thêm ảnh</p>-->
+<!--                <input class="d-none" type="file" multiple name="imageFiles[]" value="">-->
+<!--            </label>-->
             <div class="product-create-form--right-pic-container jsImageContainer">
-                <div class="product-create-form--right-pic">
-                    <input type="text" name="mapImage[null01]">
-                </div>
-                <div class="product-create-form--right-pic">
-                    <input type="text" name="mapImage[null02]">
-                </div>
-                <div class="product-create-form--right-pic">
-                    <input type="text" name="mapImage[null03]">
-                </div>
+                <label class="product-create-form--right-pic">
+                    <input class="jsMapImage" type="file" name="mapImage[new01]">
+                </label>
             </div>
         </div>
     </form>
 </div>
 
 <script layout:fragment="script">
-    $('input[name="imageFiles[]"]').on('change', function () {
-        $('.error[data-name="images"]').addClass('d-none');
+    const container = $('.jsImageContainer');
+    $('input.jsMapImage').on('change', function () {
+        // $('.error[data-name="images"]').addClass('d-none');
         if (this.files.size == 0) return;
-        const container = $('.jsImageContainer');
-        container.empty();
-        Array.from(this.files).forEach((file, index) => {
-            let html = `<div class="product-create-form--right-pic">`;
-            html += `<img data-index="${index}" src="" data-id="" alt="">`;
-            html += `</div>`;
-            container.append(html);
+        // container.empty();
+        const file = this.files[0];
+        console.log(this);
+        const label = $(this).parent();
+        // Array.from(this.files).forEach((file, index) => {
+        //     let html = `<div class="product-create-form--right-pic">`;
+        //     html += ``;
+        //     html += `</div>`;
+        label.append(`<img data-index="${index}" src="" data-id="" alt="">`);
 
             const element = container.find(`img[data-index="${index}"]`)[0];
             readUrlImage(file, element);
-        })
+        // })
 
     })
     document.querySelector('.product-create-form').addEventListener('submit', function (e) {
         e.preventDefault();
         let canSubmit = true;
-        // if (!$('select[name="categoryId"]').val()) {
-        //     canSubmit = false;
-        //     $('.error[data-name="category"]').text("Danh mục sản phẩm không hợp lệ").removeClass('d-none');
-        // }
         $('input[type=file]').each((index, fileInput) => {
             // if (fileInput.files.length == 0) {
             //     $('.error[data-name="images"]').text("Sản phẩm ít nhất phải có 1 ảnh").removeClass('d-none');
