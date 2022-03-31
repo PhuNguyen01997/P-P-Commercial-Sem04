@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ShopModel {
-    private int id;
+    private Integer id;
 
     private String logo;
 

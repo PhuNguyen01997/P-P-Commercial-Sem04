@@ -85,7 +85,7 @@ public class ProductController {
     public String portalProductCreate(Model model) {
         int shopId = 2;
         model.addAttribute("shop", shopService.findById(shopId));
-        model.addAttribute("product", new ProductForm());
+        model.addAttribute("productForm", new ProductForm());
         model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product-form";
     }
@@ -97,7 +97,7 @@ public class ProductController {
         int shopId = 2;
         if (productResult.hasErrors()) {
             model.addAttribute("shop", shopService.findById(shopId));
-            model.addAttribute("product", product);
+            model.addAttribute("productForm", product);
             model.addAttribute("categories", categoryService.findAll());
             return "user/portal/product-form";
         }
@@ -114,7 +114,7 @@ public class ProductController {
 
         if (newProduct == null) {
             model.addAttribute("shop", shopService.findById(shopId));
-            model.addAttribute("product", new ProductModel());
+            model.addAttribute("productForm", new ProductModel());
             model.addAttribute("categories", categoryService.findAll());
             return "user/portal/product-form";
         }
@@ -133,7 +133,7 @@ public class ProductController {
 
         ProductModel product = productService.findByShopIdAndProductId(shopId, productId);
         model.addAttribute("shop", shopService.findById(shopId));
-        model.addAttribute("product", product);
+        model.addAttribute("productForm", product);
         model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product-form";
     }

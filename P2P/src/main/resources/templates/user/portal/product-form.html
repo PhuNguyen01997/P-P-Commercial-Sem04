@@ -13,7 +13,7 @@
         <span class="txt01">Sản phẩm mới</span>
         <span class="txt02">Thêm sản phẩm mới vào cửa hàng</span>
         <form class="widget">
-            <div th:if="${product.id == null || product.id == 0}" class="btn btn__red">Ẩn sản phẩm</div>
+            <div th:if="${productForm.id == null || productForm.id == 0}" class="btn btn__red">Ẩn sản phẩm</div>
         </form>
     </h3>
     <form th:object="${productForm}" th:action="@{/portal/product}"

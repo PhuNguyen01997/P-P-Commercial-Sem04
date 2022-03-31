@@ -5514,6 +5514,7 @@ label {
 
 .portal .product-create-form--right-pic img {
   width: 100%;
+  width: 20px;
   height: 100%;
   position: absolute;
   top: 50%;
@@ -5522,5 +5523,13 @@ label {
           transform: translate(-50%, -50%);
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.portal .product-create-form--right-pic .icClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 20px;
+  color: red;
 }
 /*# sourceMappingURL=style.css.map */
