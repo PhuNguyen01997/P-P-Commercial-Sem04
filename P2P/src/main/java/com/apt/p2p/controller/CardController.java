@@ -32,8 +32,9 @@ public class CardController {
 
     @GetMapping("card")
     public String card(Model model) {
+        int userId = 1;
         model.addAttribute("card", new CardModel());
-        model.addAttribute("cards", cardService.findAllByUserId(3));
+        model.addAttribute("cards", cardService.findAllByUserId(userId));
 
         return "user/account/card";
     }
