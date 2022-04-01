@@ -45,7 +45,7 @@
                             <option value="0" disabled selected>Phân loại</option>
                             <option th:each="category : ${categories}" th:value="${category.id}"
                                     th:text="${category.name}"
-                                    th:selected="${product?.category != null && product.category.id == category.id}"
+                                    th:selected="${productForm.category != null && productForm.category.id == category.id}"
                             ></option>
                         </select>
                     </div>
@@ -71,9 +71,11 @@
         <div class="product-create-form--right">
             <p th:errors="*{mapPictures}" class="error jsErrorImages">[Error Images]</p>
             <div class="product-create-form--right-pic-container jsImageContainer">
-                <label class="product-create-form--right-pic">
-                    <input class="jsMapImage d-none" type="file" data-id="1" name="mapPictures[new1]">
-                </label>
+                <div class="product-create-form--right-pic" data-id="1">
+                    <label style="width: 100%; height: 100%">
+                        <input class="jsMapImage d-none" type="file" data-id="1" name="mapPictures[new-1]">
+                    </label>
+                </div>
             </div>
         </div>
     </form>
@@ -86,26 +88,32 @@
 
         const id = $(this).attr('data-id');
         const file = this.files[0];
-        const label = $(this).parent();
-        const img = label.find(`img[data-id=${id}]`);
-        img.remove();
+        const item = container.find(`.product-create-form--right-pic[data-id="${id}"]`);
+        const img = item.find(`img[data-id=${id}]`);
         const isAddNewImg = img.length === 0;
-        const newLabel = label.clone();
+        img.remove();
+        const newItem = item.clone();
 
-        console.log(id);
-
-        label.append(`<img data-id="${id}" src="" alt="">`);
+        item.append(`<img data-id="${id}" src="" alt="">`);
+        item.append(`<i data-id="${id}" class="icClose fas fa-times"></i>`);
         const newImg = container.find(`img[data-id="${id}"]`)[0];
         readUrlImage(file, newImg);
 
         if (isAddNewImg) {
-            newLabel.find('input[type="file"]')
-                .attr('name', `mapPictures[new${parseInt(id) + 1}]`)
+            newItem.find('input[type="file"]')
+                .attr('name', `mapPictures[new-${parseInt(id) + 1}]`)
                 .attr('data-id', parseInt(id) + 1)
                 .val('');
-            container.append(newLabel);
+            newItem.attr('data-id', parseInt(id) + 1);
+            container.append(newItem);
         }
     })
+    container.on('click', '.icClose', function(e){
+        e.preventDefault();
+        const item = $(this).parent();
+        item.remove();
+    })
+
     document.querySelector('.product-create-form').addEventListener('submit', function (e) {
         e.preventDefault();
 

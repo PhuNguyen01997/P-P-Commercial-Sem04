@@ -8,7 +8,6 @@ import com.apt.p2p.service.CategoryService;
 import com.apt.p2p.service.ProductService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.ShopService;
-import com.apt.p2p.validate.PictureValidator;
 import com.apt.p2p.validate.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,6 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -38,7 +36,7 @@ public class ProductController {
 
     @InitBinder("productForm")
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new ProductFormValidator());
+        binder.addValidators(new ProductFormValidator());
     }
 
     @GetMapping("")
@@ -97,7 +95,7 @@ public class ProductController {
         int shopId = 2;
         if (productResult.hasErrors()) {
             model.addAttribute("shop", shopService.findById(shopId));
-            model.addAttribute("productForm", product);
+            model.addAttribute("product", product);
             model.addAttribute("categories", categoryService.findAll());
             return "user/portal/product-form";
         }
@@ -105,11 +103,10 @@ public class ProductController {
         ProductModel newProduct = null;
 
         if (product.getId() == null) {
-            List<MultipartFile> listImage = new ArrayList<>(product.getMapPictures().values());
-            newProduct = productService.create(product, listImage, product.getCategoryId(), shopId);
+            newProduct = productService.create(product, shopId);
         } else {
-//            newProduct = productService.
-//            String str = "";
+            newProduct = productService.update(product);
+            String str = "";
         }
 
         if (newProduct == null) {

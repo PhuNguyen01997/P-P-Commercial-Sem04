@@ -1,13 +1,12 @@
 package com.apt.p2p.model.view;
 
-import com.apt.p2p.entity.Address;
 import com.apt.p2p.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;

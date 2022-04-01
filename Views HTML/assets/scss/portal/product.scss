@@ -249,7 +249,6 @@
                     background: url('/assets/img/common/icon_plus_blue.png') no-repeat 50% 50%;
                     background-size: 30px 30px;
                     margin: 0 10px;
-                    overflow: hidden;
                     margin-bottom: 16px;
 
                     &-container {
@@ -261,7 +260,6 @@
 
                     img {
                         width: 100%;
-                        width: 20px;
                         height: 100%;
                         position: absolute;
                         top: 50%;
@@ -270,12 +268,27 @@
                         object-fit: cover;
                     }
 
-                    .icClose {
+                    label {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
                         position: absolute;
+                        left: 0;
                         top: 0;
-                        right: 0;
+                    }
+
+                    .icClose {
+                        padding: 5px;
+                        width: 30px;
+                        text-align: center;
+                        position: absolute;
+                        top: -15px;
+                        right: -15px;
                         font-size: 20px;
-                        color: red;
+                        color: #FFF;
+                        border-radius: 50%;
+                        background-color: red;
+                        border-radius: 50%;
                     }
                 }
             }

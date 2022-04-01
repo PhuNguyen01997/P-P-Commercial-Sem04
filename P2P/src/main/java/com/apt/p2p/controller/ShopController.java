@@ -29,7 +29,7 @@ public class ShopController {
 
     @InitBinder("imageFiles")
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(new PictureValidator());
+        binder.addValidators(new PictureValidator());
     }
 
     @GetMapping("portal")

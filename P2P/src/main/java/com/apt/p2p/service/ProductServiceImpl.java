@@ -6,6 +6,7 @@ import com.apt.p2p.entity.Category;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.entity.Shop;
 import com.apt.p2p.model.form.FilterProductPortal;
+import com.apt.p2p.model.form.ProductForm;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.repository.CategoryRepository;
 import com.apt.p2p.repository.ProductRepository;
@@ -18,10 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,17 +101,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductModel create(ProductModel model, List<MultipartFile> imageFiles, int categoryId, int shopId) {
+    public ProductModel create(ProductForm productForm, int shopId) {
         try {
-            Product entity = new Product(model);
+            Product entity = new Product(productForm);
 
-            Category category = categoryRepository.findById(categoryId).orElse(null);
+            Category category = categoryRepository.findById(productForm.getCategoryId()).orElse(null);
             Shop shop = shopRepository.findById(shopId).orElse(null);
 
             String ranName = String.valueOf(new Date().getTime());
             List<String> fileNameList = new ArrayList<>();
 
             int index = -1;
+            List<MultipartFile> imageFiles = new ArrayList<>(productForm.getMapPictures().values());
             for (MultipartFile file : imageFiles) {
                 index++;
                 // save File to store
@@ -141,7 +140,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductModel update(ProductModel model, MultipartFile[] imageFiles, int categoryId) {
+    public ProductModel update(ProductForm productForm) {
         return null;
     }
 

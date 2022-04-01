@@ -25,13 +25,13 @@ var getStringTimeFormat = function(date) {
 }
 
 var readUrlImage = function(file, element) {
-    const reader = new FileReader();
+  const reader = new FileReader();
 
-    reader.onload = function(e) {
-      $(element).attr('src', e.target.result);
-    };
+  reader.onload = function(e) {
+    $(element).attr('src', e.target.result);
+  };
 
-    reader.readAsDataURL(file);
+  reader.readAsDataURL(file);
 }
 
 var getBase64Image = function(img) {

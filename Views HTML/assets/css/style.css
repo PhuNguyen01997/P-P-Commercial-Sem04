@@ -5488,7 +5488,6 @@ label {
   background: url("/assets/img/common/icon_plus_blue.png") no-repeat 50% 50%;
   background-size: 30px 30px;
   margin: 0 10px;
-  overflow: hidden;
   margin-bottom: 16px;
 }
 
@@ -5514,7 +5513,6 @@ label {
 
 .portal .product-create-form--right-pic img {
   width: 100%;
-  width: 20px;
   height: 100%;
   position: absolute;
   top: 50%;
@@ -5525,11 +5523,26 @@ label {
      object-fit: cover;
 }
 
-.portal .product-create-form--right-pic .icClose {
+.portal .product-create-form--right-pic label {
+  display: block;
+  width: 100%;
+  height: 100%;
   position: absolute;
+  left: 0;
   top: 0;
-  right: 0;
+}
+
+.portal .product-create-form--right-pic .icClose {
+  padding: 5px;
+  width: 30px;
+  text-align: center;
+  position: absolute;
+  top: -15px;
+  right: -15px;
   font-size: 20px;
-  color: red;
+  color: #FFF;
+  border-radius: 50%;
+  background-color: red;
+  border-radius: 50%;
 }
 /*# sourceMappingURL=style.css.map */
