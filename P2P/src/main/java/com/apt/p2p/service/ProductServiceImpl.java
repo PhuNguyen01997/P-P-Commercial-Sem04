@@ -142,6 +142,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductModel update(ProductForm productForm) {
+        Product product = productRepository.findById(productForm.getId()).get();
         return null;
     }
 
