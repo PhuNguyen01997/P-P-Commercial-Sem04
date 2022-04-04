@@ -16,6 +16,10 @@ import java.util.Optional;
 public class FileUploadUtil {
     public static void saveFile(String uploadDir, String fileName,
                                 MultipartFile multipartFile) throws IOException {
+        if(multipartFile.isEmpty()){
+            return;
+        }
+
         File folder = ResourceUtils.getFile("src/main/assets/" + uploadDir);
         Path uploadPath = Paths.get(folder.getPath());
 

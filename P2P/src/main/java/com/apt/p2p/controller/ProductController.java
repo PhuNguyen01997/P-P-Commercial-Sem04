@@ -129,8 +129,9 @@ public class ProductController {
         }
 
         ProductModel product = productService.findByShopIdAndProductId(shopId, productId);
+
         model.addAttribute("shop", shopService.findById(shopId));
-        model.addAttribute("productForm", product);
+        model.addAttribute("productForm", new ProductForm(product));
         model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product-form";
     }

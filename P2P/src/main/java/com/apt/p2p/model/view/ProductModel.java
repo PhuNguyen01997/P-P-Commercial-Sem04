@@ -21,6 +21,8 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductModel {
+    private static String urlPath = "/assets/products/";
+
     private Integer id;
 
     @NotBlank(message = "Tên sản phẩm không hợp lệ")
@@ -70,7 +72,21 @@ public class ProductModel {
         this.rates = new ArrayList<>();
     }
 
+    public ProductModel(ProductModel productModel) {
+        this.id = productModel.getId();
+        this.name = productModel.getName();
+        this.price = productModel.getPrice();
+        this.image = productModel.getImage();
+        this.description = productModel.getDescription();
+        this.stock = productModel.getStock();
+        this.createdAt = productModel.getCreatedAt();
+        this.updatedAt = productModel.getUpdatedAt();
+        this.shop = productModel.getShop();
+        this.rates = productModel.getRates();
+        this.category = productModel.getCategory();
+    }
+
     public String toUrl(String fileName) {
-        return "/assets/products/" + fileName;
+        return urlPath + fileName;
     }
 }

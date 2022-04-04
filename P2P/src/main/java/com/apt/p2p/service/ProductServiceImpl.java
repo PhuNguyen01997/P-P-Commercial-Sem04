@@ -114,6 +114,7 @@ public class ProductServiceImpl implements ProductService {
             int index = -1;
             List<MultipartFile> imageFiles = new ArrayList<>(productForm.getMapPictures().values());
             for (MultipartFile file : imageFiles) {
+                if(file.isEmpty()) continue;
                 index++;
                 // save File to store
                 String extension = FileUploadUtil.getExtensionName(file).orElse(null);
