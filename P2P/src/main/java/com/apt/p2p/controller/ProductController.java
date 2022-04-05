@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.common.StringProcessForView;
 import com.apt.p2p.model.form.*;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;

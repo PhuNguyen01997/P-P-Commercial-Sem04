@@ -72,10 +72,10 @@
             <div class="product-create-form--right-pic-container jsImageContainer">
                 <div th:each="pic,iter : ${productForm.image}" class="product-create-form--right-pic"
                      th:attr="data-id=${iter.index}">
-                    <img th:src="${productForm.toUrl(pic)}" alt="">
+                    <img th:src="${productForm.toUrl(pic)}" th:attr="data-id=${iter.index}" alt="">
                     <label>
                         <input class="jsMapImage d-none" type="file"
-                               th:attr="data-id=${iter.index}, name=${'mapPictures[' + pic +']'}">
+                               th:attr="data-id=${iter.index}, name=${'mapPictures[' + productForm.getImageName(pic) +']'}">
                     </label>
                     <i th:attr="data-id=${iter.index}" class="icClose fas fa-times"></i>
                 </div>

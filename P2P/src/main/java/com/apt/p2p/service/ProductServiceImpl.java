@@ -12,13 +12,16 @@ import com.apt.p2p.repository.CategoryRepository;
 import com.apt.p2p.repository.ProductRepository;
 import com.apt.p2p.repository.ProductSpecification;
 import com.apt.p2p.repository.ShopRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductModel> findAllByShopWithFilterPortal(int shopId, FilterProductPortal filter) {
         Specification<Product> condition = Specification.where(ProductSpecification.hasShopId(shopId));
-        if(!filter.getName().isEmpty()){
+        if (!filter.getName().isEmpty()) {
             switch (filter.getFilterBy()) {
                 case 1: {
                     condition = condition.and(ProductSpecification.hasName(filter.getName()));
@@ -76,11 +79,11 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
-        if(filter.getCategoryId() != 0){
+        if (filter.getCategoryId() != 0) {
             condition = condition.and(ProductSpecification.hasCategoryId(filter.getCategoryId()));
         }
 
-        switch (filter.getStatus()){
+        switch (filter.getStatus()) {
             case 1: {
                 condition = condition.and(ProductSpecification.hasStock(true));
                 break;
@@ -102,47 +105,77 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductModel create(ProductForm productForm, int shopId) {
-        try {
-            Product entity = new Product(productForm);
+        Product entity = new Product(productForm);
 
-            Category category = categoryRepository.findById(productForm.getCategoryId()).orElse(null);
-            Shop shop = shopRepository.findById(shopId).orElse(null);
+        Category category = categoryRepository.findById(productForm.getCategoryId()).orElse(null);
+        Shop shop = shopRepository.findById(shopId).orElse(null);
 
+        List<String> fileNameList = new ArrayList<>();
+        List<MultipartFile> imageFiles = new ArrayList<>(productForm.getMapPictures().values());
+        for (MultipartFile file : imageFiles) {
+            if (file.isEmpty()) continue;
+
+            // save File to store
             String ranName = String.valueOf(new Date().getTime());
-            List<String> fileNameList = new ArrayList<>();
+            String fileName = "shop_" + shop.getId() + "_" + ranName;
+            String fileNameSaved = FileUploadUtil.saveFile(imageUploadDir, fileName, file);
 
-            int index = -1;
-            List<MultipartFile> imageFiles = new ArrayList<>(productForm.getMapPictures().values());
-            for (MultipartFile file : imageFiles) {
-                if(file.isEmpty()) continue;
-                index++;
-                // save File to store
-                String extension = FileUploadUtil.getExtensionName(file).orElse(null);
-                String fileName = "shop_" + shop.getId() + "_" + ranName + "_" + index + "." + extension;
-                FileUploadUtil.saveFile(imageUploadDir, fileName, file);
-
-                // save name to db
-                fileNameList.add(fileName);
+            // save name to db
+            if (fileNameSaved != null) {
+                fileNameList.add(fileNameSaved);
             }
-            ObjectMapper mapper = new ObjectMapper();
-            String imageJson = mapper.writeValueAsString(fileNameList);
-
-            entity.setShop(shop);
-            entity.setCategory(category);
-            entity.setImage(imageJson);
-
-            productRepository.save(entity);
-
-            return productMapper.productEntityToModel(entity);
-        } catch (Exception e){
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        String imageJson = null;
+        try {
+            imageJson = mapper.writeValueAsString(fileNameList);
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
         }
+
+        entity.setShop(shop);
+        entity.setCategory(category);
+        entity.setImage(imageJson);
+
+        productRepository.save(entity);
+
+        return productMapper.productEntityToModel(entity);
     }
 
     @Override
     public ProductModel update(ProductForm productForm) {
         Product product = productRepository.findById(productForm.getId()).get();
+
+        List<String> fileNameList = new ArrayList<>();
+        productForm.getMapPictures().forEach((key, imageFile) -> {
+            try {
+                List<Path> path = FileUploadUtil.findFiles(key, imageUploadDir);
+                String str = "";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//            if (key.indexOf("new") == -1) {
+//                FileUploadUtil.saveFile(imageUploadDir, key, imageFile);
+//            } else {
+//                String ranName = String.valueOf(new Date().getTime());
+//                String fileName = "shop_" + product.getShop().getId() + "_" + ranName;
+//
+//                String fileNameSaved = FileUploadUtil.saveFile(imageUploadDir, fileName, imageFile);
+//
+//                if (fileNameSaved != null) {
+//                    fileNameList.add(fileNameSaved);
+//                }
+//            }
+        });
+
+//        Category category = categoryRepository.findById(productForm.getCategoryId()).get();
+//        product.setCategory(category);
+//
+//        product.setName(productForm.getName());
+//        product.setPrice(productForm.getPrice());
+//        product.setDescription(productForm.getDescription());
+
         return null;
     }
 

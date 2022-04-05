@@ -89,4 +89,8 @@ public class ProductModel {
     public String toUrl(String fileName) {
         return urlPath + fileName;
     }
+
+    public String getImageName(String fullFileName){
+        return fullFileName.replaceAll("\\.\\w+$", "");
+    }
 }

@@ -122,8 +122,7 @@ public class ShopServiceImpl implements ShopService {
                 String fileName = shop.getLogo();
                 if (fileName == null) {
                     fileName = "logo_" + String.valueOf(new Date().getTime()) + "." + extension;
-                }
-                else{
+                } else {
                     fileName.replaceAll("\\w+$", extension);
                 }
                 FileUploadUtil.saveFile(imgUploadDir, fileName, logoFile);
@@ -135,8 +134,7 @@ public class ShopServiceImpl implements ShopService {
                 String fileName = shop.getBackground();
                 if (fileName == null) {
                     fileName = "thumbnal_" + String.valueOf(new Date().getTime()) + "." + extension;
-                }
-                else{
+                } else {
                     fileName = fileName.replaceAll("\\w+$", extension);
                 }
                 FileUploadUtil.saveFile(imgUploadDir, fileName, backgroundFile);
@@ -145,8 +143,6 @@ public class ShopServiceImpl implements ShopService {
             }
 
             shopRepository.save(shop);
-        } catch (IOException ioE) {
-            ioE.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
             shop = null;

@@ -31,4 +31,8 @@ public class StringProcessForView {
         }
         return url;
     }
+
+    public static String removeExtensionFilename(String fileName){
+        return fileName.replaceAll("\\.\\w+$", "");
+    }
 }
