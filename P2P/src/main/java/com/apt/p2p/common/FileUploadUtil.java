@@ -15,6 +15,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FileUploadUtil {
+    /**
+     * fileName (with no extension)
+     * @param uploadDir
+     * @param fileName
+     * @param multipartFile
+     * @return
+     */
     public static String saveFile(String uploadDir, String fileName,
                                   MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
@@ -31,9 +38,6 @@ public class FileUploadUtil {
                 Files.createDirectories(uploadPath);
             }
 
-            // delete if exist same name but difference extension
-            List<Path> existFilePath = findFiles(fileName, uploadDir);
-
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {
@@ -47,16 +51,30 @@ public class FileUploadUtil {
 
     public static Optional<String> getExtensionName(MultipartFile file) {
         String fileName = file.getOriginalFilename();
+        return getExtensionName(fileName);
+    }
+
+    public static Optional<String> getExtensionName(String fileName){
         return Optional.ofNullable(fileName)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(fileName.lastIndexOf(".") + 1).toLowerCase());
     }
 
-    public static void deleteFile(String uploadDir, String fileName) throws IOException {
-        File folder = ResourceUtils.getFile("src/main/assets/" + uploadDir);
-        Path folderPath = Paths.get(folder.getPath());
-        Path deleteFilePath = folderPath.resolve(fileName);
-        Files.delete(deleteFilePath);
+    /**
+     * fileName with exact extension
+     * @param uploadDir
+     * @param fileName
+     * @throws IOException
+     */
+    public static void deleteFile(String uploadDir, String fileName){
+        try {
+            File folder = ResourceUtils.getFile("src/main/assets/" + uploadDir);
+            Path folderPath = Paths.get(folder.getPath());
+            Path deleteFilePath = folderPath.resolve(fileName);
+            Files.delete(deleteFilePath);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public static List<Path> findFiles(String fileName, String searchDirectory) throws IOException {

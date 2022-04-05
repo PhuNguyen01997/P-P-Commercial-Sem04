@@ -107,12 +107,11 @@ public class ProductController {
             newProduct = productService.create(product, shopId);
         } else {
             newProduct = productService.update(product);
-            String str = "";
         }
 
         if (newProduct == null) {
             model.addAttribute("shop", shopService.findById(shopId));
-            model.addAttribute("productForm", new ProductModel());
+            model.addAttribute("productForm", product);
             model.addAttribute("categories", categoryService.findAll());
             return "user/portal/product-form";
         }

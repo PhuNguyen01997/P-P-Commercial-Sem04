@@ -1,6 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.FileUploadUtil;
+import com.apt.p2p.common.StringProcessForView;
 import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Category;
 import com.apt.p2p.entity.Product;
@@ -13,6 +14,7 @@ import com.apt.p2p.repository.ProductRepository;
 import com.apt.p2p.repository.ProductSpecification;
 import com.apt.p2p.repository.ShopRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -145,38 +147,70 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductModel update(ProductForm productForm) {
-        Product product = productRepository.findById(productForm.getId()).get();
+        try {
+            Product product = productRepository.findById(productForm.getId()).get();
+            ObjectMapper mapper = new ObjectMapper();
+            List<String> fileNameList = mapper.readValue(product.getImage(), new TypeReference<List<String>>() {
+            });
 
-        List<String> fileNameList = new ArrayList<>();
-        productForm.getMapPictures().forEach((key, imageFile) -> {
-            try {
-                List<Path> path = FileUploadUtil.findFiles(key, imageUploadDir);
-                String str = "";
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-//            if (key.indexOf("new") == -1) {
-//                FileUploadUtil.saveFile(imageUploadDir, key, imageFile);
-//            } else {
-//                String ranName = String.valueOf(new Date().getTime());
-//                String fileName = "shop_" + product.getShop().getId() + "_" + ranName;
-//
-//                String fileNameSaved = FileUploadUtil.saveFile(imageUploadDir, fileName, imageFile);
-//
-//                if (fileNameSaved != null) {
-//                    fileNameList.add(fileNameSaved);
-//                }
-//            }
-        });
+            // user want to remove image
+            List<String> deleteFileNameList = fileNameList.stream()
+                    .filter(fileName -> !productForm.getMapPictures().keySet().contains(StringProcessForView.removeExtensionFilename(fileName)))
+                    .collect(Collectors.toList());
+            deleteFileNameList.forEach(fileName -> {
+                FileUploadUtil.deleteFile(imageUploadDir, fileName);
+            });
 
-//        Category category = categoryRepository.findById(productForm.getCategoryId()).get();
-//        product.setCategory(category);
-//
-//        product.setName(productForm.getName());
-//        product.setPrice(productForm.getPrice());
-//        product.setDescription(productForm.getDescription());
+            // Process update imageFile
+            List<String> addFileNameList = new ArrayList<>();
+            productForm.getMapPictures().forEach((key, imageFile) -> {
+                if (key.indexOf("new") == -1 && !imageFile.isEmpty()) {
+                    String newExtension = FileUploadUtil.getExtensionName(imageFile).orElse(null);
+                    String currentFullName = fileNameList.stream()
+                            .filter(fullName -> StringProcessForView.removeExtensionFilename(fullName).equals(key))
+                            .collect(Collectors.toList())
+                            .get(0);
+                    String currentExtension = FileUploadUtil.getExtensionName(currentFullName).get();
+                    if (!newExtension.equals(currentExtension)) {
+                        FileUploadUtil.deleteFile(imageUploadDir, currentFullName);
+                        for (int i = 0; i < fileNameList.size(); i++) {
+                            if(StringProcessForView.removeExtensionFilename(fileNameList.get(i)).equals(key)){
+                                fileNameList.set(i, key + "." + newExtension);
+                            }
+                        }
+                    }
+                    FileUploadUtil.saveFile(imageUploadDir, key, imageFile);
+                } else {
+                    String ranName = String.valueOf(new Date().getTime());
+                    String fileName = "shop_" + product.getShop().getId() + "_" + ranName;
 
-        return null;
+                    String fileNameSaved = FileUploadUtil.saveFile(imageUploadDir, fileName, imageFile);
+
+                    if (fileNameSaved != null) {
+                        addFileNameList.add(fileNameSaved);
+                    }
+                }
+            });
+
+            fileNameList.removeAll(deleteFileNameList);
+            fileNameList.addAll(addFileNameList);
+            product.setImage(mapper.writeValueAsString(fileNameList));
+
+            // Process update category
+            Category category = categoryRepository.findById(productForm.getCategoryId()).get();
+            product.setCategory(category);
+
+            // Process update another info
+            product.setName(productForm.getName());
+            product.setPrice(productForm.getPrice());
+            product.setDescription(productForm.getDescription());
+
+            productRepository.save(product);
+            return productMapper.productEntityToModel(product);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -190,7 +224,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection) {
+    public List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer
+            rate, String sortBy, Boolean sortDirection) {
         // Sơn cặc xử lý cái biến "products" bao gồm các sản phẩm đã được lọc theo giá trị phái trên
         List<Product> products = null;
 

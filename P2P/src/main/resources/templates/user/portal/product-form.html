@@ -103,7 +103,7 @@
         img.remove();
         const newItem = item.clone();
 
-        item.append(`<img data-id="${id}" src="" alt="">`);
+        item.prepend(`<img data-id="${id}" src="" alt="">`);
         item.append(`<i data-id="${id}" class="icClose fas fa-times"></i>`);
         const newImg = container.find(`img[data-id="${id}"]`)[0];
         readUrlImage(file, newImg);
