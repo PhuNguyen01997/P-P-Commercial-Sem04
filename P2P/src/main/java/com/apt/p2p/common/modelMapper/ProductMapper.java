@@ -45,6 +45,8 @@ public class ProductMapper {
         model.setShop(new ShopModel(entity.getShop()));
         model.setRates(entity.getRates().stream().map(re -> new RateModel(re)).collect(Collectors.toList()));
         model.setCategory(entity.getCategory().removeRelationShip());
+        Double average = entity.getRates().stream().mapToDouble(r -> r.getStar()).average().orElse(0);
+        model.setAverageRate(average == 0 ? null : average);
 
         return model;
     }

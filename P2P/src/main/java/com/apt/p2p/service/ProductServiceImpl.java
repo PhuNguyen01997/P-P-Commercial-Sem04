@@ -66,46 +66,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductModel> findAllByShopWithFilterPortal(int shopId, FilterProductPortal filter) {
-        Specification<Product> condition = Specification.where(ProductSpecification.hasShopId(shopId));
-        if (!filter.getName().isEmpty()) {
-            switch (filter.getFilterBy()) {
-                case 1: {
-                    condition = condition.and(ProductSpecification.hasName(filter.getName()));
-                    break;
-                }
-                case 2: {
-                    condition = condition.and(ProductSpecification.hasId(filter.getName()));
-                    break;
-                }
-            }
-        }
-
-        if (filter.getCategoryId() != 0) {
-            condition = condition.and(ProductSpecification.hasCategoryId(filter.getCategoryId()));
-        }
-
-        switch (filter.getStatus()) {
-            case 1: {
-                condition = condition.and(ProductSpecification.hasStock(true));
-                break;
-            }
-            case 2: {
-                condition = condition.and(ProductSpecification.hasStock(false));
-                break;
-            }
-        }
-
-        List<Product> productEntities = productRepository.findAll(condition);
-
-        List<ProductModel> productModels = productEntities.stream()
-                .map(e -> productMapper.productEntityToModel(e))
-                .collect(Collectors.toList());
-
-        return productModels;
-    }
-
-    @Override
     public ProductModel create(ProductForm productForm, int shopId) {
         Product entity = new Product(productForm);
 
@@ -238,9 +198,49 @@ public class ProductServiceImpl implements ProductService {
             condition = condition.and(ProductSpecification.hasPrice(minPrice, maxPrice));
         }
 
-//        if(rate != null){
-//            condition = condition.and(ProductSpecification.hasRate(rate));
-//        }
+        if(rate != null){
+            condition = condition.and(ProductSpecification.hasRate(rate));
+        }
+
+        List<Product> productEntities = productRepository.findAll(condition);
+
+        List<ProductModel> productModels = productEntities.stream()
+                .map(e -> productMapper.productEntityToModel(e))
+                .collect(Collectors.toList());
+
+        return productModels;
+    }
+
+    @Override
+    public List<ProductModel> findAllByShopWithFilterPortal(int shopId, FilterProductPortal filter) {
+        Specification<Product> condition = Specification.where(ProductSpecification.hasShopId(shopId));
+        if (!filter.getName().isEmpty()) {
+            switch (filter.getFilterBy()) {
+                case 1: {
+                    condition = condition.and(ProductSpecification.hasName(filter.getName()));
+                    break;
+                }
+                case 2: {
+                    condition = condition.and(ProductSpecification.hasId(filter.getName()));
+                    break;
+                }
+            }
+        }
+
+        if (filter.getCategoryId() != 0) {
+            condition = condition.and(ProductSpecification.hasCategoryId(filter.getCategoryId()));
+        }
+
+        switch (filter.getStatus()) {
+            case 1: {
+                condition = condition.and(ProductSpecification.hasStock(true));
+                break;
+            }
+            case 2: {
+                condition = condition.and(ProductSpecification.hasStock(false));
+                break;
+            }
+        }
 
         List<Product> productEntities = productRepository.findAll(condition);
 

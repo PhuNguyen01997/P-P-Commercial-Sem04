@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 
@@ -73,11 +72,12 @@ public final class ProductSpecification {
 
     public static Specification<Product> hasRate(Integer rate) {
         return (root, query, cb) -> {
-
             root = joinAllRelation(root);
             Join<Product, Rate> joinProductRate = root.join("rates");
-//            cb.avg(joinProductRate.get("star")).;
-            return cb.greaterThanOrEqualTo(joinProductRate.get("star"), rate);
+
+            query.groupBy(joinProductRate.get("id")).having(cb.greaterThanOrEqualTo(cb.avg(joinProductRate.get("star")), rate.doubleValue()));
+
+            return query.getRestriction();
         };
     }
 

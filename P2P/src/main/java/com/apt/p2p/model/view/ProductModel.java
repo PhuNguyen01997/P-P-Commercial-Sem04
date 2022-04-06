@@ -50,6 +50,8 @@ public class ProductModel {
 
     private Category category;
 
+    private Double averageRate;
+
     public ProductModel(Product entity) {
         this.id = entity.getId();
         this.name = entity.getName();
@@ -84,6 +86,7 @@ public class ProductModel {
         this.shop = productModel.getShop();
         this.rates = productModel.getRates();
         this.category = productModel.getCategory();
+        this.averageRate = productModel.getAverageRate();
     }
 
     public String toUrl(String fileName) {
