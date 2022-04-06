@@ -27,5 +27,5 @@ public interface ProductService {
 
     ProductModel update(ProductForm productFormModel);
 
-    List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection);
+    List<ProductModel> findAllByShopWithFilterIndex(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection);
 }

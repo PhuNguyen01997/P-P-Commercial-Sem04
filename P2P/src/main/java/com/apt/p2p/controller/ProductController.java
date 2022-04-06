@@ -48,9 +48,7 @@ public class ProductController {
                         @RequestParam(required = false, name = "rate") Integer rate,
                         @RequestParam(required = false, name = "sortBy") String sortBy,
                         @RequestParam(required = false, name = "sortDirection") Boolean sortDirection) {
-
-
-        model.addAttribute("products", productService.SonFindAllWithFilter(keyword, minPrice, maxPrice, rate, sortBy, sortDirection));
+        model.addAttribute("products", productService.findAllByShopWithFilterIndex(keyword, minPrice, maxPrice, rate, sortBy, sortDirection));
         return "user/main/index";
     }
 

@@ -33,9 +33,9 @@
                 <p class="shopping-side--title">Price range</p>
                 <form action="">
                     <div class="shopping-side--content shopping-side--content__price-range">
-                        <input type="number" name="minPrice">
+                        <input type="number" name="minPrice" th:value="${param.minPrice}">
                         <span><i class="fas fa-exchange-alt"></i></span>
-                        <input type="number" name="maxPrice">
+                        <input type="number" name="maxPrice" th:value="${param.maxPrice}">
                     </div>
                     <button class="jsClick btn btn__red" type="button">Áp dụng</button>
                 </form>
@@ -43,7 +43,14 @@
             <div class="shopping-side--item">
                 <p class="shopping-side--title">Rate</p>
                 <ul class="shopping-side--content shopping-side--content__list-rate">
-                    <li class="jsClick">
+                    <select class="d-none" name="rate">
+                        <option value="5" th:selected="${#httpServletRequest.getParameter('rate') == '5'}"></option>
+                        <option value="4" th:selected="${#httpServletRequest.getParameter('rate') == '4'}"></option>
+                        <option value="3" th:selected="${#httpServletRequest.getParameter('rate') == '3'}"></option>
+                        <option value="2" th:selected="${#httpServletRequest.getParameter('rate') == '2'}"></option>
+                        <option value="1" th:selected="${#httpServletRequest.getParameter('rate') == '1' || #httpServletRequest.getParameter('rate') == null}"></option>
+                    </select>
+                    <li class="jsRate" data-value="5" th:classappend="${#httpServletRequest.getParameter('rate') == '5' ? 'active' : ''}">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -52,37 +59,37 @@
                                 <i class="fas fa-star"></i>
                             </span>
                     </li>
-                    <li class="jsClick">
+                    <li class="jsRate" data-value="4" th:classappend="${#httpServletRequest.getParameter('rate') == '4' ? 'active' : ''}">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </span>
-                        <span>Trở lên</span>
-                    </li>
-                    <li class="jsClick">
-                            <span class="icon icon__star">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
                         <span>Trở lên</span>
                     </li>
-                    <li class="jsClick">
+                    <li class="jsRate" data-value="3" th:classappend="${#httpServletRequest.getParameter('rate') == '3' ? 'active' : ''}">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
                         <span>Trở lên</span>
                     </li>
-                    <li class="jsClick">
+                    <li class="jsRate" data-value="2" th:classappend="${#httpServletRequest.getParameter('rate') == '2' ? 'active' : ''}">
+                            <span class="icon icon__star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        <span>Trở lên</span>
+                    </li>
+                    <li class="jsRate" data-value="1" th:classappend="${#httpServletRequest.getParameter('rate') == '1' ? 'active' : ''}">
                             <span class="icon icon__star">
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
@@ -98,12 +105,24 @@
         <div class="shopping-main">
             <div class="shopping-sort">
                 <p>Sort by</p>
-                <button data-value="NEW" class="jsSortBy btn shopping-sort--btn active">Mới</button>
-                <button data-value="PRICE" class="jsSortBy btn shopping-sort--btn">Giá tiền</button>
+                <button data-value="NEW" class="jsSortBy btn shopping-sort--btn"
+                        th:classappend="${(#httpServletRequest.getParameter('sortBy') == 'NEW' || #httpServletRequest.getParameter('sortBy') == null) ? 'active' : ''}">
+                    Mới
+                </button>
+                <button data-value="PRICE" class="jsSortBy btn shopping-sort--btn"
+                        th:classappend="${#httpServletRequest.getParameter('sortBy') == 'PRICE' ? 'active' : ''}">
+                    Giá tiền
+                </button>
                 <div class="select shopping-sort--select">
                     <select name="sortDirection" id="">
-                        <option value="false" selected>Low to high</option>
-                        <option value="true">High to low</option>
+                        <option value="true"
+                                th:selected="${#httpServletRequest.getParameter('sortDirection') == 'true' || #httpServletRequest.getParameter('sortDirection') == null}">
+                            Low to high
+                        </option>
+                        <option value="false"
+                                th:selected="${#httpServletRequest.getParameter('sortDirection') == 'false'}">
+                            High to low
+                        </option>
                     </select>
                 </div>
                 <div class="pagi-simplify">
@@ -113,14 +132,17 @@
                 </div>
             </div>
             <div class="shopping-list product">
-                <a th:unless="${products == null || products.size() == 0}" th:each="item: ${products}" href="#"
+                <a th:unless="${products == null || products.size() == 0}" th:each="item: ${products}" th:href="@{/product/{id}(id=${item.id})}"
                    class="product-item">
                     <div class="product-item--picture">
                         <img src="/img/products/product_03.jpg" alt="">
                     </div>
                     <div class="product-item--content">
                         <p th:text="${item.name}" class="product-item--title"></p>
-                        <p class="product-item--price">$ 99.99</p>
+                        <p class="product-item--price">
+                            <span th:text="${item.price}"></span>
+                            <span>vnđ</span>
+                        </p>
                         <p class="product-item--rate">
                                 <span class="icon icon__star">
                                     <i class="fas fa-star"></i>
@@ -134,18 +156,18 @@
                     </div>
                 </a>
             </div>
-<!--            <div class="shopping-pagi">-->
-<!--                <ul class="pagi">-->
-<!--                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>-->
-<!--                    <li th:each="pageNumber : ${pageNumbers}"-->
-<!--                        th:classappend="${page == pageNumber ? 'active' : ''}"-->
-<!--                        class="pagi-item btn">-->
-<!--                        <a th:href="@{/(page=${pageNumber})}"-->
-<!--                           th:text="${pageNumber + 1}"></a>-->
-<!--                    </li>-->
-<!--                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>-->
-<!--                </ul>-->
-<!--            </div>-->
+            <!--            <div class="shopping-pagi">-->
+            <!--                <ul class="pagi">-->
+            <!--                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>-->
+            <!--                    <li th:each="pageNumber : ${pageNumbers}"-->
+            <!--                        th:classappend="${page == pageNumber ? 'active' : ''}"-->
+            <!--                        class="pagi-item btn">-->
+            <!--                        <a th:href="@{/(page=${pageNumber})}"-->
+            <!--                           th:text="${pageNumber + 1}"></a>-->
+            <!--                    </li>-->
+            <!--                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>-->
+            <!--                </ul>-->
+            <!--            </div>-->
         </div>
     </div>
 </main>
@@ -157,8 +179,9 @@
             const minPrice = $('[name="minPrice"]').val();
             const maxPrice = $('[name="maxPrice"]').val();
             const sortBy = $('.jsSortBy.active').attr('data-value');
+            const rate = $('select[name="rate"]').val();
             const sortDirection = $('[name="sortDirection"]').val();
-            return {keyword, location, minPrice, maxPrice, sortBy, sortDirection};
+            return {keyword, location, minPrice, maxPrice, sortBy, sortDirection, rate};
         }
 
         function handleEvent() {
@@ -173,15 +196,21 @@
                 } else str += `${key}=${val}&`;
                 return str;
             }, '?');
-            console.log(queryParam);
             location.replace(queryParam);
         }
 
-        $('.jsClick').on('click', () => {
+        $('.jsRate').on('click', function () {
+            const value = this.dataset.value;
+            $('select[name="rate"]').val(value).change();
+        })
+
+        $('.jsClick').on('click', function () {
             handleEvent();
         })
 
-        $('[name="location"]').on('change', () => {
+        $('[name="location"]')
+            .add('[name="sortDirection"]')
+            .add('[name="rate"]').on('change', function () {
             handleEvent();
         })
 

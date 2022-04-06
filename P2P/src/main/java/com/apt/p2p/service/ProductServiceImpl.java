@@ -224,12 +224,30 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> SonFindAllWithFilter(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer
+    public List<ProductModel> findAllByShopWithFilterIndex(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer
             rate, String sortBy, Boolean sortDirection) {
-        // Sơn cặc xử lý cái biến "products" bao gồm các sản phẩm đã được lọc theo giá trị phái trên
-        List<Product> products = null;
+        Specification<Product> condition = Specification.where(null);
 
-        // ------------------------------
-        return products;
+        if (keyword != null && !keyword.isEmpty()) {
+            condition = condition.and(ProductSpecification.hasName(keyword));
+        }
+
+        if(minPrice != null || maxPrice != null){
+            minPrice = minPrice == null ? BigDecimal.ZERO : minPrice;
+            maxPrice = maxPrice == null ? BigDecimal.valueOf(Integer.MAX_VALUE) : maxPrice;
+            condition = condition.and(ProductSpecification.hasPrice(minPrice, maxPrice));
+        }
+
+//        if(rate != null){
+//            condition = condition.and(ProductSpecification.hasRate(rate));
+//        }
+
+        List<Product> productEntities = productRepository.findAll(condition);
+
+        List<ProductModel> productModels = productEntities.stream()
+                .map(e -> productMapper.productEntityToModel(e))
+                .collect(Collectors.toList());
+
+        return productModels;
     }
 }

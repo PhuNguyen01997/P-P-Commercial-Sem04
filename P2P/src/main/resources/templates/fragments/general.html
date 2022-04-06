@@ -25,8 +25,8 @@
             <img class="txt" src="/img/common/logo-text-white.png" alt="P&P">
         </a>
         <div class="header-search">
-            <form action="#" class="header-form">
-                <input class="header-form--search" type="text" name="search">
+            <form method="get" class="header-form">
+                <input class="header-form--search" type="text" name="keyword" th:value="${param.keyword}">
                 <button class="btn btn__primary header-form--submit" type="submit"><i
                         class="fas fa-search"></i></button>
             </form>
