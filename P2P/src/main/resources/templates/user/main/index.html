@@ -142,7 +142,7 @@
                    th:href="@{/product/{id}(id=${item.id})}"
                    class="product-item">
                     <div class="product-item--picture">
-                        <img src="/img/products/product_03.jpg" alt="">
+                        <img th:src="${item.image.size() > 0 ? item.toUrl(item.image.get(0)) : ''}" alt="">
                     </div>
                     <div class="product-item--content">
                         <p th:text="${item.name}" class="product-item--title"></p>

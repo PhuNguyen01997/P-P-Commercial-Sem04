@@ -25,39 +25,31 @@ INSERT INTO shop (background, created_at, description, fund, logo, name, permiss
 
 INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Điện tử', NOW()),
-(NOW(), 'Quần áo', NOW()),
-(NOW(), 'Chất gây nghiện', NOW()),
-(NOW(), 'Vũ khí', NOW());
+(NOW(), 'Thời trang', NOW()),
+(NOW(), 'Gia dụng', NOW()),
+(NOW(), 'Trang sức', NOW()),
+(NOW(), 'Sắc đẹp', NOW()),
+(NOW(), 'Thức ăn', NOW());
 
 INSERT INTO product (created_at, description, image, name, price, updated_at, category_id, shop_id, stock) VALUES
-(NOW(), 'Áo thun', '[]', 'Áo thun', 200000, NOW(), 1, 1, 0),
-(NOW(), 'Quần dài', '[]', 'Quần dài', 350000, NOW(), 1, 1, 0),
-(NOW(), 'Iphone13', '[]', 'Iphone 13', 5400000, NOW(), 2, 1, 0),
-(NOW(), 'Ma túy đá', '[]', 'Ma túy đá', 2900000, NOW(), 3, 2, 0),
-(NOW(), 'Mã tấu', '[]', 'Mã tấu', 100000, NOW(), 4, 2, 0),
-(NOW(), 'Áo thun', '[]', 'Áo thun', 200000, NOW(), 1, 1, 0),
-(NOW(), 'Quần dài', '[]', 'Quần dài', 350000, NOW(), 1, 1, 0),
-(NOW(), 'Iphone13', '[]', 'Iphone 13', 5400000, NOW(), 2, 1, 0),
-(NOW(), 'Ma túy đá', '[]', 'Ma túy đá', 2900000, NOW(), 3, 2, 0),
-(NOW(), 'Mã tấu', '[]', 'Mã tấu', 100000, NOW(), 4, 2, 0),
-(NOW(), 'Áo thun', '[]', 'Áo thun', 200000, NOW(), 1, 1, 0),
+(NOW(), 'Áo thun', '[\"asd.jpg\",\"qweqwe.jpg\"]', 'Áo thun', 200000, NOW(), 1, 1, 0),
 (NOW(), 'Quần dài', '[]', 'Quần dài', 350000, NOW(), 1, 1, 0),
 (NOW(), 'Iphone13', '[]', 'Iphone 13', 5400000, NOW(), 2, 1, 0),
 (NOW(), 'Ma túy đá', '[]', 'Ma túy đá', 2900000, NOW(), 3, 2, 0),
 (NOW(), 'Mã tấu', '[]', 'Mã tấu', 100000, NOW(), 4, 2, 0);
 
-INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES
-(NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), 'Mùa dịch nhưng giao hàng khá nhanh, chưa dùng nên chưa biết chất lượng thế nào', 2, NOW(), 2, 2),
-(NOW(), 'Giao thiếu sp ( hơn 130 ngàn) . Nhắn tin ko trả lời. Làm ơn nếu đọc đc bình luận này thì trả lại tiền giúp đi. Bán hàng ko có tâm !', 1, NOW(), 3, 2),
-(NOW(), 'Trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Do đó, trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Định lí 3: Trong một đường tròn, đường kính đi qua trung điểm của một dây không đi qua tâm thì vuông góc với dây ấy', 4, NOW(), 4, 2),
-(NOW(), 'Vòng cũng OK nhưng vòng nó toàn đấy nhau thôi đeo mà tức kinh khủng luôn. Chúc shop mọi người nên tham khảo nhiều TRC khi mua nhá. Hình ảnh mang tính chất nhận xu', 3, NOW(), 5, 2);
-
-INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
-(NOW(), 3, NOW(), 1, 2),
-(NOW(), 2, NOW(), 2, 2),
-(NOW(), 1, NOW(), 4, 2),
-(NOW(), 1, NOW(), 5, 2);
+-- INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES
+-- (NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
+-- (NOW(), 'Mùa dịch nhưng giao hàng khá nhanh, chưa dùng nên chưa biết chất lượng thế nào', 2, NOW(), 2, 2),
+-- (NOW(), 'Giao thiếu sp ( hơn 130 ngàn) . Nhắn tin ko trả lời. Làm ơn nếu đọc đc bình luận này thì trả lại tiền giúp đi. Bán hàng ko có tâm !', 1, NOW(), 3, 2),
+-- (NOW(), 'Trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Do đó, trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Định lí 3: Trong một đường tròn, đường kính đi qua trung điểm của một dây không đi qua tâm thì vuông góc với dây ấy', 4, NOW(), 4, 2),
+-- (NOW(), 'Vòng cũng OK nhưng vòng nó toàn đấy nhau thôi đeo mà tức kinh khủng luôn. Chúc shop mọi người nên tham khảo nhiều TRC khi mua nhá. Hình ảnh mang tính chất nhận xu', 3, NOW(), 5, 2);
+--
+-- INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
+-- (NOW(), 3, NOW(), 1, 2),
+-- (NOW(), 2, NOW(), 2, 2),
+-- (NOW(), 1, NOW(), 4, 2),
+-- (NOW(), 1, NOW(), 5, 2);
 
 INSERT INTO status_order (id, done_name, name) VALUES
 (1, 'Đã đặt hàng', 'Chờ xác nhận'),
