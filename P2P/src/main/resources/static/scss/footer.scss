@@ -1,53 +1,54 @@
-.footer{
+.footer {
     background-color: #fbfbfb;
     padding: 10px 0;
     border-top: 4px solid $color-primary01;
-    .inner{
+
+    .inner {
         @include flex($justify: space-between, $align: flex-start);
     }
 
-    &-head{
+    &-head {
         font-size: 15px;
         font-weight: bold;
         margin-bottom: 10px;
     }
 
-    &-item{
+    &-item {
         width: calc(25% - 7px);
 
-        &__contact{
-            a{
+        &__contact {
+            a {
                 text-decoration: underline;
             }
         }
 
-        &__connect{
-            .icon{
+        &__connect {
+            .icon {
                 display: block;
                 width: 30px;
-                
-                &:not(:last-child){
+
+                &:not(:last-child) {
                     margin-right: 10px;
                 }
             }
         }
 
-        &__payment{
-            .icon{
-                &__visa{
+        &__payment {
+            .icon {
+                &__visa {
                     width: 50px;
                 }
             }
         }
 
-        &__mobile{
-            .icon{
-                &__qr{
+        &__mobile {
+            .icon {
+                &__qr {
                     width: 80px;
                     margin-right: 10px;
                 }
 
-                &__store{
+                &__store {
                     margin-bottom: 10px;
                     display: block;
                     width: 100px;
@@ -55,15 +56,15 @@
             }
         }
 
-        &--social{
+        &--social {
             @include flex($justify: flex-start);
         }
 
-        &--mobile{
+        &--mobile {
             @include flex($justify: flex-start, $align: flex-start);
         }
 
-        &--line{
+        &--line {
             display: block;
         }
     }

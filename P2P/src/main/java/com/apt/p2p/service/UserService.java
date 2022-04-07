@@ -1,18 +1,17 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.User;
-import com.apt.p2p.model.PaymentModel;
-import com.apt.p2p.model.UserModel;
+import com.apt.p2p.model.view.UserModel;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<User> findAll();
+    List<UserModel> findAll();
 
-    Optional<User> findById(Integer id);
+    UserModel findById(Integer id);
 
-    User save(User user);
+    UserModel save(User user);
 
     void deleteById(Integer id);
 

@@ -1,80 +1,58 @@
 package com.apt.p2p.service;
 
-import com.apt.p2p.entity.Payment;
-import com.apt.p2p.entity.User;
-import com.apt.p2p.model.PaymentModel;
-import com.apt.p2p.repository.PaymentRepository;
-import com.apt.p2p.repository.ShopRepository;
+import com.apt.p2p.common.modelMapper.AddressMapper;
+import com.apt.p2p.common.modelMapper.CardMapper;
+import com.apt.p2p.entity.Address;
+import com.apt.p2p.model.view.CartIndexViewModel;
+import com.apt.p2p.model.view.CardModel;
+import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.UserRepository;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.ValidationException;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-    private final PaymentRepository repository;
-    private final ModelMapper mapper;
-
     @Autowired
-    public PaymentServiceImpl(PaymentRepository repository, UserRepository userRepository, ShopRepository shopRepository, ModelMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
+    private AddressRepository addressRepository;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private AddressMapper addressMapper;
 
     @Override
-    public PaymentModel create(PaymentModel paymentModel) {
-        try {
-            Payment payment = modelMapEntity(paymentModel);
-            payment.setUser(new User());
-//            repository.save(payment);
-            return entityMapModel(payment);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+    public List<CartIndexViewModel> processViewPayment(String[] shopCardIdList) {
+        List<CartIndexViewModel> result = new ArrayList<>();
+        Pattern shopPattern = Pattern.compile("(?<=S)\\d+");
+        Pattern cartPattern = Pattern.compile("(?<=C)\\d+");
+
+        for (String str : shopCardIdList) {
+            Integer shopId = null;
+            Matcher shopMatcher = shopPattern.matcher(str);
+            shopMatcher.find();
+            shopId = Integer.parseInt(shopMatcher.group());
+
+            Matcher cartMatcher = cartPattern.matcher(str);
+            List<Integer> cartIdList = cartMatcher.results().map(matchResult -> Integer.parseInt(matchResult.group())).collect(Collectors.toList());
+
+            result.add(cartService.getCartProductByShopIdAndCartId(shopId, cartIdList));
         }
+
+        result.stream().map(cartIndexViewModel -> {
+            ShopModel shop = cartIndexViewModel.getShop();
+            Address addressEntity = addressRepository.findByShopId(shop.getId());
+            shop.setAddress(addressMapper.addressEntityToModel(addressEntity));
+            return cartIndexViewModel;
+        });
+
+        return result;
     }
-
-    private Payment modelMapEntity(PaymentModel model) {
-        try {
-            mapper.typeMap(PaymentModel.class, Payment.class);
-            mapper.addMappings(mapModelToEntity);
-            mapper.validate();
-            return mapper.map(model, Payment.class);
-        } catch (ValidationException e) {
-            throw e;
-        }
-    }
-
-    private PaymentModel entityMapModel(Payment entity) {
-        try {
-            mapper.typeMap(Payment.class, PaymentModel.class);
-            mapper.addMappings(mapEntityToModel);
-            mapper.validate();
-            return mapper.map(entity, PaymentModel.class);
-        } catch (ValidationException e) {
-            throw e;
-        }
-    }
-
-    private PropertyMap<PaymentModel, Payment> mapModelToEntity = new PropertyMap<PaymentModel, Payment>() {
-        @Override
-        protected void configure() {
-            skip(destination.getShop());
-            skip(destination.getUser());
-        }
-    };
-
-    private PropertyMap<Payment, PaymentModel> mapEntityToModel = new PropertyMap<Payment, PaymentModel>() {
-        @Override
-        protected void configure() {
-            skip(destination.getShopId());
-            skip(destination.getUserId());
-            skip(destination.getShop());
-            skip(destination.getUser());
-        }
-    };
 }

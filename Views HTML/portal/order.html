@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/daterangepicker v3.1/daterangepicker.css" />
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="portal">
+    <header class="header">
+        <div class="header-block header-block__left">
+            <h1 class="header-block--logo">
+                <img class="icon" src="/assets/img/common/logo.png" alt="">
+                <span class="txt">Trang chủ</span>
+            </h1>
+            <p class="header-block--angle"><i class="fas fa-angle-right"></i></p>
+            <h2 class="header-block--text02">Đơn Hàng</h2>
+        </div>
+        <div class="header-block header-block__right">
+            <p class="header-block--info">
+                <span class="avatar"><img src="/assets/img/common/img_default_user.png" alt=""></span>
+                <span class="name">Username</span>
+            </p>
+            <p class="header-block--noti"><i class="far fa-bell"></i></p>
+            <p class="header-block--edu"><button href="#" class="btn btn__outline">ShoPP Edu</button></p>
+        </div>
+    </header>
+    <section class="content">
+        <aside class="aside">
+            <div class="aside-container">
+                <p class="aside-title">Quản lý đơn hàng</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Đơn hủy</a></li>
+                    <li class="aside-item"><a href="#">Trả hàng/Hoàn tiền</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý Shop</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Đánh giá Shop</a></li>
+                    <li class="aside-item"><a href="#">Hồ sơ Shop</a></li>
+                    <li class="aside-item"><a href="#">Địa chỉ</a></li>
+                    <li class="aside-item"><a href="#">Tài khoản</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý sản phẩm</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Thêm sản phẩm</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="main-inner order">
+                <ul class="portal-category">
+                    <li class="portal-category--item active">
+                        <p>Tất cả</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>Chờ xác nhận</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>Chờ lấy hàng</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>Đang giao</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>Đã giao</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>Đơn hủy</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>Trả hàng/Hoàn tiền</p>
+                    </li>
+                    <li class="portal-category--bar"></li>
+                </ul>
+                <div class="order-block order-block__date">
+                    <label for="date" class="txt">Ngày đặt hàng</label>
+                    <div class="ipt ipt__date">
+                        <input id="date" type="text" name="date" class="jsDateRangePicker">
+                        <i class="angle fas fa-angle-down"></i>
+                        <i class="calendar far fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="order-block order-block__name">
+                    <div class="select">
+                        <select name="type" id="">
+                            <option value="">Price</option>
+                            <option value="increase">Low to high</option>
+                            <option value="decrease" selected>Mã đơn hàng</option>
+                        </select>
+                    </div>
+                    <input class="ipt" type="text">
+                    <button class="btn submit btn__primary">Tìm kiếm</button>
+                    <button class="btn clear btn__white">Đặt lại</button>
+                </div>
+                <p class="order-block order-block__count">2 đơn hàng</p>
+                <div class="order-block order-block__table">
+                    <div class="table-header">
+                        <div class="table-col table-col__name">
+                            <p>Sản phẩm</p>
+                        </div>
+                        <div class="table-col table-col__price">
+                            <p>Tổng đơn hàng</p>
+                        </div>
+                        <div class="table-col table-col__date">
+                            <p>Thời gian tạo</p>
+                        </div>
+                        <div class="table-col table-col__status">
+                            <p>Thạng thái</p>
+                        </div>
+                        <div class="table-col table-col__action">
+                            <p>Thao tác</p>
+                        </div>
+                    </div>
+                    <ul class="table-body">
+                        <li class="table-body--row">
+                            <div class="table-body--row-header">
+                                <p class="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                                <p class="name">kimhyungyoong</p>
+                                <p class="order-info">ID đơn hàng: <span>123543</span></p>
+                            </div>
+                            <ul class="table-body--row-list">
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="https://cf.shopee.vn/file/fa64b3bf9fc3e1a50a1ae9857a4c82ba" alt="">
+                                        <div class="info">
+                                            <p class="txt">Dép Nam Nữ Quai Ngang Balen Chữ Trắng - Dép Balen Thời Trang Giá Xưởng Siêu Đẹp</p>
+                                            <p class="number">x2</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>56.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>01-04-2022</p>
+                                        <p>00:05</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        Đang giao
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);"></a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="https://cf.shopee.vn/file/4d1b337de4dff7f6fdecadd2434340da" alt="">
+                                        <div class="info">
+                                            <p class="txt">Áo Thun Unisex 2S Clothing - TA08 Form Rộng Tay Lỡ, Áo Phông Nam Nữ Freesize</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>91.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>01-04-2022</p>
+                                        <p>00:05</p>
+                                    </div>
+                                    <div class="table-col table-col__status">Đang giao</div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);"></a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="https://cf.shopee.vn/file/e071a80b67ef993ee69d802c173e4276" alt="">
+                                        <div class="info">
+                                            <p class="txt">Đầm Cổ Polo Thắt Eo Màu Trơn Phong Cách Hàn Quốc Thời Trang Hè Cho Nữ</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>108.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>01-04-2022</p>
+                                        <p>00:05</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        Đang giao
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="table-body--row">
+                            <div class="table-body--row-header">
+                                <p class="avatar circle"><img src="/assets/img/common/img_default_user.png" alt=""></p>
+                                <p class="name">hoangquocduan477090</p>
+                                <p class="order-info">ID đơn hàng: <span>123200</span></p>
+                            </div>
+                            <ul class="table-body--row-list">
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="https://cf.shopee.vn/file/b3e579a625f6436afebbb0f462f91658" alt="">
+                                        <div class="info">
+                                            <p class="txt">(giá sỉ) đồng hồ thời trang nữ Vesi V99</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>29.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>19-03-202</p>
+                                        <p>13:20</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        Chờ xác nhận
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">Xác nhận đơn hàng</a>
+                                    </div>
+                                </li>
+                                <li class="table-body--row-item">
+                                    <div class="table-col table-col__name">
+                                        <img src="https://cf.shopee.vn/file/239833a278aa6e298235424fce7e64ab" alt="">
+                                        <div class="info">
+                                            <p class="txt">Áo Croptop Dài Tay Cổ Vuông Henia- Áo Kiểu Nữ Ôm Body Chất Len Tăm Dày Dặn Co Giãn Tốt Phong Cách Hàn Quốc</p>
+                                            <p class="number">x1</p>
+                                        </div>
+                                    </div>
+                                    <div class="table-col table-col__price">
+                                        <p>71.000 vnđ</p>
+                                    </div>
+                                    <div class="table-col table-col__date">
+                                        <p>19-03-202</p>
+                                        <p>13:20</p>
+                                    </div>
+                                    <div class="table-col table-col__status">
+                                        Chờ xác nhận
+                                    </div>
+                                    <div class="table-col table-col__action">
+                                        <a href="javascript: void(0);">Xác nhận đơn hàng</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>

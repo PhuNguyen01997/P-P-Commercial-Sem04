@@ -27,9 +27,11 @@
             width: 80px;
             height: 80px;
             flex-shrink: 0;
+            margin-bottom: 5px;
         }
 
         &--text {
+            flex-grow: 1;
             padding: 0 20px 0 10px;
 
             &>* {
@@ -77,8 +79,13 @@
         }
 
         &--btn {
+            color: white;
             font-size: 1.2rem;
             padding: 5px 8px;
+
+            i{
+                margin-right: 5px;
+            }
         }
 
         &--status {
@@ -116,6 +123,10 @@
 
             &:first-of-type {
                 margin-left: auto;
+            }
+
+            &.btn__primary{
+                color: #fff;
             }
         }
     }

@@ -15,12 +15,11 @@ import java.util.List;
 @Table(name = "role")
 public class Role implements Serializable {
     @Id
-    @Column(name = "role_id")
+    @Column(name = "roleId")
     private int roleId;
 
-    @Column(name = "Name")
     private String name;
 
-    @OneToMany(mappedBy = "primaryKey.role" ,cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "primaryKey.role", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserRole> userRoles;
 }

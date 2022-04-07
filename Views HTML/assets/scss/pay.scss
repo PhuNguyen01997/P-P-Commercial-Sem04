@@ -1,5 +1,6 @@
 .pay {
     margin: 30px auto;
+
     &>* {
         background-color: white;
     }
@@ -17,8 +18,28 @@
             margin-bottom: 15px;
         }
 
+        &--text,
+        &--change {
+
+            .name,
+            .phone,
+            .number {
+                flex-shrink: 0;
+                font-size: 1.6rem;
+            }
+
+            .name,
+            .phone {
+                font-weight: bold;
+            }
+
+            .number {
+                flex-shrink: 1;
+            }
+        }
+
         &--text {
-            @include flex($justify: flex-start);
+            @include flex($justify: flex-start, $align: flex-start);
 
             &>* {
                 margin-bottom: 5px;
@@ -28,18 +49,36 @@
                 margin-right: 20px;
             }
 
-            .name,
-            .number {
-                font-size: 1.6rem;
-            }
-
-            .name {
-                font-weight: bold;
-            }
-
             .change {
                 margin-left: auto;
                 color: $color-green;
+                white-space: nowrap;
+            }
+        }
+
+        &--change {
+            &-item {
+                @include flex($justify: flex-start, $align: flex-start);
+
+                &>*:not(:last-child) {
+                    margin-right: 20px;
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+
+                &:last-child {
+                    padding: 10px 40px 0px;
+
+                    .btn {
+                        padding: 10px 24px;
+
+                        &:first-child {
+                            margin-right: 20px;
+                        }
+                    }
+                }
             }
         }
     }
@@ -59,7 +98,7 @@
             &>* {
                 &:nth-child(n + 2) {
                     color: $color-txt-white-grey;
-                    width: 100px;
+                    width: 120px;
                     flex-shrink: 0;
                     text-align: center;
                     margin-right: 10px;
@@ -94,7 +133,7 @@
             &--price,
             &--quantity,
             &--total {
-                width: 100px;
+                width: 120px;
                 flex-shrink: 0;
                 text-align: center;
             }
@@ -111,6 +150,7 @@
             }
 
             &--name {
+                flex-grow: 1;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -118,8 +158,19 @@
         }
 
         &-footer {
-            @include flex($justify: flex-start);
-            padding: 18px 30px;
+            border-top: 2px solid $color-bd;
+            &--block {
+                @include flex($justify: flex-start);
+                padding: 10px 30px;
+
+                &__01 {
+                    border-bottom: 1px solid $color-bd;
+                }
+            }
+
+            &--shipping {
+                margin-left: auto;
+            }
 
             &--note {
                 padding: 5px 10px;
@@ -141,7 +192,7 @@
     }
 
     &-submit {
-        & > *{
+        &>* {
             border-bottom: 1px solid $color-bd;
         }
 
@@ -155,13 +206,47 @@
             }
 
             &--btn {
+                position: relative;
                 margin-left: 10px;
                 height: 40px;
+                overflow: hidden;
+                padding: 5px 15px;
 
                 &:hover {
                     background-color: inherit;
                     border-color: $color-primary01;
                     color: $color-primary01;
+                }
+
+                &:before {
+                    display: none;
+                    content: "";
+                    position: absolute;
+                    right: -15px;
+                    bottom: -15px;
+                    width: 30px;
+                    height: 30px;
+                    background-color: $color-primary01;
+                    transform: rotate(45deg);
+                }
+
+                .icon {
+                    display: none;
+                    position: absolute;
+                    bottom: 1px;
+                    right: 1px;
+                    font-size: 10px;
+                    color: white;
+                }
+
+                &.active {
+                    border: 2px solid $color-primary01;
+                    color: $color-primary01;
+
+                    &::before,
+                    .icon {
+                        display: block;
+                    }
                 }
             }
         }
@@ -182,7 +267,7 @@
                         @include flex($justify: flex-start);
                         margin-bottom: 15px;
 
-                        .radio{
+                        .radio {
                             margin-right: 10px;
                         }
 
@@ -206,6 +291,17 @@
                     }
                 }
             }
+
+            &__cod {
+                display: flex;
+                flex-wrap: wrap;
+
+                .pay-submit-body {
+                    &--left {
+                        margin-right: 40px;
+                    }
+                }
+            }
         }
 
         &-footer {
@@ -217,7 +313,8 @@
                 border-bottom: 1px solid $color-bd;
             }
 
-            &--txt, &--number{
+            &--txt,
+            &--number {
                 @include flex($justify: flex-start);
                 color: $color-txt-white-grey;
                 min-height: 40px;
@@ -240,19 +337,20 @@
                 }
             }
 
-            &--final{
+            &--final {
                 @include flex($justify: space-between);
                 min-height: 90px;
                 padding: 10px 30px;
 
-                .btn{
+                .btn {
                     width: 210px;
                     height: 40px;
                 }
 
-                .txt{
+                .txt {
                     color: $color-txt-white-grey;
-                    a{
+
+                    a {
                         color: $color-primary01;
                     }
                 }

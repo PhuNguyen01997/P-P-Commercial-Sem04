@@ -13,106 +13,103 @@
 
     <div class="split-main order-detail-main">
         <div class="order-detail-header">
-            <a class="order-detail-header--back" href="#"><i class="fas fa-angle-left mr10"></i>Back</a>
-            <p class="order-detail-header--id">Order ID: 12837218736126</p>
-            <p class="order-detail-header--status">chỗ này ghi trạng thái đơn hàng</p>
+            <a class="order-detail-header--back jsBack" href="javascript: void(0)"><i class="fas fa-angle-left mr10"></i>Back</a>
+            <p class="order-detail-header--id">
+                <span>Order ID:</span>
+                <span th:text="${order.id}">[Order Id]</span>
+            </p>
+            <p th:text="${order.currentStatus.name}" class="order-detail-header--status">[Order Status]</p>
         </div>
         <div class="order-detail-status">
             <div class="order-step">
-                <div class="order-step--item success">
+                <div class="order-step--item"
+                     th:each="status: ${statusList}"
+                     th:if="${(status.id != 2) || (status.id == 2 && order.methodPayment)}"
+                     th:classappend="${order.currentStatus.id > status.id ? 'success' : (order.currentStatus.id == status.id ? 'current' : '')}">
                     <p class="order-step--icon circle">
-                        <i class="far fa-file-alt"></i>
+                        <i th:class="${status.getIconUrl()}"></i>
                     </p>
-                    <p class="order-step--status">Đơn hàng đã đặt</p>
-                    <p class="order-step--time">11:14 11:11:2021</p>
-                </div>
-                <div class="order-step--item success">
-                    <p class="order-step--icon circle">
-                        <i class="fas fa-dollar-sign"></i>
-                    </p>
-                    <p class="order-step--status">Đơn hàng dã thanh toán ($99.99)</p>
-                    <p class="order-step--time">11:14 11:11:2021</p>
-                </div>
-                <div class="order-step--item success">
-                    <p class="order-step--icon circle">
-                        <i class="fas fa-truck"></i>
-                    </p>
-                    <p class="order-step--status">Đang giao hàng</p>
-                    <p class="order-step--time">11:14 11:11:2021</p>
-                </div>
-                <div class="order-step--item current">
-                    <p class="order-step--icon circle">
-                        <i class="fas fa-dolly-flatbed"></i>
-                    </p>
-                    <p class="order-step--status">Chờ xác nhận</p>
-                    <p class="order-step--time">11:14 11:11:2021</p>
-                </div>
-                <div class="order-step--item">
-                    <p class="order-step--icon circle">
-                        <i class="far fa-star"></i>
-                    </p>
-                    <p class="order-step--status">Đánh giá</p>
-                    <p class="order-step--time">11:14 11:11:2021</p>
-                </div>
-                <div class="order-step--item">
-                    <p class="order-step--icon circle">
-                        <i class="far fa-window-close"></i>
-                    </p>
-                    <p class="order-step--status">Đánh giá</p>
-                    <p class="order-step--time">11:14 11:11:2021</p>
+                    <p class="order-step--status"
+                       th:text="${order.currentStatus.id > status.id ? status.doneName : status.name}"></p>
+                    <p th:if="${order.currentStatus.id > status.id}"
+                       th:text="${#dates.format(statusMapStatusHistory.get(status.id).date, 'dd-MM-yyyy HH:mm')}"
+                       class="order-step--time">[Order History Date]</p>
                 </div>
             </div>
             <div class="order-detail-control">
-                <button class="order-detail-control--btn btn btn__white">(Shop bấm trực tiếp status update status)
-                    Save
-                </button>
+<!--                <button class="order-detail-control&#45;&#45;btn btn btn__white">(Shop bấm trực tiếp status update status)-->
+<!--                    Save-->
+<!--                </button>-->
                 <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
                 <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
             </div>
         </div>
         <div class="top-envelope"></div>
         <div class="order-detail-info">
-            <p class="order-detail-info--name">Nguyễn Hoàng Phú</p>
-            <p class="order-detail-info--phone">0937441896</p>
-            <p class="order-detail-info--address">99 wưsxng bw xrwc, Phường 9, Quận 9, TP. Hồ Chí Minh</p>
+            <p th:text="${order.user.username}" class="order-detail-info--name">[User Name]</p>
+            <p th:text="${order.user.phone}" class="order-detail-info--phone">[User Phone]</p>
+            <p th:text="${order.address.getFullAddress()}"
+               class="order-detail-info--address">[User Full Address]</p>
         </div>
         <div class="order-shop">
-            <p class="order-shop--name">qw qpwoqw qwoqowpqpw</p>
-            <button class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                <i class="fas fa-store"></i> Visit shop
-            </button>
+            <p th:text="${order.shop.name}" class="order-shop--name">[Shop Name]</p>
+            <a th:href="@{/shop/{id}(id=${order.shop.id})}"
+               class="order-shop--btn order-shop--btn__visit btn btn__primary">
+                <i class="fas fa-store"></i> Ghé thăm shop
+            </a>
             <!-- <p class="order-shop--status">Status</p> -->
         </div>
         <ul class="order-detail-list">
-            <li class="order-item">
+            <li th:each="orderDetail : ${order.orderDetails}" class="order-item">
                 <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
                                                     alt=""></p>
                 <div class="order-item--text">
-                    <p class="order-item--name">Tpu Ốp Điện Thoại Cho Oppo A15 A54 A93 A94 A53 2020
-                        A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno 4 Lite Reno 4 F 5 Lite 5f Find
-                        X3Lite A15S F17 F19 Pro A33 2020 A11K A12 A1K A7 A72 A53</p>
-                    <p class="order-item--category">Category: category-name</p>
-                    <p class="order-item--quantity">x99</p>
+                    <p th:text="${orderDetail.product.name}" class="order-item--name">[Product Name]</p>
+                    <p class="order-item--category">
+                        <span>Category:</span>
+                        <span th:text="${orderDetail.product.category.name}">[Category Name]</span>
+                    </p>
+                    <p class="order-item--quantity">
+                        <span>x</span>
+                        <span th:text="${orderDetail.quantity}">[Order Quantity]</span>
+                    </p>
                 </div>
-                <p class="order-item--price">$99</p>
+                <p class="order-item--price">
+                    <span th:text="${orderDetail.lastPrice}"></span>
+                    <span> vnđ</span>
+                </p>
             </li>
         </ul>
         <ul class="order-summary">
             <li class="order-summary--item">
                 <p>Tổng tiền hàng</p>
-                <p>$20.00</p>
+                <p>
+                    <span th:text="${order.calTotal()}">
+                        [Order Total]
+                    </span>
+                    <span> vnđ</span>
+                </p>
             </li>
             <div class="order-summary--item">
                 <p>Phí vận chuyển</p>
-                <p>$5.00</p>
+                <p>
+                    <span th:text="${order.shippingCost}">[Order Shipping]</span>
+                    <span> vnđ</span>
+                </p>
             </div>
             <div class="order-summary--item order-summary--item__total">
                 <p>Tổng số tiền</p>
-                <p>$25.00</p>
+                <p>
+                    <span th:text="${order.calTotal().add(order.shippingCost)}">[Summary Total]</span>
+                    <span>vnđ</span>
+                </p>
             </div>
             <div class="order-summary--item">
                 <p>Phương thức thanh toán</p>
-                <p>Thẻ tín dụng / ghi nợ</p>
+                <p th:switch="${order.methodPayment}">
+                    <span th:case="true">Thẻ tín dụng / ghi nợ</span>
+                    <span th:case="false">Thanh toán khi nhận hàng</span>
+                </p>
             </div>
         </ul>
     </div>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-inner order">
+    <input type="hidden" th:value="${shop.id}" name="shopId">
+
+    <ul class="portal-category">
+        <li class="portal-category--item jsStatus active" data-status-id="0">
+            <p>Tất cả</p>
+        </li>
+        <li class="portal-category--item jsStatus" data-status-id="1">
+            <p>Chờ xác nhận</p>
+        </li>
+        <li class="portal-category--item jsStatus" data-status-id="2">
+            <p>Đã thanh toán</p>
+        </li>
+        <li class="portal-category--item jsStatus" data-status-id="3">
+            <p>Chờ lấy hàng</p>
+        </li>
+        <li class="portal-category--item jsStatus" data-status-id="4">
+            <p>Đang giao</p>
+        </li>
+        <li class="portal-category--item jsStatus" data-status-id="5">
+            <p>Đã giao</p>
+        </li>
+        <!--        <li class="portal-category&#45;&#45;item">-->
+        <!--            <p>Đơn hủy</p>-->
+        <!--        </li>-->
+        <!--        <li class="portal-category&#45;&#45;item">-->
+        <!--            <p>Trả hàng/Hoàn tiền</p>-->
+        <!--        </li>-->
+        <li class="portal-category--bar"></li>
+    </ul>
+    <div class="order-block order-block__date">
+        <label for="date" class="txt">Ngày đặt hàng</label>
+        <input id="date" type="text" name="date" class="jsDateRangePicker ipt">
+    </div>
+    <div class="order-block order-block__name">
+        <div class="select">
+            <select name="type" id="" class="jsFilterBy">
+                <option value="1" selected>Mã đơn hàng</option>
+                <option value="2">Tên người mua</option>
+                <option value="3">Sản phẩm</option>
+            </select>
+        </div>
+        <input class="ipt jsName" type="text">
+        <button class="btn submit btn__primary jsSubmit">Tìm kiếm</button>
+        <button class="btn clear btn__white jsClear">Đặt lại</button>
+    </div>
+    <p class="order-block order-block__count"><span class="jsCount">0</span> <span>Đơn Hàng</span></p>
+    <div class="order-block order-block__table">
+        <div class="table-header">
+            <div class="table-col table-col__name">
+                <p>Sản phẩm</p>
+            </div>
+            <div class="table-col table-col__price">
+                <p>Tổng đơn hàng</p>
+            </div>
+            <div class="table-col table-col__date">
+                <p>Thời gian tạo</p>
+            </div>
+            <div class="table-col table-col__status">
+                <p>Thạng thái</p>
+            </div>
+            <div class="table-col table-col__action">
+                <p>Thao tác</p>
+            </div>
+        </div>
+        <ul class="table-body jsContainer"></ul>
+    </div>
+</div>
+
+<script layout:fragment="script">
+    $(function () {
+        function setActive(ele) {
+            const width = $(ele).outerWidth();
+            const position = $(ele).position();
+
+            $('.jsStatus').removeClass('active');
+            $(ele).addClass('active');
+
+            $('.portal-category--bar').css({
+                width,
+                transform: `translateX(${position.left}px)`
+            });
+        }
+
+        function setFilter() {
+            const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/gm);
+            filter = {
+                statusId: $('.jsStatus.active')[0].dataset.statusId,
+                filterBy: $('.jsFilterBy').val(),
+                name: $('.jsName').val(),
+                minDate: date[0],
+                maxDate: date[1],
+            }
+        }
+
+        function renderOrder() {
+            setFilter();
+            setGlobalLoading(true);
+            const shopId = $('input[name="shopId"]').val();
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/shop/${shopId}/order`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(filter),
+                success: function (orders) {
+                    $('.jsCount').text(orders.length)
+
+                    let htmlText = "";
+                    orders.forEach((order) => {
+                        console.log(order)
+                        const createdDate = new Date(Date.parse(order.createdAt));
+                        const currentStatus = order.currentStatus;
+                        let nextStatus = {
+                            statusId: [1, 2].includes(currentStatus.id) ? 3 : currentStatus.id + 1,
+                            statusText: "",
+                        };
+
+                        switch (nextStatus.statusId) {
+                            case 2: {
+                                nextStatus.statusText = 'Chuyển sang chuẩn bị hàng';
+                                break;
+                            }
+                            case 3: {
+                                nextStatus.statusText = 'Chuyển sang chuẩn bị hàng';
+                                break;
+                            }
+                            case 4: {
+                                nextStatus.statusText = 'Thông báo shiper lấy/giao hàng';
+                                break;
+                            }
+                        }
+
+                        console.log({currentStatus, nextStatus});
+
+                        htmlText += `<li class="table-body--row">` +
+                            `<div class="table-body--row-header">` +
+                            `<p class="avatar circle"><img src="/img/common/img_default_user.png" alt=""></p>` +
+                            `<p class="name">${order.user.username}</p>` +
+                            `<p class="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
+                            `</div>` +
+                            `<ul class="table-body--row-list">`;
+
+                        order.orderDetails.forEach(ode => {
+                            htmlText += `<li class="table-body--row-item">` +
+                                `<div class="table-col table-col__name">` +
+                                `<img src="/img/products/product_01.jpg" alt="">` +
+                                `<div class="info"><p class="txt">${ode.product.name}</p><p class="number">x${ode.quantity}</p></div>` +
+                                `</div>` +
+                                `<div class="table-col table-col__price"><p>${ode.lastPrice} vnđ</p></div>` +
+                                `<div class="table-col table-col__date">` +
+                                `<p>${getStringDateFormat(createdDate)}</p>` +
+                                `<p>${getStringTimeFormat(createdDate)}</p>` +
+                                `</div>` +
+                                `<div class="table-col table-col__status">${order.currentStatus.name}</div>` +
+                                `<div class="table-col table-col__action">`;
+                            if (nextStatus.statusText) {
+                                htmlText += `<a data-id="${order.id}" data-status-id="${nextStatus.statusId}" class="jsAction" href="javascript: void(0);">${nextStatus.statusText}</a>`;
+                            }
+                            htmlText += `</div>` + `</li>`;
+                        })
+                        htmlText += `</ul>` + `</li>`;
+                    })
+                    $('.jsContainer').html(htmlText);
+
+                    setGlobalLoading(false);
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                    setGlobalLoading(false);
+                },
+            });
+        }
+
+        function fetchStatus() {
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/status`,
+                cache: false,
+                type: 'GET',
+                contentType: "application/json",
+                success: function (data) {
+                    status = data;
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                },
+            });
+        }
+
+        let filter = {};
+        let status = [];
+
+        fetchStatus();
+        setActive($('.jsStatus')[0]);
+        renderOrder();
+
+        $('.jsStatus').on('click', function () {
+            setActive(this);
+            renderOrder();
+        })
+
+        $('.jsSubmit').on('click', function () {
+            renderOrder();
+        })
+
+        $('.jsContainer').on('click', '.jsAction', function () {
+            const orderId = this.dataset.id;
+            const statusId = this.dataset.statusId;
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/order/${orderId}?statusId=${statusId}`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (success) {
+                    if (success) {
+                        window.location.reload();
+                    } else {
+                        showModal("Không thể chỉnh sửa trạng thái đơn hàng, vui lòng liên hệ hỗ trợ");
+                    }
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                },
+            });
+        })
+    });
+</script>
+</body>
+</html>

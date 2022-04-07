@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/daterangepicker v3.1/daterangepicker.css" />
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="portal">
+    <header class="header">
+        <div class="header-block header-block__left">
+            <h1 class="header-block--logo">
+                <img class="icon" src="/assets/img/common/logo.png" alt="">
+                <span class="txt">Trang chủ</span>
+            </h1>
+            <p class="header-block--angle"><i class="fas fa-angle-right"></i></p>
+            <h2 class="header-block--text02">Đơn Hàng</h2>
+        </div>
+        <div class="header-block header-block__right">
+            <p class="header-block--info">
+                <span class="avatar"><img src="/assets/img/common/img_default_user.png" alt=""></span>
+                <span class="name">Username</span>
+            </p>
+            <p class="header-block--noti"><i class="far fa-bell"></i></p>
+            <p class="header-block--edu"><button href="#" class="btn btn__outline">ShoPP Edu</button></p>
+        </div>
+    </header>
+    <section class="content">
+        <aside class="aside">
+            <div class="aside-container">
+                <p class="aside-title">Quản lý đơn hàng</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Đơn hủy</a></li>
+                    <li class="aside-item"><a href="#">Trả hàng/Hoàn tiền</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý Shop</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Đánh giá Shop</a></li>
+                    <li class="aside-item"><a href="#">Hồ sơ Shop</a></li>
+                    <li class="aside-item"><a href="#">Địa chỉ</a></li>
+                    <li class="aside-item"><a href="#">Tài khoản</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý sản phẩm</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Thêm sản phẩm</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="main-inner fund">
+                <h3 class="fund-title">Tổng quan</h3>
+                <div class="fund-info">
+                    <div class="fund-info--left">
+                        <p class="text">Số dư</p>
+                        <div class="form">
+                            <p class="price">350.294.000 vnđ</p>
+                            <a href="javascript: void();">
+                                <button class="direct btn btn__primary">Yêu cầu thanh toán</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fund-info--right">
+                        <div class="fund-info--right-header">
+                            <p class="text">Tài khoản ngân hàng</p>
+                            <a class="link" href="#">Xem thêm</a>
+                        </div>
+                        <div class="fund-info--right-body">
+                            <p class="icon"><i class="fas fa-university"></i></p>
+                            <p class="name">
+                                <span>Techcombank - NHTMCP Ky Thuong VN</span>
+                                <span>Đã kiểm tra</span>
+                            </p>
+                            <p class="priority">Mặc định</p>
+                            <a href="javascript: void()" class="more"><i class="fas fa-ellipsis-h"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="fund-title">Các giao dịch gần đây</h3>
+                <div class="ipt ipt__date fund-date">
+                    <input id="date" type="text" name="date" class="jsDateRangePicker">
+                    <i class="angle fas fa-angle-down"></i>
+                    <i class="calendar far fa-calendar-alt"></i>
+                </div>
+                <ul class="jsFilter fund-filter">
+                    <li class="fund-filter--item active">
+                        <p>Tất cả</p>
+                    </li>
+                    <li class="fund-filter--item">
+                        <p>Doanh thu</p>
+                    </li>
+                    <li class="fund-filter--item">
+                        <p>Rút tiền</p>
+                    </li>
+                </ul>
+                <div class="jsContainer fund-table">
+                    <div class="fund-row fund-row__header">
+                        <div class="fund-row--item fund-row--item__date">Ngày</div>
+                        <div class="fund-row--item fund-row--item__desc">Loại giao dịch</div>
+                        <div class="fund-row--item fund-row--item__price">Số tiền</div>
+                        <div class="fund-row--item fund-row--item__status">Trạng thái</div>
+                    </div>
+                    <div class="fund-body">
+                        <div class="fund-row">
+                            <div class="fund-row--item fund-row--item__date">
+                                <p>2022-03-20</p>
+                            </div>
+                            <div class="fund-row--item fund-row--item__desc">
+                                <p>Đơn hàng bán túi xách xyz</p>
+                            </div>
+                            <div class="fund-row--item fund-row--item__price">
+                                <p>+ 294.000</p>
+                            </div>
+                            <div class="fund-row--item fund-row--item__status">
+                                <p>Thành công</p>
+                            </div>
+                        </div>
+                        <div class="fund-row">
+                            <div class="fund-row--item fund-row--item__date">
+                                <p>2022-04-01</p>
+                            </div>
+                            <div class="fund-row--item fund-row--item__desc">
+                                <p>Rút tiền từ cửa hàng</p>
+                            </div>
+                            <div class="fund-row--item fund-row--item__price">
+                                <p>- 100.000.000</p>
+                            </div>
+                            <div class="fund-row--item fund-row--item__status">
+                                <p>Chờ xác nhận</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="/assets/js/script.js"></script>
+    <script>
+        $('.jsFilter>*').on('click', function(){
+            $('.jsFilter>*').removeClass('active');
+            this.classList.add('active');
+        })
+    </script>
+</body>
+
+</html>
