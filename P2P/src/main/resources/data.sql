@@ -34,6 +34,16 @@ INSERT INTO product (created_at, description, image, name, price, updated_at, ca
 (NOW(), 'Quần dài', '[]', 'Quần dài', 350000, NOW(), 1, 1, 0),
 (NOW(), 'Iphone13', '[]', 'Iphone 13', 5400000, NOW(), 2, 1, 0),
 (NOW(), 'Ma túy đá', '[]', 'Ma túy đá', 2900000, NOW(), 3, 2, 0),
+(NOW(), 'Mã tấu', '[]', 'Mã tấu', 100000, NOW(), 4, 2, 0),
+(NOW(), 'Áo thun', '[]', 'Áo thun', 200000, NOW(), 1, 1, 0),
+(NOW(), 'Quần dài', '[]', 'Quần dài', 350000, NOW(), 1, 1, 0),
+(NOW(), 'Iphone13', '[]', 'Iphone 13', 5400000, NOW(), 2, 1, 0),
+(NOW(), 'Ma túy đá', '[]', 'Ma túy đá', 2900000, NOW(), 3, 2, 0),
+(NOW(), 'Mã tấu', '[]', 'Mã tấu', 100000, NOW(), 4, 2, 0),
+(NOW(), 'Áo thun', '[]', 'Áo thun', 200000, NOW(), 1, 1, 0),
+(NOW(), 'Quần dài', '[]', 'Quần dài', 350000, NOW(), 1, 1, 0),
+(NOW(), 'Iphone13', '[]', 'Iphone 13', 5400000, NOW(), 2, 1, 0),
+(NOW(), 'Ma túy đá', '[]', 'Ma túy đá', 2900000, NOW(), 3, 2, 0),
 (NOW(), 'Mã tấu', '[]', 'Mã tấu', 100000, NOW(), 4, 2, 0);
 
 INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES

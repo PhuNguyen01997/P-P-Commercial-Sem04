@@ -6,7 +6,9 @@ import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Category;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.entity.Shop;
+import com.apt.p2p.model.form.FilterProductIndex;
 import com.apt.p2p.model.form.FilterProductPortal;
+import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.form.ProductForm;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.repository.CategoryRepository;
@@ -17,6 +19,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -184,31 +190,35 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductModel> findAllByShopWithFilterIndex(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer
-            rate, String sortBy, Boolean sortDirection) {
+    public Page<Product> findAllByShopWithFilterIndex(FilterProductIndex filterModel, PagiSortModel pagiSortModel) {
         Specification<Product> condition = Specification.where(null);
 
-        if (keyword != null && !keyword.isEmpty()) {
-            condition = condition.and(ProductSpecification.hasName(keyword));
+        if (filterModel.getKeyword() != null && !filterModel.getKeyword().isEmpty()) {
+            condition = condition.and(ProductSpecification.hasName(filterModel.getKeyword()));
         }
 
-        if(minPrice != null || maxPrice != null){
-            minPrice = minPrice == null ? BigDecimal.ZERO : minPrice;
-            maxPrice = maxPrice == null ? BigDecimal.valueOf(Integer.MAX_VALUE) : maxPrice;
-            condition = condition.and(ProductSpecification.hasPrice(minPrice, maxPrice));
+        if(filterModel.getMinPrice() != null || filterModel.getMaxPrice() != null){
+            filterModel.setMinPrice(filterModel.getMinPrice() == null ? BigDecimal.ZERO : filterModel.getMinPrice());
+            filterModel.setMaxPrice(filterModel.getMaxPrice() == null ? BigDecimal.valueOf(Integer.MAX_VALUE) : filterModel.getMaxPrice());
+            condition = condition.and(ProductSpecification.hasPrice(filterModel.getMinPrice(), filterModel.getMaxPrice()));
         }
 
-        if(rate != null){
-            condition = condition.and(ProductSpecification.hasRate(rate));
+        if(filterModel.getRate() != null){
+            condition = condition.and(ProductSpecification.hasRate(filterModel.getRate()));
         }
 
-        List<Product> productEntities = productRepository.findAll(condition);
+        String propertiesSort = "NEW";
+        if(pagiSortModel.getSortBy() == null || pagiSortModel.getSortBy().equals("NEW")){
+            propertiesSort = "createdAt";
+        }else if(pagiSortModel.getSortBy().equals("PRICE")){
+            propertiesSort = "price";
+        }
 
-        List<ProductModel> productModels = productEntities.stream()
-                .map(e -> productMapper.productEntityToModel(e))
-                .collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(pagiSortModel.getPage(), pagiSortModel.getSize(), pagiSortModel.getSortDirection() ? Sort.Direction.ASC : Sort.Direction.DESC, propertiesSort);
 
-        return productModels;
+        Page<Product> productEntities = productRepository.findAll(condition, pageable);
+
+        return productEntities;
     }
 
     @Override

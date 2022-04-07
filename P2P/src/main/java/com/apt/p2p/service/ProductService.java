@@ -1,9 +1,12 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Product;
+import com.apt.p2p.model.form.FilterProductIndex;
 import com.apt.p2p.model.form.FilterProductPortal;
+import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.form.ProductForm;
 import com.apt.p2p.model.view.ProductModel;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
@@ -27,5 +30,5 @@ public interface ProductService {
 
     ProductModel update(ProductForm productFormModel);
 
-    List<ProductModel> findAllByShopWithFilterIndex(String keyword, BigDecimal minPrice, BigDecimal maxPrice, Integer rate, String sortBy, Boolean sortDirection);
+    Page<Product> findAllByShopWithFilterIndex(FilterProductIndex filterModel, PagiSortModel pagiSortModel);
 }

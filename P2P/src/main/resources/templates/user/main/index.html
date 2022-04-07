@@ -44,11 +44,12 @@
                 <p class="shopping-side--title">Rate</p>
                 <ul class="shopping-side--content shopping-side--content__list-rate">
                     <select class="d-none" name="rate">
-                        <option value="5" th:selected="${#httpServletRequest.getParameter('rate') == '5'}"></option>
-                        <option value="4" th:selected="${#httpServletRequest.getParameter('rate') == '4'}"></option>
-                        <option value="3" th:selected="${#httpServletRequest.getParameter('rate') == '3'}"></option>
-                        <option value="2" th:selected="${#httpServletRequest.getParameter('rate') == '2'}"></option>
+                        <option value="0" selected></option>
                         <option value="1" th:selected="${#httpServletRequest.getParameter('rate') == '1'}"></option>
+                        <option value="2" th:selected="${#httpServletRequest.getParameter('rate') == '2'}"></option>
+                        <option value="3" th:selected="${#httpServletRequest.getParameter('rate') == '3'}"></option>
+                        <option value="4" th:selected="${#httpServletRequest.getParameter('rate') == '4'}"></option>
+                        <option value="5" th:selected="${#httpServletRequest.getParameter('rate') == '5'}"></option>
                     </select>
                     <li class="jsRate" data-value="5"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '5' ? 'active' : ''}">
@@ -160,18 +161,18 @@
                     </div>
                 </a>
             </div>
-            <!--            <div class="shopping-pagi">-->
-            <!--                <ul class="pagi">-->
-            <!--                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>-->
-            <!--                    <li th:each="pageNumber : ${pageNumbers}"-->
-            <!--                        th:classappend="${page == pageNumber ? 'active' : ''}"-->
-            <!--                        class="pagi-item btn">-->
-            <!--                        <a th:href="@{/(page=${pageNumber})}"-->
-            <!--                           th:text="${pageNumber + 1}"></a>-->
-            <!--                    </li>-->
-            <!--                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>-->
-            <!--                </ul>-->
-            <!--            </div>-->
+            <div class="shopping-pagi">
+                <ul class="pagi">
+                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
+                    <li th:each="pageNumber : ${totalPage}"
+                        th:classappend="${page == pageNumber ? 'active' : ''}"
+                        class="pagi-item btn">
+                        <a th:href="@{/(page=${pageNumber})}"
+                           th:text="${pageNumber + 1}"></a>
+                    </li>
+                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
+                </ul>
+            </div>
         </div>
     </div>
 </main>
@@ -183,7 +184,7 @@
             const minPrice = $('[name="minPrice"]').val();
             const maxPrice = $('[name="maxPrice"]').val();
             const sortBy = $('.jsSortBy.active').attr('data-value');
-            const rate = $('select[name="rate"]').val();
+            const rate = $('select[name="rate"]').val() == 0 ? null : $('select[name="rate"]').val();
             const sortDirection = $('[name="sortDirection"]').val();
             return {keyword, location, minPrice, maxPrice, sortBy, sortDirection, rate};
         }
@@ -200,7 +201,7 @@
                 } else str += `${key}=${val}&`;
                 return str;
             }, '?');
-            location.replace(queryParam);
+            // location.replace(queryParam);
         }
 
         $('.jsRate').on('click', function () {
