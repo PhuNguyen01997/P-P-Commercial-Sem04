@@ -1,11 +1,12 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.common.StringProcessForView;
 import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Product;
+import com.apt.p2p.entity.Rate;
 import com.apt.p2p.model.form.*;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
+import com.apt.p2p.model.view.ResponsePagiView;
 import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.service.CategoryService;
 import com.apt.p2p.service.ProductService;
@@ -19,11 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,23 +43,6 @@ public class ProductController {
         binder.addValidators(new ProductFormValidator());
     }
 
-//    @GetMapping("")
-//    public String index(Model model,
-//                        @RequestParam(required = false, name = "keyword") String keyword,
-//                        @RequestParam(required = false, name = "minPrice") BigDecimal minPrice,
-//                        @RequestParam(required = false, name = "maxPrice") BigDecimal maxPrice,
-//                        @RequestParam(required = false, name = "rate") Integer rate,
-//                        @RequestParam(required = false, name = "sortBy") String sortBy,
-//                        @RequestParam(required = false, name = "sortDirection") Boolean sortDirection) {
-//        Page<Product> pageProducts = productService.findAllByShopWithFilterIndex(keyword, minPrice, maxPrice, rate, sortBy, sortDirection);
-//        List<ProductModel> products = pageProducts.stream()
-//                .map(e -> productMapper.productEntityToModel(e))
-//                .collect(Collectors.toList());
-//        model.addAttribute("products", products);
-//        model.addAttribute("pagi", )
-//        return "user/main/index";
-//    }
-
     @GetMapping("")
     public String index(Model model,
                         @ModelAttribute FilterProductIndex filterModel,
@@ -72,7 +53,10 @@ public class ProductController {
                 .map(e -> productMapper.productEntityToModel(e))
                 .collect(Collectors.toList());
         model.addAttribute("products", products);
-        model.addAttribute("pagiTotal", pageProducts.getTotalPages());
+
+        ResponsePagiView pagiView = new ResponsePagiView(pagiSortModel.getPage(), pageProducts.getTotalPages());
+        model.addAttribute("pagiView", pagiView);
+
         return "user/main/index";
     }
 
@@ -80,14 +64,13 @@ public class ProductController {
     public String productDetail(Model model, @PathVariable("id") int id) {
         ProductModel product = productService.findById(id);
 
-        List<RateModel> rates = rateService.findByProductId(id);
+        List<RateModel> rates = rateService.findAllByProductId(id);
 
         ShopModel shop = shopService.findByProductId(id);
         shop.setCountProducts(productService.countByShopId(shop.getId()));
         shop.setCountRates(rateService.countByShopId(shop.getId()));
 
         model.addAttribute("product", product);
-        model.addAttribute("rates", rates);
         model.addAttribute("shop", shop);
         model.addAttribute("addCartModel", new ProductAddCartModel(1, id));
 

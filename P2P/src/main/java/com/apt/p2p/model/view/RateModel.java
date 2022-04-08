@@ -33,5 +33,8 @@ public class RateModel {
         this.star = entity.getStar();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
+
+        this.user = null;
+        this.product = null;
     }
 }

@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/plugins/slick v1.8.1/slick.css" />
+    <link rel="stylesheet" href="assets/plugins/slick v1.8.1/slick-theme.css" />
 </head>
 
 <body>
@@ -58,27 +60,28 @@
         <div class="inner detail">
             <div class="detail-primary">
                 <div class="detail-picture">
-                    <div class="detail-picture--current pic">
-                        <img src="https://cf.shopee.vn/file/4bc3bcd600d0957bbd5d00221667530f" alt="">
-                    </div>
-                    <ul class="detail-picture--list">
-                        <li class="detail-picture--item pic">
-                            <img src="assets/img/products/product_01.jpg" alt="">
+                    <div class="detail-picture--current jsImageAccept pic"></div>
+                    <ul class="detail-picture--list jsSlick">
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="/assets/img/products/product_01.jpg" alt="">
                         </li>
-                        <li class="detail-picture--item pic">
-                            <img src="assets/img/products/product_01.jpg" alt="">
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="https://cf.shopee.vn/file/4bc3bcd600d0957bbd5d00221667530f" alt="">
                         </li>
-                        <li class="detail-picture--item pic">
-                            <img src="assets/img/products/product_01.jpg" alt="">
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="https://blog.ipleaders.in/wp-content/uploads/2018/02/BV-Acharya-17.jpg" alt="">
                         </li>
-                        <li class="detail-picture--item pic">
-                            <img src="assets/img/products/product_01.jpg" alt="">
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Lc2YabkcXK3nEoM_BSM-g9OZdysVXRHj-g&usqp=CAU" alt="">
                         </li>
-                        <li class="detail-picture--item pic">
-                            <img src="assets/img/products/product_01.jpg" alt="">
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="https://i1.sndcdn.com/artworks-PiNxpGX4tQm77R7j-adBUQA-t500x500.jpg" alt="">
                         </li>
-                        <li class="detail-picture--item pic">
-                            <img src="assets/img/products/product_01.jpg" alt="">
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="https://s3-ap-southeast-1.amazonaws.com/images.spiderum.com/sp-images/e9fef2d083cf11ea8f996dbfbe6e50b1.jpg" alt="">
+                        </li>
+                        <li class="detail-picture--item pic jsImage">
+                            <img src="https://demoda.vn/wp-content/uploads/2022/01/anh-wibu.jpg" alt="">
                         </li>
                     </ul>
                 </div>
@@ -205,7 +208,8 @@ Và nếu bạn cũng đang đi tìm một chiếc ví thể thể hiện đư�
                         </div>
                     </div>
                     <div class="detail-rate--item">
-                        <p class="pic detail-rate--pic"><img src="./assets/img/products/product_01.jpg" alt=""></p>
+                        <p class="pic detail-rate--pic">
+                            <img src="./assets/img/products/product_01.jpg" alt=""></p>
                         <div class="detail-rate--content">
                             <p class="detail-rate--name">hoangquocduan477090</p>
                             <p class="detail-rate--star">
@@ -217,13 +221,20 @@ Và nếu bạn cũng đang đi tìm một chiếc ví thể thể hiện đư�
                                     <i class="fas fa-star"></i>
                                 </span>
                             </p>
-                            <p class="detail-rate--text">Túi xinh giao hàng nhanh 
+                            <p class="detail-rate--text">Túi xinh giao hàng nhanh
                                 Nhưng mà hơi hẹp huhu đựng đc cái bóp 😢</p>
                             <p class="detail-rate--date">2021-11-06 14:59</p>
                         </div>
                     </div>
-                    <!-- <div style="margin-top: 20px;">Pagination hoặc See more ở đây (tùy mày)</div> -->
                 </div>
+                <ul class="pagi detail-rate--pagi">
+                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
+                    <li class="pagi-item btn active">1</li>
+                    <li class="pagi-item btn">2</li>
+                    <li class="pagi-item btn">3</li>
+                    <li class="pagi-item btn">4</li>
+                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
+                </ul>
             </div>
         </div>
     </main>
@@ -264,6 +275,29 @@ Và nếu bạn cũng đang đi tìm một chiếc ví thể thể hiện đư�
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/plugins/slick v1.8.1/slick.min.js"></script>
+    <script>
+        $('.jsSlick').slick({
+            infinite: true,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            centerMode: false,
+            centerPadding: '60px',
+        });
+
+        function setImage(element) {
+            const src = $(element).children('img').attr('src');
+            imageAccept.css('background-image', `url(${src})`);
+            $('.jsImage').removeClass('active');
+            $(element).addClass('active');
+        }
+
+        let imageAccept = $('.jsImageAccept');
+        setImage(document.querySelectorAll('.jsImage.slick-active')[0]);
+        $('.jsImage').on('mouseenter', function(){
+            setImage(this);
+        })
+    </script>
 </body>
 
 </html>

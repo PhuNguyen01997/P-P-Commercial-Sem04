@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 public class UserModel {
+    private static String urlPath = "/assets/users/";
+
     private Integer id;
 
     @NotBlank
@@ -39,15 +42,15 @@ public class UserModel {
 
     private ShopModel shop;
 
-    private List<AddressModel> addresses;
+    private List<AddressModel> addresses = new ArrayList<>();
 
-    private List<CardModel> cards;
+    private List<CardModel> cards = new ArrayList<>();
 
-    private List<CartModel> carts;
+    private List<CartModel> carts = new ArrayList<>();
 
-    private List<RateModel> rates;
+    private List<RateModel> rates = new ArrayList<>();
 
-    private List<OrderModel> orders;
+    private List<OrderModel> orders = new ArrayList<>();
 
     public UserModel(User user) {
         this.id = user.getUserId();
@@ -58,5 +61,9 @@ public class UserModel {
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
         this.stripeCustomerId = user.getStripeCustomerId();
+    }
+
+    public String toUrl(String fileName) {
+        return urlPath + fileName;
     }
 }

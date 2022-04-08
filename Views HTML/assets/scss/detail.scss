@@ -35,6 +35,57 @@
 
         &--current {
             padding-bottom: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        &--list {
+            margin-top: 10px;
+
+            .pic {
+                width: 82px;
+                height: 82px;
+                border: 2px solid transparent;
+
+                &.active {
+                    border-color: $color-primary01;
+                }
+            }
+        }
+
+        .jsSlick {
+            .slick {
+                &-track {
+                    margin: 0;
+                }
+
+                &-slide {
+                    margin: 0 5px;
+                }
+
+                &-list {
+                    margin: 0 -5px;
+                }
+
+                &-arrow {
+                    z-index: 2;
+                    width: 30px;
+                    height: 30px;
+
+                    &::before {
+                        font-size: 30px;
+                    }
+                }
+
+                &-prev {
+                    left: 0;
+                }
+
+                &-next {
+                    right: 0;
+                }
+            }
         }
     }
 
@@ -182,7 +233,7 @@
     }
 
     &-rate {
-        padding: 25px 0 15px;
+        padding: 25px 0 10px;
         background-color: white;
 
         &--item {
@@ -217,6 +268,24 @@
         &--date {
             font-size: 1.2rem;
             color: $color-txt-white-grey;
+        }
+
+        &--pagi {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 16px;
+            margin: 10px 10px 0 0;
+
+            .pagi-item {
+                width: 24px;
+                height: 24px;
+                margin: 0 5px;
+            }
+
+            .pagi-item__prev,
+            .pagi-item__next {
+                border: 1px solid $color-bd-ipt;
+            }
         }
     }
 }

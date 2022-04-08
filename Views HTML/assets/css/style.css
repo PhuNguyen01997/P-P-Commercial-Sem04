@@ -832,6 +832,11 @@ label {
   color: white;
 }
 
+.pagi-item.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .pagi-simplify {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1829,6 +1834,53 @@ label {
 
 .detail-picture--current {
   padding-bottom: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.detail-picture--list {
+  margin-top: 10px;
+}
+
+.detail-picture--list .pic {
+  width: 82px;
+  height: 82px;
+  border: 2px solid transparent;
+}
+
+.detail-picture--list .pic.active {
+  border-color: #9932cc;
+}
+
+.detail-picture .jsSlick .slick-track {
+  margin: 0;
+}
+
+.detail-picture .jsSlick .slick-slide {
+  margin: 0 5px;
+}
+
+.detail-picture .jsSlick .slick-list {
+  margin: 0 -5px;
+}
+
+.detail-picture .jsSlick .slick-arrow {
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+}
+
+.detail-picture .jsSlick .slick-arrow::before {
+  font-size: 30px;
+}
+
+.detail-picture .jsSlick .slick-prev {
+  left: 0;
+}
+
+.detail-picture .jsSlick .slick-next {
+  right: 0;
 }
 
 .detail-content--title {
@@ -2018,7 +2070,7 @@ label {
 }
 
 .detail-rate {
-  padding: 25px 0 15px;
+  padding: 25px 0 10px;
   background-color: white;
 }
 
@@ -2067,6 +2119,28 @@ label {
 .detail-rate--date {
   font-size: 1.2rem;
   color: rgba(85, 85, 85, 0.8);
+}
+
+.detail-rate--pagi {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  font-size: 16px;
+  margin: 10px 10px 0 0;
+}
+
+.detail-rate--pagi .pagi-item {
+  width: 24px;
+  height: 24px;
+  margin: 0 5px;
+}
+
+.detail-rate--pagi .pagi-item__prev,
+.detail-rate--pagi .pagi-item__next {
+  border: 1px solid rgba(0, 0, 0, 0.14);
 }
 
 .account .split-main {

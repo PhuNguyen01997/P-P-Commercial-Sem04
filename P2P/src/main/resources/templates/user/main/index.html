@@ -132,7 +132,7 @@
                     </select>
                 </div>
                 <div class="pagi-simplify">
-                    <p>1/5</p>
+                    <p><span th:text="${pagiView.index + 1}"></span>/<span th:text="${pagiView.total}"></span></p>
                     <button><i class="fas fa-angle-left"></i></button>
                     <button><i class="fas fa-angle-right"></i></button>
                 </div>
@@ -163,14 +163,20 @@
             </div>
             <div class="shopping-pagi">
                 <ul class="pagi">
-                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
-                    <li th:each="pageNumber : ${totalPage}"
-                        th:classappend="${page == pageNumber ? 'active' : ''}"
+                    <li class="pagi-item btn pagi-item__prev"
+                    th:classappend="${pagiView.index == 0 ? 'disabled' : ''}">
+                        <a th:href="@{/(page=${pagiView.prev})}"><i class="fas fa-angle-left"></i></a>
+                    </li>
+                    <li th:each="pageNumber : ${pagiView.pagiList}"
+                        th:classappend="${pageNumber == pagiView.index ? 'active' : ''}"
                         class="pagi-item btn">
                         <a th:href="@{/(page=${pageNumber})}"
                            th:text="${pageNumber + 1}"></a>
                     </li>
-                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
+                    <li class="pagi-item btn pagi-item__prev"
+                        th:classappend="${pagiView.index == pagiView.total - 1 ? 'disabled' : ''}">
+                        <a th:href="@{/(page=${pagiView.next})}"><i class="fas fa-angle-right"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -201,7 +207,7 @@
                 } else str += `${key}=${val}&`;
                 return str;
             }, '?');
-            // location.replace(queryParam);
+            location.replace(queryParam);
         }
 
         $('.jsRate').on('click', function () {

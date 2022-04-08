@@ -1,7 +1,9 @@
 package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
+import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
+import com.apt.p2p.model.view.UserModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +30,11 @@ public class RateMapper {
     }
 
     public RateModel rateEntityToModel(Rate entity) {
-        ModelMapper mapper = mapperService.getModelMapper();
-        mapper.typeMap(Rate.class, RateModel.class);
-        mapper.addMappings(new PropertyMap<Rate, RateModel>() {
-            @Override
-            protected void configure() {
-                skip(destination.getUser());
-                skip(destination.getProduct());
-            }
-        });
+        RateModel model = new RateModel(entity);
 
-        mapper.validate();
-        return mapper.map(entity, RateModel.class);
+        model.setUser(new UserModel(entity.getUser()));
+        model.setProduct(new ProductModel(entity.getProduct()));
+
+        return model;
     }
 }

@@ -172,9 +172,11 @@ label {
 
     &__limit-length {
         position: relative;
+
         input {
             padding-right: 70px;
         }
+
         .length {
             @include flex();
             width: 70px;
@@ -689,6 +691,11 @@ label {
         &.active {
             background-color: $color-primary01;
             color: white;
+        }
+
+        &.disabled {
+            opacity: 0.4;
+            pointer-events: none;
         }
     }
 

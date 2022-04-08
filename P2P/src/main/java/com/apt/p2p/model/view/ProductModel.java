@@ -60,7 +60,10 @@ public class ProductModel {
         this.stock = entity.getStock();
         this.createdAt = entity.getCreatedAt();
         this.updatedAt = entity.getUpdatedAt();
-        this.category = entity.getCategory();
+
+        Category categoryEmptyProduct = entity.getCategory();
+        categoryEmptyProduct.setProducts(new ArrayList<>());
+        this.category = categoryEmptyProduct;
 
         try {
             ObjectMapper mapper = new ObjectMapper();
