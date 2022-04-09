@@ -1,6 +1,6 @@
 package com.apt.p2p.service;
 
-import com.apt.p2p.model.Custom0Auth2User;
+import com.apt.p2p.model.form.Custom0Auth2User;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

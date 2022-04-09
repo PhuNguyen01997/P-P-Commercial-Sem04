@@ -1,6 +1,5 @@
 package com.apt.p2p.entity;
 
-import com.apt.p2p.model.view.UserModel;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;

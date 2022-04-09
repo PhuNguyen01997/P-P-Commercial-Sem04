@@ -7,23 +7,17 @@ import com.apt.p2p.entity.Shop;
 import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.entity.User;
 import com.apt.p2p.model.view.ShopModel;
-import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.repository.AddressRepository;
 import com.apt.p2p.repository.ShopRepository;
 import com.apt.p2p.repository.ShopTransactionRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ShopServiceImpl implements ShopService {

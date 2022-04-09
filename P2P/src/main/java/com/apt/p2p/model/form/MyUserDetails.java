@@ -1,4 +1,4 @@
-package com.apt.p2p.model;
+package com.apt.p2p.model.form;
 
 import com.apt.p2p.entity.Role;
 import com.apt.p2p.entity.User;

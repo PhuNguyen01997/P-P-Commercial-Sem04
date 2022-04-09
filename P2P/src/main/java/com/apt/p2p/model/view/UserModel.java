@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,25 +21,31 @@ public class UserModel {
 
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "field email is not null")
     private String email;
 
-    @NotBlank
+    @Pattern(regexp = "[^&%$#@!~]*" , message = "Username can't contain special characters")
+    @NotBlank (message = "field username is not null")
     private String username;
 
-    @NotBlank
+    //    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&!-+=()])(?=\\S+$).{8,20}$"
+//            , message = "Weak password")
+    @NotBlank(message = "field password is not null")
     private String password;
 
-    @NotBlank
+    private boolean enabled = true;
+
+    @Pattern(regexp = "^[\\d\\s]+$" , message = "invalid phone")
+    @NotBlank(message = "field phone is not null")
     private String phone;
 
     private String avatar;
 
+    private String stripeCustomerId;
+
     private Date createdAt = new Date();
 
     private Date updatedAt = new Date();
-
-    private String stripeCustomerId;
 
     private ShopModel shop;
 

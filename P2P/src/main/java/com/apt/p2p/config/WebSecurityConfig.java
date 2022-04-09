@@ -1,9 +1,8 @@
 package com.apt.p2p.config;
 
-import com.apt.p2p.model.Custom0Auth2User;
+import com.apt.p2p.model.form.Custom0Auth2User;
 import com.apt.p2p.service.CustomOAuth2UserServiceImpl;
 import com.apt.p2p.service.UsersDetailServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
