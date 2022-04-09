@@ -63,15 +63,13 @@ public class ProductController {
     @GetMapping("product/{id}")
     public String productDetail(Model model, @PathVariable("id") int id) {
         ProductModel product = productService.findById(id);
-
-        List<RateModel> rates = rateService.findAllByProductId(id);
+        model.addAttribute("product", product);
 
         ShopModel shop = shopService.findByProductId(id);
         shop.setCountProducts(productService.countByShopId(shop.getId()));
         shop.setCountRates(rateService.countByShopId(shop.getId()));
-
-        model.addAttribute("product", product);
         model.addAttribute("shop", shop);
+
         model.addAttribute("addCartModel", new ProductAddCartModel(1, id));
 
         return "user/main/product-detail";

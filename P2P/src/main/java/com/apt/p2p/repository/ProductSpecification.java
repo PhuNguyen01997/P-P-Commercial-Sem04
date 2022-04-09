@@ -55,27 +55,19 @@ public final class ProductSpecification {
     }
 
     public static Specification<Product> hasPrice(BigDecimal minPrice, BigDecimal maxPrice) {
-//        Specification<Product> result = Specification.where(null);
-//        if (minPrice != null) {
-//            result = result.and((root, query, cb) -> {
-//                root = joinAllRelation(root);
-//                return cb.greaterThanOrEqualTo(root.get("price"), minPrice);
-//            });
-//        }
-//        if (maxPrice != null) {
-//            result = result.and((root, query, cb) -> {
-//                root = joinAllRelation(root);
-//                return cb.lessThanOrEqualTo(root.get("price"), maxPrice);
-//            });
-//        }
-//        return result;
-        Specification result = Specification.where(null);
-        return result
-                .and((root, query, cb) -> {
-                    root = joinAllRelation(root);
-                    return cb.greaterThanOrEqualTo(root.get("price"), minPrice);
-                })
-                .and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+//        Specification result = Specification.where(null);
+//        return result
+//                .and((root, query, cb) -> {
+//                    root = joinAllRelation(root);
+//                    return cb.greaterThanOrEqualTo(root.get("price"), minPrice);
+//                })
+//                .and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+        return (root, query, cb) -> {
+            root = joinAllRelation(root);
+            Predicate minPricePred = cb.greaterThanOrEqualTo(root.get("price"), minPrice);
+            Predicate maxPricePred = cb.lessThanOrEqualTo(root.get("price"), maxPrice);
+            return cb.and(minPricePred, maxPricePred);
+        };
     }
 
     public static Specification<Product> hasRate(Integer rate) {
@@ -90,8 +82,8 @@ public final class ProductSpecification {
     }
 
     private static Root joinAllRelation(Root root) {
-        root.fetch("shop", JoinType.LEFT);
-        root.fetch("category", JoinType.LEFT);
+//        root.fetch("shop", JoinType.LEFT);
+//        root.fetch("category", JoinType.LEFT);
         return root;
     }
 }
