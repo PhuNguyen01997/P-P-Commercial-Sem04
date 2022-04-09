@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-inner fund">
+    <h3 class="fund-title">Tổng quan</h3>
+    <div class="fund-info">
+        <div class="fund-info--left">
+            <p class="text">Số dư</p>
+            <div class="form">
+                <p class="price">
+                    <span th:text="${shop.fund}"></span>
+                    <span>vnđ</span></p>
+                <a href="/portal/fund/withdraw">
+                    <button class="direct btn btn__primary">Yêu cầu thanh toán</button>
+                </a>
+            </div>
+        </div>
+        <div class="fund-info--right">
+            <div class="fund-info--right-header">
+                <p class="text">Tài khoản ngân hàng</p>
+                <a class="link" href="javascript: void(0)">Xem thêm</a>
+            </div>
+            <div class="fund-info--right-body">
+                <p class="icon"><i class="fas fa-university"></i></p>
+                <p class="name">
+                    <span>Techcombank - NHTMCP Ky Thuong VN</span>
+                    <span>Đã kiểm tra</span>
+                </p>
+                <p class="priority">Mặc định</p>
+                <a href="javascript: void(0)" class="more"><i class="fas fa-ellipsis-h"></i></a>
+            </div>
+        </div>
+    </div>
+    <h3 class="fund-title">Các giao dịch gần đây</h3>
+    <div class="ipt ipt__date fund-date">
+        <input id="date" type="text" name="date" class="jsDateRangePicker">
+        <i class="angle fas fa-angle-down"></i>
+        <i class="calendar far fa-calendar-alt"></i>
+    </div>
+    <ul class="jsFilter fund-filter">
+        <li class="fund-filter--item active" data-type="0">
+            <p>Tất cả</p>
+        </li>
+        <li class="fund-filter--item" data-type="1">
+            <p>Doanh thu</p>
+        </li>
+        <li class="fund-filter--item" data-type="2">
+            <p>Rút tiền</p>
+        </li>
+    </ul>
+    <div class="jsContainer fund-table">
+        <div class="fund-row fund-row__header">
+            <div class="fund-row--item fund-row--item__date">Ngày</div>
+            <div class="fund-row--item fund-row--item__desc">Loại giao dịch</div>
+            <div class="fund-row--item fund-row--item__price">Số tiền</div>
+            <div class="fund-row--item fund-row--item__status">Trạng thái</div>
+        </div>
+        <div class="fund-body">
+
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script">
+    $(function () {
+        function getFilter() {
+            const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/gm);
+            return {
+                minDate: date[0],
+                maxDate: date[1],
+                type: $('.jsFilter>*.active').attr('data-type'),
+            }
+        }
+
+        function fetchTransaction() {
+            const filter = getFilter();
+            setGlobalLoading(true);
+            const shopId = 1;
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/shop/${shopId}/fund`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(filter),
+                success: function (funds) {
+                    let html = "";
+                    funds.forEach(fund => {
+                        const date = new Date(Date.parse(fund.date));
+                        html += `<div class="fund-row">` +
+                            `<div class="fund-row--item fund-row--item__date">` +
+                            `<p>${getStringDateFormat(date)}</p>` +
+                            `</div>` +
+                            `<div class="fund-row--item fund-row--item__desc">` +
+                            `<p>${fund.description}</p>` +
+                            `</div>` +
+                            `<div class="fund-row--item fund-row--item__price">` +
+                            `<p>${fund.order ? '+' : '-'}${fund.amount}</p>` +
+                            `</div>` +
+                            `<div class="fund-row--item fund-row--item__status">` +
+                            `<p>${fund.status}</p>` +
+                            `</div>` +
+                            `</div>`;
+                    })
+                    $('.fund-body').html(html);
+
+                    setGlobalLoading(false);
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                    setGlobalLoading(false);
+                },
+            });
+        }
+
+        fetchTransaction();
+
+        $('.jsFilter>*').on('click', function () {
+            $('.jsFilter>*').removeClass('active');
+            this.classList.add('active');
+
+            fetchTransaction();
+        })
+    });
+</script>
+</body>
+</html>

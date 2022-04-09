@@ -19,20 +19,20 @@
             </button>
         </div>
         <ul class="account-card">
-            <li class="account-card-item">
-                <p class="account-card-item--pic pic"><img src="/img/common/icon-master-card.png" alt=""></p>
-                <p class="account-card-item--name">VISA</p>
-                <p class="account-card-item--number">**** **** **** 1234</p>
+            <p th:if="${cards.isEmpty()}" class="py-5 emptyText">Bạn không có tài khoản nào</p>
+            <li th:each="item : ${cards}" class="account-card-item">
+                <p class="account-card-item--pic pic">
+                    <img th:src="${item.imgUrl}" alt="">
+                </p>
+                <p th:text="${item.type}" class="account-card-item--name">[Card Brand]</p>
+                <p class="account-card-item--number">
+                    <span>**** **** ****</span>
+                    <span th:text="${item.last4}"></span>
+                </p>
                 <div class="account-card-item--action">
-                    <a href="#" class="account-card-item--link">Xóa</a>
-                </div>
-            </li>
-            <li class="account-card-item">
-                <p class="account-card-item--pic pic"><img src="/img/common/icon-visa.png" alt=""></p>
-                <p class="account-card-item--name">Master Card</p>
-                <p class="account-card-item--number">**** **** **** 9999</p>
-                <div class="account-card-item--action">
-                    <a href="#" class="account-card-item--link">Xóa</a>
+                    <form th:action="@{/card/{id}(id=${item.stripeCardId})}" th:method="delete">
+                        <button type="submit" class="account-card-item--link">Xóa</button>
+                    </form>
                 </div>
             </li>
         </ul>
@@ -58,14 +58,14 @@
                 <select id="select-card" class="d-none" th:field="*{type}">
                     <option value=""></option>
                     <option th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}"
-                            th:value="${payType}"
+                            th:value="${payType.displayValue}"
                             th:text="${payType.displayValue}"
-                            th:selected="${payType == card.getType()}"></option>
+                            th:selected="${payType == card.type}"></option>
                 </select>
                 <div class="modal2--pic-type">
                     <th:block th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}">
-                        <p th:attr="data-value=${payType}" th:switch="${payType}"
-                           th:classappend="${payType.toString() == card.getType()} ? 'active' : 'no-active'"
+                        <p th:attr="data-value=${payType.displayValue}" th:switch="${payType}"
+                           th:classappend="${payType.displayValue == card.type} ? 'active' : 'no-active'"
                            class="pic">
                             <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
                                  src="/img/common/icon-visa.png" alt="">
@@ -77,7 +77,7 @@
                 <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">
-                <input th:field="*{due}" type="date" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
+                <input th:field="*{due}" type="month" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
                 <input th:field="*{cvv}" class="modal2-input modal2-input__CVV" placeholder="Mã CVV">
                 <p th:if="${#fields.hasErrors('due')}" th:errors="*{due}" class="error">Invalid value</p>
                 <p th:if="${#fields.hasErrors('cvv')}" th:errors="*{cvv}" class="error">Invalid value</p>
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="modal2-footer">
-            <button type="button" class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
+            <button type="button" class="js-close modal2-footer--back btn btn__white">Trở lại</button>
             <button type="submit" class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
         </div>
     </form>

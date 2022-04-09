@@ -19,142 +19,326 @@
             </button>
         </div>
         <ul class="account-address">
-            <li class="account-address-item">
+            <p th:if="${addressList.isEmpty()}" class="py-5 emptyText">Bạn không có địa chỉ nào</p>
+            <li th:each="address : ${addressList}" th:attr="data-id=${address.id}"
+                class="account-address-item">
                 <div class="account-address-left">
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Họ và tên</p>
-                        <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
+                        <p th:text="${address.ownName}" class="account-address-left--value jsOwnName">[Address
+                            Username]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">0999999999</p>
+                        <p th:text="${address.ownPhone}" class="account-address-left--value jsOwnPhone">[Address
+                            Phone]</p>
                     </div>
                     <div class="account-address-left--row">
                         <p class="account-address-left--key">Địa chỉ</p>
                         <p class="account-address-left--value">
-                            99 Họ tên đường<br>
-                            Phường xx<br>
-                            Quận yy<br>
-                            Tp. Hồ Chí Minh
+                            <span th:text="${address.number}" class="jsNumber">[Address Number]</span><br>
+                            <span th:text="${address.ward}" class="jsWard">[Address Ward]</span><br>
+                            <span th:text="${address.district}" class="jsDistrict">[Address District]</span><br>
+                            <span th:text="${address.province}" class="jsProvince">[Address Province]</span>
                         </p>
                     </div>
                 </div>
                 <div class="account-address-right">
-                    <p>
-                        <a class="link" href="#">Sửa</a>
-                        <a class="link" href="#">Xóa</a>
-                    </p>
-                </div>
-            </li>
-            <li class="account-address-item">
-                <div class="account-address-left">
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Họ và tên</p>
-                        <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">0999999999</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Địa chỉ</p>
-                        <p class="account-address-left--value">
-                            99 Họ tên đường<br>
-                            Phường xx<br>
-                            Quận yy<br>
-                            Tp. Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-                <div class="account-address-right">
-                    <p>
-                        <a class="link" href="#">Sửa</a>
-                        <a class="link" href="#">Xóa</a>
-                    </p>
-                </div>
-            </li>
-            <li class="account-address-item">
-                <div class="account-address-left">
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Họ và tên</p>
-                        <p class="account-address-left--value">Uwusu Wusuw WUsu</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Số điện thoại</p>
-                        <p class="account-address-left--value">0999999999</p>
-                    </div>
-                    <div class="account-address-left--row">
-                        <p class="account-address-left--key">Địa chỉ</p>
-                        <p class="account-address-left--value">
-                            99 Họ tên đường<br>
-                            Phường xx<br>
-                            Quận yy<br>
-                            Tp. Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-                <div class="account-address-right">
-                    <p>
-                        <a class="link" href="#">Sửa</a>
-                        <a class="link" href="#">Xóa</a>
-                    </p>
+                    <a class="link jsEditBtn" href="#">Sửa</a>
+                    <form th:action="@{/address/{id}(id=${address.id})}" th:method="delete">
+                        <button type="submit">Xóa</button>
+                    </form>
                 </div>
             </li>
         </ul>
     </div>
 </div>
-<div layout:fragment="modal" id="create-address" class="modal2-container">
-    <div class="modal2 modal2__address">
+<div layout:fragment="modal" id="create-address" class="modal2-container"
+     th:classappend="${hasAnyError != null && hasAnyError} ? 'js-close' : ''">
+    <form th:action="@{/address}" th:object="${addressForm}" method="post" class="modal2 modal2__address">
+        <input type="hidden" th:field="*{id}">
         <div class="modal2-header">
             <h3>Địa chỉ mới</h3>
         </div>
-        <form action="" class="modal2-body modal2-form modal2-form__address-create">
+        <div class="modal2-body modal2-form modal2-form__address-create">
             <div class="modal2-input-container">
-                <input class="modal2-input modal2-input__name" type="text" placeholder="Họ và tên">
-                <input class="modal2-input modal2-input__phone" type="text" placeholder="Số điện thoại">
+                <input th:field="*{ownName}"
+                       class="modal2-input modal2-input__name" type="text" placeholder="Họ và tên">
+                <input th:field="*{ownPhone}" th:type="number"
+                       class="modal2-input modal2-input__phone" type="text" placeholder="Số điện thoại">
+                <p th:if="${#fields.hasErrors('ownName')}" th:errors="*{ownName}" class="error">Invalid value</p>
+                <p th:if="${#fields.hasErrors('ownPhone')}" th:errors="*{ownPhone}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container modal2-input-container__address">
-                <p class="modal2-input modal2-input__legend">Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã</p>
-                <p class="modal2-input modal2-input__value">Gia Lai, Huyện Đăk Pơ, Xã An Thành</p>
+                <p class="modal2-input modal2-input__legend">Tỉnh/Thành phố, Quận/Huyện, Phường/Xã</p>
+                <p th:if="${addressForm.province != null && !addressForm.province.isEmpty()}"
+                   th:text="${addressForm.province
+                   + (addressForm.district == null ? '' : ', ' + addressForm.district)
+                   + (addressForm.ward == null ? '' : ', ' + addressForm.ward)}"
+                   class="modal2-input modal2-input__value">Chọn địa chỉ</p>
+                <p th:unless="${addressForm.province != null && !addressForm.province.isEmpty()}"
+                   class="modal2-input modal2-input__value">Chọn địa chỉ</p>
+                <input th:field="*{province}" type="hidden">
+                <input th:field="*{provinceId}" type="hidden">
+                <input th:field="*{district}" type="hidden">
+                <input th:field="*{districtId}" type="hidden">
+                <input th:field="*{ward}" type="hidden">
+                <input th:field="*{wardId}" type="hidden">
+                <p th:if="${#fields.hasErrors('province')}" th:errors="*{province}" class="error">Invalid value</p>
                 <div class="modal2-input modal2-input__box">
                     <div class="modal2-input modal2-input__header">
-                        <p>Tỉnh/Thành phố</p>
-                        <p class="active">Quận/Huyện</p>
-                        <p>Phường/Xã</p>
+                        <p data-type="province" class="jsAddressSelect active">Tỉnh/Thành phố</p>
+                        <p data-type="district" class="jsAddressSelect">Quận/Huyện</p>
+                        <p data-type="ward" class="jsAddressSelect">Phường/Xã</p>
                     </div>
-                    <ul class="modal2-input modal2-input__list">
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
-                        <li>SAHDG sAHDs JHJDS</li>
+                    <ul class="jsAddressContainer modal2-input modal2-input__list">
                     </ul>
                 </div>
             </div>
             <div class="modal2-card-input">
-                <textarea type="text" class="" placeholder="Địa chỉ cụ thể" rows="3" resize></textarea>
+                <textarea th:field="*{number}" placeholder="Địa chỉ cụ thể" rows="3" resize></textarea>
+                <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="error">Invalid value</p>
             </div>
-        </form>
-        <div class="modal2-footer">
-            <button class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
-            <button class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
         </div>
-    </div>
+        <div class="modal2-footer">
+            <button type="button" class="js-close modal2-footer--back btn btn__white">Trở lại</button>
+            <button type="submit" class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+        </div>
+    </form>
 </div>
+<script layout:fragment="script">
+    let tempLocation = {};
+
+    function checkHeaderForm(){
+        if($('input[name="id"]').val()){
+            const ownName = $('input[name="ownName"]').val();
+            const ownPhone = $('input[name="ownPhone"]').val();
+            $('.modal2-header h3').text(`${ownName} - ${ownPhone}`);
+        }else{
+            $('.modal2-header h3').text(`Địa chỉ mới`);
+        }
+    }
+
+    function setLoading(bool) {
+        if (bool) {
+            $('.jsAddressContainer').addClass('loading');
+        } else {
+            $('.jsAddressContainer').removeClass('loading');
+        }
+    }
+
+    function fetchProvinces(callback = null) {
+        setLoading(true);
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/provinces`,
+            cache: false,
+            type: 'GET',
+            success: function (arrVal) {
+                arrVal = arrVal.map(item => {
+                    return `<li data-id="${item.ProvinceID}">${item.ProvinceName}</li>`
+                })
+                $('.jsAddressContainer').html(arrVal);
+
+                setLoading(false);
+
+                if (callback) {
+                    callback();
+                }
+            }
+        });
+    }
+
+    function fetchDistricts(province, callback = null) {
+        setLoading(true);
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/${province}/districts`,
+            cache: false,
+            type: 'GET',
+            success: function (arrVal) {
+                arrVal = arrVal.map(item => {
+                    return `<li data-id="${item.DistrictID}">${item.DistrictName}</li>`
+                })
+                $('.jsAddressContainer').html(arrVal);
+
+                setLoading(false);
+
+                if (callback) {
+                    callback();
+                }
+            }
+        });
+    }
+
+    function fetchWards(district, callback = null) {
+        setLoading(true);
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/${district}/wards`,
+            cache: false,
+            type: 'GET',
+            success: function (arrVal) {
+                setLoading(false);
+
+                arrVal = arrVal.map(item => {
+                    return `<li data-id="${item.WardCode}">${item.WardName}</li>`
+                })
+                $('.jsAddressContainer').html(arrVal);
+
+                if (callback) {
+                    callback();
+                }
+            }
+        });
+    }
+
+    function setValueAddress() {
+        let address = '';
+        address += tempLocation['province'] ? tempLocation['province'] : '';
+        address += tempLocation['district'] ? `, ${tempLocation['district']}` : '';
+        address += tempLocation['ward'] ? `, ${tempLocation['ward']}` : '';
+
+        $('input#province').val(tempLocation['province']);
+        $('input#district').val(tempLocation['district']);
+        $('input#ward').val(tempLocation['ward']);
+        $('input#provinceId').val(tempLocation['provinceId']);
+        $('input#districtId').val(tempLocation['districtId']);
+        $('input#wardId').val(tempLocation['wardId']);
+
+        $('.modal2-input-container__address .modal2-input__value').text(address);
+    }
+
+    fetchProvinces();
+    checkHeaderForm();
+
+    $('.modal2-input-container__address .modal2-input__value').on('click', function () {
+        $('.modal2-input-container__address .modal2-input__box').toggleClass('show');
+    })
+
+    $('.jsAddressContainer').on('click', 'li', function () {
+        const curr = $('.jsAddressSelect.active')[0];
+        const type = curr.dataset.type;
+        const next = $(curr).next();
+        const nextId = this.dataset.id;
+
+        curr.dataset.id = this.dataset.id;
+        tempLocation[`${type}Id`] = this.dataset.id;
+        tempLocation[type] = this.innerText;
+
+        if (!next[0]) {
+            $('.modal2-input-container__address .modal2-input__box').removeClass('show');
+
+            fetchProvinces();
+
+            $('.jsAddressSelect').removeClass('active');
+            $('.jsAddressSelect[data-type="province"]').addClass('active');
+            setValueAddress();
+            return;
+        }
+
+        switch (next.attr('data-type')) {
+            case 'district': {
+                $('.jsAddressSelect[data-type="district"]').removeAttr('data-id');
+                $('.jsAddressSelect[data-type="ward"]').removeAttr('data-id');
+                tempLocation['district'] = '';
+                tempLocation['ward'] = '';
+
+                fetchDistricts(nextId);
+                break;
+            }
+            case 'ward': {
+                $('.jsAddressSelect[data-type="ward"]').removeAttr('data-id');
+                tempLocation['ward'] = '';
+
+                fetchWards(nextId);
+                break;
+            }
+        }
+        curr.classList.remove('active');
+        next.addClass('active');
+
+        setValueAddress();
+    })
+
+    $('.jsAddressSelect').on('click', function () {
+        switch (this.dataset.type) {
+            case 'province': {
+                fetchProvinces(() => {
+                    $('.jsAddressSelect').removeClass('active');
+                    $('.jsAddressSelect[data-type="province"]').addClass('active');
+                });
+                break;
+            }
+            case 'district': {
+                const provinceId = $('.jsAddressSelect[data-type="province"]').attr('data-id');
+                fetchDistricts(provinceId, () => {
+                    $('.jsAddressSelect').removeClass('active');
+                    $('.jsAddressSelect[data-type="district"]').addClass('active');
+                });
+                break;
+            }
+            case 'ward': {
+                const districtId = $('.jsAddressSelect[data-type="district"]').attr('data-id');
+                fetchWards(districtId, () => {
+                    $('.jsAddressSelect').removeClass('active');
+                    $('.jsAddressSelect[data-type="ward"]').addClass('active');
+                });
+                break;
+            }
+        }
+    })
+
+    $('.jsEditBtn').on('click', function () {
+        const container = $(this).parents('.account-address-item')[0];
+        $('.error').remove();
+
+        const address = {
+            id: container.dataset.id,
+            ownName: $(container).find('.jsOwnName')[0].innerText,
+            ownPhone: $(container).find('.jsOwnPhone')[0].innerText,
+            number: $(container).find('.jsNumber')[0].innerText,
+            ward: $(container).find('.jsWard')[0].innerText,
+            district: $(container).find('.jsDistrict')[0].innerText,
+            province: $(container).find('.jsProvince')[0].innerText,
+        }
+
+        Object.keys(address).forEach(key => {
+            $(`[name='${key}']`).val(address[key]);
+        })
+
+        tempLocation['province'] = address["province"];
+        tempLocation['district'] = address["district"];
+        tempLocation['ward'] = address["ward"];
+        setValueAddress();
+
+        $('.modal2__address').attr('action', `/address/${address.id}`);
+        checkHeaderForm();
+        $('.modal2-container').addClass('js-close');
+    })
+
+    $('.js-modal').on('click', function () {
+        $('.modal2__address').attr('action', `/address`);
+        $('.error').remove();
+
+        const address = {
+            id: '',
+            ownName: '',
+            ownPhone: '',
+            number: '',
+            ward: '',
+            district: '',
+            province: '',
+        }
+
+        Object.keys(address).forEach(key => {
+            $(`[name='${key}']`).val(address[key]);
+        })
+
+        tempLocation['province'] = address["province"];
+        tempLocation['district'] = address["district"];
+        tempLocation['ward'] = address["ward"];
+
+        setValueAddress();
+        checkHeaderForm();
+    })
+</script>
 </body>
 </html>

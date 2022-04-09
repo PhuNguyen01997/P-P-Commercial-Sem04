@@ -1,19 +1,20 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Address;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
+import com.apt.p2p.model.view.AddressModel;
 
 import java.util.List;
 
 public interface AddressService {
-    Address createNewAddress(Address address);
+    List<AddressModel> findAll();
 
-    void deleteAddress(Integer id);
+    List<AddressModel> findAllByUserId(int userId);
 
-    Address editAddress(Address address);
+    AddressModel save(int userId, AddressModel address);
 
-    List<Address> getAddress();
+    AddressModel findById(int id);
 
-    Address getAddressDetail(Integer id);
+    AddressModel update(AddressModel addressModel);
+
+    boolean delete(int id);
 }

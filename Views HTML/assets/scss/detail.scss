@@ -2,11 +2,11 @@
     padding-top: 20px;
     margin-bottom: 40px;
 
-    & > *:not(:last-child){
+    &>*:not(:last-child) {
         margin-bottom: 15px;
     }
 
-    & > * {
+    &>* {
         @include box-shadow();
     }
 
@@ -24,6 +24,7 @@
         .pic {
             position: relative;
             overflow: hidden;
+
             img {
                 position: absolute;
                 width: 100%;
@@ -34,6 +35,57 @@
 
         &--current {
             padding-bottom: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        &--list {
+            margin-top: 10px;
+
+            .pic {
+                width: 82px;
+                height: 82px;
+                border: 2px solid transparent;
+
+                &.active {
+                    border-color: $color-primary01;
+                }
+            }
+        }
+
+        .jsSlick {
+            .slick {
+                &-track {
+                    margin: 0;
+                }
+
+                &-slide {
+                    margin: 0 5px;
+                }
+
+                &-list {
+                    margin: 0 -5px;
+                }
+
+                &-arrow {
+                    z-index: 2;
+                    width: 30px;
+                    height: 30px;
+
+                    &::before {
+                        font-size: 30px;
+                    }
+                }
+
+                &-prev {
+                    left: 0;
+                }
+
+                &-next {
+                    right: 0;
+                }
+            }
         }
     }
 
@@ -115,7 +167,7 @@
             margin-right: 20px;
             flex-shrink: 0;
 
-            img{
+            img {
                 height: 100%;
             }
         }
@@ -173,23 +225,25 @@
     &-product {
         padding-top: 25px;
         background-color: white;
-        &--content{
+
+        &--content {
+            white-space: pre;
             font-size: 1.4rem;
             padding: 15px;
         }
     }
 
-    &-rate{
-        padding: 25px 0 15px;
+    &-rate {
+        padding: 25px 0 10px;
         background-color: white;
 
-        &--item{
+        &--item {
             @include flex($align: flex-start, $justify: flex-start);
             padding: 15px;
             border-bottom: 1px solid $color-bd;
         }
 
-        &--pic{
+        &--pic {
             width: 40px;
             height: 40px;
             margin-right: 10px;
@@ -198,22 +252,41 @@
             overflow: hidden;
         }
 
-        &--name{
+        &--name {
             font-size: 1.2rem;
         }
-        &--star{
+
+        &--star {
             margin-bottom: 10px;
         }
 
-        &--text{
+        &--text {
             padding: 10px 0;
             font-size: 1.4rem;
             line-height: 1.4;
         }
 
-        &--date{
+        &--date {
             font-size: 1.2rem;
             color: $color-txt-white-grey;
+        }
+
+        &--pagi {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 16px;
+            margin: 10px 10px 0 0;
+
+            .pagi-item {
+                width: 24px;
+                height: 24px;
+                margin: 0 5px;
+            }
+
+            .pagi-item__prev,
+            .pagi-item__next {
+                border: 1px solid $color-bd-ipt;
+            }
         }
     }
 }

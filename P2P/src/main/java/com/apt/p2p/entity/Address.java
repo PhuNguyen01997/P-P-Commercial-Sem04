@@ -1,21 +1,29 @@
 package com.apt.p2p.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.apt.p2p.model.view.AddressModel;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "Address")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
+    @NotNull
+    private String ownName;
+
+    @NotNull
+    @Column(length = 14)
+    private String ownPhone;
 
     @NotNull
     @Column(length = 100)
@@ -25,12 +33,23 @@ public class Address {
     private String ward;
 
     @NotNull
+    @Column(length = 20)
+    private String wardId;
+
+    @NotNull
     private  String district;
+
+    @NotNull
+    @Column(length = 20)
+    private int districtId;
 
     @NotNull
     private String province;
 
     @NotNull
+    @Column(length = 20)
+    private int provinceId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
@@ -38,10 +57,6 @@ public class Address {
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
     private Shop shop;
 
-    public Address(String number, String ward, String district, String province) {
-        this.number = number;
-        this.ward = ward;
-        this.district = district;
-        this.province = province;
-    }
+    @OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
+    private List<Order> orders;
 }

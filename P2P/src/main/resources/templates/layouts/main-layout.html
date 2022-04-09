@@ -6,27 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
 
-    <script src="/plugins/jquery v3.6.0.js/jquery v3.6.0.min.js"></script>
-    <script src="/plugins/bootstrap-4.0.0/js/bootstrap.js"></script>
+    <script th:src="@{/plugins/jquery v3.6.0.js/jquery v3.6.0.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap-4.0.0/js/bootstrap.js}"></script>
+    <script th:src="@{/plugins/slick v1.8.1/slick.min.js}"></script>
     <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 
 
-    <link rel="stylesheet" href="/plugins/bootstrap-4.0.0/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-4.0.0/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/plugins/slick v1.8.1/slick.css}">
+    <link rel="stylesheet" th:href="@{/plugins/slick v1.8.1/slick-theme.css}">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <th:block layout:fragment="style"></th:block>
 </head>
 <body>
 <header th:insert="fragments/general.html :: header" class="header">
     <h1>Header</h1>
 </header>
+
 <main layout:fragment="content">
     <h1>Content</h1>
 </main>
+
+<div id="globalLoading"></div>
+
 <footer class="footer" th:insert="fragments/general.html :: footer">
     <h1>Footer</h1>
 </footer>
+
+<div th:if="${globalError != null}" th:replace="fragments/modal.html :: global-error"></div>
+
 <script src="/js/script.js"></script>
 <th:block layout:fragment="script"></th:block>
 </body>

@@ -63,10 +63,10 @@
         <div class="inner cart cart__list">
             <div class="cart-header">
                 <div class="cart-header-item cart-checkbox">
-                    <label for="check01" class="checkbox">
+                    <label for="allCheck01" class="checkbox">
                         <i class="icon fas fa-check"></i>
                         <span></span>
-                        <input id="check01" type="checkbox">
+                        <input id="allCheck01" type="checkbox" class="allCheck">
                     </label>
                 </div>
                 <p class="cart-header-item cart-header-item__name">Sản phẩm</p>
@@ -78,10 +78,10 @@
             <div class="cart-section">
                 <div class="cart-section-shop">
                     <div class="cart-section-shop--checkbox cart-checkbox">
-                        <label for="check02" class="checkbox">
+                        <label for="shopCheck01" class="checkbox">
                             <i class="icon fas fa-check"></i>
                             <span></span>
-                            <input id="check02" type="checkbox">
+                            <input id="shopCheck01" type="checkbox" class="shopCheck">
                         </label>
                     </div>
                     <div class="cart-section-shop--info">
@@ -89,12 +89,12 @@
                     </div>
                 </div>
                 <ul class="cart-section-product">
-                    <li class="cart-section-product--item">
+                    <li class="cart-section-product--item" data-id='1'>
                         <div class="cart-section-product--checkbox cart-checkbox">
-                            <label for="check03" class="checkbox">
+                            <label for="check01" class="checkbox">
                                 <i class="icon fas fa-check"></i>
                                 <span></span>
-                                <input id="check03" type="checkbox">
+                                <input id="check01" type="checkbox">
                             </label>
                         </div>
                         <a href="#" class="cart-section-product--img pic">
@@ -106,26 +106,26 @@
                         </a>
                         <div class="cart-section-product--price cart-w15">
                             <span class="strikethrough">$99.99</span>
-                            <span>$99.00</span>
+                            <span class="jsPrice" data-value='250000'>250.000 vnđ</span>
                         </div>
                         <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
+                                <input class="jsQuantity" type="number" name="" value="1" min="1" max="99">
                             </span>
                         </div>
-                        <div class="cart-section-product--total cart-w10">
-                            $110.000
+                        <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">
+                            0 vnđ
                         </div>
                         <div class="cart-section-product--action cart-w10">
                             <button class="btn btn__red">Xóa</button>
                         </div>
                     </li>
-                    <li class="cart-section-product--item">
+                    <li class="cart-section-product--item" data-id="3">
                         <div class="cart-section-product--checkbox cart-checkbox">
-                            <label for="check03" class="checkbox">
+                            <label for="check02" class="checkbox">
                                 <i class="icon fas fa-check"></i>
                                 <span></span>
-                                <input id="check03" type="checkbox">
+                                <input id="check02" type="checkbox">
                             </label>
                         </div>
                         <a href="#" class="cart-section-product--img pic">
@@ -137,15 +137,15 @@
                         </a>
                         <div class="cart-section-product--price cart-w15">
                             <span class="strikethrough">$99.99</span>
-                            <span>$99.00</span>
+                            <span class="jsPrice" data-value="50000">50000 vnđ</span>
                         </div>
                         <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
+                                <input class="jsQuantity" type="number" name="" value="1" min="1" max="99">
                             </span>
                         </div>
-                        <div class="cart-section-product--total cart-w10">
-                            $110.000
+                        <div data-total="0" data-total="0" class="cart-section-product--total cart-w10 jsTotal">
+                            0 vnđ
                         </div>
                         <div class="cart-section-product--action cart-w10">
                             <button class="btn btn__red">Xóa</button>
@@ -156,10 +156,10 @@
             <div class="cart-section">
                 <div class="cart-section-shop">
                     <div class="cart-section-shop--checkbox cart-checkbox">
-                        <label for="check02" class="checkbox">
+                        <label for="shopCheck02" class="checkbox">
                             <i class="icon fas fa-check"></i>
                             <span></span>
-                            <input id="check02" type="checkbox">
+                            <input id="shopCheck02" type="checkbox" class="shopCheck">
                         </label>
                     </div>
                     <div class="cart-section-shop--info">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
                 <ul class="cart-section-product">
-                    <li class="cart-section-product--item">
+                    <li class="cart-section-product--item" data-id="4">
                         <div class="cart-section-product--checkbox cart-checkbox">
                             <label for="check03" class="checkbox">
                                 <i class="icon fas fa-check"></i>
@@ -184,26 +184,26 @@
                         </a>
                         <div class="cart-section-product--price cart-w15">
                             <span class="strikethrough">$99.99</span>
-                            <span>$99.00</span>
+                            <span class="jsPrice" data-value="10000">10000 vnđ</span>
                         </div>
                         <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
+                                <input class="jsQuantity" type="number" name="" value="1" min="1" max="99">
                             </span>
                         </div>
-                        <div class="cart-section-product--total cart-w10">
-                            $110.000
+                        <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">
+                            0 vnđ
                         </div>
                         <div class="cart-section-product--action cart-w10">
                             <button class="btn btn__red">Xóa</button>
                         </div>
                     </li>
-                    <li class="cart-section-product--item">
+                    <li class="cart-section-product--item" data-id="2">
                         <div class="cart-section-product--checkbox cart-checkbox">
-                            <label for="check03" class="checkbox">
+                            <label for="check04" class="checkbox">
                                 <i class="icon fas fa-check"></i>
                                 <span></span>
-                                <input id="check03" type="checkbox">
+                                <input id="check04" type="checkbox">
                             </label>
                         </div>
                         <a href="#" class="cart-section-product--img pic">
@@ -215,15 +215,15 @@
                         </a>
                         <div class="cart-section-product--price cart-w15">
                             <span class="strikethrough">$99.99</span>
-                            <span>$99.00</span>
+                            <span class="jsPrice" data-value='100000'>100.000 vnđ</span>
                         </div>
                         <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
+                                <input class="jsQuantity" type="number" name="" value="1" min="1" max="99">
                             </span>
                         </div>
-                        <div class="cart-section-product--total cart-w10">
-                            $110.000
+                        <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">
+                            0 vnđ
                         </div>
                         <div class="cart-section-product--action cart-w10">
                             <button class="btn btn__red">Xóa</button>
@@ -234,15 +234,18 @@
             <div class="cart-footer">
                 <div class="cart-footer-block cart-footer-block__03">
                     <div class="cart-footer-block--checkbox cart-checkbox">
-                        <label for="check04" class="checkbox">
+                        <label for="allCheck02" class="checkbox">
                             <i class="icon fas fa-check"></i>
                             <span></span>
-                            <input id="check04" type="checkbox">
+                            <input id="allCheck02" type="checkbox" class="allCheck">
                         </label>
                     </div>
-                    <a class="cart-footer-block--txt cart-footer-block--txt__delete" href="#">Xóa</a>
+                    <form class="jsDeleteForm cart-footer-block--txt cart-footer-block--txt__delete">
+                        <div class="inputContainer"></div>
+                        <button>Xóa</button>
+                    </form>
                     <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (99 sản phẩm):</p>
-                    <p class="cart-footer-block--price">$12.323.123</p>
+                    <p class="cart-footer-block--price jsSum">0 vnđ</p>
                     <button class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
                 </div>
             </div>
@@ -286,6 +289,71 @@
     </footer>
 
     <script src="/assets/js/script.js"></script>
+    <script>
+        function checkInput(label, value) {
+            const input = $(label).find('input[type="checkbox"]')[0];
+            if (value) {
+                $(label).addClass('checkbox__active');
+            } else {
+                $(label).removeClass('checkbox__active');
+            }
+            input.checked = value;
+        }
+
+        function sumAll() {
+            let sum = 0;
+            $('.jsDeleteForm .inputContainer').empty();
+            
+            $('.cart-section-product--item').each(function (index, item) {
+                if ($(item).find('.checkbox__active').length) {
+                    // tính total
+                    sum += parseFloat($(item).find('.jsTotal')[0].dataset.total);
+
+                    // set check list id vào form delete
+                    const id = $(item).attr('data-id');
+                    $('.jsDeleteForm .inputContainer').append(`<input type='hidden' name="ids[]" value='${id}'>`);
+                }
+            })
+            
+            $('.jsSum').text(`${sum} vnđ`);
+        }
+
+        function setTotal(item) {
+            const price = $(item).find(`.jsPrice`)[0].dataset.value;
+            const quantity = $(item).find(`.jsQuantity`)[0].value;
+            const totalContainer = $(item).find(`.jsTotal`)[0];
+            totalContainer.innerText = `${price * quantity} vnđ`;
+            $(totalContainer).attr('data-total', price * quantity);
+        }
+
+        $('.cart-section-product--item').each(function () {
+            setTotal(this);
+        })
+
+        $('input[type="checkbox"].allCheck').on('change', function () {
+            const isCheck = this.checked;
+            $('.checkbox').each((index, item) => checkInput(item, isCheck));
+        })
+
+        $('input[type="checkbox"].shopCheck').on('change', function () {
+            const isCheck = this.checked;
+
+            const parent = $(this).parents('.cart-section');
+            parent.find('.checkbox').each((index, item) => checkInput(item, isCheck));
+        })
+
+        $('.cart-section .attachAdjust input[type="number"]').on('change', function () {
+            const parent = $(this).parents('.cart-section-product--item')[0];
+
+            setTotal(parent);
+
+            sumAll();
+        })
+
+        $('input[type="checkbox"]').on('change', function () {
+            setTimeout(() => sumAll(), 10);
+        })
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="header">
+    <div class="header-block header-block__left">
+        <h1 class="header-block--logo">
+            <img class="icon" src="/img/common/logo.png" alt="">
+            <span class="txt">Trang chủ</span>
+        </h1>
+        <p class="header-block--angle"><i class="fas fa-angle-right"></i></p>
+        <h2 class="header-block--text02">Đơn Hàng</h2>
+    </div>
+    <div class="header-block header-block__right">
+        <p class="header-block--info">
+            <span class="avatar"><img src="/img/common/img_default_user.png" alt=""></span>
+            <span class="name">Username</span>
+        </p>
+        <p class="header-block--noti"><i class="far fa-bell"></i></p>
+        <p class="header-block--edu">
+            <button class="btn btn__outline">ShoPP Edu</button>
+        </p>
+    </div>
+</th:block>
+
+<aside th:fragment="content-side" class="aside">
+    <div class="aside-container">
+        <p class="aside-title">Quản lý đơn hàng</p>
+        <ul class="aside-list">
+            <li class="aside-item"><a th:href='@{/portal/order}'>Tất cả</a></li>
+<!--            <li class="aside-item"><a href='javascript: void(0)'>Đơn hủy</a></li>-->
+<!--            <li class="aside-item"><a href='javascript: void(0)'>Trả hàng/Hoàn tiền</a></li>-->
+        </ul>
+    </div>
+    <div class="aside-container">
+        <p class="aside-title">Quản lý Shop</p>
+        <ul class="aside-list">
+            <li class="aside-item"><a th:href='@{/portal/}'>Hồ sơ Shop</a></li>
+            <li class="aside-item"><a href='javascript: void(0)'>Đánh giá Shop</a></li>
+<!--            <li class="aside-item"><a href='javascript: void(0)'>Giao dịch</a></li>-->
+<!--            <li class="aside-item"><a href='javascript: void(0)'>Địa chỉ</a></li>-->
+        </ul>
+    </div>
+    <div class="aside-container">
+        <p class="aside-title">Quản lý sản phẩm</p>
+        <ul class="aside-list">
+            <li class="aside-item"><a th:href='@{/portal/product}'>Tất cả</a></li>
+            <li class="aside-item"><a th:href='@{/portal/product/create}'>Thêm sản phẩm</a></li>
+        </ul>
+    </div>
+    <div class="aside-container">
+        <p class="aside-title">Tài Chính</p>
+        <ul class="aside-list">
+            <li class="aside-item"><a th:href='@{/portal/fund}'>Số dư tài khoản Shoppe</a></li>
+        </ul>
+    </div>
+</aside>
+
+<div th:fragment="error-shop">
+    <p class="error">Bạn chưa có cửa hàng, vui lòng đăng ký một cửa hàng cho riêng mình.</p>
+</div>
+</body>
+</html>

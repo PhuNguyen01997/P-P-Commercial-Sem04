@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="global-error" id="globalError" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Xin lỗi</h4>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="jsText" th:text="${globalError}">Có lỗi xảy ra, vui lòng thử lại sau</p>
+            </div>
+        </div>
+    </div>
+
+    <script th:if="${globalError != null}">
+        $('#globalError').modal('show');
+    </script>
+</div>
+
+</body>
+</html>

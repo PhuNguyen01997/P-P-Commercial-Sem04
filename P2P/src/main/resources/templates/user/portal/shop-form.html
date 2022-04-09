@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<div layout:fragment="content" class="main-inner shop">
+    <h3 class="shop-title">Hồ Sơ Shop</h3>
+    <p class="shop-title-desc">Xem tình trạng Shop và cập nhật hồ sơ Shop của bạn</p>
+    <form class="shop-form" th:object="${shop}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" name="checkImagesExists" th:value="${imageFiles == null ? '' : 1}">
+        <div class="shop-form-left">
+            <div class="shop-picture">
+                <div class="shop-picture--avatar pic circle">
+                    <img class="jsAvatar" th:src="${shop.logo != null ? shop.toUrl(shop.logo) : ''}" alt="">
+                    <label class="shop-picture--ipt shop-picture--ipt__avatar" for="avatar">Sửa</label>
+                    <input type="file" class="d-none" id="avatar"
+                           th:value="${imageFiles != null ? imageFiles.getImageFiles()[0] : ''}" name="imageFiles[0]">
+                </div>
+                <div class="shop-picture--text">
+                    <p class="name" th:text="${shop.name}">[Shop Name]</p>
+                    <p class="date" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attendant Date]</p>
+                </div>
+                <div class="shop-picture--thumbnail pic">
+                    <img class="jsThumbnail" th:src="${shop.background != null ? shop.toUrl(shop.background) : ''}"
+                         alt="">
+                </div>
+                <label class="shop-picture--ipt shop-picture--ipt__thumbnail" for="thumbnail">Sửa ảnh bìa</label>
+                <input id="thumbnail" class="d-none" type="file"
+                       th:value="${imageFiles != null ? imageFiles.getImageFiles()[1] : ''}" name="imageFiles[1]">
+            </div>
+            <p class="error py-1 d-none" data-name="images">[Error Images]</p>
+            <div class="shop-info">
+                <div class="shop-info--item">
+                    <p class="label">Sản phẩm</p>
+                    <a th:href="@{/portal/product}" th:text="${shop.products == null ? 0 : shop.products.size()}"
+                       class="link"
+                       href="javascript: void(0)">0</a>
+                </div>
+                <div class="shop-info--item">
+                    <p class="label">Đánh giá shop</p>
+                    <a th:href="@{/portal/rate}" th:text="${shop.countRates}"
+                       class="link" href="javascript: void(0)">0</a>
+                </div>
+            </div>
+        </div>
+        <div class="shop-form-right">
+            <div class="shop-form-row">
+                <label for="name">Tên Shop</label>
+                <div class="ipt ipt__limit-length">
+                    <input maxlength="30" th:field="*{name}" id="name" type="text">
+                    <p class="length"><span class="jsCount-name">0</span><span>/30</span></p>
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">[Error Name]</p>
+                </div>
+            </div>
+            <div class="shop-form-row">
+                <label>Địa chỉ Shop</label>
+                <div th:if="${user.addresses.size() == 0}">
+                    <input type="hidden" name="teAddress" value="">
+                    <p>Bạn chưa có địa chỉ <a href="#">Tạo địa chỉ</a></p>
+                </div>
+                <div th:if="${user.addresses.size() > 0}" class="select">
+                    <select name="teAddress">
+                        <option value="" selected disabled>Chọn địa chỉ</option>
+                        <option th:each="address: ${user.addresses}"
+                                th:text="${address.getFullAddress()}"
+                                th:value="${address.id}"
+                                th:selected="${address.id == shop.address?.id}"></option>
+                    </select>
+                </div>
+                <p class="error d-none" data-name="teAddress">[Error teAddress]</p>
+            </div>
+            <div class="shop-form-row">
+                <label for="phone">Số điện thoại</label>
+                <input id="phone" name="phone" th:field="*{phone}" type="text">
+                <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="error">[Error Phone]</p>
+            </div>
+            <div class="shop-form-row shop-form-row__textarea">
+                <label for="description">Mô tả Shop</label>
+                <textarea th:field="*{description}"
+                          rows="5" id="description"
+                          placeholder="Nhập mô tả hoặc thông tin về Shop của bạn tại đây"></textarea>
+                <p class="length"><span class="jsCount-description">0</span><span>/500</span></p>
+                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">[Error
+                    Description]</p>
+            </div>
+            <div class="shop-form-row shop-form-row__submit">
+                <button type="submit" class="btn btn__primary">Lưu</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script layout:fragment="script">
+    $(function () {
+        if ($('input[name="checkImagesExists"]').val()) {
+            const imagesLocal = JSON.parse(localStorage.getItem('tempImages'));
+            $('.jsAvatar').attr('src', 'data:image/png;base64,' + imagesLocal.logo);
+            $('.jsThumbnail').attr('src', 'data:image/png;base64,' + imagesLocal.thumbnail);
+        } else {
+            let imagesLocal = {};
+            $('.jsAvatar, .jsThumbnail').each(function (index, item) {
+                let key = '';
+                if (item.classList.contains('jsAvatar')) {
+                    key = 'logo';
+                } else if (item.classList.contains('jsThumbnail')) {
+                    key = 'thumbnail';
+                }
+                imagesLocal[key] = getBase64Image(item);
+            })
+            localStorage.setItem("tempImages", JSON.stringify(imagesLocal));
+        }
+
+        $('#avatar').on('change', function () {
+            const element = document.querySelector('.jsAvatar');
+            if (this.files && this.files[0]) {
+                readUrlImage(this.files[0], element);
+            }
+        });
+        $('#thumbnail').on('change', function () {
+            const element = document.querySelector('.jsThumbnail');
+            if (this.files && this.files[0]) {
+                readUrlImage(this.files[0], element);
+            }
+        });
+
+        document.querySelector('.shop-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let canSubmit = true;
+            if (!$('[name="teAddress"]').val()) {
+                $('.error[data-name="teAddress"]').text("Địa chỉ không thể trống").removeClass('d-none');
+                return;
+            }
+            const fileList = $('input[type=file]');
+            fileList.each((index, fileInput) => {
+                if (fileInput.files.length && fileInput.files[0].size / 1000000 > 2) {
+                    canSubmit = false;
+                    $('.error[data-name="images"]').text("Kích thước hình ảnh quá lớn (< 2MB)").removeClass('d-none');
+                    return;
+                }
+            })
+            if (canSubmit) this.submit();
+        });
+    })
+</script>
+</body>
+</html>

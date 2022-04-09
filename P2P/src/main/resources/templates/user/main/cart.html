@@ -12,10 +12,10 @@
     <div class="inner cart cart__list">
         <div class="cart-header">
             <div class="cart-header-item cart-checkbox">
-                <label for="check01" class="checkbox">
+                <label for="allCheck01" class="checkbox">
                     <i class="icon fas fa-check"></i>
                     <span></span>
-                    <input id="check01" type="checkbox">
+                    <input id="allCheck01" type="checkbox" class="allCheck">
                 </label>
             </div>
             <p class="cart-header-item cart-header-item__name">Sản phẩm</p>
@@ -24,178 +24,197 @@
             <p class="cart-header-item cart-w10">Số tiền</p>
             <p class="cart-header-item cart-w10">Thao tác</p>
         </div>
-        <div class="cart-section">
+        <div th:each="cart : ${cartList}" class="cart-section">
             <div class="cart-section-shop">
                 <div class="cart-section-shop--checkbox cart-checkbox">
-                    <label for="check02" class="checkbox">
+                    <label th:for="'shop' + ${cart.shop.id}" class="checkbox">
                         <i class="icon fas fa-check"></i>
                         <span></span>
-                        <input id="check02" type="checkbox">
+                        <input th:id="'shop' + ${cart.shop.id}" type="checkbox" class="shopCheck">
                     </label>
                 </div>
                 <div class="cart-section-shop--info">
-                    <p>CK68.VN <a href="#"><i class="icon icon__right fas fa-comment-alt"></i></a></p>
+                    <p><span th:text="${cart.shop.name}"></span> <a href="javascript: void(0);"><i
+                            class="icon icon__right fas fa-comment-alt"></i></a></p>
                 </div>
             </div>
             <ul class="cart-section-product">
-                <li class="cart-section-product--item">
+                <li th:attr="data-id=${pc.cart.id}, data-shop-id=${cart.shop.id}"
+                    th:each="pc : ${cart.getProductCarts()}" class="cart-section-product--item">
                     <div class="cart-section-product--checkbox cart-checkbox">
-                        <label for="check03" class="checkbox">
+                        <label th:for="'cart' + ${pc.cart.id}" class="checkbox">
                             <i class="icon fas fa-check"></i>
                             <span></span>
-                            <input id="check03" type="checkbox">
+                            <input th:id="'cart' + ${pc.cart.id}" type="checkbox">
                         </label>
                     </div>
-                    <a href="#" class="cart-section-product--img pic">
+                    <a th:href="@{/product/{id}(id=${pc.product.id})}" class="cart-section-product--img pic">
                         <img src="/img/products/product_02.jpg" alt="">
                     </a>
-                    <a href="#" class="cart-section-product--name">
-                        Ốp Điện Thoại Cho Oppo A54 A15 A93 A94 A53 2020 A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno
-                        4 Lite Reno 4 F 5 Lite 5f X3Lite A15S F17 A12E A83 / 332 / 33 / 11s
-                    </a>
+                    <a th:href="@{/product/{id}(id=${pc.product.id})}"
+                       th:text="${pc.product.name}"
+                       class="cart-section-product--name"></a>
                     <div class="cart-section-product--price cart-w15">
-                        <span class="strikethrough">$99.99</span>
-                        <span>$99.00</span>
+                        <!--                        <span class="strikethrough">$99.99</span>-->
+                        <p>
+                            <span th:text="${pc.product.price}"></span>
+                            <span class="jsPrice" th:attr="data-value=${pc.product.price}">vnđ</span>
+                        </p>
                     </div>
                     <div class="cart-section-product--quantity cart-w15">
                             <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
+                                <input type="number" name="" th:value="${pc.cart.quantity}" min="1" max="99"
+                                       class="jsQuantity">
                             </span>
                     </div>
-                    <div class="cart-section-product--total cart-w10">
-                        $110.000
-                    </div>
-                    <div class="cart-section-product--action cart-w10">
+                    <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">0 vnđ</div>
+                    <form th:action="@{/cart/{id}(id=${pc.cart.id})}" th:method="delete"
+                          class="cart-section-product--action cart-w10">
                         <button class="btn btn__red">Xóa</button>
-                    </div>
-                </li>
-                <li class="cart-section-product--item">
-                    <div class="cart-section-product--checkbox cart-checkbox">
-                        <label for="check03" class="checkbox">
-                            <i class="icon fas fa-check"></i>
-                            <span></span>
-                            <input id="check03" type="checkbox">
-                        </label>
-                    </div>
-                    <a href="#" class="cart-section-product--img pic">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </a>
-                    <a href="#" class="cart-section-product--name">
-                        Ốp Điện Thoại Cho Oppo A54 A15 A93 A94 A53 2020 A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno
-                        4 Lite Reno 4 F 5 Lite 5f X3Lite A15S F17 A12E A83 / 332 / 33 / 11s
-                    </a>
-                    <div class="cart-section-product--price cart-w15">
-                        <span class="strikethrough">$99.99</span>
-                        <span>$99.00</span>
-                    </div>
-                    <div class="cart-section-product--quantity cart-w15">
-                            <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
-                            </span>
-                    </div>
-                    <div class="cart-section-product--total cart-w10">
-                        $110.000
-                    </div>
-                    <div class="cart-section-product--action cart-w10">
-                        <button class="btn btn__red">Xóa</button>
-                    </div>
+                    </form>
                 </li>
             </ul>
         </div>
-        <div class="cart-section">
-            <div class="cart-section-shop">
-                <div class="cart-section-shop--checkbox cart-checkbox">
-                    <label for="check02" class="checkbox">
-                        <i class="icon fas fa-check"></i>
-                        <span></span>
-                        <input id="check02" type="checkbox">
-                    </label>
-                </div>
-                <div class="cart-section-shop--info">
-                    <p>CK68.VN <a href="#"><i class="icon icon__right fas fa-comment-alt"></i></a></p>
-                </div>
+        <form class="cart-footer jsPayForm" th:method="POST" th:action="@{/pay}">
+            <div class="inputContainer d-none">
+                <input type="text" name="shopCart[]" value="">
             </div>
-            <ul class="cart-section-product">
-                <li class="cart-section-product--item">
-                    <div class="cart-section-product--checkbox cart-checkbox">
-                        <label for="check03" class="checkbox">
-                            <i class="icon fas fa-check"></i>
-                            <span></span>
-                            <input id="check03" type="checkbox">
-                        </label>
-                    </div>
-                    <a href="#" class="cart-section-product--img pic">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </a>
-                    <a href="#" class="cart-section-product--name">
-                        Ốp Điện Thoại Cho Oppo A54 A15 A93 A94 A53 2020 A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno
-                        4 Lite Reno 4 F 5 Lite 5f X3Lite A15S F17 A12E A83 / 332 / 33 / 11s
-                    </a>
-                    <div class="cart-section-product--price cart-w15">
-                        <span class="strikethrough">$99.99</span>
-                        <span>$99.00</span>
-                    </div>
-                    <div class="cart-section-product--quantity cart-w15">
-                            <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
-                            </span>
-                    </div>
-                    <div class="cart-section-product--total cart-w10">
-                        $110.000
-                    </div>
-                    <div class="cart-section-product--action cart-w10">
-                        <button class="btn btn__red">Xóa</button>
-                    </div>
-                </li>
-                <li class="cart-section-product--item">
-                    <div class="cart-section-product--checkbox cart-checkbox">
-                        <label for="check03" class="checkbox">
-                            <i class="icon fas fa-check"></i>
-                            <span></span>
-                            <input id="check03" type="checkbox">
-                        </label>
-                    </div>
-                    <a href="#" class="cart-section-product--img pic">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </a>
-                    <a href="#" class="cart-section-product--name">
-                        Ốp Điện Thoại Cho Oppo A54 A15 A93 A94 A53 2020 A7 A3S A5 2020 A5S A12 A92 A31 A9 2020 Reno
-                        4 Lite Reno 4 F 5 Lite 5f X3Lite A15S F17 A12E A83 / 332 / 33 / 11s
-                    </a>
-                    <div class="cart-section-product--price cart-w15">
-                        <span class="strikethrough">$99.99</span>
-                        <span>$99.00</span>
-                    </div>
-                    <div class="cart-section-product--quantity cart-w15">
-                            <span class="attachAdjust">
-                                <input type="number" name="" value="1" min="1">
-                            </span>
-                    </div>
-                    <div class="cart-section-product--total cart-w10">
-                        $110.000
-                    </div>
-                    <div class="cart-section-product--action cart-w10">
-                        <button class="btn btn__red">Xóa</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="cart-footer">
             <div class="cart-footer-block cart-footer-block__03">
                 <div class="cart-footer-block--checkbox cart-checkbox">
-                    <label for="check04" class="checkbox">
+                    <label for="allCheck02" class="checkbox">
                         <i class="icon fas fa-check"></i>
                         <span></span>
-                        <input id="check04" type="checkbox">
+                        <input id="allCheck02" type="checkbox" class="allCheck">
                     </label>
                 </div>
-                <a class="cart-footer-block--txt cart-footer-block--txt__delete" href="#">Xóa</a>
-                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (99 sản phẩm):</p>
-                <p class="cart-footer-block--price">$12.323.123</p>
-                <button class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
+                <a class="jsDeleteArchor" href="javascript: void(0)">Xóa</a>
+                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (<span
+                        class="jsCountProduct">0</span> sản phẩm):</p>
+                <p class="cart-footer-block--price jsSum">0 vnđ</p>
+                <button type="submit" class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
             </div>
-        </div>
+        </form>
+        <form th:action="@{/cart}" th:method="delete"
+              class="jsDeleteForm d-none cart-footer-block--txt cart-footer-block--txt__delete">
+            <div class="inputContainer">
+                <input type="text" name="ids[]">
+            </div>
+        </form>
     </div>
 </main>
+
+<script layout:fragment="script">
+    function checkInput(label, value) {
+        const input = $(label).find('input[type="checkbox"]')[0];
+        if (value) {
+            $(label).addClass('checkbox__active');
+        } else {
+            $(label).removeClass('checkbox__active');
+        }
+        input.checked = value;
+    }
+
+    function sumAll() {
+        let sum = 0;
+        let count = 0;
+        $('.jsDeleteForm .inputContainer').empty();
+        $('.jsPayForm .inputContainer').empty();
+        let dataPay = {};
+
+        $('.cart-section-product--item').each(function (index, item) {
+            if ($(item).find('.checkbox__active').length) {
+                // đếm số sản phẩm check
+                count++;
+
+                // tính total
+                sum += parseFloat($(item).find('.jsTotal')[0].dataset.total);
+
+                // set check list id vào form delete
+                const id = $(item).attr('data-id');
+                $('.jsDeleteForm .inputContainer').append(`<input type='hidden' name="ids[]" value='${id}'>`);
+
+                // thêm sản phẩm check vào data gửi đi thanh toán
+                const shopId = item.dataset.shopId;
+                const cartId = item.dataset.id;
+                dataPay[shopId] = dataPay[shopId] ? [...dataPay[shopId], cartId] : dataPay[shopId] = [cartId];
+            }
+        })
+
+        Object.keys(dataPay).map((key, index) => {
+            const cartIdString = dataPay[key].reduce((strResult, item, index) => { return strResult + `C${item}` }, "");
+            $('.jsPayForm .inputContainer').append(`<input type='text' name="shopCart[]" value='S${key + cartIdString}'>`);
+        })
+
+        if(!Object.keys(dataPay).length){
+            $('.jsPayForm .inputContainer').append(`<input type='text' name="shopCart[]" value=''>`);
+        }
+
+        $('.jsSum').text(`${sum} vnđ`);
+        $('.jsCountProduct').text(count);
+    }
+
+    function setTotal(item) {
+        const price = $(item).find(`.jsPrice`)[0].dataset.value;
+        const quantity = $(item).find(`.jsQuantity`)[0].value;
+        const totalContainer = $(item).find(`.jsTotal`)[0];
+        totalContainer.innerText = `${price * quantity} vnđ`;
+        $(totalContainer).attr('data-total', price * quantity);
+    }
+
+    function editCart(id, quantity, callback) {
+        $.ajax({
+            url: `${window.location.protocol}//${window.location.host}/cart-edit`,
+            cache: false,
+            type: 'POST',
+            success: function (result) {
+                if (result) {
+                    callback();
+                } else {
+                    console.error("Error ajax");
+                }
+            },
+            data: {
+                id: id,
+                quantity: quantity,
+            }
+        });
+    }
+
+    $('.cart-section-product--item').each(function () {
+        setTotal(this);
+    })
+
+    $('input[type="checkbox"].allCheck').on('change', function () {
+        const isCheck = this.checked;
+        $('.checkbox').each((index, item) => checkInput(item, isCheck));
+    })
+
+    $('input[type="checkbox"].shopCheck').on('change', function () {
+        const isCheck = this.checked;
+
+        const parent = $(this).parents('.cart-section');
+        parent.find('.checkbox').each((index, item) => checkInput(item, isCheck));
+    })
+
+    $('.cart-section .attachAdjust input[type="number"]').on('change', function () {
+        const parent = $(this).parents('.cart-section-product--item')[0];
+
+        const id = $(parent).attr('data-id');
+        const quantity = $(this).val();
+
+        editCart(id, quantity, function () {
+            setTotal(parent);
+            sumAll();
+        });
+    })
+
+    $('input[type="checkbox"]').on('change', function () {
+        setTimeout(() => sumAll(), 10);
+    });
+
+    $('.jsDeleteArchor').on('click', function () {
+        document.querySelector('.jsDeleteForm').submit()
+    })
+</script>
 </body>
 </html>

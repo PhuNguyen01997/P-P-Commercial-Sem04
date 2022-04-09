@@ -1,8 +1,10 @@
 package com.apt.p2p.service;
 
 
+import com.apt.p2p.common.modelMapper.UserMapper;
 import com.apt.p2p.entity.Role;
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.repository.RoleRepository;
 import com.apt.p2p.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 @Configuration
 @Service
@@ -46,21 +49,23 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
     private String mailTls;
 
-
     @Autowired
     private RoleRepository roleRepository;
-
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserModel> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(e -> userMapper.userEntityToModel(e)).collect(Collectors.toList());
     }
 
     @Override
-    public Optional<User> findById(Integer id) {
-        return userRepository.findById(id);
+    public UserModel findById(Integer userId) {
+        User user = userRepository.findById(userId).get();
+        return userMapper.userEntityToModel(user);
     }
 
     @Override
@@ -108,17 +113,17 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         List<Role> roles = roleRepository.FindRoleByEmail(user.getEmail());
         List<GrantedAuthority> grantList = new ArrayList<>();
-        if(roles != null && roles.size() > 0){
-            for(Role role : roles){
+        if (roles != null && roles.size() > 0) {
+            for (Role role : roles) {
                 GrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
                 grantList.add(authority);
             }
-        }else {
+        } else {
             grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
         boolean enabled = user.isEnabled();
@@ -142,5 +147,4 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
             userRepository.save(u);
         }
     }
-
 }

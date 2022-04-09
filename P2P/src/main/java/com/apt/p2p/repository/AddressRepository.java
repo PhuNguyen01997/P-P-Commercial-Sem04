@@ -1,13 +1,18 @@
 package com.apt.p2p.repository;
 
 import com.apt.p2p.entity.Address;
-import com.apt.p2p.repository.Custom.AddressRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-public interface AddressRepository extends JpaRepository<Address, Long>, AddressRepositoryCustom {
-    Address findById(Integer id);
+import java.util.List;
 
-    void deleteAddressById(Integer id);
+public interface AddressRepository extends JpaRepository<Address, Integer> {
+    @Query("SELECT a FROM Address a WHERE a.user.id=:id ORDER BY a.id")
+    List<Address> findAllByUserId(@Param("id") int userId);
+
+    List<Address> findAllByOrderById();
+
+    @Query("SELECT a FROM Address a WHERE a.shop.id=:id")
+    Address findByShopId(@Param("id") int shopId);
 }
