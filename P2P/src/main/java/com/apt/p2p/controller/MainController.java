@@ -1,10 +1,7 @@
 package com.apt.p2p.controller;
 
-import com.apt.p2p.entity.User;
+import com.apt.p2p.entity.*;
 import com.apt.p2p.common.RandomUtil;
-import com.apt.p2p.entity.Address;
-import com.apt.p2p.entity.Product;
-import com.apt.p2p.entity.Rate;
 import com.apt.p2p.model.view.DistrictModel;
 import com.apt.p2p.model.view.ProvinceModel;
 import com.apt.p2p.model.view.WardModel;
@@ -16,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -30,6 +29,8 @@ public class MainController {
     private ShopRepository shopRepository;
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Autowired
     private LocationService locationService;
 
@@ -81,6 +82,8 @@ public class MainController {
             "#streetwear #localbrand #basictee #freesize #hanquoc #formrong #oversize #ulzzang #unisex";
 
     private List<ProvinceModel> provinces = null;
+    private Map<Integer, List<DistrictModel>> mapProvinceDistrict = new HashMap<>();
+    private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
 
     @GetMapping("shop/{shopId}/order/{orderId}")
     public String orderDetailShop(@PathVariable("shopId") int shopId, @PathVariable("orderId") int orderId) {
@@ -108,16 +111,39 @@ public class MainController {
 
         List<Product> products = productRepository.findAll();
         List<User> users = userRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
 
-        // product set description
-        products.forEach(p -> {
-            p.setDescription(this.descriptionProduct);
-        });
+        // create users
+        users.addAll(createUser(30));
 
         // create address for user
         users.forEach(u -> {
-//            Integer amount = RandomUtil.getRandomNumber(1, 2);
-//            List<Address> addresses = createAddress(u, amount);
+            Integer amount = RandomUtil.getRandomNumber(1, 2);
+            List<Address> addresses = createAddress(u, amount);
+        });
+
+        // create shops
+        List<Shop> shops = createShop(users, 18);
+
+        // product set description
+        // product set shop
+        Map<Integer, List<Shop>> mapCategoryShop = new HashMap<>();
+        Integer ratio = shops.size() / categories.size();
+        for (int i = 0; i < categories.size(); i++) {
+            int range = (i + 1) * ratio;
+            List<Shop> newShopList = new ArrayList<>();
+            for (int j = range - ratio; j < range; j++) {
+                newShopList.add(shops.get(j));
+            }
+            mapCategoryShop.put(i, newShopList);
+        }
+        products.forEach(p -> {
+            // product set description
+            p.setDescription(this.descriptionProduct);
+
+            // product set shop
+            List<Shop> shopValids = mapCategoryShop.get(p.getCategory().getId());
+            p.setShop(shopValids.get(RandomUtil.getRandomNumber(0, ratio - 1)));
         });
 
         userRepository.saveAll(users);
@@ -127,24 +153,61 @@ public class MainController {
         return null;
     }
 
-    private List<Rate> createRate(Integer amount) {
+    private List<Shop> createShop(List<User> users, int amount) {
+        List<Shop> result = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            // lấy số user cuối -> đầu
+            User user = users.get(users.size() - 1 - i);
+
+            Shop newShop = new Shop();
+
+            newShop.setLogo(i + "_logo.jpg");
+            newShop.setBackground(i + "_thumbnail.jpg");
+            newShop.setName(RandomUtil.getRandomString(10, 42));
+            newShop.setPhone(RandomUtil.getRandomPhone());
+            newShop.setPermission(true);
+            newShop.setDescription("test");
+            newShop.setUser(user);
+
+            result.add(newShop);
+        }
+        shopRepository.saveAll(result);
+
+        return result;
+    }
+
+    private List<Rate> createRate(int amount) {
         for (int i = 0; i < amount; i++) {
 
         }
         return null;
     }
 
-    private List<Address> createAddress(User user, Integer amount) {
+    private List<Address> createAddress(User user, int amount) {
         List<Address> result = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             Integer randomProvinceIndex = RandomUtil.getRandomNumber(0, this.provinces.size() - 1);
             ProvinceModel province = this.provinces.get(randomProvinceIndex);
 
-            List<DistrictModel> districtList = locationService.districtFindAllByProvinceId(province.getProvinceId());
+            List<DistrictModel> districtList = getDistrictModels(province.getProvinceId());
+            if (districtList.size() == 0) {
+                randomProvinceIndex = RandomUtil.getRandomNumber(0, this.provinces.size() - 1);
+                province = this.provinces.get(randomProvinceIndex);
+
+                districtList = getDistrictModels(province.getProvinceId());
+            }
+
             Integer randomDistrictIndex = RandomUtil.getRandomNumber(0, districtList.size() - 1);
             DistrictModel district = districtList.get(randomDistrictIndex);
 
-            List<WardModel> wardList = locationService.wardFindAllByDistrictId(district.getDistrictId());
+            List<WardModel> wardList = getWardModels(district.getDistrictId());
+            if (wardList.size() == 0) {
+                randomDistrictIndex = RandomUtil.getRandomNumber(0, districtList.size() - 1);
+                district = districtList.get(randomDistrictIndex);
+
+                wardList = getWardModels(district.getDistrictId());
+            }
+
             Integer randomWardIndex = RandomUtil.getRandomNumber(0, wardList.size() - 1);
             WardModel ward = wardList.get(randomWardIndex);
 
@@ -166,5 +229,53 @@ public class MainController {
         addressRepository.saveAll(result);
 
         return result;
+    }
+
+    private List<User> createUser(int amount) {
+        List<User> result = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            User newUser = new User();
+            String name = "user_" + i;
+
+            newUser.setEmail(name + "@gmail.com");
+            newUser.setUsername(name);
+            newUser.setPassword("$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa");
+            newUser.setPhone(RandomUtil.getRandomPhone());
+            newUser.setAvatar(null);
+
+            result.add(newUser);
+        }
+
+        userRepository.saveAll(result);
+
+        return result;
+    }
+
+    private List<DistrictModel> getDistrictModels(Integer provinceId) {
+        List<DistrictModel> districtList = new ArrayList<>();
+        if (mapProvinceDistrict.get(provinceId) == null) {
+            districtList = locationService.districtFindAllByProvinceId(provinceId);
+            if (districtList.size() != 0) {
+                mapProvinceDistrict.put(provinceId, districtList);
+            }
+        } else {
+            districtList = mapProvinceDistrict.get(provinceId);
+        }
+
+        return districtList;
+    }
+
+    private List<WardModel> getWardModels(Integer districtId) {
+        List<WardModel> wardList = new ArrayList<>();
+        if (mapDistrictWard.get(districtId) == null) {
+            wardList = locationService.wardFindAllByDistrictId(districtId);
+            if (wardList.size() != 0) {
+                mapDistrictWard.put(districtId, wardList);
+            }
+        } else {
+            wardList = mapDistrictWard.get(districtId);
+        }
+        return wardList;
     }
 }

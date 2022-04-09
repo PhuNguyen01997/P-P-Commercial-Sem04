@@ -42,6 +42,8 @@ public class Shop {
 
     private Boolean permission = false;
 
+    private String stripeCardId;
+
     @NotNull
     private String description;
 
@@ -60,8 +62,6 @@ public class Shop {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "addressId")
     private Address address;
-
-    private String stripeCardId;
 
     @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
     private List<Order> orders;

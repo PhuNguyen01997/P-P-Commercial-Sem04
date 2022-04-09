@@ -48,14 +48,14 @@ public class User {
 
     private String provider;
 
+    private String stripeCustomerId;
+
     @ManyToMany
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
-
-    private String stripeCustomerId;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Shop shop;
