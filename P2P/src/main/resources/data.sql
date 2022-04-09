@@ -32,33 +32,19 @@ INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Thức ăn', NOW());
 
 INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
-(NOW(), 'Vòng đá đeo tay từ tính 8mm chăm sóc sức khỏe độc đáo', '[\"1_18723.jpg\",\"1_34632.jpg\",\"1_4385.jpg\"]', 'Thời gian giao hàng dự kiến cho sản phẩm này là từ 7-9 ngày', 14000, NOW(), 4, 1, 0),
-(NOW(), 'Vòng tay may mắn đính hạt ngọc trai phong cách Trung Hoa cổ điển cho nữ', '[\"4_7234.jpg\",\"4_745.jpg\",\"4_57.jpg\",\"4_4534.jpg\"]', 'Thời gian giao hàng dự kiến cho sản phẩm này là từ 7-9 ngày', 14000, NOW(), 4, 1, 0),
-(NOW(), 'Lắc tay bạc cho bé gái hình nơ khắc tên LTT0042 - Trang Sức TNJ', '[\"4_546.jpg\",\"4_3485.jpg\"]', 'Lắc tay bạc cho bé hình nơ khắc tên LTT0042 - Trang Sức TNJ', 319000, NOW(), 4, 1, 0),
-(NOW(), 'Lắc tay xù cực đẹp, cao cấp', '[\"4_34543.jpg\",\"4_549.jpg\"]', 'Không chỉ là quà tặng thông thường mà còn là thay ngàn lời muốn nói💟 👉 Gắn kết tình cảm gia đình, trao gửi yêu thương với các tuyệt phẩm quà tặng vô cùng độc đáo, ý nghĩa ➡️ Bảo hành thu mua sản phẩm trọn đời. <Các gái tag nhẹ ấy của mình vào để nhắc khéo nhé 😉> ------------------------ Liên hệ shop ngay để sở hữu những món quà chất hơn nước cất này bằng cách ⚜️Để lại cmt hoặc nhắn tin tới shop để được tư vấn cụ thể ☎️ Phone: 0979465921TUYỂN CỘNG TÁC VIÊN LIÊN TỤC CHIẾC KHẤU CAO', 1300000, NOW(), 4, 1, 0),
-(NOW(), '[Whiteline] Vòng tay Macrame Eye of Horus (có size Chân)', '[\"4_576.jpg\",\"4_54534.jpg\"]', 'Size S: Dưới 45kg', 178200, NOW(), 4, 1, 0),
-(NOW(), 'SET NHẪN BUTTERFLY', '[\"4_48695.jpg\",\"4_4368.jpg\",\"4_34987534.jpg\"]', 'Butterfly tượng trưng cho sự mơ mộng, lãng mạn- những ước mơ hồn nhiên, tươi sáng - biểu tượng của sự thay đổi cuộc đời theo chiều hướng tốt đẹp hơn.
-Mẫu nhẫn gồm 2 nhẫn ghép (không bán lẻ) có thể đeo mix hay đeo rời đều xinh 🤍', 115000, NOW(), 4, 1, 0),
-(NOW(), 'NHẪN NỮ MẶT ĐÁ CAO CẤP', '[\"4_47383.jpg\"]', '5 LÝ DO YÊN TÂM MUA HÀNG TẠI SHOP:', 13000, NOW(), 4, 1, 0),
-(NOW(), 'Đồng Hồ Samsung Galaxy Watch3 Bluetooth (45mm)', '[\"4_84937.jpg\",\"4_893453.jpg\",\"4_947354.jpg\"]', 'Cảm biến: Accelerometer, Barometer, Gyro Sensor, Light Sensor, Optical Heart Rate Sensor', 6999999 , NOW(), 4, 1, 0),
-(NOW(), 'Đồng Hồ Nữ Gucci Le Marche des Merveilles Watch YA1264060', '[\"4_38495743.jpg\",\"4_934543.jpg\",\"4_4387.jpg\"]', '✔ Thương hiệu: Gucci ', 7500000, NOW(), 4, 1, 0);
+(NOW(), 'Vòng đá đeo tay từ tính 8mm chăm sóc sức khỏe độc đáo', '[\"1_18723.jpg\",\"1_34632.jpg\",\"1_4385.jpg\"]', '', 14000, NOW(), 4, 1, 0),
+(NOW(), 'Vòng tay may mắn đính hạt ngọc trai phong cách Trung Hoa cổ điển cho nữ', '[\"4_7234.jpg\",\"4_745.jpg\",\"4_57.jpg\",\"4_4534.jpg\"]', '', 14000, NOW(), 4, 1, 0),
+(NOW(), 'Lắc tay bạc cho bé gái hình nơ khắc tên LTT0042 - Trang Sức TNJ', '[\"4_546.jpg\",\"4_3485.jpg\"]', '', 319000, NOW(), 4, 1, 0),
+(NOW(), 'Lắc tay xù cực đẹp, cao cấp', '[\"4_34543.jpg\",\"4_549.jpg\"]', '', 1300000, NOW(), 4, 1, 0),
+(NOW(), '[Whiteline] Vòng tay Macrame Eye of Horus (có size Chân)', '[\"4_576.jpg\",\"4_54534.jpg\"]', '', 178200, NOW(), 4, 1, 0),
+(NOW(), 'SET NHẪN BUTTERFLY', '[\"4_48695.jpg\",\"4_4368.jpg\",\"4_34987534.jpg\"]', '', 115000, NOW(), 4, 1, 0),
+(NOW(), 'NHẪN NỮ MẶT ĐÁ CAO CẤP', '[\"4_47383.jpg\"]', '', 13000, NOW(), 4, 1, 0),
+(NOW(), 'Đồng Hồ Samsung Galaxy Watch3 Bluetooth (45mm)', '[\"4_84937.jpg\",\"4_893453.jpg\",\"4_947354.jpg\"]', '', 6999999 , NOW(), 4, 1, 0),
+(NOW(), 'Đồng Hồ Nữ Gucci Le Marche des Merveilles Watch YA1264060', '[\"4_38495743.jpg\",\"4_934543.jpg\",\"4_4387.jpg\"]', '', 7500000, NOW(), 4, 1, 0);
 
 
 INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES
 (NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '01 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '02 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '03 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '04 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '05 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '06 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '07 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '08 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '09 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '10 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '11 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '12 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
-(NOW(), '13 lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
 (NOW(), 'Mùa dịch nhưng giao hàng khá nhanh, chưa dùng nên chưa biết chất lượng thế nào', 2, NOW(), 2, 2),
 (NOW(), 'Giao thiếu sp ( hơn 130 ngàn) . Nhắn tin ko trả lời. Làm ơn nếu đọc đc bình luận này thì trả lại tiền giúp đi. Bán hàng ko có tâm !', 1, NOW(), 3, 2),
 (NOW(), 'Trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Do đó, trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Định lí 3: Trong một đường tròn, đường kính đi qua trung điểm của một dây không đi qua tâm thì vuông góc với dây ấy', 4, NOW(), 4, 2),

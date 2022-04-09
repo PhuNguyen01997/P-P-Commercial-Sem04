@@ -12,9 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DistrictModel {
     @JsonProperty("DistrictID")
-    public int districtID;
+    public int districtId;
     @JsonProperty("ProvinceID")
-    public int provinceID;
+    public int provinceId;
     @JsonProperty("DistrictName")
     public String districtName;
     @JsonProperty("NameExtension")

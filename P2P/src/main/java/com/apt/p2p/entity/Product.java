@@ -37,6 +37,7 @@ public class Product {
     @NotNull
     private String image;
 
+    @Lob
     @Column(columnDefinition = "TEXT")
     @NotNull
     private String description;

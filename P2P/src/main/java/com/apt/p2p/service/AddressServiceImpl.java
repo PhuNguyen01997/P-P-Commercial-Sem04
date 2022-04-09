@@ -37,8 +37,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public AddressModel save(AddressModel address) {
-        User user = userRepository.findById(1).get();
+    public AddressModel save(int userId, AddressModel address) {
+        User user = userRepository.findById(userId).get();
 
         Address addressEntity = addressMapper.addressModelToEntity(address);
         addressEntity.setUser(user);

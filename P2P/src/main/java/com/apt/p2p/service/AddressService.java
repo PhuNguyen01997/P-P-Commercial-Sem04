@@ -10,7 +10,7 @@ public interface AddressService {
 
     List<AddressModel> findAllByUserId(int userId);
 
-    AddressModel save(AddressModel address);
+    AddressModel save(int userId, AddressModel address);
 
     AddressModel findById(int id);
 

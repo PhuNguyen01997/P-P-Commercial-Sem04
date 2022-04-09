@@ -14,7 +14,7 @@ public class WardModel {
     @JsonProperty("WardCode")
     public String wardCode;
     @JsonProperty("DistrictID")
-    public int districtID;
+    public int districtId;
     @JsonProperty("WardName")
     public String wardName;
     @JsonProperty("NameExtension")
