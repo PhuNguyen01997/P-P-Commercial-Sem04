@@ -10,6 +10,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role,Integer> {
-    @Query("SELECT o.primaryKey.role FROM UserRole o WHERE o.primaryKey.user.username = :username")
+    @Query("SELECT u.roles from User u WHERE u.email = :email")
+    List<Role> FindRoleByEmail(@Param("email") String email);
+
+    @Query("SELECT r FROM Role r WHERE r.name = :name")
+    Role findRoleByName(String name);
+
+    @Query("SELECT o.roles FROM User o WHERE o.username = :username")
     List<Role> FindRoleByUsername(@Param("username") String username);
 }

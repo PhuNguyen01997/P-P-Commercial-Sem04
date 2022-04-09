@@ -37,14 +37,23 @@ public class User {
     @NotNull
     private String phone;
 
+    @Column (name = "reset")
+    private String resetPasswordToken;
+
     private String avatar;
 
     private Date createdAt = new Date();
 
     private Date updatedAt = new Date();
 
-    @OneToMany(mappedBy = "primaryKey.user" ,fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-    private List<UserRole> userRoles;
+    private String provider;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
 
 

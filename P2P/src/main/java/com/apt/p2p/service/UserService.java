@@ -17,4 +17,6 @@ public interface UserService {
     void deleteById(Integer id);
 
     String findByEmail(String email);
+
+    User getCurrentUser();
 }

@@ -12,9 +12,11 @@
   <div class="inner">
     <div class="auth-container">
       <h1 class="auth-title">Reset password</h1>
-      <form action="#" class="form">
-        <input class="auth--ipt auth--ipt__txt" type="password" placeholder="New password">
-        <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Confirm password">
+      <form th:action="@{/reset-password}"  class="form" method="post">
+        <input type="hidden" name="token" th:value="${token}">
+        <input class="auth--ipt auth--ipt__txt" type="password" name="newPassword" placeholder="New password">
+        <input class="auth--ipt auth--ipt__txt" type="password" name="confirmPassword" placeholder="Confirm password">
+        <p th:if="${status != null}"  th:text="${status}" class="error">Invalid value</p>
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Reset</button>
       </form>
     </div>
