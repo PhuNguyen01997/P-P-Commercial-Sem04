@@ -282,11 +282,6 @@ public class MainController {
         List<Product> products = productRepository.findAllByShopId(shop.getId());
         List<Order> result = new ArrayList<>();
 
-        List<ShopTransaction> saveShopTransaction = new ArrayList<>();
-        List<Order> saveOrder = new ArrayList<>();
-        List<StatusHistory> saveStatusHistory = new ArrayList<>();
-
-
         for (int i = 0; i < amount; i++) {
             StatusOrder currentStatusOrder = this.statusOrders.get(RandomUtil.getRandomNumber(0, 3));
             User user = users.get(RandomUtil.getRandomNumber(users.size() - 1));
@@ -302,31 +297,33 @@ public class MainController {
             newOrder.setTotal(total);
             newOrder.setShippingCost(shipping);
 
-            List<StatusHistory> statusHistories = this.statusOrders
-                    .stream().filter(so -> so.getId() <= currentStatusOrder.getId())
-                    .map(so -> new StatusHistory(so, newOrder))
-                    .collect(Collectors.toList());
-            newOrder.setStatusHistories(statusHistories);
             newOrder.setCurrentStatus(currentStatusOrder);
-
-            ShopTransaction transaction = new ShopTransaction(shop, newOrder);
-            newOrder.setShopTransaction(transaction);
-
             newOrder.setMethodPayment(false);
             newOrder.setPercentPermission(0.05);
             newOrder.setUser(user);
             newOrder.setShop(shop);
             newOrder.setAddress(address);
             newOrder.setStripeCardId(null);
+            orderRepository.save(newOrder);
+            orderDetailRepository.saveAll(orderDetails);
 
-            saveStatusHistory.addAll(statusHistories);
-            saveShopTransaction.add(transaction);
-            saveOrder.add(newOrder);
+            ShopTransaction transaction = new ShopTransaction(shop, newOrder);
+            shopTransactionRepository.save(transaction);
+            newOrder.setShopTransaction(transaction);
+
+            List<StatusHistory> statusHistories = this.statusOrders
+                    .stream().filter(so -> so.getId() <= currentStatusOrder.getId())
+                    .map(so -> {
+                        StatusHistory statusHistory = new StatusHistory(so, newOrder);
+                        statusHistory.setOrder(newOrder);
+                        return statusHistory;
+                    })
+                    .collect(Collectors.toList());
+            statusHistoryRepository.saveAll(statusHistories);
+            newOrder.setStatusHistories(statusHistories);
+
+            result.add(newOrder);
         }
-
-        statusHistoryRepository.saveAll(saveStatusHistory);
-        shopTransactionRepository.saveAll(saveShopTransaction);
-        orderRepository.saveAll(saveOrder);
 
         return result;
     }
@@ -345,7 +342,6 @@ public class MainController {
 
             result.add(newOrderDetail);
         }
-        orderDetailRepository.saveAll(result);
 
         return result;
     }
