@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private StatusOrderRepository statusOrderRepository;
     @Autowired
-    private OrderStatusOrderRepository orderStatusOrderRepository;
+    private StatusHistoryRepository statusHistoryRepository;
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
 
                 // attach many to many relation ship order - order_status_history - status_history
                 StatusHistory statusHistory = new StatusHistory(status, order);
-                orderStatusOrderRepository.save(statusHistory);
+                statusHistoryRepository.save(statusHistory);
 
                 // attach orderDetails to order
                 filterOrderDetails.forEach(ode -> ode.setOrder(order));
@@ -135,7 +135,7 @@ public class OrderServiceImpl implements OrderService {
             order.setCurrentStatus(statusOrder);
 
             StatusHistory statusHistory = new StatusHistory(statusOrder, order);
-            orderStatusOrderRepository.save(statusHistory);
+            statusHistoryRepository.save(statusHistory);
 
             order.getStatusHistories().add(statusHistory);
 

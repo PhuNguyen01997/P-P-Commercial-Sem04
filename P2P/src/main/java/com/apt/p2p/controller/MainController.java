@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -31,6 +33,16 @@ public class MainController {
     private AddressRepository addressRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private StatusOrderRepository statusOrderRepository;
+    @Autowired
+    private StatusHistoryRepository statusHistoryRepository;
+    @Autowired
+    private ShopTransactionRepository shopTransactionRepository;
     @Autowired
     private LocationService locationService;
 
@@ -81,6 +93,7 @@ public class MainController {
             "#aothuntaylo #aophongtaylo #aophongrong #aoformrong #aounisex #aopull #aodoi #ao #thun<br>" +
             "#streetwear #localbrand #basictee #freesize #hanquoc #formrong #oversize #ulzzang #unisex";
 
+    private List<StatusOrder> statusOrders = null;
     private List<ProvinceModel> provinces = null;
     private Map<Integer, List<DistrictModel>> mapProvinceDistrict = new HashMap<>();
     private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
@@ -108,22 +121,27 @@ public class MainController {
     @GetMapping("seed")
     public String seed() {
         this.provinces = locationService.provinceFindAll();
+        this.statusOrders = statusOrderRepository.findAll();
 
         List<Product> products = productRepository.findAll();
         List<User> users = userRepository.findAll();
+        User testUser = users.stream().filter(u -> u.getUserId() == 1).collect(Collectors.toList()).get(0);
+        users = users.stream().filter(u -> u.getUserId() != 1).collect(Collectors.toList());
         List<Category> categories = categoryRepository.findAll();
 
         // create users
-        users.addAll(createUser(30));
+        users.addAll(createUser(18));
 
         // create address for user
         users.forEach(u -> {
             Integer amount = RandomUtil.getRandomNumber(1, 2);
             List<Address> addresses = createAddress(u, amount);
+            u.setAddresses(addresses);
         });
 
         // create shops
-        List<Shop> shops = createShop(users, 18);
+        List<Shop> shops = createShop(users, 17);
+        shops.add(testUser.getShop());
 
         // product set description
         // product set shop
@@ -144,6 +162,13 @@ public class MainController {
             // product set shop
             List<Shop> shopValids = mapCategoryShop.get(p.getCategory().getId());
             p.setShop(shopValids.get(RandomUtil.getRandomNumber(0, ratio - 1)));
+        });
+
+        // create orders
+        List<User> finalUsers = users;
+        shops.forEach(shop -> {
+            List<Order> asd = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(5));
+            String str = "asd";
         });
 
         userRepository.saveAll(users);
@@ -168,6 +193,7 @@ public class MainController {
             newShop.setPermission(true);
             newShop.setDescription("test");
             newShop.setUser(user);
+            newShop.setAddress(user.getAddresses().get(RandomUtil.getRandomNumber(user.getAddresses().size() - 1)));
 
             result.add(newShop);
         }
@@ -248,6 +274,78 @@ public class MainController {
         }
 
         userRepository.saveAll(result);
+
+        return result;
+    }
+
+    private List<Order> createOrders(Shop shop, List<User> users, int amount) {
+        List<Product> products = productRepository.findAllByShopId(shop.getId());
+        List<Order> result = new ArrayList<>();
+
+        List<ShopTransaction> saveShopTransaction = new ArrayList<>();
+        List<Order> saveOrder = new ArrayList<>();
+        List<StatusHistory> saveStatusHistory = new ArrayList<>();
+
+
+        for (int i = 0; i < amount; i++) {
+            StatusOrder currentStatusOrder = this.statusOrders.get(RandomUtil.getRandomNumber(0, 3));
+            User user = users.get(RandomUtil.getRandomNumber(users.size() - 1));
+            Address address = user.getAddresses().get(user.getAddresses().size() - 1);
+
+            Order newOrder = new Order();
+
+            List<OrderDetail> orderDetails = createOrderDetails(products, newOrder, RandomUtil.getRandomNumber(1, 3));
+            newOrder.setOrderDetails(orderDetails);
+
+            BigDecimal shipping = BigDecimal.valueOf(RandomUtil.getRandomNumber(2, 200) * 1000);
+            BigDecimal total = orderDetails.stream().map(OrderDetail::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add).add(shipping);
+            newOrder.setTotal(total);
+            newOrder.setShippingCost(shipping);
+
+            List<StatusHistory> statusHistories = this.statusOrders
+                    .stream().filter(so -> so.getId() <= currentStatusOrder.getId())
+                    .map(so -> new StatusHistory(so, newOrder))
+                    .collect(Collectors.toList());
+            newOrder.setStatusHistories(statusHistories);
+            newOrder.setCurrentStatus(currentStatusOrder);
+
+            ShopTransaction transaction = new ShopTransaction(shop, newOrder);
+            newOrder.setShopTransaction(transaction);
+
+            newOrder.setMethodPayment(false);
+            newOrder.setPercentPermission(0.05);
+            newOrder.setUser(user);
+            newOrder.setShop(shop);
+            newOrder.setAddress(address);
+            newOrder.setStripeCardId(null);
+
+            saveStatusHistory.addAll(statusHistories);
+            saveShopTransaction.add(transaction);
+            saveOrder.add(newOrder);
+        }
+
+        statusHistoryRepository.saveAll(saveStatusHistory);
+        shopTransactionRepository.saveAll(saveShopTransaction);
+        orderRepository.saveAll(saveOrder);
+
+        return result;
+    }
+
+    private List<OrderDetail> createOrderDetails(List<Product> products, Order order, int amount) {
+        List<OrderDetail> result = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            if (products.size() == 0) break;
+
+            Product product = products.get(RandomUtil.getRandomNumber(products.size() - 1));
+            products.remove(product);
+
+            OrderDetail newOrderDetail = new OrderDetail(product.getPrice(), RandomUtil.getRandomNumber(1, 3));
+            newOrderDetail.setProduct(product);
+            newOrderDetail.setOrder(order);
+
+            result.add(newOrderDetail);
+        }
+        orderDetailRepository.saveAll(result);
 
         return result;
     }
