@@ -37,37 +37,35 @@
                 </div>
             </div>
             <div class="order-detail-control">
-<!--                <button class="order-detail-control&#45;&#45;btn btn btn__white">(Shop bấm trực tiếp status update status)-->
-<!--                    Save-->
-<!--                </button>-->
                 <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
                 <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
             </div>
         </div>
         <div class="top-envelope"></div>
-        <div class="order-detail-info">
-            <p th:text="${order.user.username}" class="order-detail-info--name">[User Name]</p>
-            <p th:text="${order.user.phone}" class="order-detail-info--phone">[User Phone]</p>
+        <div th:with="withUser = ${order.user}" class="order-detail-info">
+            <p th:text="${withUser.username}" class="order-detail-info--name">[User Name]</p>
+            <p th:text="${withUser.phone}" class="order-detail-info--phone">[User Phone]</p>
             <p th:text="${order.address.getFullAddress()}"
                class="order-detail-info--address">[User Full Address]</p>
         </div>
-        <div class="order-shop">
-            <p th:text="${order.shop.name}" class="order-shop--name">[Shop Name]</p>
-            <a th:href="@{/shop/{id}(id=${order.shop.id})}"
+        <div th:with="withShop = ${order.shop}" class="order-shop">
+            <p th:text="${withShop.name}" class="order-shop--name">[Shop Name]</p>
+            <a th:href="@{/shop/{id}(id=${withShop.id})}"
                class="order-shop--btn order-shop--btn__visit btn btn__primary">
                 <i class="fas fa-store"></i> Ghé thăm shop
             </a>
-            <!-- <p class="order-shop--status">Status</p> -->
         </div>
         <ul class="order-detail-list">
-            <li th:each="orderDetail : ${order.orderDetails}" class="order-item">
-                <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
+            <li th:each="orderDetail : ${order.orderDetails}"
+                th:with="withProduct = ${orderDetail.product}"
+                class="order-item">
+                <p class="pic order-item--pic"><img th:src="${withProduct.image.size() > 0 ? withProduct.toUrl(withProduct.image.get(0)) : ''}"
                                                     alt=""></p>
                 <div class="order-item--text">
-                    <p th:text="${orderDetail.product.name}" class="order-item--name">[Product Name]</p>
+                    <p th:text="${withProduct.name}" class="order-item--name">[Product Name]</p>
                     <p class="order-item--category">
-                        <span>Category:</span>
-                        <span th:text="${orderDetail.product.category.name}">[Category Name]</span>
+                        <span>Danh mục:</span>
+                        <span th:text="${withProduct.category.name}">[Category Name]</span>
                     </p>
                     <p class="order-item--quantity">
                         <span>x</span>

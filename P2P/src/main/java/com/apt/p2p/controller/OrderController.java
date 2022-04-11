@@ -2,7 +2,9 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.StatusHistory;
 import com.apt.p2p.model.form.FilterOrder;
+import com.apt.p2p.model.view.OrderDetailModel;
 import com.apt.p2p.model.view.OrderModel;
+import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class OrderController {
@@ -26,6 +29,10 @@ public class OrderController {
     @Autowired
     private StatusOrderService statusOrderService;
     @Autowired
+    private OrderDetailService orderDetailService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
     private StatusHistoryService statusHistoryService;
     @Autowired
     private ShopService shopService;
@@ -35,7 +42,6 @@ public class OrderController {
         int userId = 3;
 
         List<OrderModel> orders = orderService.findAllByUserId(userId);
-
         model.addAttribute("orders", orders);
 
         return "user/account/order-user";

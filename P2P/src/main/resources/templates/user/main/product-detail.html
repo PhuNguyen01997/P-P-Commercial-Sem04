@@ -132,6 +132,9 @@
         }
 
         function setRates(input) {
+            if(!input.rates.length){
+                return;
+            }
             let rateHtml = ``;
             input.rates.forEach(rate => {
                 rateHtml += `<div class="detail-rate--item">`

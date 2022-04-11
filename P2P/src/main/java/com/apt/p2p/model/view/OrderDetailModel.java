@@ -33,6 +33,6 @@ public class OrderDetailModel {
         this.id = entity.getId();
         this.lastPrice = entity.getLastPrice();
         this.quantity = entity.getQuantity();
-        this.subtotal = entity.getSubtotal();
+        this.subtotal = lastPrice.multiply(BigDecimal.valueOf(quantity));
     }
 }

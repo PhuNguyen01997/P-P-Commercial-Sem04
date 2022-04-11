@@ -45,10 +45,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDetailService orderDetailService;
     @Autowired
-    private ShopService shopService;
-    @Autowired
-    private ProductService productService;
-    @Autowired
     private OrderMapper orderMapper;
 
     @Override
@@ -149,22 +145,14 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderModel> findAllByUserId(int userId) {
         List<Order> orders = orderRepository.findAllByUserId(userId);
-        List<OrderModel> orderModels = orders.stream().map(od -> {
-            OrderModel model = orderMapper.orderEntityToModel(od);
 
-            List<OrderDetailModel> orderDetails = orderDetailService.findAllByOrderId(model.getId());
-            for (OrderDetailModel ode : orderDetails) {
-                ProductModel productModel = productService.findByOrderDetailId(ode.getId());
-                ode.setProduct(productModel);
-            }
-
-            model.setOrderDetails(orderDetails);
-
-            ShopModel shopModel = shopService.findByOrderId(model.getId());
-            model.setShop(shopModel);
-
-            return model;
-        }).collect(Collectors.toList());
+        List<OrderModel> orderModels = orders.stream()
+                .map(o -> {
+                    OrderModel model = orderMapper.orderEntityToModel(o);
+                    model.setOrderDetails(orderDetailService.findAllByOrderId(model.getId()));
+                    return model;
+                })
+                .collect(Collectors.toList());
 
         return orderModels;
     }
@@ -179,7 +167,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         OrderModel orderModel = orderMapper.orderEntityToModel(order);
-        orderModel.setOrderDetails(orderDetailService.findAllByOrderId(orderId));
+        orderModel.setOrderDetails(orderDetailService.findAllByOrderId(orderModel.getId()));
 
         for (StatusHistory sh : orderModel.getStatusHistories()) {
             sh.setStatus(statusOrderRepository.findByStatusHistory(sh.getId()));
@@ -191,19 +179,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderModel> findALlByShopId(int shopId) {
         List<Order> orders = orderRepository.findAllByShopId(shopId);
-        List<OrderModel> orderModels = orders.stream().map(od -> {
-            OrderModel model = orderMapper.orderEntityToModel(od);
-
-            List<OrderDetailModel> orderDetails = orderDetailService.findAllByOrderId(model.getId());
-            for (OrderDetailModel ode : orderDetails) {
-                ProductModel productModel = productService.findByOrderDetailId(ode.getId());
-                ode.setProduct(productModel);
-            }
-
-            model.setOrderDetails(orderDetails);
-
-            return model;
-        }).collect(Collectors.toList());
+        List<OrderModel> orderModels = orders.stream()
+                .map(o -> {
+                    OrderModel model = orderMapper.orderEntityToModel(o);
+                    model.setOrderDetails(orderDetailService.findAllByOrderId(model.getId()));
+                    return model;
+                })
+                .collect(Collectors.toList());
 
         return orderModels;
     }
@@ -231,9 +213,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<OrderModel> orderModels = orders.stream().map(o -> {
             OrderModel model = orderMapper.orderEntityToModel(o);
-            for (OrderDetailModel ode : model.getOrderDetails()) {
-                ode.setProduct(productService.findByOrderDetailId(ode.getId()));
-            }
+            model.setOrderDetails(orderDetailService.findAllByOrderId(model.getId()));
             return model;
         }).collect(Collectors.toList());
 

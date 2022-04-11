@@ -29,7 +29,9 @@ public class ResponsePagiView {
 
     private void calculatePagiList(int index, int total){
         if (index + 1 > total) {
-            throw new IllegalArgumentException("Index is > Pagi length");
+            System.out.println("Index is > Total");
+            this.pagiList = new ArrayList<Integer>();
+            return;
         }
         List<Integer> result = new ArrayList<>();
         int showRange = 2;

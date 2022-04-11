@@ -2,6 +2,8 @@ package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.view.OrderDetailModel;
+import com.apt.p2p.model.view.OrderModel;
+import com.apt.p2p.model.view.ProductModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,21 +33,10 @@ public class OrderDetailMapper {
     }
 
     public OrderDetailModel orderDetailEntityToModel(OrderDetail entity) {
-        ModelMapper mapper = mapperService.getModelMapper();
-        mapper.typeMap(OrderDetail.class, OrderDetailModel.class);
-        mapper.addMappings(new PropertyMap<OrderDetail, OrderDetailModel>() {
-            @Override
-            protected void configure() {
-                skip(destination.getSubtotal());
-                skip(destination.getOrder());
-                skip(destination.getProduct());
-            }
-        });
+        OrderDetailModel model = new OrderDetailModel(entity);
 
-        mapper.validate();
-        OrderDetailModel model = mapper.map(entity, OrderDetailModel.class);
-
-        model.setSubtotal(entity.getLastPrice().multiply(BigDecimal.valueOf(entity.getQuantity())));
+        model.setProduct(new ProductModel(entity.getProduct()));
+        model.setOrder(new OrderModel(entity.getOrder()));
 
         return model;
     }

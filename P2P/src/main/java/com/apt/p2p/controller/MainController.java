@@ -170,7 +170,7 @@ public class MainController {
         List<Order> orders = new ArrayList<>();
         List<User> finalUsers = users;
         shops.forEach(shop -> {
-            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(5));
+            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(10, 30));
             shop.setOrders(newOrders);
             orders.addAll(newOrders);
         });
@@ -220,13 +220,6 @@ public class MainController {
         shopRepository.saveAll(result);
 
         return result;
-    }
-
-    private List<Rate> createRate(int amount) {
-        for (int i = 0; i < amount; i++) {
-
-        }
-        return null;
     }
 
     private List<Address> createAddress(User user, int amount) {
