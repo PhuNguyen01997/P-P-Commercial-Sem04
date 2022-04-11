@@ -163,16 +163,36 @@ public class MainController {
             List<Shop> shopValids = mapCategoryShop.get(p.getCategory().getId());
             p.setShop(shopValids.get(RandomUtil.getRandomNumber(0, ratio - 1)));
         });
+        productRepository.saveAll(products);
+        shops = shopRepository.findAll();
 
         // create orders
+        List<Order> orders = new ArrayList<>();
         List<User> finalUsers = users;
         shops.forEach(shop -> {
-            List<Order> asd = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(5));
-            String str = "asd";
+            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(5));
+            shop.setOrders(newOrders);
+            orders.addAll(newOrders);
         });
 
+        // create rates
+        List<Rate> rates = new ArrayList<>();
+        orders.forEach(order -> {
+            if (order.getCurrentStatus().getId() == 5) {
+                order.getOrderDetails().forEach(orderDetail -> {
+                    Rate newRate = new Rate();
+                    newRate.setDescription(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(25, 60)));
+                    newRate.setStar(RandomUtil.getRandomNumber(5));
+                    newRate.setUser(order.getUser());
+                    newRate.setProduct(orderDetail.getProduct());
+
+                    rates.add(newRate);
+                });
+            }
+        });
+        rateRepository.saveAll(rates);
+
         userRepository.saveAll(users);
-        productRepository.saveAll(products);
 
         System.out.println("Seed done");
         return null;
@@ -282,14 +302,16 @@ public class MainController {
         List<Product> products = productRepository.findAllByShopId(shop.getId());
         List<Order> result = new ArrayList<>();
 
+        if (products.size() == 0) return result;
+
         for (int i = 0; i < amount; i++) {
-            StatusOrder currentStatusOrder = this.statusOrders.get(RandomUtil.getRandomNumber(0, 3));
+            StatusOrder currentStatusOrder = this.statusOrders.get(RandomUtil.getRandomNumber(0, 4));
             User user = users.get(RandomUtil.getRandomNumber(users.size() - 1));
             Address address = user.getAddresses().get(user.getAddresses().size() - 1);
 
             Order newOrder = new Order();
 
-            List<OrderDetail> orderDetails = createOrderDetails(products, newOrder, RandomUtil.getRandomNumber(1, 3));
+            List<OrderDetail> orderDetails = createOrderDetails(new ArrayList<>(products), newOrder, RandomUtil.getRandomNumber(1, 3));
             newOrder.setOrderDetails(orderDetails);
 
             BigDecimal shipping = BigDecimal.valueOf(RandomUtil.getRandomNumber(2, 200) * 1000);
@@ -305,6 +327,7 @@ public class MainController {
             newOrder.setAddress(address);
             newOrder.setStripeCardId(null);
             orderRepository.save(newOrder);
+            orderDetails.forEach(od -> od.setOrder(newOrder));
             orderDetailRepository.saveAll(orderDetails);
 
             ShopTransaction transaction = new ShopTransaction(shop, newOrder);
@@ -338,11 +361,11 @@ public class MainController {
 
             OrderDetail newOrderDetail = new OrderDetail(product.getPrice(), RandomUtil.getRandomNumber(1, 3));
             newOrderDetail.setProduct(product);
-            newOrderDetail.setOrder(order);
 
             result.add(newOrderDetail);
         }
 
+        orderDetailRepository.saveAll(result);
         return result;
     }
 

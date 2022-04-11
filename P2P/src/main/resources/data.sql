@@ -6,6 +6,13 @@ INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Sắc đẹp', NOW()),
 (NOW(), 'Thức ăn', NOW());
 
+INSERT INTO status_order (id, done_name, name) VALUES
+(1, 'Đã đặt hàng', 'Chờ xác nhận'),
+(2, 'Đã thanh toán', 'Đã thanh toán'),
+(3, 'Đã giao cho ĐVVC', 'Shop đang chuẩn bị hàng'),
+(4, 'Đơn hàng đã nhận', 'Đang giao hàng'),
+(5, 'Đánh giá', 'Đánh giá');
+
 INSERT INTO user (avatar, created_at, email, enabled, password, phone, stripe_customer_id, updated_at, username) VALUES
 (NULL, NOW(), 'seller@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '8234789232', null, NOW(), 'seller'),
 (NULL, NOW(), 'buyer@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0923823123', null,  NOW(), 'buyer');
@@ -51,10 +58,3 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 -- (NOW(), 2, NOW(), 2, 2),
 -- (NOW(), 1, NOW(), 4, 2),
 -- (NOW(), 1, NOW(), 5, 2);
-
-INSERT INTO status_order (id, done_name, name) VALUES
-(1, 'Đã đặt hàng', 'Chờ xác nhận'),
-(2, 'Đã thanh toán', 'Đã thanh toán'),
-(3, 'Đã giao cho ĐVVC', 'Shop đang chuẩn bị hàng'),
-(4, 'Đơn hàng đã nhận', 'Đang giao hàng'),
-(5, 'Đánh giá', 'Đánh giá');

@@ -22,11 +22,21 @@ public final class RandomUtil {
         return random.nextInt(Integer.MAX_VALUE);
     }
 
-    public static String getRandomPhone(){
+    public static String getRandomPhone() {
         return getRandomStringNumber(10);
     }
 
-    public static String getRandomString(int length){
+    public static String getRandomParagraph(int wordCount) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < wordCount - 1; i++) {
+            sb.append(getRandomString(getRandomNumber(2, 12)))
+                    .append(" ");
+        }
+        sb.append(getRandomString(getRandomNumber(3, 12)));
+        return sb.toString();
+    }
+
+    public static String getRandomString(int length) {
         byte[] array = new byte[length];
         String saltAlpha = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder stringBuilder = new StringBuilder();
@@ -39,12 +49,12 @@ public final class RandomUtil {
         return stringBuilder.toString();
     }
 
-    public static String getRandomString(int min, int max){
+    public static String getRandomString(int min, int max) {
         Integer randomLength = getRandomNumber(min, max);
         return getRandomString(randomLength);
     }
 
-    public static String getRandomStringNumber(int length){
+    public static String getRandomStringNumber(int length) {
         String saltNumber = "0123456789";
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < length; i++) {
@@ -55,7 +65,7 @@ public final class RandomUtil {
         return stringBuilder.toString();
     }
 
-    public static String getRandomStringNumber(int min, int max){
+    public static String getRandomStringNumber(int min, int max) {
         Integer randomLength = getRandomNumber(min, max);
         return getRandomStringNumber(randomLength);
     }

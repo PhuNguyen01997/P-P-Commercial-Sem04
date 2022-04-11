@@ -61,6 +61,10 @@ public class LocationServiceImpl implements LocationService {
         ResponseEntity<WardModelGHN> response = restTemplate.exchange(url + "/ward" + appendPath, HttpMethod.GET, httpEntity, WardModelGHN.class);
         WardModel[] arr = response.getBody().getData();
 
+        if(response.getBody().getData() == null){
+            System.out.println(districtId);
+        }
+
         List<WardModel> list = Arrays.stream(arr).filter(wm -> wm.getSupportType() != 0).collect(Collectors.toList());
 
         return list;
