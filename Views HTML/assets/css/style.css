@@ -2896,6 +2896,7 @@ label {
 
 .order-detail .order-item {
   padding-top: 15px;
+  margin: 0;
 }
 
 .order-detail-main {
