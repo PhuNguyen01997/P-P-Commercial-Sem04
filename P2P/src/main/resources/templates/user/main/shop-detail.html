@@ -232,5 +232,55 @@
         </div>
     </div>
 </main>
+<script layout:fragment="script">
+    $(function () {
+        function getFilter() {
+            const keyword = $('.header-form--search').val();
+            const location = $('[name="location"]:checked').toArray().map(node => node.value);
+            const minPrice = $('[name="minPrice"]').val();
+            const maxPrice = $('[name="maxPrice"]').val();
+            const sortBy = $('.jsSortBy.active').attr('data-value');
+            const rate = $('select[name="rate"]').val() == 0 ? null : $('select[name="rate"]').val();
+            const sortDirection = $('[name="sortDirection"]').val();
+            return {keyword, provinceId: location, minPrice, maxPrice, sortBy, sortDirection, rate};
+        }
+
+        function handleEvent() {
+            const filter = getFilter();
+            console.log(filter);
+
+            const queryParam = Object.keys(filter).reduce((str, key, index) => {
+                const val = filter[key];
+                if (!val) return str;
+                if (Array.isArray(val)) {
+                    str += `${key}=${val.join(",")}&`;
+                } else str += `${key}=${val}&`;
+                return str;
+            }, '?');
+            location.replace(queryParam);
+        }
+
+        $('.jsRate').on('click', function () {
+            const value = this.dataset.value;
+            $('select[name="rate"]').val(value).change();
+        })
+
+        $('.jsClick').on('click', function () {
+            handleEvent();
+        })
+
+        $('[name="location"]')
+            .add('[name="sortDirection"]')
+            .add('[name="rate"]').on('change', function () {
+            handleEvent();
+        })
+
+        $('.jsSortBy').on('click', function () {
+            $('.jsSortBy').removeClass('active');
+            $(this).addClass('active');
+            handleEvent();
+        })
+    });
+</script>
 </body>
 </html>

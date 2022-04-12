@@ -1574,6 +1574,11 @@ label {
   margin: 10px 0;
 }
 
+.shopping-side--content {
+  height: 220px;
+  overflow-y: scroll;
+}
+
 .shopping-side--content__list-check li, .shopping-side--content__list-rate li {
   margin-bottom: 6px;
 }
@@ -1697,7 +1702,7 @@ label {
 }
 
 .shopping-sort--select {
-  width: 140px;
+  width: 160px;
 }
 
 .shopping-list {
