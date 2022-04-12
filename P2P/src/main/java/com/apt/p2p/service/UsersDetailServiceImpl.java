@@ -138,7 +138,10 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
         //truong hop chua co tai khoan => tao moi
         if (user == null) {
             User u = new User();
+            u.setEmail(username);
             u.setUsername(username);
+            u.setPhone("");
+            u.setPassword("");
             u.setEnabled(true);
             u.setProvider("GOOGLE");
             userRepository.save(u);
