@@ -22,8 +22,6 @@
         <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error">Invalid value</p>
         <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}">
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">Invalid value</p>
-        <input class="auth--ipt auth--ipt__txt" type="file" name="pic" id="pic">
-        <img style="width: 100px; height: 100px" class="jsPic" src="" alt="logo preview" />
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Sign Up</button>
       </form>
       <div class="auth-navi">

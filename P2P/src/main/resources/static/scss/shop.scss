@@ -157,13 +157,22 @@
         }
 
         &--content {
-            height: 220px;
-            overflow-y: scroll;
+            &__list-check {
+                max-height: 220px;
+                overflow-y: scroll;
+            }
 
             &__list-check,
             &__list-rate {
                 li {
                     margin-bottom: 6px;
+                    padding: 0 5px;
+
+                    &.active {
+                        border: 1px solid #e0e0e0;
+                        background-color: #ededed;
+                        border-radius: 10px;
+                    }
                 }
             }
 
