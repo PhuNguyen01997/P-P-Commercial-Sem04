@@ -207,6 +207,10 @@ public class ProductServiceImpl implements ProductService {
             condition = condition.and(ProductSpecification.hasRate(filterModel.getRate()));
         }
 
+        if(filterModel.getProvinceId() != null && filterModel.getProvinceId().size() > 0){
+            condition = condition.and(ProductSpecification.hasLocation(filterModel.getProvinceId()));
+        }
+
         String propertiesSort = "NEW";
         if(pagiSortModel.getSortBy() == null || pagiSortModel.getSortBy().equals("NEW")){
             propertiesSort = "createdAt";

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,5 +18,5 @@ public class FilterProductIndex {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private Integer rate;
-
+    private List<Integer> provinceId = new ArrayList<>();
 }

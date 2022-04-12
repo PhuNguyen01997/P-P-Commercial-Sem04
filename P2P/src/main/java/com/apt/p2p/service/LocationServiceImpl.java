@@ -35,7 +35,9 @@ public class LocationServiceImpl implements LocationService {
         ResponseEntity<ProvinceModelGHN> response = restTemplate.exchange(url + "/province", HttpMethod.GET, httpEntity, ProvinceModelGHN.class);
         ProvinceModel[] arr = response.getBody().getData();
 
-        List<ProvinceModel> list = Arrays.asList(arr);
+        List<ProvinceModel> list = Arrays.stream(arr)
+                .sorted(Comparator.comparingInt(ProvinceModel::getProvinceId))
+                .collect(Collectors.toList());
 
         return list;
     }
@@ -48,7 +50,7 @@ public class LocationServiceImpl implements LocationService {
         ResponseEntity<DistrictModelGHN> response = restTemplate.exchange(url + "/district" + appendPath, HttpMethod.GET, httpEntity, DistrictModelGHN.class);
         DistrictModel[] arr = response.getBody().getData();
 
-        List<DistrictModel> list = Arrays.stream(arr).filter(pm -> pm.getSupportType() != 0).collect(Collectors.toList());
+        List<DistrictModel> list = Arrays.stream(arr).filter(dm -> dm.getSupportType() != 0).collect(Collectors.toList());
 
         return list;
     }

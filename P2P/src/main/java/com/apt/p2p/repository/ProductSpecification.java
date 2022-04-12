@@ -1,9 +1,6 @@
 package com.apt.p2p.repository;
 
-import com.apt.p2p.entity.Category;
-import com.apt.p2p.entity.Product;
-import com.apt.p2p.entity.Rate;
-import com.apt.p2p.entity.Shop;
+import com.apt.p2p.entity.*;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Join;
@@ -11,6 +8,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
+import java.util.List;
 
 public final class ProductSpecification {
     public static Specification<Product> hasShopId(int shopId) {
@@ -78,6 +76,16 @@ public final class ProductSpecification {
             query.groupBy(joinProductRate.get("id")).having(cb.greaterThanOrEqualTo(cb.avg(joinProductRate.get("star")), rate.doubleValue()));
 
             return query.getRestriction();
+        };
+    }
+
+    public static Specification<Product> hasLocation(List<Integer> provinceIds){
+        return (root, query, cb) -> {
+            root = joinAllRelation(root);
+            Join<Product, Shop> joinProductShop = root.join("shop");
+            Join<Shop, Address> joinShopAddress = joinProductShop.join("address");
+
+            return joinShopAddress.get("provinceId").in(provinceIds);
         };
     }
 

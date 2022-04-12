@@ -8,10 +8,7 @@ import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.ResponsePagiView;
 import com.apt.p2p.model.view.ShopModel;
-import com.apt.p2p.service.CategoryService;
-import com.apt.p2p.service.ProductService;
-import com.apt.p2p.service.RateService;
-import com.apt.p2p.service.ShopService;
+import com.apt.p2p.service.*;
 import com.apt.p2p.validate.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +33,8 @@ public class ProductController {
     @Autowired
     private ShopService shopService;
     @Autowired
+    private LocationService locationService;
+    @Autowired
     private ProductMapper productMapper;
 
     @InitBinder("productForm")
@@ -50,9 +49,17 @@ public class ProductController {
         pagiSortModel.setSize(10);
         Page<Product> pageProducts = productService.findAllByShopWithFilterIndex(filterModel, pagiSortModel);
         List<ProductModel> products = pageProducts.stream()
-                .map(e -> productMapper.productEntityToModel(e))
+                .map(e -> {
+                    ProductModel pModel = productMapper.productEntityToModel(e);
+                    pModel.setShop(shopService.findById(pModel.getShop().getId()));
+                    return pModel;
+                })
                 .collect(Collectors.toList());
+
         model.addAttribute("products", products);
+
+        model.addAttribute("filterModel", filterModel);
+        model.addAttribute("locations", locationService.provinceFindAll());
 
         ResponsePagiView pagiView = new ResponsePagiView(pagiSortModel.getPage(), pageProducts.getTotalPages());
         model.addAttribute("pagiView", pagiView);
