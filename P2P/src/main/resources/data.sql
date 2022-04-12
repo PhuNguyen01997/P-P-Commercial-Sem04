@@ -45,6 +45,16 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 (NOW(), 'NHẪN NỮ MẶT ĐÁ CAO CẤP', '[\"4_47383.jpg\"]', '', 13000, NOW(), 4, 1, 0),
 (NOW(), 'Đồng Hồ Samsung Galaxy Watch3 Bluetooth (45mm)', '[\"4_84937.jpg\",\"4_893453.jpg\",\"4_947354.jpg\"]', '', 6999999 , NOW(), 4, 1, 0),
 (NOW(), 'Đồng Hồ Nữ Gucci Le Marche des Merveilles Watch YA1264060', '[\"4_38495743.jpg\",\"4_934543.jpg\",\"4_4387.jpg\"]', '', 7500000, NOW(), 4, 1, 0);
+INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), '[WONTECH - NOW SHIP] Máy Laser Trục Khuỷu Yag Q-Switch RHINO - Siêu Phẩm Trị Nám, Tàn Nhang.', '[\"5_234543.jpg\",\"5_34978543.jpg\",\"5_398457.jpg\",\"5_348975.jpg\"]', '', 120000000, NOW(), 5, 1, 0),
+(NOW(), '[CAM KẾT chất lượng tương đương 1200K] Đai Nịt Bụng Latex 25 Xương Nhập Khẩu Hi Lạp', '[\"5_389475.jpg\",\"5_3894765.jpg\"]', '', 259700, NOW(), 5, 1, 0),
+(NOW(), 'N04 Mặt nạ quả bơ cấp ẩm mờ thâm dưỡng da làm sa mềm mịn cải thiện làn da khoẻ mạnh mặt nạ nội địa trung', '[\"5_5897436.jpg\",\"5_349875.jpg\",\"5_7667.jpg\",\"5_584679.jpg\"]', '', 2550, NOW(), 5, 1, 0),
+(NOW(), 'Xịt khóa trang điểm cố định lớp make up Star Flash Spray 8 Hours Wear 100ML Sena Beauty', '[\"5_803546.jpg\",\"5_84576.jpg\",\"5_912324.jpg\",\"5_934685.jpg\",\"5_854736.jpg\",\"5_295823.jpg\"]', '', 33000, NOW(), 5, 1, 0),
+(NOW(), 'Sữa Dưỡng Thể Dưỡng Trắng Da Toàn Thân Freshity Milky Body Lotion 250 gram', '[\"5_835768534.jpg\",\"5_4589067.jpg\",\"5_489567.jpg\"]', '', 339685, NOW(), 5, 1, 0),
+(NOW(), '[NEW-Ver 2] Son kem lì trà sữa, lâu trôi, Hàn Quốc Romand Milk Tea Velvet Tint 4.4g', '[\"5_049568.jpg\",\"5_839745.jpg\",\"5_93456.jpg\",\"5_593467.jpg\",\"5_38476.jpg\"]', '', 239000, NOW(), 5, 1, 0),
+(NOW(), 'Bộ đôi Sữa dưỡng thể trắng da Ngày (350ml) & Đêm (350ml) NIVEA (88311+88126)', '[\"5_4905786.jpg\",\"5_384673.jpg\",\"5_23897543.jpg\",\"5_8934567.jpg\",\"5_9384576.jpg\",\"5_09568.jpg\"]', '', 278000, NOW(), 5, 1, 0),
+(NOW(), 'Một gói 50 tờ giấy thấm dầu ngẫu nhiên Sena Beauty', '[\"5_8345.jpg\",\"5_8345967.jpg\",\"5_8934576.jpg\",\"5_45897.jpg\",\"5_34987.jpg\"]', '', 6930, NOW(), 5, 1, 0),
+(NOW(), 'Máy cạo râu Xiaomi Enchen BlackStone 3 Electric Shaver 3D', '[\"5_8943576.jpg\",\"5_83456.jpg\",\"5_3945.jpg\",\"5_839476.jpg\",\"5_853476.jpg\",\"5_23657.jpg\"]', '', 289900, NOW(), 5, 1, 0);
 --
 -- INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES
 -- (NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
