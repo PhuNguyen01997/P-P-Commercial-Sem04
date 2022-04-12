@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -148,6 +147,8 @@ public class MainController {
         products.forEach(p -> {
             // product set description
             p.setDescription(this.descriptionProduct);
+            LocalDateTime localDateTime = LocalDateTime.of(2022, 4, 4, RandomUtil.getRandomNumber(23), RandomUtil.getRandomNumber(59), 0);
+            p.setCreatedAt(Timestamp.valueOf(localDateTime));
 
             // product set shop
             List<Shop> shopValids = mapCategoryShop.get(p.getCategory().getId());
