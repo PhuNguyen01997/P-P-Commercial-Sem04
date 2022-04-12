@@ -55,7 +55,6 @@ public class ProductController {
                     return pModel;
                 })
                 .collect(Collectors.toList());
-
         model.addAttribute("products", products);
 
         model.addAttribute("filterModel", filterModel);

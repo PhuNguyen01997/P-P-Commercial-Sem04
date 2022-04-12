@@ -866,6 +866,10 @@ label {
   background-color: white;
 }
 
+.pagi-simplify button.disabled {
+  color: rgba(0, 0, 0, 0.14);
+}
+
 .pagi-simplify button:last-child {
   border-left: 1px solid rgba(0, 0, 0, 0.14);
 }
@@ -1480,6 +1484,10 @@ label {
   margin-right: 10px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+}
+
+.shopping-header-banner--pic img {
+  height: 100%;
 }
 
 .shopping-header-banner--name-container {

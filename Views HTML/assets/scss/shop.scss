@@ -79,6 +79,10 @@
                 border: 2px solid $color-bd;
                 margin-right: 10px;
                 flex-shrink: 0;
+
+                img {
+                    height: 100%;
+                }
             }
 
             &--name-container {

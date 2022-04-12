@@ -98,19 +98,9 @@ public class MainController {
     private Map<Integer, List<DistrictModel>> mapProvinceDistrict = new HashMap<>();
     private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
 
-    @GetMapping("shop/{shopId}/order/{orderId}")
-    public String orderDetailShop(@PathVariable("shopId") int shopId, @PathVariable("orderId") int orderId) {
-        return "user/account/order-detail";
-    }
-
     @GetMapping("edit")
     public String userEdit() {
         return "user/account/user-form";
-    }
-
-    @GetMapping("shop/{shopId}")
-    public String shopIndex() {
-        return "user/main/shop-detail";
     }
 
     @GetMapping("identity")

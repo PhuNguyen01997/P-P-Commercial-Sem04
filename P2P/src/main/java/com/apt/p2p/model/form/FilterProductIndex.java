@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class FilterProductIndex {
+    private Integer shopId;
     private String keyword;
     private BigDecimal minPrice;
     private BigDecimal maxPrice;

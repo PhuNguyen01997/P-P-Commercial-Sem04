@@ -866,6 +866,10 @@ label {
   background-color: white;
 }
 
+.pagi-simplify button.disabled {
+  color: rgba(0, 0, 0, 0.14);
+}
+
 .pagi-simplify button:last-child {
   border-left: 1px solid rgba(0, 0, 0, 0.14);
 }
@@ -1482,6 +1486,10 @@ label {
       flex-shrink: 0;
 }
 
+.shopping-header-banner--pic img {
+  height: 100%;
+}
+
 .shopping-header-banner--name-container {
   margin-top: 10px;
 }
@@ -2065,6 +2073,7 @@ label {
 }
 
 .detail-product--content {
+  white-space: pre;
   font-size: 1.4rem;
   padding: 15px;
 }
@@ -2895,6 +2904,7 @@ label {
 
 .order-detail .order-item {
   padding-top: 15px;
+  margin: 0;
 }
 
 .order-detail-main {

@@ -714,6 +714,10 @@ label {
             height: 100%;
             background-color: white;
 
+            &.disabled{
+                color: $color-bd-ipt;
+            }
+
             &:last-child {
                 border-left: 1px solid $color-bd-ipt;
             }

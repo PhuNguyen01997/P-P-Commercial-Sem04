@@ -13,14 +13,14 @@
         <div class="inner shopping-header-info">
             <div class="shopping-header-banner">
                 <div class="shopping-header-banner--bg">
-                    <img src="/img/products/product_01.jpg" alt="">
+                    <img th:src="${shop.toUrl(shop.background)}" alt="">
                 </div>
                 <div class="shopping-header-banner--block01">
                     <p class="pic circle shopping-header-banner--pic">
-                        <img src="./img/products/product_03.jpg" alt="">
+                        <img th:src="${shop.toUrl(shop.logo)}" alt="">
                     </p>
                     <div class="shopping-header-banner--name-container">
-                        <h1 class="shopping-header-banner--name">Thế giới di động 1 cái tên shop thật dài</h1>
+                        <h1 th:text="${shop.name}" class="shopping-header-banner--name">[Shop Name]</h1>
                         <span class="shopping-header-banner--onl">Online 99 phút trước</span>
                     </div>
                 </div>
@@ -36,55 +36,124 @@
             <ul class="shopping-header-list">
                 <li class="shopping-header-item">
                     <span>Sản phẩm:</span>
-                    <span>144</span>
+                    <span th:text="${shop.countProducts}">[Product Count]</span>
                 </li>
                 <li class="shopping-header-item">
                     <span>Đang theo dõi:</span>
-                    <span>99</span>
+                    <span>[Following Count]</span>
                 </li>
                 <li class="shopping-header-item">
                     <span>Tỉ lệ phản hồi chat:</span>
+<!--                    <span></span>-->
                     <span>86% (Trong Vài Giờ)</span>
                 </li>
                 <li class="shopping-header-item">
                     <span>Người theo dõi:</span>
-                    <span>99</span>
+                    <span>[Follow Count]</span>
                 </li>
                 <li class="shopping-header-item">
                     <span>Đánh giá:</span>
-                    <span>4.9 (11,3k đánh giá)</span>
+                    <span th:text="${shop.averageRates + ' (' + shop.countRates + ' đánh giá)'}">[Rate]</span>
                 </li>
                 <li class="shopping-header-item">
                     <span>Tham gia</span>
-                    <span>99 tháng trước</span>
+                    <span th:text="${shop.createdAt}">[Attend Date]</span>
+<!--                    99 tháng trước-->
                 </li>
             </ul>
         </div>
     </div>
     <div class="inner shopping">
         <div class="shopping-side">
-            <p class="shopping-side--headline"><i class="icon fas fa-filter"></i>Category</p>
+            <p class="shopping-side--headline"><i class="icon fas fa-filter"></i>Filter</p>
             <div class="shopping-side--item">
-                <ul class="shopping-side--content shopping-side--content__list-name">
-                    <li>
-                        <i class="icon fas fa-caret-right"></i>
-                        <a href="#">Omo</a>
+                <p class="shopping-side--title">Locations</p>
+                <ul class="shopping-side--content shopping-side--content__list-check">
+                    <li th:each="location, iter : ${locations}" class="">
+                        <label th:for="${iter.index}">
+                            <input th:id="${iter.index}" th:value="${location.provinceId}"
+                                   th:checked="${filterModel.provinceId.contains(location.provinceId)}"
+                                   name="location" type="checkbox">
+                            <span th:text="${location.provinceName}"></span>
+                        </label>
                     </li>
-                    <li>
-                        <i class="icon fas fa-caret-right"></i>
-                        <a href="#">Downy</a>
+                </ul>
+            </div>
+            <div class="shopping-side--item">
+                <p class="shopping-side--title">Price range</p>
+                <form action="">
+                    <div class="shopping-side--content shopping-side--content__price-range">
+                        <input type="number" name="minPrice" th:value="${param.minPrice}">
+                        <span><i class="fas fa-exchange-alt"></i></span>
+                        <input type="number" name="maxPrice" th:value="${param.maxPrice}">
+                    </div>
+                    <button class="jsClick btn btn__red" type="button">Áp dụng</button>
+                </form>
+            </div>
+            <div class="shopping-side--item">
+                <p class="shopping-side--title">Rate</p>
+                <ul class="shopping-side--content shopping-side--content__list-rate">
+                    <select class="d-none" name="rate">
+                        <option value="0" selected></option>
+                        <option value="1" th:selected="${#httpServletRequest.getParameter('rate') == '1'}"></option>
+                        <option value="2" th:selected="${#httpServletRequest.getParameter('rate') == '2'}"></option>
+                        <option value="3" th:selected="${#httpServletRequest.getParameter('rate') == '3'}"></option>
+                        <option value="4" th:selected="${#httpServletRequest.getParameter('rate') == '4'}"></option>
+                        <option value="5" th:selected="${#httpServletRequest.getParameter('rate') == '5'}"></option>
+                    </select>
+                    <li class="jsRate" data-value="5"
+                        th:classappend="${#httpServletRequest.getParameter('rate') == '5' ? 'active' : ''}">
+                            <span class="icon icon__star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </span>
                     </li>
-                    <li class="active">
-                        <i class="icon fas fa-caret-right"></i>
-                        <a href="#">Tide</a>
+                    <li class="jsRate" data-value="4"
+                        th:classappend="${#httpServletRequest.getParameter('rate') == '4' ? 'active' : ''}">
+                            <span class="icon icon__star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        <span>Trở lên</span>
                     </li>
-                    <li>
-                        <i class="icon fas fa-caret-right"></i>
-                        <a href="#">Honda</a>
+                    <li class="jsRate" data-value="3"
+                        th:classappend="${#httpServletRequest.getParameter('rate') == '3' ? 'active' : ''}">
+                            <span class="icon icon__star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        <span>Trở lên</span>
                     </li>
-                    <li>
-                        <i class="icon fas fa-caret-right"></i>
-                        <a href="#">Yamaha</a>
+                    <li class="jsRate" data-value="2"
+                        th:classappend="${#httpServletRequest.getParameter('rate') == '2' ? 'active' : ''}">
+                            <span class="icon icon__star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        <span>Trở lên</span>
+                    </li>
+                    <li class="jsRate" data-value="1"
+                        th:classappend="${#httpServletRequest.getParameter('rate') == '1' ? 'active' : ''}">
+                            <span class="icon icon__star">
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                        <span>Trở lên</span>
                     </li>
                 </ul>
             </div>
@@ -92,170 +161,72 @@
         <div class="shopping-main">
             <div class="shopping-sort">
                 <p>Sort by</p>
-                <button class="btn shopping-sort--btn active">New</button>
-                <button class="btn shopping-sort--btn">Selling</button>
+                <button data-value="NEW" class="jsSortBy btn shopping-sort--btn"
+                        th:classappend="${(#httpServletRequest.getParameter('sortBy') == 'NEW' || #httpServletRequest.getParameter('sortBy') == null) ? 'active' : ''}">
+                    Mới
+                </button>
+                <button data-value="PRICE" class="jsSortBy btn shopping-sort--btn"
+                        th:classappend="${#httpServletRequest.getParameter('sortBy') == 'PRICE' ? 'active' : ''}">
+                    Giá tiền
+                </button>
                 <div class="select shopping-sort--select">
-                    <select name="" id="">
-                        <option value="">Price</option>
-                        <option value="increase">Low to high</option>
-                        <option value="decrease">High to low</option>
+                    <select name="sortDirection" id="">
+                        <option value="true"
+                                th:selected="${#httpServletRequest.getParameter('sortDirection') == 'true' || #httpServletRequest.getParameter('sortDirection') == null}">
+                            Từ thấp đến cao
+                        </option>
+                        <option value="false"
+                                th:selected="${#httpServletRequest.getParameter('sortDirection') == 'false'}">
+                            Từ cao đến thấp
+                        </option>
                     </select>
                 </div>
                 <div class="pagi-simplify">
-                    <p>1/5</p>
+                    <p><span th:text="${pagiView.index + 1}"></span>/<span th:text="${pagiView.total}"></span></p>
                     <button><i class="fas fa-angle-left"></i></button>
                     <button><i class="fas fa-angle-right"></i></button>
                 </div>
             </div>
             <div class="shopping-list product">
-                <a href="#" class="product-item">
+                <a th:unless="${products == null || products.size() == 0}" th:each="item: ${products}"
+                   th:href="@{/product/{id}(id=${item.id})}"
+                   class="product-item">
                     <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
+                        <img th:src="${item.image.size() > 0 ? item.toUrl(item.image.get(0)) : ''}" alt="">
                     </div>
                     <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
+                        <p th:text="${item.name}" class="product-item--title"></p>
+                        <p class="product-item--price">
+                            <span th:text="${item.price}"></span>
+                            <span>vnđ</span>
                         </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy </p>
-                        <p class="product-item--price">$ 99.99</p>
                         <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
+                            <span class="icon icon__star">
+                                <i class="fa-star"
+                                   th:each="i: ${#numbers.sequence(1, 5)}"
+                                   th:classappend="${i - 1 < item.averageRate ? 'fas' : 'far' }"></i>
+                            </span>
                         </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
-                    </div>
-                </a>
-                <a href="#" class="product-item">
-                    <div class="product-item--picture">
-                        <img src="/img/products/product_02.jpg" alt="">
-                    </div>
-                    <div class="product-item--content">
-                        <p class="product-item--title">Bàn Phím Cơ Máy Tính Crack K2 PRO Led RGB 10 Chế Độ Khác
-                            Nhau, Chơi Game Dùng Văn Phòng Cực Đã</p>
-                        <p class="product-item--price">$ 99.99</p>
-                        <p class="product-item--rate">
-                                <span class="icon icon__star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                        </p>
-                        <p class="product-item--location">TP.HCM</p>
+                        <p th:text="${item.shop.address.province}" class="product-item--location">[Location]</p>
                     </div>
                 </a>
             </div>
             <div class="shopping-pagi">
                 <ul class="pagi">
-                    <li class="pagi-item btn pagi-item__prev"><i class="fas fa-angle-left"></i></li>
-                    <li class="pagi-item btn active">1</li>
-                    <li class="pagi-item btn">2</li>
-                    <li class="pagi-item btn">3</li>
-                    <li class="pagi-item btn">4</li>
-                    <li class="pagi-item btn pagi-item__next"><i class="fas fa-angle-right"></i></li>
+                    <li class="pagi-item btn pagi-item__prev"
+                        th:classappend="${pagiView.index == 0 ? 'disabled' : ''}">
+                        <a th:href="@{/(page=${pagiView.prev})}"><i class="fas fa-angle-left"></i></a>
+                    </li>
+                    <li th:each="pageNumber : ${pagiView.pagiList}"
+                        th:classappend="${pageNumber == pagiView.index ? 'active' : ''}"
+                        class="pagi-item btn">
+                        <a th:href="@{/(page=${pageNumber})}"
+                           th:text="${pageNumber + 1}"></a>
+                    </li>
+                    <li class="pagi-item btn pagi-item__prev"
+                        th:classappend="${pagiView.index == pagiView.total - 1 ? 'disabled' : ''}">
+                        <a th:href="@{/(page=${pagiView.next})}"><i class="fas fa-angle-right"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>

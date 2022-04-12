@@ -119,11 +119,11 @@
                     <select name="sortDirection" id="">
                         <option value="true"
                                 th:selected="${#httpServletRequest.getParameter('sortDirection') == 'true' || #httpServletRequest.getParameter('sortDirection') == null}">
-                            Low to high
+                            Từ thấp đến cao
                         </option>
                         <option value="false"
                                 th:selected="${#httpServletRequest.getParameter('sortDirection') == 'false'}">
-                            High to low
+                            Từ cao đến thấp
                         </option>
                     </select>
                 </div>

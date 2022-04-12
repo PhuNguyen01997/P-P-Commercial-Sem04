@@ -1,5 +1,6 @@
 package com.apt.p2p.model.view;
 
+import com.apt.p2p.entity.Rate;
 import com.apt.p2p.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -56,6 +58,8 @@ public class ShopModel {
 
     public Integer countRates = 0;
 
+    public Double averageRates = 0.0;
+
     public ShopModel(Shop shop) {
         this.id = shop.getId();
         this.logo = shop.getLogo();
@@ -78,10 +82,12 @@ public class ShopModel {
         if(shop.getProducts() != null && shop.getProducts().size() > 0){
             this.countProducts = shop.getProducts().size();
             this.countRates = shop.getProducts().stream().map(product -> product.getRates().size()).reduce(0, Integer::sum);
-        }
-        else{
-            this.setCountProducts(0);
-            this.setCountRates(0);
+
+            List<Rate> allRateOfShop = new ArrayList<>();
+            shop.getProducts().forEach(product -> {
+                allRateOfShop.addAll(product.getRates());
+            });
+            this.averageRates = allRateOfShop.stream().mapToDouble(rate -> rate.getStar()).average().orElse(0);
         }
     }
 
