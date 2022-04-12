@@ -22,7 +22,8 @@
         <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error">Invalid value</p>
         <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}">
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">Invalid value</p>
-        <input class="auth--ipt auth--ipt__txt" type="file" name="pic">
+        <input class="auth--ipt auth--ipt__txt" type="file" name="pic" id="pic">
+        <img style="width: 100px; height: 100px" class="jsPic" src="" alt="logo preview" />
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Sign Up</button>
       </form>
       <div class="auth-navi">
@@ -36,5 +37,17 @@
     </div>
   </div>
 </main>
+<script layout:fragment="script">
+  $(function () {
+    $('#pic').on('change', function () {
+      console.log(this);
+      const element = document.querySelector('.jsPic');
+      if (this.files && this.files[0]) {
+        console.log(this.files[0])
+        readUrlImage(this.files[0], element);
+      }
+    });
+  })
+</script>
 </body>
 </html>

@@ -1,9 +1,12 @@
 package com.apt.p2p.config;
 
+import com.apt.p2p.common.FacebookSignInAdapter;
 import com.apt.p2p.model.form.Custom0Auth2User;
 import com.apt.p2p.service.CustomOAuth2UserServiceImpl;
+import com.apt.p2p.service.FacebookConnectionSignup;
 import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,6 +20,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
+import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.social.connect.web.ProviderSignInController;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +35,15 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private FacebookConnectionSignup facebookConnectionSignup;
+
+    @Value("${spring.social.facebook.appSecret}")
+    String appSecret;
+
+    @Value("${spring.social.facebook.appId}")
+    String appId;
+
     @Autowired
     private CustomOAuth2UserServiceImpl oAuth2UserService;
 
@@ -82,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         Custom0Auth2User user = (Custom0Auth2User)authentication.getPrincipal();
 
                         userService.processOAuthPostLogin(user.getEmail());
-                        response.sendRedirect("/list");
+                        response.sendRedirect("/");
                     }
                 })
                 .and()
@@ -99,5 +117,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PersistentTokenRepository persistenceTokenRepository() {
         return new InMemoryTokenRepositoryImpl();
+    }
+
+    @Bean
+    public ProviderSignInController providerSignInController() {
+        ConnectionFactoryLocator connectionFactoryLocator =
+                connectionFactoryLocator();
+        UsersConnectionRepository usersConnectionRepository =
+                getUsersConnectionRepository(connectionFactoryLocator);
+        ((InMemoryUsersConnectionRepository) usersConnectionRepository)
+                .setConnectionSignUp(facebookConnectionSignup);
+        return new ProviderSignInController(connectionFactoryLocator,
+                usersConnectionRepository, new FacebookSignInAdapter());
+    }
+
+    private ConnectionFactoryLocator connectionFactoryLocator() {
+        ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
+        registry.addConnectionFactory(new FacebookConnectionFactory(appId, appSecret));
+        return registry;
+    }
+
+    private UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator
+                                                                           connectionFactoryLocator) {
+        return new InMemoryUsersConnectionRepository(connectionFactoryLocator);
     }
 }
