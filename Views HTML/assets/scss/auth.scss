@@ -24,6 +24,7 @@
     }
 
     &-container {
+        position: relative;
         flex-shrink: 0;
         background-color: white;
         padding: 15px;
@@ -34,10 +35,37 @@
         a {
             color: $color-primary01;
         }
+
+        label[for="pic"]{
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            input {
+                display: none;
+            }
+        }
     }
 
     &-navi {
-        @include flex($justify: space-between);
+        @include flex($justify: space-between, $direction: row);
+
+        &--item {
+            width: 50%;
+            & * {
+                display: block;
+                margin-bottom:  5px;
+            }
+        }
     }
 
     &--ipt {

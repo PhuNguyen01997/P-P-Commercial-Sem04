@@ -157,6 +157,8 @@
         }
 
         &--content {
+            height: 220px;
+            overflow-y: scroll;
 
             &__list-check,
             &__list-rate {
@@ -262,7 +264,7 @@
         }
 
         &--select {
-            width: 140px;
+            width: 160px;
         }
     }
 
