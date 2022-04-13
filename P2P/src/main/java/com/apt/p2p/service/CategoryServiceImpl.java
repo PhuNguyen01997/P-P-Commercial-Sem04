@@ -5,6 +5,7 @@ import com.apt.p2p.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,5 +21,21 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findById(int categoryId) {
         return categoryRepository.findById(categoryId).orElse(null);
+    }
+
+    @Override
+    public Category updateName(int id, String name) {
+        Category category = categoryRepository.findById(id).get();
+        category.setName(name);
+        category.setUpdatedAt(new Date());
+
+        categoryRepository.save(category);
+        return category;
+    }
+
+    @Override
+    public Category save(Category category) {
+        categoryRepository.save(category);
+        return category;
     }
 }

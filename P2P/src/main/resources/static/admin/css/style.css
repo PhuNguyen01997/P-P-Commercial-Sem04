@@ -21,3 +21,11 @@
 .dataTables_wrapper .dataTables_info{
     padding-top: 0.65rem;
 }
+
+.swal2-success-ring {
+    border-color: white !important;
+}
+
+.swal2-title{
+    color: white !important;
+}

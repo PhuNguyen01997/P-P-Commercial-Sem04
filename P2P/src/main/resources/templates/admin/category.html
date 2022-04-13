@@ -10,40 +10,76 @@
 <body>
 <section layout:fragment="content">
     <div class="container-fluid">
-        <table id="example1" class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Rendering engine</th>
-                <th>Browser</th>
-                <th>Platform(s)</th>
-                <th>Engine version</th>
-                <th>CSS grade</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Other browsers</td>
-                <td>All others</td>
-                <td>-</td>
-                <td>-</td>
-                <td>U</td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>Rendering engine</th>
-                <th>Browser</th>
-                <th>Platform(s)</th>
-                <th>Engine version</th>
-                <th>CSS grade</th>
-            </tr>
-            </tfoot>
-        </table>
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Danh mục mới</h3>
+                    </div>
+                    <form method="post" action="category/create">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Tên danh mục</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Tên danh mục">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Thêm danh mục</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Danh mục</th>
+                                <th>Cập nhật</th>
+                                <!--                <th>Thao tác</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="category : ${categories}">
+                                <td th:text="${category.id}"></td>
+                                <td th:text="${category.name}"></td>
+                                <td>
+                                    <form action="category/update" method="post" class="d-flex">
+                                        <input type="hidden" name="id" th:value="${category.id}">
+                                        <input type="text" name="name" placeholder="Thay đổi tên">
+                                        <button class="ml-2 submit btn btn-sm btn-warning">Cập nhật</button>
+                                    </form>
+                                </td>
+                                <!--                <td>-->
+                                <!--                    <form action="" method="post" class="d-flex">-->
+                                <!--                        <input type="hidden" th:value="${category.id}">-->
+                                <!--                        <button class="submit btn-sm btn">Ẩn</button>-->
+                                <!--                    </form>-->
+                                <!--                </td>-->
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Danh mục</th>
+                                <th>Cập nhật</th>
+                                <!--                <th>Thao tác</th>-->
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <script layout:fragment="script">
-
+    $("#dataTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+    });
 </script>
 </body>
 </html>
