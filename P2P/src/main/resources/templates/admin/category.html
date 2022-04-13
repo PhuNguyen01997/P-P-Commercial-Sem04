@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container-fluid">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Rendering engine</th>
+                <th>Browser</th>
+                <th>Platform(s)</th>
+                <th>Engine version</th>
+                <th>CSS grade</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Other browsers</td>
+                <td>All others</td>
+                <td>-</td>
+                <td>-</td>
+                <td>U</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Rendering engine</th>
+                <th>Browser</th>
+                <th>Platform(s)</th>
+                <th>Engine version</th>
+                <th>CSS grade</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</section>
+
+<script layout:fragment="script">
+
+</script>
+</body>
+</html>
