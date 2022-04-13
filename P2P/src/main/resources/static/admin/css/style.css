@@ -29,3 +29,15 @@
 .swal2-title{
     color: white !important;
 }
+
+.detail-img{
+    position: absolute;
+    right: 20px;
+    width: 150px;
+}
+
+@media screen and (max-width: 480px) {
+    img#picture {
+        width: 100px;
+    }
+}

@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Product;
+import com.apt.p2p.entity.Shop;
 import com.apt.p2p.model.form.FilterProductIndex;
 import com.apt.p2p.model.form.ImageFilesModels;
 import com.apt.p2p.model.form.PagiSortModel;
@@ -69,6 +70,21 @@ public class ShopController {
         model.addAttribute("pagiView", pagiView);
 
         return "user/main/shop-detail";
+    }
+
+    @GetMapping("admin/shop")
+    public String adminShopIndex(Model model){
+        List<ShopModel> shops = shopService.findAll();
+        model.addAttribute("shops", shops);
+
+        return "admin/shop";
+    }
+
+    @GetMapping("admin/shop/{shopId}")
+    public String adminShopDetail(Model model, @PathVariable("shopId") int shopId){
+        ShopModel shop = shopService.findById(shopId);
+        model.addAttribute("shop", shop);
+        return "admin/shop-detail";
     }
 
     @GetMapping("portal")

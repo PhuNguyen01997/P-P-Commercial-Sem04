@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -33,6 +35,12 @@ public class ShopServiceImpl implements ShopService {
     private ShopMapper shopMapper;
 
     private String imgUploadDir = "shops/";
+
+    @Override
+    public List<ShopModel> findAll() {
+        List<Shop> shops = shopRepository.findAll();
+        return shops.stream().map(se -> shopMapper.shopEntityToModel(se)).collect(Collectors.toList());
+    }
 
     @Override
     public ShopModel findByProductId(int productId) {
