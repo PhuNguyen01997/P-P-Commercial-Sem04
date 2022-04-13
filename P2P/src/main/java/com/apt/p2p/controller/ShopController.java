@@ -26,11 +26,11 @@ import java.util.stream.Collectors;
 @Controller
 public class ShopController {
     @Autowired
+    private UsersDetailServiceImpl userService;
+    @Autowired
     private ShopService shopService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private UserService userService;
     @Autowired
     private LocationService locationService;
     @Autowired

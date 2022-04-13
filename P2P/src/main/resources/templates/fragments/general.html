@@ -13,10 +13,13 @@
         </div>
         <div class="nav-col__right nav-col">
             <a class="nav-col--item" href="#">Notification</a>
-            <a class="nav-col--item">[[${#request.remoteUser}]]</a>
-            <a class="nav-col--item" th:href="@{/signup}">Sign Up</a>
-            <a class="nav-col--item" th:href="@{/signin}">Sign In</a>
-            <a class="nav-col--item" th:href="@{/logout}">Log Out</a>
+            <a href="/edit" class="nav-col--item nav-col--item__user">
+                <img th:src="" alt="">
+                <p>[[${#request.remoteUser}]]</p>
+            </a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Sign Up</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Sign In</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" th:href="@{/logout}">Log Out</a>
         </div>
     </nav>
     <div class="header-container">

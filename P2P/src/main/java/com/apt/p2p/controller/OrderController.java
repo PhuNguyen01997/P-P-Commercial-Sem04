@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 @Controller
 public class OrderController {
     @Autowired
-    private OrderService orderService;
-    @Autowired
     private UsersDetailServiceImpl userService;
+    @Autowired
+    private OrderService orderService;
     @Autowired
     private StatusOrderService statusOrderService;
     @Autowired

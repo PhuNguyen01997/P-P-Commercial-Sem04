@@ -3,6 +3,7 @@ package com.apt.p2p.controller;
 import com.apt.p2p.entity.Category;
 import com.apt.p2p.model.view.ToastResponse;
 import com.apt.p2p.service.CategoryService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CategoryController {
+    @Autowired
+    private UsersDetailServiceImpl userService;
     @Autowired
     private CategoryService categoryService;
 

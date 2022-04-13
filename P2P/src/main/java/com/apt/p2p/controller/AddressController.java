@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.AddressModel;
 import com.apt.p2p.service.AddressService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import com.apt.p2p.validate.AddressModelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -18,6 +19,8 @@ import java.util.List;
 
 @Controller
 public class AddressController {
+    @Autowired
+    private UsersDetailServiceImpl userService;
     @Autowired
     private AddressService addressService;
 

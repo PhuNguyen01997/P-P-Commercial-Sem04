@@ -5,6 +5,7 @@ import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.CartModel;
 import com.apt.p2p.service.CartService;
 import com.apt.p2p.service.ShopService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CartController {
+    @Autowired
+    private UsersDetailServiceImpl userService;
     @Autowired
     private CartService cartService;
 

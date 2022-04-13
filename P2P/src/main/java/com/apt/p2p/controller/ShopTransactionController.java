@@ -3,6 +3,7 @@ package com.apt.p2p.controller;
 import com.apt.p2p.model.form.FilterShopTransaction;
 import com.apt.p2p.model.view.ShopTransactionModel;
 import com.apt.p2p.service.ShopTransactionService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import java.util.List;
 
 @Controller
 public class ShopTransactionController {
+    @Autowired
+    private UsersDetailServiceImpl userService;
     @Autowired
     private ShopTransactionService shopTransactionService;
 

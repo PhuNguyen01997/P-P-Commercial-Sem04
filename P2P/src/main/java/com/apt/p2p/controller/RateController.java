@@ -7,6 +7,7 @@ import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.ResponsePagiView;
 import com.apt.p2p.model.view.ResponseRateApiPagi;
 import com.apt.p2p.service.RateService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class RateController {
+    @Autowired
+    private UsersDetailServiceImpl userService;
     @Autowired
     private RateService rateService;
     @Autowired

@@ -6,6 +6,7 @@ import com.apt.p2p.model.view.DistrictModel;
 import com.apt.p2p.model.view.ProvinceModel;
 import com.apt.p2p.model.view.WardModel;
 import com.apt.p2p.service.LocationService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

@@ -24,6 +24,8 @@ import java.util.List;
 @Controller
 public class PaymentController {
     @Autowired
+    private UsersDetailServiceImpl userService;
+    @Autowired
     private PaymentService paymentService;
     @Autowired
     private CardService cardService;

@@ -1,7 +1,9 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.CardModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.CardService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import com.apt.p2p.validate.CardModelValidator;
 import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 @Controller
 public class CardController {
     @Autowired
+    private UsersDetailServiceImpl userService;
+    @Autowired
     private CardService cardService;
 
     @InitBinder("card")
@@ -32,9 +36,9 @@ public class CardController {
 
     @GetMapping("card")
     public String card(Model model) {
-        int userId = 1;
+        UserModel user = userService.getCurrentUser();
         model.addAttribute("card", new CardModel());
-        model.addAttribute("cards", cardService.findAllByUserId(userId));
+        model.addAttribute("cards", cardService.findAllByUserId(user.getId()));
 
         return "user/account/card";
     }

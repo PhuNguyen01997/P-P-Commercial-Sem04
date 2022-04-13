@@ -4,6 +4,7 @@ import com.apt.p2p.model.form.WithdrawForm;
 import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UserService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,9 @@ import java.math.BigDecimal;
 @Controller
 public class FundController {
     @Autowired
-    private ShopService shopService;
+    private UsersDetailServiceImpl userService;
     @Autowired
-    private UserService userService;
+    private ShopService shopService;
 
     @GetMapping("portal/fund")
     public String portalIndex(Model model) {
