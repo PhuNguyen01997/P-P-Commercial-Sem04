@@ -10,4 +10,6 @@ public interface ShopTransactionService{
     List<ShopTransactionModel> findAll();
 
     List<ShopTransactionModel> findAllByShopIdWithFilter(int shopId, FilterShopTransaction filter);
+
+    ShopTransactionModel findById(int id);
 }

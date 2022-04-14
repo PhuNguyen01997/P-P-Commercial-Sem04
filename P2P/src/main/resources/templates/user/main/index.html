@@ -203,7 +203,7 @@
                 } else str += `${key}=${val}&`;
                 return str;
             }, '?');
-            location.replace(queryParam);
+            location.href = queryParam;
         }
 
         $('.jsRate').on('click', function () {

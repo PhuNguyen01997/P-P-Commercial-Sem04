@@ -1,11 +1,11 @@
-package com.apt.p2p.entity;
+package com.apt.p2p.entityEnum;
 
 public enum CardType {
     VISA("Visa"), MASTER_CARD("MasterCard");
 
     private final String displayValue;
 
-    private CardType(String displayValue){
+    CardType(String displayValue){
         this.displayValue = displayValue;
     }
 

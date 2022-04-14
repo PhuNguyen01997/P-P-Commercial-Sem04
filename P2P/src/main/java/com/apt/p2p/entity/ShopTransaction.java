@@ -32,7 +32,7 @@ public class ShopTransaction {
     @NotNull
     private Date date = new Date();
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private ShopTransactionStatus status;
 
     @NotNull

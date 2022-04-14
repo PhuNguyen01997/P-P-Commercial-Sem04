@@ -1,12 +1,10 @@
 package com.apt.p2p.model.view;
 
 import com.apt.p2p.common.DateDeserializer;
-import com.apt.p2p.entity.CardType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;

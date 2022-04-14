@@ -1,6 +1,6 @@
 package com.apt.p2p.common;
 
-import com.apt.p2p.entity.CardType;
+import com.apt.p2p.entityEnum.CardType;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
