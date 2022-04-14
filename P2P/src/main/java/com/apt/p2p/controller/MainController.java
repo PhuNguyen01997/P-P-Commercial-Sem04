@@ -7,10 +7,13 @@ import com.apt.p2p.model.view.ProvinceModel;
 import com.apt.p2p.model.view.WardModel;
 import com.apt.p2p.repository.*;
 import com.apt.p2p.service.LocationService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,6 +48,8 @@ public class MainController {
     private ShopTransactionRepository shopTransactionRepository;
     @Autowired
     private LocationService locationService;
+    @Autowired
+    private UsersDetailServiceImpl usersDetailService;
 
     private String descriptionProduct = "Áo thun nam, Áo thun nữ, Áo phông nam, Áo phông nữ<br>" +
             "#aothun #aophong #aothunnam #aothunnu #aophongnam #aophongnu<br>" +
@@ -99,8 +104,15 @@ public class MainController {
     private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
 
     @GetMapping("edit")
-    public String userEdit() {
+    public String userEdit(Model model) {
+        User user = usersDetailService.getCurrentUser();
+        model.addAttribute("account" , user);
         return "user/account/user-form";
+    }
+
+    @PostMapping("edit-account")
+    public String updateAccount(Model model) {
+        return null;
     }
 
     @GetMapping("identity")

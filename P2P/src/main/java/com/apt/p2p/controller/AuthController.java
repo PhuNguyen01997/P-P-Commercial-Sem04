@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.common.FileUploadUtil;
 import com.apt.p2p.common.Utility;
 import com.apt.p2p.entity.Role;
 import com.apt.p2p.entity.User;
@@ -7,6 +8,7 @@ import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.repository.RoleRepository;
 import com.apt.p2p.repository.UserRepository;
 import com.apt.p2p.service.UserService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -35,6 +37,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,6 +56,9 @@ public class AuthController {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private UsersDetailServiceImpl usersDetailService;
 
     /**
      * call sign in page.
@@ -116,19 +122,27 @@ public class AuthController {
             return "user/auth/signup";
         }
         User usr = new User();
-        if (!image.isEmpty()) {
-            try {
-                byte[] bytes = image.getBytes();
-                File uploadFolder = ResourceUtils.getFile("classpath:static/img/auth");
-                Path imagePath = Paths.get(uploadFolder.getPath(), image.getOriginalFilename());
-                Files.write(imagePath, bytes);
-                userModel.setAvatar(image.getOriginalFilename());
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (!image.isEmpty()) { // new image
+            //                byte[] bytes = image.getBytes();
+//                File uploadFolder = ResourceUtils.getFile("classpath:static/img/auth");
+//                Path imagePath = Paths.get(uploadFolder.getPath(), image.getOriginalFilename());
+//                Files.write(imagePath, bytes);
+//                usr.setAvatar(image.getOriginalFilename());
+            String extension = FileUploadUtil.getExtensionName(image).orElse(null);
+            String fileName = usr.getAvatar();
+            if (fileName == null) {
+                fileName =  String.valueOf(new Date().getTime()) + "." + extension;
+            } else {
+                fileName.replaceAll("\\w+$", extension);
             }
+            FileUploadUtil.saveFile("users/", fileName, image);
+
+            usr.setAvatar(fileName);
+        } else {
+            usr.setAvatar(usr.getAvatar());
         }
+
         usr.setEmail(userModel.getEmail());
-        usr.setAvatar(userModel.getAvatar());
         usr.setPassword(passwordEncoder.encode(userModel.getPassword()));
         usr.setPhone(userModel.getPhone());
         usr.setUsername(userModel.getUsername());
@@ -288,5 +302,7 @@ public class AuthController {
         user.setResetPasswordToken(null);
         service.save(user);
     }
+
+
 
 }
