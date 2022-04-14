@@ -4,10 +4,7 @@ import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.model.form.FilterShopTransaction;
 import com.apt.p2p.model.view.ShopTransactionModel;
 import com.apt.p2p.model.view.UserModel;
-import com.apt.p2p.service.ShopService;
-import com.apt.p2p.service.ShopTransactionService;
-import com.apt.p2p.service.UserService;
-import com.apt.p2p.service.UsersDetailServiceImpl;
+import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +24,8 @@ public class ShopTransactionController {
     private UserService userService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/admin/transaction")
     public String adminIndex(Model model){
@@ -41,6 +40,9 @@ public class ShopTransactionController {
     public String adminDetail(Model model, @PathVariable("id") int id){
         ShopTransactionModel shopTransactionModel = shopTransactionService.findById(id);
         shopTransactionModel.setShop(shopService.findById(shopTransactionModel.getShop().getId()));
+        if(shopTransactionModel.getOrder() != null){
+            shopTransactionModel.setOrder(orderService.findById(shopTransactionModel.getOrder().getId()));
+        }
 
         model.addAttribute("transaction", shopTransactionModel);
 

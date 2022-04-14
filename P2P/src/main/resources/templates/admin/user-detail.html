@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-8 d-flex align-items-center">
+                        <h3 class="card-title"><i class="fas fa-text-width"></i><span th:text="${user.username}"></span></h3>
+                    </div>
+                    <div class="col-sm-4 d-flex justify-content-end">
+                        <button data-name="{{ $product->name }}" data-id="{{ $product->id }}" name="delete"
+                                class="btn btn-danger">Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <dl class="row">
+                    <img id="picture" class="detail-img" th:src="${user.toUrl(user.avatar)}">
+                    <dt class="col-sm-2">ID</dt>
+                    <dd th:text="${user.id}" class="col-sm-10"></dd>
+                    <dt class="col-sm-2">Tên đăng nhập</dt>
+                    <dd th:text="${user.username}" class="col-sm-10"></dd>
+                    <dt class="col-sm-2">Email</dt>
+                    <dd th:text="${user.email}" class="col-sm-10"></dd>
+                    <dt class="col-sm-2">Số điện thoại</dt>
+                    <dd class="col-sm-10" th:text="${user.phone}"></dd>
+                    <dt class="col-sm-2">Ngày tham gia</dt>
+                    <dd th:text="${#dates.format(user.createdAt, 'dd-MM-yyyy')}" class="col-sm-10"></dd>
+                    <dt class="col-sm-2">Địa chỉ</dt>
+                    <dd class="col-sm-10">
+                        <li th:each="address : ${user.addresses}" th:text="${address.getFullAddress()}"></li>
+                    </dd>
+                </dl>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script layout:fragment="script">
+    $("#dataTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+    });
+</script>
+</body>
+</html>
