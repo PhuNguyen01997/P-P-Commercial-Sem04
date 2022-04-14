@@ -5,6 +5,7 @@ import com.apt.p2p.common.RandomUtil;
 import com.apt.p2p.entityEnum.ShopTransactionStatus;
 import com.apt.p2p.model.view.DistrictModel;
 import com.apt.p2p.model.view.ProvinceModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.model.view.WardModel;
 import com.apt.p2p.repository.*;
 import com.apt.p2p.service.LocationService;
@@ -111,7 +112,7 @@ public class MainController {
 
     @GetMapping("edit")
     public String userEdit(Model model) {
-        User user = usersDetailService.getCurrentUser();
+        UserModel user = usersDetailService.getCurrentUser();
         model.addAttribute("account" , user);
         return "user/account/user-form";
     }
