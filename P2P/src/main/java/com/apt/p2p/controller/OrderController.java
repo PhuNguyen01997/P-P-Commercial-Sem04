@@ -29,10 +29,6 @@ public class OrderController {
     @Autowired
     private StatusOrderService statusOrderService;
     @Autowired
-    private OrderDetailService orderDetailService;
-    @Autowired
-    private ProductService productService;
-    @Autowired
     private StatusHistoryService statusHistoryService;
     @Autowired
     private ShopService shopService;

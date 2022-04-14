@@ -39,7 +39,7 @@ public final class OrderSpecification {
             case 1: {
 //                Filter By OrderId
                 result = (root, query, cb) -> {
-                    return cb.like(root.get("id"), "%" + name + "%");
+                    return cb.like(root.get("id").as(String.class), "%" + name + "%");
                 };
                 break;
             }

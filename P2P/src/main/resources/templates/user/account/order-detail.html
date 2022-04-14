@@ -37,6 +37,9 @@
                 </div>
             </div>
             <div class="order-detail-control">
+                <a th:href="@{/order/{id}/rate(id = ${order.id})}">
+                    <button class="order-detail-control--btn btn btn__primary">Đánh giá</button>
+                </a>
                 <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
                 <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
             </div>
@@ -73,7 +76,7 @@
                     </p>
                 </div>
                 <p class="order-item--price">
-                    <span th:text="${orderDetail.lastPrice}"></span>
+                    <span th:text="${#numbers.formatDecimal(orderDetail.lastPrice, 0, 'COMMA', 0, 'POINT')}"></span>
                     <span> vnđ</span>
                 </p>
             </li>
@@ -82,7 +85,7 @@
             <li class="order-summary--item">
                 <p>Tổng tiền hàng</p>
                 <p>
-                    <span th:text="${order.calTotal()}">
+                    <span th:text="${#numbers.formatDecimal(order.calTotal(), 0, 'COMMA', 0, 'POINT')}">
                         [Order Total]
                     </span>
                     <span> vnđ</span>
@@ -91,14 +94,14 @@
             <div class="order-summary--item">
                 <p>Phí vận chuyển</p>
                 <p>
-                    <span th:text="${order.shippingCost}">[Order Shipping]</span>
+                    <span th:text="${#numbers.formatDecimal(order.shippingCost, 0, 'COMMA', 0, 'POINT')}">[Order Shipping]</span>
                     <span> vnđ</span>
                 </p>
             </div>
             <div class="order-summary--item order-summary--item__total">
                 <p>Tổng số tiền</p>
                 <p>
-                    <span th:text="${order.calTotal().add(order.shippingCost)}">[Summary Total]</span>
+                    <span th:text="${#numbers.formatDecimal(order.calTotal().add(order.shippingCost), 0, 'COMMA', 0, 'POINT')}">[Summary Total]</span>
                     <span>vnđ</span>
                 </p>
             </div>
