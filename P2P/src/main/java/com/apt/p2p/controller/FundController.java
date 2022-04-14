@@ -26,17 +26,15 @@ public class FundController {
 
     @GetMapping("portal/fund")
     public String portalIndex(Model model) {
-        int userId = 2;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
 
-        model.addAttribute("shop", user.getShop() != null ? shopService.findById(user.getShop().getId()) : null);
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         return "user/portal/fund";
     }
 
     @GetMapping("portal/fund/withdraw")
     public String portalWithdraw(Model model) {
-        int userId = 2;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
 
         model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         model.addAttribute("withdraw", new WithdrawForm(user.getShop() != null ? user.getShop().getId() : 0 , BigDecimal.ZERO));
@@ -63,6 +61,6 @@ public class FundController {
             return "user/portal/fund-withdraw";
         }
 
-        return "redirect:/portal/" + input.getShopId() + "/fund/";
+        return "redirect:/portal/fund/";
     }
 }

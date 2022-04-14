@@ -33,7 +33,11 @@ public class ShopTransactionServiceImpl implements ShopTransactionService {
     public List<ShopTransactionModel> findAllByShopIdWithFilter(int shopId, FilterShopTransaction filter) {
         Specification<ShopTransaction> condition = Specification
                 .where(ShopTransactionSpecification.hasShopId(shopId))
-                .and(ShopTransactionSpecification.hasDateIn(filter.getMinDate(), filter.getMaxDate()));
+                .and(ShopTransactionSpecification.hasDateIn(filter.getMinDate(), filter.getMaxDate()))
+                .and((root, query, cb) -> {
+                    query.orderBy(cb.desc(root.get("id")));
+                    return null;
+                });
 
         switch (filter.getType()) {
             case 1: {

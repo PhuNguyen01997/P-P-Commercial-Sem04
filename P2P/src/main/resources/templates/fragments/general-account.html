@@ -7,11 +7,11 @@
 <body>
 <div th:fragment="content-side" class="account-side split-side">
     <div class="account-head">
-        <p class="pic circle account-head--avatar pic"><img src="/img/products/product_01.jpg"
+        <p class="pic circle account-head--avatar pic"><img th:src="${user.toUrl(user.avatar)}"
                                                             alt=""></p>
         <div class="account-head--text">
-            <p class="account-head--name">Uwu Bu Bu</p>
-            <p class="account-head--edit"><a href="#"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
+            <p th:text="${user.username}" class="account-head--name">[User Name]</p>
+            <p class="account-head--edit"><a href="/edit"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
             </p>
         </div>
     </div>

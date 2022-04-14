@@ -71,6 +71,9 @@ public class UserModel {
     }
 
     public String toUrl(String fileName) {
+        if(fileName == null || fileName.isEmpty()){
+            return "/img/common/img_default_user.png";
+        }
         return urlPath + fileName;
     }
 }

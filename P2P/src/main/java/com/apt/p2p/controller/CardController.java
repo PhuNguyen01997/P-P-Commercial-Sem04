@@ -37,6 +37,8 @@ public class CardController {
     @GetMapping("card")
     public String card(Model model) {
         UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         model.addAttribute("card", new CardModel());
         model.addAttribute("cards", cardService.findAllByUserId(user.getId()));
 
@@ -50,9 +52,12 @@ public class CardController {
             BindingResult result,
             RedirectAttributes redirectAttributes
     ) {
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         if (result.hasErrors()) {
             model.addAttribute("card", cardModel);
-            model.addAttribute("cards", cardService.findAllByUserId(3));
+            model.addAttribute("cards", cardService.findAllByUserId(user.getId()));
             model.addAttribute("hasAnyError", true);
 
             return "user/account/card";
@@ -60,9 +65,9 @@ public class CardController {
         try {
             CardModel paymentResult = cardService.create(cardModel);
         } catch (StripeException e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra, vui lòng kiểm tra lại thông tin thẻ");
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xảy ra, vui lòng kiểm tra lại thông tin thẻ");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thêm thẻ thanh toán, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xảy ra không thể thêm thẻ thanh toán, xin hãy thử lại sau");
         }
         return "redirect:/card";
     }

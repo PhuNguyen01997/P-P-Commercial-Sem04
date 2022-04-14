@@ -40,15 +40,15 @@ public class CartServiceImpl implements CartService {
     private ProductMapper productMapper;
 
     @Override
-    public List<CartModel> findByUserId(int userId) {
-        return cartRepository.findByUserId(userId).stream().map(ce -> cartMapper.cartEntityToModel(ce)).collect(Collectors.toList());
+    public List<CartModel> findAllByUserId(int userId) {
+        return cartRepository.findAllByUserId(userId).stream().map(ce -> cartMapper.cartEntityToModel(ce)).collect(Collectors.toList());
     }
 
     @Override
-    public CartModel save(ProductAddCartModel productAddCart) {
+    public CartModel save(int userId, ProductAddCartModel productAddCart) {
         Product product = productRepository.findById(productAddCart.getProductId()).get();
 
-        User user = userRepository.findById(2).get();
+        User user = userRepository.findById(userId).get();
 
         Cart cart = cartRepository.findByProductIdAndUserId(product.getId(), user.getUserId());
         if (cart != null) {
@@ -65,9 +65,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartIndexViewModel> getCartListChunkByShop() {
-        int userId = 2;
-        List<Cart> cartList = cartRepository.findByUserId(userId);
+    public List<CartIndexViewModel> getCartListChunkByShop(int userId) {
+        List<Cart> cartList = cartRepository.findAllByUserId(userId);
         List<CartIndexViewModel> result = new ArrayList<>();
         cartList = cartList.stream()
                 .sorted((c1, c2) ->

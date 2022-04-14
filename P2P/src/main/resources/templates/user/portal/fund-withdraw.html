@@ -25,8 +25,8 @@
             <div class="fund-withdraw-row--right fund-withdraw-row--right__amount">
                 <input th:field="*{amount}" th:max="${shop.fund.doubleValue() > 5000000 ? 5000000 : shop.fund}" type="number" id="amount">
                 <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="error">Invalid value</p>
-                <p class="note">* Số dư hiện tại <span th:text="${shop.fund}"></span> vnđ</p>
-                <p class="note">* Giới hạn rút tiền trong ngày 5.000.000 vnđ</p>
+                <p class="note">* Số dư hiện tại <span th:text="${#numbers.formatDecimal(shop.fund, 0, 'COMMA', 0, 'POINT')}"></span> vnđ</p>
+                <p class="note">* Giới hạn rút tiền trong ngày 5,000,000 vnđ</p>
             </div>
         </div>
         <div class="fund-withdraw-row">

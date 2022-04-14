@@ -61,15 +61,16 @@ public class LocationServiceImpl implements LocationService {
 
         String appendPath = "?district_id=" + districtId;
         ResponseEntity<WardModelGHN> response = restTemplate.exchange(url + "/ward" + appendPath, HttpMethod.GET, httpEntity, WardModelGHN.class);
-        WardModel[] arr = response.getBody().getData();
 
-        if(response.getBody().getData() == null){
+
+        if(response.getBody().getData() != null){
+            WardModel[] arr = response.getBody().getData();
+            List<WardModel> list = Arrays.stream(arr).filter(wm -> wm.getSupportType() != 0).collect(Collectors.toList());
+            return list;
+        }else{
             System.out.println(districtId);
+            return new ArrayList<WardModel>();
         }
-
-        List<WardModel> list = Arrays.stream(arr).filter(wm -> wm.getSupportType() != 0).collect(Collectors.toList());
-
-        return list;
     }
 
     @Override

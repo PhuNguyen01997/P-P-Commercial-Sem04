@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.*;
 import com.apt.p2p.common.RandomUtil;
+import com.apt.p2p.entityEnum.ShopTransactionStatus;
 import com.apt.p2p.model.view.DistrictModel;
 import com.apt.p2p.model.view.ProvinceModel;
 import com.apt.p2p.model.view.WardModel;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.transaction.Transaction;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -42,6 +44,10 @@ public class MainController {
     private StatusHistoryRepository statusHistoryRepository;
     @Autowired
     private ShopTransactionRepository shopTransactionRepository;
+    @Autowired
+    private CartRepository cartRepository;
+    @Autowired
+    private RoleRepository roleRepository;
     @Autowired
     private LocationService locationService;
 
@@ -96,6 +102,7 @@ public class MainController {
     private List<ProvinceModel> provinces = null;
     private Map<Integer, List<DistrictModel>> mapProvinceDistrict = new HashMap<>();
     private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
+    private List<Role> roles;
 
     @GetMapping("edit")
     public String userEdit() {
@@ -111,6 +118,7 @@ public class MainController {
     public String seed() {
         this.provinces = locationService.provinceFindAll();
         this.statusOrders = statusOrderRepository.findAll();
+        this.roles = roleRepository.findAll();
 
         List<Product> products = productRepository.findAll();
         List<User> users = userRepository.findAll();
@@ -131,6 +139,13 @@ public class MainController {
         // create shops
         List<Shop> shops = createShop(users, 17);
         shops.add(testUser.getShop());
+        users.add(testUser);
+
+        // create transaction withdraw
+        shops.forEach(shop -> {
+            List<ShopTransaction> transactions = createShopTransaction(shop, RandomUtil.getRandomNumber(100));
+            shop.setShopTransactions(transactions);
+        });
 
         // product set description
         // product set shop
@@ -183,6 +198,23 @@ public class MainController {
         });
         rateRepository.saveAll(rates);
 
+        // create carts
+        users.forEach(u -> {
+            Integer randomAmount = RandomUtil.getRandomNumber(3, products.size() / 2);
+            List<Cart> carts = createCarts(u, new ArrayList<>(products), randomAmount);
+            u.setCarts(carts);
+        });
+
+        // create roles users
+        users.forEach(user -> {
+            List<Role> newRoles = new ArrayList<>();
+            newRoles.add(this.roles.get(0));
+            if (user.getUsername().equals("seller") || user.getShop() != null) {
+                newRoles.add(this.roles.get(2));
+            } else if (user.getUsername().equals("admin")) newRoles.add(this.roles.get(1));
+            user.setRoles(newRoles);
+        });
+
         userRepository.saveAll(users);
 
         System.out.println("Seed done");
@@ -199,15 +231,18 @@ public class MainController {
 
             newShop.setLogo(i + "_logo.jpg");
             newShop.setBackground(i + "_thumbnail.jpg");
-            newShop.setName(RandomUtil.getRandomString(10, 42));
+            newShop.setName(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(4)));
             newShop.setPhone(RandomUtil.getRandomPhone());
             newShop.setPermission(true);
             newShop.setDescription("test");
             newShop.setUser(user);
+            newShop.setFund(BigDecimal.valueOf(RandomUtil.getRandomNumber(350000000)));
             newShop.setAddress(user.getAddresses().get(RandomUtil.getRandomNumber(user.getAddresses().size() - 1)));
 
             result.add(newShop);
+            user.setShop(newShop);
         }
+
         shopRepository.saveAll(result);
 
         return result;
@@ -220,7 +255,7 @@ public class MainController {
             ProvinceModel province = this.provinces.get(randomProvinceIndex);
 
             List<DistrictModel> districtList = getDistrictModels(province.getProvinceId());
-            if (districtList.size() == 0) {
+            while (districtList.size() == 0) {
                 randomProvinceIndex = RandomUtil.getRandomNumber(0, this.provinces.size() - 1);
                 province = this.provinces.get(randomProvinceIndex);
 
@@ -231,7 +266,7 @@ public class MainController {
             DistrictModel district = districtList.get(randomDistrictIndex);
 
             List<WardModel> wardList = getWardModels(district.getDistrictId());
-            if (wardList.size() == 0) {
+            while (wardList.size() == 0) {
                 randomDistrictIndex = RandomUtil.getRandomNumber(0, districtList.size() - 1);
                 district = districtList.get(randomDistrictIndex);
 
@@ -350,6 +385,39 @@ public class MainController {
         }
 
         orderDetailRepository.saveAll(result);
+        return result;
+    }
+
+    private List<ShopTransaction> createShopTransaction(Shop shop, int amount) {
+        List<ShopTransaction> result = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            ShopTransaction newTransaction = new ShopTransaction(shop, BigDecimal.valueOf(RandomUtil.getRandomNumber(5000000)), ShopTransactionStatus.values()[RandomUtil.getRandomNumber(2)]);
+
+            result.add(newTransaction);
+        }
+
+        shopTransactionRepository.saveAll(result);
+
+        return result;
+    }
+
+    private List<Cart> createCarts(User user, List<Product> products, int amount) {
+        List<Cart> result = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            Integer randomIndexProduct = RandomUtil.getRandomNumber(products.size() - 1);
+            Product product = products.get(randomIndexProduct);
+            products.remove(product);
+
+            Cart newCart = new Cart();
+            newCart.setQuantity(RandomUtil.getRandomNumber(1, 3));
+            newCart.setUser(user);
+            newCart.setProduct(product);
+
+            result.add(newCart);
+        }
+
+        cartRepository.saveAll(result);
+
         return result;
     }
 

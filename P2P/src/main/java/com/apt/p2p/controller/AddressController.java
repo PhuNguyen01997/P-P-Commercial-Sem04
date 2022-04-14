@@ -1,6 +1,7 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.AddressModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.AddressService;
 import com.apt.p2p.service.UsersDetailServiceImpl;
 import com.apt.p2p.validate.AddressModelValidator;
@@ -35,8 +36,10 @@ public class AddressController {
 
     @GetMapping("address")
     public String index(Model model) {
-        int userId = 1;
-        List<AddressModel> addressList = addressService.findAllByUserId(userId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        List<AddressModel> addressList = addressService.findAllByUserId(user.getId());
         model.addAttribute("addressList", addressList);
         model.addAttribute("addressForm", new AddressModel());
 
@@ -47,9 +50,11 @@ public class AddressController {
     public String create(Model model,
                          @Valid @ModelAttribute("addressForm") AddressModel address,
                          BindingResult result) {
-        int userId = 1;
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         if (result.hasErrors()) {
-            List<AddressModel> addressList = addressService.findAllByUserId(userId);
+            List<AddressModel> addressList = addressService.findAllByUserId(user.getId());
             model.addAttribute("addressList", addressList);
             model.addAttribute("addressForm", address);
             model.addAttribute("hasAnyError", true);
@@ -57,7 +62,7 @@ public class AddressController {
             return "user/account/address";
         }
 
-        AddressModel addressModel = addressService.save(userId, address);
+        AddressModel addressModel = addressService.save(user.getId(), address);
 
         return "redirect:/address";
     }
@@ -67,8 +72,11 @@ public class AddressController {
                        @Valid @ModelAttribute("addressForm") AddressModel address,
                        BindingResult result,
                        RedirectAttributes redirectAttributes) {
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         if (result.hasErrors()) {
-            List<AddressModel> addressList = addressService.findAllByUserId(1);
+            List<AddressModel> addressList = addressService.findAllByUserId(user.getId());
             model.addAttribute("addressList", addressList);
             model.addAttribute("addressForm", address);
             model.addAttribute("hasAnyError", true);
@@ -91,36 +99,5 @@ public class AddressController {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
         }
         return "redirect:/address";
-    }
-
-    private List<Integer> calPagiPage(int index, int total) {
-        if (index + 1 > total) {
-            throw new IllegalArgumentException("Index is > Pagi length");
-        }
-        List<Integer> result = new ArrayList<>();
-        int showRange = 2;
-        int borderStart = showRange;
-        int borderEnd = total - showRange - 1;
-        if (borderStart > borderEnd) {
-            for (int i = 0; i <= total - 1; i++) {
-                result.add(i);
-            }
-        } else if (borderStart <= index && index <= borderEnd) {
-            for (int i = index - showRange; i < index; i++) {
-                result.add(i);
-            }
-            for (int i = index; i <= index + showRange; i++) {
-                result.add(i);
-            }
-        } else if (index >= borderEnd) {
-            for (int i = total - 1; i > total - 1 - ((showRange * 2) + 1); i--) {
-                result.add(0, i);
-            }
-        } else if (index <= borderStart) {
-            for (int i = 0; i < ((showRange * 2) + 1); i++) {
-                result.add(i);
-            }
-        }
-        return result;
     }
 }

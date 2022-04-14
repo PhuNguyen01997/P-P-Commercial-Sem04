@@ -7,7 +7,7 @@ import com.apt.p2p.model.view.CartModel;
 import java.util.List;
 
 public interface CartService {
-    List<CartModel> findByUserId(int userId);
+    List<CartModel> findAllByUserId(int userId);
 
     void delete(int id);
 
@@ -15,9 +15,9 @@ public interface CartService {
 
     boolean edit(CartModel cartModel);
 
-    CartModel save(ProductAddCartModel productAddCartModel);
+    CartModel save(int userId, ProductAddCartModel productAddCartModel);
 
-    List<CartIndexViewModel> getCartListChunkByShop();
+    List<CartIndexViewModel> getCartListChunkByShop(int userId);
 
     CartIndexViewModel getCartProductByShopIdAndCartId(int shopId, List<Integer> cartIdList);
 }

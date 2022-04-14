@@ -101,7 +101,6 @@ public class AuthController {
 
         if (result.hasErrors()) {
             model.addAttribute("user", userModel);
-            model.addAttribute("hasAnyError", true);
             return "user/auth/signup";
         }
         Role role = roleRepository.findRoleByName("ROLE_USER");
@@ -112,7 +111,6 @@ public class AuthController {
 
         if (email != null) {
             model.addAttribute("duplicate", "Email already exists");
-            model.addAttribute("hasAnyError", true);
             return "user/auth/signup";
         }
         User usr = new User();
@@ -234,7 +232,6 @@ public class AuthController {
                 return "user/auth/forgot";
             } else {
                 model.addAttribute("errorEmail", "Email dose not exists");
-                model.addAttribute("hasAnyError", true);
                 return "user/auth/forgot";
             }
         }

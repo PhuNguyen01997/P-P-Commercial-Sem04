@@ -143,7 +143,7 @@
                     <div class="product-item--content">
                         <p th:text="${item.name}" class="product-item--title"></p>
                         <p class="product-item--price">
-                            <span th:text="${item.price}"></span>
+                            <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>
                             <span>vnđ</span>
                         </p>
                         <p class="product-item--rate">

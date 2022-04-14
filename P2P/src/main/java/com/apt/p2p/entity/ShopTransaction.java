@@ -64,4 +64,9 @@ public class ShopTransaction {
         this.status = ShopTransactionStatus.WAIT;
         this.description = "Rút tiền từ cửa hàng vào tài khoản cá nhân";
     }
+
+    public ShopTransaction(Shop shop, BigDecimal amount, ShopTransactionStatus status) {
+        this(shop, amount);
+        this.status = status;
+    }
 }
