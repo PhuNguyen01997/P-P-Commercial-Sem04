@@ -384,7 +384,11 @@ label {
         }
     }
 }
-
+a.btn__primary{
+    &:hover{
+        color: white;
+    }
+}
 .btn {
     display: inline-flex;
     align-items: center;

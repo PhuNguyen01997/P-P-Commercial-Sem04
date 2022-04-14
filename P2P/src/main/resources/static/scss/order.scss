@@ -57,6 +57,7 @@
         }
 
         &--price {
+            flex-shrink: 0;
             font-size: 18px;
             align-self: center;
             color: $color-red;
@@ -89,7 +90,8 @@
         }
 
         &--status {
-            color: $color-red;
+            color: $color-primary01;
+            font-weight: bold;
             margin-left: auto;
         }
     }

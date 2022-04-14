@@ -87,8 +87,12 @@
                             }
                         }
 
-                        .order-info {
-                            margin-left: auto;
+                        .amount {
+                            margin: 0 20px 0 auto;
+
+                            .bold {
+                                font-weight: bold;
+                            }
                         }
                     }
 

@@ -168,6 +168,7 @@
                 padding: 0 20px;
 
                 &:first-child {
+                    text-align: center;
                     padding-left: 40px;
                 }
 
@@ -189,6 +190,11 @@
                     overflow: hidden;
                     color: #000;
                     font-weight: bold;
+                    text-align: left;
+                }
+
+                &__price, &__status{
+                    text-align: center;
                 }
 
                 &__price {

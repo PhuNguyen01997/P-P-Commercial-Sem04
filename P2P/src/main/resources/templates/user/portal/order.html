@@ -140,10 +140,12 @@
                             }
                         }
 
+                        let total =
                         htmlText += `<li class="table-body--row">` +
                             `<div class="table-body--row-header">` +
                             `<p class="avatar circle"><img src="/img/common/img_default_user.png" alt=""></p>` +
                             `<p class="name">${order.user.username}</p>` +
+                            `<p class="amount"><span>Tổng cộng: </span><span class="bold">${order.total.toLocaleString()} vnđ</span></p>` +
                             `<p class="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
                             `</div>` +
                             `<ul class="table-body--row-list">`;
