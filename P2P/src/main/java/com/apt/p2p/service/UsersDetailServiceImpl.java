@@ -2,6 +2,7 @@ package com.apt.p2p.service;
 import com.apt.p2p.common.modelMapper.UserMapper;
 import com.apt.p2p.entity.Role;
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.form.Custom0Auth2User;
 import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.repository.RoleRepository;
 import com.apt.p2p.repository.UserRepository;
@@ -20,9 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -134,17 +133,18 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     }
 
     // sau khi login bang google chung ta se tao ra 1 tai khoang local tuong ung
-    public void processOAuthPostLogin(String username) {
-        User user = userRepository.findByUsername((username));
+    public void processOAuthPostLogin(Custom0Auth2User custom0Auth2User , String from) {
+        Map<String,Object> auth = custom0Auth2User.getAttributes();
+        User user = userRepository.findByUsername(custom0Auth2User.getEmail());
         //truong hop chua co tai khoan => tao moi
         if (user == null) {
             User u = new User();
-            u.setEmail(username);
-            u.setUsername(username);
+            u.setEmail(String.valueOf(auth.get("email")));
+            u.setUsername(String.valueOf(auth.get("name")));
             u.setPhone("");
             u.setPassword("");
             u.setEnabled(true);
-            u.setProvider("GOOGLE");
+            u.setProvider(from.toUpperCase());
             userRepository.save(u);
         }
     }

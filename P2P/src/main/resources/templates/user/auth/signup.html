@@ -10,9 +10,9 @@
 <body>
 <main layout:fragment="content-form" class="auth">
   <div class="inner">
-    <div class="auth-container">
+    <form th:action="@{/save-user}" th:object="${user}" method="POST" enctype="multipart/form-data"  class="auth-container">
       <h1 class="auth-title">Sign Up</h1>
-      <form th:action="@{/save-user}" th:object="${user}" method="POST" enctype="multipart/form-data" class="form">
+      <div class="form">
         <input class="auth--ipt auth--ipt__txt" placeholder="Email" th:field="*{email}">
         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Invalid value</p>
         <p th:if="${duplicate != null}" class="error" th:text="${duplicate}"></p>
@@ -23,7 +23,7 @@
         <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}">
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">Invalid value</p>
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Sign Up</button>
-      </form>
+      </div>
       <div class="auth-navi">
         <a th:href="@{/signin}">Sign in</a>
         <a th:href="@{/forgot}">Forgot password ?</a>
@@ -32,7 +32,7 @@
         <img class="jsPic" src="/assets/img/common/icon_plus_blue.png" alt="logo preview">
         <input class="auth--ipt auth--ipt__txt" type="file" name="pic" id="pic">
       </label>
-    </div>
+    </form>
   </div>
 </main>
 <script layout:fragment="script">

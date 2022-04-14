@@ -1,6 +1,7 @@
 package com.apt.p2p.config;
 
 import com.apt.p2p.common.FacebookSignInAdapter;
+import com.apt.p2p.common.RegexString;
 import com.apt.p2p.model.form.Custom0Auth2User;
 import com.apt.p2p.service.CustomOAuth2UserServiceImpl;
 import com.apt.p2p.service.FacebookConnectionSignup;
@@ -90,8 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                                         Authentication authentication) throws IOException, ServletException {
                         // nhận thông tin người dùng thông qua Principle
                         Custom0Auth2User user = (Custom0Auth2User)authentication.getPrincipal();
-
-                        userService.processOAuthPostLogin(user.getEmail());
+                        String from = RegexString.replaceUrl(request.getRequestURI());
+                        userService.processOAuthPostLogin(user ,  from);
                         response.sendRedirect("/");
                     }
                 })
