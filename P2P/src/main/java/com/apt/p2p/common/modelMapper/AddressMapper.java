@@ -37,7 +37,9 @@ public class AddressMapper {
         AddressModel model = new AddressModel(entity);
 
         model.setUser(new UserModel(entity.getUser()));
-        model.setShop(new ShopModel(entity.getShop()));
+        if(entity.getShop() != null){
+            model.setShop(new ShopModel(entity.getShop()));
+        }
         model.setOrders(entity.getOrders().stream().map(oe -> new OrderModel(oe)).collect(Collectors.toList()));
 
         return model;

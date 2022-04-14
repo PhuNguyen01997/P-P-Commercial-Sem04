@@ -279,7 +279,7 @@ public class MainController {
             Address newAddress = new Address();
             newAddress.setOwnName(RandomUtil.getRandomString(10, 42));
             newAddress.setOwnPhone(RandomUtil.getRandomPhone());
-            newAddress.setNumber(RandomUtil.getRandomStringNumber(1, 3) + " " + RandomUtil.getRandomString(18, 60));
+            newAddress.setNumber(RandomUtil.getRandomStringNumber(1, 3) + " " + RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(2, 4)));
             newAddress.setWard(ward.getWardName());
             newAddress.setWardId(ward.getWardCode());
             newAddress.setDistrict(district.getDistrictName());

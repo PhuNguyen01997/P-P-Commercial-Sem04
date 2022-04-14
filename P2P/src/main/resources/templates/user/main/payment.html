@@ -24,7 +24,7 @@
                     <span th:text="${addresses.get(0).ownPhone}" class="phone">[Address Phone]</span>
                     <span th:text="${addresses.get(0).getFullAddress()}"
                           class="number">[Address Full]</span>
-                    <a class="change" href="#">Thay đổi</a>
+                    <a class="change" href="javascript: void(0);">Thay đổi</a>
                 </p>
                 <div class="pay-address--change d-none">
                     <label th:each="address : ${addresses}" class="pay-address--change-item">
@@ -46,7 +46,8 @@
                 </div>
             </th:block>
         </div>
-        <th:block th:each="shopCart : ${shopCarts}">
+        <th:block th:each="shopCart : ${shopCarts}"
+                  th:with="shop = ${shopCart.shop}">
             <div class="pay-cart" th:attr="data-shop-id=${shopCart.shop.id}">
                 <div class="pay-cart-header">
                     <p>Sản phẩm</p>
@@ -55,24 +56,25 @@
                     <p>Thành tiền</p>
                 </div>
                 <div class="pay-cart-shop"
-                     th:attr="data-shop-address-id=${shopCart.shop.address.id}, data-shop-id=${shopCart.shop.id}"
-                >
-                    <input type="hidden" name="shopIds[]" th:value="${shopCart.shop.id}">
-                    <p th:text="${shopCart.shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
+                     th:attr="data-shop-address-id=${shop.address.id}, data-shop-id=${shop.id}">
+                    <input type="hidden" name="shopIds[]" th:value="${shop.id}">
+                    <p th:text="${shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
                     <a class="pay-cart-shop--chat" href="javascript: void(0);"><i
                             class="icon icon__left fas fa-comment-alt"></i>Chat
                         ngay</a>
                 </div>
                 <ul class="pay-cart-list">
-                    <li th:each="productCart : ${shopCart.productCarts}" class="pay-cart-item">
-                        <input type="hidden" name="cartIds[]" th:value="${productCart.cart.id}">
-                        <div class="pay-cart-item--pic pic"><img src="/img/products/product_02.jpg" alt=""></div>
-                        <p th:text="${productCart.product.name}" class="pay-cart-item--name">[Product Name]</p>
-                        <p th:text="${productCart.product.price + ' vnđ'}" class="pay-cart-item--price">[Product
+                    <li th:each="productCart : ${shopCart.productCarts}"
+                        th:with="product = ${productCart.product}, cart = ${productCart.cart}"
+                        class="pay-cart-item">
+                        <input type="hidden" name="cartIds[]" th:value="${cart.id}">
+                        <div class="pay-cart-item--pic pic"><img th:src="${product.toUrl(product.image.get(0))}" alt=""></div>
+                        <p th:text="${product.name}" class="pay-cart-item--name">[Product Name]</p>
+                        <p th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="pay-cart-item--price">[Product
                             Price]</p>
-                        <p th:text="${productCart.cart.quantity}" class="pay-cart-item--quantity">[Cart Quantity]</p>
-                        <p th:text="${(productCart.cart.quantity * productCart.product.price) + ' vnđ'}"
-                           th:attr="data-total=${productCart.cart.quantity * productCart.product.price}, data-shop-id=${shopCart.shop.id}"
+                        <p th:text="${cart.quantity}" class="pay-cart-item--quantity">[Cart Quantity]</p>
+                        <p th:text="${#numbers.formatDecimal(product.price.multiply(cart.quantity), 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                           th:attr="data-total=${cart.quantity * product.price}, data-shop-id=${shop.id}"
                            class="pay-cart-item--total jsTotal">[Total: price x quantity]</p>
                     </li>
                 </ul>
@@ -81,17 +83,17 @@
                         <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
                         <p class="pay-cart-footer--shipping">
                             <span>Phí vận chuyển: </span>
-                            <span class="jsShipping" th:attr="data-shop-id=${shopCart.shop.id}">[Shipping cost]</span>
+                            <span class="jsShipping" th:attr="data-shop-id=${shop.id}"><b class="error">Không tìm thấy địa chỉ</b></span>
                             <input type="hidden" name="shipping[]"
-                                   th:attr="data-shop-id=${shopCart.shop.id}" value="">
+                                   th:attr="data-shop-id=${shop.id}" value="">
                         </p>
                     </div>
                     <div class="pay-cart-footer--block">
                         <p class="pay-cart-footer--text">Tổng số tiền (
-                            <span th:attr="data-shop-id=${shopCart.shop.id}" class="jsCount">[Count]</span>
+                            <span th:attr="data-shop-id=${shop.id}" class="jsCount">[Count]</span>
                             sản phẩm)
                         </p>
-                        <p th:attr="data-shop-id=${shopCart.shop.id}"
+                        <p th:attr="data-shop-id=${shop.id}"
                            class="pay-cart-footer--total jsSumTotal">[Total]</p>
                     </div>
                 </div>
@@ -239,7 +241,9 @@
     })
 
     calTotal();
-    calShippingFee();
+    if($('[name="addressId"]').length){
+        calShippingFee();
+    }
 
     $('.pay-address--text').on('click', '.change', function () {
         $('.pay-address--change').removeClass('d-none');
@@ -279,10 +283,11 @@
             if (hasStripeCard) {
                 this.submit();
             }
-        } else {
-            this.submit();
+        }else{
+            if($('.jsSumTotal3').text().length){
+                this.submit();
+            }
         }
-        console.log()
     });
 </script>
 </body>
