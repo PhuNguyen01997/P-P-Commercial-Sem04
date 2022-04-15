@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>ShoPP</title>
+    <title th:text="${shop.id == null ? 'Đăng ký cửa hàng' : shop.name}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="main-inner shop">
