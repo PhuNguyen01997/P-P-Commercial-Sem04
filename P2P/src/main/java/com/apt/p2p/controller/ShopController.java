@@ -105,11 +105,10 @@ public class ShopController {
 
     @GetMapping("portal")
     public String shopDetail(Model model) {
-        int userId = 3;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
 
         model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : new ShopModel());
-        model.addAttribute("user", user);
         model.addAttribute("imageFiles", null);
         return "user/portal/shop-form";
     }
@@ -121,8 +120,9 @@ public class ShopController {
                              BindingResult resultShop,
                              @Valid @ModelAttribute("imageFiles") ImageFilesModels imageFilesModels,
                              BindingResult resultImages) {
-        int userId = 3;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         AddressModel address = addressService.findById(addressId);
         shop.setAddress(address);
         shop.setUser(user);
