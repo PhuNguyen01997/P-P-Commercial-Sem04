@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.model.form.FilterShopTransaction;
+import com.apt.p2p.model.view.AdminHeaderNavi;
 import com.apt.p2p.model.view.ShopTransactionModel;
 import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,12 @@ public class ShopTransactionController {
 
         model.addAttribute("transactions", transactions);
 
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Giao dịch", ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Giao dịch", naviArr));
+
         return "/admin/transaction";
     }
 
@@ -45,6 +53,13 @@ public class ShopTransactionController {
         }
 
         model.addAttribute("transaction", shopTransactionModel);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Giao dịch", "/admin/shop"},
+                new String[]{String.valueOf(shopTransactionModel.getId()), ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Giao dịch", naviArr));
 
         return "admin/transaction-detail";
     }

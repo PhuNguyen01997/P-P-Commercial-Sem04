@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,17 +75,31 @@ public class ShopController {
     }
 
     @GetMapping("admin/shop")
-    public String adminShopIndex(Model model){
+    public String adminShopIndex(Model model) {
         List<ShopModel> shops = shopService.findAll();
         model.addAttribute("shops", shops);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Cửa hàng", ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Cửa hàng", naviArr));
 
         return "admin/shop";
     }
 
     @GetMapping("admin/shop/{shopId}")
-    public String adminShopDetail(Model model, @PathVariable("shopId") int shopId){
+    public String adminShopDetail(Model model, @PathVariable("shopId") int shopId) {
         ShopModel shop = shopService.findById(shopId);
         model.addAttribute("shop", shop);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Cửa hàng", "/admin/shop"},
+                new String[]{shop.getName(), ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Cửa hàng", naviArr));
+
         return "admin/shop-detail";
     }
 

@@ -12,11 +12,11 @@
             <a class="nav-col--item" href="#">Seller channel</a>
         </div>
         <div class="nav-col__right nav-col">
-            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="#">Notification</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="javascript: void(0)">Thông báo</a>
             <a sec:authorize="isAuthenticated()" href="/edit" class="nav-col--item nav-col--item__user">[[${#request.remoteUser}]]</a>
-            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Sign Up</a>
-            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Sign In</a>
-            <a sec:authorize="isAuthenticated()" class="nav-col--item" th:href="@{/logout}">Log Out</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Đăng ký</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Đăng nhập</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" th:href="@{/logout}">Đăng xuất</a>
         </div>
     </nav>
     <div class="header-container">
@@ -31,10 +31,9 @@
                         class="fas fa-search"></i></button>
             </form>
             <ul class="header-category">
-                <li class="header-category--item"><a href="#">Vehicle</a></li>
-                <li class="header-category--item"><a href="#">Media</a></li>
-                <li class="header-category--item"><a href="#">Clothes</a></li>
-                <li class="header-category--item"><a href="#">Service</a></li>
+                <li th:each="category : ${headerCategories}" class="header-category--item">
+                    <a href="#" th:text="${category.name}"></a>
+                </li>
             </ul>
         </div>
         <a class="icon header-cart" href="/cart"><i class="fas fa-shopping-cart"></i></a>

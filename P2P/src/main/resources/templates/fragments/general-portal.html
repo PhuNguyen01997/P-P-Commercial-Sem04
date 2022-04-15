@@ -16,8 +16,8 @@
     </div>
     <div class="header-block header-block__right">
         <p class="header-block--info">
-            <span class="avatar"><img src="/img/common/img_default_user.png" alt=""></span>
-            <span class="name">Username</span>
+            <span class="avatar"><img th:src="${shop.toUrl(shop.logo)}" alt=""></span>
+            <span class="name" th:text="${shop.name}"></span>
         </p>
         <p class="header-block--noti"><i class="far fa-bell"></i></p>
         <p class="header-block--edu">

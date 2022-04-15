@@ -1,7 +1,7 @@
 Title main, admin, portal
+Common: main cateogyr, header admin, header portal
 
 
-Common: category main, header admin, header portal
 login admin
 auth portal
 auth admin
