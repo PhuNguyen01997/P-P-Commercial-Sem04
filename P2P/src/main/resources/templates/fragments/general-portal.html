@@ -15,7 +15,7 @@
         <h2 class="header-block--text02">Đơn Hàng</h2>
     </div>
     <div class="header-block header-block__right">
-        <p class="header-block--info">
+        <p th:if="${shop != null && shop.id != null}" class="header-block--info">
             <span class="avatar"><img th:src="${shop.toUrl(shop.logo)}" alt=""></span>
             <span class="name" th:text="${shop.name}"></span>
         </p>
