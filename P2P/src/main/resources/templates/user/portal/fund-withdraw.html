@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>ShoPP</title>
+    <title th:text="${shop != null ? shop.name + ' - Rút tiền' : 'Cửa hàng'}"></title>
 </head>
 <body>
 <form method="post" layout:fragment="content" th:object="${withdraw}" class="main-inner fund-withdraw">

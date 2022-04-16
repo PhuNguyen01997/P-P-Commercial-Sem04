@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/main-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>ShoPP Tên Shop</title>
+    <title th:text="${shop.name}">ShoPP Tên Shop</title>
 </head>
 <body>
 <main layout:fragment="content">
@@ -197,7 +197,7 @@
                     <div class="product-item--content">
                         <p th:text="${item.name}" class="product-item--title"></p>
                         <p class="product-item--price">
-                            <span th:text="${item.price}"></span>
+                            <span th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span>
                             <span>vnđ</span>
                         </p>
                         <p class="product-item--rate">
@@ -214,18 +214,20 @@
             <div class="shopping-pagi">
                 <ul class="pagi">
                     <li class="pagi-item btn pagi-item__prev"
-                        th:classappend="${pagiView.index == 0 ? 'disabled' : ''}">
-                        <a th:href="@{/(page=${pagiView.prev})}"><i class="fas fa-angle-left"></i></a>
+                        th:classappend="${pagiView.index == 0 ? 'disabled' : ''}"
+                        th:data-page="${pagiView.prev}">
+                        <i class="fas fa-angle-left"></i>
                     </li>
                     <li th:each="pageNumber : ${pagiView.pagiList}"
                         th:classappend="${pageNumber == pagiView.index ? 'active' : ''}"
+                        th:text="${pageNumber + 1}"
+                        th:data-page="${pageNumber}"
                         class="pagi-item btn">
-                        <a th:href="@{/(page=${pageNumber})}"
-                           th:text="${pageNumber + 1}"></a>
                     </li>
                     <li class="pagi-item btn pagi-item__prev"
-                        th:classappend="${pagiView.index == pagiView.total - 1 ? 'disabled' : ''}">
-                        <a th:href="@{/(page=${pagiView.next})}"><i class="fas fa-angle-right"></i></a>
+                        th:classappend="${pagiView.index == pagiView.total - 1 ? 'disabled' : ''}"
+                        th:data-page="${pagiView.next}">
+                        <i class="fas fa-angle-right"></i>
                     </li>
                 </ul>
             </div>
@@ -279,6 +281,19 @@
             $('.jsSortBy').removeClass('active');
             $(this).addClass('active');
             handleEvent();
+        })
+
+        $('.pagi').on('click', '.pagi-item', function(){
+            const page = this.dataset.page;
+            const url = location.href;
+            let newUrl = '';
+            if(url.indexOf('page=') != -1){
+                newUrl = url.replace(/(?<=page\=)\d+/, page);
+            }else{
+                newUrl = url.charAt(url.length - 1) == '&' ? url : url + '?';
+                newUrl += `page=${page}`;
+            }
+            location.href = newUrl;
         })
     });
 </script>

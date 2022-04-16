@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>ShoPP</title>
+    <title th:text="${shop == null ? 'Thêm sản phảm' : (shop.name + ' - Sản phẩm')}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="product-create">
@@ -19,6 +19,7 @@
     <form th:object="${productForm}" th:action="@{/portal/product}"
           class="product-create-form" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" name="shopId" th:value="${shop.id}">
         <div class="product-create-form--left">
             <div class="form-item">
                 <label class="form-item--left" for="name">Tên sản phẩm</label>

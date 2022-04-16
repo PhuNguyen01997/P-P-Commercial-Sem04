@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,27 +75,40 @@ public class ShopController {
     }
 
     @GetMapping("admin/shop")
-    public String adminShopIndex(Model model){
+    public String adminShopIndex(Model model) {
         List<ShopModel> shops = shopService.findAll();
         model.addAttribute("shops", shops);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Cửa hàng", ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Cửa hàng", naviArr));
 
         return "admin/shop";
     }
 
     @GetMapping("admin/shop/{shopId}")
-    public String adminShopDetail(Model model, @PathVariable("shopId") int shopId){
+    public String adminShopDetail(Model model, @PathVariable("shopId") int shopId) {
         ShopModel shop = shopService.findById(shopId);
         model.addAttribute("shop", shop);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Cửa hàng", "/admin/shop"},
+                new String[]{shop.getName(), ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Cửa hàng", naviArr));
+
         return "admin/shop-detail";
     }
 
     @GetMapping("portal")
     public String shopDetail(Model model) {
-        int userId = 3;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
 
         model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : new ShopModel());
-        model.addAttribute("user", user);
         model.addAttribute("imageFiles", null);
         return "user/portal/shop-form";
     }
@@ -105,8 +120,9 @@ public class ShopController {
                              BindingResult resultShop,
                              @Valid @ModelAttribute("imageFiles") ImageFilesModels imageFilesModels,
                              BindingResult resultImages) {
-        int userId = 3;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         AddressModel address = addressService.findById(addressId);
         shop.setAddress(address);
         shop.setUser(user);

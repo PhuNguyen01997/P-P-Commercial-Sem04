@@ -1,6 +1,7 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.Category;
+import com.apt.p2p.model.view.AdminHeaderNavi;
 import com.apt.p2p.model.view.ToastResponse;
 import com.apt.p2p.service.CategoryService;
 import com.apt.p2p.service.UsersDetailServiceImpl;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class CategoryController {
     @Autowired
@@ -22,6 +26,13 @@ public class CategoryController {
     @GetMapping("/admin/category")
     public String index(Model model) {
         model.addAttribute("categories", categoryService.findAll());
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Danh mục", ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Danh mục", naviArr));
+
         return "admin/category";
     }
 

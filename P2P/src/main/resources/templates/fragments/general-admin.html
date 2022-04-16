@@ -9,12 +9,15 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
+                <h1 class="m-0" th:text="${viewHeaderNavi.title}"></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard v1</li>
+                    <li th:each="navi : ${viewHeaderNavi.naviItem}"
+                        class="breadcrumb-item">
+                        <a th:if="${!navi[1].isEmpty()}" th:href="${navi[1]}" th:text="${navi[0]}"></a>
+                        <span th:if="${navi[1].isEmpty()}" th:text="${navi[0]}"></span>
+                    </li>
                 </ol>
             </div>
         </div>
@@ -39,7 +42,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="admin/transaction" class="nav-link">
+                    <a href="/admin/transaction" class="nav-link">
                         <i class="fas fa-hand-holding-usd"></i>
                         <p>Giao dịch</p>
                     </a>
@@ -57,7 +60,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="/admin/user" class="nav-link">
                         <i class="fas fa-user"></i>
                         <p>Người dùng</p>
                     </a>
@@ -102,7 +105,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Logout</a>
+            <a href="#" class="nav-link">Đăng xuất</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">

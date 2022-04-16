@@ -202,19 +202,19 @@
             success: function (dataArr) {
                 let sumShipping = 0;
                 dataArr.forEach((shippingCost, index) => {
-                    $($('.jsShipping')[index]).text(shippingCost + ' vnđ').attr("data-shipping", shippingCost);
+                    $($('.jsShipping')[index]).text(shippingCost.toLocaleString() + ' vnđ').attr("data-shipping", shippingCost);
                     $($(`input[name="shipping[]"]`)[index]).val(shippingCost);
 
                     const currentTotal = parseInt($('.jsSumTotal')[index].dataset.total);
-                    $($('.jsSumTotal')[index]).text(`${currentTotal + shippingCost} vnđ`).attr("data-total", shippingCost + currentTotal);
+                    $($('.jsSumTotal')[index]).text(`${(currentTotal + shippingCost).toLocaleString()} vnđ`).attr("data-total", shippingCost + currentTotal);
 
                     sumShipping += parseInt(shippingCost);
                 })
 
-                $('.jsShipping2').text(sumShipping + ' vnđ').attr('data-shipping', sumShipping);
+                $('.jsShipping2').text(sumShipping.toLocaleString() + ' vnđ').attr('data-shipping', sumShipping);
 
                 const allTotal = parseInt($('.jsSumTotal2').attr('data-total')) + sumShipping;
-                $('.jsSumTotal3').text(allTotal + ' vnđ').attr('data-total', allTotal);
+                $('.jsSumTotal3').text(allTotal.toLocaleString() + ' vnđ').attr('data-total', allTotal);
 
                 setGlobalLoading(false);
             },

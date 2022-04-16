@@ -51,7 +51,9 @@
                     margin-bottom: 12px;
                 }
 
-                input, .ipt,
+                input,
+                .ipt,
+                .select,
                 textarea {
                     width: 100%;
                     max-width: 600px;
@@ -62,7 +64,9 @@
                     display: block;
                 }
 
-                input, p.length {
+                input,
+                .select,
+                p.length {
                     height: 30px;
                 }
 

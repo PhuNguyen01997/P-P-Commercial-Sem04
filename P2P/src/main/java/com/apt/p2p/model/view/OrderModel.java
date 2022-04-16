@@ -50,6 +50,10 @@ public class OrderModel {
         return result;
     }
 
+    public BigDecimal getShopRealReceiveTotal(){
+        return total.subtract(total.multiply(BigDecimal.valueOf(percentPermission)));
+    }
+
     public OrderModel(Order entity) {
         this.id = entity.getId();
         this.methodPayment = entity.getMethodPayment();

@@ -4,10 +4,7 @@ import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.entity.Rate;
 import com.apt.p2p.model.form.*;
-import com.apt.p2p.model.view.ProductModel;
-import com.apt.p2p.model.view.RateModel;
-import com.apt.p2p.model.view.ResponsePagiView;
-import com.apt.p2p.model.view.ShopModel;
+import com.apt.p2p.model.view.*;
 import com.apt.p2p.service.*;
 import com.apt.p2p.validate.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,26 +82,32 @@ public class ProductController {
 
     @GetMapping("portal/product")
     public String portalProduct(Model model) {
-        int shopId = 2;
-        model.addAttribute("shop", shopService.findById(shopId));
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         model.addAttribute("categories", categoryService.findAll());
+
         return "user/portal/product";
     }
 
     @GetMapping("portal/product/create")
     public String portalProductCreate(Model model) {
-        int shopId = 2;
-        model.addAttribute("shop", shopService.findById(shopId));
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         model.addAttribute("productForm", new ProductForm());
         model.addAttribute("categories", categoryService.findAll());
+
         return "user/portal/product-form";
     }
 
     @PostMapping("portal/product")
     public String portalProductCreate(Model model,
                                       @Valid @ModelAttribute("productForm") ProductForm product,
+                                      @ModelAttribute("shopId") int shopId,
                                       BindingResult productResult) {
-        int shopId = 2;
         if (productResult.hasErrors()) {
             model.addAttribute("shop", shopService.findById(shopId));
             model.addAttribute("product", product);
@@ -131,26 +134,27 @@ public class ProductController {
 
     @GetMapping("portal/product/{productId}")
     public String portalProductCreate(Model model, @PathVariable("productId") int productId) {
-        int shopId = 2;
-        ShopModel shop = shopService.findById(shopId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        ShopModel shop = shopService.findByUserId(user.getId());
         List<ProductModel> productFind = shop.getProducts().stream().filter(p -> p.getId() == productId).collect(Collectors.toList());
 
         if (productFind.isEmpty()) {
             return "notfound";
         }
 
-        ProductModel product = productService.findByShopIdAndProductId(shopId, productId);
+        ProductModel product = productService.findByShopIdAndProductId(shop.getId(), productId);
 
-        model.addAttribute("shop", shopService.findById(shopId));
+        model.addAttribute("shop", shopService.findById(shop.getId()));
         model.addAttribute("productForm", new ProductForm(product));
         model.addAttribute("categories", categoryService.findAll());
         return "user/portal/product-form";
     }
 
-    @PostMapping("/api/products/portal")
+    @PostMapping("/api/products/portal/{shopId}")
     @ResponseBody
-    public List<ProductModel> portalApiIndex(@RequestBody FilterProductPortal input) {
-        int shopId = 2;
+    public List<ProductModel> portalApiIndex(@RequestBody FilterProductPortal input, @PathVariable("shopId") int shopId) {
         return productService.findAllByShopWithFilterPortal(shopId, input);
     }
 }

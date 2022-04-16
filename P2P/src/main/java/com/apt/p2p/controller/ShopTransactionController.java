@@ -2,12 +2,10 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.model.form.FilterShopTransaction;
+import com.apt.p2p.model.view.AdminHeaderNavi;
 import com.apt.p2p.model.view.ShopTransactionModel;
 import com.apt.p2p.model.view.UserModel;
-import com.apt.p2p.service.ShopService;
-import com.apt.p2p.service.ShopTransactionService;
-import com.apt.p2p.service.UserService;
-import com.apt.p2p.service.UsersDetailServiceImpl;
+import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -27,12 +26,20 @@ public class ShopTransactionController {
     private UserService userService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/admin/transaction")
     public String adminIndex(Model model){
         List<ShopTransactionModel> transactions = shopTransactionService.findAll();
 
         model.addAttribute("transactions", transactions);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Giao dịch", ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Giao dịch", naviArr));
 
         return "/admin/transaction";
     }
@@ -41,8 +48,18 @@ public class ShopTransactionController {
     public String adminDetail(Model model, @PathVariable("id") int id){
         ShopTransactionModel shopTransactionModel = shopTransactionService.findById(id);
         shopTransactionModel.setShop(shopService.findById(shopTransactionModel.getShop().getId()));
+        if(shopTransactionModel.getOrder() != null){
+            shopTransactionModel.setOrder(orderService.findById(shopTransactionModel.getOrder().getId()));
+        }
 
         model.addAttribute("transaction", shopTransactionModel);
+
+        List<String[]> naviArr = Arrays.asList(
+                new String[]{"Home", "/admin"},
+                new String[]{"Giao dịch", "/admin/shop"},
+                new String[]{String.valueOf(shopTransactionModel.getId()), ""}
+        );
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Giao dịch", naviArr));
 
         return "admin/transaction-detail";
     }

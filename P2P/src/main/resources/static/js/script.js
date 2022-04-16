@@ -47,6 +47,20 @@ var getBase64Image = function(img) {
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 
+var getDateFormat = function (strDate, includeTime = false) {
+  const date = new Date(strDate);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1 < 10 ? '0' + date.getMonth() : date.getMonth();
+  const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  const hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+  const minus = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+  let result = `${day}-${month}-${year}`;
+  if (includeTime) {
+    result += ` ${hour}:${minus}`;
+  }
+  return result;
+}
+
 $(function() {
   // JS for custom select
   function setSelect(select, value, text) {

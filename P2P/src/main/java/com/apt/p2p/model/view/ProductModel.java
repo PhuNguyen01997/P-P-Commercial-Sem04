@@ -29,7 +29,7 @@ public class ProductModel {
     private String name;
 
     @Min(value = 1000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
-    @Max(value = 100000000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
+    @Max(value = 120001000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <120.000.000 vnđ)")
     @NotNull(message = "Giá sản phẩm không hợp lệ")
     private BigDecimal price;
 

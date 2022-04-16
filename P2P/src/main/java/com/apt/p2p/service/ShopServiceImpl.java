@@ -123,11 +123,13 @@ public class ShopServiceImpl implements ShopService {
                 String extension = FileUploadUtil.getExtensionName(logoFile).orElse(null);
                 String fileName = shop.getLogo();
                 if (fileName == null) {
-                    fileName = "logo_" + String.valueOf(new Date().getTime()) + "." + extension;
-                } else {
-                    fileName.replaceAll("\\w+$", extension);
+                    fileName = "logo_" + String.valueOf(new Date().getTime()) + '.' + extension;
+                } else if (extension != FileUploadUtil.getExtensionName(fileName).orElse(null)) {
+                    FileUploadUtil.deleteFile(imgUploadDir, fileName);
+                    fileName = fileName.replaceAll("\\w+$", extension);
                 }
-                FileUploadUtil.saveFile(imgUploadDir, fileName, logoFile);
+
+                FileUploadUtil.saveFile(imgUploadDir, String.valueOf(fileName).replaceAll("\\.\\w+$", ""), logoFile);
 
                 shop.setLogo(fileName);
             }
@@ -136,10 +138,11 @@ public class ShopServiceImpl implements ShopService {
                 String fileName = shop.getBackground();
                 if (fileName == null) {
                     fileName = "thumbnal_" + String.valueOf(new Date().getTime()) + "." + extension;
-                } else {
+                } else if (extension != FileUploadUtil.getExtensionName(fileName).orElse(null)) {
+                    FileUploadUtil.deleteFile(imgUploadDir, fileName);
                     fileName = fileName.replaceAll("\\w+$", extension);
                 }
-                FileUploadUtil.saveFile(imgUploadDir, fileName, backgroundFile);
+                FileUploadUtil.saveFile(imgUploadDir, String.valueOf(fileName).replaceAll("\\.\\w+$", ""), backgroundFile);
 
                 shop.setBackground(fileName);
             }

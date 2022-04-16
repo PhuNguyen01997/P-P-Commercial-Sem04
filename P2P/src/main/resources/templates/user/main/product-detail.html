@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/main-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>ShoPP Tên product</title>
+    <title th:text="${product.name}"></title>
 </head>
 <body>
 <main layout:fragment="content">
@@ -30,7 +30,7 @@
                            th:classappend="${i - 1 < product.averageRate ? 'fas' : 'far' }"></i>
                     </span>
                 </p>
-                <p class="detail-content--price"><span th:text="${product.price}">Price</span> <span>vnđ</span></p>
+                <p class="detail-content--price"><span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">Price</span> <span>vnđ</span></p>
                 <p class="detail-content--line">
                     <span class="detail-content--line-key">Quantity</span>
                     <span class="detail-content--line-value detail-content--line-value__quantity attachAdjust">
@@ -66,7 +66,7 @@
                                       class="txt__primary">[Shop Rate Count]</span></p>
                 </div>
                 <div class="detail-shop--description-item">
-                    <p>Ngày tham gia <span class="txt__primary" th:text="${shop.createdAt}">[Date attend]</span></p>
+                    <p>Ngày tham gia <span class="txt__primary" th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Date attend]</span></p>
                 </div>
             </div>
         </div>
@@ -78,34 +78,8 @@
         <div class="detail-rate">
             <h2 class="detail-rate--headline detail--title">Đánh giá sản phẩm</h2>
             <div class="detail-rate--list">
-                <!--                <div th:each="rateItem : ${rates}" class="detail-rate&#45;&#45;item">-->
-                <!--                    <p class="pic detail-rate&#45;&#45;pic">-->
-                <!--                        <img th:src="${rateItem.user.toUrl(rateItem.user.avatar)}" alt="">-->
-                <!--                    </p>-->
-                <!--                    <div class="detail-rate&#45;&#45;content">-->
-                <!--                        <p class="detail-rate&#45;&#45;name" th:text="${rateItem.user.username}">[Rate name]</p>-->
-                <!--                        <p class="detail-rate&#45;&#45;star">-->
-                <!--                                <span class="icon icon__star">-->
-                <!--                                    <i class="fa-star"-->
-                <!--                                       th:each="i: ${#numbers.sequence(1, 5)}"-->
-                <!--                                       th:classappend="${i - 1 < rateItem.star ? 'fas' : 'far' }"></i>-->
-                <!--                                </span>-->
-                <!--                        </p>-->
-                <!--                        <p th:text="${rateItem.description}" class="detail-rate&#45;&#45;text">[Rate Description]</p>-->
-                <!--                        <p th:text="${rateItem.createdAt}" class="detail-rate&#45;&#45;date">[Rate Time]</p>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
             <ul class="pagi detail-rate--pagi">
-<!--                <li class="pagi-item btn pagi-item__prev">-->
-<!--                    <a href=""><i class="fas fa-angle-left"></i></a>-->
-<!--                </li>-->
-<!--                <li class="pagi-item btn active">-->
-<!--                    <a href="">1</a>-->
-<!--                </li>-->
-<!--                <li class="pagi-item btn pagi-item__next">-->
-<!--                    <a href=""><i class="fas fa-angle-right"></i></a>-->
-<!--                </li>-->
             </ul>
         </div>
     </div>
@@ -126,7 +100,7 @@
         function renderRating(star) {
             let result = ``;
             for (let i = 0; i < 5; i++) {
-                result += `<i class="${i - 1 < star ? 'fas' : 'far'} fa-star"></i>`;
+                result += `<i class="${i < star ? 'fas' : 'far'} fa-star"></i>`;
             }
             return result;
         }
@@ -147,7 +121,7 @@
                     + `<span class="icon icon__star">${renderRating(rate.star)}</span>`
                     + `</p>`
                     + `<p class="detail-rate--text">${rate.description}</p>`
-                    + `<p class="detail-rate--date">${rate.createdAt}</p>`
+                    + `<p class="detail-rate--date">${getDateFormat(rate.createdAt, true)}</p>`
                     + `</div>`
                     + `</div>`;
             })
