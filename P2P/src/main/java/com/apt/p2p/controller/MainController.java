@@ -1,5 +1,6 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.common.FileUploadUtil;
 import com.apt.p2p.entity.*;
 import com.apt.p2p.common.RandomUtil;
 import com.apt.p2p.entityEnum.ShopTransactionStatus;
@@ -9,15 +10,18 @@ import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.model.view.WardModel;
 import com.apt.p2p.repository.*;
 import com.apt.p2p.service.LocationService;
+import com.apt.p2p.service.UserService;
 import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transaction;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -56,6 +60,12 @@ public class MainController {
     private LocationService locationService;
     @Autowired
     private UsersDetailServiceImpl usersDetailService;
+    @Autowired
+    private UserService service;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private String imgUploadDir = "users/";
 
     private String descriptionProduct = "Áo thun nam, Áo thun nữ, Áo phông nam, Áo phông nữ<br>" +
             "#aothun #aophong #aothunnam #aothunnu #aophongnam #aophongnu<br>" +
@@ -118,8 +128,34 @@ public class MainController {
     }
 
     @PostMapping("edit-account")
-    public String updateAccount(Model model) {
+    public String updateAccount(Model model,
+                                @RequestParam("pic") MultipartFile image,
+                                @Valid @ModelAttribute("user") UserModel userModel,
+                                BindingResult result) {
 
+        User usr = userRepository.findByUsername(userModel.getUsername());
+
+        if (!image.isEmpty()) { // new image
+            String extension = FileUploadUtil.getExtensionName(image).orElse(null);
+            String fileName = usr.getAvatar();
+            if (fileName == null) {
+                fileName =String.valueOf(new Date().getTime()) + '.' + extension;
+            } else if (extension != FileUploadUtil.getExtensionName(fileName).orElse(null)) {
+                FileUploadUtil.deleteFile("", fileName);
+                fileName = fileName.replaceAll("\\w+$", extension);
+            }
+
+            FileUploadUtil.saveFile(imgUploadDir, String.valueOf(fileName).replaceAll("\\.\\w+$", ""), image);
+
+            usr.setAvatar(fileName);
+        }
+        usr.setUsername(usr.getUsername());
+        usr.setEmail(userModel.getEmail());
+        usr.setPassword(usr.getPassword());
+        usr.setPhone(userModel.getPhone());
+        usr.setUsername(userModel.getUsername());
+        usr.setRoles(usr.getRoles());
+        service.save(usr);
         return "user/account/user-form";
     }
 
