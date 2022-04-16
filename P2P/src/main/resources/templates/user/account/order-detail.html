@@ -13,7 +13,8 @@
 
     <div class="split-main order-detail-main">
         <div class="order-detail-header">
-            <a class="order-detail-header--back jsBack" href="javascript: void(0)"><i class="fas fa-angle-left mr10"></i>Back</a>
+            <a class="order-detail-header--back jsBack" href="javascript: void(0)"><i
+                    class="fas fa-angle-left mr10"></i>Back</a>
             <p class="order-detail-header--id">
                 <span>Order ID:</span>
                 <span th:text="${order.id}">[Order Id]</span>
@@ -37,9 +38,8 @@
                 </div>
             </div>
             <div class="order-detail-control">
-                <a th:href="@{/order/{id}/rate(id = ${order.id})}">
-                    <button class="order-detail-control--btn btn btn__primary">Đánh giá</button>
-                </a>
+                <button data-id="rate-product" class="js-modal order-detail-control--btn btn btn__primary">Đánh giá
+                </button>
                 <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
                 <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
             </div>
@@ -62,8 +62,9 @@
             <li th:each="orderDetail : ${order.orderDetails}"
                 th:with="withProduct = ${orderDetail.product}"
                 class="order-item">
-                <p class="pic order-item--pic"><img th:src="${withProduct.image.size() > 0 ? withProduct.toUrl(withProduct.image.get(0)) : ''}"
-                                                    alt=""></p>
+                <p class="pic order-item--pic"><img
+                        th:src="${withProduct.image.size() > 0 ? withProduct.toUrl(withProduct.image.get(0)) : ''}"
+                        alt=""></p>
                 <div class="order-item--text">
                     <p th:text="${withProduct.name}" class="order-item--name">[Product Name]</p>
                     <p class="order-item--category">
@@ -115,5 +116,50 @@
         </ul>
     </div>
 </div>
+
+<div layout:fragment="modal" id="rate-product" class="modal2-container"
+     th:classappend="${hasAnyError != null && hasAnyError} ? 'js-close' : ''">
+    <form action="/rate" method="post" class="modal2 modal2__cart-create" >
+        <h3 class="modal2-title">Rate this products</h3>
+        <div class="modal2-list">
+            <div th:each="orderDetail, iter : ${order.orderDetails}" class="modal2-item">
+                <div class="modal2-item--product">
+                    <img class="pic" th:src="${orderDetail.product.toUrl(orderDetail.product.image.get(0))}" alt="">
+                    <p th:text="${orderDetail.product.name}"></p>
+                </div>
+                <span class="modal2-item--star icon icon__star">
+                    <i data-index="1" class="far fa-star jsStar"></i>
+                    <i data-index="2" class="far fa-star jsStar"></i>
+                    <i data-index="3" class="far fa-star jsStar"></i>
+                    <i data-index="4" class="far fa-star jsStar"></i>
+                    <i data-index="5" class="far fa-star jsStar"></i>
+                </span>
+                <input type="number" th:name="${'rate['+ iter.index +'].star'}">
+                <textarea th:name="${'rate[' + iter.index +'].description'}" rows="4" class="modal2-item--desc"
+                          placeholder="Please share your thoughts on this product"></textarea>
+            </div>
+        </div>
+        <div class="modal2-footer">
+            <button type="button" class="js-close modal2-footer--back btn btn__white">TRỞ LẠI</button>
+            <button class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+        </div>
+    </form>
+</div>
+
+<script layout:fragment="script">
+    $('.jsStar').on('click', function () {
+        const index = this.dataset.index;
+        const list = $(this).parent();
+        list.children().each((i, icon) => {
+            if (icon.dataset.index <= index) {
+                $(icon).removeClass('far').addClass('fas');
+            } else {
+                $(icon).removeClass('fas').addClass('far');
+            }
+        })
+
+        $(this).parents('.modal2-item').addClass('show');
+    })
+</script>
 </body>
 </html>

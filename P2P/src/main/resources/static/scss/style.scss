@@ -793,6 +793,18 @@ a.btn__primary {
     }
 }
 
+#globalSuccess {
+    .modal-header {
+        background-color: rgb(0, 230, 27);
+        color: white;
+    }
+
+    .close {
+        color: white;
+        font-size: 20px;
+    }
+}
+
 #globalLoading {
     display: none;
     position: fixed;

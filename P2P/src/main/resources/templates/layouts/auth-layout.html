@@ -37,6 +37,7 @@
 </footer>
 
 <div th:if="${globalError != null}" th:replace="fragments/modal.html :: global-error"></div>
+<div th:if="${globalSuccess != null}" th:replace="fragments/modal.html :: global-success"></div>
 
 <script src="/js/script.js"></script>
 <th:block layout:fragment="script"></th:block>

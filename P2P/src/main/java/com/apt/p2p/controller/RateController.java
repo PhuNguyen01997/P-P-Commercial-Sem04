@@ -36,4 +36,9 @@ public class RateController {
 
         return result;
     }
+
+    @PostMapping("/rate")
+    public String rateProduct(@ModelAttribute("rate") RateModel[] ratesForm){
+        return "asd";
+    }
 }

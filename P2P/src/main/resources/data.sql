@@ -6,7 +6,7 @@ INSERT INTO role (role_id, name) VALUES
 INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Điện tử', NOW()),
 (NOW(), 'Thời trang', NOW()),
-(NOW(), 'Gia dụng', NOW()),
+(NOW(), 'Nội thất', NOW()),
 (NOW(), 'Trang sức', NOW()),
 (NOW(), 'Sắc đẹp', NOW()),
 (NOW(), 'Thức ăn', NOW());
@@ -62,7 +62,22 @@ INSERT INTO product (created_at, description, image, name, price, updated_at, ca
 (NOW(), 'Giá đỡ tản nhiệt Laptop, Macbook, Ipad nhựa ABS chắc chắn, có thể gấp gọn điều chỉnh độ cao, đế tản nhiệt kê Laptop', '[\"1_1145.jpg\",\"1_1146.jpg\"]', 'Giá đỡ tản nhiệt Laptop, Macbook, Ipad nhựa ABS chắc chắn, có thể gấp gọn điều chỉnh độ cao, đế tản nhiệt kê Laptop', 150000, NOW(), 1, 1, 0),
 (NOW(), 'Máy Chiếu FULL HD mini T01 Hệ Điều Hành Android, Kết Nối Điện Thoại, Nelfix', '[\"1_1147.jpg\",\"1_1148.jpg\"]', 'Máy Chiếu FULL HD mini T01 Hệ Điều Hành Android, Kết Nối Điện Thoại, Nelfix', 30000000, NOW(), 1, 1, 0),
 (NOW(), 'Laptop Asus K43E (core i5-2450M/2GB/320GB/Intel HD3000/14"LED)', '[\"1_1149.jpg\",\"1_1150.jpg\"]', 'Laptop Asus K43E (core i5-2450M/2GB/320GB/Intel HD3000/14"LED)', 18000000, NOW(), 1, 1, 0),
-(NOW(), 'Màn hình LCD GLowy 17|19|22|24 inch - Mới 100% Full Box - Bảo hành chính hãng 24 tháng!', '[\"1_1151.jpg\",\"1_1152.jpg\"]', 'Màn hình LCD GLowy 17|19|22|24 inch - Mới 100% Full Box - Bảo hành chính hãng 24 tháng!', 2500000, NOW(), 1, 1, 0);
+(NOW(), 'Màn hình LCD GLowy 17|19|22|24 inch - Mới 100% Full Box - Bảo hành chính hãng 24 tháng!', '[\"1_1151.jpg\",\"1_1152.jpg\"]', 'Màn hình LCD GLowy 17|19|22|24 inch - Mới 100% Full Box - Bảo hành chính hãng 24 tháng!', 2500000, NOW(), 1, 1, 0),
+(NOW(), 'Bộ Bàn Phím Gaming có dây Kèm Chuột Máy Tính Con Báo Có LED 7 Màu Ấn Tượng', '[\"1_1153.jpg\",\"1_1154.jpg\",\"1_1155.jpg\"]', 'Bộ Bàn Phím Gaming có dây Kèm Chuột Máy Tính Con Báo Có LED 7 Màu Ấn Tượng', 134000, NOW(), 1, 1, 0),
+(NOW(), 'Miếng dán màn hình HD cho Macbook ( tặng bộ khăn lâu và hỗ trợ dán màn chuyên nghiệp )', '[\"1_1156.jpg\",\"1_1157.jpg\",\"1_1158.jpg\"]', 'Miếng dán màn hình HD cho Macbook ( tặng bộ khăn lâu và hỗ trợ dán màn chuyên nghiệp )', 50000, NOW(), 1, 1, 0),
+(NOW(), 'Chuột không dây Forter V181 bảo hành đổi mới trong 6 tháng', '[\"1_1159.jpg\",\"1_1160.jpg\",\"1_1161.jpg\"]', 'Chuột không dây Forter V181 bảo hành đổi mới trong 6 tháng', 41000, NOW(), 1, 1, 0),
+(NOW(), 'Lót chuột cỡ lớn pad chuột freeship chuyên game siêu bền đẹp bảo hành 1 năm LC1', '[\"1_1162.jpg\",\"1_1163.jpg\",\"1_1164.jpg\"]', 'Lót chuột cỡ lớn pad chuột freeship chuyên game siêu bền đẹp bảo hành 1 năm LC1', 50000, NOW(), 1, 1, 0),
+(NOW(), 'Quạt tản nhiệt điện thoại MEMO DL05 - Siêu lạnh, hiển thị nhiệt độ, LED RGB, Kẹp thu vào 2 chiều', '[\"1_1165.jpg\",\"1_1166.jpg\",\"1_1167.jpg\"]', 'Quạt tản nhiệt điện thoại MEMO DL05 - Siêu lạnh, hiển thị nhiệt độ, LED RGB, Kẹp thu vào 2 chiều', 380000, NOW(), 1, 1, 0),
+(NOW(), 'Bộ 2 Găng Tay Cho Ngón Tay Bằng Vải Dệt Kim Chống Mồ Hôi Cho Tay Cầm Chơi Game', '[\"1_1168.jpg\",\"1_1169.jpg\",\"1_1170.jpg\"]', 'Bộ 2 Găng Tay Cho Ngón Tay Bằng Vải Dệt Kim Chống Mồ Hôi Cho Tay Cầm Chơi Game', 5000, NOW(), 1, 1, 0),
+(NOW(), 'Kính cường lực Full màn 21D 6/6s/6plus/6s plus/7/8/7plus/8plus/x/xs/xs max/11/11/12/13/pro/promax', '[\"1_1171.jpg\",\"1_1172.jpg\",\"1_1173.jpg\"]', 'Kính cường lực Full màn 21D 6/6s/6plus/6s plus/7/8/7plus/8plus/x/xs/xs max/11/11/12/13/pro/promax', 12000, NOW(), 1, 1, 0),
+(NOW(), 'Giá treo màn hình máy tính gắn bàn NB F80 (17-30 inch) - Xoay 360 độ, mẫu mới tải trọng 9kg - Hàng nhập khẩu', '[\"1_1174.jpg\",\"1_1175.jpg\",\"1_1176.jpg\"]', 'Giá treo màn hình máy tính gắn bàn NB F80 (17-30 inch) - Xoay 360 độ, mẫu mới tải trọng 9kg - Hàng nhập khẩu', 353000, NOW(), 1, 1, 0),
+(NOW(), 'Loa bluetooth InPods LitteFun chính hãng Pass vòm 360 độ ghép đôi loa TWS âm thanh siêu hay', '[\"1_1177.jpg\",\"1_1178.jpg\",\"1_1179.jpg\"]', 'Loa bluetooth InPods LitteFun chính hãng Pass vòm 360 độ ghép đôi loa TWS âm thanh siêu hay', 129000, NOW(), 1, 1, 0),
+(NOW(), 'Loa Bluetooth Mini Nghe Nhạc Hay Cầm Tay Nhỏ Gọn Có Móc Treo Giá Rẻ Hỗ Trợ Thẻ Nhớ Cổng 3.5mm - Gutek BS119', '[\"1_1180.jpg\",\"1_1181.jpg\",\"1_1182.jpg\"]', 'Loa Bluetooth Mini Nghe Nhạc Hay Cầm Tay Nhỏ Gọn Có Móc Treo Giá Rẻ Hỗ Trợ Thẻ Nhớ Cổng 3.5mm - Gutek BS119', 109000, NOW(), 1, 1, 0),
+(NOW(), 'Sạc dự phòng 20000mAh PT126P-Max Sạc nhanh 2.1A màn hình kỹ thuật số LED - Bảo hành 12 tháng', '[\"1_1183.jpg\",\"1_1184.jpg\",\"1_1185.jpg\"]', 'Sạc dự phòng 20000mAh PT126P-Max Sạc nhanh 2.1A màn hình kỹ thuật số LED - Bảo hành 12 tháng', 199000, NOW(), 1, 1, 0),
+(NOW(), 'Sạc nhanh PD 18w - 20w bộ củ cáp sạt dùng cho iphone ip 6/7/7plus/8/x/11/12, cóc xạc cổng typec to lightning dây dài 1m', '[\"1_1186.jpg\",\"1_1187.jpg\",\"1_1188.jpg\"]', 'Sạc nhanh PD 18w - 20w bộ củ cáp sạt dùng cho iphone ip 6/7/7plus/8/x/11/12, cóc xạc cổng typec to lightning dây dài 1m', 99000, NOW(), 1, 1, 0),
+(NOW(), 'Dây sạc samsung, cổng Micro USB, Cáp sạc oppo, xiaomi... thiết kế dây bện dù cho điện thoại androi', '[\"1_1189.jpg\",\"1_1190.jpg\",\"1_1191.jpg\"]', 'Dây sạc samsung, cổng Micro USB, Cáp sạc oppo, xiaomi... thiết kế dây bện dù cho điện thoại androi', 15000, NOW(), 1, 1, 0),
+(NOW(), 'Nồi chiên không dầu dung tích 5 lít CAMEL Bảo hành 6 tháng', '[\"1_1192.jpg\",\"1_1193.jpg\",\"1_1194.jpg\"]', 'Nồi chiên không dầu dung tích 5 lít CAMEL Bảo hành 6 tháng', 552000, NOW(), 1, 1, 0),
+(NOW(), 'Lò nướng điện Comet CM6510 10L', '[\"1_1195.jpg\",\"1_1196.jpg\"]', 'Lò nướng điện Comet CM6510 10L', 485000, NOW(), 1, 1, 0);
 INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
 (NOW(), 'Áo thun planned farmer tay lỡ, áo phông nam nữ giá sốc QuynhNhiFashion', '[\"2_10.jpg\",\"2_11.jpg\",\"2_12.jpg\"]', '', 89000, NOW(), 2, 1, 0),
 (NOW(), 'Áo thun nam nữ unisex tay lỡ Anime Bananashopz , áo phông form rộng cổ tròn siêu chất', '[\"2_7.jpg\",\"2_8.jpg\",\"2_9.jpg\"]', '', 79000, NOW(), 2, 1, 0),
@@ -117,14 +132,9 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 (NOW(), 'Bộ đôi Sữa dưỡng thể trắng da Ngày (350ml) & Đêm (350ml) NIVEA (88311+88126)', '[\"5_4905786.jpg\",\"5_384673.jpg\",\"5_23897543.jpg\",\"5_8934567.jpg\",\"5_9384576.jpg\",\"5_09568.jpg\"]', '', 278000, NOW(), 5, 1, 0),
 (NOW(), 'Một gói 50 tờ giấy thấm dầu ngẫu nhiên Sena Beauty', '[\"5_8345.jpg\",\"5_8345967.jpg\",\"5_8934576.jpg\",\"5_45897.jpg\",\"5_34987.jpg\"]', '', 6930, NOW(), 5, 1, 0),
 (NOW(), 'Máy cạo râu Xiaomi Enchen BlackStone 3 Electric Shaver 3D', '[\"5_8943576.jpg\",\"5_83456.jpg\",\"5_3945.jpg\",\"5_839476.jpg\",\"5_853476.jpg\",\"5_23657.jpg\"]', '', 289900, NOW(), 5, 1, 0);
---
--- INSERT INTO rate (created_at, description, star, updated_at, product_id, user_id) VALUES
--- (NOW(), 'Hình ảnh và video chỉ mang tính chất nhận xu nhé. Hood giao nhanh lắm, 1 ngày là tới tay rồi. Lại chắc chắn, đóng gói cẩn thận.', 5, NOW(), 1, 2),
--- (NOW(), 'Mùa dịch nhưng giao hàng khá nhanh, chưa dùng nên chưa biết chất lượng thế nào', 2, NOW(), 2, 2),
--- (NOW(), 'Giao thiếu sp ( hơn 130 ngàn) . Nhắn tin ko trả lời. Làm ơn nếu đọc đc bình luận này thì trả lại tiền giúp đi. Bán hàng ko có tâm !', 1, NOW(), 3, 2),
--- (NOW(), 'Trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Do đó, trong một đường tròn, đường kính vuông góc với một dây thì đi qua trung điểm của dây ấy. Định lí 3: Trong một đường tròn, đường kính đi qua trung điểm của một dây không đi qua tâm thì vuông góc với dây ấy', 4, NOW(), 4, 2),
--- (NOW(), 'Vòng cũng OK nhưng vòng nó toàn đấy nhau thôi đeo mà tức kinh khủng luôn. Chúc shop mọi người nên tham khảo nhiều TRC khi mua nhá. Hình ảnh mang tính chất nhận xu', 3, NOW(), 5, 2);
---
+-- INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+-- (NOW(), 'Xẻng Hình Trái Tim múc bột, thìa múc thức ăn tráng miệng bằng nhựa', '', '', 2000, NOW(), 6, 1, 0),
+
 -- INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
 -- (NOW(), 3, NOW(), 1, 2),
 -- (NOW(), 2, NOW(), 2, 2),

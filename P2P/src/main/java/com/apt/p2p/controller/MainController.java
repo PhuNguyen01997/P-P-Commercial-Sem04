@@ -156,7 +156,7 @@ public class MainController {
         usr.setUsername(userModel.getUsername());
         usr.setRoles(usr.getRoles());
         service.save(usr);
-        return "user/account/user-form";
+        return "redirect:/account";
     }
 
     @GetMapping("identity")

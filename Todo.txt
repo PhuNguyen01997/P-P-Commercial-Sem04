@@ -1,13 +1,21 @@
 Title main, admin, portal
 Common: main cateogyr, header admin, header portal
 
+thong bao
 
-login admin
-auth portal
 auth admin
+
 App
+auth app
+
 rate product
 statictical
 Design main u
-auth app
+
+
 CHECK
++-
+lọc rate
+ảnh protal product
+them gio hang
+dang ky nut google, facebook
