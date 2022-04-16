@@ -50,6 +50,9 @@ public class User {
 
     private String stripeCustomerId;
 
+    @Column(name="subName")
+    private String subName;
+
     @ManyToMany
     @JoinTable(
             name = "user_role",

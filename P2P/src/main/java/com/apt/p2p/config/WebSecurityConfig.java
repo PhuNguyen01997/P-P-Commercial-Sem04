@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/signin", "/signup").permitAll();
-//        http.authorizeRequests().antMatchers("/shop/{id}").authenticated();
+        http.authorizeRequests().antMatchers("/account").authenticated();
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/signin")
@@ -96,13 +96,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll()
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/").permitAll()
+                .and()
+                .authorizeRequests().and().rememberMe()
+                .tokenRepository(persistenceTokenRepository())
+                .tokenValiditySeconds(60)
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
-
-//                .http.authorizeRequests().and().rememberMe()
-//                .tokenRepository(persistenceTokenRepository())
-//                .tokenValiditySeconds(60);
 
     }
 
