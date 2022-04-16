@@ -65,7 +65,6 @@ public class UserModel {
 
     private List<OrderModel> orders = new ArrayList<>();
 
-    private String subName;
     public UserModel(User user) {
         this.id = user.getUserId();
         this.email = user.getEmail();

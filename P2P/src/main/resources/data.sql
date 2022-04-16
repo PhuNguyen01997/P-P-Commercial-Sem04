@@ -81,7 +81,22 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 (NOW(), 'ÁO KHOÁC 2 MÀU CỰC XINH N01', '[\"2_46.jpg\",\"2_47.jpg\",\"2_48.jpg\"]', '', 178000, NOW(), 2, 1, 0),
 (NOW(), 'ÁO KHOÁC NỈ TRƠN ULZZANG FORM RỘNG (ẢNH THẬT Ở CUỐI)', '[\"2_49.jpg\",\"2_50.jpg\",\"2_51.jpg\"]', '', 120000, NOW(), 2, 1, 0),
 (NOW(), 'BIKINI UZZLANG HÀN QUỐC 2022 2 MẢNH CẠP CAO NƠ NGỰC', '[\"2_52.jpg\",\"2_53.jpg\",\"2_54.jpg\"]', '', 1000000, NOW(), 2, 1, 0),
-(NOW(), 'Áo thun tay lỡ nam nữ, áo phông unisex form rộng chất cotton mát mịn thấm hút mồ hôi in hình MILK', '[\"2_6.jpg\",\"2_5.jpg\",\"2_4.jpg\"]', '', 39000, NOW(), 2, 1, 0);
+(NOW(), 'Áo thun tay lỡ nam nữ, áo phông unisex form rộng chất cotton mát mịn thấm hút mồ hôi in hình MILK', '[\"2_6.jpg\",\"2_5.jpg\",\"2_4.jpg\"]', '', 39000, NOW(), 2, 1, 0),
+(NOW(), 'Áo Croptop thun nữ kiểu yếm ôm hở lưng Xinh 24 sexy phong cách Hàn quốc', '[\"2_55.jpg\",\"2_56.jpg\",\"2_57.jpg\"]', '', 99000, NOW(), 2, 1, 0),
+(NOW(), 'Áo Croptop Ngắn Tay Cổ Yếm 2 Màu Đen - Trắng Form Nữ Phong Cách Hàn Quốc', '[\"2_58.jpg\",\"2_59.jpg\",\"2_60.jpg\"]', '', 49000, NOW(), 2, 1, 0),
+(NOW(), 'Túi xách đeo chéo nữ mini đựng điện thoại màu sắc basic dễ phối đồ phong cách hàn quốc giá rẻ đẹp', '[\"2_61.jpg\",\"2_62.jpg\",\"2_63.jpg\"]', '', 400000, NOW(), 2, 1, 0),
+(NOW(), 'Túi xách nữ công sở đeo chéo đeo vai tote da thời trang cao cấp giá rẻ', '[\"2_64.jpg\",\"2_65.jpg\",\"2_66.jpg\"]', '', 250000, NOW(), 2, 1, 0),
+(NOW(), 'Túi xách nữ 💖 𝑭𝑹𝑬𝑬𝑺𝑯𝑰𝑷 💖 Túi mini nữ đeo chéo hàng quảng châu siêu hot TD09', '[\"2_67.jpg\",\"2_68.jpg\",\"2_69.jpg\"]', '', 150000, NOW(), 2, 1, 0),
+(NOW(), 'Dép nam, nữ siêu nhẹ DUWA - Hàng chính hãng - Bò sữa quai ngang DH1163', '[\"2_70.jpg\",\"2_71.jpg\",\"2_72.jpg\"]', '', 79000, NOW(), 2, 1, 0),
+(NOW(), 'Dép đi biển nữ quai ngang mùa hè phiên bản Hàn Quốc đế dày chống trượt, T111', '[\"2_73.jpg\",\"2_74.jpg\",\"2_75.jpg\"]', '', 85000, NOW(), 2, 1, 0),
+(NOW(), 'Váy Babydoll Vay Bồng Đũi Tơ 2 Lớp, Đầm Công Chúa Cực Xinh', '[\"2_76.jpg\",\"2_77.jpg\",\"2_78.jpg\"]', '', 350000, NOW(), 2, 1, 0),
+(NOW(), 'Váy babydoll tay bồng cổ vuông Đầm trễ vai tiểu thư ulzzang dáng xoè hai lớp có khóa lưng basic đen trắng vintage', '[\"2_79.jpg\",\"2_80.jpg\",\"2_81.jpg\"]', '', 200000, NOW(), 2, 1, 0),
+(NOW(), 'Váy ngủ 2 dây lụa satin cao cấp 4Lova mềm mịn, quyến rũ', '[\"2_82.jpg\",\"2_83.jpg\",\"2_84.jpg\"]', '', 150000, NOW(), 2, 1, 0),
+(NOW(), 'SẴN🔥Váy lụa 2 dây cổ đổ phi lụa cao cấp', '[\"2_85.jpg\",\"2_86.jpg\",\"2_87.jpg\"]', '', 200000, NOW(), 2, 1, 0),
+(NOW(), 'Áo croptop tay dài cổ bẻ siêu xịn', '[\"2_88.jpg\",\"2_89.jpg\",\"2_90.jpg\"]', '', 500000, NOW(), 2, 1, 0),
+(NOW(), 'Dép Đế Mềm Chống Lạc Có Đèn Phát Sáng Hình Thỏ Dễ Thương Cho Bé', '[\"2_91.jpg\",\"2_92.jpg\",\"2_93.jpg\"]', '', 105000, NOW(), 2, 1, 0),
+(NOW(), 'Dép Nữ Quai Ngang Thời Trang, Dép Lê Nữ MLB LA Cao Su Dập Nổi Hàng Đẹp 20SHOES', '[\"2_94.jpg\",\"2_95.jpg\",\"2_96.jpg\"]', '', 149000, NOW(), 2, 1, 0),
+(NOW(), 'Bikini basic - Đồ bơi 2 mảnh siêu sang chảnh (nhiều màu)', '[\"2_97.jpg\",\"2_98.jpg\",\"2_99.jpg\"]', '', 1000000, NOW(), 2, 1, 0);
 INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
 (NOW(), 'Vòng đá đeo tay từ tính 8mm chăm sóc sức khỏe độc đáo', '[\"4_18723.jpg\",\"4_34632.jpg\",\"4_4385.jpg\"]', '', 14000, NOW(), 4, 1, 0),
 (NOW(), 'Vòng tay may mắn đính hạt ngọc trai phong cách Trung Hoa cổ điển cho nữ', '[\"4_7234.jpg\",\"4_745.jpg\",\"4_57.jpg\",\"4_4534.jpg\"]', '', 14000, NOW(), 4, 1, 0),

@@ -9,10 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,7 +18,15 @@ public class MyInterceptor implements HandlerInterceptor {
     private CategoryService categoryService;
 
     private List<Category> headerCategories;
-    private Map<String, String> naviPortalHeader = new HashMap<>();
+    private Map<String, String> naviPortalHeader;
+    private List<String[]> dataNaviPortalHeader = Arrays.asList(
+            new String[]{"/portal/order", "Đơn hàng"},
+            new String[]{"/portal/product", "Quản lý sản phẩm"},
+            new String[]{"/portal/product/create", "Thêm sản phẩm"},
+            new String[]{"/portal/", "Cửa hàng"},
+            new String[]{"/portal/fund", "Quản lý quỹ tiền"},
+            new String[]{"/portal/fund-withdraw", "Rút tiền"}
+    );
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -29,7 +34,22 @@ public class MyInterceptor implements HandlerInterceptor {
             headerCategories = categoryService.findAll();
             headerCategories = headerCategories.stream().sorted(Comparator.comparingInt(Category::getId).reversed()).limit(8).collect(Collectors.toList());
         }
+
+        if(naviPortalHeader == null){
+           naviPortalHeader = new HashMap<>();
+           dataNaviPortalHeader.forEach(arrStr -> {
+               naviPortalHeader.put(arrStr[0], arrStr[1]);
+           });
+        }
+
+        String requestUri = request.getRequestURI();
+        if (requestUri.indexOf("/portal") != -1) {
+            request.setAttribute("portalHeaderNavi", this.naviPortalHeader.get(requestUri));
+            String str = this.naviPortalHeader.get(requestUri);
+            String str2 = "asd";
+        }
         request.setAttribute("headerCategories", headerCategories);
+
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
