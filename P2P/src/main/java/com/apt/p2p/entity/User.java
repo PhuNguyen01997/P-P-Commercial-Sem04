@@ -53,6 +53,10 @@ public class User {
     @Column(name="subName")
     private String subName;
 
+    private String birth;
+
+    private String gender;
+
     @ManyToMany
     @JoinTable(
             name = "user_role",

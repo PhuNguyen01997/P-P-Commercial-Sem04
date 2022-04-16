@@ -49,6 +49,10 @@ public class UserModel {
 
     private ShopModel shop;
 
+    private String birth;
+
+    private String gender;
+
     private List<AddressModel> addresses = new ArrayList<>();
 
     private List<CardModel> cards = new ArrayList<>();
@@ -59,6 +63,7 @@ public class UserModel {
 
     private List<OrderModel> orders = new ArrayList<>();
 
+    private String subName;
     public UserModel(User user) {
         this.id = user.getUserId();
         this.email = user.getEmail();

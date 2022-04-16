@@ -47,6 +47,9 @@ public class UserMapper {
         model.setAvatar(entity.getAvatar());
         model.setCreatedAt(entity.getCreatedAt());
         model.setUpdatedAt(entity.getUpdatedAt());
+        model.setSubName(entity.getSubName());
+        model.setBirth(entity.getBirth());
+        model.setGender(entity.getGender());
         model.setStripeCustomerId(entity.getStripeCustomerId());
 
         model.setShop(entity.getShop() == null ? null : new ShopModel(entity.getShop()));

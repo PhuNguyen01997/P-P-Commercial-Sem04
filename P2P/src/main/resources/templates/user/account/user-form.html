@@ -16,12 +16,12 @@
             <h2 class="split-header--title">Hồ Sơ Của Tôi</h2>
             <p class="split-header--text">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
         </div>
-        <form th:action="@{/edit-account}" th:object="${account}" method="POST" class="account-form account-edit-form">
+        <form th:action="@{/save-user}" th:object="${user}" method="POST" class="account-form account-edit-form" enctype="multipart/form-data">
             <div class="account-form--left">
                 <div class="form-item">
                     <label class="form-item--left" for="username">Tên đăng nhập</label>
                     <div class="form-item--right">
-                        <p type="text" th:field="*{username}" readonly></p>
+                        <p type="text" th:text="${user.username}" readonly> </p>
                     </div>
                 </div>
                 <div class="form-item">
@@ -45,11 +45,11 @@
                 <div class="form-item">
                     <label class="form-item--left" for="gender">Giới tính</label>
                     <div class="form-item--right">
-                         <input type="radio" id="html" name="fav_language" value="M">
-                         <label for="html">Nam</label>
-                         <input type="radio" id="css" name="fav_language" value="F">
+                         <input type="radio" id="gender" name="gender" value="M">
+                         <label for="Nam">Nam</label>
+                         <input type="radio" id="gender" name="gender" value="F">
                          <label for="html">Nữ</label>
-                         <input type="radio" id="javascript" name="fav_language" value="O">
+                         <input type="radio" id="gender" name="gender" value="O">
                          <label for="html">Khác</label>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
                 </div>
             </div>
             <div class="account-form--right">
-                <p class="circle pic account-form--pic">
-                    <img src="/img/common/img_default_user.png" alt="">
+                <p class="circle pic account-form--pic" name="pic">
+                    <img th:src="${user.toUrl(user.avatar)}">
                 </p>
                 <button class="btn btn__primary-outline account-form--update-btn">Choose picture</button>
                 <p class="account-form--pic-note">Dụng lượng file tối đa 1 MB<br>Định dạng:.JPEG, .PNG</p>

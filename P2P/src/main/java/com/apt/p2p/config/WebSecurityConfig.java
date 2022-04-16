@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/signin", "/signup").permitAll();
-        http.authorizeRequests().antMatchers("/card", "/address", "/order", "/cart", "/portal/**").authenticated();
+        http.authorizeRequests().antMatchers("/card", "/address", "/order", "/cart","/account", "/portal/**").authenticated();
 //        http.authorizeRequests().antMatchers("/portal").access("hasRole('ROLE_SELLER')");
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
@@ -106,6 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(60)
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
+        http.sessionManagement()
+                .invalidSessionUrl("/reset?token=invalid");
 
     }
 
