@@ -110,7 +110,7 @@ public class MainController {
     private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
     private List<Role> roles;
 
-    @GetMapping("edit")
+    @GetMapping("account")
     public String userEdit(Model model) {
         UserModel user = usersDetailService.getCurrentUser();
         model.addAttribute("account" , user);

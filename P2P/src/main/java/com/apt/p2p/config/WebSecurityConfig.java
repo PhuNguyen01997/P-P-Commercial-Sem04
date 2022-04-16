@@ -97,13 +97,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll()
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/").permitAll()
+                .and()
+                .authorizeRequests().and().rememberMe()
+                .tokenRepository(persistenceTokenRepository())
+                .tokenValiditySeconds(60)
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
-
-//                .http.authorizeRequests().and().rememberMe()
-//                .tokenRepository(persistenceTokenRepository())
-//                .tokenValiditySeconds(60);
 
     }
 

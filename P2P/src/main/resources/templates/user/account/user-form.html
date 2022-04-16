@@ -16,66 +16,57 @@
             <h2 class="split-header--title">Hồ Sơ Của Tôi</h2>
             <p class="split-header--text">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
         </div>
-        <form method="POST" class="account-form account-edit-form">
+        <form th:action="@{/edit-account}" th:object="${account}" method="POST" class="account-form account-edit-form">
             <div class="account-form--left">
                 <div class="form-item">
                     <label class="form-item--left" for="username">Tên đăng nhập</label>
                     <div class="form-item--right">
-                        <input type="text" name="username" id="username">
+                        <p type="text" th:field="*{username}" readonly></p>
                     </div>
                 </div>
                 <div class="form-item">
-                    <label class="form-item--left" for="userinfo">Tên</label>
+                    <label class="form-item--left" for="subName">Tên</label>
                     <div class="form-item--right">
-                        <input type="text" name="userinfo">
+                        <input type="text" th:field="*{subName}">
                     </div>
                 </div>
                 <div class="form-item">
                     <label class="form-item--left" for="email">Email</label>
                     <div class="form-item--right">
-                        <input type="text" name="email" id="email">
+                        <input type="text" th:field="*{email}">
                     </div>
                 </div>
                 <div class="form-item">
                     <label class="form-item--left" for="number">Số điện thoại</label>
                     <div class="form-item--right">
-                        <input type="text" name="number" id="number">
+                        <input type="text" th:field="*{phone}">
                     </div>
                 </div>
                 <div class="form-item">
                     <label class="form-item--left" for="gender">Giới tính</label>
                     <div class="form-item--right">
-                        <div class="select">
-                            <select name="" id="">
-                                <option value="">Price</option>
-                                <option value="01">Option 01</option>
-                                <option value="02">Option 02</option>
-                            </select>
-                        </div>
+                         <input type="radio" id="html" name="fav_language" value="M">
+                         <label for="html">Nam</label>
+                         <input type="radio" id="css" name="fav_language" value="F">
+                         <label for="html">Nữ</label>
+                         <input type="radio" id="javascript" name="fav_language" value="O">
+                         <label for="html">Khác</label>
                     </div>
                 </div>
                 <div class="form-item">
-                    <label class="form-item--left" for="gender">Giới tính</label>
+                    <label class="form-item--left" for="gender">Năm Sinh</label>
                     <div class="form-item--right form-item--right__flex">
                         <div class="select">
-                            <select name="" id="">
-                                <option value="">Price</option>
-                                <option value="01">Option 01</option>
-                                <option value="02">Option 02</option>
+                            <select name = "dd" id="day">
                             </select>
                         </div>
                         <div class="select">
-                            <select name="" id="">
-                                <option value="">Price</option>
-                                <option value="01">Option 01</option>
-                                <option value="02">Option 02</option>
+                            <select name = "mm" onchange="change_month(this)" id="month">
                             </select>
                         </div>
                         <div class="select">
-                            <select name="" id="">
-                                <option value="">Price</option>
-                                <option value="01">Option 01</option>
-                                <option value="02">Option 02</option>
+                            <select name = "yyyy" onchange="change_year(this)"> id="year">
+
                             </select>
                         </div>
                     </div>
@@ -97,5 +88,99 @@
         </form>
     </div>
 </div>
+<script>
+    var Days = [31,28,31,30,31,30,31,31,30,31,30,31];// index => month [0-11]
+    $(document).ready(function(){
+        var option = '<option value="day">day</option>';
+        var selectedDay="day";
+        for (var i=1;i <= Days[0];i++){ //add option days
+            option += '<option value="'+ i + '">' + i + '</option>';
+        }
+        $('#day').append(option);
+        $('#day').val(selectedDay);
+
+        var option = '<option value="month">month</option>';
+        var selectedMon ="month";
+        for (var i=1;i <= 12;i++){
+            option += '<option value="'+ i + '">' + i + '</option>';
+        }
+        $('#month').append(option);
+        $('#month').val(selectedMon);
+
+        var option = '<option value="month">month</option>';
+        var selectedMon ="month";
+        for (var i=1;i <= 12;i++){
+            option += '<option value="'+ i + '">' + i + '</option>';
+        }
+        $('#month2').append(option);
+        $('#month2').val(selectedMon);
+
+        var d = new Date();
+        var option = '<option value="year">year</option>';
+        selectedYear ="year";
+        for (var i=1930;i <= d.getFullYear();i++){// years start i
+            option += '<option value="'+ i + '">' + i + '</option>';
+        }
+        $('#year').append(option);
+        $('#year').val(selectedYear);
+    });
+    function isLeapYear(year) {
+        year = parseInt(year);
+        if (year % 4 != 0) {
+            return false;
+        } else if (year % 400 == 0) {
+            return true;
+        } else if (year % 100 == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function change_year(select)
+    {
+        if( isLeapYear( $(select).val() ) )
+        {
+            Days[1] = 29;
+
+        }
+        else {
+            Days[1] = 28;
+        }
+        if( $("#month").val() == 2)
+        {
+            var day = $('#day');
+            var val = $(day).val();
+            $(day).empty();
+            var option = '<option value="day">day</option>';
+            for (var i=1;i <= Days[1];i++){ //add option days
+                option += '<option value="'+ i + '">' + i + '</option>';
+            }
+            $(day).append(option);
+            if( val > Days[ month ] )
+            {
+                val = 1;
+            }
+            $(day).val(val);
+        }
+    }
+
+    function change_month(select) {
+        var day = $('#day');
+        var val = $(day).val();
+        $(day).empty();
+        var option = '<option value="day">day</option>';
+        var month = parseInt( $(select).val() ) - 1;
+        for (var i=1;i <= Days[ month ];i++){ //add option days
+            option += '<option value="'+ i + '">' + i + '</option>';
+        }
+        $(day).append(option);
+        if( val > Days[ month ] )
+        {
+            val = 1;
+        }
+        $(day).val(val);
+    }
+</script>
 </body>
 </html>
