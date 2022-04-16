@@ -230,6 +230,7 @@
 
         &-right {
             @include flex($justify: flex-end, $align: center);
+
             .link {
                 padding: 15px 0;
                 color: $color-txt-grey;

@@ -76,7 +76,7 @@
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
-    const shopId = [[${shop.id}]];
+    const shopId = [[${shop != null ? shop.id : null}]];
 
     $(function () {
         const maxCountProduct = 100;
@@ -84,6 +84,7 @@
         $('.jsCountRest').text(maxCountProduct - currentCount);
 
         function setActive(ele) {
+            if(!ele) return;
             const width = $(ele).outerWidth();
             const position = $(ele).position();
 

@@ -43,6 +43,8 @@ public class UserModel {
 
     private String stripeCustomerId;
 
+    private String subName;
+
     private Date createdAt = new Date();
 
     private Date updatedAt = new Date();
@@ -65,9 +67,11 @@ public class UserModel {
         this.username = user.getUsername();
         this.phone = user.getPhone();
         this.avatar = user.getAvatar();
+        this.stripeCustomerId = user.getStripeCustomerId();
+        this.subName = user.getSubName();
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
-        this.stripeCustomerId = user.getStripeCustomerId();
+        this.enabled = user.isEnabled();
     }
 
     public String toUrl(String fileName) {

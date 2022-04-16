@@ -384,11 +384,13 @@ label {
         }
     }
 }
-a.btn__primary{
-    &:hover{
+
+a.btn__primary {
+    &:hover {
         color: white;
     }
 }
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -540,6 +542,20 @@ a.btn__primary{
                 @include flex($justify: flex-start);
                 min-height: 40px;
             }
+            
+            .radio-block {
+                @include flex($justify: flex-start, $align: center);
+                min-height: 40px;
+                .radio {
+                    margin-right: 5px;
+                }
+                
+                &__horizonal {
+                    .radio:nth-child(n + 2){
+                        margin-left: 20px;
+                    }
+                }
+            }
 
             &__flex {
                 @include flex($justify: space-between);
@@ -561,7 +577,7 @@ a.btn__primary{
 
         input,
         .select,
-        button[type="submit"] {
+        button[type="submit"], {
             min-height: 40px;
         }
     }
@@ -718,7 +734,7 @@ a.btn__primary{
             height: 100%;
             background-color: white;
 
-            &.disabled{
+            &.disabled {
                 color: $color-bd-ipt;
             }
 

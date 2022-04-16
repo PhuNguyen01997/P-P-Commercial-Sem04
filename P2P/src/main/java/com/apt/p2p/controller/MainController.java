@@ -113,7 +113,7 @@ public class MainController {
     @GetMapping("account")
     public String userEdit(Model model) {
         UserModel user = usersDetailService.getCurrentUser();
-        model.addAttribute("account" , user);
+        model.addAttribute("user" , user);
         return "user/account/user-form";
     }
 

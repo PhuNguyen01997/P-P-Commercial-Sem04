@@ -10,7 +10,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,14 +21,19 @@ public class MyInterceptor implements HandlerInterceptor {
     private CategoryService categoryService;
 
     private List<Category> headerCategories;
+    private Map<String, String> naviPortalHeader = new HashMap<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(headerCategories == null){
+        if (headerCategories == null) {
             headerCategories = categoryService.findAll();
             headerCategories = headerCategories.stream().sorted(Comparator.comparingInt(Category::getId).reversed()).limit(8).collect(Collectors.toList());
         }
         request.setAttribute("headerCategories", headerCategories);
         return HandlerInterceptor.super.preHandle(request, response, handler);
+    }
+
+    public void setNaviPortalHeader(Map<String, String> naviPortalHeader) {
+        this.naviPortalHeader = naviPortalHeader;
     }
 }

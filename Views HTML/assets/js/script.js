@@ -61,6 +61,22 @@ var getDateFormat = function (strDate, includeTime = false) {
   return result;
 }
 
+var renderSelect = function (element) {
+  const selected = $(element).find('option:selected')[0];
+  const showDefault = `<p class="select--default">${selected.text}</p>`;
+  let list = `<ul class="select--list">`;
+  $(element).find('option').each((index, option) => {
+    list += `<li class="select--item ${selected.value === option.value ? "active" : ""}" data-value="${option.value}" data-text="${option.text}">`
+    list += `<span>${option.text}</span>`
+    list += `<span class="icon"><i class="fas fa-angle-down"></i></span>`
+    list += `</li>`;
+  });
+  list += `</ul>`;
+  list += `<p class="icon"><i class="fas fa-angle-down"></i></p>`;
+  $(element).find('.select--list, .icon, .select--default').remove();
+  $(element).append(showDefault + list);
+}
+
 $(function () {
   // JS for custom select
   function setSelect(select, value, text) {
@@ -72,18 +88,7 @@ $(function () {
   }
 
   $(".select").each(function () {
-    const selected = $(this).find('option:selected')[0];
-    const showDefault = `<p class="select--default">${selected.text}</p>`;
-    let list = `<ul class="select--list">`;
-    $(this).find('option').each((index, option) => {
-      list += `<li class="select--item ${selected.value === option.value ? "active" : ""}" data-value="${option.value}" data-text="${option.text}">`
-      list += `<span>${option.text}</span>`
-      list += `<span class="icon"><i class="fas fa-angle-down"></i></span>`
-      list += `</li>`;
-    });
-    list += `</ul>`;
-    list += `<p class="icon"><i class="fas fa-angle-down"></i></p>`;
-    $(this).append(showDefault + list);
+    renderSelect(this);
   })
 
   $('.select').on('mouseenter', function () {

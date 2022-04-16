@@ -1,9 +1,9 @@
 // JS for set loading
-var setGlobalLoading = function(isLoading) {
+var setGlobalLoading = function (isLoading) {
   $('#globalLoading')[isLoading ? 'addClass' : 'removeClass']('loading');
 }
 
-var getStringDateFormat = function(date) {
+var getStringDateFormat = function (date) {
   let day = date.getDate();
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
@@ -14,7 +14,7 @@ var getStringDateFormat = function(date) {
   return `${day}-${month}-${year}`;
 }
 
-var getStringTimeFormat = function(date) {
+var getStringTimeFormat = function (date) {
   let hour = date.getHours();
   let minute = date.getMinutes();
 
@@ -24,17 +24,17 @@ var getStringTimeFormat = function(date) {
   return `${hour}:${minute}`
 }
 
-var readUrlImage = function(file, element) {
+var readUrlImage = function (file, element) {
   const reader = new FileReader();
 
-  reader.onload = function(e) {
+  reader.onload = function (e) {
     $(element).attr('src', e.target.result);
   };
 
   reader.readAsDataURL(file);
 }
 
-var getBase64Image = function(img) {
+var getBase64Image = function (img) {
   const canvas = document.createElement("canvas");
   canvas.width = img.naturalWidth;
   canvas.height = img.naturalHeight;
@@ -61,7 +61,23 @@ var getDateFormat = function (strDate, includeTime = false) {
   return result;
 }
 
-$(function() {
+var renderSelect = function (element) {
+  const selected = $(element).find('option:selected')[0];
+  const showDefault = `<p class="select--default">${selected.text}</p>`;
+  let list = `<ul class="select--list">`;
+  $(element).find('option').each((index, option) => {
+    list += `<li class="select--item ${selected.value === option.value ? "active" : ""}" data-value="${option.value}" data-text="${option.text}">`
+    list += `<span>${option.text}</span>`
+    list += `<span class="icon"><i class="fas fa-angle-down"></i></span>`
+    list += `</li>`;
+  });
+  list += `</ul>`;
+  list += `<p class="icon"><i class="fas fa-angle-down"></i></p>`;
+  $(element).find('.select--list, .icon, .select--default').remove();
+  $(element).append(showDefault + list);
+}
+
+$(function () {
   // JS for custom select
   function setSelect(select, value, text) {
     $($(select).find('select')[0]).val(value).change();
@@ -71,26 +87,15 @@ $(function() {
     $(select).find(`.select--item[data-value="${value}"]`).addClass('active');
   }
 
-  $(".select").each(function() {
-    const selected = $(this).find('option:selected')[0];
-    const showDefault = `<p class="select--default">${selected.text}</p>`;
-    let list = `<ul class="select--list">`;
-    $(this).find('option').each((index, option) => {
-      list += `<li class="select--item ${selected.value === option.value ? "active" : ""}" data-value="${option.value}" data-text="${option.text}">`
-      list += `<span>${option.text}</span>`
-      list += `<span class="icon"><i class="fas fa-angle-down"></i></span>`
-      list += `</li>`;
-    });
-    list += `</ul>`;
-    list += `<p class="icon"><i class="fas fa-angle-down"></i></p>`;
-    $(this).append(showDefault + list);
+  $(".select").each(function () {
+    renderSelect(this);
   })
 
-  $('.select').on('mouseenter', function() {
+  $('.select').on('mouseenter', function () {
     $(this).find('.select--list')[0].classList.add('show');
   })
 
-  $('.select').on('mouseleave', function() {
+  $('.select').on('mouseleave', function () {
     $(this).find('.select--list')[0].classList.remove('show');
   })
 
@@ -103,7 +108,7 @@ $(function() {
     }
   })
 
-  $('.select').on('click', '.select--item', function() {
+  $('.select').on('click', '.select--item', function () {
     const select = $(this).parents('.select')[0];
     setSelect(select, this.dataset.value, this.dataset.text);
 
@@ -111,11 +116,11 @@ $(function() {
   })
 
   // JS for custom input has increase, decrease button
-  $('.attachAdjust').each(function() {
+  $('.attachAdjust').each(function () {
     $(this).prepend('<span class="attachAdjust--button" data-value="minus"></span>');
     $(this).append('<span class="attachAdjust--button" data-value="plus"></span>');
   })
-  $('.attachAdjust').on('click', ".attachAdjust--button", function() {
+  $('.attachAdjust').on('click', ".attachAdjust--button", function () {
     const input = $(this).siblings("input")[0];
     switch ($(this).attr("data-value")) {
       case 'plus': {
@@ -133,17 +138,17 @@ $(function() {
 
   // JS for dropdown
   if ($('.dropdown').length) {
-    $('.dropdown > *:first-child').on('click', function() {
+    $('.dropdown > *:first-child').on('click', function () {
       const container = $(this).next()[0];
       $(container).slideToggle();
     })
   }
 
   // JS for checkbox
-  $('input[type="checkbox"]:checked').each(function() {
+  $('input[type="checkbox"]:checked').each(function () {
     $(this).parents('.checkbox').addClass("checkbox__active");
   })
-  $('.checkbox').on('change', "input[type='checkbox']", function() {
+  $('.checkbox').on('change', "input[type='checkbox']", function () {
     const isCheck = this.checked;
     if (isCheck) {
       $(this).parents('.checkbox').addClass("checkbox__active");
@@ -153,7 +158,7 @@ $(function() {
   })
 
   // JS for input radio
-  $('input[type="radio"]').on("change", function() {
+  $('input[type="radio"]').on("change", function () {
     const name = $(this).attr('name');
     $(`input[type="radio"][name=${name}]`).next().removeClass('active');
     $(this).next().addClass('active');
@@ -166,7 +171,7 @@ $(function() {
 
   // Js for cart footer is sticky
   if ($('.cart__list .cart-footer').length) {
-    $(window).on('scroll', function() {
+    $(window).on('scroll', function () {
       const winBotPos = $(window).scrollTop() + $(window).height();
       const cartFooterBotPos = $('.cart-footer').offset().top + $('.cart-footer').height();
       if (winBotPos < cartFooterBotPos) {
@@ -178,11 +183,11 @@ $(function() {
   }
 
   // Js for modal
-  $('.js-modal').on('click', function() {
+  $('.js-modal').on('click', function () {
     const id = this.dataset.id;
     $(`#${id}`).addClass('js-close');
   })
-  $('.modal2-container').on('click', function(e) {
+  $('.modal2-container').on('click', function (e) {
     if (e.target.classList.contains('js-close')) {
       $(this).removeClass('js-close');
     }
@@ -206,7 +211,7 @@ $(function() {
   }
 
   // jsForBackButton
-  $('.jsBack').on('click', function() {
+  $('.jsBack').on('click', function () {
     window.history.back();
   })
 
@@ -216,7 +221,7 @@ $(function() {
       const length = item.value.length;
       $(`.jsCount-${id}`).text(length);
     })
-    $('.ipt__limit-length input, textarea').on('keyup', function() {
+    $('.ipt__limit-length input, textarea').on('keyup', function () {
       const id = this.id;
       const length = this.value.length;
       $(`.jsCount-${id}`).text(length);

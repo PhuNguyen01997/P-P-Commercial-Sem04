@@ -11,7 +11,7 @@
                                                             alt=""></p>
         <div class="account-head--text">
             <p th:text="${user.username}" class="account-head--name">[User Name]</p>
-            <p class="account-head--edit"><a href="/edit"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
+            <p class="account-head--edit"><a href="/account"><i class="icon fas fa-pencil-alt"></i>Edit profile</a>
             </p>
         </div>
     </div>
@@ -19,8 +19,8 @@
         <li class="account-body--item account-body--item__dropdown dropdown">
             <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
             <ul class="dropdown-list">
-                <li class="dropdown-item"><a th:href="@{/edit}">Profile</a></li>
-                <li class="dropdown-item"><a th:href="@{/edit}">Change password</a></li>
+                <li class="dropdown-item"><a th:href="@{/account}">Profile</a></li>
+                <li class="dropdown-item"><a th:href="@{/account}">Change password</a></li>
                 <li class="dropdown-item"><a th:href="@{/card}">Card</a></li>
                 <li class="dropdown-item"><a th:href="@{/address}">Address</a></li>
             </ul>

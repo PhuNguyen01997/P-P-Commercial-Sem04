@@ -8,14 +8,16 @@
     <title>Document</title>
 
     <script src="/assets/plugins/jquery v3.6.0.js/jquery v3.6.0.js"></script>
+    <script src="/assets/plugins/moment v2.29/moment.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
+    </script>
+
 
 
 
@@ -96,7 +98,7 @@
                         <div class="form-item">
                             <label class="form-item--left" for="username">Tên đăng nhập</label>
                             <div class="form-item--right">
-                                <input type="text" name="username" id="username">
+                                <p class="text">TExt</p>
                             </div>
                         </div>
                         <div class="form-item">
@@ -120,44 +122,50 @@
                         <div class="form-item">
                             <label class="form-item--left" for="gender">Giới tính</label>
                             <div class="form-item--right">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
-                                    </select>
+                                <div class="radio-block radio-block__horizonal">
+                                    <label class="radio">
+                                        <input checked name="address" type="radio">
+                                        <div class="radio-show"></div>
+                                    </label>
+                                    <span>Nam</span>
+                                    <label class="radio">
+                                        <input checked name="address" type="radio">
+                                        <div class="radio-show"></div>
+                                    </label>
+                                    <span>Nữ</span>
+                                    <label class="radio">
+                                        <input checked name="address" type="radio">
+                                        <div class="radio-show"></div>
+                                    </label>
+                                    <span>Bêđê</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-item">
                             <label class="form-item--left" for="gender">Giới tính</label>
                             <div class="form-item--right form-item--right__flex">
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
+                                <div class="select select__year">
+                                    <select name="year" id="">
+                                        <option value="0">Năm sinh</option>
                                     </select>
                                 </div>
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
+                                <div class="select select__month">
+                                    <select name="month" id="">
+                                        <option value="0">Tháng sinh</option>
                                     </select>
                                 </div>
-                                <div class="select">
-                                    <select name="" id="">
-                                        <option value="">Price</option>
-                                        <option value="01">Option 01</option>
-                                        <option value="02">Option 02</option>
+                                <div class="select select__day">
+                                    <select name="day" id="">
+                                        <option value="0">Ngày sinh</option>
                                     </select>
                                 </div>
                             </div>
+                            <input type="hidden" name="birth">
                         </div>
                         <div class="form-item">
                             <label class="form-item--left"></label>
-                            <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button></div>
+                            <div class="form-item--right"><button type="submit" class="btn btn__primary">Lưu</button>
+                            </div>
                         </div>
                     </div>
                     <div class="account-form--right">
@@ -209,6 +217,36 @@
     </footer>
 
     <script src="/assets/js/script.js"></script>
+    <script>
+        $(function () {
+            let yearHtml = `<option value="0">Năm sinh</option>`
+            for (let i = 2022; i >= 1960; i--) {
+                yearHtml += `<option value="${i}">${i}</option>`;
+            }
+            $('select[name="year"]').html(yearHtml);
+            renderSelect(document.querySelector('.select__year'));
+
+            let monthHtml = `<option value="0">Tháng sinh</option>`
+            for (let i = 1; i <= 12; i++) {
+                monthHtml += `<option value="${i < 10 ? '0' + i : i}">Tháng ${i < 10 ? '0' + i : i}</option>`;
+            }
+            $('select[name="month"]').html(monthHtml);
+            renderSelect(document.querySelector('.select__month'));
+
+            $('select[name="month"]').add('select[name="year"]').on('change', function () {
+                const year = $('select[name="year"]').val();
+                const month = $('select[name="month"]').val();
+                const daysInMonth = moment(`${year}-${month}`, 'YYYY-MM').daysInMonth();
+                let dayHtml = `<option value="0">Ngày sinh</option>`
+                for (let i = 1; i <= daysInMonth; i++) {
+                    dayHtml +=
+                        `<option value="${i < 10 ? '0' + i : i}">${i < 10 ? '0' + i : i}</option>`;
+                }
+                $('select[name="day"]').html(dayHtml);
+                renderSelect(document.querySelector('.select__day'));
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -269,7 +269,7 @@ label {
       -ms-flex-direction: row;
           flex-direction: row;
   width: 100%;
-  height: inherit;
+  height: calc(100% - 1px);
   min-height: inherit;
   background-color: inherit;
   border-radius: 2px;
@@ -643,6 +643,31 @@ a.btn__primary:hover {
       -ms-flex-direction: row;
           flex-direction: row;
   min-height: 40px;
+}
+
+.form-item--right .radio-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-height: 40px;
+}
+
+.form-item--right .radio-block .radio {
+  margin-right: 5px;
+}
+
+.form-item--right .radio-block__horizonal .radio:nth-child(n + 2) {
+  margin-left: 20px;
 }
 
 .form-item--right__flex {
@@ -5120,7 +5145,9 @@ a.btn__primary:hover {
   margin-bottom: 12px;
 }
 
-.portal .shop-form-row input, .portal .shop-form-row .ipt,
+.portal .shop-form-row input,
+.portal .shop-form-row .ipt,
+.portal .shop-form-row .select,
 .portal .shop-form-row textarea {
   width: 100%;
   max-width: 600px;
@@ -5131,7 +5158,9 @@ a.btn__primary:hover {
   display: block;
 }
 
-.portal .shop-form-row input, .portal .shop-form-row p.length {
+.portal .shop-form-row input,
+.portal .shop-form-row .select,
+.portal .shop-form-row p.length {
   height: 30px;
 }
 

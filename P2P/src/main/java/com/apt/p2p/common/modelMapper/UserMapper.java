@@ -38,16 +38,7 @@ public class UserMapper {
     public UserModel userEntityToModel(User entity) {
         if(entity == null) return null;
 
-        UserModel model = new UserModel();
-
-        model.setId(entity.getUserId());
-        model.setEmail(entity.getEmail());
-        model.setUsername(entity.getUsername());
-        model.setPhone(entity.getPhone());
-        model.setAvatar(entity.getAvatar());
-        model.setCreatedAt(entity.getCreatedAt());
-        model.setUpdatedAt(entity.getUpdatedAt());
-        model.setStripeCustomerId(entity.getStripeCustomerId());
+        UserModel model = new UserModel(entity);
 
         model.setShop(entity.getShop() == null ? null : new ShopModel(entity.getShop()));
         model.setAddresses(entity.getAddresses().stream().map(ad -> new AddressModel(ad)).collect(Collectors.toList()));

@@ -40,7 +40,9 @@ public class AddressMapper {
         if(entity.getShop() != null){
             model.setShop(new ShopModel(entity.getShop()));
         }
-        model.setOrders(entity.getOrders().stream().map(oe -> new OrderModel(oe)).collect(Collectors.toList()));
+        if(entity.getOrders() != null){
+            model.setOrders(entity.getOrders().stream().map(oe -> new OrderModel(oe)).collect(Collectors.toList()));
+        }
 
         return model;
     }
