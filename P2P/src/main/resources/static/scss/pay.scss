@@ -20,7 +20,9 @@
 
         &--text,
         &--change {
-
+            .radio {
+                flex-shrink: 0;
+            }
             .name,
             .phone,
             .number {
@@ -159,6 +161,7 @@
 
         &-footer {
             border-top: 2px solid $color-bd;
+
             &--block {
                 @include flex($justify: flex-start);
                 padding: 10px 30px;

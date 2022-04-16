@@ -12,11 +12,11 @@
             <a class="nav-col--item" href="#">Seller channel</a>
         </div>
         <div class="nav-col__right nav-col">
-            <a class="nav-col--item" href="#">Notification</a>
-            <a class="nav-col--item">[[${#request.remoteUser}]]</a>
-            <a class="nav-col--item" th:href="@{/signup}">Sign Up</a>
-            <a class="nav-col--item" th:href="@{/signin}">Sign In</a>
-            <a class="nav-col--item" th:href="@{/logout}">Log Out</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="#">Notification</a>
+            <a sec:authorize="isAuthenticated()" href="/edit" class="nav-col--item nav-col--item__user">[[${#request.remoteUser}]]</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Sign Up</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Sign In</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" th:href="@{/logout}">Log Out</a>
         </div>
     </nav>
     <div class="header-container">

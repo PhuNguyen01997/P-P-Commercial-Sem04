@@ -1,7 +1,6 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.ShopTransactionMapper;
-import com.apt.p2p.entity.Order;
 import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.model.form.FilterShopTransaction;
 import com.apt.p2p.model.view.OrderDetailModel;
@@ -14,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.Order;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +31,23 @@ public class ShopTransactionServiceImpl implements ShopTransactionService {
     }
 
     @Override
+    public ShopTransactionModel findById(int id) {
+        ShopTransaction shopTransaction =  shopTransactionRepository.findById(id).get();
+        return shopTransactionMapper.shopTransactionEntityToModel(shopTransaction);
+    }
+
+    @Override
     public List<ShopTransactionModel> findAllByShopIdWithFilter(int shopId, FilterShopTransaction filter) {
         Specification<ShopTransaction> condition = Specification
                 .where(ShopTransactionSpecification.hasShopId(shopId))
-                .and(ShopTransactionSpecification.hasDateIn(filter.getMinDate(), filter.getMaxDate()));
+                .and(ShopTransactionSpecification.hasDateIn(filter.getMinDate(), filter.getMaxDate()))
+                .and((root, query, cb) -> {
+                    List<Order> orderList = new ArrayList<>();
+                    orderList.add(cb.asc(root.get("status")));
+                    orderList.add(cb.desc(root.get("id")));
+                    query.orderBy(orderList);
+                    return null;
+                });
 
         switch (filter.getType()) {
             case 1: {

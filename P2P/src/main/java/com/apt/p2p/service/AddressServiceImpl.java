@@ -22,14 +22,6 @@ public class AddressServiceImpl implements AddressService {
     private AddressMapper addressMapper;
 
     @Override
-    public List<AddressModel> findAll() {
-        return addressRepository.findAllByOrderById()
-                .stream()
-                .map(ae -> addressMapper.addressEntityToModel(ae))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<AddressModel> findAllByUserId(int userId) {
         return addressRepository.findAllByUserId(userId).stream()
                 .map(ae -> addressMapper.addressEntityToModel(ae))

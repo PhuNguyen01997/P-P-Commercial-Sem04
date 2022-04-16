@@ -16,5 +16,5 @@ public interface UserService {
 
     String findByEmail(String email);
 
-    User getCurrentUser();
+    UserModel getCurrentUser();
 }

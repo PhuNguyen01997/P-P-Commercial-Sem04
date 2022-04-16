@@ -1,7 +1,9 @@
 package com.apt.p2p.controller;
 
 import com.apt.p2p.model.view.CardModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.CardService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import com.apt.p2p.validate.CardModelValidator;
 import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 @Controller
 public class CardController {
     @Autowired
+    private UsersDetailServiceImpl userService;
+    @Autowired
     private CardService cardService;
 
     @InitBinder("card")
@@ -32,9 +36,11 @@ public class CardController {
 
     @GetMapping("card")
     public String card(Model model) {
-        int userId = 1;
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         model.addAttribute("card", new CardModel());
-        model.addAttribute("cards", cardService.findAllByUserId(userId));
+        model.addAttribute("cards", cardService.findAllByUserId(user.getId()));
 
         return "user/account/card";
     }
@@ -46,9 +52,12 @@ public class CardController {
             BindingResult result,
             RedirectAttributes redirectAttributes
     ) {
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         if (result.hasErrors()) {
             model.addAttribute("card", cardModel);
-            model.addAttribute("cards", cardService.findAllByUserId(3));
+            model.addAttribute("cards", cardService.findAllByUserId(user.getId()));
             model.addAttribute("hasAnyError", true);
 
             return "user/account/card";
@@ -56,9 +65,9 @@ public class CardController {
         try {
             CardModel paymentResult = cardService.create(cardModel);
         } catch (StripeException e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra, vui lòng kiểm tra lại thông tin thẻ");
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xảy ra, vui lòng kiểm tra lại thông tin thẻ");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thêm thẻ thanh toán, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xảy ra không thể thêm thẻ thanh toán, xin hãy thử lại sau");
         }
         return "redirect:/card";
     }

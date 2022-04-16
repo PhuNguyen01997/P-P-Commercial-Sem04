@@ -15,10 +15,10 @@
             <p class="text">Số dư</p>
             <div class="form">
                 <p class="price">
-                    <span th:text="${shop.fund}"></span>
+                    <span th:text="${#numbers.formatDecimal(shop.fund, 0, 'COMMA', 0, 'POINT')}"></span>
                     <span>vnđ</span></p>
                 <a href="/portal/fund/withdraw">
-                    <button class="direct btn btn__primary">Yêu cầu thanh toán</button>
+                    <button class="direct btn btn__primary">Yêu cầu rút tiền</button>
                 </a>
             </div>
         </div>
@@ -101,7 +101,7 @@
                             `<p>${fund.description}</p>` +
                             `</div>` +
                             `<div class="fund-row--item fund-row--item__price">` +
-                            `<p>${fund.order ? '+' : '-'}${fund.amount}</p>` +
+                            `<p>${fund.order ? '+' : '-'}${fund.amount.toLocaleString()}</p>` +
                             `</div>` +
                             `<div class="fund-row--item fund-row--item__status">` +
                             `<p>${fund.status}</p>` +

@@ -194,7 +194,11 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderModel> findAllByShopIdWithFilter(int shopId, FilterOrder filterOrder) {
         Specification<Order> condition = Specification
                 .where(OrderSpecification.hasShopId(shopId))
-                .and(OrderSpecification.hasDateIn(filterOrder.getMinDate(), filterOrder.getMaxDate()));
+                .and(OrderSpecification.hasDateIn(filterOrder.getMinDate(), filterOrder.getMaxDate()))
+                .and((root, query, cb) -> {
+                    query.orderBy(cb.desc(root.get("id")));
+                    return null;
+                });
 
         if (filterOrder.getStatusId() != 0) {
             condition = condition.and(OrderSpecification.hasStatusId(filterOrder.getStatusId()));

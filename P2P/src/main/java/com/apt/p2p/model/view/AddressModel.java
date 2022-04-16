@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -56,6 +57,8 @@ public class AddressModel {
         this.wardId = address.getWardId();
         this.districtId = address.getDistrictId();
         this.provinceId = address.getProvinceId();
+
+        this.orders = new ArrayList<>();
     }
 
     public String getFullAddress(){

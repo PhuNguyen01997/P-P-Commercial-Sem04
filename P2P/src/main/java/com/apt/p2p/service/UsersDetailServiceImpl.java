@@ -98,12 +98,13 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     }
 
     @Override
-    public User getCurrentUser() {
+    public UserModel getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!auth.isAuthenticated()) {
             return null;
         }
-        return userRepository.findByUsername(auth.getName());
+        User user = userRepository.findByUsername(auth.getName());
+        return userMapper.userEntityToModel(user);
     }
 
     @Override

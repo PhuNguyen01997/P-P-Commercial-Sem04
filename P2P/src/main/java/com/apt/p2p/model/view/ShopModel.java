@@ -71,6 +71,7 @@ public class ShopModel {
         this.createdAt = shop.getCreatedAt();
         this.updatedAt = shop.getUpdatedAt();
         this.stripeCardId = shop.getStripeCardId();
+        this.fund = shop.getFund();
 
         this.user = null;
         this.address = null;

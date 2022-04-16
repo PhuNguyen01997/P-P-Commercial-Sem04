@@ -1,3 +1,8 @@
+INSERT INTO role (role_id, name) VALUES
+(1, 'ROLE_USER'),
+(2, 'ROLE_ADMIN'),
+(3, 'ROLE_SELLER');
+
 INSERT INTO category (created_at, name, updated_at) VALUES
 (NOW(), 'Điện tử', NOW()),
 (NOW(), 'Thời trang', NOW()),
@@ -15,6 +20,7 @@ INSERT INTO status_order (id, done_name, name) VALUES
 
 INSERT INTO user (avatar, created_at, email, enabled, password, phone, stripe_customer_id, updated_at, username) VALUES
 (NULL, NOW(), 'seller@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '8234789232', null, NOW(), 'seller'),
+(NULL, NOW(), 'admin@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0937441896', null,  NOW(), 'admin'),
 (NULL, NOW(), 'buyer@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0923823123', null,  NOW(), 'buyer');
 
 -- INSERT INTO payment (address_register, cvv, due, fullname, `number`, postal_code, `type`, user_id) VALUES
@@ -33,7 +39,7 @@ INSERT INTO address (district, district_id, `number`, own_name, own_phone, provi
 ('Quận 3', 1444, '123 EOIWT', 'Buyer 02', '9183473932', 'Hồ Chí Minh', 202, 'Phường 4', '20304', 1);
 
 INSERT INTO shop (background, created_at, description, fund, logo, name, permission, phone, updated_at, address_id, stripe_card_id, user_id) VALUES
-('18_thumbnail.jpg', NOW(), '', 0, '18_logo.jpg', 'Shop Test', 1, '0907982932', NOW(), 2, "None", 1);
+('18_thumbnail.jpg', NOW(), '', 396042000, '18_logo.jpg', 'Shop Test', 1, '0907982932', NOW(), 2, "None", 1);
 
 INSERT INTO product (created_at, description, image, name, price, updated_at, category_id, shop_id, stock) VALUES
 (NOW(), 'Cây máy tính chơi game GTA LOL CF mới 99%', '[\"1_1111.jpg\",\"1_1112.jpg\"]', 'Cây máy tính chơi game GTA LOL CF mới 99%', 3950000, NOW(), 1, 1, 0),

@@ -1,14 +1,17 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.entity.ShopTransaction;
 import com.apt.p2p.model.form.FilterShopTransaction;
 import com.apt.p2p.model.view.ShopTransactionModel;
+import com.apt.p2p.model.view.UserModel;
+import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.ShopTransactionService;
+import com.apt.p2p.service.UserService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -20,6 +23,29 @@ import java.util.List;
 public class ShopTransactionController {
     @Autowired
     private ShopTransactionService shopTransactionService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ShopService shopService;
+
+    @GetMapping("/admin/transaction")
+    public String adminIndex(Model model){
+        List<ShopTransactionModel> transactions = shopTransactionService.findAll();
+
+        model.addAttribute("transactions", transactions);
+
+        return "/admin/transaction";
+    }
+
+    @GetMapping("/admin/transaction/{id}")
+    public String adminDetail(Model model, @PathVariable("id") int id){
+        ShopTransactionModel shopTransactionModel = shopTransactionService.findById(id);
+        shopTransactionModel.setShop(shopService.findById(shopTransactionModel.getShop().getId()));
+
+        model.addAttribute("transaction", shopTransactionModel);
+
+        return "admin/transaction-detail";
+    }
 
     @PostMapping("/api/shop/{id}/fund")
     @ResponseBody

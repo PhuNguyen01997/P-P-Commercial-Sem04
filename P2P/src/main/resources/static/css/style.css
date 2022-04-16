@@ -437,6 +437,10 @@ label {
   display: block;
 }
 
+a.btn__primary:hover {
+  color: white;
+}
+
 .btn {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -2673,6 +2677,8 @@ label {
 }
 
 .order-item--price {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   font-size: 18px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -2719,7 +2725,8 @@ label {
 }
 
 .order-shop--status {
-  color: #ff3945;
+  color: #9932cc;
+  font-weight: bold;
   margin-left: auto;
 }
 
@@ -3258,6 +3265,11 @@ label {
   color: #9932cc;
   font-size: 1.8rem;
   margin-bottom: 15px;
+}
+
+.pay-address--text .radio, .pay-address--change .radio {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
 
 .pay-address--text .name,
@@ -4476,8 +4488,12 @@ label {
   height: 100%;
 }
 
-.portal .order .table-body--row-header .order-info {
-  margin-left: auto;
+.portal .order .table-body--row-header .amount {
+  margin: 0 20px 0 auto;
+}
+
+.portal .order .table-body--row-header .amount .bold {
+  font-weight: bold;
 }
 
 .portal .order .table-body--row-item {
@@ -4838,6 +4854,7 @@ label {
 }
 
 .portal .fund-row--item:first-child {
+  text-align: center;
   padding-left: 40px;
 }
 
@@ -4862,6 +4879,11 @@ label {
   overflow: hidden;
   color: #000;
   font-weight: bold;
+  text-align: left;
+}
+
+.portal .fund-row--item__price, .portal .fund-row--item__status {
+  text-align: center;
 }
 
 .portal .fund-row--item__price {

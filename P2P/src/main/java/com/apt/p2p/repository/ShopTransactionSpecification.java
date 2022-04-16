@@ -12,6 +12,8 @@ public final class ShopTransactionSpecification {
     public static Specification<ShopTransaction> hasShopId(int shopId) {
         return (root, query, cb) -> {
             root = joinAllRelation(root);
+            query.orderBy(cb.desc(root.get("id")));
+
             Join<ShopTransaction, Shop> joinShop = root.join("shop");
             return cb.equal(joinShop.get("id"), shopId);
         };
@@ -20,6 +22,7 @@ public final class ShopTransactionSpecification {
     public static Specification<ShopTransaction> hasDateIn(Date minDate, Date maxDate) {
         return (root, query, cb) -> {
             root = joinAllRelation(root);
+
             return cb.between(root.get("date"), minDate, maxDate);
         };
     }

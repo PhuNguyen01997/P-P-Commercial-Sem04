@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="dataTable" class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Sđt</th>
+                                <th>Địa chỉ</th>
+                                <th>Đánh giá</th>
+                                <th>Sản phẩm</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="shop : ${shops}" class="jsClick" th:data-id="${shop.id}">
+                                <td th:text="${shop.name}"></td>
+                                <td th:text="${shop.phone}"></td>
+                                <td th:text="${shop.address.province}"></td>
+                                <td th:text="${shop.averageRates + ' ('+ shop.countRates +')'}"></td>
+                                <td th:text="${shop.countProducts}"></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Sđt</th>
+                                <th>Địa chỉ</th>
+                                <th>Đánh giá</th>
+                                <th>Sản phẩm</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script layout:fragment="script">
+    $("#dataTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+    });
+    $('table').on('click', '.jsClick', function(){
+        const id = this.dataset.id;
+        location.href = `shop/${id}`;
+    })
+</script>
+</body>
+</html>

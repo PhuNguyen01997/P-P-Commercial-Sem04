@@ -49,7 +49,7 @@
                         </label>
                     </div>
                     <a th:href="@{/product/{id}(id=${pc.product.id})}" class="cart-section-product--img pic">
-                        <img src="/img/products/product_02.jpg" alt="">
+                        <img th:src="${pc.product.toUrl(pc.product.image.get(0))}" alt="">
                     </a>
                     <a th:href="@{/product/{id}(id=${pc.product.id})}"
                        th:text="${pc.product.name}"
@@ -57,7 +57,7 @@
                     <div class="cart-section-product--price cart-w15">
                         <!--                        <span class="strikethrough">$99.99</span>-->
                         <p>
-                            <span th:text="${pc.product.price}"></span>
+                            <span th:text="${#numbers.formatDecimal(pc.product.price, 0, 'COMMA', 0, 'POINT')}"></span>
                             <span class="jsPrice" th:attr="data-value=${pc.product.price}">vnđ</span>
                         </p>
                     </div>
@@ -149,7 +149,7 @@
             $('.jsPayForm .inputContainer').append(`<input type='text' name="shopCart[]" value=''>`);
         }
 
-        $('.jsSum').text(`${sum} vnđ`);
+        $('.jsSum').text(`${sum.toLocaleString()} vnđ`);
         $('.jsCountProduct').text(count);
     }
 
@@ -157,7 +157,7 @@
         const price = $(item).find(`.jsPrice`)[0].dataset.value;
         const quantity = $(item).find(`.jsQuantity`)[0].value;
         const totalContainer = $(item).find(`.jsTotal`)[0];
-        totalContainer.innerText = `${price * quantity} vnđ`;
+        totalContainer.innerText = `${(price * quantity).toLocaleString()} vnđ`;
         $(totalContainer).attr('data-total', price * quantity);
     }
 

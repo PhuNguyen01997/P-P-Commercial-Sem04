@@ -1,0 +1,43 @@
+.dataTables_wrapper .pagination {
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    text-align: right;
+}
+
+.dataTables_wrapper .dataTables_filter input[type="search"] {
+    display: inline-block;
+    width: auto;
+    margin-left: 0.5em;
+}
+
+.dataTables_wrapper .dataTables_length select{
+    display: inline-block;
+    width: auto;
+}
+
+.dataTables_wrapper .dataTables_info{
+    padding-top: 0.65rem;
+}
+
+.swal2-success-ring {
+    border-color: white !important;
+}
+
+.swal2-title{
+    color: white !important;
+}
+
+.detail-img{
+    position: absolute;
+    right: 20px;
+    width: 150px;
+}
+
+@media screen and (max-width: 480px) {
+    img#picture {
+        width: 100px;
+    }
+}

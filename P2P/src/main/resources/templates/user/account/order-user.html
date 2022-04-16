@@ -26,7 +26,7 @@
                 <div class="order-body">
                     <ul class="order-body--list">
                         <li th:each="orderDetail : ${order.orderDetails}" class="order-item">
-                            <p class="pic order-item--pic"><img src="/img/products/product_01.jpg"
+                            <p class="pic order-item--pic"><img th:src="${orderDetail.product.toUrl(orderDetail.product.image.get(0))}"
                                                                 alt=""></p>
                             <div class="order-item--text">
                                 <p th:text="${orderDetail.product.name}" class="order-item--name">[Order Product
@@ -41,7 +41,7 @@
                             </div>
                             <p class="order-item--price">
                                 <span class="jsPrice" th:attr="data-value=${orderDetail.lastPrice}"
-                                      th:text="${orderDetail.lastPrice}">[Order Product Price]</span>
+                                      th:text="${#numbers.formatDecimal(orderDetail.lastPrice, 0, 'COMMA', 0, 'POINT')}">[Order Product Price]</span>
                                 <span> vnđ</span>
                             </p>
                         </li>
@@ -51,12 +51,12 @@
             <div class="order-submit">
                 <p class="order-submit--total">
                     <span>Total:</span>
-                    <span th:text="${order.calTotal()}" class="jsTotal">[Total Order]</span>
+                    <span th:text="${#numbers.formatDecimal(order.calTotal(), 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
                 </p>
                 <div class="order-submit--info">
-                    <p class="order-submit--text">Bạn đã hủy</p>
+                    <p class="order-submit--text mr-4">Bạn đã hủy</p>
                     <!--                    <button class="order-submit&#45;&#45;btn order-submit&#45;&#45;btn btn btn__primary">Mua lại</button>-->
-                    <a th:href="@{/rate/{id}(id = ${order.id})}">
+                    <a th:href="@{/order/{id}/rate(id = ${order.id})}">
                         <button class="order-submit--btn order-submit--btn btn btn__primary">Đánh giá</button>
                     </a>
                     <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Liên hệ người bán</a>

@@ -4,6 +4,7 @@ import com.apt.p2p.model.form.WithdrawForm;
 import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UserService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,23 +20,21 @@ import java.math.BigDecimal;
 @Controller
 public class FundController {
     @Autowired
-    private ShopService shopService;
+    private UsersDetailServiceImpl userService;
     @Autowired
-    private UserService userService;
+    private ShopService shopService;
 
     @GetMapping("portal/fund")
     public String portalIndex(Model model) {
-        int userId = 2;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
 
-        model.addAttribute("shop", user.getShop() != null ? shopService.findById(user.getShop().getId()) : null);
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         return "user/portal/fund";
     }
 
     @GetMapping("portal/fund/withdraw")
     public String portalWithdraw(Model model) {
-        int userId = 2;
-        UserModel user = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
 
         model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         model.addAttribute("withdraw", new WithdrawForm(user.getShop() != null ? user.getShop().getId() : 0 , BigDecimal.ZERO));
@@ -62,6 +61,6 @@ public class FundController {
             return "user/portal/fund-withdraw";
         }
 
-        return "redirect:/portal/" + input.getShopId() + "/fund/";
+        return "redirect:/portal/fund/";
     }
 }

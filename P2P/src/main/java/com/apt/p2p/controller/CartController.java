@@ -3,8 +3,10 @@ package com.apt.p2p.controller;
 import com.apt.p2p.model.form.ProductAddCartModel;
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.CartModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.CartService;
 import com.apt.p2p.service.ShopService;
+import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,15 @@ import java.util.stream.Collectors;
 @Controller
 public class CartController {
     @Autowired
+    private UsersDetailServiceImpl userService;
+    @Autowired
     private CartService cartService;
 
     @GetMapping("/cart")
     public String cart(Model model) {
-        List<CartIndexViewModel> cartList = cartService.getCartListChunkByShop();
+        UserModel user = userService.getCurrentUser();
 
+        List<CartIndexViewModel> cartList = cartService.getCartListChunkByShop(user.getId());
         model.addAttribute("cartList", cartList);
 
         return "user/main/cart";
@@ -32,7 +37,9 @@ public class CartController {
 
     @PostMapping("/cart-add")
     public String addCart(Model model, @ModelAttribute("addCartModel") ProductAddCartModel cartModel) {
-        cartService.save(cartModel);
+        UserModel user = userService.getCurrentUser();
+
+        cartService.save(user.getId(), cartModel);
         return "redirect:/product/" + cartModel.getProductId();
     }
 

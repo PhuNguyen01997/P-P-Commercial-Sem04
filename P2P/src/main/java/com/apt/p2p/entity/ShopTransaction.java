@@ -32,7 +32,7 @@ public class ShopTransaction {
     @NotNull
     private Date date = new Date();
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private ShopTransactionStatus status;
 
     @NotNull
@@ -63,5 +63,10 @@ public class ShopTransaction {
         this.amount = amount;
         this.status = ShopTransactionStatus.WAIT;
         this.description = "Rút tiền từ cửa hàng vào tài khoản cá nhân";
+    }
+
+    public ShopTransaction(Shop shop, BigDecimal amount, ShopTransactionStatus status) {
+        this(shop, amount);
+        this.status = status;
     }
 }

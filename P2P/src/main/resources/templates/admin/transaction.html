@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="dataTable" class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Số tiền</th>
+                                <th class="text-center">Thời gian</th>
+                                <th>Cửa hàng</th>
+                                <th class="text-center">Trạng thái</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="transaction : ${transactions}" class="jsClick" th:data-id="${transaction.id}">
+                                <td class="text-center" th:data-order="${transaction.amount}">
+                                    <span th:text="${transaction.order == null ? '-' : '+'}" class="mr-1"></span>
+                                    <span th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"></span>
+                                </td>
+                                <td th:text="${#dates.format(transaction.date, 'dd-MM-yyyy HH:mm')}"
+                                    th:data-order="${transaction.date.getTime()}"
+                                    class="text-center"></td>
+                                <td th:text="${transaction.shop.name}"></td>
+                                <td th:switch="${transaction.status.name()}" class="text-center">
+                                    <span class="badge badge-danger"
+                                          th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).WAIT.name()}">Chờ xử lý</span>
+                                    <span class="badge badge-success"
+                                          th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).SUCCESS.name()}">Thành công</span>
+                                    <span class="badge badge-warning"
+                                          th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).FAIL.name()}">Thất bại</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th class="text-center">Số tiền</th>
+                                <th class="text-center">Thời gian</th>
+                                <th>Cửa hàng</th>
+                                <th class="text-center">Trạng thái</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script layout:fragment="script">
+    $("#dataTable").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": true,
+        // "columnDefs": [
+            // {"type": "html-num-fmt", "targets": 0},
+        // ]
+    });
+    $('table').on('click', '.jsClick', function () {
+        const id = this.dataset.id;
+        location.href = `transaction/${id}`;
+    })
+</script>
+</body>
+</html>

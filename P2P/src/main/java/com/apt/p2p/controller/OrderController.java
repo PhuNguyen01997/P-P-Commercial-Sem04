@@ -23,15 +23,11 @@ import java.util.stream.Collectors;
 @Controller
 public class OrderController {
     @Autowired
-    private OrderService orderService;
-    @Autowired
     private UsersDetailServiceImpl userService;
     @Autowired
+    private OrderService orderService;
+    @Autowired
     private StatusOrderService statusOrderService;
-    @Autowired
-    private OrderDetailService orderDetailService;
-    @Autowired
-    private ProductService productService;
     @Autowired
     private StatusHistoryService statusHistoryService;
     @Autowired
@@ -39,9 +35,10 @@ public class OrderController {
 
     @GetMapping("order")
     public String index(Model model) {
-        int userId = 3;
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
 
-        List<OrderModel> orders = orderService.findAllByUserId(userId);
+        List<OrderModel> orders = orderService.findAllByUserId(user.getId());
         model.addAttribute("orders", orders);
 
         return "user/account/order-user";
@@ -50,7 +47,9 @@ public class OrderController {
     @GetMapping("order/{id}")
     public String orderDetail(@PathVariable("id") int id,
                               Model model) {
-        int userId = 3;
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
         OrderModel order = orderService.findById(id);
         HashMap<Integer, StatusHistory> statusMapStatusHistory = statusHistoryService.findStatusOrderMapStatusHistoryByOrderId(order.getId());
         Date date = statusMapStatusHistory.get(1).getDate();
@@ -63,10 +62,10 @@ public class OrderController {
 
     @GetMapping("portal/order")
     public String portalIndex(Model model) {
-        int userId = 2;
-        UserModel userModel = userService.findById(userId);
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
 
-        model.addAttribute("shop", userModel.getShop() != null ? shopService.findByUserId(userModel.getId()) : null);
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
 
         return "user/portal/order";
     }

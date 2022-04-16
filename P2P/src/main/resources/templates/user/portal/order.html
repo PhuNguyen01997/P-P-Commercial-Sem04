@@ -118,7 +118,6 @@
 
                     let htmlText = "";
                     orders.forEach((order) => {
-                        console.log(order)
                         const createdDate = new Date(Date.parse(order.createdAt));
                         const currentStatus = order.currentStatus;
                         let nextStatus = {
@@ -141,12 +140,12 @@
                             }
                         }
 
-                        console.log({currentStatus, nextStatus});
-
+                        let total =
                         htmlText += `<li class="table-body--row">` +
                             `<div class="table-body--row-header">` +
                             `<p class="avatar circle"><img src="/img/common/img_default_user.png" alt=""></p>` +
                             `<p class="name">${order.user.username}</p>` +
+                            `<p class="amount"><span>Tổng cộng: </span><span class="bold">${order.total.toLocaleString()} vnđ</span></p>` +
                             `<p class="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
                             `</div>` +
                             `<ul class="table-body--row-list">`;
@@ -154,10 +153,10 @@
                         order.orderDetails.forEach(ode => {
                             htmlText += `<li class="table-body--row-item">` +
                                 `<div class="table-col table-col__name">` +
-                                `<img src="/img/products/product_01.jpg" alt="">` +
+                                `<img src="/assets/products/${ode.product.image[0]}" alt="">` +
                                 `<div class="info"><p class="txt">${ode.product.name}</p><p class="number">x${ode.quantity}</p></div>` +
                                 `</div>` +
-                                `<div class="table-col table-col__price"><p>${ode.lastPrice} vnđ</p></div>` +
+                                `<div class="table-col table-col__price"><p>${ode.lastPrice.toLocaleString()} vnđ</p></div>` +
                                 `<div class="table-col table-col__date">` +
                                 `<p>${getStringDateFormat(createdDate)}</p>` +
                                 `<p>${getStringTimeFormat(createdDate)}</p>` +

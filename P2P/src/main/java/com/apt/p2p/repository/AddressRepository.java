@@ -8,10 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AddressRepository extends JpaRepository<Address, Integer> {
-    @Query("SELECT a FROM Address a WHERE a.user.id=:id ORDER BY a.id")
+    @Query("SELECT a FROM Address a WHERE a.user.userId = :id ORDER BY a.id desc")
     List<Address> findAllByUserId(@Param("id") int userId);
-
-    List<Address> findAllByOrderById();
 
     @Query("SELECT a FROM Address a WHERE a.shop.id=:id")
     Address findByShopId(@Param("id") int shopId);

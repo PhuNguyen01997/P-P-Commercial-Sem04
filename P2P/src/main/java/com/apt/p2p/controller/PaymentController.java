@@ -4,6 +4,7 @@ import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.CartIndexViewModel;
 import com.apt.p2p.model.view.OrderModel;
 import com.apt.p2p.model.view.CardModel;
+import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.*;
 import com.apt.p2p.validate.CardModelValidator;
 import com.stripe.exception.StripeException;
@@ -23,6 +24,8 @@ import java.util.List;
 
 @Controller
 public class PaymentController {
+    @Autowired
+    private UsersDetailServiceImpl userService;
     @Autowired
     private PaymentService paymentService;
     @Autowired
@@ -44,11 +47,12 @@ public class PaymentController {
         if (idList.length < 1) {
             return "redirect:/cart";
         }
+        UserModel user = userService.getCurrentUser();
 
         List<CartIndexViewModel> shopCarts = paymentService.processViewPayment(idList);
         model.addAttribute("shopCarts", shopCarts);
-        model.addAttribute("addresses", addressService.findAllByUserId(3));
-        model.addAttribute("creditCards", cardService.findAllByUserId(3));
+        model.addAttribute("addresses", addressService.findAllByUserId(user.getId()));
+        model.addAttribute("creditCards", cardService.findAllByUserId(user.getId()));
         model.addAttribute("purchase", new PurchaseModel());
 
         return "user/main/payment";

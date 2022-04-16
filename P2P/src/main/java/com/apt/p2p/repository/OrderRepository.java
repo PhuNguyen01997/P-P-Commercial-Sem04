@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpecificationExecutor {
-    @Query("SELECT o FROM Order o WHERE o.user.id=:id ORDER BY o.id DESC")
+    @Query("SELECT o FROM Order o WHERE o.user.userId=:id ORDER BY o.id DESC")
     List<Order> findAllByUserId(@Param("id") int userId);
 
     @Query("SELECT o FROM Order o WHERE o.shop.id=:id ORDER BY o.id DESC")

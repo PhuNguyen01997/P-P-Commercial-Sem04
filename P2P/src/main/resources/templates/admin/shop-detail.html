@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>ShoPP</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-sm-8 d-flex align-items-center">
+                        <h3 class="card-title"><i class="fas fa-text-width"></i> <span
+                                class="deleted text-gray">asd</span></h3>
+                        <!--            <h3 class="card-title"><i class="fas fa-text-width"></i> {{ $product->name }}</h3>-->
+                    </div>
+                    <div class="col-sm-4 d-flex justify-content-end">
+                        <button data-name="{{ $product->name }}" data-id="{{ $product->id }}" name="delete"
+                                class="btn btn-danger">Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <dl class="row">
+                    <img id="picture" class="detail-img" th:src="${shop.logo}">
+                    <dt class="col-sm-3">ID</dt>
+                    <dd th:text="${shop.id}" class="col-sm-9"></dd>
+                    <dt class="col-sm-3">Tên cửa hàng</dt>
+                    <dd th:text="${shop.name}" class="col-sm-9"></dd>
+                    <dt class="col-sm-3">Số điện thoại</dt>
+                    <dd th:text="${shop.phone}" class="col-sm-9"></dd>
+                    <dt class="col-sm-3">Quỹ tiền</dt>
+                    <dd class="col-sm-9"><span th:text="${shop.fund}"></span><span> vnđ</span></dd>
+                    <dt class="col-sm-3">Ngày đăng ký</dt>
+                    <dd th:text="${shop.createdAt}" class="col-sm-9"></dd>
+                    <dt class="col-sm-3">Đánh giá</dt>
+                    <dd th:text="${shop.averageRates + ' ('+ shop.countRates +' đánh giá)'}" class="col-sm-9 text-nowrap"></dd>
+                    <dt class="col-sm-3">Sở hữu</dt>
+                    <dd th:text="${shop.user.username}" class="col-sm-9"></dd>
+                </dl>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</section>
+
+<script layout:fragment="script">
+    $("#dataTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+    });
+</script>
+</body>
+</html>

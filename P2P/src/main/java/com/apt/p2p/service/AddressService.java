@@ -6,8 +6,6 @@ import com.apt.p2p.model.view.AddressModel;
 import java.util.List;
 
 public interface AddressService {
-    List<AddressModel> findAll();
-
     List<AddressModel> findAllByUserId(int userId);
 
     AddressModel save(int userId, AddressModel address);

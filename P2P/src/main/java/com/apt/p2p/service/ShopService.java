@@ -4,8 +4,10 @@ import com.apt.p2p.model.view.ShopModel;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface ShopService {
+    List<ShopModel> findAll();
     ShopModel findById(int id);
 
     ShopModel findByProductId(int productId);

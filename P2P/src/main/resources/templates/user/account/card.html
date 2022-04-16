@@ -57,19 +57,19 @@
             <div class="modal2-input-container modal2-input-container__card-choose">
                 <select id="select-card" class="d-none" th:field="*{type}">
                     <option value=""></option>
-                    <option th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}"
+                    <option th:each="payType : ${T(com.apt.p2p.entityEnum.CardType).values()}"
                             th:value="${payType.displayValue}"
                             th:text="${payType.displayValue}"
                             th:selected="${payType == card.type}"></option>
                 </select>
                 <div class="modal2--pic-type">
-                    <th:block th:each="payType : ${T(com.apt.p2p.entity.CardType).values()}">
+                    <th:block th:each="payType : ${T(com.apt.p2p.entityEnum.CardType).values()}">
                         <p th:attr="data-value=${payType.displayValue}" th:switch="${payType}"
                            th:classappend="${payType.displayValue == card.type} ? 'active' : 'no-active'"
                            class="pic">
-                            <img th:case="${T(com.apt.p2p.entity.CardType).VISA}"
+                            <img th:case="${T(com.apt.p2p.entityEnum.CardType).VISA}"
                                  src="/img/common/icon-visa.png" alt="">
-                            <img th:case="${T(com.apt.p2p.entity.CardType).MASTER_CARD}"
+                            <img th:case="${T(com.apt.p2p.entityEnum.CardType).MASTER_CARD}"
                                  src="/img/common/icon-master-card.png" alt="">
                         </p>
                     </th:block>

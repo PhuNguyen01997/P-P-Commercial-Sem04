@@ -69,7 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/signin", "/signup").permitAll();
-        http.authorizeRequests().antMatchers("/account").authenticated();
+        http.authorizeRequests().antMatchers("/card", "/address", "/order", "/cart", "/portal/**").authenticated();
+//        http.authorizeRequests().antMatchers("/portal").access("hasRole('ROLE_SELLER')");
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/signin")
