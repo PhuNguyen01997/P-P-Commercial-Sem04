@@ -119,7 +119,8 @@ public class MainController {
 
     @PostMapping("edit-account")
     public String updateAccount(Model model) {
-        return null;
+
+        return "user/account/user-form";
     }
 
     @GetMapping("identity")
