@@ -16,12 +16,13 @@
             <h2 class="split-header--title">Hồ Sơ Của Tôi</h2>
             <p class="split-header--text">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
         </div>
-        <form th:action="@{/save-user}" th:object="${user}" method="POST" class="account-form account-edit-form" enctype="multipart/form-data">
+        <form th:action="@{/edit-account}" th:object="${user}" method="POST" class="account-form account-edit-form" enctype="multipart/form-data">
             <div class="account-form--left">
                 <div class="form-item">
                     <label class="form-item--left">Tên đăng nhập</label>
                     <div class="form-item--right">
                         <p class="text" th:text="${user.username}"></p>
+                        <input type="hidden" th:field="*{username}">
                     </div>
                 </div>
                 <div class="form-item">
@@ -93,10 +94,11 @@
                 </div>
             </div>
             <div class="account-form--right">
-                <p class="circle pic account-form--pic" name="pic">
-                    <img th:src="${user.toUrl(user.avatar)}">
+                <p class="circle pic account-form--pic">
+                    <img th:src="${user.toUrl(user.avatar)}" class="jsPic">
                 </p>
-                <button class="btn btn__primary-outline account-form--update-btn">Choose picture</button>
+                <label class="btn btn__primary-outline account-form--update-btn" for="pic">Choose picture</label>
+                <input type="file" for="pic" name="pic" id="pic" class="d-none">
                 <p class="account-form--pic-note">Dụng lượng file tối đa 1 MB<br>Định dạng:.JPEG, .PNG</p>
             </div>
         </form>
@@ -104,6 +106,15 @@
 </div>
 <script layout:fragment="script">
     $(function () {
+        $('#pic').on('change', function () {
+            console.log(this);
+            const element = document.querySelector('.jsPic');
+            if (this.files && this.files[0]) {
+                console.log(this.files[0])
+                readUrlImage(this.files[0], element);
+            }
+        });
+
         let yearHtml = `<option value="0">Năm sinh</option>`
         for (let i = 2022; i >= 1960; i--) {
             yearHtml += `<option value="${i}">${i}</option>`;

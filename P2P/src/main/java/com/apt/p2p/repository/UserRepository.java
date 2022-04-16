@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
+
     User findByUsername(String username);
 
     @Query("SELECT distinct (u.email) FROM User u WHERE u.email = :email")

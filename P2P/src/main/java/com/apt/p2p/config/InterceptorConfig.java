@@ -13,7 +13,7 @@ public class InterceptorConfig {
     public MyInterceptor MyInterceptor() {
         MyInterceptor myInterceptor = new MyInterceptor();
         Map<String, String> naviPortalHeader = new HashMap<>();
-        myInterceptor.setNaviPortalHeader();
+//        myInterceptor.setNaviPortalHeader();
         return myInterceptor;
     }
 }
