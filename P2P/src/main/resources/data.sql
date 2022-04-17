@@ -124,8 +124,22 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 (NOW(), 'Bộ đôi Sữa dưỡng thể trắng da Ngày (350ml) & Đêm (350ml) NIVEA (88311+88126)', '[\"5_4905786.jpg\",\"5_384673.jpg\",\"5_23897543.jpg\",\"5_8934567.jpg\",\"5_9384576.jpg\",\"5_09568.jpg\"]', '', 278000, NOW(), 5, 1, 0),
 (NOW(), 'Một gói 50 tờ giấy thấm dầu ngẫu nhiên Sena Beauty', '[\"5_8345.jpg\",\"5_8345967.jpg\",\"5_8934576.jpg\",\"5_45897.jpg\",\"5_34987.jpg\"]', '', 6930, NOW(), 5, 1, 0),
 (NOW(), 'Máy cạo râu Xiaomi Enchen BlackStone 3 Electric Shaver 3D', '[\"5_8943576.jpg\",\"5_83456.jpg\",\"5_3945.jpg\",\"5_839476.jpg\",\"5_853476.jpg\",\"5_23657.jpg\"]', '', 289900, NOW(), 5, 1, 0);
--- INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
--- (NOW(), 'Xẻng Hình Trái Tim múc bột, thìa múc thức ăn tráng miệng bằng nhựa', '', '', 2000, NOW(), 6, 1, 0),
+INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), 'Sa tế sò điệp Thích Cay,trộn mì, hủ tiếu, phở, sốt cá viên chiên, dùng để ướp thịt tiện lợi', '[\"1_11110.jpg\",\"1_11111.jpg\",\"1_11112.jpg\"]', '', 40000, NOW(), 6, 1, 0),
+(NOW(), 'Mật ong nguyên chất hoa cà phê Beemo', '[\"1_11113.jpg\",\"1_11114.jpg\",\"1_11115.jpg\"]', '', 48500, NOW(), 6, 1, 0),
+(NOW(), 'Mì xào khô/ mì trộn INDOMIE Goreng rẻ vô địch đủ vị', '[\"1_11116.jpg\",\"1_11117.jpg\",\"1_11118.jpg\"]', '', 5000, NOW(), 6, 1, 0),
+(NOW(), 'Set Nguyên Liệu Trà Sữa Trân Châu 25-30 Ly Trà Thái Xanh, Đỏ, Phúc Long', '[\"1_11119.jpg\",\"1_11120.jpg\",\"1_11121.jpg\"]', '', 35000, NOW(), 6, 1, 0),
+(NOW(), 'Yến mạch cán vỡ Hafer Flocken 500gr, 5 phút ăn liền', '[\"1_11122.jpg\",\"1_11123.jpg\",\"1_11124.jpg\"]', 'Y', 17000, NOW(), 6, 1, 0),
+(NOW(), 'Ghẹ Sữa Rim Gia Vị 200G Đệ Nhất Khô đồ ăn vặt ngon giá rẻ Đặc Sản Phan Thiết', '[\"1_11125.jpg\",\"1_11126.jpg\",\"1_11127.jpg\"]', '', 59000, NOW(), 6, 1, 0),
+(NOW(), 'Cơm cháy lắc khô bò 300g DumBum đồ ăn vặt Hà Nội vừa ngon vừa rẻ', '[\"1_11128.jpg\",\"1_11129.jpg\",\"1_11130.jpg\"]', '', 32000, NOW(), 6, 1, 0),
+(NOW(), 'Bim Bim Cánh Gà Chiên Giòn ', '[\"1_11131.jpg\",\"1_11132.jpg\",\"1_11133.jpg\"]', '', 7000, NOW(), 6, 1, 0),
+(NOW(), '150g Rong biển cháy tỏi loại ngon lon', '[\"1_11134.jpg\",\"1_11135.jpg\",\"1_11136.jpg\"]', '', 36000, NOW(), 6, 1, 0),
+(NOW(), 'Chè Dưỡng Nhan Set Nguyên Liệu 30 Chén, Chè Tuyết Yến Bổ Dưỡng, Đẹp Da', '[\"1_11137.jpg\",\"1_11138.jpg\",\"1_11139.jpg\"]', '', 30000, NOW(), 6, 1, 0),
+(NOW(), '500g Hạt Macca Organic Sạch Di Linh Lâm Đồng', '[\"1_11140.jpg\",\"1_11141.jpg\",\"1_11142.jpg\"]', '', 25000, NOW(), 6, 1, 0),
+(NOW(), 'Kẹo Thạch Zaizai 320g / 350g / 500g - Đức Hạnh | Hương vị: Khoai Môn, Chanh Leo, Me, Dâu, Xoài, Đào, cam', '[\"1_11143.jpg\",\"1_11144.jpg\",\"1_11145.jpg\"]', '', 42000, NOW(), 6, 1, 0),
+(NOW(), 'Bánh BISCOTTI Nguyên Cám Ăn Kiêng Lành Mạnh 100% by HeBe - Bánh Ngũ Cốc Ăn Kiêng Health', '[\"1_11146.jpg\",\"1_11147.jpg\",\"1_11148.jpg\"]', '', 45000, NOW(), 6, 1, 0),
+(NOW(), 'ĐƯỜNG ĐEN TAIWAN', '[\"1_11149.jpg\",\"1_11150.jpg\",\"1_11151.jpg\"]', '', 98000, NOW(), 6, 1, 0),
+(NOW(), 'Trái Đào Ngâm Nước Đường Thái Lan Lon 425gr & Lon 820gr', '[\"1_11152.jpg\",\"1_11153.jpg\",\"1_11154.jpg\"]', '', 24000, NOW(), 6, 1, 0);
 
 -- INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
 -- (NOW(), 3, NOW(), 1, 2),
