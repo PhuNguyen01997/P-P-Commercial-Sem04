@@ -19,8 +19,7 @@ public class CardServiceImpl implements CardService {
     private CardMapper cardMapper;
 
     @Override
-    public CardModel create(CardModel cardModel) throws StripeException {
-        int userId = 3;
+    public CardModel create(int userId, CardModel cardModel) throws StripeException {
         Card card = stripeService.createCard(userId, cardModel);
 
         return cardMapper.stripeCardToCardModel(card);

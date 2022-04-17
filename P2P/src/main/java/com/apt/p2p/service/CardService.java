@@ -6,9 +6,9 @@ import com.stripe.exception.StripeException;
 import java.util.List;
 
 public interface CardService {
-    public CardModel create(CardModel cardModel) throws StripeException;
+    public CardModel create(int userId, CardModel cardModel) throws StripeException;
 
-    public List<CardModel> findAllByUserId(int id);
+    public List<CardModel> findAllByUserId(int userId);
 
     public boolean delete(String stripeCardId);
 }

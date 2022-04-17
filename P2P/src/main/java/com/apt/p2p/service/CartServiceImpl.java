@@ -5,6 +5,7 @@ import com.apt.p2p.common.modelMapper.ProductMapper;
 import com.apt.p2p.common.modelMapper.ShopMapper;
 import com.apt.p2p.entity.Cart;
 import com.apt.p2p.entity.Product;
+import com.apt.p2p.entity.Shop;
 import com.apt.p2p.entity.User;
 import com.apt.p2p.model.form.ProductAddCartModel;
 import com.apt.p2p.model.view.*;
@@ -45,8 +46,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartModel save(int userId, ProductAddCartModel productAddCart) {
+    public CartModel save(int userId, ProductAddCartModel productAddCart) throws Exception {
         Product product = productRepository.findById(productAddCart.getProductId()).get();
+
+        Shop shop = shopRepository.findByProductId(productAddCart.getProductId());
+        if(shop.getUser().getUserId() == userId){
+            throw new Exception("You cannot add your product to your cart !!!");
+        }
 
         User user = userRepository.findById(userId).get();
 

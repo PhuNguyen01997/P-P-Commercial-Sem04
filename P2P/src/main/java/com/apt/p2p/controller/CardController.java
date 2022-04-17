@@ -63,11 +63,11 @@ public class CardController {
             return "user/account/card";
         }
         try {
-            CardModel paymentResult = cardService.create(cardModel);
+            CardModel paymentResult = cardService.create(user.getId(), cardModel);
         } catch (StripeException e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xảy ra, vui lòng kiểm tra lại thông tin thẻ");
+            redirectAttributes.addFlashAttribute("globalError", "Something wrong, please check your card information");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xảy ra không thể thêm thẻ thanh toán, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "Something wrong, can't add your card payment, please add later");
         }
         return "redirect:/card";
     }

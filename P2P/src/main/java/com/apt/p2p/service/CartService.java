@@ -15,7 +15,7 @@ public interface CartService {
 
     boolean edit(CartModel cartModel);
 
-    CartModel save(int userId, ProductAddCartModel productAddCartModel);
+    CartModel save(int userId, ProductAddCartModel productAddCartModel) throws Exception;
 
     List<CartIndexViewModel> getCartListChunkByShop(int userId);
 

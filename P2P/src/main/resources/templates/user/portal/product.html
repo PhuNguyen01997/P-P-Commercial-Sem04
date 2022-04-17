@@ -117,7 +117,7 @@
                     products.forEach(product => {
                         html += `<div class="product-row" data-id="${product.id}">` +
                             `<div class="product-row--item product-row--item__name">` +
-                            `<p class="pic"><img src="${product.image}" alt=""></p>` +
+                            `<p class="pic"><img src="/assets/products/${product.image[0]}" alt=""></p>` +
                             `<p class="text">${product.name}</p>` +
                             `</div>` +
                             `<div class="product-row--item product-row--item__category">` +

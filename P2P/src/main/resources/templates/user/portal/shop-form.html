@@ -53,8 +53,8 @@
             <div class="shop-form-row">
                 <label for="name">Tên Shop</label>
                 <div class="ipt ipt__limit-length">
-                    <input maxlength="30" th:field="*{name}" id="name" type="text">
-                    <p class="length"><span class="jsCount-name">0</span><span>/30</span></p>
+                    <input maxlength="100" th:field="*{name}" id="name" type="text">
+                    <p class="length"><span class="jsCount-name">0</span><span>/100</span></p>
                     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">[Error Name]</p>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <label>Địa chỉ Shop</label>
                 <div th:if="${user.addresses.size() == 0}">
                     <input type="hidden" name="teAddress" value="">
-                    <p>Bạn chưa có địa chỉ <a href="#">Tạo địa chỉ</a></p>
+                    <p>Bạn chưa có địa chỉ <a href="/address">Tạo địa chỉ</a></p>
                 </div>
                 <div th:if="${user.addresses.size() > 0}" class="select">
                     <select name="teAddress">
@@ -83,9 +83,9 @@
             <div class="shop-form-row shop-form-row__textarea">
                 <label for="description">Mô tả Shop</label>
                 <textarea th:field="*{description}"
-                          rows="5" id="description"
+                          rows="5" id="description" maxlength="3000"
                           placeholder="Nhập mô tả hoặc thông tin về Shop của bạn tại đây"></textarea>
-                <p class="length"><span class="jsCount-description">0</span><span>/500</span></p>
+                <p class="length"><span class="jsCount-description">0</span><span>/3000</span></p>
                 <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error">[Error
                     Description]</p>
             </div>

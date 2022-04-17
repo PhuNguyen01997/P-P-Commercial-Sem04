@@ -212,12 +212,12 @@ label {
 }
 
 .attachAdjust--button[data-value="minus"] {
-  background: url("/assets/img/common/icon-minus.png") no-repeat 50% 50%;
+  background: url("/img/common/icon-minus.png") no-repeat 50% 50%;
   background-size: 50% 50%;
 }
 
 .attachAdjust--button[data-value="plus"] {
-  background: url("/assets/img/common/icon-plus.png") no-repeat 50% 50%;
+  background: url("/img/common/icon-plus.png") no-repeat 50% 50%;
   background-size: 50% 50%;
 }
 
