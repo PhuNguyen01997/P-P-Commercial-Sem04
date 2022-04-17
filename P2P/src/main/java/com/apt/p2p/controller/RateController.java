@@ -3,9 +3,12 @@ package com.apt.p2p.controller;
 import com.apt.p2p.common.modelMapper.RateMapper;
 import com.apt.p2p.entity.Rate;
 import com.apt.p2p.model.form.PagiSortModel;
+import com.apt.p2p.model.form.RateMultiProductForm;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.ResponsePagiView;
 import com.apt.p2p.model.view.ResponseRateApiPagi;
+import com.apt.p2p.model.view.UserModel;
+import com.apt.p2p.service.OrderService;
 import com.apt.p2p.service.RateService;
 import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,8 @@ public class RateController {
     @Autowired
     private RateService rateService;
     @Autowired
+    private OrderService orderService;
+    @Autowired
     private RateMapper rateMapper;
 
     @PostMapping ("/api/products/{productId}/rate")
@@ -37,8 +42,14 @@ public class RateController {
         return result;
     }
 
-    @PostMapping("/rate")
-    public String rateProduct(@ModelAttribute("rate") RateModel[] ratesForm){
-        return "asd";
+    @PostMapping("/rate/{orderId}")
+    public String rateProduct(@ModelAttribute RateMultiProductForm ratesForm, @PathVariable("orderId") int orderId){
+        UserModel user = userService.getCurrentUser();
+        for (int i = 0; i < ratesForm.getRates().size(); i++) {
+            rateService.create(user.getId(), ratesForm.getProductId().get(i), ratesForm.getRates().get(i));
+        }
+
+        orderService.updateStatus(orderId, 5);
+        return "redirect:/order/" + orderId;
     }
 }

@@ -234,7 +234,7 @@ public class MainController {
         // create rates
         List<Rate> rates = new ArrayList<>();
         orders.forEach(order -> {
-            if (order.getCurrentStatus().getId() == 5) {
+            if (order.getCurrentStatus().getId() == 6) {
                 order.getOrderDetails().forEach(orderDetail -> {
                     Rate newRate = new Rate();
                     newRate.setDescription(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(25, 60)));
@@ -374,7 +374,14 @@ public class MainController {
         if (products.size() == 0) return result;
 
         for (int i = 0; i < amount; i++) {
-            StatusOrder currentStatusOrder = this.statusOrders.get(RandomUtil.getRandomNumber(0, 4));
+            Integer randomStatusIndex = RandomUtil.getRandomNumber(5);
+            if(randomStatusIndex <= 3){
+                randomStatusIndex = RandomUtil.getRandomNumber(5);
+            }
+            if(randomStatusIndex == 4){
+                randomStatusIndex = RandomUtil.getRandomNumber(4, 5);
+            }
+            StatusOrder currentStatusOrder = this.statusOrders.get(randomStatusIndex);
             User user = users.get(RandomUtil.getRandomNumber(users.size() - 1));
             Address address = user.getAddresses().get(user.getAddresses().size() - 1);
 

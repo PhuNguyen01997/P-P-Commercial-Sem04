@@ -29,4 +29,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     @Query("SELECT c.products FROM Category c WHERE c.id=:id")
     Product findAllByCategory(@Param("id") int categoryId);
+
+    @Query("SELECT p FROM Order o " +
+            "LEFT JOIN OrderDetail od ON od.order.id = o.id " +
+            "LEFT JOIN Product p ON od.product.id = p.id " +
+            "WHERE o.id = :id")
+    List<Product> findAllByOrderId(@Param("id") int orderId);
 }

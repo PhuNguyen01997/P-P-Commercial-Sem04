@@ -27,12 +27,6 @@ public class StatusOrder {
     @NotNull
     private String doneName;
 
-//    @OneToMany(mappedBy = "currentStatus", fetch = FetchType.LAZY)
-//    private List<Order> orders;
-
-//    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
-//    private List<StatusHistory> StatusHistories;
-
     public String getIconUrl(){
         String url = "";
         switch (this.id){
@@ -53,6 +47,10 @@ public class StatusOrder {
                 break;
             }
             case 5: {
+                url = "far fa-handshake";
+                break;
+            }
+            case 6: {
                 url = "far fa-star";
                 break;
             }

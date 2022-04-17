@@ -10,8 +10,15 @@ import java.util.List;
 
 public interface RateRepository extends JpaRepository<Rate, Integer>, JpaSpecificationExecutor {
     @Query("SELECT p.rates FROM Product p WHERE p.id=:id")
-    public List<Rate> findByProductId(@Param("id") int productId);
+    List<Rate> findByProductId(@Param("id") int productId);
 
     @Query("SELECT COUNT(r) FROM Rate r WHERE r.product.shop.id=:id")
-    public Integer countByShopId(@Param("id") int shopId);
+    Integer countByShopId(@Param("id") int shopId);
+
+    @Query("SELECT r FROM OrderDetail od " +
+            "JOIN Product p ON od.product.id = p.id " +
+            "JOIN Rate r ON r.product.id = p.id " +
+            "GROUP BY od.id " +
+            "HAVING od.id = :id")
+    Rate findByOrderDetailId(@Param("id") int orderDetailId);
 }

@@ -14,4 +14,8 @@ public interface RateService {
     Page<Rate> findAllByProductId(int productId, PagiSortModel pagiSortModel);
 
     Integer countByShopId(int shopId);
+
+    RateModel create(int userId, int productId, RateModel rateModel);
+
+    List<RateModel> findAllByOrderIdAndUserId(int orderId, int userId);
 }

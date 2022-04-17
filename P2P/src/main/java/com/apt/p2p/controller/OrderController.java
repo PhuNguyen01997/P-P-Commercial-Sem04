@@ -2,10 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.entity.StatusHistory;
 import com.apt.p2p.model.form.FilterOrder;
-import com.apt.p2p.model.view.OrderDetailModel;
-import com.apt.p2p.model.view.OrderModel;
-import com.apt.p2p.model.view.ProductModel;
-import com.apt.p2p.model.view.UserModel;
+import com.apt.p2p.model.view.*;
 import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +23,8 @@ public class OrderController {
     private UsersDetailServiceImpl userService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private RateService rateService;
     @Autowired
     private StatusOrderService statusOrderService;
     @Autowired
@@ -52,10 +51,14 @@ public class OrderController {
 
         OrderModel order = orderService.findById(id);
         HashMap<Integer, StatusHistory> statusMapStatusHistory = statusHistoryService.findStatusOrderMapStatusHistoryByOrderId(order.getId());
-        Date date = statusMapStatusHistory.get(1).getDate();
         model.addAttribute("order", order);
         model.addAttribute("statusList", statusOrderService.findAll());
-        model.addAttribute("statusMapStatusHistory", statusHistoryService.findStatusOrderMapStatusHistoryByOrderId(order.getId()));
+        model.addAttribute("statusMapStatusHistory", statusMapStatusHistory);
+
+        List<RateModel> rates = rateService.findAllByOrderIdAndUserId(order.getId(), user.getId());
+        if(order.getCurrentStatus().getId() == 5 && rates.size() == 0){
+            model.addAttribute("canRate", true);
+        }
 
         return "user/account/order-detail";
     }

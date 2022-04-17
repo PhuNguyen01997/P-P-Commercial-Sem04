@@ -20,12 +20,12 @@ public class MyInterceptor implements HandlerInterceptor {
     private List<Category> headerCategories;
     private Map<String, String> naviPortalHeader;
     private List<String[]> dataNaviPortalHeader = Arrays.asList(
-            new String[]{"/portal/order", "Đơn hàng"},
-            new String[]{"/portal/product", "Quản lý sản phẩm"},
-            new String[]{"/portal/product/create", "Thêm sản phẩm"},
-            new String[]{"/portal/", "Cửa hàng"},
-            new String[]{"/portal/fund", "Quản lý quỹ tiền"},
-            new String[]{"/portal/fund-withdraw", "Rút tiền"}
+            new String[]{"/portal/order", "Orders"},
+            new String[]{"/portal/product", "Products"},
+            new String[]{"/portal/product/create", "Add new products"},
+            new String[]{"/portal/", "My Store"},
+            new String[]{"/portal/fund", "Fund store"},
+            new String[]{"/portal/fund-withdraw", "Fund withdraw"}
     );
 
     @Override
