@@ -59,10 +59,10 @@ public class PaymentController {
     }
 
     @PostMapping("checkout")
-    @Transactional
     public String checkout(@ModelAttribute("purchase") PurchaseModel purchaseModel,
                            RedirectAttributes redirectAttributes) {
-        List<OrderModel> result = orderService.create(purchaseModel);
+        UserModel user = userService.getCurrentUser();
+        List<OrderModel> result = orderService.create(user.getId(), purchaseModel);
 
         if (result == null) {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");

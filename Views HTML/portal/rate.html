@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/assets/plugins/jquery v3.6.0/jquery v3.6.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/plugins/daterangepicker v3.1/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/plugins/daterangepicker v3.1/daterangepicker.css" />
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/5ca78cb473.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="portal">
+    <header class="header">
+        <div class="header-block header-block__left">
+            <h1 class="header-block--logo">
+                <img class="icon" src="/assets/img/common/logo.png" alt="">
+                <span class="txt">Trang chủ</span>
+            </h1>
+            <p class="header-block--angle"><i class="fas fa-angle-right"></i></p>
+            <h2 class="header-block--text02">Đơn Hàng</h2>
+        </div>
+        <div class="header-block header-block__right">
+            <p class="header-block--info">
+                <span class="avatar"><img src="/assets/img/common/img_default_user.png" alt=""></span>
+                <span class="name">Username</span>
+            </p>
+            <p class="header-block--noti"><i class="far fa-bell"></i></p>
+            <p class="header-block--edu"><button href="#" class="btn btn__outline">ShoPP Edu</button></p>
+        </div>
+    </header>
+    <section class="content">
+        <aside class="aside">
+            <div class="aside-container">
+                <p class="aside-title">Quản lý đơn hàng</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Đơn hủy</a></li>
+                    <li class="aside-item"><a href="#">Trả hàng/Hoàn tiền</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý Shop</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Đánh giá Shop</a></li>
+                    <li class="aside-item"><a href="#">Hồ sơ Shop</a></li>
+                    <li class="aside-item"><a href="#">Địa chỉ</a></li>
+                    <li class="aside-item"><a href="#">Tài khoản</a></li>
+                </ul>
+            </div>
+            <div class="aside-container">
+                <p class="aside-title">Quản lý sản phẩm</p>
+                <ul class="aside-list">
+                    <li class="aside-item"><a href="#">Tất cả</a></li>
+                    <li class="aside-item"><a href="#">Thêm sản phẩm</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main">
+            <div class="main-inner rate shop">
+                <h3 class="shop-title">Rate products</h3>
+                <p class="shop-title-desc">Manage your store reviews</p>
+                <div class="rate-search">
+                    <div class="rate-search-item">
+                        <label for="productName">Product name:</label>
+                        <input class="" type="text" name="productName">
+                    </div>
+                    <div class="rate-search-item">
+                        <label for="userName">User name:</label>
+                        <input class="" type="text" name="userName">
+                    </div>
+                    <div class="rate-search-item">
+                        <label for="date">Date:</label>
+                        <input class="" type="text" name="date">
+                    </div>
+                </div>
+                <button class="rate-submit btn btn__primary">Search</button>
+            </div>
+            <div class="main-inner rate-value">
+                <ul class="portal-category">
+                    <li class="portal-category--item active">
+                        <p>5 Sao</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>4 Sao</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>3 Sao</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>2 Sao</p>
+                    </li>
+                    <li class="portal-category--item">
+                        <p>1 Sao</p>
+                    </li>
+                    <li class="portal-category--bar"></li>
+                </ul>
+                <div class="rate-table">
+                    <div class="rate-table-header">
+                        <div class="rate-row rate-row__header">
+                            <div class="rate-row--item">Product information</div>
+                            <div class="rate-row--item">Rate information</div>
+                        </div>
+                    </div>
+                    <div class="rate-table-body">
+                        <div class="rate-row rate-row__body">
+                            <div class="rate-row--top">
+                                <p class="user">User: <img src="" alt=""><span>asd asd as asd</span></p>
+                                <p class="order">Order ID: <span>123271983</span></p>
+                            </div>
+                            <div class="rate-row--content">
+                                <div class="rate-row--content-item rate-row--content-item__product">
+                                    <img class="left" src="" alt="">
+                                    <div class="right">
+                                        <p class="name">asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH jkD
+                                            jkSDJKj JD </p>
+                                        <p class="category">Category: <span>123671 26378</span></p>
+                                    </div>
+                                </div>
+                                <div class="rate-row--content-item rate-row--content-item__rate">
+                                    <span class="icon icon__star">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </span>
+                                    <p class="date">2022-14-23 23:20</p>
+                                    <p>asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH jkD jkSDJKj
+                                        JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH jkD
+                                        jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH
+                                        jkD jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD
+                                        hKASDH jkD jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD
+                                        kjASD hKASDH jkD jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh
+                                        SJD kjASD hKASDH jkD jkSDJKj JD </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>

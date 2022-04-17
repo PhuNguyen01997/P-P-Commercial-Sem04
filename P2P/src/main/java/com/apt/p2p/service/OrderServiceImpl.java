@@ -4,16 +4,13 @@ import com.apt.p2p.common.modelMapper.OrderMapper;
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.form.FilterOrder;
 import com.apt.p2p.model.form.PurchaseModel;
-import com.apt.p2p.model.view.OrderDetailModel;
 import com.apt.p2p.model.view.OrderModel;
-import com.apt.p2p.model.view.ProductModel;
-import com.apt.p2p.model.view.ShopModel;
 import com.apt.p2p.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -49,9 +46,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public List<OrderModel> create(PurchaseModel purchaseModel) {
-        int userId = 3;
+    public List<OrderModel> create(int userId, PurchaseModel purchaseModel) {
         List<OrderModel> result = new ArrayList<>();
+        Boolean isPaymentOnline = purchaseModel.getMethodPayment();
         try {
             // handle save to db
             List<Cart> carts = cartRepository.findAllById(Arrays.asList(purchaseModel.getCartIds()));
@@ -59,7 +56,6 @@ public class OrderServiceImpl implements OrderService {
                 Product product = productRepository.findById(c.getProduct().getId()).get();
                 OrderDetail orderDetail = new OrderDetail(c.getProduct().getPrice(), c.getQuantity());
                 orderDetail.setProduct(product);
-                orderDetailRepository.save(orderDetail);
 
                 return orderDetail;
             }).collect(Collectors.toList());
@@ -68,12 +64,16 @@ public class OrderServiceImpl implements OrderService {
 
             Address address = addressRepository.findById(purchaseModel.getAddressId()).get();
 
-            String stripeCardId = purchaseModel.getMethodPayment() ? purchaseModel.getStripeCardId() : null;
+            String stripeCardId = isPaymentOnline ? purchaseModel.getStripeCardId() : null;
 
-            StatusOrder status = statusOrderRepository.findById(purchaseModel.getMethodPayment() ? 2 : 1).get();
+            StatusOrder status = statusOrderRepository.findById(isPaymentOnline ? 2 : 1).get();
 
             BigDecimal sumTotal = BigDecimal.valueOf(0);
             Integer tempIndex = 0;
+            List<Order> orderCreates = new ArrayList<>();
+            List<StatusHistory> statusCreates = new ArrayList<>();
+            List<ShopTransaction> transactionCreates = new ArrayList<>();
+            HashMap<Integer, BigDecimal> mapShopFund = new HashMap<>();
             for (Integer shopId : purchaseModel.getShopIds()) {
                 List<OrderDetail> filterOrderDetails = orderDetails
                         .stream().filter(ode -> ode.getProduct().getShop().getId() == shopId)
@@ -88,31 +88,48 @@ public class OrderServiceImpl implements OrderService {
                 Shop shop = shopRepository.findById(shopId).get();
 
                 BigDecimal totalGetPermission = total.subtract(total.multiply(BigDecimal.valueOf(0.05)));
-                shop.setFund(shop.getFund().add(totalGetPermission));
+                if(isPaymentOnline){
+                    mapShopFund.put(shopId, totalGetPermission);
+                }
 
-                Order order = new Order(purchaseModel.getMethodPayment(), total, shipCost, user, orderDetails, status, shop, address, stripeCardId);
-                orderRepository.save(order);
+                Order order = new Order(isPaymentOnline, total, shipCost, user, orderDetails, status, shop, address, stripeCardId);
 
                 // attach many to many relation ship order - order_status_history - status_history
-                StatusHistory statusHistory = new StatusHistory(status, order);
-                statusHistoryRepository.save(statusHistory);
+                for (int i = 1; i <= status.getId(); i++) {
+                    StatusOrder statusSaveToHistory = statusOrderRepository.findById(i).get();
+                    StatusHistory statusHistory = new StatusHistory(statusSaveToHistory, order);
+                    statusCreates.add(statusHistory);
+                }
 
                 // attach orderDetails to order
                 filterOrderDetails.forEach(ode -> ode.setOrder(order));
 
                 // save transaction history
-                ShopTransaction transaction = new ShopTransaction(shop, order);
-                shopTransactionRepository.save(transaction);
+                if(isPaymentOnline){
+                    ShopTransaction transaction = new ShopTransaction(shop, order);
+                    transactionCreates.add(transaction);
+                }
 
                 result.add(orderMapper.orderEntityToModel(order));
 
                 tempIndex++;
+                orderCreates.add(order);
             }
 
             // Stripe charge
-            if (purchaseModel.getMethodPayment()) {
+            if (isPaymentOnline) {
                 stripeService.checkout(user.getUserId(), sumTotal, stripeCardId);
             }
+
+            orderDetailRepository.saveAll(orderDetails);
+            orderRepository.saveAll(orderCreates);
+            statusHistoryRepository.saveAll(statusCreates);
+            shopTransactionRepository.saveAll(transactionCreates);
+            mapShopFund.keySet().forEach(shopId -> {
+                Shop shop = shopRepository.findById(shopId).get();
+                shop.setFund(shop.getFund().add(mapShopFund.get(shopId)));
+                shopRepository.save(shop);
+            });
         } catch (Exception e) {
             e.printStackTrace();
             return null;

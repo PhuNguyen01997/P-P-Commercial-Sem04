@@ -54,7 +54,7 @@
                     <span th:text="${#numbers.formatDecimal(order.calTotal(), 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
                 </p>
                 <div class="order-submit--info">
-                    <p class="order-submit--text mr-4">Bạn đã hủy</p>
+<!--                    <p class="order-submit&#45;&#45;text mr-4">Bạn đã hủy</p>-->
                     <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Liên hệ người bán</a>
                     <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">Chi tiết đon
                         hàng</a>

@@ -143,7 +143,10 @@ public class StripeServiceImpl implements StripeService {
 
     @Override
     public boolean checkout(int userId, BigDecimal total, String stripeCardId) throws StripeException{
-        BigDecimal totalUsd = total.divide(BigDecimal.valueOf(2000));
+        BigDecimal totalUsd = total;
+        while (totalUsd.compareTo(BigDecimal.valueOf(1000)) >= 0){
+            totalUsd = totalUsd.divide(BigDecimal.valueOf(1000));
+        }
         Customer customer = getCustomer(userId, true);
         if (customer == null) {
             return false;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/portal-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${shop == null ? 'Rate' : (shop.name + ' - Rate')}"></title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="main-inner">
+        <div class="product-search">
+            <div class="product-search-item product-search-item__name">
+                <div class="select">
+                    <select name="filterBy" id="">
+                        <option value="1" selected>Tên sản phẩm</option>
+                        <option value="2">Mã sản phẩm</option>
+                    </select>
+                </div>
+                <input type="text" name="name" placeholder="Nhập vào">
+            </div>
+            <div class="product-search-item product-search-item__category">
+                <label>Danh mục</label>
+                <div class="select">
+                    <select name="categoryId">
+                        <option value="0" selected>Tất cả</option>
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.name}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="product-search-item product-search-item__submit">
+                <button class="jsSubmit btn btn__primary">Tìm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+
+</script>
+</body>
+</html>
