@@ -2,6 +2,7 @@ package com.apt.p2p.controller;
 
 import com.apt.p2p.common.modelMapper.RateMapper;
 import com.apt.p2p.entity.Rate;
+import com.apt.p2p.model.form.FilterRatePortal;
 import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.form.RateMultiProductForm;
 import com.apt.p2p.model.view.RateModel;
@@ -10,10 +11,12 @@ import com.apt.p2p.model.view.ResponseRateApiPagi;
 import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.service.OrderService;
 import com.apt.p2p.service.RateService;
+import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +30,8 @@ public class RateController {
     private RateService rateService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private ShopService shopService;
     @Autowired
     private RateMapper rateMapper;
 
@@ -51,5 +56,21 @@ public class RateController {
 
         orderService.updateStatus(orderId, 5);
         return "redirect:/order/" + orderId;
+    }
+
+    @GetMapping("portal/rate")
+    public String portalRate(Model model){
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
+
+        return "user/portal/rate";
+    }
+
+    @PostMapping("api/rate/portal")
+    @ResponseBody
+    public List<RateModel> apiGetRateByFilter(@RequestBody FilterRatePortal filterRatePortal){
+        return rateService.findAllByFilterPortal(filterRatePortal);
     }
 }

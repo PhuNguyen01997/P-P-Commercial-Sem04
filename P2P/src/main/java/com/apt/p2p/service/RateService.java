@@ -1,6 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.entity.Rate;
+import com.apt.p2p.model.form.FilterRatePortal;
 import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.view.RateModel;
 import org.springframework.data.domain.Page;
@@ -18,4 +19,6 @@ public interface RateService {
     RateModel create(int userId, int productId, RateModel rateModel);
 
     List<RateModel> findAllByOrderIdAndUserId(int orderId, int userId);
+
+    List<RateModel> findAllByFilterPortal(FilterRatePortal filterRatePortal);
 }

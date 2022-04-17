@@ -78,17 +78,21 @@
                 <h3 class="shop-title">Rate products</h3>
                 <p class="shop-title-desc">Manage your store reviews</p>
                 <div class="rate-search">
-                    <div class="rate-search-item">
+                    <div class="rate-search-item rate-search-item__text">
                         <label for="productName">Product name:</label>
                         <input class="" type="text" name="productName">
                     </div>
-                    <div class="rate-search-item">
+                    <div class="rate-search-item rate-search-item__text">
                         <label for="userName">User name:</label>
                         <input class="" type="text" name="userName">
                     </div>
-                    <div class="rate-search-item">
+                    <div class="rate-search-item rate-search-item__date">
                         <label for="date">Date:</label>
-                        <input class="" type="text" name="date">
+                        <div class="ipt ipt__date">
+                            <input class="jsDateRangePicker" type="text" id="date" name="date">
+                            <i class="angle fas fa-angle-down" aria-hidden="true"></i>
+                            <i class="calendar far fa-calendar-alt" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
                 <button class="rate-submit btn btn__primary">Search</button>

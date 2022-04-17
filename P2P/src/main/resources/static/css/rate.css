@@ -1,0 +1,16 @@
+.portal .rate-value {
+  padding: 0;
+}
+
+.portal .rate-table {
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.portal .rate-row__header {
+  background-color: #f6f6f6;
+  color: rgba(85, 85, 85, 0.8);
+  text-align: center;
+}
+/*# sourceMappingURL=rate.css.map */

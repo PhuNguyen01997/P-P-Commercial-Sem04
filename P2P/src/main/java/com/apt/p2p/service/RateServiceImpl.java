@@ -4,6 +4,7 @@ import com.apt.p2p.common.modelMapper.RateMapper;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.entity.Rate;
 import com.apt.p2p.entity.User;
+import com.apt.p2p.model.form.FilterRatePortal;
 import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.repository.*;
@@ -80,5 +81,31 @@ public class RateServiceImpl implements RateService {
                 .collect(Collectors.toList());
 
         return finalRates.stream().map(re -> rateMapper.rateEntityToModel(re)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RateModel> findAllByFilterPortal(FilterRatePortal filter) {
+        Specification<Rate> condition = Specification
+                .where(RateSpecification.hasShopId(filter.getShopId()))
+                .and(RateSpecification.hasDateIn(filter.getMinDate(), filter.getMaxDate()))
+                .and((root, query, cb) -> {
+                    query.orderBy(cb.desc(root.get("id")));
+                    return null;
+                });
+
+        if(filter.getUserName() != null){
+            condition = condition.and(RateSpecification.hasUsername(filter.getUserName()));
+        }
+
+        if(filter.getProductName() != null){
+            condition = condition.and(RateSpecification.hasProductName(filter.getProductName()));
+        }
+
+        if(filter.getStar() != null){
+            condition = condition.and(RateSpecification.hasStar(filter.getStar()));
+        }
+
+        List<Rate> ratesEntity =  rateRepository.findAll(condition);
+        return ratesEntity.stream().map(e -> rateMapper.rateEntityToModel(e)).collect(Collectors.toList());
     }
 }

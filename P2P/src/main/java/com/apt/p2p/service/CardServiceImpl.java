@@ -35,8 +35,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public boolean delete(String stripeCardId) {
-        int userId = 3;
+    public boolean delete(int userId, String stripeCardId) {
         boolean result = false;
         try {
             stripeService.deleteCard(userId, stripeCardId);

@@ -83,11 +83,6 @@ public class OrderController {
     @PostMapping("/api/shop/{id}/order")
     @ResponseBody
     public List<OrderModel> apiIndex(@PathVariable("id") int shopId, @RequestBody FilterOrder input) {
-        LocalDateTime ldtMaxDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(input.getMaxDate().getTime()), ZoneOffset.UTC);
-        ldtMaxDate = ldtMaxDate.plusDays(1);
-        Date dMaxDate = Date.from(ldtMaxDate.toInstant(ZoneOffset.UTC));
-        input.setMaxDate(dMaxDate);
-
         List<OrderModel> result = orderService.findAllByShopIdWithFilter(shopId, input);
 
         return result;

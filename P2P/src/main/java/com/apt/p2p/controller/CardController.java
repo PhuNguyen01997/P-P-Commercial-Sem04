@@ -77,7 +77,9 @@ public class CardController {
             @PathVariable("stripeCardId") String stripeCardId,
             RedirectAttributes redirectAttributes
     ) {
-        boolean result = cardService.delete(stripeCardId);
+        UserModel user = userService.getCurrentUser();
+
+        boolean result = cardService.delete(user.getId(), stripeCardId);
         if (!result) {
             redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
         }

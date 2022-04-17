@@ -5,6 +5,9 @@ import com.apt.p2p.entity.ShopTransaction;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +23,14 @@ public final class ShopTransactionSpecification {
     }
 
     public static Specification<ShopTransaction> hasDateIn(Date minDate, Date maxDate) {
+        LocalDateTime ldtMaxDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(maxDate.getTime()), ZoneOffset.UTC);
+        ldtMaxDate = ldtMaxDate.plusDays(1);
+        Date finalMaxDate = Date.from(ldtMaxDate.toInstant(ZoneOffset.UTC));
+
         return (root, query, cb) -> {
             root = joinAllRelation(root);
 
-            return cb.between(root.get("date"), minDate, maxDate);
+            return cb.between(root.get("date"), minDate, finalMaxDate);
         };
     }
 

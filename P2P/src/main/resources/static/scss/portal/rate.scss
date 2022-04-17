@@ -17,29 +17,17 @@
 
             &-item {
                 @include flex($justify: flex-start, $align: stretch);
+                height: 30px;
                 width: calc(33.3% - 30px);
                 margin-right: 30px;
 
                 label {
                     margin-right: 10px;
+                    line-height: 30px;
                 }
 
                 input {
                     flex-grow: 1;
-                }
-
-                &__text {
-                    height: 30px;
-
-                    label {
-                        line-height: 30px;
-                    }
-                }
-
-                &__date {
-                    label {
-                        line-height: 40px;
-                    }
                 }
             }
         }
@@ -147,13 +135,12 @@
 
             &--content {
                 @include flex($align: stretch);
-
-                &-item {
+                &-item{
                     width: 50%;
                     padding: 20px;
 
-                    &__product {
-                        @include flex($justify: flex-start);
+                    &__product{
+                        @include flex();
 
                         .left {
                             display: block;
@@ -174,11 +161,11 @@
                     &__rate {
                         border-left: 1px solid $color-bd;
 
-                        .icon__star {
+                        .icon__star{
                             font-size: 17px;
                         }
 
-                        .date {
+                        .date{
                             color: $color-txt-white-grey;
                             font-size: 12px;
                             margin: 10px 0;

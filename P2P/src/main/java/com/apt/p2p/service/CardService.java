@@ -10,5 +10,5 @@ public interface CardService {
 
     public List<CardModel> findAllByUserId(int userId);
 
-    public boolean delete(String stripeCardId);
+    public boolean delete(int userId, String stripeCardId);
 }

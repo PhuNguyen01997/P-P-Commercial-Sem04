@@ -67,11 +67,6 @@ public class ShopTransactionController {
     @PostMapping("/api/shop/{id}/fund")
     @ResponseBody
     public List<ShopTransactionModel> apiIndex(@PathVariable("id") int shopId, @RequestBody FilterShopTransaction input) {
-        LocalDateTime ldtMaxDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(input.getMaxDate().getTime()), ZoneOffset.UTC);
-        ldtMaxDate = ldtMaxDate.plusDays(1);
-        Date dMaxDate = Date.from(ldtMaxDate.toInstant(ZoneOffset.UTC));
-        input.setMaxDate(dMaxDate);
-
         List<ShopTransactionModel> result = shopTransactionService.findAllByShopIdWithFilter(shopId, input);
 
         return result;

@@ -238,7 +238,7 @@ public class MainController {
                 order.getOrderDetails().forEach(orderDetail -> {
                     Rate newRate = new Rate();
                     newRate.setDescription(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(25, 60)));
-                    newRate.setStar(RandomUtil.getRandomNumber(5));
+                    newRate.setStar(RandomUtil.getRandomNumber(1, 5));
                     newRate.setUser(order.getUser());
                     newRate.setProduct(orderDetail.getProduct());
 
