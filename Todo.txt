@@ -1,7 +1,14 @@
 statictical
-Design main u
 
 
 CHECK
+to vn
+ck editor
+refactor remove birth user, description shop
+check checkout
+admin user
 +-
+filter product by rate index
+admin role
+app android
 dang ky nut google, facebook
