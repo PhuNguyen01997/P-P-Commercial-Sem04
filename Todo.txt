@@ -2,7 +2,9 @@ statictical
 
 
 CHECK
-to vn
+category valid
+note order valid
+order portal wrong
 ck editor
 refactor remove birth user, description shop
 check checkout

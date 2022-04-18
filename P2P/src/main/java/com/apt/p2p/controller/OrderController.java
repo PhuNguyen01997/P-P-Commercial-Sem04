@@ -73,6 +73,13 @@ public class OrderController {
         return "user/portal/order";
     }
 
+    @GetMapping("api/order/{id}")
+    @ResponseBody
+    public OrderModel apiGetOrderById(@PathVariable("id") int orderId){
+        OrderModel orderModel =  orderService.findById(orderId);
+        return orderModel;
+    }
+
     @PostMapping("api/order/{id}")
     @ResponseBody
     public boolean updateStatus(@PathVariable("id") int orderId, @RequestParam("statusId") int statusId) {
