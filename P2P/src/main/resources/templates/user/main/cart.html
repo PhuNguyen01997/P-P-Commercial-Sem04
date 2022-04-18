@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/main-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Giỏ hàng</title>
+    <title>Cart</title>
 </head>
 <body>
 <main layout:fragment="content">
@@ -18,11 +18,11 @@
                     <input id="allCheck01" type="checkbox" class="allCheck">
                 </label>
             </div>
-            <p class="cart-header-item cart-header-item__name">Sản phẩm</p>
-            <p class="cart-header-item cart-w15">Đơn giá</p>
-            <p class="cart-header-item cart-w15">Số lượng</p>
-            <p class="cart-header-item cart-w10">Số tiền</p>
-            <p class="cart-header-item cart-w10">Thao tác</p>
+            <p class="cart-header-item cart-header-item__name">Products</p>
+            <p class="cart-header-item cart-w15">Price</p>
+            <p class="cart-header-item cart-w15">Quantity</p>
+            <p class="cart-header-item cart-w10">Subtotal</p>
+            <p class="cart-header-item cart-w10">Actions</p>
         </div>
         <div th:each="cart : ${cartList}" class="cart-section">
             <div class="cart-section-shop">
@@ -70,7 +70,7 @@
                     <div data-total="0" class="cart-section-product--total cart-w10 jsTotal">0 vnđ</div>
                     <form th:action="@{/cart/{id}(id=${pc.cart.id})}" th:method="delete"
                           class="cart-section-product--action cart-w10">
-                        <button class="btn btn__red">Xóa</button>
+                        <button class="btn btn__red">Delete</button>
                     </form>
                 </li>
             </ul>
@@ -87,11 +87,11 @@
                         <input id="allCheck02" type="checkbox" class="allCheck">
                     </label>
                 </div>
-                <a class="jsDeleteArchor" href="javascript: void(0)">Xóa</a>
-                <p class="cart-footer-block--txt cart-footer-block--txt__total">Tổng thanh toán (<span
-                        class="jsCountProduct">0</span> sản phẩm):</p>
+                <a class="jsDeleteArchor" href="javascript: void(0)">Delete</a>
+                <p class="cart-footer-block--txt cart-footer-block--txt__total">Total (<span
+                        class="jsCountProduct">0</span> products):</p>
                 <p class="cart-footer-block--price jsSum">0 vnđ</p>
-                <button type="submit" class="btn btn__primary cart-footer-block--buy">Mua hàng</button>
+                <button type="submit" class="btn btn__primary cart-footer-block--buy">Checkout</button>
             </div>
         </form>
         <form th:action="@{/cart}" th:method="delete"

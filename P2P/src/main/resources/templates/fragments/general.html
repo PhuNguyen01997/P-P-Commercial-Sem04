@@ -12,7 +12,7 @@
             <a class="nav-col--item" href="#">Seller channel</a>
         </div>
         <div class="nav-col__right nav-col">
-            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="javascript: void(0)">Thông báo</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="javascript: void(0)">Notification</a>
             <a sec:authorize="isAuthenticated()" href="/account" class="nav-col--item nav-col--item__user">[[${#request.remoteUser}]]</a>
             <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Register</a>
             <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Login</a>

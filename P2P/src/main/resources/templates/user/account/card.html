@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/account-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${user.username + '- Ngân hàng'}"></title>
+    <title th:text="${user.username + '- Card'}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="inner split account account__card">
@@ -13,13 +13,13 @@
 
     <div class="split-main">
         <div class="split-header">
-            <h2 class="split-header--title">Thẻ tín dụng/Ghi nợ</h2>
+            <h2 class="split-header--title"> Credit/debit cards</h2>
             <button data-id="create-card" class="js-modal btn btn__primary split-header--add"><i
-                    class="icon icon__left fas fa-plus"></i>Thêm thẻ mới
+                    class="icon icon__left fas fa-plus"></i>Add new card
             </button>
         </div>
         <ul class="account-card">
-            <p th:if="${cards.isEmpty()}" class="py-5 emptyText">Bạn không có tài khoản nào</p>
+            <p th:if="${cards.isEmpty()}" class="py-5 emptyText"> You don't have any account</p>
             <li th:each="item : ${cards}" class="account-card-item">
                 <p class="account-card-item--pic pic">
                     <img th:src="${item.imgUrl}" alt="">
@@ -31,7 +31,7 @@
                 </p>
                 <div class="account-card-item--action">
                     <form th:action="@{/card/{id}(id=${item.stripeCardId})}" th:method="delete">
-                        <button type="submit" class="account-card-item--link">Xóa</button>
+                        <button type="submit" class="account-card-item--link">Delete</button>
                     </form>
                 </div>
             </li>
@@ -42,16 +42,16 @@
      class="modal2-container">
     <form th:object="${card}" th:action="@{/card}" method="post" class="modal2 modal2__card">
         <div class="modal2-header">
-            <h3>Thêm thẻ</h3>
+            <h3>Add new card</h3>
         </div>
         <div action="" class="modal2-body modal2-form modal2-form__card-create">
             <div class="modal2-input-container">
                 <input th:field="*{fullname}" class="modal2-input modal2-input__name" type="text"
-                       placeholder="Họ tên trên thẻ">
+                       placeholder="Name on card">
                 <p th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">
-                <input th:field="*{number}" class="modal2-input modal2-input__number" placeholder="Số thẻ">
+                <input th:field="*{number}" class="modal2-input modal2-input__number" placeholder="Card number">
                 <p th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container modal2-input-container__card-choose">
@@ -78,13 +78,13 @@
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{due}" type="month" class="modal2-input modal2-input__date" placeholder="Ngày hết hạn">
-                <input th:field="*{cvv}" class="modal2-input modal2-input__CVV" placeholder="Mã CVV">
+                <input th:field="*{cvv}" class="modal2-input modal2-input__CVV" placeholder="Code CVV">
                 <p th:if="${#fields.hasErrors('due')}" th:errors="*{due}" class="error">Invalid value</p>
                 <p th:if="${#fields.hasErrors('cvv')}" th:errors="*{cvv}" class="error">Invalid value</p>
             </div>
             <div class="modal2-input-container">
                 <input th:field="*{addressRegister}" class="modal2-input modal2-input__address" type="text"
-                       placeholder="Địa chỉ nhận hóa đơn">
+                       placeholder="Billing address">
                 <p th:if="${#fields.hasErrors('addressRegister')}" th:errors="*{addressRegister}" class="error">Invalid
                     value</p>
             </div>
@@ -94,8 +94,8 @@
             </div>
         </div>
         <div class="modal2-footer">
-            <button type="button" class="js-close modal2-footer--back btn btn__white">Trở lại</button>
-            <button type="submit" class="js-close modal2-footer--submit btn btn__primary">Hoàn Thành</button>
+            <button type="button" class="js-close modal2-footer--back btn btn__white">Back</button>
+            <button type="submit" class="js-close modal2-footer--submit btn btn__primary">Submit</button>
         </div>
     </form>
 </div>
