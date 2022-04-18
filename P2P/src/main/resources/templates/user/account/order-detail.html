@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/account-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${user.username + ' - Đơn hàng ' + order.id}"></title>
+    <title th:text="${user.username + ' - Order ' + order.id}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="inner split order-detail">
@@ -41,8 +41,9 @@
                 <button th:if="${canRate != null && canRate}"
                         data-id="rate-product" class="js-modal order-detail-control--btn btn btn__primary">Rate
                 </button>
-                <button class="order-detail-control--btn btn btn__white">Liên hệ người bán</button>
-                <button class="order-detail-control--btn btn btn__white">Hủy đơn hàng</button>
+                <button class="order-detail-control--btn btn btn__white">
+                    Chat with shop</button>
+                <button class="order-detail-control--btn btn btn__white">Decline Order</button>
             </div>
         </div>
         <div class="top-envelope"></div>
@@ -56,7 +57,7 @@
             <p th:text="${withShop.name}" class="order-shop--name">[Shop Name]</p>
             <a th:href="@{/shop/{id}(id=${withShop.id})}"
                class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                <i class="fas fa-store"></i> Ghé thăm shop
+                <i class="fas fa-store"></i> Go to store
             </a>
         </div>
         <ul class="order-detail-list">
@@ -69,7 +70,7 @@
                 <div class="order-item--text">
                     <p th:text="${withProduct.name}" class="order-item--name">[Product Name]</p>
                     <p class="order-item--category">
-                        <span>Danh mục:</span>
+                        <span>Category:</span>
                         <span th:text="${withProduct.category.name}">[Category Name]</span>
                     </p>
                     <p class="order-item--quantity">
@@ -85,7 +86,7 @@
         </ul>
         <ul class="order-summary">
             <li class="order-summary--item">
-                <p>Tổng tiền hàng</p>
+                <p>Subtotal</p>
                 <p>
                     <span th:text="${#numbers.formatDecimal(order.calTotal(), 0, 'COMMA', 0, 'POINT')}">
                         [Order Total]
@@ -94,24 +95,24 @@
                 </p>
             </li>
             <div class="order-summary--item">
-                <p>Phí vận chuyển</p>
+                <p>Shipping cost</p>
                 <p>
                     <span th:text="${#numbers.formatDecimal(order.shippingCost, 0, 'COMMA', 0, 'POINT')}">[Order Shipping]</span>
                     <span> vnđ</span>
                 </p>
             </div>
             <div class="order-summary--item order-summary--item__total">
-                <p>Tổng số tiền</p>
+                <p>Total</p>
                 <p>
                     <span th:text="${#numbers.formatDecimal(order.calTotal().add(order.shippingCost), 0, 'COMMA', 0, 'POINT')}">[Summary Total]</span>
                     <span>vnđ</span>
                 </p>
             </div>
             <div class="order-summary--item">
-                <p>Phương thức thanh toán</p>
+                <p>Payment method</p>
                 <p th:switch="${order.methodPayment}">
-                    <span th:case="true">Thẻ tín dụng / ghi nợ</span>
-                    <span th:case="false">Thanh toán khi nhận hàng</span>
+                    <span th:case="true">Credit / Debit Cards</span>
+                    <span th:case="false">Ship COD</span>
                 </p>
             </div>
         </ul>

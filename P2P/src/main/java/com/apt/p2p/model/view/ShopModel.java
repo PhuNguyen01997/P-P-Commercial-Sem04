@@ -25,17 +25,17 @@ public class ShopModel {
 
     private String background;
 
-    @NotBlank(message = "Tên cửa hàng không hợp lệ")
+    @NotBlank(message = "Invalid store name")
     private String name;
 
-    @NotBlank(message = "Số điện thoại không hợp lệ")
+    @NotBlank(message = "invalid phone number")
     private String phone;
 
     private BigDecimal fund = BigDecimal.ZERO;
 
     private Boolean permission = false;
 
-    @NotBlank(message = "Mô tả cửa hàng không hợp lệ")
+    @NotBlank(message = "Invalid store description")
     private String description;
 
     private Date createdAt = new Date();

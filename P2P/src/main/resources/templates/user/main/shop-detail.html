@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/main-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${shop.name}">ShoPP Tên Shop</title>
+    <title th:text="${shop.name}">ShoPP</title>
 </head>
 <body>
 <main layout:fragment="content">
@@ -21,12 +21,12 @@
                     </p>
                     <div class="shopping-header-banner--name-container">
                         <h1 th:text="${shop.name}" class="shopping-header-banner--name">[Shop Name]</h1>
-                        <span class="shopping-header-banner--onl">Online 99 phút trước</span>
+                        <span class="shopping-header-banner--onl">Online 99 minute ago</span>
                     </div>
                 </div>
                 <div class="shopping-header-banner--block02">
-                    <button class="btn btn__transparent"><i class="icon icon__left fas fa-plus"></i>Theo
-                        dõi
+                    <button class="btn btn__transparent"><i class="icon icon__left fas fa-plus"></i>
+                        Follow
                     </button>
                     <button class="btn btn__transparent"><i
                             class="icon icon__left fas fa-comments"></i>Chat
@@ -35,29 +35,29 @@
             </div>
             <ul class="shopping-header-list">
                 <li class="shopping-header-item">
-                    <span>Sản phẩm:</span>
+                    <span>Products:</span>
                     <span th:text="${shop.countProducts}">[Product Count]</span>
                 </li>
                 <li class="shopping-header-item">
-                    <span>Đang theo dõi:</span>
+                    <span>Following:</span>
                     <span>[Following Count]</span>
                 </li>
                 <li class="shopping-header-item">
-                    <span>Tỉ lệ phản hồi chat:</span>
+                    <span>Chat response rate:</span>
 <!--                    <span></span>-->
-                    <span>86% (Trong Vài Giờ)</span>
+                    <span>86% (At few hours)</span>
                 </li>
                 <li class="shopping-header-item">
-                    <span>Người theo dõi:</span>
+                    <span>Follwers:</span>
                     <span>[Follow Count]</span>
                 </li>
                 <li class="shopping-header-item">
-                    <span>Đánh giá:</span>
-                    <span th:text="${shop.averageRates + ' (' + shop.countRates + ' đánh giá)'}">[Rate]</span>
+                    <span>Reviews:</span>
+                    <span th:text="${shop.averageRates + ' (' + shop.countRates + ' amount)'}">[Rate]</span>
                 </li>
                 <li class="shopping-header-item">
-                    <span>Tham gia</span>
-                    <span th:text="${shop.createdAt}">[Attend Date]</span>
+                    <span>Join date</span>
+                    <span th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Attend Date]</span>
 <!--                    99 tháng trước-->
                 </li>
             </ul>
@@ -87,7 +87,7 @@
                         <span><i class="fas fa-exchange-alt"></i></span>
                         <input type="number" name="maxPrice" th:value="${param.maxPrice}">
                     </div>
-                    <button class="jsClick btn btn__red" type="button">Áp dụng</button>
+                    <button class="jsClick btn btn__red" type="button">Apply</button>
                 </form>
             </div>
             <div class="shopping-side--item">
@@ -120,7 +120,7 @@
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                     <li class="jsRate" data-value="3"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '3' ? 'active' : ''}">
@@ -131,7 +131,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                     <li class="jsRate" data-value="2"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '2' ? 'active' : ''}">
@@ -142,7 +142,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                     <li class="jsRate" data-value="1"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '1' ? 'active' : ''}">
@@ -153,7 +153,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                 </ul>
             </div>
@@ -163,21 +163,21 @@
                 <p>Sort by</p>
                 <button data-value="NEW" class="jsSortBy btn shopping-sort--btn"
                         th:classappend="${(#httpServletRequest.getParameter('sortBy') == 'NEW' || #httpServletRequest.getParameter('sortBy') == null) ? 'active' : ''}">
-                    Mới
+                    New
                 </button>
                 <button data-value="PRICE" class="jsSortBy btn shopping-sort--btn"
                         th:classappend="${#httpServletRequest.getParameter('sortBy') == 'PRICE' ? 'active' : ''}">
-                    Giá tiền
+                    Price
                 </button>
                 <div class="select shopping-sort--select">
                     <select name="sortDirection" id="">
                         <option value="true"
                                 th:selected="${#httpServletRequest.getParameter('sortDirection') == 'true' || #httpServletRequest.getParameter('sortDirection') == null}">
-                            Từ thấp đến cao
+                            Low to high
                         </option>
                         <option value="false"
                                 th:selected="${#httpServletRequest.getParameter('sortDirection') == 'false'}">
-                            Từ cao đến thấp
+                            High to low
                         </option>
                     </select>
                 </div>

@@ -5,40 +5,40 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${shop != null ? shop.name + ' - Số dư' : 'Cừa hàng'}"></title>
+    <title th:text="${shop != null ? shop.name + ' - Fund' : 'Shop'}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="main-inner fund">
-    <h3 class="fund-title">Tổng quan</h3>
+    <h3 class="fund-title">General</h3>
     <div class="fund-info">
         <div class="fund-info--left">
-            <p class="text">Số dư</p>
+            <p class="text">Fund</p>
             <div class="form">
                 <p class="price">
                     <span th:text="${#numbers.formatDecimal(shop.fund, 0, 'COMMA', 0, 'POINT')}"></span>
                     <span>vnđ</span></p>
                 <a href="/portal/fund/withdraw">
-                    <button class="direct btn btn__primary">Yêu cầu rút tiền</button>
+                    <button class="direct btn btn__primary">Request wirhdraw</button>
                 </a>
             </div>
         </div>
         <div class="fund-info--right">
             <div class="fund-info--right-header">
-                <p class="text">Tài khoản ngân hàng</p>
-                <a class="link" href="javascript: void(0)">Xem thêm</a>
+                <p class="text">Bank account</p>
+                <a class="link" href="javascript: void(0)">More</a>
             </div>
             <div class="fund-info--right-body">
                 <p class="icon"><i class="fas fa-university"></i></p>
                 <p class="name">
                     <span>Techcombank - NHTMCP Ky Thuong VN</span>
-                    <span>Đã kiểm tra</span>
+                    <span>Checked</span>
                 </p>
-                <p class="priority">Mặc định</p>
+                <p class="priority">Default</p>
                 <a href="javascript: void(0)" class="more"><i class="fas fa-ellipsis-h"></i></a>
             </div>
         </div>
     </div>
-    <h3 class="fund-title">Các giao dịch gần đây</h3>
+    <h3 class="fund-title">All transactions ago</h3>
     <div class="ipt ipt__date fund-date">
         <input id="date" type="text" name="date" class="jsDateRangePicker">
         <i class="angle fas fa-angle-down"></i>
@@ -46,21 +46,21 @@
     </div>
     <ul class="jsFilter fund-filter">
         <li class="fund-filter--item active" data-type="0">
-            <p>Tất cả</p>
+            <p>All transaction</p>
         </li>
         <li class="fund-filter--item" data-type="1">
-            <p>Doanh thu</p>
+            <p>Revenue</p>
         </li>
         <li class="fund-filter--item" data-type="2">
-            <p>Rút tiền</p>
+            <p>Wirhdraw</p>
         </li>
     </ul>
     <div class="jsContainer fund-table">
         <div class="fund-row fund-row__header">
-            <div class="fund-row--item fund-row--item__date">Ngày</div>
-            <div class="fund-row--item fund-row--item__desc">Loại giao dịch</div>
-            <div class="fund-row--item fund-row--item__price">Số tiền</div>
-            <div class="fund-row--item fund-row--item__status">Trạng thái</div>
+            <div class="fund-row--item fund-row--item__date">Date</div>
+            <div class="fund-row--item fund-row--item__desc">Type</div>
+            <div class="fund-row--item fund-row--item__price">Price</div>
+            <div class="fund-row--item fund-row--item__status">Status</div>
         </div>
         <div class="fund-body">
 

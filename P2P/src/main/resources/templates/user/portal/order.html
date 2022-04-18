@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${shop != null ? shop.name + ' - Đơn hàng' : 'Cừa hàng'}"></title>
+    <title th:text="${shop != null ? shop.name + ' - Order' : 'Shop'}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="main-inner order">
@@ -39,7 +39,7 @@
         <li class="portal-category--bar"></li>
     </ul>
     <div class="order-block order-block__date">
-        <label for="date" class="txt">Ngày đặt hàng</label>
+        <label for="date" class="txt">Order date</label>
         <div class="ipt ipt__date">
             <input id="date" type="text" name="date" class="jsDateRangePicker ipt">
             <i class="angle fas fa-angle-down" aria-hidden="true"></i>
@@ -49,32 +49,33 @@
     <div class="order-block order-block__name">
         <div class="select">
             <select name="type" id="" class="jsFilterBy">
-                <option value="1" selected>Mã đơn hàng</option>
-                <option value="2">Tên người mua</option>
-                <option value="3">Sản phẩm</option>
+                <option value="1" selected>Order ID</option>
+                <option value="2">Buyer name</option>
+                <option value="3">Product name</option>
             </select>
         </div>
         <input class="ipt jsName" type="text">
-        <button class="btn submit btn__primary jsSubmit">Tìm kiếm</button>
-        <button class="btn clear btn__white jsClear">Đặt lại</button>
+        <button class="btn submit btn__primary jsSubmit">
+            Search</button>
+        <button class="btn clear btn__white jsClear">Reset</button>
     </div>
-    <p class="order-block order-block__count"><span class="jsCount">0</span> <span>Đơn Hàng</span></p>
+    <p class="order-block order-block__count"><span class="jsCount">0</span> <span>Orders</span></p>
     <div class="order-block order-block__table">
         <div class="table-header">
             <div class="table-col table-col__name">
-                <p>Sản phẩm</p>
+                <p>Product</p>
             </div>
             <div class="table-col table-col__price">
-                <p>Tổng đơn hàng</p>
+                <p>Subtotal</p>
             </div>
             <div class="table-col table-col__date">
-                <p>Thời gian tạo</p>
+                <p>Order date</p>
             </div>
             <div class="table-col table-col__status">
-                <p>Thạng thái</p>
+                <p>Status</p>
             </div>
             <div class="table-col table-col__action">
-                <p>Thao tác</p>
+                <p>Actions</p>
             </div>
         </div>
         <ul class="table-body jsContainer"></ul>
@@ -149,8 +150,8 @@
                             `<div class="table-body--row-header">` +
                             `<p class="avatar circle"><img src="/img/common/img_default_user.png" alt=""></p>` +
                             `<p class="name">${order.user.username}</p>` +
-                            `<p class="amount"><span>Tổng cộng: </span><span class="bold">${order.total.toLocaleString()} vnđ</span></p>` +
-                            `<p class="order-info">ID đơn hàng: <span>${order.id}</span></p>` +
+                            `<p class="amount"><span>Total: </span><span class="bold">${order.total.toLocaleString()} vnđ</span></p>` +
+                            `<p class="order-info">Order ID: <span>${order.id}</span></p>` +
                             `</div>` +
                             `<ul class="table-body--row-list">`;
 

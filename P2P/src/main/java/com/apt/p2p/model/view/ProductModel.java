@@ -25,17 +25,17 @@ public class ProductModel {
 
     private Integer id;
 
-    @NotBlank(message = "Tên sản phẩm không hợp lệ")
+    @NotBlank(message = "Invalid product name")
     private String name;
 
-    @Min(value = 1000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <100.000.000 vnđ)")
-    @Max(value = 120001000, message = "Giá tiền sản phẩm không hợp lệ (>1.000 vnđ & <120.000.000 vnđ)")
-    @NotNull(message = "Giá sản phẩm không hợp lệ")
+    @Min(value = 1000, message = "Invalid product price (>1.000 vnđ & <100.000.000 vnđ)")
+    @Max(value = 120001000, message = "Invalid product price (>1.000 vnđ & <120.000.000 vnđ)")
+    @NotNull(message = " \n" + "Invalid product price")
     private BigDecimal price;
 
     private List<String> image = new ArrayList<>();
 
-    @NotBlank(message = "Mô tả sản phẩm không hợp lệ")
+    @NotBlank(message = "Invalid product description")
     private String description;
 
     private int stock = 0;

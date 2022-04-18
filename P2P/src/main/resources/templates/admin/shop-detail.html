@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${'Cửa hàng - ' + shop.name}"></title>
+    <title th:text="${'Shop - ' + shop.name}"></title>
 </head>
 <body>
 <section layout:fragment="content">
@@ -29,18 +29,18 @@
                     <img id="picture" class="detail-img" th:src="${shop.logo}">
                     <dt class="col-sm-3">ID</dt>
                     <dd th:text="${shop.id}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Tên cửa hàng</dt>
+                    <dt class="col-sm-3">Shop name</dt>
                     <dd th:text="${shop.name}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Số điện thoại</dt>
+                    <dt class="col-sm-3">Phone number</dt>
                     <dd th:text="${shop.phone}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Quỹ tiền</dt>
+                    <dt class="col-sm-3">Fund</dt>
                     <dd class="col-sm-9"><span th:text="${shop.fund}"></span><span> vnđ</span></dd>
-                    <dt class="col-sm-3">Ngày đăng ký</dt>
+                    <dt class="col-sm-3">Join date</dt>
                     <dd th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Đánh giá</dt>
-                    <dd th:text="${shop.averageRates + ' ('+ shop.countRates +' đánh giá)'}"
+                    <dt class="col-sm-3">Reviews</dt>
+                    <dd th:text="${shop.averageRates + ' ('+ shop.countRates +' reviews)'}"
                         class="col-sm-9 text-nowrap"></dd>
-                    <dt class="col-sm-3">Sở hữu</dt>
+                    <dt class="col-sm-3">User</dt>
                     <dd th:text="${shop.user.username}" class="col-sm-9"></dd>
                 </dl>
             </div>

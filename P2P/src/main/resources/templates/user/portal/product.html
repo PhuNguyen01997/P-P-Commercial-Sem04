@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${shop == null ? 'Sản phẩm' : (shop.name + ' - Sản phẩm')}"></title>
+    <title th:text="${shop == null ? 'Product' : (shop.name + ' - Product')}"></title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -14,24 +14,24 @@
             <div class="product-search-item product-search-item__name">
                 <div class="select">
                     <select name="filterBy" id="">
-                        <option value="1" selected>Tên sản phẩm</option>
-                        <option value="2">Mã sản phẩm</option>
+                        <option value="1" selected>Product name</option>
+                        <option value="2">Product ID</option>
                     </select>
                 </div>
-                <input type="text" name="name" placeholder="Nhập vào">
+                <input type="text" name="name" placeholder="Insert your value">
             </div>
             <div class="product-search-item product-search-item__category">
-                <label>Danh mục</label>
+                <label>Category</label>
                 <div class="select">
                     <select name="categoryId">
-                        <option value="0" selected>Tất cả</option>
+                        <option value="0" selected>All categories</option>
                         <option th:each="category : ${categories}" th:value="${category.id}"
                                 th:text="${category.name}"></option>
                     </select>
                 </div>
             </div>
             <div class="product-search-item product-search-item__submit">
-                <button class="jsSubmit btn btn__primary">Tìm</button>
+                <button class="jsSubmit btn btn__primary">Search</button>
             </div>
         </div>
     </div>
@@ -41,10 +41,10 @@
                 <p>Tất cả</p>
             </li>
             <li data-value="1" class="jsStatus portal-category--item">
-                <p>Đang hoạt động</p>
+                <p>In business</p>
             </li>
             <li data-value="2" class="jsStatus portal-category--item">
-                <p>Hêt hàng</p>
+                <p>Empty stock</p>
             </li>
             <li class="portal-category--bar"></li>
         </ul>
@@ -52,17 +52,18 @@
             <div class="product-block">
                 <div class="product-count">
                     <p class="txt01"><span class="jsCount" th:attr="data-value=${shop.countProducts}"
-                                           th:text="${shop.countProducts}">[Product Count]</span> Sản phẩm</p>
+                                           th:text="${shop.countProducts}">[Product Count]</span> Products</p>
                     <div class="percent-container">
                         <span class="jsPercent percent"></span>
                     </div>
-                    <p class="txt02">Có thể đăng tải thêm <span class="jsCountRest"></span> sản phẩm</p>
+                    <p class="txt02">
+                        Can post more <span class="jsCountRest"></span> products</p>
                 </div>
                 <div class="product-widget">
                     <a href="/portal/product/create">
                         <button class="btn btn__primary product-widget--create"><i
-                                class="icon icon__left fas fa-plus"></i>Thểm
-                            1 sản phẩm mới
+                                class="icon icon__left fas fa-plus"></i>
+                        Add new product
                         </button>
                     </a>
                 </div>

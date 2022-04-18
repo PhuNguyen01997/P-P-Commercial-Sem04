@@ -81,7 +81,7 @@ public class CardController {
 
         boolean result = cardService.delete(user.getId(), stripeCardId);
         if (!result) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "An error occurred that cannot be cleared, please try again later");
         }
         return "redirect:/card";
     }

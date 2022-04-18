@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/main-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Thanh toán</title>
+    <title>Check out</title>
     <th:block layout:flagment="style">
         <link rel="stylesheet" href="/css/index.css">
     </th:block>
@@ -15,7 +15,7 @@
     <div class="pay inner">
         <div class="top-envelope"></div>
         <div class="pay-address">
-            <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i>Địa chỉ nhận hàng</p>
+            <p class="pay-address--title"><i class="icon icon__left fas fa-map-marker-alt"></i> Address</p>
             <p th:if="${addresses.isEmpty()}">Bạn chưa có địa chỉ nào. <a class="" th:href="@{/address}">Thêm địa
                 chỉ</a></p>
             <th:block th:unless="${addresses.isEmpty()}">
@@ -24,7 +24,7 @@
                     <span th:text="${addresses.get(0).ownPhone}" class="phone">[Address Phone]</span>
                     <span th:text="${addresses.get(0).getFullAddress()}"
                           class="number">[Address Full]</span>
-                    <a class="change" href="javascript: void(0);">Thay đổi</a>
+                    <a class="change" href="javascript: void(0);"> Change</a>
                 </p>
                 <div class="pay-address--change d-none">
                     <label th:each="address : ${addresses}" class="pay-address--change-item">
@@ -40,8 +40,8 @@
                               class="number">[Address Full]</span>
                     </label>
                     <li class="pay-address--change-item">
-                        <button type="button" class="btn btn__primary jsAddressSubmit">Hoàn Thành</button>
-                        <button type="button" class="btn btn__outline jsAddressBack">Trở lại</button>
+                        <button type="button" class="btn btn__primary jsAddressSubmit">Submit</button>
+                        <button type="button" class="btn btn__outline jsAddressBack">Back</button>
                     </li>
                 </div>
             </th:block>
@@ -50,18 +50,19 @@
                   th:with="shop = ${shopCart.shop}">
             <div class="pay-cart" th:attr="data-shop-id=${shopCart.shop.id}">
                 <div class="pay-cart-header">
-                    <p>Sản phẩm</p>
-                    <p>Số lượng</p>
-                    <p>Đơn giá</p>
-                    <p>Thành tiền</p>
+                    <p>Products</p>
+                    <p>Quantity</p>
+                    <p>Price</p>
+                    <p>Subtotal</p>
                 </div>
                 <div class="pay-cart-shop"
                      th:attr="data-shop-address-id=${shop.address.id}, data-shop-id=${shop.id}">
                     <input type="hidden" name="shopIds[]" th:value="${shop.id}">
                     <p th:text="${shop.name}" class="pay-cart-shop--name">[Shop Name]</p>
                     <a class="pay-cart-shop--chat" href="javascript: void(0);"><i
-                            class="icon icon__left fas fa-comment-alt"></i>Chat
-                        ngay</a>
+                            class="icon icon__left fas fa-comment-alt"></i>
+                        Chat now
+                        </a>
                 </div>
                 <ul class="pay-cart-list">
                     <li th:each="productCart : ${shopCart.productCarts}"
@@ -80,18 +81,18 @@
                 </ul>
                 <div class="pay-cart-footer">
                     <div class="pay-cart-footer--block pay-cart-footer--block__01">
-                        <input class="pay-cart-footer--note" type="text" placeholder="Lưu ý cho người bán">
+                        <input class="pay-cart-footer--note" type="text" placeholder="Note for shop">
                         <p class="pay-cart-footer--shipping">
-                            <span>Phí vận chuyển: </span>
-                            <span class="jsShipping" th:attr="data-shop-id=${shop.id}"><b class="error">Không tìm thấy địa chỉ</b></span>
+                            <span>Shipping cost: </span>
+                            <span class="jsShipping" th:attr="data-shop-id=${shop.id}"><b class="error">Address not found</b></span>
                             <input type="hidden" name="shipping[]"
                                    th:attr="data-shop-id=${shop.id}" value="">
                         </p>
                     </div>
                     <div class="pay-cart-footer--block">
-                        <p class="pay-cart-footer--text">Tổng số tiền (
+                        <p class="pay-cart-footer--text">Total (
                             <span th:attr="data-shop-id=${shop.id}" class="jsCount">[Count]</span>
-                            sản phẩm)
+                            products)
                         </p>
                         <p th:attr="data-shop-id=${shop.id}"
                            class="pay-cart-footer--total jsSumTotal">[Total]</p>
@@ -101,19 +102,19 @@
         </th:block>
         <div class="pay-submit">
             <div class="pay-submit-header">
-                <p class="pay-submit-header--txt">Phương thức thanh toán</p>
+                <p class="pay-submit-header--txt">Payment method</p>
                 <label type="button" data-div="debit" class="active jsMethod pay-submit-header--btn btn btn__white">
-                    Thẻ tín dụng/ghi nợ <i class="icon fas fa-check"></i>
+                    credit/debit card <i class="icon fas fa-check"></i>
                     <input type="radio" class="d-none" checked name="methodPayment" value="1">
                 </label>
                 <label type="button" data-div="cod" class="jsMethod pay-submit-header--btn btn btn__white">
-                    Thanh toán khi nhận hàng <i class="icon fas fa-check"></i>
+                    Ship COD <i class="icon fas fa-check"></i>
                     <input type="radio" class="d-none" name="methodPayment" value="0">
                 </label>
             </div>
             <div class="pay-submit-body pay-submit-body__debit">
                 <div class="pay-submit-body--left">
-                    <p>Chọn thẻ</p>
+                    <p>Choose your cards</p>
                 </div>
                 <div class="pay-submit-body--right">
                     <div class="pay-submit-body--card-list">
@@ -134,31 +135,30 @@
                         </label>
                     </div>
                     <a th:href="@{/card}" class="btn btn__white pay-submit-body--card-order"><i
-                            class="icon icon__left fas fa-plus"></i>Thẻ khác
+                            class="icon icon__left fas fa-plus"></i>Other cards
                     </a>
                 </div>
             </div>
             <div class="d-none pay-submit-body pay-submit-body__cod">
                 <div class="pay-submit-body--left">
-                    <p>Thanh toán khi nhận hàng</p>
+                    <p>Ship COD</p>
                 </div>
                 <div class="pay-submit-body--right">
-                    <p>Phí thu hộ: ₫0 VNĐ. Ưu đãi về phí vận chuyển (nếu có) áp dụng cả với phí thu hộ.</p>
+                    <p> Collection fee: ₫0 VND. Discount on shipping fee (if any) applies even to collection fee.</p>
                 </div>
             </div>
             <div class="pay-submit-footer">
                 <div class="pay-submit-footer--list">
-                    <span class="pay-submit-footer--txt">Tổng tiền hàng</span>
+                    <span class="pay-submit-footer--txt">Subtotal</span>
                     <span class="pay-submit-footer--number jsSumTotal2"></span>
-                    <span class="pay-submit-footer--txt">Phí vận chuyển</span>
+                    <span class="pay-submit-footer--txt">Shipping cost</span>
                     <span class="pay-submit-footer--number jsShipping2"></span>
-                    <span class="pay-submit-footer--txt">Tổng thanh toán:</span>
+                    <span class="pay-submit-footer--txt">Total:</span>
                     <span class="pay-submit-footer--number pay-submit-footer--number__total jsSumTotal3"></span>
                 </div>
                 <div class="pay-submit-footer--final">
-                    <p class="txt">Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo <a href="#">Điều khoản
-                        Shopee</a></p>
-                    <button type="submit" class="btn btn__primary">Đặt hàng</button>
+                    <p class="txt">Clicking "Checkout" means that you agree to comply <a href="#">ShoPP Policy</a></p>
+                    <button type="submit" class="btn btn__primary">Checkout</button>
                 </div>
             </div>
         </div>

@@ -18,14 +18,14 @@ import java.util.List;
 public class AddressModel {
     private Integer id;
 
-    @NotBlank(message = "Họ tên không thể trống")
+    @NotBlank(message = "Name cannot be empty")
     private String ownName;
 
-    @NotBlank(message = "Số điện thoại không thể trống")
-    @Pattern(regexp = "^[\\d\\s\\-\\.]+$", message = "Số điện thoại không hợp lệ")
+    @NotBlank(message = "Phone number cannot be empty")
+    @Pattern(regexp = "^[\\d\\s\\-\\.]+$", message = "Invalid phone number\n")
     private String ownPhone;
 
-    @NotBlank(message = "Số địa chỉ không thể trống")
+    @NotBlank(message = "Address number cannot be empty")
     private String number;
 
     private String ward;

@@ -28,33 +28,35 @@
 
 <aside th:fragment="content-side" class="aside">
     <div class="aside-container">
-        <p class="aside-title">Quản lý đơn hàng</p>
+        <p class="aside-title">
+            Order management</p>
         <ul class="aside-list">
-            <li class="aside-item"><a th:href='@{/portal/order}'>Tất cả</a></li>
+            <li class="aside-item"><a th:href='@{/portal/order}'>All orders</a></li>
 <!--            <li class="aside-item"><a href='javascript: void(0)'>Đơn hủy</a></li>-->
 <!--            <li class="aside-item"><a href='javascript: void(0)'>Trả hàng/Hoàn tiền</a></li>-->
         </ul>
     </div>
     <div class="aside-container">
-        <p class="aside-title">Quản lý Shop</p>
+        <p class="aside-title">Shop manager
+        </p>
         <ul class="aside-list">
             <li class="aside-item"><a th:href='@{/portal/}'>Shop Information</a></li>
-            <li class="aside-item"><a th:href='@{/portal/rate}'>Shop Rates</a></li>
+            <li class="aside-item"><a th:href='@{/portal/rate}'>Shop rates</a></li>
 <!--            <li class="aside-item"><a href='javascript: void(0)'>Giao dịch</a></li>-->
 <!--            <li class="aside-item"><a href='javascript: void(0)'>Địa chỉ</a></li>-->
         </ul>
     </div>
     <div class="aside-container">
-        <p class="aside-title">Quản lý sản phẩm</p>
+        <p class="aside-title"> Product management</p>
         <ul class="aside-list">
-            <li class="aside-item"><a th:href='@{/portal/product}'>Tất cả</a></li>
-            <li class="aside-item"><a th:href='@{/portal/product/create}'>Thêm sản phẩm</a></li>
+            <li class="aside-item"><a th:href='@{/portal/product}'>All products</a></li>
+            <li class="aside-item"><a th:href='@{/portal/product/create}'>Add new product</a></li>
         </ul>
     </div>
     <div class="aside-container">
-        <p class="aside-title">Tài Chính</p>
+        <p class="aside-title">Finance</p>
         <ul class="aside-list">
-            <li class="aside-item"><a th:href='@{/portal/fund}'>Số dư tài khoản Shoppe</a></li>
+            <li class="aside-item"><a th:href='@{/portal/fund}'>Shop fund</a></li>
         </ul>
     </div>
 </aside>

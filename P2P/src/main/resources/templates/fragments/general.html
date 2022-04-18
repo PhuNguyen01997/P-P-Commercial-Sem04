@@ -12,11 +12,11 @@
             <a class="nav-col--item" href="#">Seller channel</a>
         </div>
         <div class="nav-col__right nav-col">
-            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="javascript: void(0)">Thông báo</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" href="javascript: void(0)">Notification</a>
             <a sec:authorize="isAuthenticated()" href="/account" class="nav-col--item nav-col--item__user">[[${#request.remoteUser}]]</a>
-            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Đăng ký</a>
-            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Đăng nhập</a>
-            <a sec:authorize="isAuthenticated()" class="nav-col--item" th:href="@{/logout}">Đăng xuất</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signup}">Register</a>
+            <a sec:authorize="isAnonymous()" class="nav-col--item" th:href="@{/signin}">Login</a>
+            <a sec:authorize="isAuthenticated()" class="nav-col--item" th:href="@{/logout}">Logout</a>
         </div>
     </nav>
     <div class="header-container">
@@ -42,21 +42,21 @@
 
 <div th:fragment="footer" class="inner">
     <div class="footer-item footer-item__contact">
-        <p class="footer-head">Liên hệ và hỗ trợ</p>
-        <p class="footer-item--line">Địa chỉ: 590 CMNT, P3, Q10, TPHCM</p>
-        <p class="footer-item--line">Hotline: <a href="tel:1900-0000">1900-0000</a></p>
+        <p class="footer-head">Contact & support</p>
+        <p class="footer-item--line">Address: 590 CMNT, P3, Q10, TPHCM</p>
+        <p class="footer-item--line">Tel: <a href="tel:1900-0000">1900-0000</a></p>
         <p class="footer-item--line">Email: <a
                 href="mailto:phunguyen01997@gmail.com">phunguyen01997@gmail.com</a></p>
         <a class="footer-item--line" href="javascript: return void(0);">FAQ</a>
-        <a class="footer-item--line" href="javascript: return void(0);">Yêu cầu hỗ trợ</a>
-        <a class="footer-item--line" href="javascript: return void(0);">Chính sách đổi trả</a>
+        <a class="footer-item--line" href="javascript: return void(0);">Request support</a>
+        <a class="footer-item--line" href="javascript: return void(0);">Return Policy</a>
     </div>
     <div class="footer-item footer-item__payment">
-        <p class="footer-head">Thanh toán trực tuyến</p>
+        <p class="footer-head">Online Payment</p>
         <p class="icon icon__visa"><img src="/img/common/icon-visa.png" alt=""></p>
     </div>
     <div class="footer-item footer-item__connect">
-        <p class="footer-head">Kết nối với chúng tôi</p>
+        <p class="footer-head">Connect with us</p>
         <p class="footer-item--social">
             <a class="icon" href="javascript: return void(0);"><img src="/img/common/icon-fb.png" alt="Facebook"></a>
             <a class="icon" href="javascript: return void(0);"><img src="/img/common/icon-yt.png" alt="Youtube"></a>
@@ -64,7 +64,7 @@
         </p>
     </div>
     <div class="footer-item footer-item__mobile">
-        <p class="footer-head">Phiên bản di động</p>
+        <p class="footer-head">Mobile Version</p>
         <div class="footer-item--mobile">
             <p class="icon icon__qr"><img src="/img/common/icon-qr.png" alt=""></p>
             <div class="">

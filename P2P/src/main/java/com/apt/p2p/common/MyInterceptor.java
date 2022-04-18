@@ -45,8 +45,6 @@ public class MyInterceptor implements HandlerInterceptor {
         String requestUri = request.getRequestURI();
         if (requestUri.indexOf("/portal") != -1) {
             request.setAttribute("portalHeaderNavi", this.naviPortalHeader.get(requestUri));
-            String str = this.naviPortalHeader.get(requestUri);
-            String str2 = "asd";
         }
         request.setAttribute("headerCategories", headerCategories);
 

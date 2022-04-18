@@ -5,21 +5,21 @@
       layout:decorate="~{layouts/account-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${user.username + '- Đơn hàng'}"></title>
+    <title th:text="${user.username + '- Order'}"></title>
 </head>
 <body>
 <div layout:fragment="content" class="inner split order">
     <div th:replace="fragments/general-account.html :: content-side"></div>
 
     <div class="split-main">
-        <p th:if="${orders.size() == 0}" class="emptyText">Bạn hiện tại không có đơn hàng nào</p>
+        <p th:if="${orders.size() == 0}" class="emptyText">You currently have no orders</p>
         <div th:each="order : ${orders}" class="order-section">
             <div class="order-content">
                 <div class="order-shop">
                     <p th:text="${order.shop.name}" class="order-shop--name">[Shop Name]</p>
                     <a th:href="@{/shop/{id}(id = ${order.shop.id})}"
                        class="order-shop--btn order-shop--btn__visit btn btn__primary">
-                        <i class="fas fa-store"></i> Ghé thăm shop
+                        <i class="fas fa-store"></i> Go to store
                     </a>
                     <p th:text="${order.currentStatus.name}" class="order-shop--status">[Order Status]</p>
                 </div>
@@ -55,9 +55,10 @@
                 </p>
                 <div class="order-submit--info">
 <!--                    <p class="order-submit&#45;&#45;text mr-4">Bạn đã hủy</p>-->
-                    <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Liên hệ người bán</a>
-                    <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">Chi tiết đon
-                        hàng</a>
+                    <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Chat with shop</a>
+                    <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">
+                        Go to detail
+                        </a>
                 </div>
             </div>
         </div>

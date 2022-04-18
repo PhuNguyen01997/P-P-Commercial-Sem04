@@ -5,15 +5,15 @@
       layout:decorate="~{layouts/portal-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${shop != null ? shop.name + ' - Rút tiền' : 'Cửa hàng'}"></title>
+    <title th:text="${shop != null ? shop.name + ' - Withdraw' : 'Shop'}"></title>
 </head>
 <body>
 <form method="post" layout:fragment="content" th:object="${withdraw}" class="main-inner fund-withdraw">
     <input type="hidden" th:field="*{shopId}">
-    <h3 class="fund-withdraw-title">Rút tiền</h3>
+    <h3 class="fund-withdraw-title">Withdraw</h3>
     <div class="fund-withdraw-form">
         <div class="fund-withdraw-row">
-            <label class="fund-withdraw-row--left" for="">Tài khoản ngân hàng</label>
+            <label class="fund-withdraw-row--left" for="">Bank account</label>
             <div class="fund-withdraw-row--right fund-withdraw-row--right__bank">
                 <p class="icon"><i class="fas fa-university"></i></p>
                 <p class="txt">Techcombank - NHTMCP Ky thuong VN</p>
@@ -21,16 +21,16 @@
             </div>
         </div>
         <div class="fund-withdraw-row fund-withdraw-row__amount">
-            <label class="fund-withdraw-row--left" for="amount">Giá trị yêu cầu thanh toán</label>
+            <label class="fund-withdraw-row--left" for="amount">Request amount</label>
             <div class="fund-withdraw-row--right fund-withdraw-row--right__amount">
                 <input th:field="*{amount}" th:max="${shop.fund.doubleValue() > 5000000 ? 5000000 : shop.fund}" type="number" id="amount">
                 <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="error">Invalid value</p>
-                <p class="note">* Số dư hiện tại <span th:text="${#numbers.formatDecimal(shop.fund, 0, 'COMMA', 0, 'POINT')}"></span> vnđ</p>
-                <p class="note">* Giới hạn rút tiền trong ngày 5,000,000 vnđ</p>
+                <p class="note">* Your current fund <span th:text="${#numbers.formatDecimal(shop.fund, 0, 'COMMA', 0, 'POINT')}"></span> vnđ</p>
+                <p class="note">* Max fund withdraw daily 5,000,000 vnđ</p>
             </div>
         </div>
         <div class="fund-withdraw-row">
-            <label class="fund-withdraw-row--left" for="fee">Phí thanh toán</label>
+            <label class="fund-withdraw-row--left" for="fee">Withdraw fee</label>
             <div class="fund-withdraw-row--right fund-withdraw-row--right__fee">
                 <input type="hidden" id="fee" value="0">
                 <p><span class="ignore">11.000</span> <span>0</span> vnđ</p>

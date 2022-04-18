@@ -44,7 +44,7 @@
                     <input sec:authorize="isAuthenticated()" type="hidden" name="allow" value="true">
                     <button type="submit" class="btn btn__primary-outline detail-content--button-cart"><i
                             class="fas fa-shopping-cart"></i><span>Add to cart</span></button>
-                    <button type="button" class="btn btn__primary detail-content--button-buy">Mua ngay</button>
+                    <button type="button" class="btn btn__primary detail-content--button-buy">Buy now</button>
                 </div>
             </form>
         </div>
@@ -56,33 +56,33 @@
                 <p th:text="${shop.name}" class="detail-shop--content-title">[Shop Name]</p>
                 <div class="detail-shop--content-btn">
                     <a th:href="@{/shop/{id}(id=${shop.id})}">
-                        <button class="btn btn__primary-outline see">Xem cửa hàng</button>
+                        <button class="btn btn__primary-outline see">Go to store</button>
                     </a>
                 </div>
             </div>
             <div class="detail-shop--description">
                 <div class="detail-shop--description-item">
-                    <p>Đánh giá <span th:text="${shop.countRates}" class="txt__primary">[Product Rate Count]</span>
+                    <p>Rates <span th:text="${shop.countRates}" class="txt__primary">[Product Rate Count]</span>
                     </p>
                 </div>
                 <div class="detail-shop--description-item">
-                    <p>Sản phẩm <span th:text="${shop.countProducts}"
+                    <p>Products <span th:text="${shop.countProducts}"
                                       class="txt__primary">[Shop Rate Count]</span></p>
                 </div>
                 <div class="detail-shop--description-item">
-                    <p>Ngày tham gia <span class="txt__primary"
+                    <p>Join date <span class="txt__primary"
                                            th:text="${#dates.format(shop.createdAt, 'dd-MM-yyyy')}">[Date attend]</span>
                     </p>
                 </div>
             </div>
         </div>
         <div class="detail-product">
-            <h2 class="detail-product--title detail--title">Thông tin sản phẩm</h2>
+            <h2 class="detail-product--title detail--title">Product information</h2>
             <p th:utext="${product.description}" class="detail-product--content">
             </p>
         </div>
         <div class="detail-rate">
-            <h2 class="detail-rate--headline detail--title">Đánh giá sản phẩm</h2>
+            <h2 class="detail-rate--headline detail--title">Reviews</h2>
             <div class="detail-rate--list">
             </div>
             <ul class="pagi detail-rate--pagi">

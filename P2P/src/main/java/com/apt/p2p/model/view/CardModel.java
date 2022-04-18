@@ -17,32 +17,32 @@ public class CardModel {
 
     private String stripeCardId;
 
-    @NotBlank(message = "Họ tên không thể trống")
+    @NotBlank(message = "Name cannot be empty")
     private String fullname;
 
-    @Pattern(regexp = "^[\\d\\s]+$", message = "Mã thẻ không hợp lệ")
-    @NotBlank(message = "Mã thẻ không thể trống")
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Invalid card code")
+    @NotBlank(message = "Card code cannot be empty")
     private String number;
 
     private String last4;
 
-    @NotNull(message = "Vui lòng chọn loại thẻ")
+    @NotNull(message = "Please select card type")
     private String type;
 
     @JsonDeserialize(using = DateDeserializer.class)
-    @NotNull(message = "Ngày hết hạn không thể trống")
+    @NotNull(message = "Expiration date cannot be empty")
     @DateTimeFormat(pattern = "yyyy-MM")
     private Date due;
 
-    @NotNull(message = "CVV không thể trống")
-    @Pattern(regexp = "^[\\d\\s]+$", message = "Cvv không hợp lệ")
+    @NotNull(message = "CVV cannot be empty")
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Invalid cvv")
     private String cvv;
 
-    @NotBlank(message = "Địa chỉ không thể trống")
+    @NotBlank(message = "Address cannot be empty")
     private String addressRegister;
 
-    @Pattern(regexp = "^[\\d\\s]+$", message = "Postal code không hợp lệ")
-    @NotNull(message = "Postal code không thể trống")
+    @Pattern(regexp = "^[\\d\\s]+$", message = "Postal code illegal")
+    @NotNull(message = "Postal code can't be empty")
     private String postalCode;
 
     private String imgUrl;

@@ -37,9 +37,9 @@ public class ShopTransactionController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Giao dịch", ""}
+                new String[]{"Transaction", ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Giao dịch", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Transaction", naviArr));
 
         return "/admin/transaction";
     }
@@ -56,10 +56,10 @@ public class ShopTransactionController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Giao dịch", "/admin/shop"},
+                new String[]{"Transaction", "/admin/shop"},
                 new String[]{String.valueOf(shopTransactionModel.getId()), ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Giao dịch", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Transaction", naviArr));
 
         return "admin/transaction-detail";
     }

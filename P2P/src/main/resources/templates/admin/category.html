@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Danh mục</title>
+    <title>Category</title>
 </head>
 <body>
 <section layout:fragment="content">
@@ -14,16 +14,16 @@
             <div class="col-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Danh mục mới</h3>
+                        <h3 class="card-title">New category</h3>
                     </div>
                     <form method="post" action="category/create">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Tên danh mục</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Tên danh mục">
+                                <label for="name">Category name</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Category name">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Thêm danh mục</button>
+                                <button type="submit" class="btn btn-primary">Add category</button>
                             </div>
                         </div>
                     </form>
@@ -36,8 +36,8 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Danh mục</th>
-                                <th>Cập nhật</th>
+                                <th>Category</th>
+                                <th>Update</th>
                                 <!--                <th>Thao tác</th>-->
                             </tr>
                             </thead>
@@ -48,8 +48,8 @@
                                 <td>
                                     <form action="category/update" method="post" class="d-flex">
                                         <input type="hidden" name="id" th:value="${category.id}">
-                                        <input type="text" name="name" placeholder="Thay đổi tên">
-                                        <button class="ml-2 submit btn btn-sm btn-warning">Cập nhật</button>
+                                        <input type="text" name="name" placeholder="Change name">
+                                        <button class="ml-2 submit btn btn-sm btn-warning">Update</button>
                                     </form>
                                 </td>
                                 <!--                <td>-->
@@ -63,8 +63,8 @@
                             <tfoot>
                             <tr>
                                 <th>Id</th>
-                                <th>Danh mục</th>
-                                <th>Cập nhật</th>
+                                <th>Category</th>
+                                <th>Update</th>
                                 <!--                <th>Thao tác</th>-->
                             </tr>
                             </tfoot>

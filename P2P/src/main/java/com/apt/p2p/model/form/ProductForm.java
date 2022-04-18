@@ -28,7 +28,7 @@ import java.util.Map;
 public class ProductForm extends ProductModel {
     private Map<String, MultipartFile> mapPictures;
 
-    @Min(value = 1, message = "Danh mục sản phẩm không hợp lệ")
+    @Min(value = 1, message = "Invalid product category")
     private int categoryId;
 
     public ProductForm(ProductModel model) {

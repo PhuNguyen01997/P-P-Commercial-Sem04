@@ -159,11 +159,6 @@ public class MainController {
         return "redirect:/account";
     }
 
-    @GetMapping("identity")
-    public String identity() {
-        return "user/account/identity";
-    }
-
     @GetMapping("seed")
     public String seed() {
         this.provinces = locationService.provinceFindAll();
