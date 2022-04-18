@@ -33,7 +33,7 @@
                         <span><i class="fas fa-exchange-alt"></i></span>
                         <input type="number" name="maxPrice" th:value="${param.maxPrice}">
                     </div>
-                    <button class="jsClick btn btn__red" type="button">Áp dụng</button>
+                    <button class="jsClick btn btn__red" type="button">Apply</button>
                 </form>
             </div>
             <div class="shopping-side--item">
@@ -66,7 +66,7 @@
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                     <li class="jsRate" data-value="3"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '3' ? 'active' : ''}">
@@ -77,7 +77,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                     <li class="jsRate" data-value="2"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '2' ? 'active' : ''}">
@@ -88,7 +88,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                     <li class="jsRate" data-value="1"
                         th:classappend="${#httpServletRequest.getParameter('rate') == '1' ? 'active' : ''}">
@@ -99,7 +99,7 @@
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </span>
-                        <span>Trở lên</span>
+                        <span>Above</span>
                     </li>
                 </ul>
             </div>
@@ -109,21 +109,21 @@
                 <p>Sort by</p>
                 <button data-value="NEW" class="jsSortBy btn shopping-sort--btn"
                         th:classappend="${(#httpServletRequest.getParameter('sortBy') == 'NEW' || #httpServletRequest.getParameter('sortBy') == null) ? 'active' : ''}">
-                    Mới
+                    New
                 </button>
                 <button data-value="PRICE" class="jsSortBy btn shopping-sort--btn"
                         th:classappend="${#httpServletRequest.getParameter('sortBy') == 'PRICE' ? 'active' : ''}">
-                    Giá tiền
+                    Price
                 </button>
                 <div class="select shopping-sort--select">
                     <select name="sortDirection" id="">
                         <option value="true"
                                 th:selected="${#httpServletRequest.getParameter('sortDirection') == 'true' || #httpServletRequest.getParameter('sortDirection') == null}">
-                            Từ thấp đến cao
+                            Low to high
                         </option>
                         <option value="false"
                                 th:selected="${#httpServletRequest.getParameter('sortDirection') == 'false'}">
-                            Từ cao đến thấp
+                            High to low
                         </option>
                     </select>
                 </div>
