@@ -17,6 +17,6 @@ import java.math.BigDecimal;
 public class WithdrawForm {
     private int shopId;
 
-    @DecimalMin(value = "999", inclusive = false, message = "Số tiền cần rút không hợp lệ")
+    @DecimalMin(value = "999", inclusive = false, message = "Fund withdraw is invalid")
     private BigDecimal amount;
 }

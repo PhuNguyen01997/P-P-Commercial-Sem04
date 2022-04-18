@@ -10,13 +10,13 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Xin lỗi</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Sorry</h4>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <i class="far fa-times-circle"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="jsText" th:text="${globalError}">Có lỗi xảy ra, vui lòng thử lại sau</p>
+                <p class="jsText" th:text="${globalError}"></p>
             </div>
         </div>
     </div>
@@ -31,13 +31,13 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Thành công</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Successfully</h4>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <i class="far fa-times-circle"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="jsText" th:text="${globalSuccess}">Có lỗi xảy ra, vui lòng thử lại sau</p>
+                <p class="jsText" th:text="${globalSuccess}"></p>
             </div>
         </div>
     </div>

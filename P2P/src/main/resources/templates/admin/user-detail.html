@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Người dùng - ' + ${user.username}"></title>
+    <title th:text="'User - ' + ${user.username}"></title>
 </head>
 <body>
 <section layout:fragment="content">
@@ -29,15 +29,15 @@
                     <img id="picture" class="detail-img" th:src="${user.toUrl(user.avatar)}">
                     <dt class="col-sm-2">ID</dt>
                     <dd th:text="${user.id}" class="col-sm-10"></dd>
-                    <dt class="col-sm-2">Tên đăng nhập</dt>
+                    <dt class="col-sm-2">Username</dt>
                     <dd th:text="${user.username}" class="col-sm-10"></dd>
                     <dt class="col-sm-2">Email</dt>
                     <dd th:text="${user.email}" class="col-sm-10"></dd>
-                    <dt class="col-sm-2">Số điện thoại</dt>
+                    <dt class="col-sm-2">Phone number</dt>
                     <dd class="col-sm-10" th:text="${user.phone}"></dd>
-                    <dt class="col-sm-2">Ngày tham gia</dt>
+                    <dt class="col-sm-2">Date</dt>
                     <dd th:text="${#dates.format(user.createdAt, 'dd-MM-yyyy')}" class="col-sm-10"></dd>
-                    <dt class="col-sm-2">Địa chỉ</dt>
+                    <dt class="col-sm-2">Address</dt>
                     <dd class="col-sm-10">
                         <li th:each="address : ${user.addresses}" th:text="${address.getFullAddress()}"></li>
                     </dd>

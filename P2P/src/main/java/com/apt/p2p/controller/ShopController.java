@@ -81,9 +81,9 @@ public class ShopController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Cửa hàng", ""}
+                new String[]{"Shop", ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Cửa hàng", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Shop", naviArr));
 
         return "admin/shop";
     }
@@ -95,10 +95,10 @@ public class ShopController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Cửa hàng", "/admin/shop"},
+                new String[]{"Shop", "/admin/shop"},
                 new String[]{shop.getName(), ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Cửa hàng", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Shop", naviArr));
 
         return "admin/shop-detail";
     }

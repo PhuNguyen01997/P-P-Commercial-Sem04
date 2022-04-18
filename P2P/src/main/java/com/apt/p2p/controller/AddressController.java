@@ -86,7 +86,7 @@ public class AddressController {
 
         AddressModel success = addressService.update(address);
         if(success == null){
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra khi cập nhật, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "An error occurred while updating, please try again late");
         }
         return "redirect:/address";
     }
@@ -96,7 +96,7 @@ public class AddressController {
                          RedirectAttributes redirectAttributes) {
         boolean success = addressService.delete(id);
         if (!success) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra không thể xóa, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "An error occurred that cannot be cleared, please try again later");
         }
         return "redirect:/address";
     }

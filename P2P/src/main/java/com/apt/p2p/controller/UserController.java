@@ -24,9 +24,9 @@ public class UserController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Người dùng", ""}
+                new String[]{"User", ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Người dùng", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("User", naviArr));
 
         return "admin/user";
     }
@@ -38,10 +38,10 @@ public class UserController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Người dùng", "/admin/user"},
+                new String[]{"User", "/admin/user"},
                 new String[]{user.getUsername(), ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Người dùng", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("User", naviArr));
 
         return "admin/user-detail";
     }

@@ -5,7 +5,7 @@
       layout:decorate="~{layouts/admin-layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${'Giao dịch - ' + transaction.id}"></title>
+    <title th:text="${'Transaction - ' + transaction.id}"></title>
 </head>
 <body>
 <section layout:fragment="content">
@@ -26,27 +26,21 @@
                 <dl class="row">
                     <dt class="col-sm-3">ID</dt>
                     <dd th:text="${transaction.id}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Cửa hàng</dt>
+                    <dt class="col-sm-3">Shop</dt>
                     <dd th:text="${transaction.shop.name}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Người dùng</dt>
+                    <dt class="col-sm-3">User</dt>
                     <dd th:text="${transaction.shop.user.username}" class="col-sm-9"></dd>
-                    <th:block th:if="${transaction.order != null}">
-                        <dt class="col-sm-3">Tổng giá trị</dt>
-                        <dd th:text="${#numbers.formatDecimal(transaction.order.total, 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="col-sm-9"></dd>
-                        <dt class="col-sm-3">Thực nhận</dt>
-                        <dd class="col-sm-9">
-                            <span th:text="${#numbers.formatDecimal(transaction.order.getShopRealReceiveTotal(), 0, 'COMMA', 0, 'POINT') + ' vnđ'}"></span>
-                            <span th:text="${'(' + transaction.order.percentPermission + '%)'}"></span>
-                        </dd>
-                    </th:block>
-                    <dt class="col-sm-3">Tổng cộng</dt>
+                    <dt class="col-sm-3">Total</dt>
+                    <dd th:text="${#numbers.formatDecimal(transaction.order.total, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                        class="col-sm-9"></dd>
+                    <dt class="col-sm-3">Finish total</dt>
                     <dd class="col-sm-9">
-                        <span th:text="${transaction.order == null ? '-' : '+'}" class="badge"
-                              th:classappend="${transaction.order == null ? 'badge-danger' : 'badge-success'}"></span>
+                            <span th:text="${transaction.order == null ? '-' : '+'}" class="badge"
+                                  th:classappend="${transaction.order == null ? 'badge-danger' : 'badge-success'}"></span>
                         <span th:text="${#numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT')}"></span>
                         <span> vnđ</span>
                     </dd>
-                    <dt class="col-sm-3">Ngày yêu cầu</dt>
+                    <dt class="col-sm-3">Date</dt>
                     <dd th:text="${#dates.format(transaction.date, 'dd-MM-yyyy HH:mm')}" class="col-sm-9"></dd>
                 </dl>
             </div>
@@ -59,7 +53,7 @@
                     <div class="col-sm-8 d-flex align-items-center">
                         <h3 class="card-title">
                             <i class="fas fa-text-width"></i>
-                            <span>Đơn hàng </span>
+                            <span>Orders </span>
                             <span th:text="${order.id}"></span>
                         </h3>
                     </div>
@@ -70,10 +64,10 @@
                 <table class="table table-border table-stripped">
                     <thead>
                     <tr>
-                        <th>Sản phẩm</th>
-                        <th class="text-center">Số lượng</th>
-                        <th class="text-center">Đơn giá</th>
-                        <th class="text-center">Tổng cộng</th>
+                        <th>Product</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Subtotal</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,13 +83,13 @@
                     <tfoot>
                     <tr>
                         <td colspan="4" class="text-right nowrap">
-                            <span class="mr-2">Phí vận chuyển:</span>
+                            <span class="mr-2">Shipping cost:</span>
                             <span th:text="${#numbers.formatDecimal(order.shippingCost, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"></span>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-right nowrap">
-                            <span class="mr-2">Tổng giá trị:</span>
+                            <span class="mr-2">Total:</span>
                             <span th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"></span>
                         </td>
                     </tr>

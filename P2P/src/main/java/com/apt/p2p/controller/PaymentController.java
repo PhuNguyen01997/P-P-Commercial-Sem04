@@ -65,7 +65,7 @@ public class PaymentController {
         List<OrderModel> result = orderService.create(user.getId(), purchaseModel);
 
         if (result == null) {
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình thanh toán, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "An error occurred during checkout, please try again later");
             return "redirect:/cart";
         }
 

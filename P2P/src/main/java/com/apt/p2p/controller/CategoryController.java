@@ -29,9 +29,9 @@ public class CategoryController {
 
         List<String[]> naviArr = Arrays.asList(
                 new String[]{"Home", "/admin"},
-                new String[]{"Danh mục", ""}
+                new String[]{"Category", ""}
         );
-        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Danh mục", naviArr));
+        model.addAttribute("viewHeaderNavi", new AdminHeaderNavi("Category", naviArr));
 
         return "admin/category";
     }
@@ -40,9 +40,9 @@ public class CategoryController {
     public String update(@ModelAttribute Category category, RedirectAttributes redirectAttributes){
         Category result = categoryService.updateName(category.getId(), category.getName());
         if(result != null){
-            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(1, "Cập nhật danh mục thành công"));
+            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(1, "Update category successful"));
         }else{
-            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(0, "Có lỗi xảy ra, vui lòng thử lại sau"));
+            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(0, "Something wrong, please check again later"));
         }
         return "redirect:/admin/category";
     }
@@ -51,9 +51,9 @@ public class CategoryController {
     public String create(@ModelAttribute Category category, RedirectAttributes redirectAttributes){
         Category result = categoryService.save(category);
         if(result != null){
-            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(1, "Tạo mới danh mục thành công"));
+            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(1, "Create new category successful"));
         }else{
-            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(0, "Có lỗi xảy ra, vui lòng thử lại sau"));
+            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(0, "Something wrong, please check again later"));
         }
         return "redirect:/admin/category";
     }

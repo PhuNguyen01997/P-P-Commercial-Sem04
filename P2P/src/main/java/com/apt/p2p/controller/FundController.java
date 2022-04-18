@@ -54,7 +54,8 @@ public class FundController {
 
         boolean success = shopService.shopWithDraw(input.getShopId(), input.getAmount());
         if(!success){
-            redirectAttributes.addFlashAttribute("globalError", "Có lỗi xãy ra trong quá trình rút tiền, xin hãy thử lại sau");
+            redirectAttributes.addFlashAttribute("globalError", "\n" +
+                    "An error occurred during withdrawal, please try again later");
 
             model.addAttribute("shop", shopService.findById(input.getShopId()));
             model.addAttribute("withdraw", input);
