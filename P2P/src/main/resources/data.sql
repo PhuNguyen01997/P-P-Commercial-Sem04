@@ -24,6 +24,14 @@ INSERT INTO user (avatar, created_at, email, enabled, password, phone, stripe_cu
 (NULL, NOW(), 'admin@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0937441896', null, 'SubName',  NOW(), 'admin'),
 (NULL, NOW(), 'buyer@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0923823123', 'cus_LWVTKHJTZFu9W6', 'SubName',  NOW(), 'buyer');
 
+INSERT INTO user_role (user_id, role_id) VALUES
+(1, 1),
+(1, 3),
+(2, 1),
+(2, 2),
+(3, 1);
+
+
 INSERT INTO address (district, district_id, `number`, own_name, own_phone, province, province_id, ward, ward_id, user_id) VALUES
 ('Huyện Mường Khương', 2171, '123 ABC', 'Seller 01', '0937441896', 'Lào Cai', 269, 'Xã Thanh Bình', '80915', 1),
 ('Quận Ba Đình', 1484, '34 EWDS', 'Seller 02', '3478564738', 'Hà Nội', 201, 'Phường Giảng Võ', '1A0104', 1),

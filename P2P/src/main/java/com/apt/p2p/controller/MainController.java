@@ -207,7 +207,7 @@ public class MainController {
             for (int j = range - ratio; j < range; j++) {
                 newShopList.add(shops.get(j));
             }
-            mapCategoryShop.put(i, newShopList);
+            mapCategoryShop.put(i + 1, newShopList);
         }
         products.forEach(p -> {
             // product set description

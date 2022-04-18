@@ -73,7 +73,7 @@ public final class ProductSpecification {
             root = joinAllRelation(root);
             Join<Product, Rate> joinProductRate = root.join("rates");
 
-            query.groupBy(joinProductRate.get("id")).having(cb.greaterThanOrEqualTo(cb.avg(joinProductRate.get("star")), rate.doubleValue()));
+            query.groupBy(root.get("id")).having(cb.greaterThanOrEqualTo(cb.avg(joinProductRate.get("star")), rate.doubleValue()));
 
             return query.getRestriction();
         };

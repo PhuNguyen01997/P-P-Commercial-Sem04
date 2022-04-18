@@ -69,8 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/signin", "/signup").permitAll();
-        http.authorizeRequests().antMatchers("/card", "/address", "/order", "/cart","/account", "/portal/**").authenticated();
-//        http.authorizeRequests().antMatchers("/portal").access("hasRole('ROLE_SELLER')");
+        http.authorizeRequests().antMatchers("/card", "/address", "/order", "/cart", "/account", "/portal/**").authenticated();
+        http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/signin")
@@ -90,9 +90,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                                         Authentication authentication) throws IOException, ServletException {
                         // nhận thông tin người dùng thông qua Principle
-                        Custom0Auth2User user = (Custom0Auth2User)authentication.getPrincipal();
+                        Custom0Auth2User user = (Custom0Auth2User) authentication.getPrincipal();
                         String from = RegexString.replaceUrl(request.getRequestURI());
-                        userService.processOAuthPostLogin(user ,  from);
+                        userService.processOAuthPostLogin(user, from);
                         response.sendRedirect("/");
                     }
                 })
