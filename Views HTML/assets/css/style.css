@@ -1364,7 +1364,7 @@ a.btn__primary:hover {
   display: none;
 }
 
-.auth-navi {
+.auth-navi--item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1378,15 +1378,48 @@ a.btn__primary:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin-bottom: 7px;
 }
 
-.auth-navi--item {
-  width: 50%;
+.auth-navi--item__system {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.auth-navi--item * {
-  display: block;
-  margin-bottom: 5px;
+.auth-navi--item__social {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.auth-navi--item__social > * {
+  width: calc(50% - 5px);
+}
+
+.auth-navi .social {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  padding: 5px;
+  color: #555;
+}
+
+.auth-navi .social img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 
 .auth--ipt {
