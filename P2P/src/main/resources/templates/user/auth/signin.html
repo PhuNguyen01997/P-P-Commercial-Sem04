@@ -17,13 +17,19 @@
         <p th:if="${#request.getParameter('error') == 'true'}" class="form--error-mess" for="">Invalid username or password</p>
     </form>
     <div class="auth-navi">
-        <div class="auth-navi--item">
-            <a href="/oauth2/authorization/google">Login with Google</a>
-            <a href="/oauth2/authorization/facebook">Login with Facebook</a>
-        </div>
-        <div class="auth-navi--item">
+        <div class="auth-navi--item auth-navi--item__system">
             <a href="/signup">Sign up</a>
             <a href="/forgot">Forgot password ?</a>
+        </div>
+        <div class="auth-navi--item auth-navi--item__social">
+            <a class="social" href="/oauth2/authorization/google">
+                <img class="icon" src="/img/common/icon-gg.png" alt="">
+                <span>Google</span>
+            </a>
+            <a class="social" href="/oauth2/authorization/facebook">
+                <img class="icon" src="/img/common/icon-fb.png" alt="">
+                <span>Facebook</span>
+            </a>
         </div>
     </div>
 </div>

@@ -45,7 +45,7 @@ public class ProductController {
     public String index(Model model,
                         @ModelAttribute FilterProductIndex filterModel,
                         @ModelAttribute PagiSortModel pagiSortModel) {
-        pagiSortModel.setSize(10);
+        pagiSortModel.setSize(20);
         Page<Product> pageProducts = productService.findAllByShopWithFilterIndex(filterModel, pagiSortModel);
         List<ProductModel> products = pageProducts.stream()
                 .map(e -> {
