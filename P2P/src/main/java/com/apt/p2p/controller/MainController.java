@@ -10,6 +10,7 @@ import com.apt.p2p.model.view.UserModel;
 import com.apt.p2p.model.view.WardModel;
 import com.apt.p2p.repository.*;
 import com.apt.p2p.service.LocationService;
+import com.apt.p2p.service.ShopService;
 import com.apt.p2p.service.UserService;
 import com.apt.p2p.service.UsersDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,9 @@ public class MainController {
     private UserService service;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ShopService shopService;
+
 
     private String imgUploadDir = "users/";
 
@@ -120,13 +124,134 @@ public class MainController {
     private Map<Integer, List<WardModel>> mapDistrictWard = new HashMap<>();
     private List<Role> roles;
 
-    @GetMapping("account")
+    @GetMapping("/account")
     public String userEdit(Model model) {
         UserModel user = usersDetailService.getCurrentUser();
+        User user1 = userRepository.findByUsername(user.getUsername());
+        List<String> gender = new ArrayList<>();
+        gender.add("Man");
+        gender.add("Female");
+        gender.add("Other");
+        user.setGender(user1.getGender());
         model.addAttribute("user" , user);
+        model.addAttribute("user1" , user1);
+        model.addAttribute("listGender" , gender);
+        model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         return "user/account/user-form";
     }
 
+    @GetMapping("/change-password")
+    public String changePassword(Model model) {
+        UserModel user = usersDetailService.getCurrentUser();
+        model.addAttribute("user" , user);
+        return "user/account/change-password";
+    }
+
+    /**
+     * check two password if it's correct have to change new password
+     *
+     * @param model
+     * @param
+     * @param pass1
+     * @param pass2
+     * @return
+     */
+    @PostMapping("/update-password")
+    public String updatePassword(Model model
+                                    ,@RequestParam("newPassword") String pass1
+                                    ,@RequestParam("confirmPassword") String pass2) {
+        String newPassword = pass1;
+        String confirmPassword = pass2;
+        UserModel currentUser = usersDetailService.getCurrentUser();
+
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("user" , currentUser);
+            model.addAttribute("errorPassword" , "The password is not match");
+            return "user/account/change-password";
+        } else {
+            UserModel user = service.getCurrentUser();
+            userRepository.updatePassword(user.getEmail(),passwordEncoder.encode(confirmPassword));
+            return "redirect:/account";
+        }
+
+    }
+
+    @GetMapping("/change-email")
+    public String changeEmail(Model model) {
+        UserModel user = usersDetailService.getCurrentUser();
+        model.addAttribute("user" , user);
+        return "user/account/change-email";
+    }
+
+    /**
+     * check password of user if it's correct forword to new-email page else return message error
+     *
+     * @param model
+     * @param email
+     * @param username
+     * @param pass
+     * @return
+     */
+    @PostMapping("/confirm-email")
+    public String confirmEmail(Model model ,
+                               @RequestParam("email") String email ,
+                               @RequestParam("username") String username ,
+                               @RequestParam("confirmPassword") String pass) {
+        User usr = userRepository.findByUsername(username);
+        UserModel user = usersDetailService.getCurrentUser();
+        if (passwordEncoder.matches(pass,usr.getPassword())) {
+            model.addAttribute("user" , user);
+            return "user/account/new-email";
+        } else {
+            model.addAttribute("user" , user);
+            model.addAttribute("errorInputPassword" , "Incorrect password");
+            return "user/account/change-email";
+        }
+    }
+
+    @GetMapping("/new-email")
+    public String inputEmail(Model model) {
+        UserModel user = usersDetailService.getCurrentUser();
+        model.addAttribute("user" , user);
+        return "user/account/new-email";
+    }
+
+    /**
+     * update email of current user
+     *
+     * @param model
+     * @param
+     * @param newEmail
+     * @return
+     */
+    @PostMapping("/update-email")
+    public String updateEmail(Model model ,
+                                @RequestParam("newEmail") String newEmail) {
+        String user = service.findByEmail(newEmail);
+        UserModel currentUser = usersDetailService.getCurrentUser();
+
+        if (user != null) {
+            model.addAttribute("user" , currentUser);
+            model.addAttribute("errorEmail" , "This the email already exists.");
+            return "user/account/new-email";
+        } else {
+            UserModel model1 = service.getCurrentUser();
+            userRepository.updateEmail(model1.getEmail() , newEmail);
+            return "redirect:/account";
+        }
+    }
+
+
+
+    /**
+     * update account after login page
+     *
+     * @param model
+     * @param image
+     * @param userModel
+     * @param result
+     * @return
+     */
     @PostMapping("edit-account")
     public String updateAccount(Model model,
                                 @RequestParam("pic") MultipartFile image,
@@ -154,9 +279,11 @@ public class MainController {
         usr.setPassword(usr.getPassword());
         usr.setPhone(userModel.getPhone());
         usr.setUsername(userModel.getUsername());
+        usr.setGender(userModel.getGender());
+        usr.setSubName(userModel.getSubName());
         usr.setRoles(usr.getRoles());
         service.save(usr);
-        return "user/account/user-form";
+        return "redirect:/account";
     }
 
     @GetMapping("identity")

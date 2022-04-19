@@ -25,11 +25,17 @@
         <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Sign Up</button>
       </div>
       <div class="auth-navi">
-        <a th:href="@{/signin}">Sign in</a>
-        <a th:href="@{/forgot}">Forgot password ?</a>
+        <div class="auth-navi--item">
+          <a href="/oauth2/authorization/google">Login with Google</a>
+          <a href="/oauth2/authorization/facebook">Login with Facebook</a>
+        </div>
+        <div class="auth-navi--item">
+          <a href="/signin">Sign in</a>
+          <a href="/forgot">Forgot password ?</a>
+        </div>
       </div>
       <label for="pic">
-        <img class="jsPic" src="/assets/img/common/icon_plus_blue.png" alt="logo preview">
+        <img class="jsPic" src="/assets/img/common/icon_plus_blue.png" alt="Your Avatar">
         <input class="auth--ipt auth--ipt__txt" type="file" name="pic" id="pic">
       </label>
     </form>

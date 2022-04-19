@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/signin", "/signup").permitAll();
         http.authorizeRequests().antMatchers("/card", "/address", "/order", "/cart","/account", "/portal/**").authenticated();
-//        http.authorizeRequests().antMatchers("/portal").access("hasRole('ROLE_SELLER')");
+        http.authorizeRequests().antMatchers("/account").access("hasRole('ROLE_USER')");
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/signin")

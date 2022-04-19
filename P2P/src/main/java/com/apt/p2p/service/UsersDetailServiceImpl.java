@@ -103,7 +103,15 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
         if (!auth.isAuthenticated()) {
             return null;
         }
-        User user = userRepository.findByUsername(auth.getName());
+        User user = null;
+        try {
+            Custom0Auth2User userCurrent = (Custom0Auth2User) auth.getPrincipal();
+            String tdg = "";
+            Map<String, Object> authCurrent = userCurrent.getAttributes();
+             user = userRepository.findByUsername(String.valueOf(authCurrent.get("name")));
+        } catch (Exception e) {
+             user = userRepository.findByUsername(auth.getName());
+        }
         return userMapper.userEntityToModel(user);
     }
 
@@ -135,7 +143,7 @@ public class UsersDetailServiceImpl implements UserDetailsService,UserService {
     // sau khi login bang google chung ta se tao ra 1 tai khoang local tuong ung
     public void processOAuthPostLogin(Custom0Auth2User custom0Auth2User , String from) {
         Map<String,Object> auth = custom0Auth2User.getAttributes();
-        User user = userRepository.findByUsername(custom0Auth2User.getEmail());
+        User user = userRepository.findByUsername(String.valueOf(auth.get("name")));
         //truong hop chua co tai khoan => tao moi
         if (user == null) {
             User u = new User();
