@@ -49,7 +49,8 @@ public class AddressController {
     @PostMapping("address")
     public String create(Model model,
                          @Valid @ModelAttribute("addressForm") AddressModel address,
-                         BindingResult result) {
+                         BindingResult result ,
+                         RedirectAttributes  redirectAttributes) {
         UserModel user = userService.getCurrentUser();
         model.addAttribute("user", user);
 
@@ -63,7 +64,7 @@ public class AddressController {
         }
 
         AddressModel addressModel = addressService.save(user.getId(), address);
-
+        redirectAttributes.addFlashAttribute("globalSuccess" , "Add Address Successfully");
         return "redirect:/address";
     }
 
@@ -88,6 +89,7 @@ public class AddressController {
         if(success == null){
             redirectAttributes.addFlashAttribute("globalError", "An error occurred while updating, please try again late");
         }
+        redirectAttributes.addFlashAttribute("globalSuccess" , "Update Address Successfully");
         return "redirect:/address";
     }
 
@@ -98,6 +100,7 @@ public class AddressController {
         if (!success) {
             redirectAttributes.addFlashAttribute("globalError", "An error occurred that cannot be cleared, please try again later");
         }
+        redirectAttributes.addFlashAttribute("globalSuccess" , "Delete Address Successfully");
         return "redirect:/address";
     }
 }

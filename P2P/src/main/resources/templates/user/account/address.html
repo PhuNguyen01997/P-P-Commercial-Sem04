@@ -13,13 +13,13 @@
 
     <div class="split-main">
         <div class="split-header">
-            <h2 class="split-header--title">Địa Chỉ Của Tôi</h2>
+            <h2 class="split-header--title">My Address</h2>
             <button data-id="create-address" class="js-modal btn btn__primary split-header--add"><i
-                    class="icon icon__left fas fa-plus"></i>Thêm địa chỉ mới
+                    class="icon icon__left fas fa-plus"></i>New Address
             </button>
         </div>
         <ul class="account-address">
-            <p th:if="${addressList.isEmpty()}" class="py-5 emptyText">Bạn không có địa chỉ nào</p>
+            <p th:if="${addressList.isEmpty()}" class="py-5 emptyText">You are don't any address</p>
             <li th:each="address : ${addressList}" th:attr="data-id=${address.id}"
                 class="account-address-item">
                 <div class="account-address-left">

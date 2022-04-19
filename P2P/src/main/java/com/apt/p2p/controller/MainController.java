@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.transaction.Transaction;
 import javax.validation.Valid;
@@ -158,8 +159,9 @@ public class MainController {
      */
     @PostMapping("/update-password")
     public String updatePassword(Model model
-                                    ,@RequestParam("newPassword") String pass1
-                                    ,@RequestParam("confirmPassword") String pass2) {
+                                    , @RequestParam("newPassword") String pass1
+                                    , @RequestParam("confirmPassword") String pass2 ,
+                                    RedirectAttributes  redirectAttributes) {
         String newPassword = pass1;
         String confirmPassword = pass2;
         UserModel currentUser = usersDetailService.getCurrentUser();
@@ -171,6 +173,7 @@ public class MainController {
         } else {
             UserModel user = service.getCurrentUser();
             userRepository.updatePassword(user.getEmail(),passwordEncoder.encode(confirmPassword));
+            redirectAttributes.addFlashAttribute("globalSuccess" , "Update Password Successfully");
             return "redirect:/account";
         }
 
@@ -226,7 +229,8 @@ public class MainController {
      */
     @PostMapping("/update-email")
     public String updateEmail(Model model ,
-                                @RequestParam("newEmail") String newEmail) {
+                                @RequestParam("newEmail") String newEmail ,
+                                RedirectAttributes redirectAttributes) {
         String user = service.findByEmail(newEmail);
         UserModel currentUser = usersDetailService.getCurrentUser();
 
@@ -237,6 +241,7 @@ public class MainController {
         } else {
             UserModel model1 = service.getCurrentUser();
             userRepository.updateEmail(model1.getEmail() , newEmail);
+            redirectAttributes.addFlashAttribute("globalSuccess" , "Update Email Successfully");
             return "redirect:/account";
         }
     }
@@ -256,7 +261,8 @@ public class MainController {
     public String updateAccount(Model model,
                                 @RequestParam("pic") MultipartFile image,
                                 @Valid @ModelAttribute("user") UserModel userModel,
-                                BindingResult result) {
+                                BindingResult result ,
+                                RedirectAttributes redirectAttributes) {
 
         User usr = userRepository.findByUsername(userModel.getUsername());
 
@@ -283,6 +289,7 @@ public class MainController {
         usr.setSubName(userModel.getSubName());
         usr.setRoles(usr.getRoles());
         service.save(usr);
+        redirectAttributes.addFlashAttribute("globalSuccess" , "Update Account Successfully");
         return "redirect:/account";
     }
 
