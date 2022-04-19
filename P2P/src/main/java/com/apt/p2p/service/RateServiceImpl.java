@@ -1,6 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.RateMapper;
+import com.apt.p2p.entity.OrderDetail;
 import com.apt.p2p.entity.Product;
 import com.apt.p2p.entity.Rate;
 import com.apt.p2p.entity.User;
@@ -76,9 +77,14 @@ public class RateServiceImpl implements RateService {
 
     @Override
     public List<RateModel> findAllByOrderIdAndUserId(int orderId, int userId) {
-        List<Rate> finalRates = orderDetailRepository.findAllByOrderId(orderId).stream()
-                .map(odetail -> rateRepository.findByOrderDetailId(odetail.getId()))
-                .collect(Collectors.toList());
+        List<OrderDetail> orderDetails = orderDetailRepository.findAllByOrderId(orderId);
+        List<Rate> finalRates = new ArrayList<>();
+        orderDetails.forEach(odetail -> {
+            Rate rate = rateRepository.findByOrderDetailId(odetail.getId());
+            if(rate != null){
+                finalRates.add(rate);
+            }
+        });
 
         return finalRates.stream().map(re -> rateMapper.rateEntityToModel(re)).collect(Collectors.toList());
     }

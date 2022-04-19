@@ -306,7 +306,7 @@ public class MainController {
         List<Category> categories = categoryRepository.findAll();
 
         // create users
-        users.addAll(createUser(18));
+        users.addAll(createUser(100));
 
         // create address for user
         users.forEach(u -> {
@@ -355,7 +355,7 @@ public class MainController {
         List<Order> orders = new ArrayList<>();
         List<User> finalUsers = users;
         shops.forEach(shop -> {
-            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(10, 30));
+            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(10, 60));
             shop.setOrders(newOrders);
             orders.addAll(newOrders);
         });
@@ -507,6 +507,7 @@ public class MainController {
             if(randomStatusIndex <= 3){
                 randomStatusIndex = RandomUtil.getRandomNumber(5);
             }
+            if(randomStatusIndex == 1) randomStatusIndex = 0;
             if(randomStatusIndex == 4){
                 randomStatusIndex = RandomUtil.getRandomNumber(4, 5);
             }
@@ -535,9 +536,11 @@ public class MainController {
             orderDetails.forEach(od -> od.setOrder(newOrder));
             orderDetailRepository.saveAll(orderDetails);
 
-            ShopTransaction transaction = new ShopTransaction(shop, newOrder);
-            shopTransactionRepository.save(transaction);
-            newOrder.setShopTransaction(transaction);
+            if(currentStatusOrder.getId() == 2 || currentStatusOrder.getId() == 5 || currentStatusOrder.getId() == 6){
+                ShopTransaction transaction = new ShopTransaction(shop, newOrder);
+                shopTransactionRepository.save(transaction);
+                newOrder.setShopTransaction(transaction);
+            }
 
             List<StatusHistory> statusHistories = this.statusOrders
                     .stream().filter(so -> so.getId() <= currentStatusOrder.getId())

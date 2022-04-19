@@ -92,12 +92,12 @@ public class OrderServiceImpl implements OrderService {
 
                 Shop shop = shopRepository.findById(shopId).get();
 
-                BigDecimal totalGetPermission = total.subtract(total.multiply(BigDecimal.valueOf(0.05)));
+                BigDecimal totalGetPermission = totalWithShipCost.subtract(totalWithShipCost.multiply(BigDecimal.valueOf(0.05)));
                 if(isPaymentOnline){
                     mapShopFund.put(shopId, totalGetPermission);
                 }
 
-                Order order = new Order(isPaymentOnline, total, shipCost, user, orderDetails, status, shop, address, stripeCardId);
+                Order order = new Order(isPaymentOnline, totalWithShipCost, shipCost, user, orderDetails, status, shop, address, stripeCardId);
 
                 // attach many to many relation ship order - order_status_history - status_history
                 for (int i = 1; i <= status.getId(); i++) {

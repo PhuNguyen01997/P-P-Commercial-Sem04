@@ -88,7 +88,7 @@
             <li class="order-summary--item">
                 <p>Subtotal</p>
                 <p>
-                    <span th:text="${#numbers.formatDecimal(order.calTotal(), 0, 'COMMA', 0, 'POINT')}">
+                    <span th:text="${#numbers.formatDecimal(order.total.subtract(order.shippingCost), 0, 'COMMA', 0, 'POINT')}">
                         [Order Total]
                     </span>
                     <span> vnđ</span>
@@ -104,7 +104,7 @@
             <div class="order-summary--item order-summary--item__total">
                 <p>Total</p>
                 <p>
-                    <span th:text="${#numbers.formatDecimal(order.calTotal().add(order.shippingCost), 0, 'COMMA', 0, 'POINT')}">[Summary Total]</span>
+                    <span th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT')}">[Summary Total]</span>
                     <span>vnđ</span>
                 </p>
             </div>

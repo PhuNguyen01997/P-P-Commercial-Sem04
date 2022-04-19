@@ -49,11 +49,11 @@ public class ShopTransaction {
         this.order = order;
         BigDecimal totalAfterSubtractPermission = order.getTotal().subtract(order.getTotal().multiply(BigDecimal.valueOf(0.05)));
         this.amount = totalAfterSubtractPermission;
-        if (!order.getMethodPayment() && order.getCurrentStatus().getId() != 5) {
-            this.status = ShopTransactionStatus.WAIT;
-        } else {
+//        if (!order.getMethodPayment() && order.getCurrentStatus().getId() != 6) {
+//            this.status = ShopTransactionStatus.WAIT;
+//        } else {
             this.status = ShopTransactionStatus.SUCCESS;
-        }
+//        }
         this.description = "Khách hàng mua hàng thanh toán";
     }
 

@@ -6066,6 +6066,31 @@ a.btn__primary:hover {
   padding: 0 20px;
 }
 
+.portal .rate-row--top .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.portal .rate-row--top .user img {
+  width: 26px;
+  height: 26px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  margin: 0 5px 0 10px;
+}
+
 .portal .rate-row--top .order {
   margin-left: auto;
 }

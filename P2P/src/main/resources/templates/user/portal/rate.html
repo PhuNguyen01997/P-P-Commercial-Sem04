@@ -124,7 +124,7 @@
                         console.log(rate);
                         html += `<div class="rate-row rate-row__body">`
                             + `<div class="rate-row--top">`
-                            + `<p class="user">User: <img src="/assets/users/${rate.user.avatar}" alt=""><span>${rate.user.username}</span></p>`
+                            + `<p class="user"><span>User:</span> <img src="${rate.user.avatar ? '/assets/users/' + rate.user.avatar : '/img/common/img_default_user.png'}" alt=""><span>${rate.user.username}</span></p>`
                             + `</div>`
                             + `<div class="rate-row--content">`
                             + `<div class="rate-row--content-item rate-row--content-item__product">`

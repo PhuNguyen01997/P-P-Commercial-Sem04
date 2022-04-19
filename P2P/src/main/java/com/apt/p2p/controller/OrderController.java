@@ -35,18 +35,18 @@ public class OrderController {
     @Autowired
     private OrderMapper orderMapper;
 
+//    @GetMapping("order")
+//    public String index(Model model) {
+//        UserModel user = userService.getCurrentUser();
+//        model.addAttribute("user", user);
+//
+//        List<OrderModel> orders = orderService.findAllByUserId(user.getId());
+//        model.addAttribute("orders", orders);
+//
+//        return "user/account/order-user";
+//    }
+
     @GetMapping("order")
-    public String index(Model model) {
-        UserModel user = userService.getCurrentUser();
-        model.addAttribute("user", user);
-
-        List<OrderModel> orders = orderService.findAllByUserId(user.getId());
-        model.addAttribute("orders", orders);
-
-        return "user/account/order-user";
-    }
-
-    @GetMapping("order2")
     public String index(Model model, @RequestParam(required = false, name = "page") Integer pageNumber) {
         UserModel user = userService.getCurrentUser();
         model.addAttribute("user", user);

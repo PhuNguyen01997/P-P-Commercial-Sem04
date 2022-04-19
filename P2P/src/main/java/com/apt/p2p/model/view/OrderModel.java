@@ -45,11 +45,6 @@ public class OrderModel {
 
     private CardModel payment;
 
-    public BigDecimal calTotal() {
-        BigDecimal result = orderDetails.stream().map(OrderDetailModel::getSubtotal).reduce(BigDecimal.ZERO, BigDecimal::add);
-        return result;
-    }
-
     public BigDecimal getShopRealReceiveTotal(){
         return total.subtract(total.multiply(BigDecimal.valueOf(percentPermission)));
     }

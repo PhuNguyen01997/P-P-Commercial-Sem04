@@ -57,7 +57,7 @@
                 </p>
                 <p class="order-submit--total">
                     <span>Total:</span>
-                    <span th:text="${#numbers.formatDecimal(order.total.add(order.shippingCost), 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                    <span th:text="${#numbers.formatDecimal(order.total, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
                           class="jsTotal">[Total Order]</span>
                 </p>
                 <div class="order-submit--info">
