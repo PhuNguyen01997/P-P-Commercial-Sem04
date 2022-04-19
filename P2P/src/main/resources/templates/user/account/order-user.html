@@ -49,9 +49,13 @@
                 </div>
             </div>
             <div class="order-submit">
+                <p class="order-submit--shipping">
+                    <span>Shipping cost:</span>
+                    <span th:text="${#numbers.formatDecimal(order.shippingCost, 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
+                </p>
                 <p class="order-submit--total">
                     <span>Total:</span>
-                    <span th:text="${#numbers.formatDecimal(order.calTotal(), 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
+                    <span th:text="${#numbers.formatDecimal(order.total.add(order.shippingCost), 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
                 </p>
                 <div class="order-submit--info">
 <!--                    <p class="order-submit&#45;&#45;text mr-4">Bạn đã hủy</p>-->

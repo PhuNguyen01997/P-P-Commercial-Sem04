@@ -23,9 +23,10 @@ public class MyInterceptor implements HandlerInterceptor {
             new String[]{"/portal/order", "Orders"},
             new String[]{"/portal/product", "Products"},
             new String[]{"/portal/product/create", "Add new products"},
+            new String[]{"/portal/rate", "Reviews"},
             new String[]{"/portal/", "My Store"},
             new String[]{"/portal/fund", "Fund store"},
-            new String[]{"/portal/fund-withdraw", "Fund withdraw"}
+            new String[]{"/portal/fund/withdraw", "Request withdraw"}
     );
 
     @Override

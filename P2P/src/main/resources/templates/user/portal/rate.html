@@ -63,39 +63,6 @@
                 </div>
             </div>
             <div class="rate-table-body">
-                <!--                <div class="rate-row rate-row__body">-->
-                <!--                    <div class="rate-row&#45;&#45;top">-->
-                <!--                        <p class="user">User: <img src="" alt=""><span>asd asd as asd</span></p>-->
-                <!--                        <p class="order">Order ID: <span>123271983</span></p>-->
-                <!--                    </div>-->
-                <!--                    <div class="rate-row&#45;&#45;content">-->
-                <!--                        <div class="rate-row&#45;&#45;content-item rate-row&#45;&#45;content-item__product">-->
-                <!--                            <img class="left" src="" alt="">-->
-                <!--                            <div class="right">-->
-                <!--                                <p class="name">asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH jkD-->
-                <!--                                    jkSDJKj JD </p>-->
-                <!--                                <p class="category">Category: <span>123671 26378</span></p>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                        <div class="rate-row&#45;&#45;content-item rate-row&#45;&#45;content-item__rate">-->
-                <!--                                    <span class="icon icon__star">-->
-                <!--                                        <i class="fas fa-star"></i>-->
-                <!--                                        <i class="fas fa-star"></i>-->
-                <!--                                        <i class="fas fa-star"></i>-->
-                <!--                                        <i class="fas fa-star"></i>-->
-                <!--                                        <i class="far fa-star"></i>-->
-                <!--                                    </span>-->
-                <!--                            <p class="date">2022-14-23 23:20</p>-->
-                <!--                            <p>asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH jkD jkSDJKj-->
-                <!--                                JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH jkD-->
-                <!--                                jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD hKASDH-->
-                <!--                                jkD jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD kjASD-->
-                <!--                                hKASDH jkD jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh SJD-->
-                <!--                                kjASD hKASDH jkD jkSDJKj JD asdS HAJKDH jkASDHjk hASJKD JASj ASHdj JKAj hasj kh-->
-                <!--                                SJD kjASD hKASDH jkD jkSDJKj JD </p>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -104,99 +71,102 @@
 <script layout:fragment="script" th:inline="javascript">
     const shopId = [[${shop != null ? shop.id : null}]];
 
-    function setActive(ele) {
-        if (!ele) return;
-        const width = $(ele).outerWidth();
-        const position = $(ele).position();
+    $(function () {
+        function setActive(ele) {
+            if (!ele) return;
+            const width = $(ele).outerWidth();
+            const position = $(ele).position();
 
-        $('.portal-category--item').removeClass('active');
-        $(ele).addClass('active');
+            $('.portal-category--item').removeClass('active');
+            $(ele).addClass('active');
 
-        $('.portal-category--bar').css({
-            width,
-            transform: `translateX(${position.left}px)`
-        });
-    }
-
-    function getFilter() {
-        const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/gm);
-        let star = $('.portal-category--item.active').attr('data-value');
-        star = star ? star : null;
-        return {
-            userName: $('[name="userName"]').val() ? $('[name="userName"]').val() : null,
-            productName: $('[name="productName"]').val() ? $('[name="productName"]').val() : null,
-            minDate: date[0],
-            maxDate: date[1],
-            star
+            $('.portal-category--bar').css({
+                width,
+                transform: `translateX(${position.left}px)`
+            });
         }
-    }
 
-    function renderRating(star) {
-        let result = ``;
-        for (let i = 0; i < 5; i++) {
-            result += `<i class="${i < star ? 'fas' : 'far'} fa-star"></i>`;
+        function getFilter() {
+            const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/gm);
+            let star = $('.portal-category--item.active').attr('data-value');
+            star = star ? star : null;
+            return {
+                userName: $('[name="userName"]').val() ? $('[name="userName"]').val() : null,
+                productName: $('[name="productName"]').val() ? $('[name="productName"]').val() : null,
+                minDate: date[0],
+                maxDate: date[1],
+                star
+            }
         }
-        return result;
-    }
 
-    function fetchRate() {
-        const filter = getFilter();
-        console.log(filter);
-        setGlobalLoading(true);
+        function renderRating(star) {
+            let result = ``;
+            for (let i = 0; i < 5; i++) {
+                result += `<i class="${i < star ? 'fas' : 'far'} fa-star"></i>`;
+            }
+            return result;
+        }
 
-        $.ajax({
-            url: `${window.location.protocol}//${window.location.host}/api/rate/portal/`,
-            cache: false,
-            type: 'POST',
-            contentType: "application/json",
-            data: JSON.stringify({...filter, shopId}),
-            success: function (rates) {
-                let html = "";
-                rates.forEach(rate => {
-                    console.log(rate);
-                    html += `<div class="rate-row rate-row__body">`
-                        + `<div class="rate-row--top">`
-                        + `<p class="user">User: <img src="/assets/users/${rate.user.avatar}" alt=""><span>${rate.user.username}</span></p>`
-                        + `</div>`
-                        + `<div class="rate-row--content">`
-                        + `<div class="rate-row--content-item rate-row--content-item__product">`
-                        + `<img class="left" src="/assets/products/${rate.product.image[0]}" alt="">`
-                        + `<div class="right">`
-                        + `<p class="name">${rate.product.name}</p>`
-                        + `<p class="category">Category: <span>${rate.product.category.name}</span></p>`
-                        + `</div>`
-                        + `</div>`
-                        + `<div class="rate-row--content-item rate-row--content-item__rate">`
-                        + `<span class="icon icon__star">`
-                        + renderRating(rate.star)
-                        + `</span>`
-                        + `<p class="date">${getStringDateFormat(new Date(rate.createdAt))} ${getStringTimeFormat(new Date(rate.createdAt))}</p>`
-                        + `<p>${rate.description}</p>`
-                        + `</div>`
-                        + `</div>`
-                        + `</div>`;
-                })
+        function fetchRate() {
+            const filter = getFilter();
+            console.log(filter);
+            setGlobalLoading(true);
 
-                $('.rate-table-body').html(html);
+            $.ajax({
+                url: `${window.location.protocol}//${window.location.host}/api/rate/portal/`,
+                cache: false,
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({...filter, shopId}),
+                success: function (rates) {
+                    let html = "";
+                    rates.forEach(rate => {
+                        console.log(rate);
+                        html += `<div class="rate-row rate-row__body">`
+                            + `<div class="rate-row--top">`
+                            + `<p class="user">User: <img src="/assets/users/${rate.user.avatar}" alt=""><span>${rate.user.username}</span></p>`
+                            + `</div>`
+                            + `<div class="rate-row--content">`
+                            + `<div class="rate-row--content-item rate-row--content-item__product">`
+                            + `<img class="left" src="/assets/products/${rate.product.image[0]}" alt="">`
+                            + `<div class="right">`
+                            + `<p class="name">${rate.product.name}</p>`
+                            + `<p class="category">Category: <span>${rate.product.category.name}</span></p>`
+                            + `</div>`
+                            + `</div>`
+                            + `<div class="rate-row--content-item rate-row--content-item__rate">`
+                            + `<span class="icon icon__star">`
+                            + renderRating(rate.star)
+                            + `</span>`
+                            + `<p class="date">${getStringDateFormat(new Date(rate.createdAt))} ${getStringTimeFormat(new Date(rate.createdAt))}</p>`
+                            + `<p>${rate.description}</p>`
+                            + `</div>`
+                            + `</div>`
+                            + `</div>`;
+                    })
 
-                setGlobalLoading(false);
-            },
-            error: function (xhr, error, response) {
-                console.log({xhr, error, response});
-                setGlobalLoading(false);
-            },
-        });
-    }
+                    $('.rate-table-body').html(html);
 
-    setActive(document.querySelector('.portal-category--item.active'));
+                    setGlobalLoading(false);
+                },
+                error: function (xhr, error, response) {
+                    console.log({xhr, error, response});
+                    setGlobalLoading(false);
+                },
+            });
+        }
 
-    $('.rate-submit').on('click', function () {
+        setActive(document.querySelector('.portal-category--item.active'));
+
         fetchRate();
-    })
+        $('.rate-submit').on('click', function () {
+            fetchRate();
+        })
 
-    $('.portal-category--item').on('click', function () {
-        setActive(this);
-        fetchRate();
+        $('.portal-category--item').on('click', function () {
+            setActive(this);
+            fetchRate();
+        })
     })
 </script>
 </body>

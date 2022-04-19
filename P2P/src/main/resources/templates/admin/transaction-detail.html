@@ -10,13 +10,24 @@
 <body>
 <section layout:fragment="content">
     <div class="container-fluid">
-        <div class="card">
+        <div class="card"
+             th:classappend="${transaction.status.name == T(com.apt.p2p.entityEnum.ShopTransactionStatus).WAIT.name() ? 'card-danger' :
+                            (transaction.status.name == T(com.apt.p2p.entityEnum.ShopTransactionStatus).SUCCESS.name() ? 'card-success' : 'card-dark')}">
             <div class="card-header">
                 <div class="row">
                     <div class="col-sm-8 d-flex align-items-center">
                         <h3 class="card-title">
-                            <i class="fas fa-text-width"></i>
+                            <i class="fas fa-text-width mr-2"></i>
                             <span th:text="${transaction.id}"></span>
+                        </h3>
+                    </div>
+                    <div class="col-sm-4 d-flex align-items-center justify-content-end">
+                        <h3 class="card-title">
+                            <th:block th:switch="${transaction.status.name}">
+                                <span th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).WAIT.name()}">WAIT</span>
+                                <span th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).SUCCESS.name()}">SUCCESS</span>
+                                <span th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).FAIL.name()}">FAIL</span>
+                            </th:block>
                         </h3>
                     </div>
                 </div>
@@ -30,9 +41,19 @@
                     <dd th:text="${transaction.shop.name}" class="col-sm-9"></dd>
                     <dt class="col-sm-3">User</dt>
                     <dd th:text="${transaction.shop.user.username}" class="col-sm-9"></dd>
-                    <dt class="col-sm-3">Total</dt>
-                    <dd th:text="${#numbers.formatDecimal(transaction.order.total, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
-                        class="col-sm-9"></dd>
+                    <th:block th:if="${transaction.order != null}">
+                        <dt class="col-sm-3">Total</dt>
+                        <dd th:text="${#numbers.formatDecimal(transaction.order.total, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                            class="col-sm-9"></dd>
+                        <dt class="col-sm-3">Fee</dt>
+                        <dd th:text="${#numbers.formatDecimal(transaction.order.total.multiply(0.05), 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                            class="col-sm-9"></dd>
+                    </th:block>
+                    <th:block th:if="${transaction.order == null}">
+                        <dt class="col-sm-3">Withdraw total</dt>
+                        <dd th:text="${'-' + #numbers.formatDecimal(transaction.amount, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                            class="col-sm-9"></dd>
+                    </th:block>
                     <dt class="col-sm-3">Finish total</dt>
                     <dd class="col-sm-9">
                             <span th:text="${transaction.order == null ? '-' : '+'}" class="badge"
@@ -52,7 +73,7 @@
                 <div class="row">
                     <div class="col-sm-8 d-flex align-items-center">
                         <h3 class="card-title">
-                            <i class="fas fa-text-width"></i>
+                            <i class="fas fa-text-width mr-2"></i>
                             <span>Orders </span>
                             <span th:text="${order.id}"></span>
                         </h3>

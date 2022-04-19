@@ -19,7 +19,8 @@
                             <tr>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Date</th>
-                                <th>Category</th>
+                                <th>Shop</th>
+                                <th>Order</th>
                                 <th class="text-center">Status</th>
                             </tr>
                             </thead>
@@ -33,12 +34,15 @@
                                     th:data-order="${transaction.date.getTime()}"
                                     class="text-center"></td>
                                 <td th:text="${transaction.shop.name}"></td>
-                                <td th:switch="${transaction.status.name()}" class="text-center">
+                                <td class="text-center">
+                                    <span th:text="${transaction.order == null ? '' : transaction.order.id}" class="mr-1"></span>
+                                </td>
+                                <td th:switch="${transaction.status.name}" class="text-center">
                                     <span class="badge badge-danger"
                                           th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).WAIT.name()}">WAIT</span>
                                     <span class="badge badge-success"
                                           th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).SUCCESS.name()}">SUCCESS</span>
-                                    <span class="badge badge-warning"
+                                    <span class="badge badge-dark"
                                           th:case="${T(com.apt.p2p.entityEnum.ShopTransactionStatus).FAIL.name()}">FAIL</span>
                                 </td>
                             </tr>
@@ -48,6 +52,7 @@
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Date</th>
                                 <th>Category</th>
+                                <th>Order</th>
                                 <th class="text-center">Status</th>
                             </tr>
                             </tfoot>

@@ -44,6 +44,11 @@ public class ShopTransactionController {
         return "/admin/transaction";
     }
 
+    @GetMapping("/admin")
+    public String adminIndex2(){
+        return "redirect:/admin/transaction";
+    }
+
     @GetMapping("/admin/transaction/{id}")
     public String adminDetail(Model model, @PathVariable("id") int id){
         ShopTransactionModel shopTransactionModel = shopTransactionService.findById(id);

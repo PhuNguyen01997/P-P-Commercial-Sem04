@@ -35,8 +35,12 @@
 
         &__payment {
             .icon {
-                &__visa {
+                &__visa, &__master-card {
                     width: 50px;
+                }
+
+                &:nth-child(n+2){
+                    margin-left: 10px;
                 }
             }
         }
@@ -66,6 +70,10 @@
 
         &--line {
             display: block;
+        }
+
+        &--card {
+            @include flex($justify: flex-start, $align: center);
         }
     }
 }

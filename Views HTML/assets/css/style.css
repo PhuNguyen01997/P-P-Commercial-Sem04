@@ -1228,8 +1228,12 @@ a.btn__primary:hover {
   margin-right: 10px;
 }
 
-.footer-item__payment .icon__visa {
+.footer-item__payment .icon__visa, .footer-item__payment .icon__master-card {
   width: 50px;
+}
+
+.footer-item__payment .icon:nth-child(n+2) {
+  margin-left: 10px;
 }
 
 .footer-item__mobile .icon__qr {
@@ -1277,6 +1281,22 @@ a.btn__primary:hover {
 
 .footer-item--line {
   display: block;
+}
+
+.footer-item--card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .auth {
@@ -2802,7 +2822,7 @@ a.btn__primary:hover {
   padding: 0 15px;
 }
 
-.order-submit--total {
+.order-submit--total, .order-submit--shipping {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2816,11 +2836,21 @@ a.btn__primary:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding: 24px 0px 12px;
+}
+
+.order-submit--total span:last-child, .order-submit--shipping span:last-child {
+  margin-left: 10px;
+}
+
+.order-submit--shipping {
+  padding-top: 24px;
+}
+
+.order-submit--total {
+  padding-bottom: 12px;
 }
 
 .order-submit--total span:last-child {
-  margin-left: 10px;
   color: #ff3945;
   font-size: 2.4rem;
 }

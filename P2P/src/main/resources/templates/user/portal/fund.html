@@ -59,7 +59,7 @@
         <div class="fund-row fund-row__header">
             <div class="fund-row--item fund-row--item__date">Date</div>
             <div class="fund-row--item fund-row--item__desc">Type</div>
-            <div class="fund-row--item fund-row--item__price">Price</div>
+            <div class="fund-row--item fund-row--item__price">Total</div>
             <div class="fund-row--item fund-row--item__status">Status</div>
         </div>
         <div class="fund-body">
@@ -68,7 +68,9 @@
     </div>
 </div>
 
-<script layout:fragment="script">
+<script layout:fragment="script" th:inline="javascript">
+    const shopId = [[${shop != null ? shop.id : null}]];
+
     $(function () {
         function getFilter() {
             const date = $('input[name="date"]').val().match(/.+(?=\s\-\s)|(?<=\s\-\s).+/gm);
@@ -82,7 +84,6 @@
         function fetchTransaction() {
             const filter = getFilter();
             setGlobalLoading(true);
-            const shopId = 1;
             $.ajax({
                 url: `${window.location.protocol}//${window.location.host}/api/shop/${shopId}/fund`,
                 cache: false,
@@ -98,7 +99,10 @@
                             `<p>${getStringDateFormat(date)}</p>` +
                             `</div>` +
                             `<div class="fund-row--item fund-row--item__desc">` +
-                            `<p>${fund.description}</p>` +
+                            `<p>` +
+                            `<span>${fund.description}</span>` +
+                            (fund.order ? ` <spam>(Order ID: ${fund.order.id})</spam>` : '') +
+                            `</p>` +
                             `</div>` +
                             `<div class="fund-row--item fund-row--item__price">` +
                             `<p>${fund.order ? '+' : '-'}${fund.amount.toLocaleString()}</p>` +

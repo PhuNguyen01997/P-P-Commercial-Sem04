@@ -150,7 +150,7 @@
                             `<div class="table-body--row-header">` +
                             `<p class="avatar circle"><img src="/img/common/img_default_user.png" alt=""></p>` +
                             `<p class="name">${order.user.username}</p>` +
-                            `<p class="amount"><span>Total: </span><span class="bold">${order.total.toLocaleString()} vnđ</span></p>` +
+                            `<p class="amount"><span>Total: </span><span class="bold">${order.total.toLocaleString()} vnđ</span> <span>(Shipping: ${order.shippingCost.toLocaleString()} vnđ)</span></p>` +
                             `<p class="order-info">Order ID: <span>${order.id}</span></p>` +
                             `</div>` +
                             `<ul class="table-body--row-list">`;
@@ -159,9 +159,9 @@
                             htmlText += `<li class="table-body--row-item">` +
                                 `<div class="table-col table-col__name">` +
                                 `<img src="/assets/products/${ode.product.image[0]}" alt="">` +
-                                `<div class="info"><p class="txt">${ode.product.name}</p><p class="number">x${ode.quantity}</p></div>` +
+                                `<div class="info"><a href="/portal/product/${ode.product.id}"><p class="txt">${ode.product.name}</p><p class="number">x${ode.quantity}</p></a></div>` +
                                 `</div>` +
-                                `<div class="table-col table-col__price"><p>${ode.lastPrice.toLocaleString()} vnđ</p></div>` +
+                                `<div class="table-col table-col__price"><p>${(ode.lastPrice * ode.quantity).toLocaleString()} vnđ</p></div>` +
                                 `<div class="table-col table-col__date">` +
                                 `<p>${getStringDateFormat(createdDate)}</p>` +
                                 `<p>${getStringTimeFormat(createdDate)}</p>` +
@@ -229,7 +229,7 @@
                     if (success) {
                         window.location.reload();
                     } else {
-                        showModal("Không thể chỉnh sửa trạng thái đơn hàng, vui lòng liên hệ hỗ trợ");
+                        showModal("Unable to edit order status, please contact support");
                     }
                 },
                 error: function (xhr, error, response) {
