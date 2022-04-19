@@ -16,11 +16,12 @@
                     <div class="card-header">
                         <h3 class="card-title">New category</h3>
                     </div>
-                    <form method="post" action="category/create">
+                    <form method="post" th:object="${categoryForm}" action="/admin/category/create">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Category name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Category name">
+                                <input type="text" class="form-control" th:field="*{name}" placeholder="Category name">
+                                <p th:errors="*{name}" class="text-danger">Invalid value</p>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Add category</button>
@@ -46,11 +47,12 @@
                                 <td th:text="${category.id}"></td>
                                 <td th:text="${category.name}"></td>
                                 <td>
-                                    <form action="category/update" method="post" class="d-flex">
+                                    <form action="/admin/category/update" method="post" class="jsUpdateFrom d-flex">
                                         <input type="hidden" name="id" th:value="${category.id}">
                                         <input type="text" name="name" placeholder="Change name">
                                         <button class="ml-2 submit btn btn-sm btn-warning">Update</button>
                                     </form>
+                                    <p class="text-danger error d-none m-0"></p>
                                 </td>
                                 <!--                <td>-->
                                 <!--                    <form action="" method="post" class="d-flex">-->
@@ -80,6 +82,15 @@
     $("#dataTable").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false
     });
+    $('.jsUpdateFrom').on('submit', function () {
+        $('.error').addClass('d-none');
+
+        if ($(this).children('[name="name"]').val()) {
+            return true;
+        }
+        $(this).next('.error').text('Category name can\'t not be blank').removeClass('d-none');
+        return false;
+    })
 </script>
 </body>
 </html>

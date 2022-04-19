@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.Date;
@@ -23,6 +24,7 @@ public class Category {
 
     @Column(length = 80)
     @NotNull
+    @NotBlank(message = "Category name can't not be blank")
     private String name;
 
     private Date createdAt;
