@@ -147,10 +147,26 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 (NOW(), 'Kẹo Thạch Zaizai 320g / 350g / 500g - Đức Hạnh | Hương vị: Khoai Môn, Chanh Leo, Me, Dâu, Xoài, Đào, cam', '[\"1_11143.jpg\",\"1_11144.jpg\",\"1_11145.jpg\"]', '', 42000, NOW(), 6, 1, 0),
 (NOW(), 'Bánh BISCOTTI Nguyên Cám Ăn Kiêng Lành Mạnh 100% by HeBe - Bánh Ngũ Cốc Ăn Kiêng Health', '[\"1_11146.jpg\",\"1_11147.jpg\",\"1_11148.jpg\"]', '', 45000, NOW(), 6, 1, 0),
 (NOW(), 'ĐƯỜNG ĐEN TAIWAN', '[\"1_11149.jpg\",\"1_11150.jpg\",\"1_11151.jpg\"]', '', 98000, NOW(), 6, 1, 0),
-(NOW(), 'Trái Đào Ngâm Nước Đường Thái Lan Lon 425gr & Lon 820gr', '[\"1_11152.jpg\",\"1_11153.jpg\",\"1_11154.jpg\"]', '', 24000, NOW(), 6, 1, 0);
 
 -- INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
 -- (NOW(), 3, NOW(), 1, 2),
 -- (NOW(), 2, NOW(), 2, 2),
 -- (NOW(), 1, NOW(), 4, 2),
 -- (NOW(), 1, NOW(), 5, 2);
+
+(NOW(), 'Giá Kệ Để Đồ Đa Năng VANDO Inox 304 Sơn Đen Tĩnh Điện 3 4 5 tầng', '[\"3_330.jpg\",\"3_331.jpg\",\"3_332.jpg\"]', '', 699.000, NOW(), 3, 1, 0),
+(NOW(), 'Thùng vải đựng đồ Ghome kiêm ghế ngồi khung gỗ nhân tạo bọc vải chắc chắn, tiện lợi TV04', '[\"3_333.jpg\",\"3_334.jpg\",\"3_335.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Tranh Cát Chuyển Động 3D,Cát Lún Hàng Thủ Công ,Làm Quà Tặng ,Trang Trí Nội Thất, Đa Dạng Kích Thước', '[\"3_336.jpg\",\"3_337.jpg\",\"3_338.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Tranh Treo Tường Trang Trí Nội Thất Hình Động Vật Dễ Thương', '[\"3_001.jpg\",\"3_002.jpg\",\"3_003.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Bàn làm việc, văn phòng liền kệ sách, Khung sắt CỠ LỚN, Chịu lực cao, không lay. BLV08', '[\"3_004.jpg\",\"3_005.jpg\",\"3_006.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Kệ đựng mỹ phẩm Cicico356 để đồ trang điểm trong nhà tắm treo tường không đục lỗ nhựa ABS cao cấp', '[\"3_007.jpg\",\"3_008.jpg\",\"3_009.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Mô hình nhà gỗ búp bê thu nhỏ với nội thất đẹp mắt', '[\"3_010.jpg\",\"3_011.jpg\",\"3_012.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'chân bàn sắt sơn tĩnh điện - Chân bàn sắt mặt tròn hairpin ziczac HPBBC 03 - 01', '[\"3_013.jpg\",\"3_014.jpg\",\"3_015.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Chuồng Quây Chó Lớn - Bằng Sắt sơn tĩnh điện - Gồm 6 tấm ghép kích thước 90*100cm hoặc 100x120cm', '[\"3_016.jpg\",\"3_017.jpg\",\"3_018.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Cây Treo Quần Áo Bằng 100% Gỗ Cao Su Tự Nhiên 3 Chân AN Của Dogogiasi.com Màu Nâu Hàng Xuất Khẩu Hàn Quốc, Châu Âu.', '[\"3_019.jpg\",\"3_020.jpg\",\"3_021.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Kệ bếp kệ lò vi sóng FUNA khung sắt sơn tĩnh điện, chân kệ nó nút tăng giảm chống cập kênh hoàn toàn ( tặng móc ) - KB01', '[\"3_022.jpg\",\"3_023.jpg\",\"3_024.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), '[Phụ kiện trang trí] Kệ mây tre đan trang trí đa năng', '[\"3_025.jpg\",\"3_026.jpg\",\"3_027.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Giá treo quần áo, kệ dày dép 2 trong 1 tiện lợi SAGOKER, mã GQA947', '[\"3_028.jpg\",\"3_029.jpg\",\"3_030.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Kệ mỹ phẩm 3 tầng lồng chim - HCM Now Giao Liền', '[\"3_031.jpg\",\"3_032.jpg\",\"3_033.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), '[Mã LIFEHLSALE2 giảm 10% đơn 0Đ] kệ góc kim loại dán tường sơn tĩnh điện MÃ TGS 04 + 4 miếng dán', '[\"3_034.jpg\",\"3_035.jpg\",\"3_036.jpg\"]', '', 98000, NOW(), 3, 1, 0);
+
