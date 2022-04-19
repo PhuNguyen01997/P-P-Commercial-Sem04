@@ -78,34 +78,13 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-                <div class="form-item" >
+                <div th:if="${user.shop != null}" class="form-item" >
                     <label class="form-item--left" >Shop Name</label>
                     <div class="form-item--right">
                         <input th:field="*{shop.name}" readonly>
                         <a style="color:blue;" href="/portal"><ins>View Details</ins></a>
                     </div>
                 </div>
-<!--                <div class="form-item">-->
-<!--                    <label class="form-item&#45;&#45;left">Ngày Sinh</label>-->
-<!--                    <div class="form-item&#45;&#45;right form-item&#45;&#45;right__flex">-->
-<!--                        <div class="select select__year">-->
-<!--                            <select name="year">-->
-<!--                                <option value="0">Năm sinh</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                        <div class="select select__month">-->
-<!--                            <select name="month">-->
-<!--                                <option value="0">Tháng sinh</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                        <div class="select select__day">-->
-<!--                            <select name="day">-->
-<!--                                <option value="0">Ngày sinh</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <input type="hidden" name="birth">-->
-<!--                </div>-->
                 <div class="form-item">
                     <label class="form-item--left"></label>
                     <div class="form-item--right">

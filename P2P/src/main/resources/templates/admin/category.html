@@ -46,11 +46,14 @@
                             <tr th:each="category : ${categories}">
                                 <td th:text="${category.id}"></td>
                                 <td th:text="${category.name}"></td>
-                                <td>
+                                <td class="d-flex">
                                     <form action="/admin/category/update" method="post" class="jsUpdateFrom d-flex">
                                         <input type="hidden" name="id" th:value="${category.id}">
                                         <input type="text" name="name" placeholder="Change name">
                                         <button class="ml-2 submit btn btn-sm btn-warning">Update</button>
+                                    </form>
+                                    <form th:action="@{/admin/category/delete/{id}(id=${category.id})}" th:method="delete" class="d-flex">
+                                        <button class="ml-2 submit btn btn-sm btn-danger">Delete</button>
                                     </form>
                                     <p class="text-danger error d-none m-0"></p>
                                 </td>

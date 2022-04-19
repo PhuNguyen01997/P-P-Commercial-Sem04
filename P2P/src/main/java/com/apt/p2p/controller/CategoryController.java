@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -90,6 +88,16 @@ public class CategoryController {
             redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(1, "Create new category successful"));
         } else {
             redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(0, "Something wrong, please check again later"));
+        }
+        return "redirect:/admin/category";
+    }
+
+    @DeleteMapping("/admin/category/delete/{id}")
+    public String delete(Model model, @PathVariable("id") int id, RedirectAttributes redirectAttributes){
+        try {
+            categoryService.deleteById(id);
+        } catch (Exception e){
+            redirectAttributes.addFlashAttribute("responseMessage", new ToastResponse(0, e.getMessage()));
         }
         return "redirect:/admin/category";
     }

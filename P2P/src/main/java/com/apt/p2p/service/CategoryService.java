@@ -12,4 +12,6 @@ public interface CategoryService {
     Category updateName(int id, String name);
 
     Category save(Category category);
+
+    void deleteById(int id) throws Exception;
 }
