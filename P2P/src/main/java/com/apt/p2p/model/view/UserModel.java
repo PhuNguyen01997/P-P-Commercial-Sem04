@@ -55,6 +55,8 @@ public class UserModel {
 
     private String gender;
 
+    private String provider;
+
     private List<AddressModel> addresses = new ArrayList<>();
 
     private List<CardModel> cards = new ArrayList<>();
@@ -76,6 +78,7 @@ public class UserModel {
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
         this.enabled = user.isEnabled();
+        this.provider = user.getProvider();
     }
 
     public String toUrl(String fileName) {
