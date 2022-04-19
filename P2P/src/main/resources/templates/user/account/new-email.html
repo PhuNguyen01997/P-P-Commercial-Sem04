@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/account-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user}"></title>
+</head>
+<body>
+<div layout:fragment="content" class="inner split account account__info">
+    <div th:replace="fragments/general-account.html :: content-side"></div>
+
+    <div class="split-main split-main__form">
+        <div class="split-header">
+            <h2 class="split-header--title">Change Email</h2>
+            <p class="split-header--text">Profile management information for account security</p>
+        </div>
+        <form th:action="@{/update-email}" method="POST" class="account-form account-edit-form"
+              enctype="multipart/form-data">
+                 <div class="account-form--left">
+                    <div class="form-item">
+                        <label class="form-item--left">New Email</label>
+                        <div class="form-item--right">
+                            <input type="email" name="newEmail">
+                            <p th:if="${errorEmail != null}"  th:text="${errorEmail}" class="error">Invalid value</p>
+
+                        </div>
+                    </div>
+                     <div class="form-item">
+                         <label class="form-item--left"></label>
+                         <div class="form-item--right">
+                             <button type="submit" class="btn btn__primary">Save</button>
+                         </div>
+                     </div>
+                </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

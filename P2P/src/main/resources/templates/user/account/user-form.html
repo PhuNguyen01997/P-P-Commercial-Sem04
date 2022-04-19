@@ -13,20 +13,20 @@
 
     <div class="split-main split-main__form">
         <div class="split-header">
-            <h2 class="split-header--title">Hồ Sơ Của Tôi</h2>
-            <p class="split-header--text">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+            <h2 class="split-header--title">My Profile</h2>
+            <p class="split-header--text">Profile management information for account security</p>
         </div>
         <form th:action="@{/edit-account}" th:object="${user}" method="POST" class="account-form account-edit-form" enctype="multipart/form-data">
             <div class="account-form--left">
                 <div class="form-item">
-                    <label class="form-item--left">Tên đăng nhập</label>
+                    <label class="form-item--left">username</label>
                     <div class="form-item--right">
                         <p class="text" th:text="${user.username}"></p>
                         <input type="hidden" th:field="*{username}">
                     </div>
                 </div>
                 <div class="form-item">
-                    <label class="form-item--left" for="subName">Tên</label>
+                    <label class="form-item--left" for="subName">name</label>
                     <div class="form-item--right">
                         <input type="text" th:field="*{subName}" id="subName">
                     </div>
@@ -34,62 +34,82 @@
                 <div class="form-item">
                     <label class="form-item--left" for="email">Email</label>
                     <div class="form-item--right">
-                        <input type="text" th:field="*{email}" id="email">
+                        <p class="text" th:text="${user.email}" id="email"></p>
+                        <input type="hidden" th:field="*{email}">
+                        <a style="color:blue;" href="/change-email"><ins>Change Email</ins></a>
                     </div>
                 </div>
                 <div class="form-item">
-                    <label class="form-item--left" for="number">Số điện thoại</label>
+                    <label class="form-item--left">Gender</label>
+                    <div class="form-item--right">
+                        <div class="select">
+                            <select name="categoryId" id="" th:field="*{gender}">
+                                <option th:each="i : ${listGender}" th:value="${i}" th:text="${i}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left" for="number">Phone Number</label>
                     <div class="form-item--right">
                         <input type="text" th:field="*{phone}" id="number">
                     </div>
                 </div>
-                <div class="form-item">
-                    <label class="form-item--left">Giới tính</label>
+<!--                <div class="form-item">-->
+<!--                    <label class="form-item&#45;&#45;left">Gender</label>-->
+<!--                    <div class="form-item&#45;&#45;right">-->
+<!--                        <div class="radio-block radio-block__horizonal" >-->
+<!--                            <label class="radio" >-->
+<!--                                <input  th:if="*{gender == 'M'} ? 'checked': ''" name="gender" type="radio" value="M" id="M">-->
+<!--                                <div class="radio-show"></div>-->
+<!--                            </label>-->
+<!--                            <span for="M">Nam</span>-->
+<!--                            <label class="radio">-->
+<!--                                <input th:if="*{gender == 'F'} ? 'checked': ''" name="gender" type="radio" value="F" id="F">-->
+<!--                                <div class="radio-show"></div>-->
+<!--                            </label>-->
+<!--                            <span for="F">Nữ</span>-->
+<!--                            <label class="radio">-->
+<!--                                <input  name="gender" type="radio" value="0" id="B">-->
+<!--                                <div class="radio-show"></div>-->
+<!--                            </label>-->
+<!--                            <span for="B">Khác</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="form-item" >
+                    <label class="form-item--left" >Shop Name</label>
                     <div class="form-item--right">
-                        <div class="radio-block radio-block__horizonal">
-                            <label class="radio">
-                                <input checked name="gender" type="radio" value="M" id="M">
-                                <div class="radio-show"></div>
-                            </label>
-                            <span for="M">Nam</span>
-                            <label class="radio">
-                                <input checked name="gender" type="radio" value="F" id="F">
-                                <div class="radio-show"></div>
-                            </label>
-                            <span for="F">Nữ</span>
-                            <label class="radio">
-                                <input checked name="gender" type="radio" value="0" id="B">
-                                <div class="radio-show"></div>
-                            </label>
-                            <span for="B">Khác</span>
-                        </div>
+                        <input th:field="*{shop.name}" readonly>
+                        <a style="color:blue;" href="/portal"><ins>View Details</ins></a>
                     </div>
                 </div>
-                <div class="form-item">
-                    <label class="form-item--left">Ngày Sinh</label>
-                    <div class="form-item--right form-item--right__flex">
-                        <div class="select select__year">
-                            <select name="year">
-                                <option value="0">Năm sinh</option>
-                            </select>
-                        </div>
-                        <div class="select select__month">
-                            <select name="month">
-                                <option value="0">Tháng sinh</option>
-                            </select>
-                        </div>
-                        <div class="select select__day">
-                            <select name="day">
-                                <option value="0">Ngày sinh</option>
-                            </select>
-                        </div>
-                    </div>
-                    <input type="hidden" name="birth">
-                </div>
+<!--                <div class="form-item">-->
+<!--                    <label class="form-item&#45;&#45;left">Ngày Sinh</label>-->
+<!--                    <div class="form-item&#45;&#45;right form-item&#45;&#45;right__flex">-->
+<!--                        <div class="select select__year">-->
+<!--                            <select name="year">-->
+<!--                                <option value="0">Năm sinh</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="select select__month">-->
+<!--                            <select name="month">-->
+<!--                                <option value="0">Tháng sinh</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="select select__day">-->
+<!--                            <select name="day">-->
+<!--                                <option value="0">Ngày sinh</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <input type="hidden" name="birth">-->
+<!--                </div>-->
                 <div class="form-item">
                     <label class="form-item--left"></label>
                     <div class="form-item--right">
-                        <button type="submit" class="btn btn__primary">Lưu</button>
+                        <button type="submit" class="btn btn__primary">Save</button>
                     </div>
                 </div>
             </div>
@@ -151,6 +171,8 @@
             if(day != 0 && month != 0 && year != 0){
                 birth = `${day}-${month}-${year}`;
             }
+
+
             $('input[name="birth"]').val(birth ? birth : '');
             this.submit();
         })

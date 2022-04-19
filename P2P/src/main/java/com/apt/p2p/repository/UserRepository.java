@@ -19,4 +19,14 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     void updateToken(String token , String email);
 
     User findByResetPasswordToken(String token);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u set u.email = :newEmail WHERE u.email = :oldEmail")
+    void updateEmail(String oldEmail , String newEmail);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u set u.password = :password WHERE u.email = :email")
+    void updatePassword(String email , String password);
 }

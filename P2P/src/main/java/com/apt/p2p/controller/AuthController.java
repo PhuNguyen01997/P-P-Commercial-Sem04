@@ -120,12 +120,7 @@ public class AuthController {
             return "user/auth/signup";
         }
         User usr = new User();
-        if (!image.isEmpty()) { // new image
-            //                byte[] bytes = image.getBytes();
-//                File uploadFolder = ResourceUtils.getFile("classpath:static/img/auth");
-//                Path imagePath = Paths.get(uploadFolder.getPath(), image.getOriginalFilename());
-//                Files.write(imagePath, bytes);
-//                usr.setAvatar(image.getOriginalFilename());
+        if (!image.isEmpty()) {
             String extension = FileUploadUtil.getExtensionName(image).orElse(null);
             String fileName = usr.getAvatar();
             if (fileName == null) {
