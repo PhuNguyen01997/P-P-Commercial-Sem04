@@ -13,6 +13,14 @@ import java.util.Date;
 import java.util.List;
 
 public final class OrderSpecification {
+    public static Specification<Order> hasUserId(int userId){
+        return (root, query, cb) -> {
+            root = joinAllRelation(root);
+            Join<Order, User> joinUser = root.join("user");
+            return cb.equal(joinUser.get("userId"), userId);
+        };
+    }
+
     public static Specification<Order> hasShopId(int shopId) {
         return (root, query, cb) -> {
             root = joinAllRelation(root);

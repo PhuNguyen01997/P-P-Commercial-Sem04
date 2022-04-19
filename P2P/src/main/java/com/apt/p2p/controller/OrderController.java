@@ -1,18 +1,17 @@
 package com.apt.p2p.controller;
 
+import com.apt.p2p.common.modelMapper.OrderMapper;
+import com.apt.p2p.entity.Order;
 import com.apt.p2p.entity.StatusHistory;
 import com.apt.p2p.model.form.FilterOrder;
+import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.view.*;
 import com.apt.p2p.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +23,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
+    private OrderDetailService orderDetailService;
+    @Autowired
     private RateService rateService;
     @Autowired
     private StatusOrderService statusOrderService;
@@ -31,6 +32,8 @@ public class OrderController {
     private StatusHistoryService statusHistoryService;
     @Autowired
     private ShopService shopService;
+    @Autowired
+    private OrderMapper orderMapper;
 
     @GetMapping("order")
     public String index(Model model) {
@@ -39,6 +42,29 @@ public class OrderController {
 
         List<OrderModel> orders = orderService.findAllByUserId(user.getId());
         model.addAttribute("orders", orders);
+
+        return "user/account/order-user";
+    }
+
+    @GetMapping("order2")
+    public String index(Model model, @RequestParam(required = false, name = "page") Integer pageNumber) {
+        UserModel user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+
+        PagiSortModel pagiSortModel = new PagiSortModel();
+        pagiSortModel.setPage(pageNumber == null ? 0 : pageNumber);
+        pagiSortModel.setSize(5);
+
+        Page<Order> orderPages = orderService.findAllByUserId(user.getId(), pagiSortModel);
+        List<OrderModel> orderModels = orderPages.stream().map(e -> {
+            OrderModel orderModel = orderMapper.orderEntityToModel(e);
+            orderModel.setOrderDetails(orderDetailService.findAllByOrderId(orderModel.getId()));
+            return orderModel;
+        }).collect(Collectors.toList());
+        model.addAttribute("orders", orderModels);
+
+        ResponsePagiView pagiView = new ResponsePagiView(pagiSortModel.getPage(), orderPages.getTotalPages());
+        model.addAttribute("pagiView", pagiView);
 
         return "user/account/order-user";
     }

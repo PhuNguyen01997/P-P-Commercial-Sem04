@@ -26,8 +26,9 @@
                 <div class="order-body">
                     <ul class="order-body--list">
                         <li th:each="orderDetail : ${order.orderDetails}" class="order-item">
-                            <p class="pic order-item--pic"><img th:src="${orderDetail.product.toUrl(orderDetail.product.image.get(0))}"
-                                                                alt=""></p>
+                            <p class="pic order-item--pic"><img
+                                    th:src="${orderDetail.product.toUrl(orderDetail.product.image.get(0))}"
+                                    alt=""></p>
                             <div class="order-item--text">
                                 <p th:text="${orderDetail.product.name}" class="order-item--name">[Order Product
                                     Name]</p>
@@ -51,22 +52,59 @@
             <div class="order-submit">
                 <p class="order-submit--shipping">
                     <span>Shipping cost:</span>
-                    <span th:text="${#numbers.formatDecimal(order.shippingCost, 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
+                    <span th:text="${#numbers.formatDecimal(order.shippingCost, 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                          class="jsTotal">[Total Order]</span>
                 </p>
                 <p class="order-submit--total">
                     <span>Total:</span>
-                    <span th:text="${#numbers.formatDecimal(order.total.add(order.shippingCost), 0, 'COMMA', 0, 'POINT') + ' vnđ'}" class="jsTotal">[Total Order]</span>
+                    <span th:text="${#numbers.formatDecimal(order.total.add(order.shippingCost), 0, 'COMMA', 0, 'POINT') + ' vnđ'}"
+                          class="jsTotal">[Total Order]</span>
                 </p>
                 <div class="order-submit--info">
-<!--                    <p class="order-submit&#45;&#45;text mr-4">Bạn đã hủy</p>-->
+                    <!--                    <p class="order-submit&#45;&#45;text mr-4">Bạn đã hủy</p>-->
                     <a href="javascript: void(0);" class="order-submit--btn btn btn__white">Chat with shop</a>
                     <a th:href="@{/order/{id}(id = ${order.id})}" class="order-submit--btn btn btn__white">
                         Go to detail
-                        </a>
+                    </a>
                 </div>
             </div>
         </div>
+        <ul class="pagi detail-rate--pagi">
+            <li class="pagi-item btn pagi-item__prev"
+                th:classappend="${pagiView.index == 0 ? 'disabled' : ''}"
+                th:data-page="${pagiView.prev}">
+                <i class="fas fa-angle-left"></i>
+            </li>
+            <li th:each="pageNumber : ${pagiView.pagiList}"
+                th:classappend="${pageNumber == pagiView.index ? 'active' : ''}"
+                th:text="${pageNumber + 1}"
+                th:data-page="${pageNumber}"
+                class="pagi-item btn">
+            </li>
+            <li class="pagi-item btn pagi-item__prev"
+                th:classappend="${pagiView.index == pagiView.total - 1 ? 'disabled' : ''}"
+                th:data-page="${pagiView.next}">
+                <i class="fas fa-angle-right"></i>
+            </li>
+        </ul>
     </div>
 </div>
+
+<script layout:fragment="script">
+    $(function () {
+        $('.pagi').on('click', '.pagi-item', function(){
+            const page = this.dataset.page;
+            const url = location.href;
+            let newUrl = '';
+            if(url.indexOf('page=') != -1){
+                newUrl = url.replace(/(?<=page\=)\d+/, page);
+            }else{
+                newUrl = url.charAt(url.length - 1) == '&' ? url : url + '?';
+                newUrl += `page=${page}`;
+            }
+            location.href = newUrl;
+        })
+    });
+</script>
 </body>
 </html>

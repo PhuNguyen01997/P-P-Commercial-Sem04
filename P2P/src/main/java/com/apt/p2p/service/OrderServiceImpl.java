@@ -3,10 +3,15 @@ package com.apt.p2p.service;
 import com.apt.p2p.common.modelMapper.OrderMapper;
 import com.apt.p2p.entity.*;
 import com.apt.p2p.model.form.FilterOrder;
+import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.form.PurchaseModel;
 import com.apt.p2p.model.view.OrderModel;
 import com.apt.p2p.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -172,6 +177,17 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
 
         return orderModels;
+    }
+
+    @Override
+    public Page<Order> findAllByUserId(int userId, PagiSortModel pagiSortModel) {
+        Specification<Order> condition = Specification.where(OrderSpecification.hasUserId(userId));
+
+        Pageable pageable = PageRequest.of(pagiSortModel.getPage(), pagiSortModel.getSize(), Sort.Direction.DESC, "id");
+
+        Page<Order> orderEntities = orderRepository.findAll(condition, pageable);
+
+        return orderEntities;
     }
 
     @Override
