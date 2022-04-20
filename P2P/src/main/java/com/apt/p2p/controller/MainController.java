@@ -134,9 +134,9 @@ public class MainController {
         gender.add("Female");
         gender.add("Other");
         user.setGender(user1.getGender());
-        model.addAttribute("user" , user);
-        model.addAttribute("user1" , user1);
-        model.addAttribute("listGender" , gender);
+        model.addAttribute("user", user);
+        model.addAttribute("user1", user1);
+        model.addAttribute("listGender", gender);
         model.addAttribute("shop", user.getShop() != null ? shopService.findByUserId(user.getId()) : null);
         return "user/account/user-form";
     }
@@ -144,7 +144,7 @@ public class MainController {
     @GetMapping("/change-password")
     public String changePassword(Model model) {
         UserModel user = usersDetailService.getCurrentUser();
-        model.addAttribute("user" , user);
+        model.addAttribute("user", user);
         return "user/account/change-password";
     }
 
@@ -159,21 +159,21 @@ public class MainController {
      */
     @PostMapping("/update-password")
     public String updatePassword(Model model
-                                    , @RequestParam("newPassword") String pass1
-                                    , @RequestParam("confirmPassword") String pass2 ,
-                                    RedirectAttributes  redirectAttributes) {
+            , @RequestParam("newPassword") String pass1
+            , @RequestParam("confirmPassword") String pass2,
+                                 RedirectAttributes redirectAttributes) {
         String newPassword = pass1;
         String confirmPassword = pass2;
         UserModel currentUser = usersDetailService.getCurrentUser();
 
         if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("user" , currentUser);
-            model.addAttribute("errorPassword" , "The password is not match");
+            model.addAttribute("user", currentUser);
+            model.addAttribute("errorPassword", "The password is not match");
             return "user/account/change-password";
         } else {
             UserModel user = service.getCurrentUser();
-            userRepository.updatePassword(user.getEmail(),passwordEncoder.encode(confirmPassword));
-            redirectAttributes.addFlashAttribute("globalSuccess" , "Update Password Successfully");
+            userRepository.updatePassword(user.getEmail(), passwordEncoder.encode(confirmPassword));
+            redirectAttributes.addFlashAttribute("globalSuccess", "Update Password Successfully");
             return "redirect:/account";
         }
 
@@ -182,7 +182,7 @@ public class MainController {
     @GetMapping("/change-email")
     public String changeEmail(Model model) {
         UserModel user = usersDetailService.getCurrentUser();
-        model.addAttribute("user" , user);
+        model.addAttribute("user", user);
         return "user/account/change-email";
     }
 
@@ -196,18 +196,18 @@ public class MainController {
      * @return
      */
     @PostMapping("/confirm-email")
-    public String confirmEmail(Model model ,
-                               @RequestParam("email") String email ,
-                               @RequestParam("username") String username ,
+    public String confirmEmail(Model model,
+                               @RequestParam("email") String email,
+                               @RequestParam("username") String username,
                                @RequestParam("confirmPassword") String pass) {
         User usr = userRepository.findByUsername(username);
         UserModel user = usersDetailService.getCurrentUser();
-        if (passwordEncoder.matches(pass,usr.getPassword())) {
-            model.addAttribute("user" , user);
+        if (passwordEncoder.matches(pass, usr.getPassword())) {
+            model.addAttribute("user", user);
             return "user/account/new-email";
         } else {
-            model.addAttribute("user" , user);
-            model.addAttribute("errorInputPassword" , "Incorrect password");
+            model.addAttribute("user", user);
+            model.addAttribute("errorInputPassword", "Incorrect password");
             return "user/account/change-email";
         }
     }
@@ -215,7 +215,7 @@ public class MainController {
     @GetMapping("/new-email")
     public String inputEmail(Model model) {
         UserModel user = usersDetailService.getCurrentUser();
-        model.addAttribute("user" , user);
+        model.addAttribute("user", user);
         return "user/account/new-email";
     }
 
@@ -228,24 +228,23 @@ public class MainController {
      * @return
      */
     @PostMapping("/update-email")
-    public String updateEmail(Model model ,
-                                @RequestParam("newEmail") String newEmail ,
-                                RedirectAttributes redirectAttributes) {
+    public String updateEmail(Model model,
+                              @RequestParam("newEmail") String newEmail,
+                              RedirectAttributes redirectAttributes) {
         String user = service.findByEmail(newEmail);
         UserModel currentUser = usersDetailService.getCurrentUser();
 
         if (user != null) {
-            model.addAttribute("user" , currentUser);
-            model.addAttribute("errorEmail" , "This the email already exists.");
+            model.addAttribute("user", currentUser);
+            model.addAttribute("errorEmail", "This the email already exists.");
             return "user/account/new-email";
         } else {
             UserModel model1 = service.getCurrentUser();
-            userRepository.updateEmail(model1.getEmail() , newEmail);
-            redirectAttributes.addFlashAttribute("globalSuccess" , "Update Email Successfully");
+            userRepository.updateEmail(model1.getEmail(), newEmail);
+            redirectAttributes.addFlashAttribute("globalSuccess", "Update Email Successfully");
             return "redirect:/account";
         }
     }
-
 
 
     /**
@@ -261,7 +260,7 @@ public class MainController {
     public String updateAccount(Model model,
                                 @RequestParam("pic") MultipartFile image,
                                 @Valid @ModelAttribute("user") UserModel userModel,
-                                BindingResult result ,
+                                BindingResult result,
                                 RedirectAttributes redirectAttributes) {
 
         User usr = userRepository.findByUsername(userModel.getUsername());
@@ -270,7 +269,7 @@ public class MainController {
             String extension = FileUploadUtil.getExtensionName(image).orElse(null);
             String fileName = usr.getAvatar();
             if (fileName == null) {
-                fileName =String.valueOf(new Date().getTime()) + '.' + extension;
+                fileName = String.valueOf(new Date().getTime()) + '.' + extension;
             } else if (extension != FileUploadUtil.getExtensionName(fileName).orElse(null)) {
                 FileUploadUtil.deleteFile("", fileName);
                 fileName = fileName.replaceAll("\\w+$", extension);
@@ -289,7 +288,7 @@ public class MainController {
         usr.setSubName(userModel.getSubName());
         usr.setRoles(usr.getRoles());
         service.save(usr);
-        redirectAttributes.addFlashAttribute("globalSuccess" , "Update Account Successfully");
+        redirectAttributes.addFlashAttribute("globalSuccess", "Update Account Successfully");
         return "redirect:/account";
     }
 
@@ -306,7 +305,7 @@ public class MainController {
         List<Category> categories = categoryRepository.findAll();
 
         // create users
-        users.addAll(createUser(100));
+        users.addAll(createUser(18));
 
         // create address for user
         users.forEach(u -> {
@@ -366,7 +365,7 @@ public class MainController {
             if (order.getCurrentStatus().getId() == 6) {
                 order.getOrderDetails().forEach(orderDetail -> {
                     Rate newRate = new Rate();
-                    newRate.setDescription(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(25, 60)));
+                    newRate.setDescription(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(18, 60)));
                     newRate.setStar(RandomUtil.getRandomNumber(1, 5));
                     newRate.setUser(order.getUser());
                     newRate.setProduct(orderDetail.getProduct());
@@ -505,11 +504,11 @@ public class MainController {
 
         for (int i = 0; i < amount; i++) {
             Integer randomStatusIndex = RandomUtil.getRandomNumber(5);
-            if(randomStatusIndex <= 3){
+            if (randomStatusIndex <= 3) {
                 randomStatusIndex = RandomUtil.getRandomNumber(5);
             }
-            if(randomStatusIndex == 1) randomStatusIndex = 0;
-            if(randomStatusIndex == 4){
+            if (randomStatusIndex == 1) randomStatusIndex = 0;
+            if (randomStatusIndex == 4) {
                 randomStatusIndex = RandomUtil.getRandomNumber(4, 5);
             }
             StatusOrder currentStatusOrder = this.statusOrders.get(randomStatusIndex);
@@ -537,7 +536,7 @@ public class MainController {
             orderDetails.forEach(od -> od.setOrder(newOrder));
             orderDetailRepository.saveAll(orderDetails);
 
-            if(currentStatusOrder.getId() == 2 || currentStatusOrder.getId() == 5 || currentStatusOrder.getId() == 6){
+            if (currentStatusOrder.getId() == 2 || currentStatusOrder.getId() == 5 || currentStatusOrder.getId() == 6) {
                 ShopTransaction transaction = new ShopTransaction(shop, newOrder);
                 shopTransactionRepository.save(transaction);
                 newOrder.setShopTransaction(transaction);
@@ -593,10 +592,18 @@ public class MainController {
 
     private List<Cart> createCarts(User user, List<Product> products, int amount) {
         List<Cart> result = new ArrayList<>();
+        List<Integer> listIndexProduct = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            listIndexProduct.add(i);
+        }
+        Set<Integer> setIndex = new HashSet<>();
         for (int i = 0; i < amount; i++) {
-            Integer randomIndexProduct = RandomUtil.getRandomNumber(products.size() - 1);
-            Product product = products.get(randomIndexProduct);
-            products.remove(product);
+            Integer index = listIndexProduct.get(RandomUtil.getRandomNumber(listIndexProduct.size() - 1));
+            listIndexProduct.remove(index);
+            setIndex.add(index);
+        }
+        for (Integer index : setIndex) {
+            Product product = products.get(index);
 
             Cart newCart = new Cart();
             newCart.setQuantity(RandomUtil.getRandomNumber(1, 3));

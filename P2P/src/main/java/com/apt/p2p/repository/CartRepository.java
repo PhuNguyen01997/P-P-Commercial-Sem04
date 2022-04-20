@@ -16,6 +16,6 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
             "LEFT JOIN Shop s ON p.shop.id = s.id " +
             "LEFT JOIN User u ON c.user.userId = u.userId " +
             "WHERE u.userId = :id " +
-            "ORDER BY c.id")
+            "ORDER BY c.updatedAt DESC")
     List<Cart> findAllByUserId(@Param("id") int userId);
 }

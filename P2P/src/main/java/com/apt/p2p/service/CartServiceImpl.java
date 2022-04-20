@@ -74,10 +74,6 @@ public class CartServiceImpl implements CartService {
     public List<CartIndexViewModel> getCartListChunkByShop(int userId) {
         List<Cart> cartList = cartRepository.findAllByUserId(userId);
         List<CartIndexViewModel> result = new ArrayList<>();
-        cartList = cartList.stream()
-                .sorted((c1, c2) ->
-                        c1.getProduct().getShop().getId().compareTo(c2.getProduct().getShop().getId())
-                ).collect(Collectors.toList());
         for (Cart cart : cartList) {
             Integer index = IntStream.range(0, result.size()).filter(i -> result.get(i).getShop().getId() == cart.getProduct().getShop().getId()).findFirst().orElse(-1);
 
