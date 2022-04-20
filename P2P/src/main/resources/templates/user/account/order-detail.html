@@ -69,7 +69,7 @@
                         th:src="${withProduct.image.size() > 0 ? withProduct.toUrl(withProduct.image.get(0)) : ''}"
                         alt=""></p>
                 <div class="order-item--text">
-                    <p th:text="${withProduct.name}" class="order-item--name">[Product Name]</p>
+                    <a th:href="@{/product/{id}(id=${withProduct.id})}"><p th:text="${withProduct.name}" class="order-item--name">[Product Name]</p></a>
                     <p class="order-item--category">
                         <span>Category:</span>
                         <span th:text="${withProduct.category.name}">[Category Name]</span>

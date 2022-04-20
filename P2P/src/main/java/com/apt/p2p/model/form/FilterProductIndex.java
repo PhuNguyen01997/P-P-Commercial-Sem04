@@ -20,4 +20,5 @@ public class FilterProductIndex {
     private BigDecimal maxPrice;
     private Integer rate;
     private List<Integer> provinceId = new ArrayList<>();
+    private Integer categoryId;
 }

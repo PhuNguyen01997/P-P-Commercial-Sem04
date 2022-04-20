@@ -38,6 +38,8 @@ public class RateController {
     @PostMapping ("/api/products/{productId}/rate")
     @ResponseBody
     public ResponseRateApiPagi apiGetRateByProduct(@PathVariable("productId") int productId, @RequestBody PagiSortModel pagiSortModel){
+        pagiSortModel.setSortBy("createdAt");
+        pagiSortModel.setSortDirection(false);
         Page<Rate> pageRates = rateService.findAllByProductId(productId, pagiSortModel);
 
         List<RateModel> rates = pageRates.stream().map(e -> rateMapper.rateEntityToModel(e)).collect(Collectors.toList());

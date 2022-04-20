@@ -8,6 +8,7 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ProductSpecification {
@@ -62,9 +63,10 @@ public final class ProductSpecification {
 //                .and((root, query, cb) -> cb.lessThanOrEqualTo(root.get("price"), maxPrice));
         return (root, query, cb) -> {
             root = joinAllRelation(root);
-            Predicate minPricePred = cb.greaterThanOrEqualTo(root.get("price"), minPrice);
-            Predicate maxPricePred = cb.lessThanOrEqualTo(root.get("price"), maxPrice);
-            return cb.and(minPricePred, maxPricePred);
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+            predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+            return cb.and(predicates.toArray(new Predicate[]{}));
         };
     }
 

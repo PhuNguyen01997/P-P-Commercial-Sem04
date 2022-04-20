@@ -193,6 +193,10 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findAllByShopWithFilterIndex(FilterProductIndex filterModel, PagiSortModel pagiSortModel) {
         Specification<Product> condition = Specification.where(null);
 
+        if(filterModel.getCategoryId() != null){
+            condition = condition.and(ProductSpecification.hasCategoryId(filterModel.getCategoryId()));
+        }
+
         if(filterModel.getShopId() != null){
             condition = condition.and(ProductSpecification.hasShopId(filterModel.getShopId()));
         }

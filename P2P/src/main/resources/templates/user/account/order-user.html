@@ -30,8 +30,10 @@
                                     th:src="${orderDetail.product.toUrl(orderDetail.product.image.get(0))}"
                                     alt=""></p>
                             <div class="order-item--text">
-                                <p th:text="${orderDetail.product.name}" class="order-item--name">[Order Product
-                                    Name]</p>
+                                <a th:href="@{/product/{id}(id=${orderDetail.product.id})}">
+                                    <p th:text="${orderDetail.product.name}" class="order-item--name">[Order
+                                        ProductName]</p>
+                                </a>
                                 <p th:text="${orderDetail.product.category.name}" class="order-item--category">[Order
                                     Product Category]</p>
                                 <p th:attr="data-value=${orderDetail.quantity}"
@@ -92,13 +94,13 @@
 
 <script layout:fragment="script">
     $(function () {
-        $('.pagi').on('click', '.pagi-item', function(){
+        $('.pagi').on('click', '.pagi-item', function () {
             const page = this.dataset.page;
             const url = location.href;
             let newUrl = '';
-            if(url.indexOf('page=') != -1){
+            if (url.indexOf('page=') != -1) {
                 newUrl = url.replace(/(?<=page\=)\d+/, page);
-            }else{
+            } else {
                 newUrl = url.charAt(url.length - 1) == '&' ? url : url + '?';
                 newUrl += `page=${page}`;
             }

@@ -195,7 +195,6 @@
 
         function handleEvent() {
             const filter = getFilter();
-            console.log(filter);
 
             const queryParam = Object.keys(filter).reduce((str, key, index) => {
                 const val = filter[key];
@@ -229,13 +228,15 @@
             handleEvent();
         })
 
-        $('.pagi').on('click', '.pagi-item', function(){
+        $('.pagi').on('click', '.pagi-item', function () {
             const page = this.dataset.page;
             const url = location.href;
             let newUrl = '';
-            if(url.indexOf('page=') != -1){
+            if (url.indexOf('page=') != -1) {
                 newUrl = url.replace(/(?<=page\=)\d+/, page);
-            }else{
+            } else if (url.indexOf('?categoryId=') != -1) {
+                newUrl = url + '&' + `page=${page}`;
+            } else {
                 newUrl = url.charAt(url.length - 1) == '&' ? url : url + '?';
                 newUrl += `page=${page}`;
             }

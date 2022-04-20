@@ -106,8 +106,9 @@ public class ProductController {
     @PostMapping("portal/product")
     public String portalProductCreate(Model model,
                                       @Valid @ModelAttribute("productForm") ProductForm product,
-                                      @ModelAttribute("shopId") int shopId,
-                                      BindingResult productResult) {
+                                      BindingResult productResult,
+                                      @ModelAttribute("shopId") int shopId) {
+
         if (productResult.hasErrors()) {
             model.addAttribute("shop", shopService.findById(shopId));
             model.addAttribute("product", product);
