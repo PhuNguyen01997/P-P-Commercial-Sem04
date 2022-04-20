@@ -41,6 +41,57 @@ INSERT INTO address (district, district_id, `number`, own_name, own_phone, provi
 INSERT INTO shop (background, created_at, description, fund, logo, name, permission, phone, updated_at, address_id, stripe_card_id, user_id) VALUES
 ('18_thumbnail.jpg', NOW(), '', 396042000, '18_logo.jpg', 'Shop Test', 1, '0907982932', NOW(), 2, "None", 1);
 
+INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), 'Vòng đá đeo tay từ tính 8mm chăm sóc sức khỏe độc đáo', '[\"4_18723.jpg\",\"4_34632.jpg\",\"4_4385.jpg\"]', '', 14000, NOW(), 4, 1, 0),
+(NOW(), 'Vòng tay may mắn đính hạt ngọc trai phong cách Trung Hoa cổ điển cho nữ', '[\"4_7234.jpg\",\"4_745.jpg\",\"4_57.jpg\",\"4_4534.jpg\"]', '', 14000, NOW(), 4, 1, 0),
+(NOW(), 'Lắc tay bạc cho bé gái hình nơ khắc tên LTT0042 - Trang Sức TNJ', '[\"4_546.jpg\",\"4_3485.jpg\"]', '', 319000, NOW(), 4, 1, 0),
+(NOW(), 'Lắc tay xù cực đẹp, cao cấp', '[\"4_34543.jpg\",\"4_549.jpg\"]', '', 1300000, NOW(), 4, 1, 0),
+(NOW(), '[Whiteline] Vòng tay Macrame Eye of Horus (có size Chân)', '[\"4_576.jpg\",\"4_54534.jpg\"]', '', 178200, NOW(), 4, 1, 0),
+(NOW(), 'SET NHẪN BUTTERFLY', '[\"4_48695.jpg\",\"4_4368.jpg\",\"4_34987534.jpg\"]', '', 115000, NOW(), 4, 1, 0),
+(NOW(), 'NHẪN NỮ MẶT ĐÁ CAO CẤP', '[\"4_47383.jpg\"]', '', 13000, NOW(), 4, 1, 0),
+(NOW(), 'Đồng Hồ Samsung Galaxy Watch3 Bluetooth (45mm)', '[\"4_84937.jpg\",\"4_893453.jpg\",\"4_947354.jpg\"]', '', 6999999 , NOW(), 4, 1, 0),
+(NOW(), 'Đồng Hồ Nữ Gucci Le Marche des Merveilles Watch YA1264060', '[\"4_38495743.jpg\",\"4_934543.jpg\",\"4_4387.jpg\"]', '', 7500000, NOW(), 4, 1, 0);
+INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), '[WONTECH - NOW SHIP] Máy Laser Trục Khuỷu Yag Q-Switch RHINO - Siêu Phẩm Trị Nám, Tàn Nhang.', '[\"5_234543.jpg\",\"5_34978543.jpg\",\"5_398457.jpg\",\"5_348975.jpg\"]', '', 120000000, NOW(), 5, 1, 0),
+(NOW(), '[CAM KẾT chất lượng tương đương 1200K] Đai Nịt Bụng Latex 25 Xương Nhập Khẩu Hi Lạp', '[\"5_389475.jpg\",\"5_3894765.jpg\"]', '', 259700, NOW(), 5, 1, 0),
+(NOW(), 'N04 Mặt nạ quả bơ cấp ẩm mờ thâm dưỡng da làm sa mềm mịn cải thiện làn da khoẻ mạnh mặt nạ nội địa trung', '[\"5_5897436.jpg\",\"5_349875.jpg\",\"5_7667.jpg\",\"5_584679.jpg\"]', '', 2550, NOW(), 5, 1, 0),
+(NOW(), 'Xịt khóa trang điểm cố định lớp make up Star Flash Spray 8 Hours Wear 100ML Sena Beauty', '[\"5_803546.jpg\",\"5_84576.jpg\",\"5_912324.jpg\",\"5_934685.jpg\",\"5_854736.jpg\",\"5_295823.jpg\"]', '', 33000, NOW(), 5, 1, 0),
+(NOW(), 'Sữa Dưỡng Thể Dưỡng Trắng Da Toàn Thân Freshity Milky Body Lotion 250 gram', '[\"5_835768534.jpg\",\"5_4589067.jpg\",\"5_489567.jpg\"]', '', 339685, NOW(), 5, 1, 0),
+(NOW(), '[NEW-Ver 2] Son kem lì trà sữa, lâu trôi, Hàn Quốc Romand Milk Tea Velvet Tint 4.4g', '[\"5_049568.jpg\",\"5_839745.jpg\",\"5_93456.jpg\",\"5_593467.jpg\",\"5_38476.jpg\"]', '', 239000, NOW(), 5, 1, 0),
+(NOW(), 'Bộ đôi Sữa dưỡng thể trắng da Ngày (350ml) & Đêm (350ml) NIVEA (88311+88126)', '[\"5_4905786.jpg\",\"5_384673.jpg\",\"5_23897543.jpg\",\"5_8934567.jpg\",\"5_9384576.jpg\",\"5_09568.jpg\"]', '', 278000, NOW(), 5, 1, 0),
+(NOW(), 'Một gói 50 tờ giấy thấm dầu ngẫu nhiên Sena Beauty', '[\"5_8345.jpg\",\"5_8345967.jpg\",\"5_8934576.jpg\",\"5_45897.jpg\",\"5_34987.jpg\"]', '', 6930, NOW(), 5, 1, 0),
+(NOW(), 'Máy cạo râu Xiaomi Enchen BlackStone 3 Electric Shaver 3D', '[\"5_8943576.jpg\",\"5_83456.jpg\",\"5_3945.jpg\",\"5_839476.jpg\",\"5_853476.jpg\",\"5_23657.jpg\"]', '', 289900, NOW(), 5, 1, 0);
+INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), 'Sa tế sò điệp Thích Cay,trộn mì, hủ tiếu, phở, sốt cá viên chiên, dùng để ướp thịt tiện lợi', '[\"1_11110.jpg\",\"1_11111.jpg\",\"1_11112.jpg\"]', '', 40000, NOW(), 6, 1, 0),
+(NOW(), 'Mật ong nguyên chất hoa cà phê Beemo', '[\"1_11113.jpg\",\"1_11114.jpg\",\"1_11115.jpg\"]', '', 48500, NOW(), 6, 1, 0),
+(NOW(), 'Mì xào khô/ mì trộn INDOMIE Goreng rẻ vô địch đủ vị', '[\"1_11116.jpg\",\"1_11117.jpg\",\"1_11118.jpg\"]', '', 5000, NOW(), 6, 1, 0),
+(NOW(), 'Set Nguyên Liệu Trà Sữa Trân Châu 25-30 Ly Trà Thái Xanh, Đỏ, Phúc Long', '[\"1_11119.jpg\",\"1_11120.jpg\",\"1_11121.jpg\"]', '', 35000, NOW(), 6, 1, 0),
+(NOW(), 'Yến mạch cán vỡ Hafer Flocken 500gr, 5 phút ăn liền', '[\"1_11122.jpg\",\"1_11123.jpg\",\"1_11124.jpg\"]', 'Y', 17000, NOW(), 6, 1, 0),
+(NOW(), 'Ghẹ Sữa Rim Gia Vị 200G Đệ Nhất Khô đồ ăn vặt ngon giá rẻ Đặc Sản Phan Thiết', '[\"1_11125.jpg\",\"1_11126.jpg\",\"1_11127.jpg\"]', '', 59000, NOW(), 6, 1, 0),
+(NOW(), 'Cơm cháy lắc khô bò 300g DumBum đồ ăn vặt Hà Nội vừa ngon vừa rẻ', '[\"1_11128.jpg\",\"1_11129.jpg\",\"1_11130.jpg\"]', '', 32000, NOW(), 6, 1, 0),
+(NOW(), 'Bim Bim Cánh Gà Chiên Giòn ', '[\"1_11131.jpg\",\"1_11132.jpg\",\"1_11133.jpg\"]', '', 7000, NOW(), 6, 1, 0),
+(NOW(), '150g Rong biển cháy tỏi loại ngon lon', '[\"1_11134.jpg\",\"1_11135.jpg\",\"1_11136.jpg\"]', '', 36000, NOW(), 6, 1, 0),
+(NOW(), 'Chè Dưỡng Nhan Set Nguyên Liệu 30 Chén, Chè Tuyết Yến Bổ Dưỡng, Đẹp Da', '[\"1_11137.jpg\",\"1_11138.jpg\",\"1_11139.jpg\"]', '', 30000, NOW(), 6, 1, 0),
+(NOW(), '500g Hạt Macca Organic Sạch Di Linh Lâm Đồng', '[\"1_11140.jpg\",\"1_11141.jpg\",\"1_11142.jpg\"]', '', 25000, NOW(), 6, 1, 0),
+(NOW(), 'Kẹo Thạch Zaizai 320g / 350g / 500g - Đức Hạnh | Hương vị: Khoai Môn, Chanh Leo, Me, Dâu, Xoài, Đào, cam', '[\"1_11143.jpg\",\"1_11144.jpg\",\"1_11145.jpg\"]', '', 42000, NOW(), 6, 1, 0),
+(NOW(), 'Bánh BISCOTTI Nguyên Cám Ăn Kiêng Lành Mạnh 100% by HeBe - Bánh Ngũ Cốc Ăn Kiêng Health', '[\"1_11146.jpg\",\"1_11147.jpg\",\"1_11148.jpg\"]', '', 45000, NOW(), 6, 1, 0),
+(NOW(), 'ĐƯỜNG ĐEN TAIWAN', '[\"1_11149.jpg\",\"1_11150.jpg\",\"1_11151.jpg\"]', '', 98000, NOW(), 6, 1, 0);
+INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
+(NOW(), 'Giá Kệ Để Đồ Đa Năng VANDO Inox 304 Sơn Đen Tĩnh Điện 3 4 5 tầng', '[\"3_330.jpg\",\"3_331.jpg\",\"3_332.jpg\"]', '', 699.000, NOW(), 3, 1, 0),
+(NOW(), 'Thùng vải đựng đồ Ghome kiêm ghế ngồi khung gỗ nhân tạo bọc vải chắc chắn, tiện lợi TV04', '[\"3_333.jpg\",\"3_334.jpg\",\"3_335.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Tranh Cát Chuyển Động 3D,Cát Lún Hàng Thủ Công ,Làm Quà Tặng ,Trang Trí Nội Thất, Đa Dạng Kích Thước', '[\"3_336.jpg\",\"3_337.jpg\",\"3_338.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Tranh Treo Tường Trang Trí Nội Thất Hình Động Vật Dễ Thương', '[\"3_001.jpg\",\"3_002.jpg\",\"3_003.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Bàn làm việc, văn phòng liền kệ sách, Khung sắt CỠ LỚN, Chịu lực cao, không lay. BLV08', '[\"3_004.jpg\",\"3_005.jpg\",\"3_006.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Kệ đựng mỹ phẩm Cicico356 để đồ trang điểm trong nhà tắm treo tường không đục lỗ nhựa ABS cao cấp', '[\"3_007.jpg\",\"3_008.jpg\",\"3_009.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Mô hình nhà gỗ búp bê thu nhỏ với nội thất đẹp mắt', '[\"3_010.jpg\",\"3_011.jpg\",\"3_012.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'chân bàn sắt sơn tĩnh điện - Chân bàn sắt mặt tròn hairpin ziczac HPBBC 03 - 01', '[\"3_013.jpg\",\"3_014.jpg\",\"3_015.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Chuồng Quây Chó Lớn - Bằng Sắt sơn tĩnh điện - Gồm 6 tấm ghép kích thước 90*100cm hoặc 100x120cm', '[\"3_016.jpg\",\"3_017.jpg\",\"3_018.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Cây Treo Quần Áo Bằng 100% Gỗ Cao Su Tự Nhiên 3 Chân AN Của Dogogiasi.com Màu Nâu Hàng Xuất Khẩu Hàn Quốc, Châu Âu.', '[\"3_019.jpg\",\"3_020.jpg\",\"3_021.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Kệ bếp kệ lò vi sóng FUNA khung sắt sơn tĩnh điện, chân kệ nó nút tăng giảm chống cập kênh hoàn toàn ( tặng móc ) - KB01', '[\"3_022.jpg\",\"3_023.jpg\",\"3_024.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), '[Phụ kiện trang trí] Kệ mây tre đan trang trí đa năng', '[\"3_025.jpg\",\"3_026.jpg\",\"3_027.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Giá treo quần áo, kệ dày dép 2 trong 1 tiện lợi SAGOKER, mã GQA947', '[\"3_028.jpg\",\"3_029.jpg\",\"3_030.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), 'Kệ mỹ phẩm 3 tầng lồng chim - HCM Now Giao Liền', '[\"3_031.jpg\",\"3_032.jpg\",\"3_033.jpg\"]', '', 98000, NOW(), 3, 1, 0),
+(NOW(), '[Mã LIFEHLSALE2 giảm 10% đơn 0Đ] kệ góc kim loại dán tường sơn tĩnh điện MÃ TGS 04 + 4 miếng dán', '[\"3_034.jpg\",\"3_035.jpg\",\"3_036.jpg\"]', '', 98000, NOW(), 3, 1, 0);
 INSERT INTO product (created_at, description, image, name, price, updated_at, category_id, shop_id, stock) VALUES
 (NOW(), 'Cây máy tính chơi game GTA LOL CF mới 99%', '[\"1_1111.jpg\",\"1_1112.jpg\"]', 'Cây máy tính chơi game GTA LOL CF mới 99%', 3950000, NOW(), 1, 1, 0),
 (NOW(), 'Apple Watch Series 7 45mm GPS Sport Band', '[\"1_1113.jpg\",\"1_1114.jpg\"]', 'Apple Watch Series 7 45mm GPS Sport Band', 6500000, NOW(), 1, 1, 0),
@@ -112,61 +163,4 @@ INSERT INTO product (created_at, name, image, description, price, updated_at, ca
 (NOW(), 'Dép Đế Mềm Chống Lạc Có Đèn Phát Sáng Hình Thỏ Dễ Thương Cho Bé', '[\"2_91.jpg\",\"2_92.jpg\",\"2_93.jpg\"]', '', 105000, NOW(), 2, 1, 0),
 (NOW(), 'Dép Nữ Quai Ngang Thời Trang, Dép Lê Nữ MLB LA Cao Su Dập Nổi Hàng Đẹp 20SHOES', '[\"2_94.jpg\",\"2_95.jpg\",\"2_96.jpg\"]', '', 149000, NOW(), 2, 1, 0),
 (NOW(), 'Bikini basic - Đồ bơi 2 mảnh siêu sang chảnh (nhiều màu)', '[\"2_97.jpg\",\"2_98.jpg\",\"2_99.jpg\"]', '', 1000000, NOW(), 2, 1, 0);
-INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
-(NOW(), 'Vòng đá đeo tay từ tính 8mm chăm sóc sức khỏe độc đáo', '[\"4_18723.jpg\",\"4_34632.jpg\",\"4_4385.jpg\"]', '', 14000, NOW(), 4, 1, 0),
-(NOW(), 'Vòng tay may mắn đính hạt ngọc trai phong cách Trung Hoa cổ điển cho nữ', '[\"4_7234.jpg\",\"4_745.jpg\",\"4_57.jpg\",\"4_4534.jpg\"]', '', 14000, NOW(), 4, 1, 0),
-(NOW(), 'Lắc tay bạc cho bé gái hình nơ khắc tên LTT0042 - Trang Sức TNJ', '[\"4_546.jpg\",\"4_3485.jpg\"]', '', 319000, NOW(), 4, 1, 0),
-(NOW(), 'Lắc tay xù cực đẹp, cao cấp', '[\"4_34543.jpg\",\"4_549.jpg\"]', '', 1300000, NOW(), 4, 1, 0),
-(NOW(), '[Whiteline] Vòng tay Macrame Eye of Horus (có size Chân)', '[\"4_576.jpg\",\"4_54534.jpg\"]', '', 178200, NOW(), 4, 1, 0),
-(NOW(), 'SET NHẪN BUTTERFLY', '[\"4_48695.jpg\",\"4_4368.jpg\",\"4_34987534.jpg\"]', '', 115000, NOW(), 4, 1, 0),
-(NOW(), 'NHẪN NỮ MẶT ĐÁ CAO CẤP', '[\"4_47383.jpg\"]', '', 13000, NOW(), 4, 1, 0),
-(NOW(), 'Đồng Hồ Samsung Galaxy Watch3 Bluetooth (45mm)', '[\"4_84937.jpg\",\"4_893453.jpg\",\"4_947354.jpg\"]', '', 6999999 , NOW(), 4, 1, 0),
-(NOW(), 'Đồng Hồ Nữ Gucci Le Marche des Merveilles Watch YA1264060', '[\"4_38495743.jpg\",\"4_934543.jpg\",\"4_4387.jpg\"]', '', 7500000, NOW(), 4, 1, 0);
-INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
-(NOW(), '[WONTECH - NOW SHIP] Máy Laser Trục Khuỷu Yag Q-Switch RHINO - Siêu Phẩm Trị Nám, Tàn Nhang.', '[\"5_234543.jpg\",\"5_34978543.jpg\",\"5_398457.jpg\",\"5_348975.jpg\"]', '', 120000000, NOW(), 5, 1, 0),
-(NOW(), '[CAM KẾT chất lượng tương đương 1200K] Đai Nịt Bụng Latex 25 Xương Nhập Khẩu Hi Lạp', '[\"5_389475.jpg\",\"5_3894765.jpg\"]', '', 259700, NOW(), 5, 1, 0),
-(NOW(), 'N04 Mặt nạ quả bơ cấp ẩm mờ thâm dưỡng da làm sa mềm mịn cải thiện làn da khoẻ mạnh mặt nạ nội địa trung', '[\"5_5897436.jpg\",\"5_349875.jpg\",\"5_7667.jpg\",\"5_584679.jpg\"]', '', 2550, NOW(), 5, 1, 0),
-(NOW(), 'Xịt khóa trang điểm cố định lớp make up Star Flash Spray 8 Hours Wear 100ML Sena Beauty', '[\"5_803546.jpg\",\"5_84576.jpg\",\"5_912324.jpg\",\"5_934685.jpg\",\"5_854736.jpg\",\"5_295823.jpg\"]', '', 33000, NOW(), 5, 1, 0),
-(NOW(), 'Sữa Dưỡng Thể Dưỡng Trắng Da Toàn Thân Freshity Milky Body Lotion 250 gram', '[\"5_835768534.jpg\",\"5_4589067.jpg\",\"5_489567.jpg\"]', '', 339685, NOW(), 5, 1, 0),
-(NOW(), '[NEW-Ver 2] Son kem lì trà sữa, lâu trôi, Hàn Quốc Romand Milk Tea Velvet Tint 4.4g', '[\"5_049568.jpg\",\"5_839745.jpg\",\"5_93456.jpg\",\"5_593467.jpg\",\"5_38476.jpg\"]', '', 239000, NOW(), 5, 1, 0),
-(NOW(), 'Bộ đôi Sữa dưỡng thể trắng da Ngày (350ml) & Đêm (350ml) NIVEA (88311+88126)', '[\"5_4905786.jpg\",\"5_384673.jpg\",\"5_23897543.jpg\",\"5_8934567.jpg\",\"5_9384576.jpg\",\"5_09568.jpg\"]', '', 278000, NOW(), 5, 1, 0),
-(NOW(), 'Một gói 50 tờ giấy thấm dầu ngẫu nhiên Sena Beauty', '[\"5_8345.jpg\",\"5_8345967.jpg\",\"5_8934576.jpg\",\"5_45897.jpg\",\"5_34987.jpg\"]', '', 6930, NOW(), 5, 1, 0),
-(NOW(), 'Máy cạo râu Xiaomi Enchen BlackStone 3 Electric Shaver 3D', '[\"5_8943576.jpg\",\"5_83456.jpg\",\"5_3945.jpg\",\"5_839476.jpg\",\"5_853476.jpg\",\"5_23657.jpg\"]', '', 289900, NOW(), 5, 1, 0);
-INSERT INTO product (created_at, name, image, description, price, updated_at, category_id, shop_id, stock) VALUES
-(NOW(), 'Sa tế sò điệp Thích Cay,trộn mì, hủ tiếu, phở, sốt cá viên chiên, dùng để ướp thịt tiện lợi', '[\"1_11110.jpg\",\"1_11111.jpg\",\"1_11112.jpg\"]', '', 40000, NOW(), 6, 1, 0),
-(NOW(), 'Mật ong nguyên chất hoa cà phê Beemo', '[\"1_11113.jpg\",\"1_11114.jpg\",\"1_11115.jpg\"]', '', 48500, NOW(), 6, 1, 0),
-(NOW(), 'Mì xào khô/ mì trộn INDOMIE Goreng rẻ vô địch đủ vị', '[\"1_11116.jpg\",\"1_11117.jpg\",\"1_11118.jpg\"]', '', 5000, NOW(), 6, 1, 0),
-(NOW(), 'Set Nguyên Liệu Trà Sữa Trân Châu 25-30 Ly Trà Thái Xanh, Đỏ, Phúc Long', '[\"1_11119.jpg\",\"1_11120.jpg\",\"1_11121.jpg\"]', '', 35000, NOW(), 6, 1, 0),
-(NOW(), 'Yến mạch cán vỡ Hafer Flocken 500gr, 5 phút ăn liền', '[\"1_11122.jpg\",\"1_11123.jpg\",\"1_11124.jpg\"]', 'Y', 17000, NOW(), 6, 1, 0),
-(NOW(), 'Ghẹ Sữa Rim Gia Vị 200G Đệ Nhất Khô đồ ăn vặt ngon giá rẻ Đặc Sản Phan Thiết', '[\"1_11125.jpg\",\"1_11126.jpg\",\"1_11127.jpg\"]', '', 59000, NOW(), 6, 1, 0),
-(NOW(), 'Cơm cháy lắc khô bò 300g DumBum đồ ăn vặt Hà Nội vừa ngon vừa rẻ', '[\"1_11128.jpg\",\"1_11129.jpg\",\"1_11130.jpg\"]', '', 32000, NOW(), 6, 1, 0),
-(NOW(), 'Bim Bim Cánh Gà Chiên Giòn ', '[\"1_11131.jpg\",\"1_11132.jpg\",\"1_11133.jpg\"]', '', 7000, NOW(), 6, 1, 0),
-(NOW(), '150g Rong biển cháy tỏi loại ngon lon', '[\"1_11134.jpg\",\"1_11135.jpg\",\"1_11136.jpg\"]', '', 36000, NOW(), 6, 1, 0),
-(NOW(), 'Chè Dưỡng Nhan Set Nguyên Liệu 30 Chén, Chè Tuyết Yến Bổ Dưỡng, Đẹp Da', '[\"1_11137.jpg\",\"1_11138.jpg\",\"1_11139.jpg\"]', '', 30000, NOW(), 6, 1, 0),
-(NOW(), '500g Hạt Macca Organic Sạch Di Linh Lâm Đồng', '[\"1_11140.jpg\",\"1_11141.jpg\",\"1_11142.jpg\"]', '', 25000, NOW(), 6, 1, 0),
-(NOW(), 'Kẹo Thạch Zaizai 320g / 350g / 500g - Đức Hạnh | Hương vị: Khoai Môn, Chanh Leo, Me, Dâu, Xoài, Đào, cam', '[\"1_11143.jpg\",\"1_11144.jpg\",\"1_11145.jpg\"]', '', 42000, NOW(), 6, 1, 0),
-(NOW(), 'Bánh BISCOTTI Nguyên Cám Ăn Kiêng Lành Mạnh 100% by HeBe - Bánh Ngũ Cốc Ăn Kiêng Health', '[\"1_11146.jpg\",\"1_11147.jpg\",\"1_11148.jpg\"]', '', 45000, NOW(), 6, 1, 0),
-(NOW(), 'ĐƯỜNG ĐEN TAIWAN', '[\"1_11149.jpg\",\"1_11150.jpg\",\"1_11151.jpg\"]', '', 98000, NOW(), 6, 1, 0),
-
--- INSERT INTO cart (created_at, quantity, updated_at, product_id, user_id) VALUES
--- (NOW(), 3, NOW(), 1, 2),
--- (NOW(), 2, NOW(), 2, 2),
--- (NOW(), 1, NOW(), 4, 2),
--- (NOW(), 1, NOW(), 5, 2);
-
-(NOW(), 'Giá Kệ Để Đồ Đa Năng VANDO Inox 304 Sơn Đen Tĩnh Điện 3 4 5 tầng', '[\"3_330.jpg\",\"3_331.jpg\",\"3_332.jpg\"]', '', 699.000, NOW(), 3, 1, 0),
-(NOW(), 'Thùng vải đựng đồ Ghome kiêm ghế ngồi khung gỗ nhân tạo bọc vải chắc chắn, tiện lợi TV04', '[\"3_333.jpg\",\"3_334.jpg\",\"3_335.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Tranh Cát Chuyển Động 3D,Cát Lún Hàng Thủ Công ,Làm Quà Tặng ,Trang Trí Nội Thất, Đa Dạng Kích Thước', '[\"3_336.jpg\",\"3_337.jpg\",\"3_338.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Tranh Treo Tường Trang Trí Nội Thất Hình Động Vật Dễ Thương', '[\"3_001.jpg\",\"3_002.jpg\",\"3_003.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Bàn làm việc, văn phòng liền kệ sách, Khung sắt CỠ LỚN, Chịu lực cao, không lay. BLV08', '[\"3_004.jpg\",\"3_005.jpg\",\"3_006.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Kệ đựng mỹ phẩm Cicico356 để đồ trang điểm trong nhà tắm treo tường không đục lỗ nhựa ABS cao cấp', '[\"3_007.jpg\",\"3_008.jpg\",\"3_009.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Mô hình nhà gỗ búp bê thu nhỏ với nội thất đẹp mắt', '[\"3_010.jpg\",\"3_011.jpg\",\"3_012.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'chân bàn sắt sơn tĩnh điện - Chân bàn sắt mặt tròn hairpin ziczac HPBBC 03 - 01', '[\"3_013.jpg\",\"3_014.jpg\",\"3_015.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Chuồng Quây Chó Lớn - Bằng Sắt sơn tĩnh điện - Gồm 6 tấm ghép kích thước 90*100cm hoặc 100x120cm', '[\"3_016.jpg\",\"3_017.jpg\",\"3_018.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Cây Treo Quần Áo Bằng 100% Gỗ Cao Su Tự Nhiên 3 Chân AN Của Dogogiasi.com Màu Nâu Hàng Xuất Khẩu Hàn Quốc, Châu Âu.', '[\"3_019.jpg\",\"3_020.jpg\",\"3_021.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Kệ bếp kệ lò vi sóng FUNA khung sắt sơn tĩnh điện, chân kệ nó nút tăng giảm chống cập kênh hoàn toàn ( tặng móc ) - KB01', '[\"3_022.jpg\",\"3_023.jpg\",\"3_024.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), '[Phụ kiện trang trí] Kệ mây tre đan trang trí đa năng', '[\"3_025.jpg\",\"3_026.jpg\",\"3_027.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Giá treo quần áo, kệ dày dép 2 trong 1 tiện lợi SAGOKER, mã GQA947', '[\"3_028.jpg\",\"3_029.jpg\",\"3_030.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), 'Kệ mỹ phẩm 3 tầng lồng chim - HCM Now Giao Liền', '[\"3_031.jpg\",\"3_032.jpg\",\"3_033.jpg\"]', '', 98000, NOW(), 3, 1, 0),
-(NOW(), '[Mã LIFEHLSALE2 giảm 10% đơn 0Đ] kệ góc kim loại dán tường sơn tĩnh điện MÃ TGS 04 + 4 miếng dán', '[\"3_034.jpg\",\"3_035.jpg\",\"3_036.jpg\"]', '', 98000, NOW(), 3, 1, 0);
 

@@ -1,5 +1,0 @@
-CHECK
-ck editor
-refactor remove birth user, description shop
-check checkout
-+-, spin, loading
