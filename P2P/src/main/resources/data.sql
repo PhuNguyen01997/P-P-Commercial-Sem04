@@ -19,10 +19,10 @@ INSERT INTO status_order (id, done_name, name) VALUES
 (5, 'Đã nhận hàng', 'Nhận hàng'),
 (6, 'Đánh giá', 'Đánh giá');
 
-INSERT INTO user (avatar, created_at, email, enabled, password, phone, stripe_customer_id, sub_name, updated_at, username) VALUES
-(NULL, NOW(), 'seller@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '8234789232', null, 'SubName', NOW(), 'seller'),
-(NULL, NOW(), 'admin@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0937441896', null, 'SubName',  NOW(), 'admin'),
-(NULL, NOW(), 'buyer@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0923823123', 'cus_LWVTKHJTZFu9W6', 'SubName',  NOW(), 'buyer');
+INSERT INTO user (avatar, created_at, email, enabled, password, phone, provider, stripe_customer_id, sub_name, updated_at, username) VALUES
+(NULL, NOW(), 'seller@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '8234789232', 'LOCAL', null, 'SubName', NOW(), 'seller'),
+(NULL, NOW(), 'admin@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0937441896', 'LOCAL', null, 'SubName',  NOW(), 'admin'),
+(NULL, NOW(), 'buyer@gmail.com', 1, '$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa', '0923823123', 'LOCAL', 'cus_LWVTKHJTZFu9W6', 'SubName',  NOW(), 'buyer');
 
 INSERT INTO user_role (user_id, role_id) VALUES
 (1, 1),

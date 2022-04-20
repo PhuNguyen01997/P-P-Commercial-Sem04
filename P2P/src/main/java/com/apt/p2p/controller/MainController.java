@@ -487,6 +487,7 @@ public class MainController {
             newUser.setPassword("$2a$10$lNNNx.dNQkWYxjaOJ3f2e.6L.rD89fl0f0tGyQXMwR/huHpCHMAZa");
             newUser.setPhone(RandomUtil.getRandomPhone());
             newUser.setAvatar(null);
+            newUser.setProvider("LOCAL");
 
             result.add(newUser);
         }
