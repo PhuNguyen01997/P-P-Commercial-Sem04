@@ -86,6 +86,7 @@ public class Order {
         this.orderDetails = new ArrayList<>();
 
         this.statusHistories = new ArrayList<StatusHistory>();
+        this.rates = new ArrayList<>();
         StatusHistory firstHistory = new StatusHistory(statusOrder, this);
         this.statusHistories.add(firstHistory);
     }
