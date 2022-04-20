@@ -168,7 +168,7 @@ public class MainController {
         List<Order> orders = new ArrayList<>();
         List<User> finalUsers = users;
         shops.forEach(shop -> {
-            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(10, 60));
+            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(10, 30));
             shop.setOrders(newOrders);
             orders.addAll(newOrders);
         });
@@ -182,6 +182,7 @@ public class MainController {
                     newRate.setDescription(RandomUtil.getRandomParagraph(RandomUtil.getRandomNumber(18, 60)));
                     newRate.setStar(RandomUtil.getRandomNumber(1, 5));
                     newRate.setUser(order.getUser());
+                    newRate.setOrder(order);
                     newRate.setProduct(orderDetail.getProduct());
 
                     rates.add(newRate);

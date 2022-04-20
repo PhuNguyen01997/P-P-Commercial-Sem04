@@ -51,13 +51,14 @@
             }
 
             &-item {
+                margin-bottom: 20px;
                 &--product,
                 &--star {
                     margin-bottom: 8px;
                 }
 
                 &--product {
-                    @include flex($align: center);
+                    @include flex($align: center, $justify: flex-start);
                     height: 60px;
 
                     img {

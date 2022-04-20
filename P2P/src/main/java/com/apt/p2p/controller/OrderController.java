@@ -35,17 +35,6 @@ public class OrderController {
     @Autowired
     private OrderMapper orderMapper;
 
-//    @GetMapping("order")
-//    public String index(Model model) {
-//        UserModel user = userService.getCurrentUser();
-//        model.addAttribute("user", user);
-//
-//        List<OrderModel> orders = orderService.findAllByUserId(user.getId());
-//        model.addAttribute("orders", orders);
-//
-//        return "user/account/order-user";
-//    }
-
     @GetMapping("order")
     public String index(Model model, @RequestParam(required = false, name = "page") Integer pageNumber) {
         UserModel user = userService.getCurrentUser();
@@ -53,7 +42,7 @@ public class OrderController {
 
         PagiSortModel pagiSortModel = new PagiSortModel();
         pagiSortModel.setPage(pageNumber == null ? 0 : pageNumber);
-        pagiSortModel.setSize(5);
+        pagiSortModel.setSize(8);
 
         Page<Order> orderPages = orderService.findAllByUserId(user.getId(), pagiSortModel);
         List<OrderModel> orderModels = orderPages.stream().map(e -> {
@@ -81,7 +70,7 @@ public class OrderController {
         model.addAttribute("statusList", statusOrderService.findAll());
         model.addAttribute("statusMapStatusHistory", statusMapStatusHistory);
 
-        List<RateModel> rates = rateService.findAllByOrderIdAndUserId(order.getId(), user.getId());
+        List<RateModel> rates = rateService.findAllByOrderId(order.getId());
         if(order.getCurrentStatus().getId() == 5 && rates.size() == 0){
             model.addAttribute("canRate", true);
         }

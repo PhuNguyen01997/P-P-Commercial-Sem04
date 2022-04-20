@@ -37,6 +37,8 @@ public class OrderModel {
 
     private List<StatusHistory> statusHistories;
 
+    private List<RateModel> rates;
+
     private StatusOrder currentStatus;
 
     private ShopModel shop;
@@ -67,5 +69,6 @@ public class OrderModel {
 
         this.orderDetails = new ArrayList<>();
         this.statusHistories = new ArrayList<>();
+        this.rates = new ArrayList<>();
     }
 }

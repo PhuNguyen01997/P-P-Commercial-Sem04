@@ -51,10 +51,10 @@ public class RateController {
     public String rateProduct(@ModelAttribute RateMultiProductForm ratesForm, @PathVariable("orderId") int orderId){
         UserModel user = userService.getCurrentUser();
         for (int i = 0; i < ratesForm.getRates().size(); i++) {
-            rateService.create(user.getId(), ratesForm.getProductId().get(i), ratesForm.getRates().get(i));
+            rateService.create(user.getId(), ratesForm.getProductId().get(i), orderId, ratesForm.getRates().get(i));
         }
 
-        orderService.updateStatus(orderId, 5);
+        orderService.updateStatus(orderId, 6);
         return "redirect:/order/" + orderId;
     }
 

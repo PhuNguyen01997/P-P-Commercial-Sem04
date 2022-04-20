@@ -49,6 +49,7 @@ public class OrderMapper {
         result.setUser(new UserModel(entity.getUser()));
         result.setOrderDetails(entity.getOrderDetails().stream().map(ode -> new OrderDetailModel(ode)).collect(Collectors.toList()));
         result.setStatusHistories(entity.getStatusHistories().stream().map(sh -> new StatusHistory()).collect(Collectors.toList()));
+        result.setRates(entity.getRates().stream().map(re -> new RateModel(re)).collect(Collectors.toList()));
         result.setShop(new ShopModel(entity.getShop()));
         result.setAddress(new AddressModel(entity.getAddress()));
 

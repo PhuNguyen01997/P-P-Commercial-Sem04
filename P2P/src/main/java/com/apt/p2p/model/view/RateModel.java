@@ -27,6 +27,8 @@ public class RateModel {
 
     private ProductModel product;
 
+    private OrderModel order;
+
     public RateModel(Rate entity) {
         this.id = entity.getId();
         this.description = entity.getDescription();
@@ -36,5 +38,6 @@ public class RateModel {
 
         this.user = null;
         this.product = null;
+        this.order = null;
     }
 }

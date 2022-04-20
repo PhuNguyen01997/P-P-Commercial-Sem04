@@ -39,10 +39,11 @@
             </div>
             <div class="order-detail-control">
                 <button th:if="${canRate != null && canRate}"
-                        data-id="rate-product" class="js-modal order-detail-control--btn btn btn__primary">Rate
+                        data-id="rate-product" class="js-modal order-detail-control--btn btn btn__primary">Review
                 </button>
                 <button class="order-detail-control--btn btn btn__white">
-                    Chat with shop</button>
+                    Chat with shop
+                </button>
                 <button class="order-detail-control--btn btn btn__white">Decline Order</button>
             </div>
         </div>
@@ -125,7 +126,7 @@
         <h3 class="modal2-title">Rate this products</h3>
         <div class="modal2-list">
             <div th:each="orderDetail, iter : ${order.orderDetails}" class="modal2-item">
-                <input type="hidden" class="jsIptStar" th:name="${'rates['+ iter.index +'].star'}">
+                <input type="hidden" class="jsIptStar" th:data-index="${iter.index}" th:name="${'rates['+ iter.index +'].star'}">
                 <input type="hidden" th:name="${'productId['+ iter.index +']'}" th:value="${orderDetail.product.id}">
                 <div class="modal2-item--product">
                     <img class="pic" th:src="${orderDetail.product.toUrl(orderDetail.product.image.get(0))}" alt="">
@@ -138,13 +139,14 @@
                     <i data-index="4" class="far fa-star jsStar"></i>
                     <i data-index="5" class="far fa-star jsStar"></i>
                 </span>
-                <textarea th:name="${'rates[' + iter.index +'].description'}" rows="4" class="modal2-item--desc"
+                <p class="mb-2 d-none error errorText" th:data-index="${iter.index}"></p>
+                <textarea th:name="${'rates[' + iter.index +'].description'}" th:data-index="${iter.index}" rows="4" class="modal2-item--desc jsIptDesc"
                           placeholder="Please share your thoughts on this product"></textarea>
             </div>
         </div>
         <div class="modal2-footer">
             <button type="button" class="js-close modal2-footer--back btn btn__white">Back</button>
-            <button class="js-close modal2-footer--submit btn btn__primary">Submit</button>
+            <button class="modal2-footer--submit btn btn__primary">Submit</button>
         </div>
     </form>
 </div>
@@ -169,9 +171,30 @@
 
     document.querySelector('.modal2__cart-create').addEventListener('submit', function (e) {
         e.preventDefault();
-        console.log($('.jsIptStar'));
-        // if ($('.jsIptStar').val())
-            return;
+
+        let canSubmit = true;
+        $('.errorText').addClass('d-none');
+
+        $('.jsIptStar').each((index, item) => {
+            const dataIndex = item.dataset.index;
+            if (!item.value) {
+                $(`.errorText[data-index="${dataIndex}"]`).text("Please fill the star before submit").removeClass('d-none');
+                canSubmit = false;
+            }
+        });
+
+        if(!canSubmit) return;
+
+        $('.jsIptDesc').each((index, item) => {
+            const dataIndex = item.dataset.index;
+            if (!Boolean(item.value)) {
+                $(`.errorText[data-index="${dataIndex}"]`).text("Share your thoughts about the product before submit").removeClass('d-none');
+                canSubmit = false;
+            }
+        });
+
+        if(!canSubmit) return;
+
         this.submit();
     })
 </script>

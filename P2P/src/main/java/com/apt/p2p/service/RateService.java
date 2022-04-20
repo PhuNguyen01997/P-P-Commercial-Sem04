@@ -16,9 +16,9 @@ public interface RateService {
 
     Integer countByShopId(int shopId);
 
-    RateModel create(int userId, int productId, RateModel rateModel);
+    RateModel create(int userId, int productId, int orderId, RateModel rateModel);
 
-    List<RateModel> findAllByOrderIdAndUserId(int orderId, int userId);
+    List<RateModel> findAllByOrderId(int orderId);
 
     List<RateModel> findAllByFilterPortal(FilterRatePortal filterRatePortal);
 }

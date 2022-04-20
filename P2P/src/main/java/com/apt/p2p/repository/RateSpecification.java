@@ -73,6 +73,7 @@ public final class RateSpecification {
         if (query.getResultType() != Long.class && query.getResultType() != long.class) {
 //        root.fetch("user", JoinType.LEFT);
 //        root.fetch("product", JoinType.LEFT);
+//        root.fetch("order", JoinType.LEFT);
         }
         return root;
     }

@@ -22,7 +22,4 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpeci
             " JOIN StatusOrder s ON sh.status.id = s.id" +
             " WHERE o.id = :id")
     Optional<Order> findById(@Param("id") Integer id);
-
-    @Query("SELECT sh.order FROM StatusHistory sh WHERE sh.id = :id")
-    Order findByStatusHistoryId(@Param("id") int statusHistoryId);
 }

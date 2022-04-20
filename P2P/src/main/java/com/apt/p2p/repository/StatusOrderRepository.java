@@ -11,7 +11,4 @@ import java.util.List;
 public interface StatusOrderRepository extends JpaRepository<StatusOrder, Integer> {
     @Query("SELECT sh.status FROM StatusHistory sh WHERE sh.id = :id")
     StatusOrder findByStatusHistory(@Param("id") int statusHistoryId);
-
-    @Query("SELECT sh.status FROM StatusHistory sh WHERE sh.id = :id")
-    StatusOrder findByStatusHistoryId(@Param("id") int statusHistoryId);
 }

@@ -1,10 +1,7 @@
 package com.apt.p2p.service;
 
 import com.apt.p2p.common.modelMapper.RateMapper;
-import com.apt.p2p.entity.OrderDetail;
-import com.apt.p2p.entity.Product;
-import com.apt.p2p.entity.Rate;
-import com.apt.p2p.entity.User;
+import com.apt.p2p.entity.*;
 import com.apt.p2p.model.form.FilterRatePortal;
 import com.apt.p2p.model.form.PagiSortModel;
 import com.apt.p2p.model.view.RateModel;
@@ -30,7 +27,7 @@ public class RateServiceImpl implements RateService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private OrderDetailRepository orderDetailRepository;
+    private OrderRepository orderRepository;
     @Autowired
     private RateMapper rateMapper;
 
@@ -59,9 +56,10 @@ public class RateServiceImpl implements RateService {
     }
 
     @Override
-    public RateModel create(int userId, int productId, RateModel rateModel) {
+    public RateModel create(int userId, int productId, int orderId, RateModel rateModel) {
         Product product = productRepository.findById(productId).get();
         User user = userRepository.findById(userId).get();
+        Order order = orderRepository.findById(orderId).get();
 
         Rate newRate = new Rate();
 
@@ -69,6 +67,7 @@ public class RateServiceImpl implements RateService {
         newRate.setStar(rateModel.getStar());
         newRate.setUser(user);
         newRate.setProduct(product);
+        newRate.setOrder(order);
 
         rateRepository.save(newRate);
 
@@ -76,15 +75,8 @@ public class RateServiceImpl implements RateService {
     }
 
     @Override
-    public List<RateModel> findAllByOrderIdAndUserId(int orderId, int userId) {
-        List<OrderDetail> orderDetails = orderDetailRepository.findAllByOrderId(orderId);
-        List<Rate> finalRates = new ArrayList<>();
-        orderDetails.forEach(odetail -> {
-            Rate rate = rateRepository.findByOrderDetailId(odetail.getId());
-            if(rate != null){
-                finalRates.add(rate);
-            }
-        });
+    public List<RateModel> findAllByOrderId(int orderId) {
+        List<Rate> finalRates = rateRepository.findAllByOrderId(orderId);
 
         return finalRates.stream().map(re -> rateMapper.rateEntityToModel(re)).collect(Collectors.toList());
     }

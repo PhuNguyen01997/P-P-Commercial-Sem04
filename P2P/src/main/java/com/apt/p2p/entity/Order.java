@@ -50,6 +50,9 @@ public class Order {
     private List<OrderDetail> orderDetails;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private List<Rate> rates;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<StatusHistory> statusHistories;
 
     @NotNull

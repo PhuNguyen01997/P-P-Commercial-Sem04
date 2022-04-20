@@ -1,6 +1,7 @@
 package com.apt.p2p.common.modelMapper;
 
 import com.apt.p2p.entity.*;
+import com.apt.p2p.model.view.OrderModel;
 import com.apt.p2p.model.view.ProductModel;
 import com.apt.p2p.model.view.RateModel;
 import com.apt.p2p.model.view.UserModel;
@@ -34,6 +35,7 @@ public class RateMapper {
 
         model.setUser(new UserModel(entity.getUser()));
         model.setProduct(new ProductModel(entity.getProduct()));
+        model.setOrder(new OrderModel(entity.getOrder()));
 
         return model;
     }

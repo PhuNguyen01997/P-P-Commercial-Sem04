@@ -15,10 +15,8 @@ public interface RateRepository extends JpaRepository<Rate, Integer>, JpaSpecifi
     @Query("SELECT COUNT(r) FROM Rate r WHERE r.product.shop.id=:id")
     Integer countByShopId(@Param("id") int shopId);
 
-    @Query("SELECT r FROM OrderDetail od " +
-            "JOIN Product p ON od.product.id = p.id " +
-            "JOIN Rate r ON r.product.id = p.id " +
-            "GROUP BY od.id " +
-            "HAVING od.id = :id")
-    Rate findByOrderDetailId(@Param("id") int orderDetailId);
+    @Query("SELECT r FROM Rate r " +
+            "JOIN Order o ON r.order.id = o.id " +
+            "WHERE o.id = :id")
+    List<Rate> findAllByOrderId(@Param("id") int orderId);
 }

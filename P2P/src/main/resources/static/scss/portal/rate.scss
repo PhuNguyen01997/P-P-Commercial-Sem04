@@ -17,7 +17,6 @@
 
             &-item {
                 @include flex($justify: flex-start, $align: stretch);
-                width: calc(33.3% - 30px);
                 margin-right: 30px;
 
                 label {
@@ -29,14 +28,19 @@
                 }
 
                 &__text {
+                    flex-grow: 1;
                     height: 30px;
 
                     label {
                         line-height: 30px;
+                        flex-shrink: 0;
                     }
                 }
 
                 &__date {
+                    width: 280px;
+                    margin-right: 0;
+
                     label {
                         line-height: 40px;
                     }

@@ -108,6 +108,12 @@
                 padding: 0px 10px;
                 min-width: 100px;
             }
+
+            &__120 {
+                .form-item--left {
+                    min-width: 120px;
+                }
+            }
         }
 
         &--right {
