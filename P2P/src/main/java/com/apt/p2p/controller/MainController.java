@@ -119,7 +119,7 @@ public class MainController {
         List<Category> categories = categoryRepository.findAll();
 
         // create users
-        users.addAll(createUser(18));
+        users.addAll(createUser(50));
 
         // create address for user
         users.forEach(u -> {
@@ -168,7 +168,7 @@ public class MainController {
         List<Order> orders = new ArrayList<>();
         List<User> finalUsers = users;
         shops.forEach(shop -> {
-            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(10, 30));
+            List<Order> newOrders = createOrders(shop, finalUsers, RandomUtil.getRandomNumber(20, 60));
             shop.setOrders(newOrders);
             orders.addAll(newOrders);
         });
@@ -202,9 +202,12 @@ public class MainController {
         users.forEach(user -> {
             List<Role> newRoles = new ArrayList<>();
             newRoles.add(this.roles.get(0));
-            if (user.getUsername().equals("seller") || user.getShop() != null) {
-                newRoles.add(this.roles.get(2));
-            } else if (user.getUsername().equals("admin")) newRoles.add(this.roles.get(1));
+//            if (user.getUsername().equals("seller") || user.getShop() != null) {
+//                newRoles.add(this.roles.get(2));
+//            } else if (user.getUsername().equals("admin")) newRoles.add(this.roles.get(1));
+            if(user.getUsername().equals("seller") || user.getUsername().equals("admin")) {
+                return;
+            }
             user.setRoles(newRoles);
         });
 
