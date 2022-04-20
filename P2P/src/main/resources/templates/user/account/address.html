@@ -40,11 +40,14 @@
                             <span th:text="${address.ward}" class="jsWard">[Address Ward]</span><br>
                             <span th:text="${address.district}" class="jsDistrict">[Address District]</span><br>
                             <span th:text="${address.province}" class="jsProvince">[Address Province]</span>
+                            <span th:text="${address.provinceId}" class="jsProvinceId">[Address ProvinceId]</span>
+                            <span th:text="${address.districtId}" class="jsDistrictId">[Address DistrictId]</span>
+                            <span th:text="${address.wardId}" class="jsWardId">[Address WardId]</span>
                         </p>
                     </div>
                 </div>
                 <div class="account-address-right">
-                    <a class="link jsEditBtn" href="#">Sửa</a>
+                    <a class="link jsEditBtn" href="javascript: void(0)">Sửa</a>
                     <form th:action="@{/address/{id}(id=${address.id})}" th:method="delete">
                         <button type="submit">Xóa</button>
                     </form>
@@ -298,15 +301,16 @@
             ward: $(container).find('.jsWard')[0].innerText,
             district: $(container).find('.jsDistrict')[0].innerText,
             province: $(container).find('.jsProvince')[0].innerText,
+            provinceId: $(container).find('.jsProvinceId')[0].innerText,
+            districtId: $(container).find('.jsDistrictId')[0].innerText,
+            wardId: $(container).find('.jsWardId')[0].innerText,
         }
 
         Object.keys(address).forEach(key => {
             $(`[name='${key}']`).val(address[key]);
+            tempLocation[key] = address[key];
         })
 
-        tempLocation['province'] = address["province"];
-        tempLocation['district'] = address["district"];
-        tempLocation['ward'] = address["ward"];
         setValueAddress();
 
         $('.modal2__address').attr('action', `/address/${address.id}`);
