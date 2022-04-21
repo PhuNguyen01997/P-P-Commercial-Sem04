@@ -108,6 +108,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/403");
         http.sessionManagement()
                 .invalidSessionUrl("/reset?token=invalid");
+        http.sessionManagement()
+                .maximumSessions(1);
 
     }
 
