@@ -14,14 +14,14 @@
               class="auth-container">
             <h1 class="auth-title">Sign Up</h1>
             <div class="form">
-                <input class="auth--ipt auth--ipt__txt" placeholder="Email" th:field="*{email}">
+                <input class="auth--ipt auth--ipt__txt" placeholder="Email" th:field="*{email}" ty>
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Invalid value</p>
                 <p th:if="${duplicate != null}" class="error" th:text="${duplicate}"></p>
-                <input class="auth--ipt auth--ipt__txt" placeholder="Phone" th:field="*{phone}">
+                <input class="auth--ipt auth--ipt__txt" placeholder="Phone" th:field="*{phone}" maxlength="10">
                 <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="error">Invalid value</p>
                 <input class="auth--ipt auth--ipt__txt" type="text" placeholder="Username" th:field="*{username}">
                 <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error">Invalid value</p>
-                <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}">
+                <input class="auth--ipt auth--ipt__txt" type="password" placeholder="Password" th:field="*{password}" maxlength="8">
                 <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">Invalid value</p>
                 <button class="btn btn__red auth--ipt auth--ipt__submit" type="submit">Sign Up</button>
             </div>
