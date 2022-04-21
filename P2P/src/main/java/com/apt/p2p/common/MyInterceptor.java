@@ -31,16 +31,14 @@ public class MyInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (headerCategories == null) {
-            headerCategories = categoryService.findAll();
-            headerCategories = headerCategories.stream().sorted(Comparator.comparingInt(Category::getId).reversed()).limit(8).collect(Collectors.toList());
-        }
+        headerCategories = categoryService.findAll();
+        headerCategories = headerCategories.stream().sorted(Comparator.comparingInt(Category::getId).reversed()).limit(8).collect(Collectors.toList());
 
-        if(naviPortalHeader == null){
-           naviPortalHeader = new HashMap<>();
-           dataNaviPortalHeader.forEach(arrStr -> {
-               naviPortalHeader.put(arrStr[0], arrStr[1]);
-           });
+        if (naviPortalHeader == null) {
+            naviPortalHeader = new HashMap<>();
+            dataNaviPortalHeader.forEach(arrStr -> {
+                naviPortalHeader.put(arrStr[0], arrStr[1]);
+            });
         }
 
         String requestUri = request.getRequestURI();

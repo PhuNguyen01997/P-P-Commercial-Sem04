@@ -169,6 +169,7 @@ public class ProductServiceImpl implements ProductService {
             // Process update another info
             product.setName(productForm.getName());
             product.setPrice(productForm.getPrice());
+            product.setStock(productForm.getStock());
             product.setDescription(productForm.getDescription());
 
             productRepository.save(product);
@@ -222,6 +223,7 @@ public class ProductServiceImpl implements ProductService {
         String propertiesSort = "NEW";
         if(pagiSortModel.getSortBy() == null || pagiSortModel.getSortBy().equals("NEW")){
             propertiesSort = "createdAt";
+            pagiSortModel.setSortDirection(!pagiSortModel.getSortDirection());
         }else if(pagiSortModel.getSortBy().equals("PRICE")){
             propertiesSort = "price";
         }

@@ -154,6 +154,7 @@ public class MainController {
         products.forEach(p -> {
             // product set description
             p.setDescription(this.descriptionProduct);
+            p.setStock(RandomUtil.getRandomNumber(0, 3000));
             LocalDateTime localDateTime = LocalDateTime.of(2022, 4, 4, RandomUtil.getRandomNumber(23), RandomUtil.getRandomNumber(59), 0);
             p.setCreatedAt(Timestamp.valueOf(localDateTime));
 

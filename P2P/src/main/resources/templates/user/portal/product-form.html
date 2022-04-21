@@ -39,6 +39,13 @@
                 </div>
             </div>
             <div class="form-item">
+                <label class="form-item--left" for="stock">Stock</label>
+                <div class="form-item--right">
+                    <input type="number" th:field="*{stock}" id="stock">
+                    <p th:errors="*{stock}" class="error">[Error Stock]</p>
+                </div>
+            </div>
+            <div class="form-item">
                 <label class="form-item--left">Phân loại</label>
                 <div class="form-item--right">
                     <div class="select">
