@@ -124,13 +124,13 @@ public class AuthController {
             String extension = FileUploadUtil.getExtensionName(image).orElse(null);
             String fileName = usr.getAvatar();
             if (fileName == null) {
-                fileName =  String.valueOf(new Date().getTime()) + "." + extension;
+                fileName =  String.valueOf(new Date().getTime());
             } else {
                 fileName.replaceAll("\\w+$", extension);
             }
-            FileUploadUtil.saveFile("users/", fileName, image);
+            String fileNameAfterSaved = FileUploadUtil.saveFile("users/", fileName, image);
 
-            usr.setAvatar(fileName);
+            usr.setAvatar(fileNameAfterSaved);
         } else {
             usr.setAvatar(usr.getAvatar());
         }

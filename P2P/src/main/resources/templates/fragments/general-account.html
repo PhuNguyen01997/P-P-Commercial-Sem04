@@ -20,9 +20,9 @@
             <a href="javascript: void(0)"><i class="icon icon__account fas fa-user"></i>My Account</a>
             <ul class="dropdown-list">
                 <th:block th:if="${user.provider == 'LOCAL'}">
-                    <li class="dropdown-item"><a th:href="@{/account}">Profile</a></li>
                     <li class="dropdown-item"><a th:href="@{/change-password}">Change password</a></li>
                 </th:block>
+                <li class="dropdown-item"><a th:href="@{/account}">Profile</a></li>
                 <li class="dropdown-item"><a th:href="@{/card}">Card</a></li>
                 <li class="dropdown-item"><a th:href="@{/address}">Address</a></li>
             </ul>

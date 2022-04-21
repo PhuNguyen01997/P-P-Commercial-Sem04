@@ -12,103 +12,100 @@
     <div th:replace="fragments/general-account.html :: content-side"></div>
 
     <div class="split-main split-main__form">
-        <p class="p-3" th:if="${user.provider != 'LOCAL'}">Your account can't be edit information</p>
-        <th:block th:if="${user.provider == 'LOCAL'}">
-            <div class="split-header">
-                <h2 class="split-header--title">My Profile</h2>
-                <p class="split-header--text">Profile management information for account security</p>
+        <div class="split-header">
+            <h2 class="split-header--title">My Profile</h2>
+            <p class="split-header--text">Profile management information for account security</p>
+        </div>
+        <form th:action="@{/edit-account}" th:object="${user}" method="POST" class="account-form account-edit-form"
+              enctype="multipart/form-data">
+            <div class="account-form--left">
+                <div class="form-item">
+                    <label class="form-item--left">username</label>
+                    <div class="form-item--right">
+                        <p class="text" th:text="${user.username}"></p>
+                        <input type="hidden" th:field="*{username}">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left" for="subName">name</label>
+                    <div class="form-item--right">
+                        <input type="text" th:field="*{subName}" id="subName">
+                    </div>
+                </div>
+                <div th:if="${user.provider == 'LOCAL'}" class="form-item">
+                    <label class="form-item--left" for="email">Email</label>
+                    <div class="form-item--right">
+                        <p class="text" th:text="${user.email}" id="email"></p>
+                        <input type="hidden" th:field="*{email}">
+                        <a style="color:blue;" href="/change-email">
+                            <ins>Change Email</ins>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left">Gender</label>
+                    <div class="form-item--right">
+                        <div class="select">
+                            <select name="categoryId" id="" th:field="*{gender}">
+                                <option th:each="i : ${listGender}" th:value="${i}" th:text="${i}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left" for="number">Phone Number</label>
+                    <div class="form-item--right">
+                        <input type="text" th:field="*{phone}" id="number">
+                    </div>
+                </div>
+                <!--                <div class="form-item">-->
+                <!--                    <label class="form-item&#45;&#45;left">Gender</label>-->
+                <!--                    <div class="form-item&#45;&#45;right">-->
+                <!--                        <div class="radio-block radio-block__horizonal" >-->
+                <!--                            <label class="radio" >-->
+                <!--                                <input  th:if="*{gender == 'M'} ? 'checked': ''" name="gender" type="radio" value="M" id="M">-->
+                <!--                                <div class="radio-show"></div>-->
+                <!--                            </label>-->
+                <!--                            <span for="M">Nam</span>-->
+                <!--                            <label class="radio">-->
+                <!--                                <input th:if="*{gender == 'F'} ? 'checked': ''" name="gender" type="radio" value="F" id="F">-->
+                <!--                                <div class="radio-show"></div>-->
+                <!--                            </label>-->
+                <!--                            <span for="F">Nữ</span>-->
+                <!--                            <label class="radio">-->
+                <!--                                <input  name="gender" type="radio" value="0" id="B">-->
+                <!--                                <div class="radio-show"></div>-->
+                <!--                            </label>-->
+                <!--                            <span for="B">Khác</span>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div th:if="${user.shop != null}" class="form-item">
+                    <label class="form-item--left">Shop Name</label>
+                    <div class="form-item--right">
+                        <input th:field="*{shop.name}" readonly>
+                        <a style="color:blue;" href="/portal">
+                            <ins>View Details</ins>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label class="form-item--left"></label>
+                    <div class="form-item--right">
+                        <button type="submit" class="btn btn__primary">Save</button>
+                    </div>
+                </div>
             </div>
-            <form th:action="@{/edit-account}" th:object="${user}" method="POST" class="account-form account-edit-form"
-                  enctype="multipart/form-data">
-                <div class="account-form--left">
-                    <div class="form-item">
-                        <label class="form-item--left">username</label>
-                        <div class="form-item--right">
-                            <p class="text" th:text="${user.username}"></p>
-                            <input type="hidden" th:field="*{username}">
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="subName">name</label>
-                        <div class="form-item--right">
-                            <input type="text" th:field="*{subName}" id="subName">
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="email">Email</label>
-                        <div class="form-item--right">
-                            <p class="text" th:text="${user.email}" id="email"></p>
-                            <input type="hidden" th:field="*{email}">
-                            <a style="color:blue;" href="/change-email">
-                                <ins>Change Email</ins>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left">Gender</label>
-                        <div class="form-item--right">
-                            <div class="select">
-                                <select name="categoryId" id="" th:field="*{gender}">
-                                    <option th:each="i : ${listGender}" th:value="${i}" th:text="${i}">
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left" for="number">Phone Number</label>
-                        <div class="form-item--right">
-                            <input type="text" th:field="*{phone}" id="number">
-                        </div>
-                    </div>
-                    <!--                <div class="form-item">-->
-                    <!--                    <label class="form-item&#45;&#45;left">Gender</label>-->
-                    <!--                    <div class="form-item&#45;&#45;right">-->
-                    <!--                        <div class="radio-block radio-block__horizonal" >-->
-                    <!--                            <label class="radio" >-->
-                    <!--                                <input  th:if="*{gender == 'M'} ? 'checked': ''" name="gender" type="radio" value="M" id="M">-->
-                    <!--                                <div class="radio-show"></div>-->
-                    <!--                            </label>-->
-                    <!--                            <span for="M">Nam</span>-->
-                    <!--                            <label class="radio">-->
-                    <!--                                <input th:if="*{gender == 'F'} ? 'checked': ''" name="gender" type="radio" value="F" id="F">-->
-                    <!--                                <div class="radio-show"></div>-->
-                    <!--                            </label>-->
-                    <!--                            <span for="F">Nữ</span>-->
-                    <!--                            <label class="radio">-->
-                    <!--                                <input  name="gender" type="radio" value="0" id="B">-->
-                    <!--                                <div class="radio-show"></div>-->
-                    <!--                            </label>-->
-                    <!--                            <span for="B">Khác</span>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
-                    <div th:if="${user.shop != null}" class="form-item">
-                        <label class="form-item--left">Shop Name</label>
-                        <div class="form-item--right">
-                            <input th:field="*{shop.name}" readonly>
-                            <a style="color:blue;" href="/portal">
-                                <ins>View Details</ins>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="form-item">
-                        <label class="form-item--left"></label>
-                        <div class="form-item--right">
-                            <button type="submit" class="btn btn__primary">Save</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="account-form--right">
-                    <p class="circle pic account-form--pic">
-                        <img th:src="${user.toUrl(user.avatar)}" class="jsPic">
-                    </p>
-                    <label class="btn btn__primary-outline account-form--update-btn" for="pic">Choose picture</label>
-                    <input type="file" for="pic" name="pic" id="pic" class="d-none">
-                    <p class="account-form--pic-note">Max file 1 MB<br>Format:.JPEG, .PNG</p>
-                </div>
-            </form>
-        </th:block>
+            <div class="account-form--right">
+                <p class="circle pic account-form--pic">
+                    <img th:src="${user.toUrl(user.avatar)}" class="jsPic">
+                </p>
+                <label class="btn btn__primary-outline account-form--update-btn" for="pic">Choose picture</label>
+                <input type="file" for="pic" name="pic" id="pic" class="d-none">
+                <p class="account-form--pic-note">Max file 1 MB<br>Format:.JPEG, .PNG</p>
+            </div>
+        </form>
     </div>
 </div>
 <script layout:fragment="script">
