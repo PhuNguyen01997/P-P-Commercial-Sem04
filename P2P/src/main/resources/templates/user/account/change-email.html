@@ -32,7 +32,7 @@
                     <div class="form-item">
                         <label class="form-item--left">Your Password</label>
                         <div class="form-item--right">
-                            <input type="password" name="confirmPassword">
+                            <input type="password" name="confirmPassword" required>
                             <p th:if="${errorInputPassword != null}"  th:text="${errorInputPassword}" class="error">Invalid value</p>
                         </div>
                     </div>

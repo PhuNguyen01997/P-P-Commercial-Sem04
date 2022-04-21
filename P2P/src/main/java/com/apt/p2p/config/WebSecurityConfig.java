@@ -99,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/signin").permitAll()
+                .logoutSuccessUrl("/").permitAll()
                 .and()
                 .authorizeRequests().and().rememberMe()
                 .tokenRepository(persistenceTokenRepository())
@@ -108,6 +108,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/403");
         http.sessionManagement()
                 .invalidSessionUrl("/reset?token=invalid");
+        http.sessionManagement()
+                .maximumSessions(1);
 
     }
 
