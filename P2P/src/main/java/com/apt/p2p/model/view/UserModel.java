@@ -21,22 +21,22 @@ public class UserModel {
 
     private Integer id;
 
-    @NotBlank(message = "field email is not null")
+    @NotBlank(message = "Field email is not blank")
     private String email;
 
     @Pattern(regexp = "[^&%$#@!~]*" , message = "Username can't contain special characters")
-    @NotBlank (message = "field username is not null")
+    @NotBlank (message = "Field username is not blank")
     private String username;
 
     //    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&!-+=()])(?=\\S+$).{8,20}$"
 //            , message = "Weak password")
-    @NotBlank(message = "field password is not null")
+    @NotBlank(message = "Field password is not blank")
     private String password;
 
     private boolean enabled = true;
 
-    @Pattern(regexp = "^[\\d\\s]+$" , message = "invalid phone")
-    @NotBlank(message = "field phone is not null")
+    @NotBlank(message = "Phone number cannot be empty")
+    @Pattern(regexp = "^[\\d]{10,12}$", message = "Invalid phone number\n")
     private String phone;
 
     private String avatar;
